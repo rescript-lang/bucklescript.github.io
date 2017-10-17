@@ -6,8 +6,8 @@
     "publish-gh-pages": "docusaurus-publish",
     "examples": "docusaurus-examples",
     "write-translations": "docusaurus-write-translations",
-    "crowdin-upload": "export CROWDIN_DOCUSAURUS_PROJECT_ID=\"reason-react\"; export CROWDIN_DOCUSAURUS_API_KEY=$BS_CROWDIN_API_KEY; crowdin --config ../crowdin.yaml upload sources --auto-update -b master",
-    "crowdin-download": "export CROWDIN_DOCUSAURUS_PROJECT_ID=\"reason-react\"; export CROWDIN_DOCUSAURUS_API_KEY=$BS_CROWDIN_API_KEY; crowdin --config ../crowdin.yaml download -b master"
+    "crowdin-upload": "export CROWDIN_DOCUSAURUS_PROJECT_ID=\"bucklescript\"; export CROWDIN_DOCUSAURUS_API_KEY=$BS_CROWDIN_API_KEY; crowdin --config ../crowdin.yaml upload sources --auto-update -b master",
+    "crowdin-download": "export CROWDIN_DOCUSAURUS_PROJECT_ID=\"bucklescript\"; export CROWDIN_DOCUSAURUS_API_KEY=$BS_CROWDIN_API_KEY; crowdin --config ../crowdin.yaml download -b master"
   },
   "keywords": [],
   "author": "",
@@ -17,7 +17,6 @@
     "url": "git+https://github.com/reasonml/reason-react.git"
   },
   "dependencies": {
-    "babel-preset-react": "^6.24.1",
-    "docusaurus": "^1.0.0-alpha.41"
+    "docusaurus": "^1.0.0-beta.1"
   }
 }
