@@ -19,6 +19,12 @@ npm install --save-dev bs-platform
 
 **Note that for Windows**, if you're using BuckleScript in conjunction with a tool like [Merlin](https://reasonml.github.io/guide/editor-tools/extra-goodies#merlin), please follow [this guide that we share with Reason](https://github.com/reasonml/reasonml.github.io/issues/195).
 
+The commands that are exposed are:
+
+- `bsb`, the build system.
+- `bsc`, the raw compiler. Usually not needed.
+- `bsrefmt`, the included [Reason](https://reasonml.github.io) parser & printer.
+
 ## Alternatives (Power Users)
 
 ### Install From Source, Through NPM/Yarn

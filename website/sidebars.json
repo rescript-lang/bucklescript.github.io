@@ -2,7 +2,8 @@
   "docs": {
     "Intro": [
       "what-why",
-      "installation"
+      "installation",
+      "getting-started"
     ],
     "Manual": [
       "manual"
