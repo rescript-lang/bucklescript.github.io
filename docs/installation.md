@@ -1,96 +1,59 @@
-\#\# Installation
+---
+id: installation
+title: Installation
+---
 
-Below is a list of different ways to install BuckleScript:
+**Prerequisite**: either npm (comes with [node](https://nodejs.org/en/)) or [yarn](https://yarnpkg.com/en/).
 
-\# Windows Installation
+If you'd like to install BuckleScript globally, do:
 
-    npm install bs-platform
+```sh
+npm install -g bs-platform
+```
 
-\# \*nix installation
+This gives you a few globally exposed commands you can run, described later. But usually, you'd install the project locally:
 
--   Standard C toolchain
+```sh
+npm install --save-dev bs-platform
+```
 
--   `npm` (should be installed with Node)
+**Note that for Windows**, if you're using BuckleScript in conjunction with a tool like [Merlin](https://reasonml.github.io/guide/editor-tools/extra-goodies#merlin), please follow [this guide that we share with Reason](https://github.com/reasonml/reasonml.github.io/issues/195).
 
-The standard `npm` package management tool can be used to install
-BuckleScript. If you don’t already have `npm` installed, follow the
-directions listed
-[here](https://docs.npmjs.com/getting-started/installing-node). Once
-`npm` is installed, run the following command:
+## Alternatives (Power Users)
 
-    npm install --save bs-platform
+### Install From Source, Through NPM/Yarn
 
-or install it globally
+**Prerequisite**: either npm or yarn, plus the standard C toolchain.
 
-    npm install -g bs-platform
+```sh
+git clone https://github.com/bucklescript/bucklescript
+cd bucklescript
+npm install
+```
 
-\# **Recommended** installation with OPAM
+### Install From Source, Without NPM/Yarn
 
-When working with OCaml we also recommend using
-[opam](https://opam.ocaml.org) package manager to install OCaml
-toolchains, available [here](https://opam.ocaml.org/doc/Install.html).
-You will benefit from the existing OCaml ecosystem.
+**Prerequisite**: just the standard C toolchain.
 
-Once you have `opam` installed, ask `opam` to switch to using our
-version of the compiler:
+First, build the OCaml compiler:
 
-    opam update
-    opam switch 4.02.3+buckle-master
-    eval `opam config env`
-    npm install bs-platform
+```sh
+git clone https://github.com/bucklescript/bucklescript
+cd bucklescript/vendor/ocaml
+./configure -prefix `pwd` # put your preferred directory
+make world.opt
+make install
+```
 
-Note that using this approach, the user can also install other OCaml
-tools easily.
+The patched compiler is installed locally into `$(pwd)/bin`. To start using it temporarily, check if `ocamlc.opt` and `ocamlopt.opt` exist in `$(pwd)/bin,` and temporarily add the location to your `$(PATH)` (e.g. `PATH=$(pwd)/bin:$PATH`).
 
-\# Install from source
+Then, build BuckleScript itself:
 
-\#\# using NPM
+```sh
+cd ../../jscomp
+make world
+```
 
-1.  Standard C toolchain
+At the end, you should have a binary called `bsc.exe` under `jscomp/bin` directory, which you can add to your `$PATH`. You can also set an environment variable pointing to the standard library, e.g. `BSC_LIB=/path/to/jscomp/stdlib`, for ease of use.
 
-2.  `npm` (should be installed with Node)
-
-**Instructions:.**
-
-    git clone https://github.com/bucklescript/bucklescript
-    cd bucklescript
-    npm install
-
-\#\# Minimal dependencies
-
-1.  Standard C toolchain
-
-BuckleScript has very few dependencies and building from source can
-easily be done.
-
-**Build OCaml compiler.**
-
-    git clone https://github.com/bucklescript/bucklescript
-    cd bucklescript/vendor/ocaml
-    ./configure -prefix `pwd` # put your preferred directory
-    make world.opt
-    make install
-
-The patched compiler is installed locally into your `$(pwd)/bin`
-directory. To start using it temporarily, check if `ocamlc.opt` and
-`ocamlopt.opt` exist in `$(pwd)/bin`, and temporarily add the location
-to your `$(PATH)` (e.g. `PATH=$(pwd)/bin:$PATH`).
-
-**Building BuckleScript.**
-
-The following directions assume you already have the correct version of
-`ocamlopt.opt` in your `$PATH`, having followed the process described in
-the previous section.
-
-    cd ../../jscomp
-    make world
-
-At the end, you should have a binary called `bsc.exe` under `jscomp/bin`
-directory, which you can add to your `$PATH`. You could also set an
-environment variable pointing to the stdlib, e.g.
-`BSC_LIB=/path/to/jscomp/stdlib` for ease of use.
-
-> **Warning**
->
-> The built compiler is not *relocatable* out of box, please don’t move
-> it around unless you know what you are doing
+**Warning:** the built compiler is not relocatable out of box, don’t move it around unless you know what you're doing!
