@@ -1,5 +1,9 @@
 {
   "docs": {
+    "Intro": [
+      "what-why",
+      "installation"
+    ],
     "Manual": [
       "manual"
     ]
