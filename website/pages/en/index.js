@@ -26,15 +26,13 @@ Button.defaultProps = {
   target: "_self"
 };
 
-const codeExample =`let component = ReasonReact.statelessComponent "Greeting";
-
-let make ::name _children => {
-  ...component,
-  render: fun _self =>
-    <button>
-      (ReasonReact.stringToElement "Hello!")
-    </button>
-};`;
+const codeExample =`open Js
+let () =
+  [| 1; 2; 3; 4 |]
+  |> Array.filter (fun  x -> x > 2)
+  |> Array.mapi (fun  x i -> x + i)
+  |> Array.reduce (fun  x y -> x + y) 0
+  |> log`;
 
 const pre = "```";
 const code = "`";
@@ -80,15 +78,13 @@ class HomeSplash extends React.Component {
 
         <div className="homeWrapperWrapper">
 
-          <img src={siteConfig.baseUrl + siteConfig.headerIcon} className="spinner" />
-
           <div className="wrapper homeWrapper">
             <div className="projectTitle">{siteConfig.title}</div>
 
             <div className="homeWrapperInner">
               <div className="homeTagLine">{siteConfig.tagline}</div>
               <div className="homeCodeSnippet">
-                <Prism>{codeExample}</Prism>
+                <Prism language="ocaml">{codeExample}</Prism>
               </div>
             </div>
 
@@ -147,7 +143,7 @@ Language based OS: Mirage Unikernel`,
 
           <Container background="light" className="quickStartAndExamples homeCodeSnippet">
             <div>
-              <h2>installation</h2>
+              <h2>Installation</h2>
               <Marked>
                 {quickStart}
               </Marked>

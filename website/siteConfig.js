@@ -48,19 +48,18 @@ const examples = [
 ]
 
 const siteConfig = {
-  title: "BuckleScript" /* title for your website */,
+  title: "BuckleScript",
   tagline: "Write JS faster, safer and smaller",
-  url: "https://bucklescript.github.io/bucklescript" /* your github url */,
+  url: "https://bucklescript.github.io/bucklescript",
   editUrl: "https://github.com/bucklescript/bucklescript/tree/master/docs/",
   recruitingLink: "https://crowdin.com/project/reason-react",
   sourceCodeButton: null,
-  baseUrl: "/" /* base url for your project */,
+  baseUrl: "/",
   projectName: "bucklescript",
   headerLinks: [
     { doc: "manual", label: "Docs" },
-    // { doc: "simple", label: "Examples" },
     { doc: "manual", label: "Community" },
-    { href: "bucklescript-playground/index.html", label: "Try It"},
+    { href: "https://bucklescript.github.io/bucklescript-playground/index.html", label: "Try It"},
     { blog: true, label: "Blog" },
     { languages: true },
     { search: true },
