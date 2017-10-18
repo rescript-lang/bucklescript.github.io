@@ -53,7 +53,7 @@ capable of supporting large applications.
 BuckleScript is mainly designed to solve the problems of *large scale*
 JavaScript programming:
 
-Type-safety  
+Type-safety
 OCaml offers an industrial-strength state-of-the-art type system and
 provides very strong type inference (i.e. No verbose type annotation
 required compared with TypeScript), which proves
@@ -62,7 +62,7 @@ in managing large projects. OCaml’s type system is not just for tooling,
 it is a *sound* type system which means it is guaranteed that there will
 be no runtime type errors after type checking.
 
-High quality dead code elimination  
+High quality dead code elimination
 A large amount of web-development relies on inclusion of code
 dependencies by copying or referencing CDNs (the very thing that makes
 JavaScript highly accessible), but this also introduces a lot of [dead
@@ -77,7 +77,7 @@ levels:
 -   At the global level BuckleScript generates code ready for dead-code
     elimination done by bundling tools such as the
 
-Offline optimizations  
+Offline optimizations
 JavaScript is a dynamic language, it takes a performance-hit for the VM
 to optimize code at runtime. While some JS engines circumvent the
 problem to some extent by
@@ -88,7 +88,7 @@ using features of the OCaml type-system and compiler implementation is
 able to provide many optimizations during offline compilation, allowing
 the runtime code to be extremely fast.
 
-JS platform and Native platform  
+JS platform and Native platform
 Run your programs on all platforms, but run your system *faster* under
 specific platforms. JavaScript is everywhere but it does not mean we
 have to run all apps in JS, under several platforms, for example, server
@@ -99,7 +99,7 @@ performance*.
 While a strong type-system helps in countering these problems, at the
 same time we hope to avoid some of the problems faced in using other
 
-Slow compilation  
+Slow compilation
 OCaml byte-code compilation is known to be fast (one or two orders of
 magnitude faster than other similar languages:
 [Scala](http://www.scala-lang.org/) or
@@ -107,7 +107,7 @@ magnitude faster than other similar languages:
 property and compiles even faster since it saves the link time. See the
 speeds at work in the order faster than the JS backend.
 
-Un-readable JS Code and hard to integrate with existing JS libraries  
+Un-readable JS Code and hard to integrate with existing JS libraries
 When compiling to JavaScript, many systems generate code, that while
 syntactically and semantically correct is not human-readable and very
 difficult to debug and profile. Our BuckleScript implementation and the
@@ -116,14 +116,14 @@ that is human-readable and easier to debug and maintain. More
 importantly, this makes integration with existing JS libraries *much
 easier*.
 
-Large JS output even for a simple program  
+Large JS output even for a simple program
 In BuckleScript, a `Hello world` program generates *20 bytes* JS code
 instead of *50K bytes*. This is due to BuckleScript having an excellent
 integration with JS libs in that unlike most JS compilers, all
 BuckleScript’s runtime is written in OCaml itself so that these runtime
 libraries are only needed when user actually calls it.
 
-Loss of code-structure  
+Loss of code-structure
 Many systems generate JavaScript code that is essentially a [big ball of
 mud](https://en.wikipedia.org/wiki/Big_ball_of_mud). We try to keep the
 original structure of the code by mapping one OCaml module to one JS
@@ -3344,7 +3344,7 @@ This section will focus on how to contribute to this repo.
 -   Having [opam](https://opam.ocaml.org/) installed
 
         opam switch 4.02.3+buckle-master # use our OCaml compiler
-        opam install camlp4  
+        opam install camlp4
 
     `Camlp4` is used to generate OCaml code for processing large AST.
     (`j.ml` file), if you don’t change `j.ml` (most likely you won’t),
@@ -3530,105 +3530,3 @@ Library API documentation
 There is a small library that comes with `bs-platform`, its
 documentation is
 [here](http://bucklescript.github.io/bucklescript/api/).
-
-CHANGES
-=======
-
-1.3.2
-=====
-
--   Features
-
-    -   Significantly improve `bsb` experience (TODO: install
-        instruction)
-
-1.2.1 + dev
-===========
-
--   Features
-
-    -   it’s for deterministic build
-
-    -   -   add `-bs-syntax-only`
-
-    -   
-
-1.1.2
-=====
-
--   Fixes
-
-    -   
-
--   Features
-
-    -   Provide bspp.exe for official compiler
-
-1.1.1
-=====
-
--   Features
-
-    -   -   -   so that `bs.obj`, `obj`, `bs.raw`, `raw`, etc will both
-        work. Note that all attributes will still be qualified
-
-    -   -   
-
-1.03
-====
-
--   Features
-
-    -   
-
--   Incompatible changes (due to proper Windows support):
-
-    -   `bsc`, `bspack` and `bsppx` are renamed into `bsc.exe`,
-        `bspack.exe` and `bsppx.exe`
-
-    -   no symlink from .bin any more.
-
-    **Old symlinks.**
-
-    tmp&gt;ls -al node\_modules/.bin/ total 96 drwxr-xr-x 14 hzhang295
-    staff 476 Sep 20 17:26 . drwxr-xr-x 4 hzhang295 staff 136 Sep 20
-    17:27 .. lrwxr-xr-x 1 hzhang295 staff 22 Sep 20 17:26 bsc -&gt;
-    ../bs-platform/bin/bsc lrwxr-xr-x 1 hzhang295 staff 25 Sep 20 17:26
-    bspack -&gt; ../bs-platform/bin/bspack lrwxr-xr-x 1 hzhang295 staff
-    24 Sep 20 17:26 bsppx -&gt;
-    ../bs-platform/bin/bsppx&lt;/programlisting&gt;
-
-Now these symlinks are removed, you have to refer to
-`bs-platform/bin/bsc.exe`
-
-1.02
-====
-
--   Bug fixes and enhancement
-
-    -   
-
--   Features
-
-    -   By default, `bsc.exe` will warn when it detect some ocaml
-        datatype is passed from/to external FFi
-
-    -   
-
-1.01
-====
-
--   FFI
-
-    -   support fields and mutable fields in JS object creation
-
-    -   Introduce phantom arguments (`bs.ignore`) for ad-hoc
-
--   Bug fixes and enhancement
-
-    -   
-
-1.0
-===
-
-Initial release

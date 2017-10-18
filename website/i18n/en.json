@@ -4,7 +4,6 @@
     "previous": "Previous",
     "tagline": "Write JS faster, safer and smaller",
     "build-system-support": "build-system-support",
-    "changelog": "changelog",
     "compiler-options": "compiler-options",
     "compiler-overview": "compiler-overview",
     "conditional-compilation-support": "conditional-compilation-support",
@@ -37,7 +36,7 @@
     "Manual": "Manual"
   },
   "pages-strings": {
-    "Built With ReasonReact|no description given": "Built With ReasonReact",
+    "Built With BuckleScript|no description given": "Built With BuckleScript",
     "Learn more using the [documentation on this site.](/test-site/docs/en/doc1.html)|no description given": "Learn more using the [documentation on this site.](/test-site/docs/en/doc1.html)",
     "Browse Docs|no description given": "Browse Docs",
     "Ask questions about the documentation and project|no description given": "Ask questions about the documentation and project",

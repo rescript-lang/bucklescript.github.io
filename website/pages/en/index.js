@@ -122,7 +122,7 @@ class Index extends React.Component {
               contents={[
                 {
                   title: "Lean Developer Experience",
-                  content: "Simple, small, and blazing fast build workflow. No more configuration debugging!",
+                  content: "Simple, small and blazing fast build workflow. No more configuration debugging!",
                 },
                 {
                   title: "The Whole JavaScript Ecosystem",
