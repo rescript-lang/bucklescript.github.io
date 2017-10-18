@@ -121,20 +121,16 @@ class Index extends React.Component {
               align="center"
               contents={[
                 {
-                  title: "Developer experience",
-                  content: "BuckleScript probably has the fastest JavaScript compiler.The compiler is compiled to both native code and JavaScript, users can try the compiler in the browser and imagine how fast it would be for native backend.",
+                  title: "Lean Developer Experience",
+                  content: "Simple, small, and blazing fast build workflow. No more configuration debugging!",
                 },
                 {
-                  title: "Integration with existing JavaScript libraries",
-                  content: "BuckleScript is one of the very few compilers which compiles an existing typed language to readable JavaScript. It has the same characteristics of typescript: one OCaml module compiled into one JavaScript module (AMDJS, CommonJS, or Google module) without name mangling.",
+                  title: "The Whole JavaScript Ecosystem",
+                  content: "**Readable** JavaScript output + powerful ways to communicate with your existing JS code.",
                 },
                 {
-                  title: "It’s OCaml!",
-                  content: `30 years distilled research in PL and amazing effort of compiler engineering
-
-Native backends: AMD64, IA32, PowerPC, ARM, SPARC
-
-Language based OS: Mirage Unikernel`,
+                  title: "Solid, Stable & Cross-platform",
+                  content: "BuckleScript is backed by [OCaml](http://ocaml.org). Decades of types and compiler research and engineering.",
                 },
               ]}
               layout="threeColumn"
