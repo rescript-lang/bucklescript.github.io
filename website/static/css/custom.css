@@ -1,14 +1,3 @@
-.fixedHeaderContainer header > a > img {
-  /* spinning logo */
-  transition: 3s;
-  /* make sure it's a square. Spins at the center */
-  height: 34px;
-  width: 34px;
-}
-.fixedHeaderContainer header > a:hover > img {
-  transform: rotate(1080deg);
-}
-
 a.hash-link {
   transition: none;
 }
@@ -31,19 +20,6 @@ a.hash-link {
   .nav-site > span > li {
     position: relative;
   }
-  /* makes desktop nav scroll independently of content */
-  #docsNav.container.docsNavContainer .toc {
-    position: fixed;
-    overflow-y: scroll;
-    bottom: 0;
-    top: 0;
-    padding: 0;
-    padding-top: 90px;
-  }
-  /* safari fix */
-  #docsNav.container.docsNavContainer {
-    position: static;
-  }
 }
 
 /* mobile click zone for translation is weird */
@@ -54,200 +30,11 @@ a.hash-link {
   pointer-events: all;
 }
 
-
-
 #docsNav.container.docsNavContainer .toc::-webkit-scrollbar {
   display: none;
 }
 
-#redirectMessage {
-  font-size: 30px;
-  line-height: 30px;
-  padding-top: 100px;
-  margin: auto;
-  max-width: 800px;
-  text-align: center;
-}
-
-#redirectBanner {
-  background: #808080;
-  color: #fff;
-  display: none;
-  font-weight: 300;
-  margin: auto;
-  padding: 10px 0;
-  text-align: center;
-}
-
-#redirectBanner a {
-  color: #fff;
-  opacity: 0.6;
-}
-
-#redirectBanner a:hover {
-  opacity: 1;
-}
-
-.homeWrapperWrapper {
-  background-color: #f6f4f4;
-  overflow: hidden;
-  position: relative;
-}
-
-.spinner {
-  margin: auto;
-  position: absolute;
-  width: 800px;
-  left: 0px;
-  bottom: -400px;
-  animation:spin 750s linear infinite;
-  transition: opacity 2s;
-}
-
-@keyframes spin { 100% {transform:rotate(360deg); } }
-
-.homeWrapperInner {
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  padding: 20px 0px 20px 0px;
-}
-
-.homeCodeSnippet {
-  text-align: initial;
-  padding-top: 20px;
-}
-
-.homeTagLine {
-  font-size: 24px;
-  font-weight: 300;
-  max-width: 500px;
-  line-height: 1.5em;
-}
-
-.homeThreePoints {
-  padding-top: 20px;
-}
-
-.quickStartAndExamples {
-  /* homeThreePoints + blockElement have 30 padding, so we should have 30 here too */
-  padding-top: 30px;
-  /* block padding of 80px is too huge */
-  padding-bottom: 30px;
-}
-
-
-.quickStartAndExamples .wrapper {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  max-width: 1024px;
-}
-
-@media (max-width: 736px) {
-  .quickStartAndExamples .wrapper {
-    flex-direction: column;
-  }
-}
-
-/* companies page */
-.addCompanyButton {
-  margin-top: 2em;
-}
-
 /* overrides. Most of these should be upstreamed into docusaurus */
-
-/* fonts */
-body, h1, h2, h3, h4, .projectTitle, .fixedHeaderContainer header h2  {
-  font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",Arial,sans-serif;
-}
-
-code, pre, code.prism, pre.prism {
-  font-family: "SFMono-Regular",source-code-pro,Menlo,Monaco,Consolas,"Roboto Mono","Droid Sans Mono","Liberation Mono",Consolas,"Courier New",Courier,monospace;
-}
-
-code {
-  color: inherit;
-  background-color: rgba(243, 136, 136, 0.1);
-  border-radius: .3em;
-  box-shadow: 2px 0 rgba(243, 136, 136, 0.1), -2px 0 rgba(243, 136, 136, 0.1);
-  padding: 2px 0;
-  /* avoids scale issues on mobile */
-  word-break: break-word;
-}
-
-/* code */
-.prism {
-  /* this -15px margin offsets the usual margin given to a page. This way it looks like this:
-      |        |
-    | myCode     |
-      |        |
-
-    instead of:
-
-      |        |
-      | myCode |
-      |        |
-
-    might not be clear as ascii comment, but the **code words inside the code
-    block** are aligned with the page's boundaries; previously the code block
-    itself starts at the boundary, then has extra padding. Now the code words
-    themselves are aligned with the rest of the page's paragraphs' starting
-    point
-   */
-  margin-left: -15px;
-  margin-right: -15px;
-  border: 1px solid #eee;
-  border-radius: 6px;
-  padding: 15px;
-  overflow: auto;
-
-  font-size: 15px;
-  line-height: 23px;
-}
-.prism.language-javascript {
-  background-color: rgba(247, 223, 30, 0.03);
-}
-.prism .comment {
-  opacity: 0.7;
-}
-@media (max-width: 1024px) {
-  .prism {
-    margin-left: -10px;
-    margin-right: -10px;
-    padding: 10px;
-    /* on small screens, the code block completely occupies the width of the
-      view. No need for left/right borders */
-    border-radius: 0;
-    border-left: none;
-    border-right: none;
-  }
-}
-
-/* search */
-.navSearchWrapper {
-  align-self: center;
-  position: absolute;
-  top: 15px;
-  right: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-@media only screen and (min-width: 1024px) {
-  .navSearchWrapper {
-    position: relative;
-    top: auto;
-    right: auto;
-    padding-left: 10px;
-  }
-}
-
-.algolia-autocomplete {
-  bottom: auto;
-}
-
 .button {
   /* these buttons really shouldn't have any margin */
   margin: 0;
@@ -270,66 +57,8 @@ code {
   }
 }
 
-.post-authorName {
-  /* annoying extra height even though it's unused */
-  display: none;
-}
-
 .navPusher {
   height: auto;
-}
-
-.fixedHeaderContainer {
-  /* why is it 8 at bottom in the original? */
-  padding: 9px 0 9px 0;
-}
-
-.navigationSlider .slidingNav {
-  /* fixed makes this calculation *much* easier */
-  box-sizing: border-box;
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: auto;
-}
-
-.mainContainer .wrapper .post .postHeader {
-  /* used to be 2em. too extreme */
-  padding: 1em 0 0;
-}
-
-.mainContainer .wrapper p {
-  padding: 0.8em 0 0 0;
-}
-
-.mainContainer .wrapper p,
-.mainContainer .wrapper ul li,
-.mainContainer .wrapper ol li {
-  line-height: 1.7;
-}
-
-.mainContainer .wrapper a {
-  text-decoration: none;
-}
-
-.mainContainer .wrapper a:hover {
-  text-decoration: underline;
-}
-
-nav.toc .toggleNav ul li a.navItemActive {
-  /* no bolding. Sometimes titles overflow when the text width changes */
-  font-weight: normal;
-}
-
-.blogContainer .posts .post {
-  /* this makes sure that when we click on a read more, the article itself has the same (aka 0) padding */
-  padding: 0 0 20px;
-}
-
-.mainContainer .wrapper .posts .post {
-  /* bottom margin too large for posts in the blog view */
-  margin-bottom: 0;
 }
 
 .navGroup {
@@ -356,62 +85,4 @@ nav.toc .toggleNav ul li a.navItemActive {
   border-radius: 3px;
 }
 
-/* the empty space at the beginning of a standalone blog post is huge */
-.blogContainer .lonePost {
-  margin-top: 40px;
-}
-@media (max-width: 1024px) {
-  .blogContainer .lonePost {
-    margin-top: 20px;
-  }
-
-  .mainContainer .wrapper p,
-  .mainContainer .wrapper ul li,
-  .mainContainer .wrapper ol li {
-    font-size: 16px;
-  }
-}
-
 /* end override */
-
-@media (max-width: 1024px) {
-  .homeWrapperInner {
-    flex-direction: column;
-  }
-
-  .projectTitle {
-    font-size: 40px;
-  }
-
-  .spinner {
-    opacity: 0;
-  }
-}
-
-/* mobile */
-@media (max-width: 480px) {
-  .projectTitle {
-    font-size: 30px;
-  }
-
-  .homeCodeSnippet .prism {
-    font-size: 13px;
-  }
-}
-
-.homeCodeSnippet .prism {
-  background-color: transparent;
-  border: none;
-  padding-top: 0;
-  padding-bottom: 0;
-  margin: 0;
-  color: rgb(57, 57, 57);
-  font-size: 14px;
-}
-
-.getStarted {
-  background-color: $primaryColor;
-  color: white;
-  /* buttons have 10px margin. Make the right padding 10px too so that it looks nicely spaced beside the Tutorial button */
-  margin: 0 10px 0 0;
-}
