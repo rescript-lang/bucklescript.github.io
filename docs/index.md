@@ -1,4 +1,4 @@
-BuckleScript: write JS faster, safer and smaller
+BuckleScript: wraite JS faster, safer and smaller
 View on GitHub
 Manual
 Try it

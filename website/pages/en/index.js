@@ -27,17 +27,23 @@ Button.defaultProps = {
 const pre = "```";
 const code = "`";
 const codeExample =`${pre}ocaml
-open Js
-let () =
+let () = Js.(
   [| 1; 2; 3; 4 |]
-  |> Array.filter (fun  x -> x > 2)
-  |> Array.mapi (fun  x i -> x + i)
-  |> Array.reduce (fun  x y -> x + y) 0
+  |> Array.filter (fun x -> x > 2)
+  |> Array.mapi (fun x i -> x + i)
+  |> Array.reduce (fun x y -> x + y) 0
   |> log
+ )
 ${pre}`;
 
 const quickStart = `${pre}bash
 npm install -g bs-platform
+
+# OCaml syntax
+bsb -init my-new-project
+
+# Reason syntax
+bsb -init my-new-project -theme basic-reason
 ${pre}`;
 
 class HomeSplash extends React.Component {
@@ -52,7 +58,7 @@ class HomeSplash extends React.Component {
                 siteConfig.baseUrl +
                 "docs/" +
                 this.props.language +
-                "/manual.html"
+                "/installation.html"
               }
             >
               <translate>Get Started</translate>
@@ -130,7 +136,7 @@ class Index extends React.Component {
                 },
                 {
                   title: "Solid, Stable & Cross-platform",
-                  content: "BuckleScript is backed by [OCaml](http://ocaml.org). Decades of types and compiler research and engineering.",
+                  content: "BuckleScript is backed by [OCaml](http://ocaml.org). Decades of type system research and compiler engineering.",
                 },
               ]}
               layout="threeColumn"
@@ -139,7 +145,10 @@ class Index extends React.Component {
 
           <Container background="light" className="quickStartAndExamples homeCodeSnippet">
             <div>
-              <h2>Installation</h2>
+              <h2>Quick Start</h2>
+              <div>
+                BuckleScript seamlessly integrates with <a href="https://reasonml.github.io">Reason</a>.
+              </div>
               <MarkdownBlock>
                 {quickStart}
               </MarkdownBlock>

@@ -8,30 +8,42 @@
  */
 
 const users = [
-  // {
-  //   caption: "Facebook",
-  //   image: "img/logos/facebook.svg",
-  //   infoLink: "https://www.facebook.com",
-  //   pinned: true
-  // },
-  // {
-  //   caption: "Messenger",
-  //   image: "img/logos/messenger.svg",
-  //   infoLink: "https://messenger.com",
-  //   pinned: true
-  // },
-  // {
-  //   caption: "WOW air",
-  //   image: "img/logos/wowair.svg",
-  //   infoLink: "https://wowair.com",
-  //   pinned: true
-  // },
-  // {
-  //   caption: "BeOpinion",
-  //   image: "img/logos/beopinion.svg",
-  //   infoLink: "https://beopinion.com",
-  //   pinned: true
-  // },
+  {
+    caption: "Facebook",
+    image: "img/logos/facebook.svg",
+    infoLink: "https://www.facebook.com",
+    pinned: true
+  },
+  {
+    caption: "Messenger",
+    image: "img/logos/messenger.svg",
+    infoLink: "https://messenger.com",
+    pinned: true
+  },
+  {
+    caption: "WOW air",
+    image: "img/logos/wowair.svg",
+    infoLink: "https://wowair.com",
+    pinned: true
+  },
+  {
+    caption: "BeOpinion",
+    image: "img/logos/beopinion.svg",
+    infoLink: "https://beopinion.com",
+    pinned: true
+  },
+  {
+    caption: "Gain by Sentia",
+    image: "img/logos/gain_logo.svg",
+    infoLink: "https://gain.ai",
+    pinned: true
+  },
+  {
+    caption: "Social Tables",
+    image: "img/logos/socialtables.svg",
+    infoLink: "https://www.socialtables.com",
+    pinned: true
+  },
 ];
 
 const examples = [
@@ -49,10 +61,10 @@ const examples = [
 
 const siteConfig = {
   title: "BuckleScript",
-  tagline: "Write JS faster, safer and smaller",
+  tagline: "Write safer and simpler code, compile to JavaScript.",
   url: "https://bucklescript.github.io/bucklescript",
   editUrl: "https://github.com/bucklescript/bucklescript/tree/master/docs/",
-  recruitingLink: "https://crowdin.com/project/reason-react",
+  recruitingLink: "https://crowdin.com/project/bucklescript",
   sourceCodeButton: null,
   baseUrl: "/",
   projectName: "bucklescript",

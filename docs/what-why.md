@@ -11,7 +11,6 @@ Thanks to its great interoperability with JS, BuckleScript can be seen as a "gra
 
 BuckleScript has build-in support for [Reason](https://reasonml.github.io/), a partner project of ours, to provide an even more familiar experience to existing JS developers.
 
-
 ## Why Compile to JavaScript?
 
 JavaScript's ecosystem and community are very vibrant and active. The language itself is unparalleled in terms of adoption. Compiling to JavaScript is a therefore pragmatic choice (and sometimes, the only choice).

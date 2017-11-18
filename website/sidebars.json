@@ -7,6 +7,9 @@
     ],
     "Manual": [
       "manual"
+    ],
+    "Advanced": [
+      "use-existing-ocaml-libraries"
     ]
   }
 }
