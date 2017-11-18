@@ -1,10 +1,9 @@
 const React = require("react");
 
 const CompLibrary = require("../../core/CompLibrary.js");
-const Marked = CompLibrary.Marked; /* Used to read markdown */
+const MarkdownBlock = CompLibrary.MarkdownBlock; /* Used to read markdown */
 const Container = CompLibrary.Container;
 const GridBlock = CompLibrary.GridBlock;
-const Prism = CompLibrary.Prism;
 
 const translate = require("../../server/translate.js").translate;
 
@@ -25,17 +24,18 @@ class Button extends React.Component {
 Button.defaultProps = {
   target: "_self"
 };
-
-const codeExample =`open Js
+const pre = "```";
+const code = "`";
+const codeExample =`${pre}ocaml
+open Js
 let () =
   [| 1; 2; 3; 4 |]
   |> Array.filter (fun  x -> x > 2)
   |> Array.mapi (fun  x i -> x + i)
   |> Array.reduce (fun  x y -> x + y) 0
-  |> log`;
+  |> log
+${pre}`;
 
-const pre = "```";
-const code = "`";
 const quickStart = `${pre}bash
 npm install -g bs-platform
 ${pre}`;
@@ -84,7 +84,7 @@ class HomeSplash extends React.Component {
             <div className="homeWrapperInner">
               <div className="homeTagLine">{siteConfig.tagline}</div>
               <div className="homeCodeSnippet">
-                <Prism language="ocaml">{codeExample}</Prism>
+                <MarkdownBlock>{codeExample}</MarkdownBlock>
               </div>
             </div>
 
@@ -140,9 +140,9 @@ class Index extends React.Component {
           <Container background="light" className="quickStartAndExamples homeCodeSnippet">
             <div>
               <h2>Installation</h2>
-              <Marked>
+              <MarkdownBlock>
                 {quickStart}
-              </Marked>
+              </MarkdownBlock>
             </div>
             <div>
               <h2>Examples</h2>

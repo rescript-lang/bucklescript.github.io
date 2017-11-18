@@ -19,6 +19,7 @@
 }
 
 /* 2. Custom code block styling */
+/* code */
 code {
   color: inherit;
   background-color: rgba(243, 136, 136, 0.1);
@@ -28,9 +29,11 @@ code {
   /* avoids scale issues on mobile */
   word-break: break-word;
 }
-
-/* code */
-.prism {
+pre code {
+  background-color: unset;
+  box-shadow: none;
+}
+.hljs {
   /* this -15px margin offsets the usual margin given to a page. This way it looks like this:
       |        |
     | myCode     |
@@ -54,18 +57,18 @@ code {
   border-radius: 6px;
   padding: 15px;
   overflow: auto;
-
+  background-color: $codeColor;
   font-size: 15px;
   line-height: 23px;
 }
-.prism.language-javascript {
+.hljs.javascript {
   background-color: rgba(247, 223, 30, 0.03);
 }
-.prism .comment {
+.hljs .comment {
   opacity: 0.7;
 }
 @media (max-width: 1024px) {
-  .prism {
+  .hljs {
     margin-left: -10px;
     margin-right: -10px;
     padding: 10px;
@@ -120,7 +123,9 @@ code {
   padding: 20px 0px 20px 0px;
 }
 
-.homeCodeSnippet {
+.homeCodeSnippet .hljs {
+  background-color: transparent;
+  border: none;
   text-align: initial;
   padding-top: 20px;
 }
