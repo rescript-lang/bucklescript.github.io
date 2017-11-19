@@ -1,6 +1,6 @@
 ---
-id: getting-started
-title: Getting Started
+id: new-project
+title: New Project
 ---
 
 Once you've installed BuckleScript from the previous section, you can generate a lightweight project template:

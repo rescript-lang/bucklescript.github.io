@@ -5,7 +5,7 @@ title: What & Why
 
 ## What is BuckleScript?
 
-BuckleScript takes the [OCaml](http://ocaml.org) language and makes it compile to clean, readable JavaScript code through some tweaks. This allows the users to write in an industrial-strength language while using the existing, familiar JavaScript tools (npm/yarn, bundlers, minifiers, devtools, etc.) and accessing the vast ecosystem from both JavaScript and OCaml.
+BuckleScript takes the [OCaml](http://ocaml.org) language, **a fast, pragmatic and typed language**, and makes it compile to clean, readable JavaScript code through some tweaks. This allows the users to write in an industrial-strength language while using the existing, familiar JavaScript tools (npm/yarn, bundlers, minifiers, devtools, etc.) and accessing the vast ecosystem from both JavaScript and OCaml.
 
 Thanks to its great interoperability with JS, BuckleScript can be seen as a "gradually" typed language, where you get to incrementally adopt it in your codebase file-by-file, while keeping the full benefits of a 100% sound and reliable type system, plus extra language features.
 
@@ -13,7 +13,7 @@ BuckleScript has build-in support for [Reason](https://reasonml.github.io/), a p
 
 ## Why Compile to JavaScript?
 
-JavaScript's ecosystem and community are very vibrant and active. The language itself is unparalleled in terms of adoption. Compiling to JavaScript is a therefore pragmatic choice (and sometimes, the only choice).
+JavaScript's ecosystem and community are very vibrant and active. The language itself is unparalleled in terms of adoption & distribution. Compiling to JavaScript is a therefore pragmatic choice (and sometimes, the only choice).
 
 Additionally, the JavaScript VMs also received many engineering-years of fine-tuning and get faster all the time.
 
@@ -25,17 +25,17 @@ Despite its clear advantages, JavaScript does present a few drawbacks. Here's ho
 
 ### Type Safety
 
-BuckleScript's type system offers three major benefits:
+BuckleScript's type system alone offers three major benefits:
 
-- **Strong type inference**. Almost the entire of the language can be inferred. This means that you don't have to tediously type out all the types manually. Feel free to still type out some parts for readability!
+- **Strong type inference**. Almost the entirely of the language can be inferred. You don't have to tediously write all the types manually. Feel free to still type out some parts for readability!
 
-- **Sound type system**. "Sound" here means that the types guarantees that they are what they are, not just 90% of the time. Once a BuckleScript project compiles, there are no runtime type errors. \*
+- **Sound type system**. "Sound" here means that the types _guarantee_ that they are what they are, not just 90% of the time. Once a BuckleScript project compiles, there are no runtime type errors. \*
 
 - **Expressive type features**. With well-thought-out features like [variants](https://reasonml.github.io/guide/language/variant), [modules](https://reasonml.github.io/guide/language/module) and even an opt-in [object system](https://reasonml.github.io/guide/language/object), the types guide you through your iteration process and don't block you from expressing what you need.
 
 The combination of these three highlights, along with other type system features, unlocks new workflow possibilities and is something existing gradual typing solutions for JavaScript don't offer.
 
-\* The exceptions are some deliberate FFI hooks you'd opt into.
+\* The exceptions are some deliberate, optional interoperability hooks.
 
 ### High Quality Dead Code Elimination
 
@@ -87,7 +87,7 @@ This characteristic, combined with a fully-featured JS interop system, allows Bu
 
 <!-- TODO: playground link -->
 
-A `Hello world` BuckleScript program generates **20 bytes** JS code instead of **50K bytes**. Additionally, the standard library pieces you require in are only include when needed.
+A `Hello world` BuckleScript program generates **20 bytes** JS code. Additionally, the standard library pieces you require in are only include when needed.
 
 ### Preservation of Code Structure
 

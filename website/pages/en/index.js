@@ -136,7 +136,7 @@ class Index extends React.Component {
                 },
                 {
                   title: "Solid, Stable & Cross-platform",
-                  content: "BuckleScript is backed by [OCaml](http://ocaml.org). Decades of type system research and compiler engineering.",
+                  content: "BuckleScript is backed by [OCaml](http://ocaml.org). Decades of **type system** research and compiler engineering.",
                 },
               ]}
               layout="threeColumn"

@@ -3,10 +3,12 @@
     "Intro": [
       "what-why",
       "installation",
-      "getting-started"
+      "new-project",
+      "concepts-overview"
     ],
     "Interop": [
-      "interop-overview"
+      "interop-overview",
+      "shared-primitives"
     ]
   }
 }
