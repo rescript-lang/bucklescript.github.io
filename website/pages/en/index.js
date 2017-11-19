@@ -132,7 +132,7 @@ class Index extends React.Component {
                 },
                 {
                   title: "The Whole JavaScript Ecosystem",
-                  content: "**Readable** JavaScript output + powerful ways to communicate with your existing JS code.",
+                  content: "**Readable** JS output + comprehensive support for communicating with existing code.",
                 },
                 {
                   title: "Solid, Stable & Cross-platform",

@@ -19,6 +19,7 @@
     "index": "index",
     "installation": "Installation",
     "integration_with_reason": "integration_with_reason",
+    "interop-overview": "Overview",
     "js-call-ocaml": "js-call-ocaml",
     "js-lib": "js-lib",
     "manual": "Manual",
@@ -35,8 +36,7 @@
     "Blog": "Blog",
     "GitHub": "GitHub",
     "Intro": "Intro",
-    "Manual": "Manual",
-    "Advanced": "Advanced"
+    "Interop": "Interop"
   },
   "pages-strings": {
     "Built With BuckleScript|no description given": "Built With BuckleScript",

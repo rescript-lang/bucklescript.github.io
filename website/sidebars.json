@@ -5,11 +5,8 @@
       "installation",
       "getting-started"
     ],
-    "Manual": [
-      "manual"
-    ],
-    "Advanced": [
-      "use-existing-ocaml-libraries"
+    "Interop": [
+      "interop-overview"
     ]
   }
 }

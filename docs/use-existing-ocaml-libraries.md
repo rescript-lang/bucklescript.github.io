@@ -19,7 +19,9 @@ In general, you are expected to see two kinds of build artifacts: the generated 
 
 Since CommonJS has no namespaces, to allow JS files to live in different directories, we have a flag
 
-    bsc.exe -bs-package-name $npm_package_name -bs-package-output modulesystem:path/to/your/js/dir -c a.ml
+```sh
+bsc.exe -bs-package-name $npm_package_name -bs-package-output modulesystem:path/to/your/js/dir -c a.ml
+```
 
 By passing this flag, `bsc.exe` will store your `package_name` and relative path to `package.json` in `.cmj` files. It will also generate JS files in the directory you specified. You can, and are encouraged to, store JavaScript files in a hierarchical directory.
 
@@ -29,13 +31,17 @@ For the binary artifacts (Note that this is not necessary if you only want your 
 
 If you follow the layout convention above, using an OCaml package is pretty straightforward:
 
-    bsc.exe -I path/to/ocaml/package/installed -c a.ml
+```sh
+bsc.exe -I path/to/ocaml/package/installed -c a.ml
+```
 
 ### Together
 
 Your command line would be like this:
 
-    bsc.exe -I path/to/ocaml/package1/installed -I path/to/ocaml/package2/installed  -bs-package-name $npm_package_name -bs-package-output commonjs:path/to/lib/js/ -c a.ml
+```sh
+bsc.exe -I path/to/ocaml/package1/installed -I path/to/ocaml/package2/installed  -bs-package-name $npm_package_name -bs-package-output commonjs:path/to/lib/js/ -c a.ml
+```
 
 ### Examples
 
