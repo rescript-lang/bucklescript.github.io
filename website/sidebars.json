@@ -9,7 +9,10 @@
     "Interop": [
       "interop-overview",
       "common-shared-primitives",
-      "null-undefined-option"
+      "null-undefined-option",
+      "intro-to-external",
+      "bind-to-global-values",
+      "function"
     ]
   }
 }
