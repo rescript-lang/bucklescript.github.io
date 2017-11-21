@@ -89,10 +89,10 @@ const siteConfig = {
     prismColor:
       "rgba(171, 94, 163, 0.03)" /* primaryColor in rgba form, with 0.03 alpha */
   },
-  // algolia: {
-  //   apiKey: "pending",
-  //   indexName: "bucklescript"
-  // },
+  algolia: {
+    apiKey: "0fd97db83891aa20810559812d9e69ac",
+    indexName: "bucklescript"
+  },
 };
 
 module.exports = siteConfig;
