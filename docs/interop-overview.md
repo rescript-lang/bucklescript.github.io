@@ -15,7 +15,7 @@ The above section might sound a bit buzzword-y; here's is how we've designed Buc
 
 ### Variables
 
-Most variables' name compile to clean JS names. `hello` compiles to `hello`, whereas other compilers might compile it to e.g. `__$INTERNAL$hello$1`. Clean names (i.e. "no name mangling") help debugging and one-off experiments & bindings. We've seen emergency fixes where a team mate less familiar with BuckleScript and Reason comes into a file and drop a raw JS code block in the middle of a BuckleScript function body where the raw block refers to a BS name. Please don't do that, but it's reassuring to know that last-resort escape hatches are possible.
+Most variables' name compile to clean JS names. `hello` compiles to `hello`, whereas other compilers might turn it to e.g. `__$INTERNAL$hello$1`. Clean names (i.e. "no name mangling") help debugging and one-off experiments & bindings. We've seen emergency fixes where a team mate less familiar with BuckleScript and Reason comes into a file and drop a raw JS code block in the middle of a BuckleScript file. It's reassuring to know that last-resort escape hatches are possible.
 
 ### Data Structures
 

@@ -42,3 +42,25 @@ The `return` part "wraps" a string into a nullable string, to make the type syst
 This is the idiomatic way of working with the concept of "no value" in BuckleScript/OCaml/Reason. [The Reason docs on variants](https://reasonml.github.io/guide/language/variant#option) describes option in more detail.
 
 `Js.Nullable.from_opt` converts from a `Js.Nullable.t` to `option`. `Js.Nullable.to_opt` does the opposite.
+
+## Tips & Tricks
+
+In an external, you can directly convert a `Js.Nullable.t` into an `option` through `bs.return nullable`:
+
+```ocaml
+type element
+external getElementById : string -> element option = "getElementById" [@@bs.scope "document"][@@bs.return nullable]
+```
+
+Reason syntax:
+
+```reason
+type element;
+[@bs.return nullable] [@bs.scope "document"] external getElementById : string => option(element) = "getElementById";
+```
+
+When you use `getElementById`, it'll implicitly convert the JS nullable string into an option. Saves you an explicit conversion through `Js.Nullable.to_opt`.
+
+### Design Decisions
+
+OCaml/BuckleScript option is a "boxed" value. Under BuckleScript, a `None` is compiled into `0` and a `Some foo` is compiled into `[foo]`. The above `bs.return nullable` smartly removes such boxing overhead when the returned value is destructed in the same routine.

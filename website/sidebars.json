@@ -8,10 +8,12 @@
     ],
     "Interop": [
       "interop-overview",
+      "embed-raw-javascript",
       "common-shared-primitives",
-      "null-undefined-option",
       "intro-to-external",
       "bind-to-global-values",
+      "null-undefined-option",
+      "object-record",
       "function"
     ]
   }
