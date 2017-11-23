@@ -14,7 +14,9 @@
       "bind-to-global-values",
       "null-undefined-option",
       "object-record",
-      "function"
+      "function",
+      "import-export",
+      "regular-expression"
     ]
   }
 }
