@@ -5,6 +5,7 @@
     "previous": "Previous",
     "tagline": "Write safer and simpler code, compile to JavaScript.",
     "bind-to-global-values": "Bind to Global Values",
+    "boolean": "Boolean",
     "build-system-support": "build-system-support",
     "common-shared-primitives": "Common Shared Primitives",
     "compiler-options": "compiler-options",
@@ -13,6 +14,7 @@
     "conditional-compilation-support": "conditional-compilation-support",
     "dev-mode-how-to": "dev-mode-how-to",
     "developing-bucklescript": "developing-bucklescript",
+    "difference-from-native-ocaml": "Difference from Native OCaml",
     "differences-from-js_of_ocaml": "differences-from-js_of_ocaml",
     "embed-raw-javascript": "Embed Raw JavaScript",
     "exception-handling": "exception-handling",
@@ -45,7 +47,8 @@
     "Blog": "Blog",
     "GitHub": "GitHub",
     "Intro": "Intro",
-    "Interop": "Interop"
+    "Interop": "Interop",
+    "Advanced": "Advanced"
   },
   "pages-strings": {
     "Built With BuckleScript|no description given": "Built With BuckleScript",

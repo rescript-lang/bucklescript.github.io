@@ -10,6 +10,7 @@
       "interop-overview",
       "embed-raw-javascript",
       "common-shared-primitives",
+      "boolean",
       "intro-to-external",
       "bind-to-global-values",
       "null-undefined-option",
@@ -17,6 +18,9 @@
       "function",
       "import-export",
       "regular-expression"
+    ],
+    "Advanced": [
+      "difference-from-native-ocaml"
     ]
   }
 }
