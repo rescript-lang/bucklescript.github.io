@@ -3,7 +3,7 @@ id: installation
 title: Installation
 ---
 
-**Prerequisite**: either npm (comes with [node](https://nodejs.org/en/)) or [yarn](https://yarnpkg.com/en/).
+**Prerequisite**: either NPM (comes with [node](https://nodejs.org/en/)) or [Yarn](https://yarnpkg.com/en/).
 
 If you'd like to install BuckleScript globally, do:
 
@@ -22,7 +22,7 @@ npm install --save-dev bs-platform
 The commands that are exposed are:
 
 - `bsb`, the build system.
-- `bsc`, the raw compiler. Usually not needed.
+- `bsc`, the raw compiler. Usually not used directly.
 - `bsrefmt`, the included [Reason](https://reasonml.github.io) parser & printer.
 
 ## Alternatives (Power Users)

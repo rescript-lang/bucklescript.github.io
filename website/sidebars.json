@@ -21,6 +21,8 @@
     ],
     "Advanced": [
       "conditional-compilation",
+      "extended-compiler-options",
+      "use-existing-ocaml-libraries",
       "difference-from-native-ocaml",
       "compiler-architecture-principles",
       "comparison-to-jsoo"

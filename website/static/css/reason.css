@@ -60,6 +60,9 @@ pre code {
   background-color: $codeColor;
   font-size: 15px;
   line-height: 23px;
+
+  /* respect the section's max width, from .mainContainer .wrapper p */
+  max-width: 50rem;
 }
 .hljs.javascript {
   background-color: rgba(247, 223, 30, 0.03);
