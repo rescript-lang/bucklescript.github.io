@@ -67,11 +67,11 @@ pre code {
 .hljs .comment {
   opacity: 0.7;
 }
-@media (max-width: 1024px) {
+@media (max-width: 736px) {
   .hljs {
-    margin-left: -10px;
-    margin-right: -10px;
-    padding: 10px;
+    margin-left: -20px;
+    margin-right: -20px;
+    padding: 20px;
     /* on small screens, the code block completely occupies the width of the
       view. No need for left/right borders */
     border-radius: 0;
@@ -123,7 +123,7 @@ pre code {
   padding: 20px 0px 20px 0px;
 }
 
-.homeCodeSnippet .hljs {
+.homeCodeSnippet {
   background-color: transparent;
   border: none;
   text-align: initial;
@@ -182,12 +182,12 @@ pre code {
     font-size: 30px;
   }
 
-  .homeCodeSnippet .prism {
+  .homeCodeSnippet .hljs {
     font-size: 13px;
   }
 }
 
-.homeCodeSnippet .prism {
+.homeCodeSnippet .hljs {
   background-color: transparent;
   border: none;
   padding-top: 0;

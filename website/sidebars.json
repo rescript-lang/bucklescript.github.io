@@ -10,8 +10,8 @@
       "interop-overview",
       "embed-raw-javascript",
       "common-shared-primitives",
-      "boolean",
       "intro-to-external",
+      "boolean",
       "bind-to-global-values",
       "null-undefined-option",
       "object-record",
@@ -20,7 +20,10 @@
       "regular-expression"
     ],
     "Advanced": [
-      "difference-from-native-ocaml"
+      "conditional-compilation",
+      "difference-from-native-ocaml",
+      "compiler-architecture-principles",
+      "comparison-to-jsoo"
     ]
   }
 }
