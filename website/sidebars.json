@@ -19,6 +19,10 @@
       "import-export",
       "regular-expression"
     ],
+    "Build System": [
+      "build-performance",
+      "interop-with-js-build-systems"
+    ],
     "Advanced": [
       "conditional-compilation",
       "extended-compiler-options",

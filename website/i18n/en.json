@@ -6,11 +6,11 @@
     "tagline": "Write safer and simpler code, compile to JavaScript.",
     "bind-to-global-values": "Bind to Global Values",
     "boolean": "Boolean",
+    "build-performance": "Performance",
     "build-system-support": "build-system-support",
     "common-shared-primitives": "Common Shared Primitives",
     "comparison-to-jsoo": "Comparison to Js_of_ocaml",
     "compiler-architecture-principles": "Compiler Architecture & Principles",
-    "compiler-options": "compiler-options",
     "compiler-overview": "compiler-overview",
     "concepts-overview": "Concepts Overview",
     "conditional-compilation": "Conditional Compilation",
@@ -28,6 +28,7 @@
     "import-export": "Import & Export",
     "installation": "Installation",
     "interop-overview": "Overview",
+    "interop-with-js-build-systems": "Interop with JS Build System",
     "intro-to-external": "Intro to External",
     "js-call-ocaml": "js-call-ocaml",
     "js-lib": "js-lib",
@@ -50,6 +51,7 @@
     "GitHub": "GitHub",
     "Intro": "Intro",
     "Interop": "Interop",
+    "Build System": "Build System",
     "Advanced": "Advanced"
   },
   "pages-strings": {
