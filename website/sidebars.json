@@ -22,8 +22,8 @@
     "Build System": [
       "build-overview",
       "build-configuration",
-      "build-performance",
-      "interop-with-js-build-systems"
+      "interop-with-js-build-systems",
+      "build-performance"
     ],
     "Advanced": [
       "conditional-compilation",
