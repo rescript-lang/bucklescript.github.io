@@ -21,11 +21,11 @@
 /* 2. Custom code block styling */
 /* code */
 code {
-  color: inherit;
-  background-color: rgba(243, 136, 136, 0.1);
-  border-radius: .3em;
-  box-shadow: 2px 0 rgba(243, 136, 136, 0.1), -2px 0 rgba(243, 136, 136, 0.1);
   padding: 2px 0;
+  background-color: rgba(243, 136, 136, 0.1);
+  box-shadow: 2px 0 rgba(243, 136, 136, 0.1), -2px 0 rgba(243, 136, 136, 0.1);
+  color: inherit;
+  border-radius: .3em;
   /* avoids scale issues on mobile */
   word-break: break-word;
 }
