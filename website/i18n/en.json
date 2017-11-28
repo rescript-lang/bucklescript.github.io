@@ -6,6 +6,8 @@
     "tagline": "Write safer and simpler code, compile to JavaScript.",
     "bind-to-global-values": "Bind to Global Values",
     "boolean": "Boolean",
+    "build-configuration": "Configuration",
+    "build-overview": "Overview",
     "build-performance": "Performance",
     "build-system-support": "build-system-support",
     "common-shared-primitives": "Common Shared Primitives",

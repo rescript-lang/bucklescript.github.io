@@ -20,6 +20,8 @@
       "regular-expression"
     ],
     "Build System": [
+      "build-overview",
+      "build-configuration",
       "build-performance",
       "interop-with-js-build-systems"
     ],
