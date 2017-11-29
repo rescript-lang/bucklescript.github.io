@@ -65,6 +65,66 @@ function f (x,y) {
 }
 ```
 
+### Detect Global Variables
+
+Bucklescript provides a relatively type safe approach for such use case: `bs.external`. `[%bs.external a_single_identifier]` is a value of type `option`. Example:
+
+```ocaml
+match [%bs.external __DEV__] with
+| Some _ -> Js.log "dev mode"
+| None -> Js.log "production mode"
+```
+
+Reason syntax
+
+```reason
+switch [%bs.external __DEV__] {
+| Some(_) => Js.log("dev mode")
+| None => Js.log("production mode")
+};
+```
+
+Output:
+
+```js
+var match = typeof (__DEV__) === "undefined" ? undefined : (__DEV__);
+
+if (match !== undefined) {
+  console.log("dev mode");
+} else {
+  console.log("production mode");
+}
+```
+
+Another example:
+
+```ocaml
+match [%bs.external __filename] with
+| Some f -> Js.log f
+| None -> Js.log "non-node environment"
+```
+
+Reason syntax
+
+```reason
+switch [%bs.external __filename] {
+| Some(f) => Js.log(f)
+| None => Js.log("non-node environment")
+};
+```
+
+Output:
+
+```js
+var match = typeof (__filename) === "undefined" ? undefined : (__filename);
+
+if (match !== undefined) {
+  console.log(match);
+} else {
+  console.log("non-node environment");
+}
+```
+
 ### Tips & Tricks
 
 Embedding raw JS snippets is **highgly discouraged**, though also highly useful if you're just starting out. As a matter of fact, the first few Reason BuckleScript projects were converted through:

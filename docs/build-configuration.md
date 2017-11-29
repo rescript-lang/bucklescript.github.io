@@ -3,7 +3,7 @@ id: build-configuration
 title: Configuration
 ---
 
-## `bsconfig.json` Configurations
+`bsconfig.json` is the single, mandatory build meta file needed for bsb.
 
 **The complete configuration schema is [here](https://bucklescript.github.io/bucklescript/docson/#build-schema.json)**. We'll _non-exhaustively_ highlight the important parts in prose here.
 
@@ -65,7 +65,9 @@ Hook that's invoked every time a file is recompiled. Good for JS build system in
 
 ```json
 {
-  "js-post-build": {"cmd": "node ../../postProcessTheFile.js"}
+  "js-post-build": {
+    "cmd": "node ../../postProcessTheFile.js"
+  }
 }
 ```
 

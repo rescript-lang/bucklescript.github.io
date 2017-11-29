@@ -23,6 +23,8 @@ Once declared, you can use an `external` as a normal value.
 
 BuckleScript `external`s are inlined into their callers during compilation and completely erased. In practice, when you e.g. bind to a JavaScript function on the BS side and use it, all trace of such binding disappear from the output.
 
+**Note**: do also use `external`s and the `[bs.blabla]` attributes in the interface files. Otherwise the inlining won't happen.
+
 ## Special Identity External
 
 One external worth mentioning is the following one:

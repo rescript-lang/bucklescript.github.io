@@ -17,7 +17,8 @@
       "object-record",
       "function",
       "import-export",
-      "regular-expression"
+      "regular-expression",
+      "generate-helpers-deriving"
     ],
     "Build System": [
       "build-overview",
