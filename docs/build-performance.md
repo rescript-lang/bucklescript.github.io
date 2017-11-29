@@ -30,6 +30,8 @@ Raw `bsb.exe` build on a small project should be around `70ms`. This doubles whe
 
 No-op build (when no file's changed) should be around `15ms`. Incremental rebuild (described soon) of a single file in a project is around `70ms` too.
 
+Cleaning the artifacts should be instantaneous.
+
 ### Extreme Test
 
 We've stress-tested bsb on a big project of 10,000 files (100 directories with 100 files each, containing interdependencies) using https://github.com/ocaml-omake/omake/blob/perf-test/performance/generate.ml, on Retina Macbook Pro Mid 2014 (quad core, i7).

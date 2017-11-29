@@ -23,7 +23,6 @@ The slight disavantage of such approach is that you need to keep both a bsb watc
 
 For what it's worth, you can also turn bsb into an automated step in your build pipeline (e.g. into a webpack loader, like our [deprecated bs-loader here](https://github.com/reasonml-community/bs-loader)).
 
-
 ### Tips & Tricks
 
 You can make BS JS files look even more idiomatic through the in-source + bs suffix config in `bsconfig.json`:

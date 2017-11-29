@@ -25,7 +25,9 @@ bsb -themes
 
 <!-- TODO: clean up themes -->
 
-To build a project, make sure you have the `bsconfig.json` generated above, then run:
+The build description file is called `bsconfig.json`. Every BuckleScript project needs one.
+
+To build a project, run:
 
 ```sh
 bsb -make-world
@@ -33,12 +35,24 @@ bsb -make-world
 
 Add `-w` to keep the built-in watcher running. Any new file change will be picked up and the build will re-run. **Note** that third-party libraries in `node_modules` aren't watched as it may exceed the node.js watcher count limit.
 
-## `bsconfig.json` Configurations
+To build only yourself, use `bsb -make`.
 
-**The complete configuration schema is [here](https://bucklescript.github.io/bucklescript/docson/#build-schema.json)**. We'll highlight the important parts in prose here.
+`bsb -help` to see all the available options.
 
-### name, namespace
+## Artifacts Cleaning
 
-`name` is the name of the library, ideally kept in sync with your npm `package.json`'s `name`.
+If you ever get into a stable build for edge-case reasons, use:
 
-`namespace` is almost **mandatory** at this point; we haven't turned it on by default as to preserve backward-compatibility, but do put `"namespace": true` into your bsconfig.
+```sh
+bsb -clean-world
+```
+
+Or `bsb -clean` to clean only your own artifacts.
+
+### Tips & Tricks
+
+A typical problem with traditional build systems is that they're not resilient against the user moving/deleting source files. Most don't clean up the old artifacts correctly after such user action\*. Bsb is unfortunately no different, **unless** you turn on `"suffix": ".bs.js"` in `bsconfig.json`, in which case we can track which JS artifact belongs to which source file correctly, even against source file moving/deletion.
+
+## Design Decisions
+
+\* One such build system that tracks these correctly & efficiently is [Tup](http://gittup.org/tup/). See the (rather accessible!) paper [here](http://gittup.org/tup/build_system_rules_and_algorithms.pdf). Unfortunately, Tup's implementation uses FUSE and other systems, which we can't safely use on every platform.
