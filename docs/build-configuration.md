@@ -79,12 +79,14 @@ Output to either CommonJS, ES6 modules or AMD. Example:
 {
   "package-specs": {
     "module": "commonjs",
-    "in-source": true // generates output alongside source files
+    "in-source": true
   }
 }
 ```
 
-Notably, `"module": "es6-global"` resolves `node_modules` using relative paths. Good for development-time usage of ES6 in conjunction with browsers like Safari and Firefox that support ES6 modules today. No more dev-time bundling!
+- `"module": "es6-global"` resolves `node_modules` using relative paths. Good for development-time usage of ES6 in conjunction with browsers like Safari and Firefox that support ES6 modules today. No more dev-time bundling!
+
+- `"in-source": true` generates output alongside source files, instead of by default isolating them into `lib/js`. The output directory is otherwise not configurable.
 
 ### suffix
 

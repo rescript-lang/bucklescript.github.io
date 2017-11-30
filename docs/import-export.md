@@ -68,6 +68,8 @@ var Path = require("path");
 var root = Path.dirname("/User/chenglou");
 ```
 
+**Note**: the string inside `bs.module` can be anything: `"./src/myJsFile"`, `"@myNpmNamespace/myLib"`, etc.
+
 ### Import a Default Value
 
 By omitting the payload to `bs.module`, you bind to the whole JS module:

@@ -228,7 +228,7 @@ If your key contains hyphens... you'll have to use the next method.
 
 ### Js Object <-> OCaml Record conversion
 
-You might be tempted to map such `Js.t` object to a proper OCaml/BuckleScript record, and use many of the benefits that come with latter: immutable update, comparison, pattern-matching, etc. You can definitely write your converter functions from `Js.t` objects to record, and vice-versa. In the future, we'll provide automatic converters.
+If you don't want to work with `Js.t` objects and want to use idiomatic OCaml/Reason records, we provide automatic generation of helpers that convert between a `Js.t` object and a corresponding record type. See the section on [Generate Helpers (Deriving)](generate-helpers-deriving.md).
 
 ## Object as Dynamic Record
 

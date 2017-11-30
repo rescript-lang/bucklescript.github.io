@@ -39,7 +39,7 @@ npm install
 
 ### Install From Source, Without NPM/Yarn
 
-**Prerequisite**: just the standard C toolchain.
+**Prerequisite**: the standard C toolchain (gcc, make).
 
 First, build the OCaml compiler:
 
