@@ -10,3 +10,5 @@ title: TypeScript Support
   "bsc-flags": ["-bs-gen-tds"]
 }
 ```
+
+<!-- TODO document flow support -->

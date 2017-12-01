@@ -23,7 +23,8 @@
       "generate-converters-accessors",
       "nodejs-special-variables",
       "interop-misc",
-      "typescript-support"
+      "typescript-support",
+      "browser-support-polyfills"
     ],
     "Build System": [
       "build-overview",

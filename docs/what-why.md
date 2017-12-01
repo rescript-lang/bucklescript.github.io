@@ -5,7 +5,7 @@ title: What & Why
 
 ## What is BuckleScript?
 
-BuckleScript takes the [OCaml](http://ocaml.org) language, **a fast, pragmatic and typed language**, and makes it compile to clean, readable JavaScript code through some tweaks. This allows the users to write in an industrial-strength language while using the existing, familiar JavaScript tools (npm/yarn, bundlers, minifiers, devtools, etc.) and accessing the vast ecosystem from both JavaScript and OCaml.
+BuckleScript isn't a new language. It simply takes [OCaml](http://ocaml.org), **a fast, pragmatic and typed language**, and makes it compile to clean, readable JavaScript code through some tweaks. This allows the users to write in an industrial-strength language while using the existing, familiar JavaScript tools (npm/yarn, bundlers, minifiers, devtools, etc.) and accessing the vast ecosystem from both JavaScript and OCaml.
 
 Thanks to its great interoperability with JS, BuckleScript can be seen as a "gradually" typed language, where you get to incrementally adopt it in your codebase file-by-file, while keeping the full benefits of a 100% sound and reliable type system, plus extra language features.
 
@@ -44,7 +44,7 @@ levels:
 
 - Function and module level code elimination is facilitated by the well-engineered type system and **purity analysis**.
 
-- At the global level, BuckleScript generates code that are naturally friendly to dead code elimination done by bundling tools such as [Rollup](https://github.com/rollup/rollup) and [Closure Compiler](https://developers.google.com/closure/compiler/).
+- At the global level, BuckleScript generates code that are naturally friendly to dead code elimination done by bundling tools such as [Rollup](https://github.com/rollup/rollup) and [Closure Compiler](https://developers.google.com/closure/compiler/), after its own sophisticated elimination pass.
 
 ### Compile-time Optimizations
 

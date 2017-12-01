@@ -46,8 +46,14 @@ If you ever get into a stable build for edge-case reasons, use:
 ```sh
 bsb -clean-world
 ```
-
+jj
 Or `bsb -clean` to clean only your own artifacts.
+
+## Editor Support
+
+Bsb generates a `.merlin` file, used by various [editor plugins](https://reasonml.github.io/guide/editor-tools/editors-plugins) under the hood to power e.g. autocomplete, type hint, diagnosis, etc.
+
+**Bonus**: you can directly pipe the bsb terminal error messages into VSCode by setting the config [here](https://github.com/reasonml-editor/vscode-reasonml#bsb).
 
 ### Tips & Tricks
 

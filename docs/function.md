@@ -521,6 +521,35 @@ Reason syntax:
 map([|1, 2, 3|], (x) => x + 1);
 ```
 
+#### Pitfall
+
+If you try to do this:
+
+```ocaml
+let id : ('a -> 'a [@bs]) = ((fun v -> v) [@bs])
+```
+
+Reason syntax:
+
+```reason
+let id: [@bs] ('a => 'a) = [@bs] ((v) => v);
+```
+
+You’ll get this cryptic error message:
+
+```
+Error: The type of this expression, ('_a -> '_a [@bs]),
+       contains type variables that cannot be generalized
+```
+
+The issue here isn’t that the function is polymorphic. You can use polymorphic uncurried functions as inline callbacks, but you can’t export them (and `let`s are exposed by default unless you hide it with an interface file). The issue here is a combination of the uncurried call, polymorphism and exporting the function. It’s an unfortunate limitation of how OCaml’s type system incorporates side-effects, and how BS handles uncurrying.
+
+The simplest solution is in most cases to just not export it, by adding an interface to the module. Alternatively, if you really need to export it, you can do so in its curried form, and then wrap it in an uncurried lambda at the call site. E.g.:
+
+```ocaml
+lat _ = map (fun v -> id v [@bs])
+```
+
 ##### Design Decisions
 
 In general, `bs.uncurry` is recommended; the compiler will do lots of optimizations to resolve the currying to uncurrying at compile time. However, there are some cases the compiler can't optimize it. In these case, it will be converted to a runtime check.
