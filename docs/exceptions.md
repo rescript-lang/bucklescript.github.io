@@ -30,3 +30,49 @@ try (
   }
 };
 ```
+
+## Usage
+
+Take promise for example:
+
+```ocaml
+exception UnhandledPromise
+
+let handlePromiseFailure = function [@bs.open]
+  | Not_found ->
+    Js.log "Not found";
+    Js.Promise.resolve ()
+
+let _ =
+ Js.Promise.reject Not_found
+ |> Js.Promise.catch (fun error ->
+      match handlePromiseFailure error with
+      | Some x -> x
+      | None -> raise UnhandledPromise
+  )
+```
+
+Reason syntax:
+
+```reason
+exception UnhandledPromise;
+
+let handlePromiseFailure =
+  [@bs.open]
+  (
+    fun
+    | Not_found => {
+        Js.log("Not found");
+        Js.Promise.resolve()
+      }
+  );
+
+Js.Promise.reject(Not_found)
+  |> Js.Promise.catch(
+     (error) =>
+       switch (handlePromiseFailure(error)) {
+       | Some(x) => x
+       | None => raise(UnhandledPromise)
+       }
+   );
+```

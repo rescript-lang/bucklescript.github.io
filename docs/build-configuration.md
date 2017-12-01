@@ -43,6 +43,17 @@ Your source files need to be specified explicitly (we don't want to accidentally
 }
 ```
 
+You can mark your directories as dev-only (for e.g. tests):
+
+```json
+{
+  "sources" : {
+    "dir" : "test",
+    "type" : "dev"
+  }
+}
+```
+
 ### bs-dependencies, bs-dev-dependencies
 
 List of BuckleScript/Reason dependencies. Just like `package.json`'s dependencies, they'll be searched in `node_modules`.

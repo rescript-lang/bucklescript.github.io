@@ -9,7 +9,7 @@
     "Interop": [
       "interop-overview",
       "embed-raw-javascript",
-      "common-shared-primitives",
+      "common-data-types",
       "intro-to-external",
       "boolean",
       "bind-to-global-values",
@@ -29,7 +29,8 @@
       "build-overview",
       "build-configuration",
       "interop-with-js-build-systems",
-      "build-performance"
+      "build-performance",
+      "build-advanced"
     ],
     "Standard Library": [
       "stdlib-overview"
