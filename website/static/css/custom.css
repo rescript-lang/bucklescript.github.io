@@ -1,12 +1,12 @@
 .fixedHeaderContainer header > a > img {
   /* spinning logo */
-  transition: 3s;
+  transition: transform 0.5s cubic-bezier(0.18, 0.89, 0.31, 1.16);
   /* make sure it's a square. Spins at the center */
   height: 34px;
   width: 34px;
 }
 .fixedHeaderContainer header > a:hover > img {
-  transform: rotate(1080deg);
+  transform: scale(1.3);
 }
 
 /* only show language icon */
