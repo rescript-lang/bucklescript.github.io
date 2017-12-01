@@ -12,7 +12,9 @@ BS splits the many overloaded usage of JS objects into distinct categories, for 
 Up until recently, where JS finally got proper Map support, objects have been used as a map. The characteristics of object-as-map are the following:
 
 - contains values that are all of the same type
+
 - might or might not add/remove arbitrary keys
+
 - might or might not be accessed using a dynamic/computed key
 
 If these points (especially the first one) describe your object usage, then look no further than using the [`Js.Dict`](https://bucklescript.github.io/bucklescript/api/Js.Dict.html) API! This is a thin layer of binding we've made for such situation. Under the hood, a `Js.Dict` is just an object, and the bindings are compiled away. No performance cost. Actually, **better** than no perf cost! See the Design Decisions below.
@@ -24,6 +26,7 @@ In this mode, you can do all the metaprogramming you're used to with JS objects:
 If your object:
 
 - has a known number of fields
+
 - might or might not contain values of heterogeneous types
 
 Then you're really using it like a "record" in most languages. For example, think of the difference of use-case and intent between the object `{name: "John", age: 10, job: "CEO"}` and `{"John": 10, "Allison": 20, "Jimmy": 15}`.
@@ -56,6 +59,8 @@ type person = Js.t({
 
 [@bs.val] external john : person = "john";
 ```
+
+**From now on**, we'll call the BuckleScript interop object "`Js.t` object", to disambiguate it with normal object and JS object.
 
 Because object types are used often, Reason gives it a nicer sugar. `Js.t({. name: string})` will format to `{. "name": string}`.
 
@@ -176,33 +181,80 @@ See what went wrong here? We've declared a `person` type, but `jane` is inferred
 OCaml's optional labeled function maps rather nicely to a JS object creation. We provide an alternative way of creating objects, `bs.obj`, that is convenient if said object contains optional fields:
 
 ```ocaml
-type t
-external make_config : hi:int -> ?lo:int -> unit -> t = "" [@@bs.obj]
+external makeConfig : high:int -> ?low:int -> unit -> _ = "" [@@bs.obj]
 
-let c1 = make_config ~hi:3 ()
-let c2 = make_config ~lo:2 ~hi:3 ()
+let c1 = makeConfig ~high:3 ()
+let c2 = makeConfig ~low:2 ~high:3 ()
+
+(* access them as Js.t objects! *)
+let high: int = c1##high
+let low: int Js.undefined = c1##low
 ```
 
 Reason syntax:
 
 ```reason
-type t;
-[@bs.obj] external make_config : (~hi: int, ~lo: int=?, unit) => t = "";
+[@bs.obj] external makeConfig : (~high: int, ~low: int=?, unit) => _ = "";
 
-let c1 = make_config(~hi=3, ());
-let c2 = make_config(~lo=2, ~hi=3, ());
+let c1 = makeConfig(~high=3, ());
+let c2 = makeConfig(~low=2, ~high=3, ());
+
+/* access them as Js.t objects! */
+let high: int = c1##high;
+let low: Js.undefined(int) = c1##low;
 ```
 
 Output:
 
 ```js
-var c1 = {hi : 3};
-var c2 = {hi : 3 , lo: 2};
+var c1 = {high: 3};
+var c2 = {high: 3, low: 2};
+var high = c1.high;
+var low = c1.low;
 ```
 
-_The final `unit` is there to indicate that you've finished applying optional arguments. More info [here](https://reasonml.github.io/guide/language/function#optional-labeled-arguments)_.
+**Note**:
 
-For extra hacking, you can make the returned type `t` un-abstract, aka `type t = <hi: int, lo: int Js.nullable> Js.t`.
+- Marking the return value as `_` will infer a `Js.t` object of the expected shape!
+
+- The final `unit` is there to indicate that you've finished applying optional arguments. More info [here](https://reasonml.github.io/guide/language/function#optional-labeled-arguments).
+
+You can also attach constant data unto an object using `[@bs.as]`:
+
+```ocaml
+external makeIOConfig :
+  stdio:(_ [@bs.as "inherit"]) ->
+  cwd:string ->
+  detached:(_ [@bs.as {json|true|json}]) ->
+  unit ->
+  _ = "" [@@bs.obj]
+
+let config = makeIOConfig ~cwd:"." ()
+```
+
+Reason syntax:
+
+```reason
+[@bs.obj]
+external makeIOConfig : (
+  ~stdio: [@bs.as "inherit"] _,
+  ~cwd: string,
+  ~detached: [@bs.as {json|true|json}] _,
+  unit
+) => _ = "";
+
+let config = makeIOConfig(~cwd=".", ());
+```
+
+Output:
+
+```js
+var config = {
+  stdio: "inherit",
+  cwd: ".",
+  detached: true
+};
+```
 
 ### Invalid Field Names
 
@@ -235,9 +287,75 @@ If you don't want to work with `Js.t` objects and want to use idiomatic OCaml/Re
 When The two above modes of binding to objects fail, you can always fall back to this one. And sometimes this the **preferable** way of binding to objects, because it:
 
 - deals with objects with potentially arbitrary shapes
+
 - allows heterogeneous values
+
 - allows hyphen in object keys
 
+```ocaml
+type t
+external create : int -> t = "Int32Array" [@@bs.new] (* bs.new is documented in the class section *)
+external get : t -> int -> int = "" [@@bs.get_index]
+external set : t -> int -> int -> unit = "" [@@bs.set_index]
 
+let i32arr = (create 3)
+let _ = set i32arr 0 42
+let _ = Js.log (get i32arr 0)
+```
 
-bs.get_index
+Reason syntax:
+
+```reason
+type t;
+[@bs.new] external create : int => t = "Int32Array"; /* bs.new is documented in the class section */
+[@bs.get_index] external get : (t, int) => int = "";
+[@bs.set_index] external set : (t, int, int) => unit = "";
+
+let i32arr = create(3);
+set(i32arr, 0, 42);
+Js.log(get(i32arr, 0));
+```
+
+Albeit the names are called `get_index` and `set_index`, it's really dynamic access of objects fields and/or arrays.
+
+Output:
+
+```js
+var i32arr = new Int32Array(3);
+i32arr[0] = 42;
+console.log(i32arr[0]);
+```
+
+### Specific Getter/Setter
+
+```ocaml
+type textarea
+external setName : textarea -> string -> unit = "name" [@@bs.set]
+external getName : textarea -> string = "name" [@@bs.get]
+
+external myTextArea: textarea = "" [@@bs.val]
+let _ = setName myTextArea "asd"
+```
+
+Reason syntax:
+
+```reason
+type textarea;
+[@bs.set] external setName : (textarea, string) => unit = "name";
+[@bs.get] external getName : textarea => string = "name";
+
+[@bs.val] external myTextArea : textarea = "";
+setName(myTextArea, "asd");
+```
+
+Output:
+
+```js
+myTextArea.name = "asd";
+```
+
+There's also a trick with object methods and method chaining in the next function section.
+
+## Conclusion
+
+All these tricks to bind to JS objects might be overwhelming; don't worry, you can just pick whatever you need as you go. But hopefully you can see that there's almost always a way to bind to your favorite JS library with no cost!

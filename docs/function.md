@@ -60,6 +60,76 @@ We've compiled to the same function, but now the usage is much clearer on the BS
 
 **Note**: in this particular case, you need a unit, `()` after `border`, since `border` is an [optional argument at the last position](https://reasonml.github.io/guide/language/function#optional-labeled-arguments). Not having a unit to indicate you've finished applying the function would generate a warning.
 
+## Object Method
+
+You might have seen in the object and record section that you can attach a `bs.meth` onto a `Js.t` object and call it as a method. This section presents an alternative using `bs.send`.
+
+```ocaml
+type document (* abstract type for a document object *)
+external getElementById : document -> string -> Dom.element = "getElementById" [@@bs.send]
+external doc: document = "document" [@@bs.val]
+
+let el = getElementById doc "myId"
+```
+
+Reason syntax:
+
+```reason
+type document; /* abstract type for a document object */
+[@bs.send] external getElementById : (document, string) => Dom.element = "getElementById";
+[@bs.val] external doc : document = "document";
+
+let el = getElementById(doc, "myId");
+```
+
+Output:
+
+```js
+var el = document.getElementById("myId");
+```
+
+In a `bs.send`, the object is always the first argument. Actual arguments of the method follow (this is a bit what modern OOP objects are really).
+
+### Chaining
+
+Ever used `foo().bar().baz()` chaining ("fluent api") in JS OOP? We can model that in BuckleScript too, by turning `bs.send` into `bs.send.pipe`, and using the stock `|>` operator:
+
+```ocaml
+external map : ('a -> 'b) -> 'b array = "" [@@bs.send.pipe: 'a array]
+external forEach: ('a -> unit) -> 'a array = "" [@@bs.send.pipe: 'a array]
+
+let _ =
+  [|1; 2; 3|]
+  |> map (fun x -> x + 1)
+  |> forEach (fun x -> Js.log x)
+```
+
+Reason syntax:
+
+```reason
+[@bs.send.pipe : array('a)]
+external map : ('a => 'b) => array('b) = "";
+
+[@bs.send.pipe : array('a)]
+external forEach : ('a => unit) => array('a) = "";
+
+[|1, 2, 3|]
+|> map((x) => x + 1)
+|> forEach((x) => Js.log(x));
+```
+
+The payload to `bs.send.pipe` is what you'd previously have put as the first argument of `bs.send`. So the non-bs-send-pipe way of writing it would have been:
+
+```ocaml
+external map : 'a array -> ('a -> 'b) -> 'b array = "" [@@bs.send]
+```
+
+Reason syntax:
+
+```reason
+[@bs.send] external map : (array('a), 'a => 'b) => array('b) = "";
+```
+
 ## Variadic Function Arguments
 
 You might have JS functions that take an arbitrary amount of arguments. BuckleScript supports binding to those, under the condition that the arbitrary arguments part is homogenous (aka of the same type). If so, add `bs.splice` to your `external`.
@@ -165,8 +235,6 @@ padLeft("Hello World", "Message from BS: ");
 
 ## Constraint Arguments Better
 
-**Note**: bonus interop feature. Skip if you're bored.
-
 Consider the Node `fs.readFileSync`'s second argument. It can take a string, but really only a defined set: `"ascii"`, `"utf8"`, etc. You can still bind it as a string, but we can use poly variants + `bs.string` to ensure that our usage's more correct:
 
 ```ocaml
@@ -208,6 +276,132 @@ Fs.readFileSync("xx.txt", "ascii");
 - Attaching a `[@bs.as "foo"]` to a constructor lets you customize the final string.
 
 And now, passing something like `"myOwnUnicode"` or other variant constructor names to `readFileSync` would correctly error.
+
+Aside from string, you can also compile an argument to an int, using `bs.int` instead of `bs.string` in a similar way:
+
+```ocaml
+external test_int_type :
+  ([ `on_closed
+   | `on_open [@bs.as 20]
+   | `in_bin
+   ]
+   [@bs.int]) -> int =
+  "" [@@bs.val]
+
+let _ = test_int_type `in_bin
+```
+
+Reason syntax:
+
+```reason
+[@bs.val]
+external test_int_type : (
+  [@bs.int] [
+    | `on_closed
+    | [@bs.as 20] `on_open
+    | `in_bin
+  ])
+  => int = "";
+
+test_int_type(`in_bin);
+```
+
+`on_closed` will compile to `0`, `on_open` to `20` and `in_bin` to **`21`**.
+
+## Special-case: Event Listeners
+
+One last trick with polymorphic variants:
+
+```ocaml
+type readline
+external on :
+    (
+    [ `close of unit -> unit
+    | `line of string -> unit
+    ]
+    [@bs.string])
+    -> readline = "" [@@bs.send.pipe: readline]
+let register rl =
+  rl
+  |> on (`close (fun event -> ()))
+  |> on (`line (fun line -> print_endline line))
+```
+
+Reason syntax:
+
+```reason
+type readline;
+
+[@bs.send.pipe : readline]
+external on : (
+  [@bs.string] [
+    | `close(unit => unit)
+    | `line(string => unit)
+  ])
+  => readline = "";
+
+let register = (rl) =>
+  rl
+  |> on(`close((event) => ()))
+  |> on(`line((line) => print_endline(line)));
+```
+
+Output:
+
+```js
+function register(rl) {
+  return rl.on("close", (function () {
+              return /* () */0;
+            }))
+            .on("line", (function (line) {
+              console.log(line);
+              return /* () */0;
+            }));
+}
+```
+
+<!-- TODO: GADT phantom type -->
+
+## Fixed Arguments
+
+Sometimes it's convenient to bind to a function using an `external`, while passing predetermined argument values to the JS function:
+
+```ocaml
+external process_on_exit :
+  (_ [@bs.as "exit"]) ->
+  (int -> unit) ->
+  unit =
+  "process.on" [@@bs.val]
+
+let () = process_on_exit (fun exit_code ->
+  Js.log ("error code: " ^ string_of_int exit_code)
+)
+```
+
+Reason syntax:
+
+```reason
+[@bs.val]
+external process_on_exit : (
+  [@bs.as "exit"] _,
+  int => unit
+) => unit = "process.on";
+
+let () = process_on_exit((exit_code) =>
+  Js.log("error code: " ++ string_of_int(exit_code))
+);
+```
+
+Output:
+
+```js
+process.on("exit", function (exit_code) {
+  console.log("error code: " + exit_code);
+  return /* () */0;
+});
+```
+
+The `[@bs.as "exit"]` and the placeholder `_` argument together indicates that you want the first argument to compile to the string `"exit"`. You can also use any JSON literal with `bs.as`: `[@bs.as {json|true|json}]`, `[@bs.as {json|{"name": "John"}|json}]`, etc.
 
 ## Curry & Uncurry
 
@@ -332,4 +526,3 @@ map([|1, 2, 3|], (x) => x + 1);
 In general, `bs.uncurry` is recommended; the compiler will do lots of optimizations to resolve the currying to uncurrying at compile time. However, there are some cases the compiler can't optimize it. In these case, it will be converted to a runtime check.
 
 This means `[@bs]` are completely static behavior (no runtime cost), while `[@bs.uncurry]` is more convenient for end users but, in some rare cases, might be slower than `[@bs]`.
-

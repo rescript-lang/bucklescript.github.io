@@ -280,6 +280,8 @@ switch (fruitFromJs(100)) {
 };
 ```
 
+**Note**: by using `bs.as` here, all subsequent number encoding changes. `Apple` is still `0`, `Orange` is `10`, `Kiwi` is `100` and `Watermelon` is **`101`**!
+
 ### More Safety
 
 Similar to the JS object <-> record deriving, you can hide the fact that the JS enum are ints by using `newType`:
