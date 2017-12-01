@@ -3,7 +3,7 @@ id: roadmap
 title: Roadmap & Contribution
 ---
 
-## Bucklescript Team TODOs
+## BuckleScript Team TODOs
 
 Some future plans are briefly discussed in the repo's [issues page](https://github.com/bucklescript/bucklescript/issues).
 

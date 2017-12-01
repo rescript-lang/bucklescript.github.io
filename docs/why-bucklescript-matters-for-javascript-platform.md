@@ -20,7 +20,7 @@ projects like [typescript](https://www.typescriptlang.org/),
 [Elm](http://elm-lang.org/), or [Purescript](http://www.purescript.org/)
 we think you will probably be interested in BuckleScript as well.
 
-Bucklescript is not a new language. It reuses the existing [OCaml
+BuckleScript is not a new language. It reuses the existing [OCaml
 programming language](https://ocaml.org/) while still delivering
 debug-able and performant JavaScript code. We think it’s better to reuse
 than having to invent a new language.
@@ -74,7 +74,7 @@ How does it compare with other transpilers?
     programming in a functional style in general, we realize there are
     some cases that an imperative style makes perfect sense.
 
-2.  Bucklescript is not just OCaml, but the whole OCaml ecosystem
+2.  BuckleScript is not just OCaml, but the whole OCaml ecosystem
 
 The OCaml compiler implementation(s) are famous for blazing fast compile
 times, and as programmer, we think compile times really matter and are a
@@ -85,7 +85,7 @@ very important feature of a compiled language.
 The above picture compares OCaml compilation-times with other languages:
 S for Scala, K for Koltin, TS for TypeScript.
 
-Bucklescript reuses most of the OCaml compiler (parsing/type checking
+BuckleScript reuses most of the OCaml compiler (parsing/type checking
 and pattern match compilation), its type checker [was well
 engineered](http://okmij.org/ftp/ML/generalization.html) and written in
 an imperative style to make it fast.
@@ -101,7 +101,7 @@ deliver the software to more people without installation - compared with
 Elm, Purescript, or typescript, none of which support both an ASM
 backend and a JS backend.
 
-1.  Bucklescript is an optimizing compiler and will do much more in the
+1.  BuckleScript is an optimizing compiler and will do much more in the
     future.
 
 Since OCaml has a sound type system, and functional languages are

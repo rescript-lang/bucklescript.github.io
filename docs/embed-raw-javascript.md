@@ -67,7 +67,7 @@ function f (x,y) {
 
 ### Detect Global Variables
 
-Bucklescript provides a relatively type safe approach for such use case: `bs.external`. `[%bs.external a_single_identifier]` is a value of type `option`. Example:
+BuckleScript provides a relatively type safe approach for such use case: `bs.external`. `[%bs.external a_single_identifier]` is a value of type `option`. Example:
 
 ```ocaml
 match [%bs.external __DEV__] with
