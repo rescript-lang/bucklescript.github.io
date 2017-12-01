@@ -79,9 +79,9 @@ const siteConfig = {
   ],
   users,
   examples,
-  // headerIcon: "img/logo.svg",
+  headerIcon: "img/logos/bucklescript_small.svg",
   // footerIcon: "img/logo.svg",
-  favicon: "img/logo.svg",
+  favicon: "img/logos/bucklescript_small.svg",
   /* colors for website */
   colors: {
     primaryColor: "#ab5ea3",
