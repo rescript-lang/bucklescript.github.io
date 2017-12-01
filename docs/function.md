@@ -526,3 +526,50 @@ map([|1, 2, 3|], (x) => x + 1);
 In general, `bs.uncurry` is recommended; the compiler will do lots of optimizations to resolve the currying to uncurrying at compile time. However, there are some cases the compiler can't optimize it. In these case, it will be converted to a runtime check.
 
 This means `[@bs]` are completely static behavior (no runtime cost), while `[@bs.uncurry]` is more convenient for end users but, in some rare cases, might be slower than `[@bs]`.
+
+## Binding to `this`-based Callbacks
+
+Many JS libraries have callbacks which rely on this (the source), for example:
+
+```js
+x.onload = function(v) {
+  console.log(this.response + v)
+}
+```
+
+Here, `this` would point to `x` (actually, it depends on how `onload` is called, but we digress). It's not correct to declare `x.onload` of type `unit → unit [@bs]`. Instead, we introduced a special attribute, `bs.this`, which allows us to type `x` as so:
+
+```ocaml
+type x
+external x: x = "" [@@bs.val]
+external set_onload : x -> (x -> int -> unit [@bs.this]) -> unit = "onload" [@@bs.set]
+external resp : x -> int = "response" [@@bs.get]
+
+let _ =
+  set_onload x begin fun [@bs.this] o v ->
+    Js.log(resp o + v )
+  end
+```
+
+Reason syntax:
+
+```reason
+type x;
+[@bs.val] external x : x = "";
+[@bs.set] external set_onload : (x, [@bs.this] ((x, int) => unit)) => unit = "onload";
+[@bs.get] external resp : x => int = "response";
+
+set_onload(x, [@bs.this] ((o, v) => Js.log(resp(o) + v)));
+```
+
+Output:
+
+```js
+x.onload = (function (v) {
+    var o = this;
+    console.log(o.response + v | 0);
+    return /* () */0;
+  });
+```
+
+`bs.this` is the same as `bs`, except that its first parameter is reserved for `this` and for arity of 0, there is no need for a redundant `unit` type.

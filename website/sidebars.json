@@ -14,18 +14,24 @@
       "boolean",
       "bind-to-global-values",
       "null-undefined-option",
-      "object-record",
+      "object",
+      "class",
       "function",
       "import-export",
       "regular-expression",
       "exceptions",
-      "generate-helpers-deriving"
+      "generate-converters-accessors",
+      "nodejs-special-variables",
+      "interop-misc"
     ],
     "Build System": [
       "build-overview",
       "build-configuration",
       "interop-with-js-build-systems",
       "build-performance"
+    ],
+    "Standard Library": [
+      "stdlib-overview"
     ],
     "Advanced": [
       "conditional-compilation",

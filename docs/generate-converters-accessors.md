@@ -1,6 +1,6 @@
 ---
-id: generate-helpers-deriving
-title: Generate Helpers (Deriving)
+id: generate-converters-accessors
+title: Generate Converters & Helpers
 ---
 
 Sometimes, you might want to generate e.g. function accessors from a variant declaration, or a `Js.t` object + converter functions from a record definition. BuckleScript comes with a few annotations that allow you to generate those.

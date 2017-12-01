@@ -1,6 +1,6 @@
 ---
-id: object-record
-title: Object & Record
+id: object
+title: Object
 ---
 
 JavaScript objects are used for so many purposes that if we had a single API for typing them, we'd likely end up with "this is an object that can take potentially many unknown fields with many unknown value types", which isn't very useful.
@@ -21,7 +21,7 @@ If these points (especially the first one) describe your object usage, then look
 
 In this mode, you can do all the metaprogramming you're used to with JS objects: get all keys through `Js.Dict.keys`, get values through `Js.Dict.values`, etc.
 
-## Object as Record
+## Object as "Record"
 
 If your object:
 
