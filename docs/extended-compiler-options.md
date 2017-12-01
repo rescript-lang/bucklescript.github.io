@@ -65,7 +65,7 @@ You would then need a bundler for the different module systems: webpack supports
 
 ## -bs-gen-tds
 
-Trigger the generation of TypeScript `.d.ts` files. `bsc` has the ability to also emit `.d.ts` for better interaction with TypeScript. This is still **experimental**.
+Trigger the generation of TypeScript `.d.ts` files. `bsc` has the ability to emit `.d.ts` for better integration with TypeScript. This is still **experimental**.
 
 ## -bs-no-warn-ffi-type
 

@@ -22,7 +22,8 @@
       "exceptions",
       "generate-converters-accessors",
       "nodejs-special-variables",
-      "interop-misc"
+      "interop-misc",
+      "typescript-support"
     ],
     "Build System": [
       "build-overview",
