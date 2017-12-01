@@ -13,7 +13,7 @@ external myCFunction : int -> string = "theCFunctionName"
 
 Reason syntax:
 
-```ocaml
+```reason
 external myCFunction : int => string = "theCFunctionName"
 ```
 
@@ -29,7 +29,7 @@ BuckleScript `external`s are inlined into their callers during compilation and c
 
 One external worth mentioning is the following one:
 
-```reason
+```ocaml
 external myShadyConversion : foo -> bar = "%identity"
 ```
 

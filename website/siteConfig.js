@@ -86,7 +86,7 @@ const siteConfig = {
   colors: {
     primaryColor: "#ab5ea3",
     secondaryColor: "#ab5ea3",
-    prismColor:
+    codeColor:
       "rgba(171, 94, 163, 0.03)" /* primaryColor in rgba form, with 0.03 alpha */
   },
   highlight: {
