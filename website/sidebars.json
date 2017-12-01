@@ -41,5 +41,17 @@
       "compiler-architecture-principles",
       "comparison-to-jsoo"
     ]
+  },
+  "try-menu": {
+    "Try": [
+      "try",
+      "load-third-party-libraries"
+    ]
+  },
+  "community-menu": {
+    "Community": [
+      "community",
+      "roadmap"
+    ]
   }
 }
