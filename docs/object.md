@@ -12,9 +12,7 @@ BS splits the many overloaded usage of JS objects into distinct categories, for 
 Up until recently, where JS finally got proper Map support, objects have been used as a map. The characteristics of object-as-map are the following:
 
 - contains values that are all of the same type
-
 - might or might not add/remove arbitrary keys
-
 - might or might not be accessed using a dynamic/computed key
 
 If these points (especially the first one) describe your object usage, then look no further than using the [`Js.Dict`](https://bucklescript.github.io/bucklescript/api/Js.Dict.html) API! This is a thin layer of binding we've made for such situation. Under the hood, a `Js.Dict` is just an object, and the bindings are compiled away. No performance cost. Actually, **better** than no perf cost! See the Design Decisions below.
@@ -26,7 +24,6 @@ In this mode, you can do all the metaprogramming you're used to with JS objects:
 If your object:
 
 - has a known number of fields
-
 - might or might not contain values of heterogeneous types
 
 Then you're really using it like a "record" in most languages. For example, think of the difference of use-case and intent between the object `{name: "John", age: 10, job: "CEO"}` and `{"John": 10, "Allison": 20, "Jimmy": 15}`.
@@ -287,9 +284,7 @@ If you don't want to work with `Js.t` objects and want to use idiomatic OCaml/Re
 When The two above modes of binding to objects fail, you can always fall back to this one. And sometimes this the **preferable** way of binding to objects, because it:
 
 - deals with objects with potentially arbitrary shapes
-
 - allows heterogeneous values
-
 - allows hyphen in object keys
 
 ```ocaml

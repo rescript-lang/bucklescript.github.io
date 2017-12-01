@@ -10,7 +10,6 @@ People used to use preprocessors like [C preprocessor](http://tigcc.ticalc.org/d
 Instead of a preprocessor, BuckleScript adds language-level static `if` compilation. It's less powerful than other preprocessors since it only supports static `if` (no `#define`, `#undefine`, `#include`), but there are several advantages.
 
 - It’s tiny (only ~500 lines) and highly efficient. Everything can be done in a **single pass**. It's easy to rebuild the pre-processor into a standalone file, with no dependencies on compiler libs, to back-port it to old OCaml compilers.
-
 - It’s purely functional and type-safe, and cooperates with editor tooling like Merlin.
 
 **Note**: BuckleScript's conditional compilation doesn't work with Reason yet.
@@ -104,13 +103,9 @@ atom
 ## Typing Rules
 
 - type of INT is `int`
-
 - type of STRING is `string`
-
 - type of FLOAT is `float`
-
 - value of UIDENT comes from either built-in values (with documented types) or an environment variable, if it is literally `true`, `false` then it is `bool`, else if it is parsable by `int_of_string` then it is of type int, else if it is parsable by `float_of_string` then it is float, otherwise it would be string
-
 - In `lhs operator rhs`, `lhs` and `rhs` are always the same type and return boolean. `=~` is a semantic version operator which requires both sides to be string.
 
 Evaluation rules are obvious. `=~` respect semantic version, for example, the underlying engine

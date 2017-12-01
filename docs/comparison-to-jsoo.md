@@ -8,9 +8,7 @@ Js_of_ocaml is a popular compiler which compiles OCaml’s bytecode into JavaScr
 However, there are a few areas that BuckleScript approaches differently:
 
 - Js_of_ocaml takes low-level bytecode from OCaml compiler, BuckleScript takes the high-level rawlambda representation from OCaml compiler.
-
 - Js_of_ocaml focuses more on existing OCaml ecosystem (OPAM) while BuckleScript’s major goal is to target NPM/Yarn and existing JS workflows.
-
 - Js_of_ocaml and BuckleScript have slightly different runtime encoding in several places. For example, BuckleScript encodes OCaml Array as JS Array while js_of_ocaml requires its index 0 to be of value 0.
 
 See also the [What & Why](what-why.md) page for more info on BuckleScript's emphasis.

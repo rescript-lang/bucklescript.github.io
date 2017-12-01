@@ -47,7 +47,7 @@
   },
   "try-menu": {
     "Try": [
-      "try",
+      "playground",
       "load-third-party-libraries"
     ]
   },

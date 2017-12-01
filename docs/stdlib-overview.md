@@ -10,7 +10,5 @@ BuckleScript is mostly just OCaml, so they share the same standard library. The 
 In addition, we provide a few extra modules:
 
 - `Dom`: contains DOM types. The DOM is very hard to bind to, so we've decided to only keep the types in the stdlib and let users bind to the subset of DOM they need downstream.
-
 - `Node`: for node-specific APIs. Experimental; contribution welcome!
-
 - `Js`: all the familiar JS APIs and modules are here! E.g. if you want to use the [JS Array API](https://bucklescript.github.io/bucklescript/api/Js.Array.html) over the [OCaml Array API](https://caml.inria.fr/pub/docs/manual-ocaml-4.02/libref/Array.html) because you're more familiar with the former, go ahead.

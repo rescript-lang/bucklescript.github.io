@@ -70,7 +70,7 @@ const siteConfig = {
   projectName: "bucklescript",
   headerLinks: [
     { doc: "installation", label: "Docs" },
-    { doc: "try", label: "Try"},
+    { doc: "playground", label: "Try"},
     { doc: "community", label: "Community" },
     { blog: true, label: "Blog" },
     { languages: true },

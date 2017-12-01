@@ -39,9 +39,7 @@ We've stress-tested bsb on a big project of 10,000 files (100 directories with 1
 <!-- TODO: better repro -->
 
 - No-op build of 10k files: `440ms` (unfortunately, that's the minimum amount of time required to check the mtimes of 10k files. But maybe we can cleverly optimize this in the future).
-
 - Clean build: 5 minutes.
-
 - Incremental build: depends on the file, but should be under `1s` unless it has lots of dependents.
 
 ## Incrementality
@@ -61,9 +59,7 @@ OCaml/BuckleScript/Reason uses the concept of interface files (`.mli` or `.rei`)
 Unfortunately, JS build systems are usually the bottleneck for building a JS project nowadays. Having part of the build finishes blazingly fast doesn't matter much if the rest of the build takes seconds or literally minutes. Here are a few suggestions:
 
 - Convert more files into BuckleScript/Reason =). Fewer files going through fewer parts of the JS pipeline helps a ton.
-
 - Careful with bringing in more dependencies: libraries, syntax transforms, build step loaders, etc. The bulk of these dragging down the editing & building experience might out-weight the API benefits they provide.
-
 - Wait for us to create our own super fast linker (aka bundler).
 
 ## Hot Reloading

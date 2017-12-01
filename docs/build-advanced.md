@@ -10,7 +10,6 @@ You might use some pre-processor to generate boilerplate code during development
 **Note**: pre-processors can be classified as two categories:
 
 - System-dependent, which should be delayed until running on user machines.
-
 - System-independent: lex, yacc, m4, re2c, etc, which can be executed any time.
 
 BS has built in support for [conditional compilation](conditional-compilation.md), which satisfies the first point. This section is about the second point.

@@ -272,7 +272,6 @@ Fs.readFileSync("xx.txt", "ascii");
 ```
 
 - Attaching `[@bs.string]` to the whole poly variant type makes its constructor compile to a string of the same name.
-
 - Attaching a `[@bs.as "foo"]` to a constructor lets you customize the final string.
 
 And now, passing something like `"myOwnUnicode"` or other variant constructor names to `readFileSync` would correctly error.
@@ -500,9 +499,7 @@ This is an uncurried bucklescript function. It must be applied with [@bs].
 The above solution is safe, guaranteed, and performant, but sometimes visually a little burdensome. We provide an alternative solution if:
 
 - you're binding with `external`
-
 - the `external` function takes in an argument that's another function
-
 - you want the user not to need to annotate the call sites with `[@bs]`
 
 <!-- TODO: is this up-to-date info? -->

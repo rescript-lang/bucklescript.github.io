@@ -26,9 +26,7 @@ OCaml’s weak map is not available in BuckleScript. The weak pointer is replace
 OCaml has `int`, `int32`, `nativeint` and `int64` types.
 
 - Both `int32` and `int64` in BuckleScript have the exact same semantics as OCaml.
-
 - `int` in BuckleScript is the same as `int32` while in OCaml it’s platform dependent.
-
 - `nativeint` is treated as JavaScript float, except for division. For example, `Nativeint.div a b` will be translated into `a / b | 0`.
 
 **Note**: `Nativeint.shift_right_logical x 0` is different from `Int32.shift_right_local x 0`. The former is literally translated into `x >>> 0` (translated into an unsigned int), while the latter is `x | 0`.

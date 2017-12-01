@@ -13,7 +13,6 @@ In the end, we spit out normal HTML, with all the JS dependencies (barring a few
 Two special files:
 
 - `sidebars.json`: lists the sections.
-
 - `siteConfig.json`: some header and i18n configs.
 
 During your development, most changes will be picked up at each browser refresh. If you touch these two files, however, you'll have to kill & restart the server.

@@ -12,11 +12,8 @@ The JS ecosystem uses a few build systems: [browserify](http://browserify.org/),
 BuckleScript and bsb only take care of the compilation step; it maps one ml/re/mli/rei file into one JS output file. As such, in theory, no build system integration is needed from our side. From e.g. the webpack watcher's perspective, the JS files BuckleScript generates are almost equivalent to your hand-written JS files. We also recommend that you initially check in those BS-generated JS files, as this workflow means:
 
 - You can introduce BuckleScript and/or Reason silently into your codebase without disturbing existing build infra.
-
 - You have a visual diff of the performance & correctness of your JS file when you update the ml/re files and the JS artifacts change.
-
 - You can let teammates hot-patch the JS files in emergency situations, without needing to first start learning BS/Reason.
-
 - You can remove BuckleScript and Reason completely from your codebase and things will still work (in case your company decides to stop using us for whatever reason).
 
 The slight disavantage of such approach is that you need to keep both a bsb watcher and a webpack watcher open. Though if you activate [VSCode-Reasonml's bsb feature](https://github.com/reasonml-editor/vscode-reasonml#bsb), you avoid the former rather seamlessly.
@@ -40,7 +37,6 @@ You can make BS JS files look even more idiomatic through the in-source + bs suf
 This will:
 
 - Generate the JS files alongside your BS source files.
-
 - Use the file extension `.bs.js`, so that you can require these files on the JS side through `require('./MyFile.bs')`, without needing a loader.
 
 ## Use Loaders on BS Side

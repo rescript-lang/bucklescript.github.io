@@ -30,9 +30,7 @@ type action =
 Variants constructors with payloads generate functions, payload-less constructors generate plain integers. **Note**:
 
 - The generated accessors are lower-cased.
-
 - You can now use these helpers on the JavaScript side! But don't rely on their actual values please.
-
 - Doesn't work with polymorphic variants yet.
 
 Output:
@@ -66,7 +64,6 @@ let s = submit("hello"); /* gives Submit("hello") */
 This is useful:
 
 - When you're passing the accessor function as a higher-order function (which plain variant constructors aren't).
-
 - When you'd like the JS side to use these values & functions opaquely and pass you back a variant constructor (since JS has no such thing).
 
 ## Convert Between `Js.t` Object and Record
