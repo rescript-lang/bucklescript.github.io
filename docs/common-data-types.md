@@ -67,7 +67,11 @@ BuckleScript floats are JS numbers, vice-versa. The OCaml standard library doesn
 
 Idiomatic OCaml arrays are supposed to be fix-sized. This constraint is relaxed on the BuckleScript size. You can change its length using the usual [JS Array API](https://bucklescript.github.io/bucklescript/api/Js.Array.html#VALdefault). BuckleScript's own Array API is [here](https://reasonml.github.io/api/Array.html).
 
-## Private Data Types
+### Tuple
+
+OCaml tuples are compiled to JS arrays. Convenient when you're interop-ing with a JS array that contains heterogeneous values, but happens to have a fixed length. Model it as a tuple on the BS side!
+
+## Non-shared Data Types
 
 Record, variant (including `option` and `list`), object and others can be exported as well, but you should **not** rely on their internal representation on the JS side. Aka, don't grab a BS list and start manipulating its structure on the JS side.
 
@@ -83,3 +87,62 @@ The same justification applies for records. OCaml records are fixed, nominally t
 
 <!-- TODO: playground link -->
 <!-- TODO: API docs revamp -->
+
+## Cheat Sheet
+
+### Shared
+
+OCaml/BS/Reason Type | JavaScript Type
+---------------------|---------------
+int | number
+nativeint | number
+int32 | number
+float | number
+string | string
+array | array
+tuple | array. `(3, 4)` -> `[3, 4]`
+Js.boolean | boolean `Js.true_` -> `true` `Js.false_` -> `false`
+Js.Nullable.t | `null`/`undefined`
+Js.t object | object
+
+### Non-shared
+
+Again, the representations are subject to change.
+
+OCaml/BS/Reason Type | JavaScript Value
+---------------------|---------------
+bool | `true` -> `1`, `false` -> `0`
+int64 | array. [high, low]. high is signed, low unsigned
+char | `'a'` -> `97`
+bytes | number array (we might encode it as buffer in NodeJS)
+record | array. `{x: 1; y: 2}` -> `[1, 2]`
+option | `None` -> `0`, `Some(a)` -> `[a]`
+list | `[]` -> `0`, `[x, y]` -> `[x, y]`, `[1, 2, 3]` -> `[ 1, [ 2, [ 3, 0 ] ] ]`
+Variant | \*
+Polymorphic variant | \*\*
+exception | -
+extension | -
+object | -
+
+\* Variants with a single non-nullary constructor:
+
+```ocaml
+type tree = Leaf | Node of int * tree * tree
+(* Leaf -> 0 *)
+(* Node a b c -> [a, b, c] *)
+```
+
+Variants with more than one non-nullary constructor:
+
+```ocaml
+type u = A of string | B of int
+(* A a -> [a].tag = 0 -- tag 0 assignment is optional *)
+(* B b -> [b].tag=1 *)
+```
+
+\*\* Polymorphic Variant:
+
+```ocaml
+`a (* 97 *)
+`a 1 2 (* [ 97, [1, 2] ] *)
+```
