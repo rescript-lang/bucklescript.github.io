@@ -49,12 +49,12 @@ const users = [
 const examples = [
   {
     name: "Hacker News",
-    image: "img/examples/hn.png",
+    image: "/img/examples/hn.png",
     link: "https://github.com/reasonml-community/reason-react-hacker-news",
   },
   {
     name: "TodoMVC",
-    image: "img/examples/todomvc.png",
+    image: "/img/examples/todomvc.png",
     link: "https://github.com/reasonml-community/reason-react-example/tree/master/src/todomvc",
   }
 ]
