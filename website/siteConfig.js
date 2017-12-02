@@ -63,7 +63,7 @@ const siteConfig = {
   title: "BuckleScript",
   tagline: "Write safer and simpler code, compile to JavaScript.",
   url: "https://bucklescript.github.io/bucklescript",
-  editUrl: "https://github.com/bucklescript/bucklescript/tree/master/docs/",
+  editUrl: "https://github.com/bucklescript/bucklescript/tree/source/docs/",
   translationRecruitingLink: "https://crowdin.com/project/bucklescript",
   sourceCodeButton: null,
   baseUrl: "/",
