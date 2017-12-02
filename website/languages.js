@@ -176,7 +176,7 @@ const languages = [
   {
     enabled: true,
     name: "中文",
-    tag: "zh-Hans"
+    tag: "zh-CN"
   },
   {
     enabled: false,
