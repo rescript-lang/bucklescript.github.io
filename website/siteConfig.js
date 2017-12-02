@@ -61,7 +61,7 @@ const examples = [
 
 const siteConfig = {
   title: "BuckleScript",
-  tagline: "Write safer and simpler code, compile to JavaScript.",
+  tagline: "Write safer and simpler code in OCaml & Reason, compile to JavaScript.",
   url: "https://bucklescript.github.io/bucklescript",
   editUrl: "https://github.com/bucklescript/bucklescript.github.io/tree/source/docs/",
   translationRecruitingLink: "https://crowdin.com/project/bucklescript",
