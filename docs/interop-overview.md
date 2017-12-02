@@ -34,7 +34,7 @@ let messages = [|"hello", "world", "how", "are", "you"|];
 Roughly compiles to the JS code:
 
 ```js
-var messages = [| "hello", "world", "how", "are", "you" |]
+var messages = ["hello", "world", "how", "are", "you"]
 ```
 
 There is zero mental and performance overhead while using such value. Naturally, the value on the BuckleScript side is automatically typed to be an array of strings.
