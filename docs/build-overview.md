@@ -46,7 +46,7 @@ If you ever get into a stable build for edge-case reasons, use:
 ```sh
 bsb -clean-world
 ```
-jj
+
 Or `bsb -clean` to clean only your own artifacts.
 
 ## Editor Support
