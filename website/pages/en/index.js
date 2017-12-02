@@ -62,9 +62,7 @@ class HomeSplash extends React.Component {
             >
               <translate>Get Started</translate>
             </Button>
-            <Button
-              href="https://jaredforsyth.com/2017/06/03/javascript-interop-with-reason-and-bucklescript/"
-            >
+            <Button href="https://reasonml.github.io/guide/javascript/interop">
               Tutorial
             </Button>
           </div>
