@@ -25,6 +25,12 @@ Major data structures in BuckleScript **map over cleanly to JS**. For example, a
 let messages = [| "hello"; "world"; "how"; "are"; "you" |]
 ```
 
+Reason syntax:
+
+```reason
+let messages = [|"hello", "world", "how", "are", "you"|];
+```
+
 Roughly compiles to the JS code:
 
 ```js
