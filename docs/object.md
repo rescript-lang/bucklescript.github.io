@@ -153,7 +153,7 @@ let bucklescript = [%bs.obj {
 let name = bucklescript##info##author;
 ```
 
-Because object values are used often, Reason gives it a nicer sugar. `[%bs.obj {foo: 1}]` will format to `{. "foo": 1}`.
+Because object values are used often, Reason gives it a nicer sugar. `[%bs.obj {foo: 1}]` will format to `{"foo": 1}`.
 
 The created object will have an inferred type, no type declaration needed! The above example will infer as `< info: < author: string > Js.t > Js.t`. Reason syntax: `{. "info": {. "author": string}}`.
 
