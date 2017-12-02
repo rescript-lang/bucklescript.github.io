@@ -54,7 +54,7 @@ const languages = [
     tag: "el"
   },
   {
-    enabled: false,
+    enabled: true,
     name: "Español",
     tag: "es-ES"
   },
@@ -69,7 +69,7 @@ const languages = [
     tag: "fi"
   },
   {
-    enabled: false,
+    enabled: true,
     name: "Français",
     tag: "fr"
   },
@@ -174,7 +174,7 @@ const languages = [
     tag: "vi"
   },
   {
-    enabled: false,
+    enabled: true,
     name: "中文",
     tag: "zh-Hans"
   },
