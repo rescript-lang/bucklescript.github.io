@@ -67,7 +67,7 @@ const siteConfig = {
   recruitingLink: "https://crowdin.com/project/bucklescript",
   sourceCodeButton: null,
   baseUrl: "/",
-  projectName: "bucklescript",
+  projectName: "",
   headerLinks: [
     { doc: "installation", label: "Docs" },
     { doc: "playground", label: "Try"},
