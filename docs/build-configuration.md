@@ -60,7 +60,7 @@ List of BuckleScript/Reason dependencies. Just like `package.json`'s dependencie
 
 ### reason, refmt
 
-`reason` config is rnabled by default. To turn on JSX for [ReasonReact](https://reasonml.github.io/reason-react/), specify:
+`reason` config is enabled by default. To turn on JSX for [ReasonReact](https://reasonml.github.io/reason-react/), specify:
 
 ```json
 {
