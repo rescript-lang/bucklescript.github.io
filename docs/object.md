@@ -277,7 +277,7 @@ If your key contains hyphens... you'll have to use the next method.
 
 ### Js Object <-> OCaml Record conversion
 
-If you don't want to work with `Js.t` objects and want to use idiomatic OCaml/Reason records, we provide automatic generation of helpers that convert between a `Js.t` object and a corresponding record type. See the section on [Generate Helpers (Deriving)](generate-helpers-deriving.md).
+If you don't want to work with `Js.t` objects and want to use idiomatic OCaml/Reason records, we provide automatic generation of helpers that convert between a `Js.t` object and a corresponding record type. See the section on [Generate Converters & Helpers](generate-converters-accessors.md).
 
 ## Object as Dynamic Record
 

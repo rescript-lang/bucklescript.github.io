@@ -7,7 +7,7 @@ BuckleScript considers performance at install time, build time and run time as a
 
 ## Under the Hood
 
-Bsb itself uses a build system under the hood, called [Ninja](ninja-build.org). Ninja is like Make, but cross-platform, minimal, focuses in perf and destined to be more of a low-level building block than a full-blown build system. In this regard, Ninja's a great implementation detail for bsb.
+Bsb itself uses a build system under the hood, called [Ninja](https://ninja-build.org). Ninja is like Make, but cross-platform, minimal, focuses in perf and destined to be more of a low-level building block than a full-blown build system. In this regard, Ninja's a great implementation detail for bsb.
 
 Bsb reads into `bsconfig.json` and generates the Ninja build file in `lib/bs`. The file contains the low-level `bsc`-related commands, namespacing rules, intermediate artifacts generation & others. It then runs `ninja` for the actual build.
 
