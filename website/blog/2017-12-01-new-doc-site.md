@@ -10,5 +10,6 @@ A few highlights:
 - Internationalization is now here and works the same way as ReasonReact's. Go wild.
 - The sections are now more cleanly organized.
 - More docs, simpler sections, more examples, fewer typos, nicer styling.
+- Reason code snippets alongside the OCaml snippets!
 
 Enjoy and have a nice weekend!
