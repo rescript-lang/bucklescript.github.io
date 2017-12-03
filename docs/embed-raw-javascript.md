@@ -6,7 +6,7 @@ title: Embed Raw JavaScript
 We're introducing this **last-resort** escape hatch first, in case you're ever stuck trying the other more legitimate APIs and wanna move on. Here's how you can drop a chunk of JavaScript right into your BuckleScript file:
 
 ```ocaml
-let add = [%bs.raw {|
+let add = [%raw {|
   function(a, b) {
     console.log('hello from raw JavaScript!');
     return a + b;
@@ -19,9 +19,9 @@ let _ = Js.log (add 1 2)
 Reason syntax:
 
 ```reason
-let add = [%bs.raw {|
+let add = [%raw {|
   function(a, b) {
-    console.log('hello from raw JavaScript!');
+    console.log("hello from raw JavaScript!");
     return a + b
   }
 |}];
@@ -31,19 +31,20 @@ Js.log(add(1, 2));
 
 The `{|foo|}` syntax stands for OCaml/BuckleScript/Reason's multi-line, "quoted string" syntax. Think of them as the equivalent of JavaScript's template literals. No escaping is needed inside that string.
 
-**Careful** with the OCaml/Reason syntax here. `[%bs.raw foo]` allows you to embed an expression. To embed a statement, use `[%%bs.raw foo]`:
+**Careful** with the OCaml/Reason syntax here. `[%raw foo]` allows you to embed an expression. To embed a statement, use `[%%raw foo]`:
 
 ```ocaml
-[%%bs.raw "var a = 1"]
+[%%raw "var a = 1"]
 ```
-
+<!-- TODO: add explaination about extension syntax  -->
+<!-- TODO: add reason counter part -->
 ### Debugger
 
-You can also drop a `[%bs.debugger]` expression in a body:
+You can also drop a `[%debugger]` expression in a body:
 
 ```ocaml
 let f x y =
-  [%bs.debugger];
+  [%debugger];
   x + y
 ```
 
@@ -51,7 +52,7 @@ Reason syntax:
 
 ```reason
 let f = (x, y) => {
-  [%bs.debugger];
+  [%debugger];
   x + y
 };
 ```
@@ -67,18 +68,18 @@ function f (x,y) {
 
 ### Detect Global Variables
 
-BuckleScript provides a relatively type safe approach for such use case: `bs.external`. `[%bs.external a_single_identifier]` is a value of type `option`. Example:
+BuckleScript provides a relatively type safe approach for such use case: `external`. `[%external a_single_identifier]` is a value of type `option`. Example:
 
 ```ocaml
-match [%bs.external __DEV__] with
+match [%external __DEV__] with
 | Some _ -> Js.log "dev mode"
 | None -> Js.log "production mode"
 ```
-
+<!-- TODO: change it to `= None` which is more idiomatic -->
 Reason syntax
 
 ```reason
-switch [%bs.external __DEV__] {
+switch [%external __DEV__] {
 | Some(_) => Js.log("dev mode")
 | None => Js.log("production mode")
 };
@@ -99,7 +100,7 @@ if (match !== undefined) {
 Another example:
 
 ```ocaml
-match [%bs.external __filename] with
+match [%external __filename] with
 | Some f -> Js.log f
 | None -> Js.log "non-node environment"
 ```
@@ -107,7 +108,7 @@ match [%bs.external __filename] with
 Reason syntax
 
 ```reason
-switch [%bs.external __filename] {
+switch [%external __filename] {
 | Some(f) => Js.log(f)
 | None => Js.log("non-node environment")
 };
