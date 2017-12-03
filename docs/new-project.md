@@ -20,10 +20,10 @@ To compile & run the project you just created:
 ```sh
 cd my-new-project
 npm run build
-node lib/js/src/demo.js
+node src/demo.bs.js
 ```
 
-And that's it! You've just built the project once and ran the JS output is located at `lib/js`. Feel free to inspect the js output, add a few files in `my-new-project/src`, etc. Hopefully we've delivered on our promise of being a lean toolchain with clean output =).
+And that's it! You've just built the project once and ran the JS output. Feel free to inspect the js output, add a few files in `my-new-project/src`, etc. Hopefully we've delivered on our promise of being a lean toolchain with clean output =).
 
 We'll explain `bsb`, the build system called by the above `npm run build`, in a later section.
 
