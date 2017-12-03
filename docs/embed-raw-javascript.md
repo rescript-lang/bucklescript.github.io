@@ -127,7 +127,7 @@ if (match !== undefined) {
 
 ### Tips & Tricks
 
-Embedding raw JS snippets is **highgly discouraged**, though also highly useful if you're just starting out. As a matter of fact, the first few Reason BuckleScript projects were converted through:
+Embedding raw JS snippets is **highly discouraged**, though also highly useful if you're just starting out. As a matter of fact, the first few Reason BuckleScript projects were converted through:
 
 - pasting raw JS snippets inside a file
 - examining the JS output (identical)
