@@ -5,11 +5,11 @@ title: What & Why
 
 ## What is BuckleScript?
 
-BuckleScript isn't a new language. It simply takes [OCaml](http://ocaml.org), **a fast, pragmatic and typed language**, and makes it compile to clean, readable JavaScript code through some tweaks. This allows the users to write in an industrial-strength language while using the existing, familiar JavaScript tools (npm/yarn, bundlers, minifiers, devtools, etc.) and accessing the vast ecosystem from both JavaScript and OCaml.
+BuckleScript isn't a new language. It simply takes [OCaml](http://ocaml.org), **a fast, pragmatic and typed language**, and makes it compile to clean, readable and performant JavaScript code. This allows the users to write in an industrial-strength language while using the existing, familiar JavaScript tools (npm/yarn, bundlers, minifiers, devtools, etc.) and accessing the vast ecosystem from both JavaScript and OCaml.
 
 Thanks to its great interoperability with JS, BuckleScript can be seen as a "gradually" typed language, where you get to incrementally adopt it in your codebase file-by-file, while keeping the full benefits of a 100% sound and reliable type system, plus extra language features.
 
-BuckleScript has build-in support for [Reason](https://reasonml.github.io/), a partner project of ours, to provide an even more familiar experience to existing JS developers.
+BuckleScript has built-in support for [Reason](https://reasonml.github.io/), a partner project of ours, to provide an even more familiar experience to existing JS developers.
 
 ## Why Compile to JavaScript?
 
@@ -23,12 +23,12 @@ _"Why not just use nothing but JavaScript then?"_
 
 Despite its clear advantages, JavaScript does present a few drawbacks. Here's how BuckleScript solves them.
 
-### Type Safety
+### Reliability
 
-BuckleScript's type system alone offers three major benefits:
+BuckleScript's type system alone offers three major benefits to make your programs more reliable:
 
-- **Strong type inference**. Almost the entirely of the language can be inferred. You don't have to tediously write all the types manually. Feel free to still type out some parts for readability!
 - **Sound type system**. "Sound" here means that the types _guarantee_ that they are what they are, not just 90% of the time. Once a BuckleScript project compiles, there are no runtime type errors. \*
+- **Strong type inference**. Almost the entirely of the language can be inferred. You don't have to tediously write all the types manually. Feel free to still type out some parts for readability!
 - **Expressive type features**. With well-thought-out features like [variants](https://reasonml.github.io/guide/language/variant), [modules](https://reasonml.github.io/guide/language/module) and even an opt-in [object system](https://reasonml.github.io/guide/language/object), the types guide you through your iteration process and don't block you from expressing what you need.
 
 The combination of these three highlights, along with other type system features, unlocks new workflow possibilities and is something existing gradual typing solutions for JavaScript don't offer.
@@ -42,6 +42,7 @@ levels:
 
 - Function and module level code elimination is facilitated by the well-engineered type system and **purity analysis**.
 - At the global level, BuckleScript generates code that are naturally friendly to dead code elimination done by bundling tools such as [Rollup](https://github.com/rollup/rollup) and [Closure Compiler](https://developers.google.com/closure/compiler/), after its own sophisticated elimination pass.
+- BuckleScript's runtime support is very small, and it is also written in BuckleScript itself so that unneeded runtime can be shaked away when bundled
 
 ### Compile-time Optimizations
 
