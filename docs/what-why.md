@@ -42,7 +42,7 @@ levels:
 
 - Function and module level code elimination is facilitated by the well-engineered type system and **purity analysis**.
 - At the global level, BuckleScript generates code that are naturally friendly to dead code elimination done by bundling tools such as [Rollup](https://github.com/rollup/rollup) and [Closure Compiler](https://developers.google.com/closure/compiler/), after its own sophisticated elimination pass.
-- BuckleScript's runtime support is very small, and it is also written in BuckleScript itself so that unneeded runtime can be shaked away when bundled
+- The same applies for BuckleScript's own tiny runtime (which is written in BuckleScript itself).
 
 ### Compile-time Optimizations
 
