@@ -79,10 +79,12 @@ external length: int = "length" [@@bs.val][@@bs.scope "window", "DocumentType", 
 Reason syntax:
 
 ```reason
-[@bs.val] [@bs.scope "Math"] external random : unit => float = "random";
+[@bs.val] [@bs.scope "Math"]
+external random : unit => float = "random";
 let someNumber = random();
 
-[@bs.val] [@bs.scope ("window", "DocumentType", "toString")] external length : int = "length";
+[@bs.val] [@bs.scope ("window", "DocumentType", "toString")]
+external length : int = "length";
 ```
 
 ## Nullable
@@ -280,7 +282,8 @@ Reason syntax:
 ```reason
 [@bs.send] external getElementById : (document, string) => Dom.element = "getElementById";
 
-[@bs.send.pipe : array('a)] external map : ('a => 'b) => array('b) = "";
+[@bs.send.pipe : array('a)]
+external map : ('a => 'b) => array('b) = "";
 ```
 
 ### Variadic
@@ -292,7 +295,8 @@ external join : string array -> string = "" [@@bs.module "path"] [@@bs.splice]
 Reason syntax:
 
 ```reason
-[@bs.module "path"] [@bs.splice] external join : array(string) => string = "";
+[@bs.module "path"] [@bs.splice]
+external join : array(string) => string = "";
 ```
 
 ### Polymorphic Function
@@ -306,7 +310,6 @@ Reason syntax:
 
 ```reason
 [@bs.module "Drawing"] external drawCat : unit => unit = "draw";
-
 [@bs.module "Drawing"] external drawDog : (~giveName: string) => unit = "draw";
 ```
 
@@ -325,7 +328,13 @@ let _ = padLeft "Hello World" (`Int 4)
 Reason syntax:
 
 ```reason
-[@bs.val] external padLeft : (string, [@bs.unwrap] [ | `Str(string) | `Int(int)]) => string = "";
+[@bs.val] external padLeft : (
+  string,
+  [@bs.unwrap] [
+    | `Str(string)
+    | `Int(int)
+  ]
+) => string = "";
 
 padLeft("Hello World", `Int(4));
 ```
