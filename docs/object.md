@@ -19,6 +19,27 @@ If these points (especially the first one) describe your object usage, then look
 
 In this mode, you can do all the metaprogramming you're used to with JS objects: get all keys through `Js.Dict.keys`, get values through `Js.Dict.values`, etc.
 
+### Example
+
+```ocaml
+let myMap = Js.Dict.empty ()
+let _ = Js.Dict.set myMap "Allison" 10
+```
+
+Reason syntax:
+
+```reason
+let myMap = Js.Dict.empty();
+Js.Dict.set(myMap, "Allison", 10);
+```
+
+Output:
+
+```js
+var myMap = { };
+myMap["Allison"] = 10;
+```
+
 ## Object as "Record"
 
 If your object:
@@ -41,7 +62,7 @@ type person = <
   job: string
 > Js.t
 
-external john : person = "john"[@@bs.val ]
+external john : person = "john" [@@bs.val]
 ```
 
 Reason syntax:

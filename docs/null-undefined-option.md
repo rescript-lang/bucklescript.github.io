@@ -26,13 +26,13 @@ let theJsValue: Js.Nullable.t(string) = /* the value you've gotten here */
 To create a nullable string, do:
 
 ```ocaml
-let nullableString = Js.Nullable.return "hello"
+let nullableString: string Js.Nullable.t = Js.Nullable.return "hello"
 ```
 
 Reason syntax:
 
 ```reason
-let nullableString = Js.Nullable.return("hello");
+let nullableString: Js.Nullable.t(string) = Js.Nullable.return("hello");
 ```
 
 The `return` part "wraps" a string into a nullable string, to make the type system understand and track the fact that, as you pass this value around, it's not just a string, but a string that can be `null` or `undefined`. Tada! No more nullable bugs!

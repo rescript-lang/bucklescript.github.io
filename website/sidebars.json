@@ -8,6 +8,7 @@
     ],
     "Interop": [
       "interop-overview",
+      "interop-cheatsheet",
       "embed-raw-javascript",
       "common-data-types",
       "intro-to-external",

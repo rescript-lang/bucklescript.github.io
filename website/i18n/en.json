@@ -28,6 +28,7 @@
     "generate-converters-accessors": "Generate Converters & Helpers",
     "import-export": "Import & Export",
     "installation": "Installation",
+    "interop-cheatsheet": "Cheatsheet",
     "interop-misc": "Miscellaneous",
     "interop-overview": "Overview",
     "interop-with-js-build-systems": "Interop with JS Build System",
