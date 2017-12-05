@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://bucklescript.github.io/blog</id>
+    <title>BuckleScript Blog</title>
+    <updated>2017-12-01T06:00:00Z</updated>
+    <generator>Feed for Node.js</generator>
+    <link rel="alternate" href="https://bucklescript.github.io/blog"/>
+    <subtitle>The best place to stay up-to-date with the latest BuckleScript news and events.</subtitle>
+    <logo>https://bucklescript.github.ioimg/logos/bucklescript_small.svg</logo>
+    <entry>
+        <title type="html"><![CDATA[New Documentation Site!]]></title>
+        <id>https://bucklescript.github.io/blog/2017/12/01/new-doc-site.html</id>
+        <link href="https://bucklescript.github.io/blog/2017/12/01/new-doc-site.html">
+        </link>
+        <updated>2017-12-01T06:00:00Z</updated>
+        <summary type="html"><![CDATA[Surprise! We've unified our documentation process with [ReasonReact](https://reasonml.github.io/reason-react/)'s. The docs revamp addresses one of the biggest demands for BuckleScript.
+
+A few highlights:
+
+- The old doc site still exists at the [same ]]></summary>
+        <author>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[BuckleScript 1.7.5]]></title>
+        <id>https://bucklescript.github.io/blog/2017/10/09/release-1-7-5.html</id>
+        <link href="https://bucklescript.github.io/blog/2017/10/09/release-1-7-5.html">
+        </link>
+        <updated>2017-10-09T06:00:00Z</updated>
+        <summary type="html"><![CDATA[
+Since BuckleScript has grown and developed its own community, it is moving to its own GitHub organization. This will allow the community to continue to grow and to set the future direction of the project.
+
+At the same time, we are truly thankful for the support of Bloomberg who allowed this amazing project to happen!
+
+]]></summary>
+        <author>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[BuckleScript 1.7.4]]></title>
+        <id>https://bucklescript.github.io/blog/2017/10/08/release-1-7-4.html</id>
+        <link href="https://bucklescript.github.io/blog/2017/10/08/release-1-7-4.html">
+        </link>
+        <updated>2017-10-08T06:00:00Z</updated>
+        <summary type="html"><![CDATA[Full changes: https://github.com/bucklescript/bucklescript/blob/master/Changes.md#bucklescript-174may-24-2017
+
+Main highlights:
+
+1. Create a BuckleScript project and build in a single line(works on all platforms with zero dependencies including Windo]]></summary>
+        <author>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[BuckleScript 1.7.0]]></title>
+        <id>https://bucklescript.github.io/blog/2017/10/07/release-1-7-0.html</id>
+        <link href="https://bucklescript.github.io/blog/2017/10/07/release-1-7-0.html">
+        </link>
+        <updated>2017-10-07T06:00:00Z</updated>
+        <summary type="html"><![CDATA[
+#### First class uncurried calling convention
+
+As a functional language, the vanilla OCaml only provides curried calling convention,
+BuckleScript employs fairly [advanced optimizations](http://bucklescript.github.io/bucklescript-playground/#Curry_Optimization) for curried calling convention, however, the most efficient code is efficient code not relying on optimizations.
+
+Since this release, we provide first class uncurried calling convention, _all toolchains provided by BuckleScript_ can understand uncurried calling convention
+
+]]></summary>
+        <author>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[BuckleScript 1.5.2]]></title>
+        <id>https://bucklescript.github.io/blog/2017/10/06/release-1-5-2.html</id>
+        <link href="https://bucklescript.github.io/blog/2017/10/06/release-1-5-2.html">
+        </link>
+        <updated>2017-10-06T06:00:00Z</updated>
+        <summary type="html"><![CDATA[## Features
+1. [FFI: Unicode literal support]( http://bucklescript.github.io/bucklescript/Manual.html#_unicode_support_since_1_5_1)
+
+2. [FFI: Return value checking](http://bucklescript.github.io/bucklescript/Manual.html#_return_value_checking_since_1]]></summary>
+        <author>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[BuckleScript 1.5.1]]></title>
+        <id>https://bucklescript.github.io/blog/2017/10/05/release-1-5-1.html</id>
+        <link href="https://bucklescript.github.io/blog/2017/10/05/release-1-5-1.html">
+        </link>
+        <updated>2017-10-05T06:00:00Z</updated>
+        <summary type="html"><![CDATA[## Features
+1. [FFI: Unicode literal support](http://bucklescript.github.io/bucklescript/Manual.html#_unicode_support_since_1_5_1)
+
+2. [FFI: return value checking](http://bucklescript.github.io/bucklescript/Manual.html#_unicode_support_since_1_5_1)
+
+]]></summary>
+        <author>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[BuckleScript 1.5.0]]></title>
+        <id>https://bucklescript.github.io/blog/2017/10/04/release-1-5-0.html</id>
+        <link href="https://bucklescript.github.io/blog/2017/10/04/release-1-5-0.html">
+        </link>
+        <updated>2017-10-04T06:00:00Z</updated>
+        <summary type="html"><![CDATA[Besides a number of minor bug fixes and perf improvement, most notable changes
+
+- Bundled Reason together thanks to Reason team, so that Reason syntax support is also first class, this also makes Reason for the first time available to Windows users.
+]]></summary>
+        <author>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[BuckleScript 1.4.3]]></title>
+        <id>https://bucklescript.github.io/blog/2017/10/03/release-1-4-3.html</id>
+        <link href="https://bucklescript.github.io/blog/2017/10/03/release-1-4-3.html">
+        </link>
+        <updated>2017-10-03T06:00:00Z</updated>
+        <summary type="html"><![CDATA[Besides a number of minor bug fixes, most notable changes
+
+- ES6 module support, "es6", "es6-global" , "amdjs-global"
+
+"es6" package-spec will generate es6 modules for each ocaml module,
+"es6-global" will also generate es6 modules but the path does n]]></summary>
+        <author>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[BuckleScript 1.4.2]]></title>
+        <id>https://bucklescript.github.io/blog/2017/10/02/release-1-4-2.html</id>
+        <link href="https://bucklescript.github.io/blog/2017/10/02/release-1-4-2.html">
+        </link>
+        <updated>2017-10-02T06:00:00Z</updated>
+        <summary type="html"><![CDATA[BuckleScript 1.4.2 release comes with quite a few enhancement.
+
+Most notable features:
+
+1. The build system is ready to handle multiple npm packages, and its module system can be
+overriden by the end user. For example, if the library A(end user) depe]]></summary>
+        <author>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Bloomberg announcing BuckleScript 1.0]]></title>
+        <id>https://bucklescript.github.io/blog/2017/10/01/announcing-1-0.html</id>
+        <link href="https://bucklescript.github.io/blog/2017/10/01/announcing-1-0.html">
+        </link>
+        <updated>2017-10-01T06:00:00Z</updated>
+        <summary type="html"><![CDATA[The BuckleScript announcement can be found on the [Tech at Bloomberg blog](https://www.techatbloomberg.com/blog/bucklescript-1-0-release-arrived/).]]></summary>
+        <author>
+        </author>
+    </entry>
+</feed>

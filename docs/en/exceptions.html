@@ -1,0 +1,100 @@
+<html><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/><title>Exceptions · BuckleScript</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta property="og:title" content="Exceptions · BuckleScript"/><meta property="og:type" content="website"/><meta property="og:url" content="https://bucklescript.github.io/index.html"/><meta property="og:description" content="In the JS world, exception could be any data, while an OCaml exception is a structured data format and supports pattern matching. Catching an OCaml exception on JS side is therefore doesn&#x27;t work as intended."/><link rel="shortcut icon" href="/img/logos/bucklescript_small.svg"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/arduino-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://bucklescript.github.io/blog/atom.xml" title="BuckleScript Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://bucklescript.github.io/blog/feed.xml" title="BuckleScript Blog RSS Feed"/><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/logos/bucklescript_small.svg"/><h2 class="headerTitle">BuckleScript</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li><a href="/docs/en/installation.html" target="_self">Docs</a></li><li><a href="/docs/en/playground.html" target="_self">Try</a></li><li><a href="/docs/en/community.html" target="_self">Community</a></li><li><a href="/blog" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/es-ES">Español</a></li><li><a href="/fr">Français</a></li><li><a href="/zh-CN">中文</a></li><li><a href="https://crowdin.com/project/bucklescript" target="_blank">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(){
+          if(languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search"/></li><li><a href="https://github.com/bucklescript/bucklescript" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Interop</span></h2></div><div class="navGroups"><div class="navGroup navGroupActive"><h3>Intro</h3><ul><li class="navListItem"><a class="navItem" href="/docs/en/what-why.html">What &amp; Why</a></li><li class="navListItem"><a class="navItem" href="/docs/en/installation.html">Installation</a></li><li class="navListItem"><a class="navItem" href="/docs/en/new-project.html">New Project</a></li><li class="navListItem"><a class="navItem" href="/docs/en/concepts-overview.html">Concepts Overview</a></li></ul></div><div class="navGroup navGroupActive"><h3>Interop</h3><ul><li class="navListItem"><a class="navItem" href="/docs/en/interop-overview.html">Overview</a></li><li class="navListItem"><a class="navItem" href="/docs/en/interop-cheatsheet.html">Cheatsheet</a></li><li class="navListItem"><a class="navItem" href="/docs/en/embed-raw-javascript.html">Embed Raw JavaScript</a></li><li class="navListItem"><a class="navItem" href="/docs/en/common-data-types.html">Common Data Types</a></li><li class="navListItem"><a class="navItem" href="/docs/en/intro-to-external.html">Intro to External</a></li><li class="navListItem"><a class="navItem" href="/docs/en/boolean.html">Boolean</a></li><li class="navListItem"><a class="navItem" href="/docs/en/bind-to-global-values.html">Bind to Global Values</a></li><li class="navListItem"><a class="navItem" href="/docs/en/null-undefined-option.html">Null, Undefined &amp; Option</a></li><li class="navListItem"><a class="navItem" href="/docs/en/object.html">Object</a></li><li class="navListItem"><a class="navItem" href="/docs/en/class.html">Class</a></li><li class="navListItem"><a class="navItem" href="/docs/en/function.html">Function</a></li><li class="navListItem"><a class="navItem" href="/docs/en/import-export.html">Import &amp; Export</a></li><li class="navListItem"><a class="navItem" href="/docs/en/regular-expression.html">Regular Expression</a></li><li class="navListItem navListItemActive"><a class="navItem navItemActive" href="/docs/en/exceptions.html">Exceptions</a></li><li class="navListItem"><a class="navItem" href="/docs/en/generate-converters-accessors.html">Generate Converters &amp; Helpers</a></li><li class="navListItem"><a class="navItem" href="/docs/en/nodejs-special-variables.html">NodeJS Special Variables</a></li><li class="navListItem"><a class="navItem" href="/docs/en/interop-misc.html">Miscellaneous</a></li><li class="navListItem"><a class="navItem" href="/docs/en/typescript-support.html">TypeScript Support</a></li><li class="navListItem"><a class="navItem" href="/docs/en/browser-support-polyfills.html">Browser Support &amp; Polyfills</a></li></ul></div><div class="navGroup navGroupActive"><h3>Build System</h3><ul><li class="navListItem"><a class="navItem" href="/docs/en/build-overview.html">Overview</a></li><li class="navListItem"><a class="navItem" href="/docs/en/build-configuration.html">Configuration</a></li><li class="navListItem"><a class="navItem" href="/docs/en/interop-with-js-build-systems.html">Interop with JS Build System</a></li><li class="navListItem"><a class="navItem" href="/docs/en/build-performance.html">Performance</a></li><li class="navListItem"><a class="navItem" href="/docs/en/build-advanced.html">Advanced</a></li></ul></div><div class="navGroup navGroupActive"><h3>Standard Library</h3><ul><li class="navListItem"><a class="navItem" href="/docs/en/stdlib-overview.html">Overview</a></li></ul></div><div class="navGroup navGroupActive"><h3>Advanced</h3><ul><li class="navListItem"><a class="navItem" href="/docs/en/conditional-compilation.html">Conditional Compilation</a></li><li class="navListItem"><a class="navItem" href="/docs/en/extended-compiler-options.html">Extended Compiler Options</a></li><li class="navListItem"><a class="navItem" href="/docs/en/use-existing-ocaml-libraries.html">Use Existing OCaml Libraries</a></li><li class="navListItem"><a class="navItem" href="/docs/en/difference-from-native-ocaml.html">Difference from Native OCaml</a></li><li class="navListItem"><a class="navItem" href="/docs/en/compiler-architecture-principles.html">Compiler Architecture &amp; Principles</a></li><li class="navListItem"><a class="navItem" href="/docs/en/comparison-to-jsoo.html">Comparison to Js_of_ocaml</a></li></ul></div></div></section></div><script>
+          var toggler = document.getElementById('navToggler');
+          var nav = document.getElementById('docsNav');
+          toggler.onclick = function() {
+            nav.classList.toggle('docsSliderActive');
+          };
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/bucklescript/bucklescript.github.io/tree/source/docs/exceptions.md" target="_blank">Edit</a><h1>Exceptions</h1></header><article><div><span><p>In the JS world, exception could be any data, while an OCaml exception is a structured data format and supports pattern matching. Catching an OCaml exception on JS side is therefore doesn't work as intended.</p>
+<p>JS exceptions can be raised from the BuckleScript side by using the <a href="https://bucklescript.github.io/bucklescript/api/Js.Exn.html"><code>JS.Exn.raise*</code></a> functions, and can be caught as a BS exception of the type <code>Js.Exn.Error</code> with the JS exception as its payload, typed as <code>Js.Exn.t</code>. The JS Exception can then either be manipulated with the accessor functions in <code>Js.Exn</code>, or casted to a more appropriate type.</p>
+<pre><code class="hljs css ocaml"><span class="hljs-keyword">try</span>
+  <span class="hljs-type">Js</span>.<span class="hljs-type">Exn</span>.raiseError <span class="hljs-string">"oops!"</span>
+<span class="hljs-keyword">with</span>
+| <span class="hljs-type">Js</span>.<span class="hljs-type">Exn</span>.<span class="hljs-type">Error</span> e -&gt;
+  <span class="hljs-keyword">match</span> <span class="hljs-type">Js</span>.<span class="hljs-type">Exn</span>.message e <span class="hljs-keyword">with</span>
+  | <span class="hljs-type">Some</span> message -&gt; <span class="hljs-type">Js</span>.log {j|<span class="hljs-type">Error</span>: $message|j}
+  | <span class="hljs-type">None</span> -&gt; <span class="hljs-type">Js</span>.log <span class="hljs-string">"An unknown error occurred"</span>
+</code></pre>
+<p>Reason syntax:</p>
+<pre><code class="hljs css reason"><span class="hljs-built_in">try</span> (
+  Js.Exn.raiseError(<span class="hljs-string">"oops!"</span>)
+) {
+| <span class="hljs-type">Js</span>.Exn.Error(e) =&gt;
+  switch (Js.Exn.message(e)) {
+  | <span class="hljs-type">Some</span>(message) =&gt; Js.log({j|<span class="hljs-type">Error</span>: $message|<span class="hljs-type">j</span>})
+  | <span class="hljs-type">None</span> =&gt; Js.log(<span class="hljs-string">"An unknown error occurred"</span>)
+  }
+};
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" name="usage"></a><a href="#usage" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Usage</h2>
+<p>Take promise for example:</p>
+<pre><code class="hljs css ocaml"><span class="hljs-keyword">exception</span> <span class="hljs-type">UnhandledPromise</span>
+
+<span class="hljs-keyword">let</span> handlePromiseFailure = <span class="hljs-keyword">function</span> [@bs.<span class="hljs-keyword">open</span>]
+  | <span class="hljs-type">Not_found</span> -&gt;
+    <span class="hljs-type">Js</span>.log <span class="hljs-string">"Not found"</span>;
+    <span class="hljs-type">Js</span>.<span class="hljs-type">Promise</span>.resolve <span class="hljs-literal">()</span>
+
+<span class="hljs-keyword">let</span> _ =
+ <span class="hljs-type">Js</span>.<span class="hljs-type">Promise</span>.reject <span class="hljs-type">Not_found</span>
+ |&gt; <span class="hljs-type">Js</span>.<span class="hljs-type">Promise</span>.catch (<span class="hljs-keyword">fun</span> error -&gt;
+      <span class="hljs-keyword">match</span> handlePromiseFailure error <span class="hljs-keyword">with</span>
+      | <span class="hljs-type">Some</span> x -&gt; x
+      | <span class="hljs-type">None</span> -&gt; raise <span class="hljs-type">UnhandledPromise</span>
+  )
+</code></pre>
+<p>Reason syntax:</p>
+<pre><code class="hljs css reason">exception UnhandledPromise;
+
+<span class="hljs-keyword">let</span> handlePromiseFailure =
+  [@bs.open]
+  (
+    <span class="hljs-keyword">fun</span>
+    | <span class="hljs-type">Not_found</span> =&gt; {
+        Js.log(<span class="hljs-string">"Not found"</span>);
+        Js.Promise.resolve()
+      }
+  );
+
+Js.Promise.reject(Not_found)
+  |<span class="hljs-type">&gt; Js</span>.Promise.catch(
+     (error) =&gt;
+       switch (handlePromiseFailure(error)) {
+       | <span class="hljs-type">Some</span>(x) =&gt; x
+       | <span class="hljs-type">None</span> =&gt; raise(UnhandledPromise)
+       }
+   );
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="regular-expression.html">← Regular Expression</a><a class="docs-next button" href="generate-converters-accessors.html">Generate Converters &amp; Helpers →</a></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.js"></script><script>window.foo = new Pjax({
+          areas: [
+            // try to use the first query.
+            '.mainContainer, .docsNavContainer .toc .navWrapper',
+            // fallback
+            'body'
+          ],
+          link: '.docsNavContainer:not(.docsSliderActive) a',
+          update: {
+            script: false,
+          }
+        });
+        var languagesMenuItemCopy = document.getElementById("languages-menu");
+        languagesMenuItemCopy.addEventListener("click", function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          e.stopImmediatePropagation();
+        });</script></span></div><script type="text/javascript" src="//cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+              var search = docsearch({
+                apiKey: '0fd97db83891aa20810559812d9e69ac',
+                indexName: 'bucklescript',
+                inputSelector: '#search_input_react'
+              });
+            </script></body></html>
