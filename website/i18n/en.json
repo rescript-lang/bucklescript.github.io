@@ -18,8 +18,6 @@
     "compiler-architecture-principles": "Compiler Architecture & Principles",
     "concepts-overview": "Concepts Overview",
     "conditional-compilation": "Conditional Compilation",
-    "dev-mode-how-to": "dev-mode-how-to",
-    "developing-bucklescript": "developing-bucklescript",
     "difference-from-native-ocaml": "Difference from Native OCaml",
     "embed-raw-javascript": "Embed Raw JavaScript",
     "exceptions": "Exceptions",
