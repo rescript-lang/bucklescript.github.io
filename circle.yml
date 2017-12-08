@@ -12,7 +12,7 @@ dependencies:
 
 deployment:
   website:
-    branch: master
+    branch: source
     commands:
       - git config --global user.email "rickyvetter@users.noreply.github.com"
       - git config --global user.name "Temporary Ricky Bot"
