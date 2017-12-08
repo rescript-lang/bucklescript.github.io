@@ -26,9 +26,9 @@ Where `MyProject` is your project's [namespace](build-configuration.md#name-name
 The above command outputs a boilerplate `.mli` interface to stdout. If you're using Reason, turn it into `.rei` syntax:
 
 ```sh
-bsc lib/bs/src/MyUtils-MyProject.cmi | refmt --parse ml --interface true
+bsc -bs-re-out lib/bs/src/MyUtils-MyProject.cmi | refmt --parse ml --interface true
 ```
 
-_If you don't have `bsc` and `refmt` globally available, use the ones provided locally in `node_modules/bs-platform/lib/bsc.exe` and `node_modules/bs-platform/lib/refmt3.exe`_.
+_If you don't have `bsc` globally available, use the ones provided locally in `node_modules/bs-platform/lib/bsc.exe`_.
 
-**Note**: the generated boilerplate might contain the strings `"BS-EXTERNAL"`. This happens when you've used `@bs` externals in your implementation file. It's a temporary flaw; you need to manually turn these `"BS-EXTERNAL"` back into the right `@bs` externals for now. We'll correct this in the future.
+**Note**: the generated boilerplate might contain the strings `"BS-EXTERNAL"` or `"BuckleScript External"`. This happens when you've used `@bs` externals in your implementation file. It's a temporary flaw; you need to manually turn these `"BS-EXTERNAL"` back into the right `@bs` externals for now. We'll correct this in the future.
