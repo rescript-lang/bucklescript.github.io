@@ -30,6 +30,7 @@
     "Build System": [
       "build-overview",
       "build-configuration",
+      "automatic-interface-generation",
       "interop-with-js-build-systems",
       "build-performance",
       "build-advanced"
