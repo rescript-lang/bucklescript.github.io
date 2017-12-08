@@ -43,6 +43,8 @@ This is the idiomatic way of working with the concept of "no value" in BuckleScr
 
 `Js.Nullable.from_opt` converts from a `Js.Nullable.t` to `option`. `Js.Nullable.to_opt` does the opposite.
 
+**The `Option` helper module** is [here](https://bucklescript.github.io/bucklescript/api/Js.Option.html).
+
 ## Tips & Tricks
 
 In an external, you can directly convert a `Js.Nullable.t` into an `option` through `bs.return nullable`:
