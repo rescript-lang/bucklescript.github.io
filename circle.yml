@@ -6,6 +6,11 @@ test:
   override:
     - "true"
 
+general:
+  branches:
+    ignore:
+      - master
+
 dependencies:
   pre:
     - wget https://artifacts.crowdin.com/repo/deb/crowdin.deb -O crowdin.deb && sudo dpkg -i crowdin.deb
