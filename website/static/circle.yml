@@ -1,0 +1,4 @@
+# /static gets copied to master branch. Don't want to run ci on deployment.
+branches:
+  ignore:
+    - master
