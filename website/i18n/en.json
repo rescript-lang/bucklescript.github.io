@@ -20,6 +20,7 @@
     "concepts-overview": "Concepts Overview",
     "conditional-compilation": "Conditional Compilation",
     "difference-from-native-ocaml": "Difference from Native OCaml",
+    "ecosystem": "Ecosystem",
     "embed-raw-javascript": "Embed Raw JavaScript",
     "exceptions": "Exceptions",
     "extended-compiler-options": "Extended Compiler Options",

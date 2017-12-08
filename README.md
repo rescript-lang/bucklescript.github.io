@@ -29,4 +29,4 @@ For repo maintainers: to have the new translated strings appear in prod, run `ya
 
 ## Building and Deploying
 
-Changes from `source` branch are automatically picked into `master` branch by CI, then published. Translation download/uploads are still manual right now.
+Changes from `source` branch are automatically picked into `master` branch by CI, then published. Translation download/uploads are still manual right now (needs API key, which @rickyvetter and @chenglou have).

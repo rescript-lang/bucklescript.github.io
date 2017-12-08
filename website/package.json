@@ -3,8 +3,6 @@
   "scripts": {
     "start": "docusaurus-start",
     "build": "docusaurus-build",
-    "publish-gh-pages": "docusaurus-publish",
-    "examples": "docusaurus-examples",
     "write-translations": "docusaurus-write-translations",
     "crowdin-upload": "export CROWDIN_DOCUSAURUS_PROJECT_ID=\"bucklescript\"; export CROWDIN_DOCUSAURUS_API_KEY=$BS_CROWDIN_API_KEY; crowdin --config ../crowdin.yaml upload sources --auto-update -b master",
     "crowdin-download": "export CROWDIN_DOCUSAURUS_PROJECT_ID=\"bucklescript\"; export CROWDIN_DOCUSAURUS_API_KEY=$BS_CROWDIN_API_KEY; crowdin --config ../crowdin.yaml download -b master"
