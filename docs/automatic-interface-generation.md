@@ -26,7 +26,7 @@ Where `MyProject` is your project's [namespace](build-configuration.md#name-name
 The above command outputs a boilerplate `.mli` interface to stdout. If you're using Reason, turn it into `.rei` syntax:
 
 ```sh
-bsc -bs-re-out lib/bs/src/MyUtils-MyProject.cmi | refmt --parse ml --interface true
+bsc -bs-re-out lib/bs/src/MyUtils-MyProject.cmi
 ```
 
 _If you don't have `bsc` globally available, use the ones provided locally in `node_modules/bs-platform/lib/bsc.exe`_.
