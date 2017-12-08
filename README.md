@@ -1,14 +1,14 @@
 # BuckleScript Website
 
-This code is used to generate https://bucklescript.github.io. It pulls in files from `docs` and the current directory to generate the final static html files that's served on the site.
+This code is used to generate https://bucklescript.github.io. It pulls in files from `docs/` and `website/` to generate html files served on the site.
 
-`website/` contains the actual js, css, images and other files (and blog, which contains some markdown files too, these are separated from `docs/`, not too important).
+`website/` contains the JS, CSS, images and other files (and blog, which contains some markdown files too, these are separated from `docs/`, not too important).
 
-`npm start` to start the server & watcher. The other scripts in package.json should also be self-descriptive.
+`npm install && npm start` to start the development server & watcher.
 
-Don't use `npm build` for now.
+Don't use `npm build`. It's mostly for debugging.
 
-In the end, we spit out normal HTML, with all the JS dependencies (barring a few critical ones) removed, including ReactJS itself. It's a full, static website, super lightweight, portable, unfancy but good looking.
+In the end, we spit out normal HTML, with all the JS dependencies (barring a few critical ones) removed, including ReactJS itself. It's a full, static website, super lightweight, portable, unfancy but good looking. Works with JS turned off too.
 
 Two special files:
 
@@ -29,4 +29,4 @@ For repo maintainers: to have the new translated strings appear in prod, run `ya
 
 ## Building and Deploying
 
-**Note**: the deployment is slightly manual right now. Ping @rickyvetter and @chenglou on Discord if you'd like to try it eagerly.
+Changes from `source` branch are automatically picked into `master` branch by CI, then published. Translation download/uploads are still manual right now.
