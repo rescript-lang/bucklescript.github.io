@@ -28,10 +28,10 @@
 </code></pre>
 <p>Where <code>MyProject</code> is your project's <a href="/docs/en/build-configuration.html#name-namespace">namespace</a>. If it's not enabled, it'll be just <code>MyUtils.cmi</code>). <code>.cmi</code> is the OCaml/BuckleScript file that contains some <a href="https://reasonml.github.io/community/faq#compiled-files">compiled type info</a>.</p>
 <p>The above command outputs a boilerplate <code>.mli</code> interface to stdout. If you're using Reason, turn it into <code>.rei</code> syntax:</p>
-<pre><code class="hljs css sh">bsc lib/bs/src/MyUtils-MyProject.cmi | refmt --parse ml --interface <span class="hljs-literal">true</span>
+<pre><code class="hljs css sh">bsc -bs-re-out lib/bs/src/MyUtils-MyProject.cmi | refmt --parse ml --interface <span class="hljs-literal">true</span>
 </code></pre>
-<p><em>If you don't have <code>bsc</code> and <code>refmt</code> globally available, use the ones provided locally in <code>node_modules/bs-platform/lib/bsc.exe</code> and <code>node_modules/bs-platform/lib/refmt3.exe</code></em>.</p>
-<p><strong>Note</strong>: the generated boilerplate might contain the strings <code>&quot;BS-EXTERNAL&quot;</code>. This happens when you've used <code>@bs</code> externals in your implementation file. It's a temporary flaw; you need to manually turn these <code>&quot;BS-EXTERNAL&quot;</code> back into the right <code>@bs</code> externals for now. We'll correct this in the future.</p>
+<p><em>If you don't have <code>bsc</code> globally available, use the ones provided locally in <code>node_modules/bs-platform/lib/bsc.exe</code></em>.</p>
+<p><strong>Note</strong>: the generated boilerplate might contain the strings <code>&quot;BS-EXTERNAL&quot;</code> or <code>&quot;BuckleScript External&quot;</code>. This happens when you've used <code>@bs</code> externals in your implementation file. It's a temporary flaw; you need to manually turn these <code>&quot;BS-EXTERNAL&quot;</code> back into the right <code>@bs</code> externals for now. We'll correct this in the future.</p>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="build-configuration.html">← Configuration</a><a class="docs-next button" href="interop-with-js-build-systems.html">Interop with JS Build System →</a></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.js"></script><script>window.foo = new Pjax({
           areas: [
             // try to use the first query.
