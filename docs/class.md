@@ -29,6 +29,29 @@ Output:
 var date = new Date();
 ```
 
+You can chain `bs.new` and `bs.module` if the JS module you're importing is itself a class:
+
+```ocaml
+type t
+external book : unit -> t = "Book" [@@bs.new] [@@bs.module]
+let bookInstance = book ()
+```
+
+Reason syntax:
+
+```reason
+type t;
+[@bs.new] [@bs.module] external book : unit => t = "Book";
+let bookInstance = book();
+```
+
+Output:
+
+```js
+var Book = require("Book");
+var bookInstance = new Book();
+```
+
 ## Bind to JS Classes
 
 JS classes are really just JS objects wired up funnily. **In general**, prefer using the previous object section's features to bind to a JS object.
