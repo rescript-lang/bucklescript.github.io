@@ -78,15 +78,26 @@ The `refmt` config **should be explicitly specified**: `"refmt": 3` for the new 
 
 ### js-post-build
 
-Hook that's invoked every time a file is recompiled. Good for JS build system interop. See the schema for more details. Example:
+Hook that's invoked every time a file is recompiled. Good for JS build system interop, but please use it **sparingly**. Calling your custom command for every recompiled file slows down your build and worsens the building experience for even third-party users of your lib.
+
+Example:
 
 ```json
 {
   "js-post-build": {
-    "cmd": "node ../../postProcessTheFile.js"
+    "cmd": "/path/to/node ../../postProcessTheFile.js"
   }
 }
 ```
+
+Note that the command's path resolution is done through the following:
+
+- `/myCommand` is resolved absolutely
+- `myCommand` is resolved into `node_modules/myCommand`
+- `./myCommand` is resolved into `myProjectRoot/myCommand`
+- `myCommand` is just called as `myCommand`. But note that Bsb doesn't read into your environment, so if you put `node`, it won't find it unless you specify an absolute path. Alternatively, point to a script that has the header `#!/usr/local/bin/node`.
+
+The command itself is called from inside `lib/bs`.
 
 ### package-specs
 
@@ -101,7 +112,7 @@ Output to either CommonJS, ES6 modules or AMD. Example:
 }
 ```
 
-- `"module": "es6-global"` resolves `node_modules` using relative paths. Good for development-time usage of ES6 in conjunction with browsers like Safari and Firefox that support ES6 modules today. No more dev-time bundling!
+- `"module": "es6-global"` resolves `node_modules` using relative paths. Good for development-time usage of ES6 in conjunction with browsers like Safari and Firefox that support ES6 modules today. **No more dev-time bundling**!
 - `"in-source": true` generates output alongside source files, instead of by default isolating them into `lib/js`. The output directory is otherwise not configurable.
 
 ### suffix
