@@ -63,13 +63,22 @@
 </code></pre>
 <p>The <code>refmt</code> config <strong>should be explicitly specified</strong>: <code>&quot;refmt&quot;: 3</code> for the new <a href="https://reasonml.github.io/community/blog/#reason-3">Reason V3 syntax</a>.</p>
 <h3><a class="anchor" aria-hidden="true" name="js-post-build"></a><a href="#js-post-build" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>js-post-build</h3>
-<p>Hook that's invoked every time a file is recompiled. Good for JS build system interop. See the schema for more details. Example:</p>
+<p>Hook that's invoked every time a file is recompiled. Good for JS build system interop, but please use it <strong>sparingly</strong>. Calling your custom command for every recompiled file slows down your build and worsens the building experience for even third-party users of your lib.</p>
+<p>Example:</p>
 <pre><code class="hljs css json">{
   <span class="hljs-attr">"js-post-build"</span>: {
-    <span class="hljs-attr">"cmd"</span>: <span class="hljs-string">"node ../../postProcessTheFile.js"</span>
+    <span class="hljs-attr">"cmd"</span>: <span class="hljs-string">"/path/to/node ../../postProcessTheFile.js"</span>
   }
 }
 </code></pre>
+<p>Note that the command's path resolution is done through the following:</p>
+<ul>
+<li><code>/myCommand</code> is resolved absolutely</li>
+<li><code>myCommand</code> is resolved into <code>node_modules/myCommand</code></li>
+<li><code>./myCommand</code> is resolved into <code>myProjectRoot/myCommand</code></li>
+<li><code>myCommand</code> is just called as <code>myCommand</code>. But note that Bsb doesn't read into your environment, so if you put <code>node</code>, it won't find it unless you specify an absolute path. Alternatively, point to a script that has the header <code>#!/usr/local/bin/node</code>.</li>
+</ul>
+<p>The command itself is called from inside <code>lib/bs</code>.</p>
 <h3><a class="anchor" aria-hidden="true" name="package-specs"></a><a href="#package-specs" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>package-specs</h3>
 <p>Output to either CommonJS, ES6 modules or AMD. Example:</p>
 <pre><code class="hljs css json">{
@@ -80,7 +89,7 @@
 }
 </code></pre>
 <ul>
-<li><code>&quot;module&quot;: &quot;es6-global&quot;</code> resolves <code>node_modules</code> using relative paths. Good for development-time usage of ES6 in conjunction with browsers like Safari and Firefox that support ES6 modules today. No more dev-time bundling!</li>
+<li><code>&quot;module&quot;: &quot;es6-global&quot;</code> resolves <code>node_modules</code> using relative paths. Good for development-time usage of ES6 in conjunction with browsers like Safari and Firefox that support ES6 modules today. <strong>No more dev-time bundling</strong>!</li>
 <li><code>&quot;in-source&quot;: true</code> generates output alongside source files, instead of by default isolating them into <code>lib/js</code>. The output directory is otherwise not configurable.</li>
 </ul>
 <h3><a class="anchor" aria-hidden="true" name="suffix"></a><a href="#suffix" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>suffix</h3>
