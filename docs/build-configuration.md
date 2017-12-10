@@ -92,8 +92,8 @@ Example:
 
 Note that the command's path resolution is done through the following:
 
-- `/myCommand` is resolved absolutely
-- `myCommand` is resolved into `node_modules/myCommand`
+- `/myCommand` is resolved into `/myCommand`
+- `myCommand/` is resolved into `node_modules/myCommand`
 - `./myCommand` is resolved into `myProjectRoot/myCommand`
 - `myCommand` is just called as `myCommand`. But note that Bsb doesn't read into your environment, so if you put `node`, it won't find it unless you specify an absolute path. Alternatively, point to a script that has the header `#!/usr/local/bin/node`.
 
