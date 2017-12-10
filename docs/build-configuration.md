@@ -101,7 +101,7 @@ The command itself is called from inside `lib/bs`.
 
 ### package-specs
 
-Output to either CommonJS, ES6 modules or AMD. Example:
+Output to either CommonJS (the default), ES6 modules or AMD. Example:
 
 ```json
 {
@@ -114,6 +114,8 @@ Output to either CommonJS, ES6 modules or AMD. Example:
 
 - `"module": "es6-global"` resolves `node_modules` using relative paths. Good for development-time usage of ES6 in conjunction with browsers like Safari and Firefox that support ES6 modules today. **No more dev-time bundling**!
 - `"in-source": true` generates output alongside source files, instead of by default isolating them into `lib/js`. The output directory is otherwise not configurable.
+
+This configuration only applies to you, when you develop the project. When the project is used as a third-party library, the consumer's own `bsconfig.json` `package-specs` overrides the configuration here, logically.
 
 ### suffix
 
