@@ -73,8 +73,8 @@
 </code></pre>
 <p>Note that the command's path resolution is done through the following:</p>
 <ul>
-<li><code>/myCommand</code> is resolved absolutely</li>
-<li><code>myCommand</code> is resolved into <code>node_modules/myCommand</code></li>
+<li><code>/myCommand</code> is resolved into <code>/myCommand</code></li>
+<li><code>myCommand/</code> is resolved into <code>node_modules/myCommand</code></li>
 <li><code>./myCommand</code> is resolved into <code>myProjectRoot/myCommand</code></li>
 <li><code>myCommand</code> is just called as <code>myCommand</code>. But note that Bsb doesn't read into your environment, so if you put <code>node</code>, it won't find it unless you specify an absolute path. Alternatively, point to a script that has the header <code>#!/usr/local/bin/node</code>.</li>
 </ul>
