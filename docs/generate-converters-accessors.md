@@ -103,7 +103,10 @@ let coordinatesToJs: coordinates => {. "x": int, "y": int};
 let coordinatesFromJs: {.. "x": int, "y": int} => coordinates;
 ```
 
-**Note**: `coordinatesFromJs` uses an open object type that accepts more fields, just to be more permissive.
+**Note**:
+
+- `coordinatesFromJs` uses an open object type that accepts more fields, just to be more permissive.
+- The converters are shallow. They don't recursively drill into the fields and convert them. This preserves the speed and simplicity of output while satisfying 80% of use-cases. File an issue if you'd like seeing recursive conversion happen though!
 
 ### Usage
 
