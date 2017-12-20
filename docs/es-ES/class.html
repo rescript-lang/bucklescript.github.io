@@ -30,6 +30,20 @@
 <p>Output:</p>
 <pre><code class="hljs css js"><span class="hljs-keyword">var</span> date = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>();
 </code></pre>
+<p>You can chain <code>bs.new</code> and <code>bs.module</code> if the JS module you're importing is itself a class:</p>
+<pre><code class="hljs css ocaml"><span class="hljs-keyword">type</span> t
+<span class="hljs-keyword">external</span> book : <span class="hljs-built_in">unit</span> -&gt; t = <span class="hljs-string">"Book"</span> [@@bs.<span class="hljs-keyword">new</span>] [@@bs.<span class="hljs-keyword">module</span>]
+<span class="hljs-keyword">let</span> bookInstance = book <span class="hljs-literal">()</span>
+</code></pre>
+<p>Reason syntax:</p>
+<pre><code class="hljs css reason">type t<span class="hljs-comment">;</span>
+[@<span class="hljs-keyword">bs.new] </span>[@<span class="hljs-keyword">bs.module] </span><span class="hljs-keyword">external </span><span class="hljs-keyword">book </span>: unit =&gt; t = <span class="hljs-string">"Book"</span><span class="hljs-comment">;</span>
+let <span class="hljs-keyword">bookInstance </span>= <span class="hljs-keyword">book();
+</span></code></pre>
+<p>Output:</p>
+<pre><code class="hljs css js"><span class="hljs-keyword">var</span> Book = <span class="hljs-built_in">require</span>(<span class="hljs-string">"Book"</span>);
+<span class="hljs-keyword">var</span> bookInstance = <span class="hljs-keyword">new</span> Book();
+</code></pre>
 <h2><a class="anchor" aria-hidden="true" name="bind-to-js-classes"></a><a href="#bind-to-js-classes" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Bind to JS Classes</h2>
 <p>JS classes are really just JS objects wired up funnily. <strong>In general</strong>, prefer using the previous object section's features to bind to a JS object.</p>
 <p>OCaml having classes really helps with binding to JS classes. Just add a <code>[@bs]</code> to a class type to turn them into a <code>Js.t</code> class:</p>
