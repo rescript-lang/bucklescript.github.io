@@ -14,7 +14,7 @@ external myCFunction : int -> string = "theCFunctionName"
 Reason syntax:
 
 ```reason
-external myCFunction : int => string = "theCFunctionName"
+external myCFunction : int => string = "theCFunctionName";
 ```
 
 It's like a `let`, except that the body of an external is, as seen above, a string. That string usually has specific meanings depending on the context. For native OCaml, it usually points to a C function of that name. For BuckleScript, these externals are usually decorated with certain `[@bs.blabla]` attributes.
@@ -36,7 +36,7 @@ external myShadyConversion : foo -> bar = "%identity"
 Reason syntax:
 
 ```reason
-external myShadyConversion : foo => bar = "%identity"
+external myShadyConversion : foo => bar = "%identity";
 ```
 
 This is a final escape hatch which does nothing but converting from the type `foo` to `bar`. In the following sections, if you ever fail to write a JS binding, you can fall back to use this one. But try not to.
