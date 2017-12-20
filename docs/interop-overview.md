@@ -62,7 +62,7 @@ BS comes with a lightning-fast (fastest?) build system. It starts up in a few **
 
 ### Package Management
 
-We use NPM and Yarn. Since the generated output is clean enough, you can publish them at NPM `prepublishOnly` time and remove all trace of BuckleScript beforehand. The consumer wouldn't even know you wrote in BS, not JS! Check your `node_modules` right now; you might have been using some transitive BS code without knowing! The consumer wouldn't even know you wrote in BS, not JS.
+We use NPM and Yarn. Since the generated output is clean enough, you can publish them at NPM `prepublishOnly` time and remove all trace of BuckleScript beforehand. The consumer wouldn't even know you wrote in BS, not JS! Check your `node_modules` right now; you might have been using some transitive BS code without knowing!
 
 ## Conclusion
 
