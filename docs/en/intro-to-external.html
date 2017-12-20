@@ -19,7 +19,7 @@
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">external</span> myCFunction : <span class="hljs-built_in">int</span> -&gt; <span class="hljs-built_in">string</span> = <span class="hljs-string">"theCFunctionName"</span>
 </code></pre>
 <p>Reason syntax:</p>
-<pre><code class="hljs css reason"><span class="hljs-keyword">external</span> myCFunction : <span class="hljs-built_in">int</span> =&gt; <span class="hljs-built_in">string</span> = <span class="hljs-string">"theCFunctionName"</span>;
+<pre><code class="hljs css reason"><span class="hljs-keyword">external</span> myCFunction : <span class="hljs-built_in">int</span> =&gt; <span class="hljs-built_in">string</span> = <span class="hljs-string">"theCFunctionName"</span>
 </code></pre>
 <p>It's like a <code>let</code>, except that the body of an external is, as seen above, a string. That string usually has specific meanings depending on the context. For native OCaml, it usually points to a C function of that name. For BuckleScript, these externals are usually decorated with certain <code>[@bs.blabla]</code> attributes.</p>
 <p>Once declared, you can use an <code>external</code> as a normal value.</p>
@@ -30,7 +30,7 @@
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">external</span> myShadyConversion : foo -&gt; bar = <span class="hljs-string">"%identity"</span>
 </code></pre>
 <p>Reason syntax:</p>
-<pre><code class="hljs css reason"><span class="hljs-keyword">external </span>myShadyConversion : foo =&gt; <span class="hljs-keyword">bar </span>= <span class="hljs-string">"%identity"</span><span class="hljs-comment">;</span>
+<pre><code class="hljs css reason"><span class="hljs-keyword">external</span> myShadyConversion : foo =&gt; bar = <span class="hljs-string">"%identity"</span>
 </code></pre>
 <p>This is a final escape hatch which does nothing but converting from the type <code>foo</code> to <code>bar</code>. In the following sections, if you ever fail to write a JS binding, you can fall back to use this one. But try not to.</p>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="common-data-types.html">← Common Data Types</a><a class="docs-next button" href="boolean.html">Boolean →</a></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.js"></script><script>window.foo = new Pjax({

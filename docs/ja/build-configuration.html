@@ -1,0 +1,134 @@
+<html><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/><title>Configuration · BuckleScript</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta property="og:title" content="Configuration · BuckleScript"/><meta property="og:type" content="website"/><meta property="og:url" content="https://bucklescript.github.io/index.html"/><meta property="og:description" content="`bsconfig.json` is the single, mandatory build meta file needed for bsb."/><link rel="shortcut icon" href="/img/logos/bucklescript_small.svg"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/arduino-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://bucklescript.github.io/blog/atom.xml" title="BuckleScript Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://bucklescript.github.io/blog/feed.xml" title="BuckleScript Blog RSS Feed"/><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/logos/bucklescript_small.svg"/><h2 class="headerTitle">BuckleScript</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li><a href="/docs/ja/installation.html" target="_self">Docs</a></li><li><a href="/docs/ja/playground.html" target="_self">Try</a></li><li><a href="/docs/ja/community.html" target="_self">Community</a></li><li><a href="/blog" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>日本語</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/en">English</a></li><li><a href="/es-ES">Español</a></li><li><a href="/fr">Français</a></li><li><a href="/ko">한국어</a></li><li><a href="/pt-BR">Português (Brasil)</a></li><li><a href="/ru">Русский</a></li><li><a href="/zh-CN">中文</a></li><li><a href="/zh-Hant">繁體中文</a></li><li><a href="https://crowdin.com/project/bucklescript" target="_blank">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(){
+          if(languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search"/></li><li><a href="https://github.com/bucklescript/bucklescript" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Build System</span></h2></div><div class="navGroups"><div class="navGroup navGroupActive"><h3>Intro</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ja/what-why.html">What &amp; Why</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/installation.html">Installation</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/new-project.html">New Project</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/concepts-overview.html">Concepts Overview</a></li></ul></div><div class="navGroup navGroupActive"><h3>Interop</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ja/interop-overview.html">Overview</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/interop-cheatsheet.html">Cheatsheet</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/embed-raw-javascript.html">Embed Raw JavaScript</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/common-data-types.html">Common Data Types</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/intro-to-external.html">Intro to External</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/boolean.html">Boolean</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/bind-to-global-values.html">Bind to Global Values</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/null-undefined-option.html">Null, Undefined &amp; Option</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/object.html">Object</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/class.html">Class</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/function.html">Function</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/import-export.html">Import &amp; Export</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/regular-expression.html">Regular Expression</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/exceptions.html">Exceptions</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/generate-converters-accessors.html">Generate Converters &amp; Helpers</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/nodejs-special-variables.html">NodeJS Special Variables</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/interop-misc.html">Miscellaneous</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/typescript-support.html">TypeScript Support</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/browser-support-polyfills.html">Browser Support &amp; Polyfills</a></li></ul></div><div class="navGroup navGroupActive"><h3>Build System</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ja/build-overview.html">Overview</a></li><li class="navListItem navListItemActive"><a class="navItem navItemActive" href="/docs/ja/build-configuration.html">Configuration</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/automatic-interface-generation.html">Automatic Interface Generation</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/interop-with-js-build-systems.html">Interop with JS Build System</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/build-performance.html">Performance</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/build-advanced.html">Advanced</a></li></ul></div><div class="navGroup navGroupActive"><h3>Standard Library</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ja/stdlib-overview.html">Overview</a></li></ul></div><div class="navGroup navGroupActive"><h3>Advanced</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ja/conditional-compilation.html">Conditional Compilation</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/extended-compiler-options.html">Extended Compiler Options</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/use-existing-ocaml-libraries.html">Use Existing OCaml Libraries</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/difference-from-native-ocaml.html">Difference from Native OCaml</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/compiler-architecture-principles.html">Compiler Architecture &amp; Principles</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/comparison-to-jsoo.html">Comparison to Js_of_ocaml</a></li></ul></div></div></section></div><script>
+          var toggler = document.getElementById('navToggler');
+          var nav = document.getElementById('docsNav');
+          toggler.onclick = function() {
+            nav.classList.toggle('docsSliderActive');
+          };
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/bucklescript/ja" target="_blank">Translate</a><h1>Configuration</h1></header><article><div><span><p><code>bsconfig.json</code> is the single, mandatory build meta file needed for bsb.</p>
+<p><strong>The complete configuration schema is <a href="https://bucklescript.github.io/bucklescript/docson/#build-schema.json">here</a></strong>. We'll <em>non-exhaustively</em> highlight the important parts in prose here.</p>
+<h3><a class="anchor" aria-hidden="true" name="name-namespace"></a><a href="#name-namespace" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>name, namespace</h3>
+<p><code>name</code> is the name of the library, used as its &quot;namespace&quot;. You can activate namespacing through <code>&quot;namespace&quot;: true</code> in your <code>bsconfig.json</code>. Namespacing is almost <strong>mandatory</strong>; we haven't turned it on by default yet to preserve backward-compatibility.</p>
+<p>Explanation: by default, your files, once used as a third-party dependency, are available globally to the consumer. If you have an e.g. <code>Util.re</code> and the consumer also has a file of the same name, things will clash. Turning on <code>namespace</code> avoids this by wrapping all your files into an extra module layer, so instead of a global <code>Util</code> module, the consumer will see you as <code>MyProject.Util</code>.</p>
+<p>Aka, in Bsb, &quot;namespace&quot; is just a fancy term for an auto-generated module that wraps all your project's files (efficiently and correctly, of course!) for third-party consumption.</p>
+<p>Inside your own project, you don't have to reference your own namespace. We don't do folder-level namespacing, aka all your project's file names must be unique. This is a constraint that enables several features such as fast search and easier project reorganization.</p>
+<p><strong>Note</strong>: the <code>bsconfig.json</code> <code>name</code> should be the same as the <code>package.json</code> <code>name</code>, to avoid confusing corner-cases. However, this means that you can't use a camelCased names such as <code>MyProject</code>, since <code>package.json</code> and npm forbid you to do so (some file systems are case-insensitive). To have the namespace/module as <code>MyProject</code>, write <code>&quot;name&quot;: &quot;my-project&quot;</code>. Bsb will turn that into the camelCased name correctly.</p>
+<h3><a class="anchor" aria-hidden="true" name="sources"></a><a href="#sources" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>sources</h3>
+<p>Your source files need to be specified explicitly (we don't want to accidentally drill down into some unrelated directories). Examples:</p>
+<pre><code class="hljs css json">{
+  <span class="hljs-attr">"sources"</span>: [<span class="hljs-string">"src"</span>, <span class="hljs-string">"examples"</span>]
+}
+</code></pre>
+<pre><code class="hljs css json">{
+  <span class="hljs-attr">"sources"</span>: {
+    <span class="hljs-attr">"dir"</span>: <span class="hljs-string">"src"</span>,
+    <span class="hljs-attr">"subdirs"</span>: [<span class="hljs-string">"page"</span>]
+  }
+}
+</code></pre>
+<pre><code class="hljs css json">{
+  <span class="hljs-attr">"sources"</span>: [
+    <span class="hljs-string">"examples"</span>,
+    {
+      <span class="hljs-attr">"dir"</span>: <span class="hljs-string">"src"</span>,
+      <span class="hljs-attr">"subdirs"</span>: <span class="hljs-literal">true</span> // recursively builds every subdirectory
+    }
+  ]
+}
+</code></pre>
+<p>You can mark your directories as dev-only (for e.g. tests). These won't be build and exposed to third-party:</p>
+<pre><code class="hljs css json">{
+  <span class="hljs-attr">"sources"</span> : {
+    <span class="hljs-attr">"dir"</span> : <span class="hljs-string">"test"</span>,
+    <span class="hljs-attr">"type"</span> : <span class="hljs-string">"dev"</span>
+  }
+}
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" name="bs-dependencies-bs-dev-dependencies"></a><a href="#bs-dependencies-bs-dev-dependencies" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>bs-dependencies, bs-dev-dependencies</h3>
+<p>List of BuckleScript/Reason dependencies. Just like <code>package.json</code>'s dependencies, they'll be searched in <code>node_modules</code>.</p>
+<h3><a class="anchor" aria-hidden="true" name="reason-refmt"></a><a href="#reason-refmt" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>reason, refmt</h3>
+<p><code>reason</code> config is enabled by default. To turn on JSX for <a href="https://reasonml.github.io/reason-react/">ReasonReact</a>, specify:</p>
+<pre><code class="hljs css json">{
+  <span class="hljs-attr">"reason"</span>: {<span class="hljs-attr">"react-jsx"</span>: <span class="hljs-number">2</span>}
+}
+</code></pre>
+<p>The <code>refmt</code> config <strong>should be explicitly specified</strong>: <code>&quot;refmt&quot;: 3</code> for the new <a href="https://reasonml.github.io/community/blog/#reason-3">Reason V3 syntax</a>.</p>
+<h3><a class="anchor" aria-hidden="true" name="js-post-build"></a><a href="#js-post-build" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>js-post-build</h3>
+<p>Hook that's invoked every time a file is recompiled. Good for JS build system interop, but please use it <strong>sparingly</strong>. Calling your custom command for every recompiled file slows down your build and worsens the building experience for even third-party users of your lib.</p>
+<p>Example:</p>
+<pre><code class="hljs css json">{
+  <span class="hljs-attr">"js-post-build"</span>: {
+    <span class="hljs-attr">"cmd"</span>: <span class="hljs-string">"/path/to/node ../../postProcessTheFile.js"</span>
+  }
+}
+</code></pre>
+<p>Note that the command's path resolution is done through the following:</p>
+<ul>
+<li><code>/myCommand</code> is resolved into <code>/myCommand</code></li>
+<li><code>myCommand/</code> is resolved into <code>node_modules/myCommand</code></li>
+<li><code>./myCommand</code> is resolved into <code>myProjectRoot/myCommand</code></li>
+<li><code>myCommand</code> is just called as <code>myCommand</code>. But note that Bsb doesn't read into your environment, so if you put <code>node</code>, it won't find it unless you specify an absolute path. Alternatively, point to a script that has the header <code>#!/usr/local/bin/node</code>.</li>
+</ul>
+<p>The command itself is called from inside <code>lib/bs</code>.</p>
+<h3><a class="anchor" aria-hidden="true" name="package-specs"></a><a href="#package-specs" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>package-specs</h3>
+<p>Output to either CommonJS (the default), ES6 modules or AMD. Example:</p>
+<pre><code class="hljs css json">{
+  <span class="hljs-attr">"package-specs"</span>: {
+    <span class="hljs-attr">"module"</span>: <span class="hljs-string">"commonjs"</span>,
+    <span class="hljs-attr">"in-source"</span>: <span class="hljs-literal">true</span>
+  }
+}
+</code></pre>
+<ul>
+<li><code>&quot;module&quot;: &quot;es6-global&quot;</code> resolves <code>node_modules</code> using relative paths. Good for development-time usage of ES6 in conjunction with browsers like Safari and Firefox that support ES6 modules today. <strong>No more dev-time bundling</strong>!</li>
+<li><code>&quot;in-source&quot;: true</code> generates output alongside source files, instead of by default isolating them into <code>lib/js</code>. The output directory is otherwise not configurable.</li>
+</ul>
+<p>This configuration only applies to you, when you develop the project. When the project is used as a third-party library, the consumer's own <code>bsconfig.json</code> <code>package-specs</code> overrides the configuration here, logically.</p>
+<h3><a class="anchor" aria-hidden="true" name="suffix"></a><a href="#suffix" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>suffix</h3>
+<p>Either <code>&quot;.js&quot;</code> or <code>&quot;.bs.js&quot;</code>. Strongly <a href="/docs/ja/build-overview.html#tips-tricks">prefer the latter</a>.</p>
+<h3><a class="anchor" aria-hidden="true" name="warnings"></a><a href="#warnings" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>warnings</h3>
+<p>Selectively turn on/off certain warnings and/or turn them into hard errors. Example:</p>
+<pre><code class="hljs css json">{
+  <span class="hljs-attr">"warnings"</span>: {
+    <span class="hljs-attr">"number"</span>: <span class="hljs-string">"-44-102"</span>,
+    <span class="hljs-attr">"error"</span>: <span class="hljs-string">"+5"</span>
+  }
+}
+</code></pre>
+<p>Turn off warning <code>44</code> and <code>102</code> (polymorphic comparison). Turn warning <code>5</code> (partial application whose result has function type and is ignored) into a hard error.</p>
+<p>The warning number are shown in the build output when they're triggered. The complete list is <a href="https://caml.inria.fr/pub/docs/manual-ocaml/comp.html#sec281">here</a>, a little bit below. <code>100</code> and up are BuckleScript-specific.</p>
+<h3><a class="anchor" aria-hidden="true" name="bsc-flags"></a><a href="#bsc-flags" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>bsc-flags</h3>
+<p>Extra flags to pass to the underlying <code>bsc</code> call. Notably: <code>[&quot;-bs-super-errors&quot;]</code> for turning on <a href="https://reasonml.github.io/community/blog/#way-way-waaaay-nicer-error-messages">cleaning error output</a>. No need to pass this flag for a Reason project; it's enabled by default.</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="build-overview.html">← Overview</a><a class="docs-next button" href="automatic-interface-generation.html">Automatic Interface Generation →</a></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.js"></script><script>window.foo = new Pjax({
+          areas: [
+            // try to use the first query.
+            '.mainContainer, .docsNavContainer .toc .navWrapper',
+            // fallback
+            'body'
+          ],
+          link: '.docsNavContainer:not(.docsSliderActive) a',
+          update: {
+            script: false,
+          }
+        });
+        var languagesMenuItemCopy = document.getElementById("languages-menu");
+        languagesMenuItemCopy.addEventListener("click", function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          e.stopImmediatePropagation();
+        });</script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+              var search = docsearch({
+                apiKey: '0fd97db83891aa20810559812d9e69ac',
+                indexName: 'bucklescript',
+                inputSelector: '#search_input_react'
+              });
+            </script></body></html>
