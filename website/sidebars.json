@@ -21,6 +21,7 @@
       "import-export",
       "regular-expression",
       "exceptions",
+      "json",
       "generate-converters-accessors",
       "nodejs-special-variables",
       "interop-misc",
