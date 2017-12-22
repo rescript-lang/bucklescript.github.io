@@ -7,7 +7,7 @@ BuckleScript is mostly just OCaml, so they share the same standard library. The 
 
 **Note** that BuckleScript is currently at OCaml v4.02.3. We will upgrade to a newer OCaml later on.
 
-In addition, we provide a few extra modules:
+In addition, we provide a few extra modules, documented [here](https://bucklescript.github.io/bucklescript/api/):
 
 - `Dom`: contains DOM types. The DOM is very hard to bind to, so we've decided to only keep the types in the stdlib and let users bind to the subset of DOM they need downstream.
 - `Node`: for node-specific APIs. Experimental; contribution welcome!
