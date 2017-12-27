@@ -181,7 +181,7 @@ const languages = [
   {
     enabled: true,
     name: "繁體中文",
-    tag: "zh-Hant"
+    tag: "zh-TW"
   },
   {
     enabled: false,
