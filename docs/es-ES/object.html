@@ -128,6 +128,7 @@ john##say(<span class="hljs-string">"hey"</span>, <span class="hljs-string">"jud
 <span class="hljs-keyword">let</span> name = bucklescript##info##author;
 </code></pre>
 <p>Because object values are used often, Reason gives it a nicer sugar. <code>[%bs.obj {foo: 1}]</code> will format to <code>{&quot;foo&quot;: 1}</code>.</p>
+<p><strong>Note</strong>: there's no syntax sugar for creating an empty object in OCaml nor Reason (aka this doesn't work: <code>[@bs.obj {}]</code>. Please use <code>Js.Obj.empty()</code> for that purpose.</p>
 <p>The created object will have an inferred type, no type declaration needed! The above example will infer as <code>&lt; info: &lt; author: string &gt; Js.t &gt; Js.t</code>. Reason syntax: <code>{. &quot;info&quot;: {. &quot;author&quot;: string}}</code>.</p>
 <p><strong>Note</strong>: since the value has its type inferred, <strong>don't</strong> accidentally do this:</p>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">type</span> person = &lt;age: <span class="hljs-built_in">string</span>&gt; <span class="hljs-type">Js</span>.t
