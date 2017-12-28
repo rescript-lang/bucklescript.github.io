@@ -31,13 +31,25 @@ Js.log(add(1, 2));
 
 The `{|foo|}` syntax stands for OCaml/BuckleScript/Reason's multi-line, "quoted string" syntax. Think of them as the equivalent of JavaScript's template literals. No escaping is needed inside that string.
 
-**Careful** with the OCaml/Reason syntax here. `[%raw foo]` allows you to embed an expression. To embed a statement, use `[%%raw foo]`:
+**Careful** with the OCaml/Reason syntax here. `[%raw foo]` allows you to embed an expression. For top-level declarations in OCaml/Reason, use `[%%raw foo]` (two `%`):
 
 ```ocaml
 [%%raw "var a = 1"]
+
+let f = [%raw "function() {return 1}"]
 ```
+
+Reason syntax:
+
+```reason
+[%%raw "var a = 1"];
+
+let f = [%raw "function() {return 1}"];
+```
+
 <!-- TODO: add explaination about extension syntax  -->
 <!-- TODO: add reason counter part -->
+
 ### Debugger
 
 You can also drop a `[%debugger]` expression in a body:
