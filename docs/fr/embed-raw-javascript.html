@@ -35,8 +35,15 @@ let _ = Js.log (add 1 2)
 Js.log(<span class="hljs-keyword">add</span><span class="bash">(1, 2));
 </span></code></pre>
 <p>The <code>{|foo|}</code> syntax stands for OCaml/BuckleScript/Reason's multi-line, &quot;quoted string&quot; syntax. Think of them as the equivalent of JavaScript's template literals. No escaping is needed inside that string.</p>
-<p><strong>Careful</strong> with the OCaml/Reason syntax here. <code>[%raw foo]</code> allows you to embed an expression. To embed a statement, use <code>[%%raw foo]</code>:</p>
+<p><strong>Careful</strong> with the OCaml/Reason syntax here. <code>[%raw foo]</code> allows you to embed an expression. For top-level declarations in OCaml/Reason, use <code>[%%raw foo]</code> (two <code>%</code>):</p>
 <pre><code class="hljs css ocaml">[%%raw <span class="hljs-string">"var a = 1"</span>]
+
+<span class="hljs-keyword">let</span> f = [%raw <span class="hljs-string">"function() {return 1}"</span>]
+</code></pre>
+<p>Reason syntax:</p>
+<pre><code class="hljs css reason">[<span class="hljs-meta">%</span><span class="hljs-meta">%</span>raw <span class="hljs-string">"var a = 1"</span>];
+
+let f = [<span class="hljs-meta">%</span>raw <span class="hljs-string">"function() {return 1}"</span>];
 </code></pre>
 <!-- TODO: add explaination about extension syntax  -->
 <!-- TODO: add reason counter part -->
