@@ -34,13 +34,15 @@ Cleaning the artifacts should be instantaneous.
 
 ### Extreme Test
 
-We've stress-tested bsb on a big project of 10,000 files (100 directories with 100 files each, containing interdependencies) using https://github.com/ocaml-omake/omake/blob/perf-test/performance/generate.ml, on Retina Macbook Pro Mid 2014 (quad core, i7).
+We've stress-tested bsb on a big project of 10,000 files (2 directories, 5000 files each, first 5000 no dependencies, last 5000 10 dependencies on files from the former directory) using https://github.com/ocaml-omake/omake/blob/perf-test/performance/generate.ml, on Retina Macbook Pro Early 2015 (3.1 GHz Intel Core i7).
 
 <!-- TODO: better repro -->
 
-- No-op build of 10k files: `440ms` (unfortunately, that's the minimum amount of time required to check the mtimes of 10k files. But maybe we can cleverly optimize this in the future).
-- Clean build: 5 minutes.
-- Incremental build: depends on the file, but should be under `1s` unless it has lots of dependents.
+- No-op build of 10k files: `800ms` (the minimum amount of time required to check the mtimes of 10k files).
+- Clean build: <3 minutes.
+- Incremental build: depends on the number of the dependents of the file. No dependent means `1s`.
+
+Note that bsb is a file-based build system. We don't do in-memory build, even if that speeds up the build a lot. In-memory builds risk memory leaks, out-of-memory errors and others. The bsb watcher, on the other hand, can stay open for days.
 
 ## Incrementality
 
