@@ -49,7 +49,7 @@ Your source files need to be specified explicitly (we don't want to accidentally
 }
 ```
 
-You can mark your directories as dev-only (for e.g. tests). These won't be build and exposed to third-party:
+You can mark your directories as dev-only (for e.g. tests). These won't be built and exposed to third-parties, or even to other "dev" directories in the same project:
 
 ```json
 {
