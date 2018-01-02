@@ -184,7 +184,7 @@ Note how all three externals bind to the same JS function, `draw`.
 If you have the irresistible urge of saying "if only this JS function argument was a variant instead of informally being either `string` or `int`", then good news: we do provide such `external` features through annotating a parameter as a polymorphic variant! Assuming you have the following JS function you'd like to bind to:
 
 ```js
-function padLeft(string, padding) {
+function padLeft(value, padding) {
   if (typeof padding === "number") {
     return Array(padding + 1).join(" ") + value;
   }
