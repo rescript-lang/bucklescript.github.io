@@ -1,5 +1,4 @@
 ---
-id: intro-to-external
 title: Intro to External
 ---
 

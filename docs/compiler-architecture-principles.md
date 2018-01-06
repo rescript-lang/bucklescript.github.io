@@ -1,5 +1,4 @@
 ---
-id: compiler-architecture-principles
 title: Compiler Architecture & Principles
 ---
 

@@ -1,5 +1,4 @@
 ---
-id: browser-support-polyfills
 title: Browser Support & Polyfills
 ---
 

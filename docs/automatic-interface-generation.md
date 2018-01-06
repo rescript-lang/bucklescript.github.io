@@ -1,5 +1,4 @@
 ---
-id: automatic-interface-generation
 title: Automatic Interface Generation
 ---
 

@@ -1,5 +1,4 @@
 ---
-id: new-project
 title: New Project
 ---
 

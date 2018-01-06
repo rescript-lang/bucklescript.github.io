@@ -1,5 +1,4 @@
 ---
-id: bind-to-global-values
 title: Bind to Global Values
 ---
 

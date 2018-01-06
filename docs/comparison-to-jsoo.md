@@ -1,5 +1,4 @@
 ---
-id: comparison-to-jsoo
 title: Comparison to Js_of_ocaml
 ---
 

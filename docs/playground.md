@@ -1,5 +1,4 @@
 ---
-id: playground
 title: Playground
 ---
 

@@ -1,5 +1,4 @@
 ---
-id: regular-expression
 title: Regular Expression
 ---
 

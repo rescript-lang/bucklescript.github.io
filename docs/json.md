@@ -1,5 +1,4 @@
 ---
-id: json
 title: JSON
 ---
 

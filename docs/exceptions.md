@@ -1,5 +1,4 @@
 ---
-id: exceptions
 title: Exceptions
 ---
 

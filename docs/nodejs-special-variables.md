@@ -1,5 +1,4 @@
 ---
-id: nodejs-special-variables
 title: NodeJS Special Variables
 ---
 

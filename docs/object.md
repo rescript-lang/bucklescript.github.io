@@ -1,5 +1,4 @@
 ---
-id: object
 title: Object
 ---
 

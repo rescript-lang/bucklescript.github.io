@@ -1,5 +1,4 @@
 ---
-id: boolean
 title: Boolean
 ---
 

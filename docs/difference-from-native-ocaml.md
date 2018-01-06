@@ -1,5 +1,4 @@
 ---
-id: difference-from-native-ocaml
 title: Difference from Native OCaml
 ---
 

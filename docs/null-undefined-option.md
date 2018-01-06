@@ -1,5 +1,4 @@
 ---
-id: null-undefined-option
 title: Null, Undefined & Option
 ---
 

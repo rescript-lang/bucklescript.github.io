@@ -1,5 +1,4 @@
 ---
-id: embed-raw-javascript
 title: Embed Raw JavaScript
 ---
 

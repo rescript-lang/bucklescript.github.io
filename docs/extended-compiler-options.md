@@ -1,5 +1,4 @@
 ---
-id: extended-compiler-options
 title: Extended Compiler Options
 ---
 

@@ -1,5 +1,4 @@
 ---
-id: generate-converters-accessors
 title: Generate Converters & Helpers
 ---
 

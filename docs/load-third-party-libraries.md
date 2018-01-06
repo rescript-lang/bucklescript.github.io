@@ -1,5 +1,4 @@
 ---
-id: load-third-party-libraries
 title: Load Third-party Libraries
 ---
 

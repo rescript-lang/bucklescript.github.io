@@ -1,5 +1,4 @@
 ---
-id: function
 title: Function
 ---
 

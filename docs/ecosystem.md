@@ -1,5 +1,4 @@
 ---
-id: ecosystem
 title: Ecosystem
 ---
 
