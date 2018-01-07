@@ -28,7 +28,7 @@ BuckleScript's type system alone offers three major benefits to make your progra
 
 - **Sound type system**. "Sound" here means that the types _guarantee_ that they are what they are, not just 90% of the time. Once a BuckleScript project compiles, there are no runtime type errors. \*
 - **Strong type inference**. Almost the entirety of the language can be inferred. You don't have to tediously write all the types manually. Feel free to still type out some parts for readability!
-- **Expressive type features**. With well-thought-out features like [variants](https://reasonml.github.io/guide/language/variant), [modules](https://reasonml.github.io/guide/language/module) and even an opt-in [object system](https://reasonml.github.io/guide/language/object), the types guide you through your iteration process and don't block you from expressing what you need.
+- **Expressive type features**. With well-thought-out features like [variants](https://reasonml.github.io/docs/en/variant.html), [modules](https://reasonml.github.io/docs/en/module.html) and even an opt-in [object system](https://reasonml.github.io/docs/en/object.html), the types guide you through your iteration process and don't block you from expressing what you need.
 
 The combination of these three highlights, along with other type system features, unlocks new workflow possibilities and is something existing gradual typing solutions for JavaScript don't offer.
 

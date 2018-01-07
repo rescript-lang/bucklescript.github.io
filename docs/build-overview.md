@@ -50,7 +50,7 @@ Or `bsb -clean` to clean only your own artifacts.
 
 ## Editor Support
 
-Bsb generates a `.merlin` file, used by various [editor plugins](https://reasonml.github.io/guide/editor-tools/editors-plugins) under the hood to power e.g. autocomplete, type hint, diagnosis, etc.
+Bsb generates a `.merlin` file, used by various [editor plugins](https://reasonml.github.io/docs/en/editor-plugins.html) under the hood to power e.g. autocomplete, type hint, diagnosis, etc.
 
 **Bonus**: you can directly pipe the bsb terminal error messages into VSCode by setting the config [here](https://github.com/reasonml-editor/vscode-reasonml#bsb).
 

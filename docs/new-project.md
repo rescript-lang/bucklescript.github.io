@@ -28,4 +28,4 @@ We'll explain `bsb`, the build system called by the above `npm run build`, in a 
 
 ## Editor Integration
 
-We share the same editor integration as Reason. See the setup [here](https://reasonml.github.io/guide/editor-tools/global-installation).
+We share the same editor integration as Reason. See the setup [here](https://reasonml.github.io/docs/en/global-installation.html).

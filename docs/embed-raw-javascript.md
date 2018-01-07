@@ -147,4 +147,4 @@ Embedding raw JS snippets is **highly discouraged**, though also highly useful i
 
 At the end, we get a fully safe, converted Reason BuckleScript file whose JS output is clean enough that we can confidently assert that no new bug has been introduced during the conversion process.
 
-We have a small guide on this iteration [here](https://reasonml.github.io/guide/javascript/interop). Feel free to peruse it later.
+We have a small guide on this iteration [here](https://reasonml.github.io/docs/en/interop.html). Feel free to peruse it later.

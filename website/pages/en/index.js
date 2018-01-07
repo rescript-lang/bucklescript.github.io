@@ -62,7 +62,7 @@ class HomeSplash extends React.Component {
             >
               <translate>Get Started</translate>
             </Button>
-            <Button href="https://reasonml.github.io/guide/javascript/interop">
+            <Button href="https://reasonml.github.io/docs/en/interop.html">
               Tutorial
             </Button>
           </div>

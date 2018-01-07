@@ -8,13 +8,13 @@ BuckleScript's primitives such as `string`, `float`, `array` and a few others ha
 
 This means that if you receive e.g. a string from the JS side, you can use it **without conversion** on the BS side, and vice-versa. In other words, string and others are "_guaranteed public representations_".
 
-P.S. if you need an overview of the language primitives themselves, see [the Reason docs](https://reasonml.github.io/guide/language).
+P.S. if you need an overview of the language primitives themselves, see [the Reason docs](https://reasonml.github.io/docs/en/overview.html).
 
 **BuckleScript uses the same standard library as OCaml**; see the docs [here](https://reasonml.github.io/api/) (in Reason syntax). **Additionally**, we provide the bindings to all the familiar JS primitives [here](https://bucklescript.github.io/bucklescript/api/Js). You can mix and match these two.
 
 ### String
 
-Immutable on both sides, as expected. [BuckleScript String API](https://reasonml.github.io/api/String.html). [JS String API](https://bucklescript.github.io/bucklescript/api/Js.String.html#VALdefault).
+Immutable on both sides, as expected. [BuckleScript String API](https://reasonml.github.io/api/String.html). [JS String API](https://bucklescript.github.io/bucklescript/api/Js.String.html).
 
 #### Unicode Support
 
@@ -30,7 +30,7 @@ It'll compile to the follow JS:
 console.log("\xe4\xbd\xa0\xe5\xa5\xbd");
 ```
 
-Which gives you cryptic console output. To rectify this, BuckleScript exposes a special `js` annotation to the default [quoted string syntax](https://reasonml.github.io/guide/language/string-and-char/#quoted-string) built into the language. Use it like this:
+Which gives you cryptic console output. To rectify this, BuckleScript exposes a special `js` annotation to the default [quoted string syntax](https://reasonml.github.io/docs/en/string-and-char.html#quoted-string) built into the language. Use it like this:
 
 ```ocaml
 Js.log {js|你好，

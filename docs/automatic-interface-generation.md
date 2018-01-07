@@ -2,7 +2,7 @@
 title: Automatic Interface Generation
 ---
 
-"Interface files" (`.mli`, `.rei` files) are the "public description" of their corresponding "implementation files" (`.ml`, `.re`), exposed as documentation, and containing nothing but type declarations. Since a file is a module, an interface file is essentially a [module signature](https://reasonml.github.io/guide/language/module#signatures).
+"Interface files" (`.mli`, `.rei` files) are the "public description" of their corresponding "implementation files" (`.ml`, `.re`), exposed as documentation, and containing nothing but type declarations. Since a file is a module, an interface file is essentially a [module signature](https://reasonml.github.io/docs/en/module.html#signatures).
 
 ## Tips & Tricks
 

@@ -16,7 +16,7 @@ This gives you a few globally exposed commands you can run, described later. But
 npm install --save-dev bs-platform
 ```
 
-**Note that for Windows**, if you're using BuckleScript in conjunction with a tool like [Merlin](https://reasonml.github.io/guide/editor-tools/extra-goodies#merlin), please follow [this guide that we share with Reason](https://github.com/reasonml/reasonml.github.io/issues/195).
+**Note that for Windows**, if you're using BuckleScript in conjunction with a tool like [Merlin](https://reasonml.github.io/docs/en/extra-goodies.html#merlin), please follow [this guide that we share with Reason](https://github.com/reasonml/reasonml.github.io/issues/195).
 
 The commands that are exposed are:
 

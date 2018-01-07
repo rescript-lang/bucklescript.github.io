@@ -236,7 +236,7 @@ var low = c1.low;
 
 - Marking the return value as `_` will infer a `Js.t` object of the expected shape!
 
-- The final `unit` is there to indicate that you've finished applying optional arguments. More info [here](https://reasonml.github.io/guide/language/function#optional-labeled-arguments).
+- The final `unit` is there to indicate that you've finished applying optional arguments. More info [here](https://reasonml.github.io/docs/en/function.html#labeled-arguments).
 
 You can also attach constant data unto an object using `[@bs.as]`:
 
