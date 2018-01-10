@@ -90,7 +90,7 @@ match [%external __DEV__] with
 Reason syntax
 
 ```reason
-switch [%external __DEV__] {
+switch ([%external __DEV__]) {
 | Some(_) => Js.log("dev mode")
 | None => Js.log("production mode")
 };
@@ -119,7 +119,7 @@ match [%external __filename] with
 Reason syntax
 
 ```reason
-switch [%external __filename] {
+switch ([%external __filename]) {
 | Some(f) => Js.log(f)
 | None => Js.log("non-node environment")
 };
