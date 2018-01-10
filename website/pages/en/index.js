@@ -119,7 +119,7 @@ class Index extends React.Component {
       <div>
         <HomeSplash language={language} />
         <div className="mainContainer">
-          <Container className="homeThreePoints" padding={["bottom"]}>
+          <Container className="homeThreePoints">
             <GridBlock
               align="center"
               contents={[
