@@ -73,7 +73,7 @@ let f = [<span class="hljs-meta">%</span>raw <span class="hljs-string">"function
 </code></pre>
 <!-- TODO: change it to `= None` which is more idiomatic -->
 Reason syntax
-<pre><code class="hljs css reason">switch [%external __DEV__] {
+<pre><code class="hljs css reason">switch ([%external __DEV__]) {
 | <span class="hljs-type">Some</span>(<span class="hljs-keyword">_</span>) =&gt; Js.log(<span class="hljs-string">"dev mode"</span>)
 | <span class="hljs-type">None</span> =&gt; Js.log(<span class="hljs-string">"production mode"</span>)
 };
@@ -93,7 +93,7 @@ Reason syntax
 | <span class="hljs-type">None</span> -&gt; <span class="hljs-type">Js</span>.log <span class="hljs-string">"non-node environment"</span>
 </code></pre>
 <p>Reason syntax</p>
-<pre><code class="hljs css reason">switch [%external __filename] {
+<pre><code class="hljs css reason">switch ([%external __filename]) {
 | <span class="hljs-type">Some</span>(f) =&gt; Js.log(f)
 | <span class="hljs-type">None</span> =&gt; Js.log(<span class="hljs-string">"non-node environment"</span>)
 };
