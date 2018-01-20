@@ -57,7 +57,7 @@ The generated output is clean enough that it could be passed as (slightly badly 
 
 BS comes with a lightning-fast (fastest?) build system. It starts up in a few **milliseconds** and shuts down as fast. Incremental compilation is **two digits of milliseconds**. This allows the build system to be inserted invisibly into your whole JS build pipeline without embarrassing it. Unless your JS build pipeline is already embarrassingly slow. That's ok.
 
-**1** BS file compiles to **1** JS file. The build can be configured to generate JS files alongside or outside your `ml`/`re` source files. This means you don't have to ask the infra team's help in trying out BuckleScript at the company; simply generate the JS files and check them in. From the perspective of the rest of the compilation pipeline, it's as if you've written these JS files by hand. This is how [Messenger successfully introduced Reason into the codebase](https://reasonml.github.io/community/blog/#messengercom-now-50-converted-to-reason).
+**1** BS file compiles to **1** JS file. The build can be configured to generate JS files alongside or outside your `ml`/`re` source files. This means you don't have to ask the infra team's help in trying out BuckleScript at the company; simply generate the JS files and check them in. From the perspective of the rest of the compilation pipeline, it's as if you've written these JS files by hand. This is how [Messenger successfully introduced Reason into the codebase](https://reasonml.github.io/blog/2017/09/08/messenger-50-reason.html).
 
 ### Package Management
 
