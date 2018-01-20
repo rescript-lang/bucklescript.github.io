@@ -73,7 +73,7 @@ List of BuckleScript/Reason dependencies. Just like `package.json`'s dependencie
 }
 ```
 
-The `refmt` config **should be explicitly specified**: `"refmt": 3` for the new [Reason V3 syntax](https://reasonml.github.io/community/blog/#reason-3).
+The `refmt` config **should be explicitly specified**: `"refmt": 3` for the new [Reason V3 syntax](https://reasonml.github.io/blog/2017/10/27/reason3.html).
 
 ### js-post-build
 
@@ -139,4 +139,4 @@ The warning number are shown in the build output when they're triggered. The com
 
 ### bsc-flags
 
-Extra flags to pass to the underlying `bsc` call. Notably: `["-bs-super-errors"]` for turning on [cleaning error output](https://reasonml.github.io/community/blog/#way-way-waaaay-nicer-error-messages). No need to pass this flag for a Reason project; it's enabled by default.
+Extra flags to pass to the underlying `bsc` call. Notably: `["-bs-super-errors"]` for turning on [cleaning error output](https://reasonml.github.io/blog/2017/08/25/way-nicer-error-messages.html). No need to pass this flag for a Reason project; it's enabled by default.
