@@ -160,8 +160,8 @@ type person = {
   .
   "name": string,
   "age": int,
-  [@bs.set] job : string,
-  [@bs.meth] getNickname : unit => string
+  [@bs.set] "job" : string,
+  [@bs.meth] "getNickname" : unit => string
 };
 
 [@bs.val] external john : person = "john";
