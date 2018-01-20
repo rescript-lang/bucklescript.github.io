@@ -40,7 +40,7 @@ The `return` part "wraps" a string into a nullable string, to make the type syst
 
 This is the idiomatic way of working with the concept of "no value" in BuckleScript/OCaml/Reason. [The Reason docs on variants](https://reasonml.github.io/docs/en/variant.html) describes option in more detail.
 
-`Js.Nullable.from_opt` converts from a `Js.Nullable.t` to `option`. `Js.Nullable.to_opt` does the opposite.
+`Js.Nullable.from_opt` converts from a `option` to `Js.Nullable.t`. `Js.Nullable.to_opt` does the opposite.
 
 **The `Option` helper module** is [here](https://bucklescript.github.io/bucklescript/api/Js.Option.html).
 
