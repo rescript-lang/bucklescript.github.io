@@ -2,7 +2,7 @@
 title: Use Existing OCaml Libraries
 ---
 
-**Note**: this section is reserved for advanced usages. Usually, you'd pick an OCaml/Reason library that's already configured to work with our higher-level build system `bsb` (aka has a `bsconfig.json`). If not, you'd usually add a `bsconfig.json` to it. But if you want to directly use an OCaml package that's not part of the npm workflow, or are building some quirky infra with BuckleScript, keep reading!
+> This section is reserved for advanced usages. Usually, you'd pick an OCaml/Reason library that's already configured to work with our higher-level build system `bsb` (aka has a `bsconfig.json`). If not, you'd usually add a `bsconfig.json` to it. But if you want to directly use an OCaml package that's not part of the npm workflow, or are building some quirky infra with BuckleScript, keep reading!
 
 This guide is also a small walkthrough of how `bsb` works under the hood.
 
@@ -11,6 +11,8 @@ This guide is also a small walkthrough of how `bsb` works under the hood.
 ### Build an OCaml Library as a NPM Package
 
 **Note**: this section might be slightly stale. If any of the steps aren't working, please file us an issue! Thanks.
+
+**We highly recommend** you try this endeavour on a dependency-less library first. It'd avoid lots of trouble.
 
 BuckleScript's compiler, `bsc`, extends the OCaml compiler options with several flags to provide a better experience for NPM users.
 
