@@ -118,7 +118,7 @@ This configuration only applies to you, when you develop the project. When the p
 
 ### suffix
 
-Either `".js"` or `".bs.js"`. Strongly [prefer the latter](build-overview.md#tips-tricks).
+Either `".js"` or `".bs.js"`. Strongly prefer the latter.
 
 #### Design Decisions
 
