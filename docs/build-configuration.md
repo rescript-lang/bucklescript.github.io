@@ -120,6 +120,15 @@ This configuration only applies to you, when you develop the project. When the p
 
 Either `".js"` or `".bs.js"`. Strongly [prefer the latter](build-overview.md#tips-tricks).
 
+#### Design Decisions
+
+Generating JS files with the `.bs.js` suffix means that, on the JS side, you can do `const myBuckleScriptFile = require('./theFile.bs')`. The benefits:
+
+- It's immediately clear that we're dealing with a generated JS file here.
+- It avoids clashes with a potential `theFile.js` file in the same folder.
+- It avoids the need of using a build system loader for BuckleScript files. This + in-source build means integrating a BuckleScript project into your pure JS codebase **basically doesn't touch anything in your build pipeline at all**.
+- The `.bs.js` suffix [lets bsb track JS artifacts much better](build-overview.md#tips-tricks).
+
 ### warnings
 
 Selectively turn on/off certain warnings and/or turn them into hard errors. Example:
