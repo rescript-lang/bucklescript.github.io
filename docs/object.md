@@ -293,7 +293,8 @@ stream.MAX_LENGTH;
 
 **Double check your JS output** to make sure your name mangling worked.
 
-If your key contains hyphens... you'll have to use the next method.
+**If your key contains hyphens**
+... you'll have to use the next method.
 
 <!-- TODO: playground link -->
 
@@ -307,7 +308,7 @@ When The two above modes of binding to objects fail, you can always fall back to
 
 - deals with objects with potentially arbitrary shapes
 - allows heterogeneous values
-- allows hyphen in object keys
+- **allows hyphen and other symbols in object keys**
 
 ```ocaml
 type t
