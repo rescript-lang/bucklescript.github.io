@@ -275,7 +275,9 @@ var config = {
 };
 ```
 
-### Invalid Field Names
+### Name mangling
+
+#### Invalid field names
 
 Sometimes, you might be binding to JavaScript object fields that start with capital letters or use reserved words. The latter is invalid and the former is reserved for module and variant names. To circumvent this, we support object label mangling/translation:
 
@@ -294,13 +296,31 @@ stream.MAX_LENGTH;
 **Double check your JS output** to make sure your name mangling worked.
 
 **If your key contains hyphens**
-... you'll have to use the next method.
+... you'll have to use it as a dynamic record.
 
-<!-- TODO: playground link -->
+#### Ad-hoc polymoprhism
+
+Another form of name mangling is also supported, where a double udnerscore (`__`) can be used add a disambiguating identifier which wil be removed in the generated JS.
+
+```ml
+f##draw__int 3 4
+f##draw__float 3.2 4.5
+```
+
+Output:
+
+```js
+f.draw(3, 4);
+f.draw(3.2, 4.5);
+```
+
+This can be useful in rare ciscumstances, but is generally not recommended since it produces non-idiomatic identifiers and is not very intuitive. Prefer instead to implement the object as a dynamic record, or define an abstract untagged union type to encapsualte values of either type before passing them to or from JavaScript.
 
 ### Js Object <-> OCaml Record conversion
 
 If you don't want to work with `Js.t` objects and want to use idiomatic OCaml/Reason records, we provide automatic generation of helpers that convert between a `Js.t` object and a corresponding record type. See the section on [Generate Converters & Helpers](generate-converters-accessors.md).
+
+<!-- TODO: playground link -->
 
 ## Object as Dynamic Record
 
