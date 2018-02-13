@@ -295,16 +295,22 @@ stream.MAX_LENGTH;
 
 **Double check your JS output** to make sure your name mangling worked.
 
-**If your key contains hyphens**
-... you'll have to use it as a dynamic record.
+**If your key contains hyphens**, you'll have to use it as a dynamic record, described later.
 
-#### Ad-hoc polymoprhism
+#### Ad-hoc Polymorphism
 
-Another form of name mangling is also supported, where a double udnerscore (`__`) can be used add a disambiguating identifier which wil be removed in the generated JS.
+Another form of name mangling is also supported, where a double underscore (`__`) can be used add a disambiguating identifier which will be removed in the generated JS.
 
-```ml
+```ocaml
 f##draw__int 3 4
 f##draw__float 3.2 4.5
+```
+
+Reason syntax:
+
+```reason
+f##draw__int(3, 4);
+f##draw__float(3.2, 4.5);
 ```
 
 Output:
@@ -314,7 +320,7 @@ f.draw(3, 4);
 f.draw(3.2, 4.5);
 ```
 
-This can be useful in rare ciscumstances, but is generally not recommended since it produces non-idiomatic identifiers and is not very intuitive. Prefer instead to implement the object as a dynamic record, or define an abstract untagged union type to encapsualte values of either type before passing them to or from JavaScript.
+This can be useful in rare circumstances, but is generally not recommended since it produces non-idiomatic identifiers and is not very intuitive. Prefer instead to implement the object as a dynamic record (described below), or define an abstract untagged union type to encapsulate values of either type before passing them to or from JavaScript.
 
 ### Js Object <-> OCaml Record conversion
 
