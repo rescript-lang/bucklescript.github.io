@@ -199,7 +199,8 @@ let<span class="hljs-built_in"> config </span>= makeIOConfig(~<span class="hljs-
   <span class="hljs-attr">detached</span>: <span class="hljs-literal">true</span>
 };
 </code></pre>
-<h3><a class="anchor" aria-hidden="true" name="invalid-field-names"></a><a href="#invalid-field-names" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Invalid Field Names</h3>
+<h3><a class="anchor" aria-hidden="true" name="name-mangling"></a><a href="#name-mangling" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Name mangling</h3>
+<h4><a class="anchor" aria-hidden="true" name="invalid-field-names"></a><a href="#invalid-field-names" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Invalid field names</h4>
 <p>Sometimes, you might be binding to JavaScript object fields that start with capital letters or use reserved words. The latter is invalid and the former is reserved for module and variant names. To circumvent this, we support object label mangling/translation:</p>
 <pre><code class="hljs css ocaml">stream##_open
 stream##_MAX_LENGTH
@@ -209,10 +210,20 @@ stream##_MAX_LENGTH
 stream.MAX_LENGTH;
 </code></pre>
 <p><strong>Double check your JS output</strong> to make sure your name mangling worked.</p>
-<p><strong>If your key contains hyphens</strong> ... you'll have to use the next method.</p>
-<!-- TODO: playground link -->
+<p><strong>If your key contains hyphens</strong> ... you'll have to use it as a dynamic record.</p>
+<h4><a class="anchor" aria-hidden="true" name="ad-hoc-polymoprhism"></a><a href="#ad-hoc-polymoprhism" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Ad-hoc polymoprhism</h4>
+<p>Another form of name mangling is also supported, where a double udnerscore (<code>__</code>) can be used add a disambiguating identifier which wil be removed in the generated JS.</p>
+<pre><code class="hljs css ml">f##draw__int <span class="hljs-number">3</span> <span class="hljs-number">4</span>
+f##draw__float <span class="hljs-number">3.2</span> <span class="hljs-number">4.5</span>
+</code></pre>
+<p>Output:</p>
+<pre><code class="hljs css js">f.draw(<span class="hljs-number">3</span>, <span class="hljs-number">4</span>);
+f.draw(<span class="hljs-number">3.2</span>, <span class="hljs-number">4.5</span>);
+</code></pre>
+<p>This can be useful in rare ciscumstances, but is generally not recommended since it produces non-idiomatic identifiers and is not very intuitive. Prefer instead to implement the object as a dynamic record, or define an abstract untagged union type to encapsualte values of either type before passing them to or from JavaScript.</p>
 <h3><a class="anchor" aria-hidden="true" name="js-object-ocaml-record-conversion"></a><a href="#js-object-ocaml-record-conversion" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Js Object &lt;-&gt; OCaml Record conversion</h3>
 <p>If you don't want to work with <code>Js.t</code> objects and want to use idiomatic OCaml/Reason records, we provide automatic generation of helpers that convert between a <code>Js.t</code> object and a corresponding record type. See the section on <a href="/docs/zh-TW/generate-converters-accessors.html">Generate Converters &amp; Helpers</a>.</p>
+<!-- TODO: playground link -->
 <h2><a class="anchor" aria-hidden="true" name="object-as-dynamic-record"></a><a href="#object-as-dynamic-record" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Object as Dynamic Record</h2>
 <p>When The two above modes of binding to objects fail, you can always fall back to this one. And sometimes this the <strong>preferable</strong> way of binding to objects, because it:</p>
 <ul>
