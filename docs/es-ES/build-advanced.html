@@ -18,11 +18,11 @@
 <p>Usted debe utilizar algunos pre-procesadores para generar códigos repetitivos durante el desarrollo.</p>
 <p><strong>Nota</strong>: pre-procesadores pueden ser clasificados en dos categorías:</p>
 <ul>
-<li>System-dependent, which should be delayed until running on user machines.</li>
-<li>System-independent: lex, yacc, m4, re2c, etc, which can be executed any time.</li>
+<li>Dependientes del sistema, que deben ser retrasados hasta correr en las máquinas de los usuarios.</li>
+<li>Independientes del sistema: lex, yacc, m4, re2c, etc, que pueden ser ejecutados en cualquier momento.</li>
 </ul>
-<p>BS has built in support for <a href="/docs/es-ES/conditional-compilation.html">conditional compilation</a>, which satisfies the first point. This section is about the second point.</p>
-<p>An example, where bsb uses <a href="http://caml.inria.fr/pub/docs/manual-ocaml-4.00/manual026.html">ocamlyacc</a>:</p>
+<p>BS ha construido un soporte para <a href="/docs/es-ES/conditional-compilation.html">la compilación condicional</a>, que satisface el primer punto. Esta sección es para el segundo punto.</p>
+<p>Un ejemplo, dónde bsb usa <a href="http://caml.inria.fr/pub/docs/manual-ocaml-4.00/manual026.html">ocamlyacc</a>:</p>
 <pre><code class="hljs css json">{
   <span class="hljs-attr">"generators"</span> : [
     {
@@ -41,14 +41,14 @@
   }
 }
 </code></pre>
-<p><code>ocamlyacc</code> will generate the artifacts <code>test.ml</code> and <code>test.mli</code> in the same directory than <code>test.mly</code>.</p>
-<p><strong>Note</strong>: we highly recommend you to check in the generated files, since this cuts out dependencies like <code>ocamlyacc</code> for the end-users.</p>
-<p>When developing a project, <code>bsb</code> will track the dependencies between <code>test.ml</code> and <code>test.mly</code> properly. When released as a package, <code>bsb</code> will cut such dependency, so that users will only need the generated <code>test.ml</code>. To help test such behavior in development mode, users could set it manually:</p>
+<p><code>ocamlyacc</code> generará los artefactos <code>test.ml</code> y <code>test.mli</code> en el mismo directorio que <code>test.mly</code>.</p>
+<p><strong>Nota</strong>: Recomendamos que revises en los archivos generados, ya que esto elimina las dependencias como <code>ocamlyacc</code> para los usuarios finales.</p>
+<p>Cuando se desarrolla un proyecto, <code>bsb</code> hará un seguimiento de las dependencias entre <code>test.ml</code> y <code>test.mly</code> correctamente. Cuando sea liberado como un paquete, <code>bsb</code> eliminará esta dependencia, para que así los usuarios sólo necesitarán el <code>test.ml</code> generado. Para ayudar en la prueba este comportamiento en el modo de desarrollo, los usuarios pueden establecerlo manualmente:</p>
 <pre><code class="hljs css json">{
   <span class="hljs-attr">"cut-generators"</span> : <span class="hljs-literal">true</span>
 }
 </code></pre>
-<p>This <em>prevents</em> <code>bsb</code> from regenerating <code>test.ml</code> whenever <code>test.mly</code> changes.</p>
+<p>Esto <em>previene</em> a <code>bsb</code> de regenerar <code>test.ml</code> cada vez que <code>test.mly</code> cambie.</p>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="build-performance.html">← Rendimiento</a><a class="docs-next button" href="stdlib-overview.html">Resumen →</a></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.js"></script><script>window.foo = new Pjax({
           areas: [
             // try to use the first query.
