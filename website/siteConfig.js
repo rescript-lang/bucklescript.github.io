@@ -71,6 +71,7 @@ const siteConfig = {
   headerLinks: [
     { doc: "installation", label: "Docs" },
     { doc: "playground", label: "Try"},
+    { doc: "stdlib-overview", label: "API" },
     { doc: "community", label: "Community" },
     { blog: true, label: "Blog" },
     { languages: true },
