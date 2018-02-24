@@ -10,11 +10,11 @@ title: Configuration
 
 `name` is the name of the library, used as its "namespace". You can activate namespacing through `"namespace": true` in your `bsconfig.json`. Namespacing is almost **mandatory**; we haven't turned it on by default yet to preserve backward-compatibility.
 
-Explanation: by default, your files, once used as a third-party dependency, are available globally to the consumer. If you have an e.g. `Util.re` and the consumer also has a file of the same name, things will clash. Turning on `namespace` avoids this by wrapping all your files into an extra module layer, so instead of a global `Util` module, the consumer will see you as `MyProject.Util`.
+**Explanation**: by default, your files, once used as a third-party dependency, are available globally to the consumer. E.g. if you have an `Util.re` and the consumer also has a file of the same name, they will clash. Turning on `namespace` avoids this by wrapping all your own project's files into an extra module layer; instead of a global `Util` module, the consumer will see you as `MyProject.Util`. **The namespacing affects your consumers, not yourself**.
 
 Aka, in Bsb, "namespace" is just a fancy term for an auto-generated module that wraps all your project's files (efficiently and correctly, of course!) for third-party consumption.
 
-Inside your own project, you don't have to reference your own namespace. We don't do folder-level namespacing, aka all your project's file names must be unique. This is a constraint that enables several features such as fast search and easier project reorganization.
+We don't do folder-level namespacing for your own project; all your own file names must be unique. This is a constraint that enables several features such as fast search and easier project reorganization.
 
 **Note**: the `bsconfig.json` `name` should be the same as the `package.json` `name`, to avoid confusing corner-cases. However, this means that you can't use a camelCased names such as `MyProject`, since `package.json` and npm forbid you to do so (some file systems are case-insensitive). To have the namespace/module as `MyProject`, write `"name": "my-project"`. Bsb will turn that into the camelCased name correctly.
 
