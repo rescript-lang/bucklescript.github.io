@@ -46,7 +46,7 @@ make install
 </code></pre>
 <p>The patched compiler is installed locally into <code>$(pwd)/bin</code>. To start using it temporarily, check if <code>ocamlc.opt</code> and <code>ocamlopt.opt</code> exist in <code>$(pwd)/bin,</code> and temporarily add the location to your <code>$(PATH)</code> (e.g. <code>PATH=$(pwd)/bin:$PATH</code>).</p>
 <p>Then, build BuckleScript itself:</p>
-<pre><code class="hljs css sh"><span class="hljs-built_in">cd</span> ../../jscomp
+<pre><code class="hljs css sh"><span class="hljs-built_in">cd</span> ../../
 make world
 </code></pre>
 <p>At the end, you should have a binary called <code>bsc.exe</code> under <code>jscomp/bin</code> directory, which you can add to your <code>$PATH</code>. You can also set an environment variable pointing to the standard library, e.g. <code>BSC_LIB=/path/to/jscomp/stdlib</code>, for ease of use.</p>

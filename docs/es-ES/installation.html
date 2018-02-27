@@ -49,7 +49,7 @@ make install
 </code></pre>
 <p>El compilador parcheado está instalado localmente en <code>$(pwd)/bin</code>. Para empezar a usarlo temporalmente, verifica si <code>ocamlc.opt</code> y <code>ocamlopt.opt</code> existen en <code>$(pwd)/bin,</code> y temporalmente añade la ubicación a tu <code>$(PATH)</code> (p.e. <code>PATH=$(pwd)/bin:$PATH</code>).</p>
 <p>Entonces, construye BuckleScript como tal:</p>
-<pre><code class="hljs css sh"><span class="hljs-built_in">cd</span> ../../jscomp
+<pre><code class="hljs css sh"><span class="hljs-built_in">cd</span> ../../
 make world
 </code></pre>
 <p>Al final deberías tener un binario llamado <code>bsc.exe</code> dentro del directorio <code>jscomp/bin</code>, que puedes añadirlo a tu <code>$PATH</code>. Además puedes establecer una variable de entorno señalando a la librería estándar, p.e. <code>BSC_LIB=/path/to/jscomp/stdlib</code>, para facilitar el uso.</p>
