@@ -32,7 +32,9 @@ To build a project, run:
 bsb -make-world
 ```
 
-Add `-w` to keep the built-in watcher running. Any new file change will be picked up and the build will re-run. **Note** that third-party libraries in `node_modules` aren't watched as it may exceed the node.js watcher count limit.
+Add `-w` to keep the built-in watcher running. Any new file change will be picked up and the build will re-run.
+
+**Note**: third-party libraries (in `node_modules`) aren't watched, as doing so may exceed the node.js watcher count limit. If you're doing quick and dirty modifications inside `node_modules`, you have to do `bsb -clean-world -make-world` to rebuild them.
 
 To build only yourself, use `bsb -make`.
 
