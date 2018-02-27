@@ -55,7 +55,7 @@ The patched compiler is installed locally into `$(pwd)/bin`. To start using it t
 Then, build BuckleScript itself:
 
 ```sh
-cd ../../jscomp
+cd ../../
 make world
 ```
 
