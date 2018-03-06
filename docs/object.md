@@ -14,7 +14,7 @@ Up until recently, where JS finally got proper Map support, objects have been us
 - might or might not add/remove arbitrary keys
 - might or might not be accessed using a dynamic/computed key
 
-If these points (especially the first one) describe your object usage, then look no further than using the [`Js.Dict`](https://bucklescript.github.io/bucklescript/api/Js.Dict.html) API! This is a thin layer of binding we've made for such situation. Under the hood, a `Js.Dict` is just an object, and the bindings are compiled away. No performance cost. Actually, **better** than no perf cost! See the Design Decisions below.
+If these points (especially the first one) describe your object usage, then look no further than using the [`Js.Dict`](https://bucklescript.github.io/bucklescript/api/Js.Dict.html) API! This is a thin wrapper we've made for such situation. Under the hood, a `Js.Dict` is just an object, and the whole API is erased after compilation. No performance cost. Actually, **better** than no perf cost! See the Design Decisions below.
 
 In this mode, you can do all the metaprogramming you're used to with JS objects: get all keys through `Js.Dict.keys`, get values through `Js.Dict.values`, etc.
 
@@ -279,7 +279,7 @@ var config = {
 
 #### Invalid field names
 
-Sometimes, you might be binding to JavaScript object fields that start with capital letters or use reserved words. The latter is invalid and the former is reserved for module and variant names. To circumvent this, we support object label mangling/translation:
+Sometimes, you might encounter JavaScript object fields that start with capital letters or use reserved words. The latter is invalid and the former is reserved for module and variant names. To circumvent this, we support object label mangling/translation:
 
 ```ocaml
 stream##_open
@@ -330,7 +330,7 @@ If you don't want to work with `Js.t` objects and want to use idiomatic OCaml/Re
 
 ## Object as Dynamic Record
 
-When The two above modes of binding to objects fail, you can always fall back to this one. And sometimes this the **preferable** way of binding to objects, because it:
+When The two above modes of talking to JS objects fail, you can always fall back to this one. And sometimes this the **preferable** way of talking to JS objects, because it:
 
 - deals with objects with potentially arbitrary shapes
 - allows heterogeneous values

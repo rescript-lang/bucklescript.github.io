@@ -55,7 +55,7 @@ var bookInstance = new Book();
 
 JS classes are really just JS objects wired up funnily. **In general**, prefer using the previous object section's features to bind to a JS object.
 
-OCaml having classes really helps with binding to JS classes. Just add a `[@bs]` to a class type to turn them into a `Js.t` class:
+OCaml having classes really helps with modeling JS classes. Just add a `[@bs]` to a class type to turn them into a `Js.t` class:
 
 ```ocaml
 class type _rect = object

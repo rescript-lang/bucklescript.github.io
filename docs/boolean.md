@@ -24,7 +24,7 @@ Reason syntax:
 [@bs.val] external isStudent : string => bool = "isStudent";
 ```
 
-_`bs.val` is a frequent annotation for binding to values. It'll be introduced in the next section._
+_`bs.val` is a frequent annotation for modeling values. It'll be introduced in the next section._
 
 You don't have to use `string -> Js.boolean` and then do an explicit conversion though `Js.to_bool` yourself!
 

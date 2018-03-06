@@ -4,7 +4,7 @@ title: Null, Undefined & Option
 
 OCaml itself doesn't have the notion of `null` or `undefined`. This is a _great_ thing, as it wipes out an entire category of bugs.
 
-BuckleScript provides bindings to `null` and `undefined` through [`Js.Nullable`](https://bucklescript.github.io/bucklescript/api/Js.Nullable.html), since it's pretty much required for JavaScript.
+BuckleScript provides access to `null` and `undefined` through [`Js.Nullable`](https://bucklescript.github.io/bucklescript/api/Js.Nullable.html), since it's pretty much required for JavaScript.
 
 ## Examples
 

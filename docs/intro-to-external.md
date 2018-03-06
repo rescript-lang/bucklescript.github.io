@@ -20,9 +20,9 @@ It's like a `let`, except that the body of an external is, as seen above, a stri
 
 Once declared, you can use an `external` as a normal value.
 
-BuckleScript `external`s are inlined into their callers during compilation and completely erased. In practice, when you e.g. bind to a JavaScript function on the BS side and use it, all trace of such binding disappear from the output.
+BuckleScript `external`s are turned into the expected JS values, inlined into their callers during compilation, **and completely erased afterward**. You won't see them in the JS output. It's as if you wrote the generated JS code by hand! No performance cost either, naturally.
 
-**Note**: do also use `external`s and the `[bs.blabla]` attributes in the interface files. Otherwise the inlining won't happen.
+**Note**: do also use `external`s and the `[@bs.blabla]` attributes in the interface files. Otherwise the inlining won't happen.
 
 ## Special Identity External
 
@@ -38,4 +38,4 @@ Reason syntax:
 external myShadyConversion : foo => bar = "%identity";
 ```
 
-This is a final escape hatch which does nothing but converting from the type `foo` to `bar`. In the following sections, if you ever fail to write a JS binding, you can fall back to use this one. But try not to.
+This is a final escape hatch which does nothing but converting from the type `foo` to `bar`. In the following sections, if you ever fail to write an `external`, you can fall back to using this one. But try not to.

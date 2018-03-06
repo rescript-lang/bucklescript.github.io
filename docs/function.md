@@ -2,7 +2,7 @@
 title: Function
 ---
 
-Binding to JS functions is like binding to a normal value:
+Modeling a JS function is like modeling a normal value:
 
 ```ocaml
 external encodeURI: string -> string = "encodeURI" [@@bs.val]
@@ -20,7 +20,7 @@ We also expose a few special features, described below.
 
 ## Labeled Arguments
 
-OCaml has labeled arguments (that are potentially optional). These work on an `external` too! You'd use them to _fix_ a JS function's unclear usage. Assuming we're binding to this:
+OCaml has labeled arguments (that are potentially optional). These work on an `external` too! You'd use them to _fix_ a JS function's unclear usage. Assuming we're modeling this:
 
 ```js
 function draw(x, y, border) {
@@ -131,7 +131,7 @@ Reason syntax:
 
 ## Variadic Function Arguments
 
-You might have JS functions that take an arbitrary amount of arguments. BuckleScript supports binding to those, under the condition that the arbitrary arguments part is homogenous (aka of the same type). If so, add `bs.splice` to your `external`.
+You might have JS functions that take an arbitrary amount of arguments. BuckleScript supports modeling those, under the condition that the arbitrary arguments part is homogenous (aka of the same type). If so, add `bs.splice` to your `external`.
 
 ```ocaml
 external join : string array -> string = "" [@@bs.module "path"] [@@bs.splice]
@@ -154,7 +154,7 @@ var v = Path.join("a","b");
 
 _`bs.module` will be explaned in the Import & Export section next_.
 
-## Binding to Polymorphic Function
+## Modeling Polymorphic Function
 
 Apart from the above special-case, JS function in general are often arbitrary overloaded in terms of argument types and number. How would you bind to those?
 
@@ -497,7 +497,7 @@ This is an uncurried bucklescript function. It must be applied with [@bs].
 
 The above solution is safe, guaranteed, and performant, but sometimes visually a little burdensome. We provide an alternative solution if:
 
-- you're binding with `external`
+- you're using `external`
 - the `external` function takes in an argument that's another function
 - you want the user not to need to annotate the call sites with `[@bs]`
 
@@ -552,7 +552,7 @@ In general, `bs.uncurry` is recommended; the compiler will do lots of optimizati
 
 This means `[@bs]` are completely static behavior (no runtime cost), while `[@bs.uncurry]` is more convenient for end users but, in some rare cases, might be slower than `[@bs]`.
 
-## Binding to `this`-based Callbacks
+## Modeling `this`-based Callbacks
 
 Many JS libraries have callbacks which rely on this (the source), for example:
 

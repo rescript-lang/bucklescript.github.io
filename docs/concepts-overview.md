@@ -18,14 +18,12 @@ An alternative syntax for OCaml that's more familiar to JS programmers and reduc
 
 This is OCaml's official package manager. Since BuckleScript uses NPM and Yarn, you won't need OPAM as a beginner. We will mention it for advanced workflows.
 
-## Binding/External/Interop/FFI
+## External/Interop/FFI
 
 These are all jargon for working with BuckleScript <-> JavaScript.
 
-Binding: make a JavaScript value available to BuckleScript. "I bound to this JavaScript value", "I wrote bindings to this JS library" (aka I wrapped the JS library to expose a more idiomatic BuckleScript API), etc.
-
-External: in the context of BuckleScript, this is one of the primary feature for binding to a JS value.
+External: in the context of BuckleScript, one of the primary ways to use a JS value.
 
 Interop: short for "interoperability".
 
-FFI: Foreign Function Interface. The general term for things like "external", "interop" and "binding". Basically means calling a value from the other language.
+FFI: Foreign Function Interface. The general term for things like "external", "wrapper" and "interop". Basically means calling a value from the other language. Prefer the first two terms.

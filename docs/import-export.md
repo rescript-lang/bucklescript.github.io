@@ -120,7 +120,7 @@ console.log(Student.default);
 
 ### Tips & Tricks
 
-When the name you're using on the BS side matches the JS value you're binding to, you can use the empty string shorthand:
+When the name you're using on the BS side matches the name of the JS value, you can use the empty string shorthand:
 
 ```ocaml
 external dirname: string -> string = "" [@@bs.module "path"]

@@ -10,7 +10,7 @@ This means that if you receive e.g. a string from the JS side, you can use it **
 
 P.S. if you need an overview of the language primitives themselves, see [the Reason docs](https://reasonml.github.io/docs/en/overview.html).
 
-**BuckleScript uses the same standard library as OCaml**; see the docs [here](https://reasonml.github.io/api/) (in Reason syntax). **Additionally**, we provide the bindings to all the familiar JS primitives [here](https://bucklescript.github.io/bucklescript/api/Js). You can mix and match these two.
+**BuckleScript uses the same standard library as OCaml**; see the docs [here](https://reasonml.github.io/api/) (in Reason syntax). **Additionally**, we provide access to all the familiar JS primitives [here](https://bucklescript.github.io/bucklescript/api/Js). You can mix and match these two.
 
 ### String
 
