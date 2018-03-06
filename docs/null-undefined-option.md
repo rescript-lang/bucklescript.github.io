@@ -50,14 +50,14 @@ In an external, you can directly convert a `Js.Nullable.t` into an `option` thro
 
 ```ocaml
 type element
-external getElementById : string -> element option = "getElementById" [@@bs.scope "document"][@@bs.return nullable]
+external getElementById : string -> element option = "getElementById" [@@bs.val][@@bs.scope "document"][@@bs.return nullable]
 ```
 
 Reason syntax:
 
 ```reason
 type element;
-[@bs.return nullable] [@bs.scope "document"] external getElementById : string => option(element) = "getElementById";
+[@bs.val] [@bs.return nullable] [@bs.scope "document"] external getElementById : string => option(element) = "getElementById";
 ```
 
 When you use `getElementById`, it'll implicitly convert the JS nullable string into an option. Saves you an explicit conversion through `Js.Nullable.to_opt`.
