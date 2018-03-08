@@ -26,7 +26,7 @@ bsb -themes
 
 The build description file is called `bsconfig.json`. Every BuckleScript project needs one.
 
-To build a project, run:
+**To build a project**, run:
 
 ```sh
 bsb -make-world
@@ -36,7 +36,7 @@ Add `-w` to keep the built-in watcher running. Any new file change will be picke
 
 **Note**: third-party libraries (in `node_modules`) aren't watched, as doing so may exceed the node.js watcher count limit. If you're doing quick and dirty modifications inside `node_modules`, you have to do `bsb -clean-world -make-world` to rebuild them.
 
-To build only yourself, use `bsb -make`.
+**To build only yourself**, use `bsb -make`.
 
 `bsb -help` to see all the available options.
 
