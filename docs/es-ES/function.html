@@ -36,7 +36,7 @@ draw(<span class="hljs-number">20</span>, <span class="hljs-number">20</span>, <
 <span class="hljs-keyword">let</span> _ = draw ~x:<span class="hljs-number">10</span> ~y:<span class="hljs-number">20</span> <span class="hljs-literal">()</span>
 </code></pre>
 <p>Sintaxis de Reason:</p>
-<pre><code class="hljs css reason">[@bs.val] external draw: (~x:int, ~y:int, ~border:Js.<span class="hljs-attribute">boolean</span>=?, unit) =&gt; unit = <span class="hljs-string">""</span>;
+<pre><code class="hljs css reason">[@bs.val] external draw : (~x: int, ~y: int, ~border: Js.<span class="hljs-attribute">boolean</span>=?, unit) =&gt; unit = <span class="hljs-string">""</span>;
 
 draw(~<span class="hljs-attribute">x</span>=10, ~<span class="hljs-attribute">y</span>=20, ~<span class="hljs-attribute">border</span>=Js.true_, ());
 draw(~<span class="hljs-attribute">x</span>=10, ~<span class="hljs-attribute">y</span>=20, ());
@@ -83,9 +83,9 @@ draw(<span class="hljs-number">10</span>, <span class="hljs-number">20</span>, <
 [@bs.send.pipe : <span class="hljs-built_in">array</span>(<span class="hljs-symbol">'a</span>)]
 <span class="hljs-keyword">external</span> forEach : (<span class="hljs-symbol">'a</span> =&gt; <span class="hljs-built_in">unit</span>) =&gt; <span class="hljs-built_in">array</span>(<span class="hljs-symbol">'a</span>) = <span class="hljs-string">""</span>;
 
-[|<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>|]
-|&gt; map((x) =&gt; x + <span class="hljs-number">1</span>)
-|&gt; forEach((x) =&gt; <span class="hljs-type">Js</span>.log(x));
+[|(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)|]
+|&gt; map(x =&gt; x + <span class="hljs-number">1</span>)
+|&gt; forEach(x =&gt; <span class="hljs-type">Js</span>.log(x));
 </code></pre>
 <p>La carga a <code>bs.send.pipe</code> es lo que previamente habías puesto como el primer argumento de <code>bs.send</code>. Así que la manera non-bs-send-pipe de escribirlo hubiera sido:</p>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">external</span> map : <span class="hljs-symbol">'a</span> <span class="hljs-built_in">array</span> -&gt; (<span class="hljs-symbol">'a</span> -&gt; <span class="hljs-symbol">'b</span>) -&gt; <span class="hljs-symbol">'b</span> <span class="hljs-built_in">array</span> = <span class="hljs-string">""</span> [@@bs.send]
@@ -104,7 +104,7 @@ draw(<span class="hljs-number">10</span>, <span class="hljs-number">20</span>, <
 </code></pre>
 <p>Salida:</p>
 <pre><code class="hljs css js"><span class="hljs-keyword">var</span> Path = <span class="hljs-built_in">require</span>(<span class="hljs-string">"path"</span>);
-<span class="hljs-keyword">var</span> v = Path.join(<span class="hljs-string">"a"</span>,<span class="hljs-string">"b"</span>);
+<span class="hljs-keyword">var</span> v = Path.join(<span class="hljs-string">"a"</span>, <span class="hljs-string">"b"</span>);
 </code></pre>
 <p><em><code>bs.module</code> será explicada en la sección siguiente de Importación &amp; Exportación</em>.</p>
 <h2><a class="anchor" aria-hidden="true" name="modeling-polymorphic-function"></a><a href="#modeling-polymorphic-function" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Modeling Polymorphic Function</h2>
@@ -277,12 +277,12 @@ let register = <span class="hljs-function"><span class="hljs-params">(rl)</span>
 <p>Sintaxis de Reason:</p>
 <pre><code class="hljs css reason">[@bs.<span class="hljs-keyword">val</span>]
 <span class="hljs-keyword">external</span> process_on_exit : (
-  [@bs.<span class="hljs-keyword">as</span> <span class="hljs-string">"salida"</span>] _,
+  [@bs.<span class="hljs-keyword">as</span> <span class="hljs-string">"exit"</span>] _,
   <span class="hljs-built_in">int</span> =&gt; <span class="hljs-built_in">unit</span>
 ) =&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">"process.on"</span>;
 
-<span class="hljs-keyword">let</span> <span class="hljs-literal">()</span> = process_on_exit((exit_code) =&gt;
-  <span class="hljs-type">Js</span>.log(<span class="hljs-string">"codigo de error: "</span> ++ string_of_int(exit_code))
+<span class="hljs-keyword">let</span> <span class="hljs-literal">()</span> = process_on_exit(exit_code =&gt;
+  <span class="hljs-type">Js</span>.log(<span class="hljs-string">"error code: "</span> ++ string_of_int(exit_code))
 );
 </code></pre>
 <p>Salida:</p>
@@ -325,69 +325,73 @@ let register = <span class="hljs-function"><span class="hljs-params">(rl)</span>
 <p>BS intenta hacer la #1 lo más que puede. Incluso cuando falla y usa el mecanismo de curry #2, no es peligroso usualmente.</p>
 <p><strong>Sin embargo</strong>, si tu encuentras el #3, el tanteo no es lo suficientemente bueno: necesitas un camino garantizado de completamente aplicar una función, sin pasos intermediarios de curry. Nosotros proveemos esta garantía mediante el uso de la anotación &quot;para quitar el curry&quot; <code>[@bs]</code> en una declaración de función &amp; sitio de llamada.</p>
 <h3><a class="anchor" aria-hidden="true" name="solucion-garantia-para-quitar-el-curry"></a><a href="#solucion-garantia-para-quitar-el-curry" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Solución: Garantía para quitar el Curry</h3>
-<p>Si anotas una firma de la declaración de la función en un <code>external</code> o un simple <code>let</code> con un <code>[@bs]</code>, conviertes esa función en una similar a la que se le puede quitar el curry:</p>
+<p>If you annotate a function declaration signature on an <code>external</code> or <code>let</code> with a <code>[@bs]</code> (or, in Reason syntax, annotate the start of the parameters with a dot), you'll turn that function into an similar-looking one that's guaranteed to be uncurried:</p>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">type</span> timerId
 <span class="hljs-keyword">external</span> setTimeout : (<span class="hljs-built_in">unit</span> -&gt; <span class="hljs-built_in">unit</span> [@bs]) -&gt; <span class="hljs-built_in">int</span> -&gt; timerId = <span class="hljs-string">"setTimeout"</span> [@@bs.<span class="hljs-keyword">val</span>]
 
 <span class="hljs-keyword">let</span> id = setTimeout (<span class="hljs-keyword">fun</span> [@bs] <span class="hljs-literal">()</span> -&gt; <span class="hljs-type">Js</span>.log <span class="hljs-string">"hola"</span>) <span class="hljs-number">1000</span>
 </code></pre>
 <p>Sintaxis de Reason:</p>
-<pre><code class="hljs css reason"><span class="hljs-built_in">type</span> timerId;
-[@bs.val] external setTimeout : <span class="hljs-function"><span class="hljs-params">([@bs] (unit =&gt; unit), int)</span> =&gt;</span> timerId = <span class="hljs-string">"setTimeout"</span>;
+<pre><code class="hljs css reason"><span class="hljs-keyword">type</span> timerId;
+[@bs.<span class="hljs-keyword">val</span>] <span class="hljs-keyword">external</span> setTimeout : ((. <span class="hljs-built_in">unit</span>) =&gt; <span class="hljs-built_in">unit</span>, <span class="hljs-built_in">int</span>) =&gt; timerId = <span class="hljs-string">"setTimeout"</span>;
 
-let id = setTimeout([@bs] (<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> Js.log(<span class="hljs-string">"hola"</span>)), <span class="hljs-number">1000</span>);
+<span class="hljs-keyword">let</span> id = setTimeout((.) =&gt; <span class="hljs-type">Js</span>.log(<span class="hljs-string">"hello"</span>), <span class="hljs-number">1000</span>);
 </code></pre>
-<p><strong>Nota</strong>: tanto el sitio de declaración y el sitio de llamada necesitan tener la anotación <code>[@bs]</code>.</p>
+<p><strong>Note</strong>: both the declaration site and the call site need to have the uncurry annotation. That's part of the guarantee/requirement.</p>
 <p>Cuando tratas de hacer curry a esa función, obtendrás un error del tipo:</p>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">let</span> add = <span class="hljs-keyword">fun</span> [@bs] x y z -&gt; x + y + z
 <span class="hljs-keyword">let</span> addFiveOops = add <span class="hljs-number">5</span>
 </code></pre>
 <p>Sintaxis de Reason:</p>
-<pre><code class="hljs css reason">let <span class="hljs-keyword">add</span><span class="bash"> = [@bs] ((x, y, z) =&gt; x + y + z);
+<pre><code class="hljs css reason">let <span class="hljs-keyword">add</span><span class="bash"> = (. x, y, z) =&gt; x + y + z;
 </span>let addFiveOops = <span class="hljs-keyword">add</span><span class="bash">(5);
 </span></code></pre>
+<p>Error:</p>
 <pre><code class="hljs">Esta es una función de BuckleScript sin curry. Debe ser aplicada con [@bs].
 </code></pre>
 <h4><a class="anchor" aria-hidden="true" name="solucion-extra"></a><a href="#solucion-extra" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Solución Extra</h4>
-<p>La solución anterior es segura, garantizada, y eficiente, pero a veces es un poco cargada visualmente. Te damos una solución alterna si:</p>
+<p>The above solution is safe, guaranteed, and performant, but sometimes visually a little burdensome. We provide an alternative solution if:</p>
 <ul>
 <li>you're using <code>external</code></li>
 <li>la función <code>external</code> toma un argumento que es otra función</li>
-<li>quieres que el usuario no tenga la necesidad de anotar los sitios de llamada con <code>[@bs]</code></li>
+<li>you want the user <strong>not</strong> to need to annotate the call sites with <code>[@bs]</code> or the dot in Reason</li>
 </ul>
 <!-- TODO: is this up-to-date info? -->
-<p>Entonces intenta con <code>[@bs.uncurry</code>]:</p>
+<p>Then try <code>[@bs.uncurry]</code>:</p>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">external</span> map : <span class="hljs-symbol">'a</span> <span class="hljs-built_in">array</span> -&gt; (<span class="hljs-symbol">'a</span> -&gt; <span class="hljs-symbol">'b</span> [@bs.uncurry]) -&gt; <span class="hljs-symbol">'b</span> <span class="hljs-built_in">array</span> = <span class="hljs-string">""</span> [@@bs.send]
 <span class="hljs-keyword">let</span> _ = map [|<span class="hljs-number">1</span>; <span class="hljs-number">2</span>; <span class="hljs-number">3</span>|] (<span class="hljs-keyword">fun</span> x -&gt; x+ <span class="hljs-number">1</span>)
 </code></pre>
-<p>Sintaxis de Reason:</p>
+<p>Reason syntax:</p>
 <pre><code class="hljs css reason">[@bs.send] <span class="hljs-keyword">external</span> map : (<span class="hljs-built_in">array</span>(<span class="hljs-symbol">'a</span>), [@bs.uncurry] (<span class="hljs-symbol">'a</span> =&gt; <span class="hljs-symbol">'b</span>)) =&gt; <span class="hljs-built_in">array</span>(<span class="hljs-symbol">'b</span>) = <span class="hljs-string">""</span>;
-map([|<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>|], (x) =&gt; x + <span class="hljs-number">1</span>);
+map([|<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>|], x =&gt; x + <span class="hljs-number">1</span>);
 </code></pre>
 <h4><a class="anchor" aria-hidden="true" name="excepciones"></a><a href="#excepciones" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Excepciones</h4>
-<p>Si intentas hacer esto:</p>
+<p>If you try to do this:</p>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">let</span> id : (<span class="hljs-symbol">'a</span> -&gt; <span class="hljs-symbol">'a</span> [@bs]) = ((<span class="hljs-keyword">fun</span> v -&gt; v) [@bs])
 </code></pre>
-<p>Sintaxis de Reason:</p>
-<pre><code class="hljs css reason">let id: [@bs] (<span class="hljs-string">'a =&gt; '</span>a) = [@bs] (<span class="hljs-function"><span class="hljs-params">(v)</span> =&gt;</span> v);
+<p>Reason syntax:</p>
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> id: (. <span class="hljs-symbol">'a</span>) =&gt; <span class="hljs-symbol">'a</span> = (. v) =&gt; v;
 </code></pre>
-<p>Obtendrás este mensaje de error críptico:</p>
+<p>You’ll get this cryptic error message:</p>
 <pre><code class="hljs">Error: este tipo de expresión, ('_a -&gt; '_a [@bs]),       contiene tipos de variables que no pueden ser generalizados
 </code></pre>
-<p>El problema aquí no es que la función sea polimórfica. Puedes usar las funciones polimórficas sin curry como retornos de llamada en línea, pero no puedes exportarlos (y los <code>let</code>s están expuestos por defecto a menos que los escondas en un archivo de interfaz). El problema aquí es una combinación de una llamada sin curry, poliformismo y exportar una función. Es una limitación desadortunada de como el tipo de sistema OCaml incorpora efectos secundarios, y de como BS maneja quitar el curry.</p>
-<p>La soluciones más simples en la mayoría de los casos es simplemente no exportarlo, mediante la adición de un módulo de interfaz. Alternativamente, si tu realmente necesitas exportarlo, puedes hacerlo en su forma sin curry, y luego envolverlo en un lambda sin curry en el sitio de llamada. P.e.:</p>
-<pre><code class="hljs css ocaml">lat _ = map (<span class="hljs-keyword">fun</span> v -&gt; id v [@bs])
+<p>The issue here isn’t that the function is polymorphic. You can use polymorphic uncurried functions as inline callbacks, but you can’t export them (and <code>let</code>s are exposed by default unless you hide it with an interface file). The issue here is a combination of the uncurried call, polymorphism and exporting the function. It’s an unfortunate limitation of how OCaml’s type system incorporates side-effects, and how BS handles uncurrying.</p>
+<p>The simplest solution is in most cases to just not export it, by adding an interface to the module. Alternatively, if you really need to export it, you can do so in its curried form, and then wrap it in an uncurried lambda at the call site. E.g.:</p>
+<pre><code class="hljs css ocaml"><span class="hljs-keyword">let</span> _ = map (<span class="hljs-keyword">fun</span> v -&gt; id v [@bs])
+</code></pre>
+<p>Reason syntax:</p>
+<pre><code class="hljs css reason">map(<span class="hljs-name">v</span> =&gt; id(. v))<span class="hljs-comment">;</span>
 </code></pre>
 <h5><a class="anchor" aria-hidden="true" name="decisiones-de-diseno"></a><a href="#decisiones-de-diseno" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Decisiones de Diseño</h5>
-<p>En general, es recomendado usar <code>bs.uncurry</code>: el compilador hará muchas optimizaciones para resolver el hacer y deshacer del curry durante la compilación. Sin embargo, hay algunos casos donde el compilador no puede optimizarlo. En estos casos, se convertirá en una chequeo en el tiempo de ejecución.</p>
-<p>Esto significa que los <code>[@bs]</code> son de comportamiento completamente estático (sin costos en el tiempo de ejecución), mientras que <code>[@bs.uncurry]</code> es más conveniente para usuarios finales pero, en algunos casos singulares, puede ser más lento que <code>[@bs]</code>.</p>
+<p>In general, <code>bs.uncurry</code> is recommended; the compiler will do lots of optimizations to resolve the currying to uncurrying at compile time. However, there are some cases the compiler can't optimize it. In these case, it will be converted to a runtime check.</p>
+<p>This means <code>[@bs]</code> are completely static behavior (no runtime cost), while <code>[@bs.uncurry]</code> is more convenient for end users but, in some rare cases, might be slower than <code>[@bs]</code>.</p>
 <h2><a class="anchor" aria-hidden="true" name="modeling-this-based-callbacks"></a><a href="#modeling-this-based-callbacks" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Modeling <code>this</code>-based Callbacks</h2>
-<p>Muchas librerías JS tienen retornos de llamada que se basan en esto (el origen), por ejemplo:</p>
+<p>Many JS libraries have callbacks which rely on this (the source), for example:</p>
 <pre><code class="hljs css js">x.onload = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">v</span>) </span>{
   <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>.response + v)
 }
 </code></pre>
-<p>Aquí, <code>this</code> apuntaría a <code>x</code> (en verdad, esto depende de como sea llamado <code>onload</code>, pero nosotros divagamos). No es correcto declarar <code>x.onload</code> del tipo <code>unit → unit [@bs]</code>. En vez de esto, nosotros introducimos un atributo especial, <code>bs.this</code>, que nos permite escribir <code>x</code> como:</p>
+<p>Here, <code>this</code> would point to <code>x</code> (actually, it depends on how <code>onload</code> is called, but we digress). It's not correct to declare <code>x.onload</code> of type <code>unit → unit [@bs]</code>. Instead, we introduced a special attribute, <code>bs.this</code>, which allows us to type <code>x</code> as so:</p>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">type</span> x
 <span class="hljs-keyword">external</span> x: x = <span class="hljs-string">""</span> [@@bs.<span class="hljs-keyword">val</span>]
 <span class="hljs-keyword">external</span> set_onload : x -&gt; (x -&gt; <span class="hljs-built_in">int</span> -&gt; <span class="hljs-built_in">unit</span> [@bs.this]) -&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">"onload"</span> [@@bs.set]
@@ -398,7 +402,7 @@ map([|<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <s
     <span class="hljs-type">Js</span>.log(resp o + v )
   <span class="hljs-keyword">end</span>
 </code></pre>
-<p>Sintaxis de Reason:</p>
+<p>Reason syntax:</p>
 <pre><code class="hljs css reason">type x;
 [<span class="hljs-meta">@bs</span>.val] <span class="hljs-keyword">external</span> x : x = <span class="hljs-string">""</span>;
 [<span class="hljs-meta">@bs</span>.<span class="hljs-keyword">set</span>] <span class="hljs-keyword">external</span> set_onload : (x, [<span class="hljs-meta">@bs</span>.<span class="hljs-keyword">this</span>] ((x, <span class="hljs-built_in">int</span>) =&gt; unit)) =&gt; unit = <span class="hljs-string">"onload"</span>;
@@ -406,14 +410,14 @@ map([|<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <s
 
 set_onload(x, [<span class="hljs-meta">@bs</span>.<span class="hljs-keyword">this</span>] ((o, v) =&gt; Js.log(resp(o) + v)));
 </code></pre>
-<p>Salida:</p>
+<p>Output:</p>
 <pre><code class="hljs css js">x.onload = (<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">v</span>) </span>{
     <span class="hljs-keyword">var</span> o = <span class="hljs-keyword">this</span>;
     <span class="hljs-built_in">console</span>.log(o.response + v | <span class="hljs-number">0</span>);
     <span class="hljs-keyword">return</span> <span class="hljs-comment">/* () */</span><span class="hljs-number">0</span>;
   });
 </code></pre>
-<p><code>bs.this</code> es lo mismo que <code>bs</code>, excepto que el primer parámetro está reservado para <code>this</code> y para una aridad de 0, no hay necesidad de un tipo redundante de <code>unit</code>.</p>
+<p><code>bs.this</code> is the same as <code>bs</code>, except that its first parameter is reserved for <code>this</code> and for arity of 0, there is no need for a redundant <code>unit</code> type.</p>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="class.html">← Clase</a><a class="docs-next button" href="import-export.html">Importar y Exportar →</a></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.js"></script><script>window.foo = new Pjax({
           areas: [
             // try to use the first query.
