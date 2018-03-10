@@ -42,7 +42,7 @@ let _ = draw ~x:10 ~y:20 ()
 Reason syntax:
 
 ```reason
-[@bs.val] external draw: (~x:int, ~y:int, ~border:Js.boolean=?, unit) => unit = "";
+[@bs.val] external draw : (~x: int, ~y: int, ~border: Js.boolean=?, unit) => unit = "";
 
 draw(~x=10, ~y=20, ~border=Js.true_, ());
 draw(~x=10, ~y=20, ());
@@ -112,9 +112,9 @@ external map : ('a => 'b) => array('b) = "";
 [@bs.send.pipe : array('a)]
 external forEach : ('a => unit) => array('a) = "";
 
-[|1, 2, 3|]
-|> map((x) => x + 1)
-|> forEach((x) => Js.log(x));
+[|(1, 2, 3)|]
+|> map(x => x + 1)
+|> forEach(x => Js.log(x));
 ```
 
 The payload to `bs.send.pipe` is what you'd previously have put as the first argument of `bs.send`. So the non-bs-send-pipe way of writing it would have been:
@@ -149,7 +149,7 @@ Output:
 
 ```js
 var Path = require("path");
-var v = Path.join("a","b");
+var v = Path.join("a", "b");
 ```
 
 _`bs.module` will be explaned in the Import & Export section next_.
@@ -385,7 +385,7 @@ external process_on_exit : (
   int => unit
 ) => unit = "process.on";
 
-let () = process_on_exit((exit_code) =>
+let () = process_on_exit(exit_code =>
   Js.log("error code: " ++ string_of_int(exit_code))
 );
 ```
@@ -455,7 +455,7 @@ BS tries to do #1 as much as it can. Even when it bails and uses #2's currying m
 
 ### Solution: Guaranteed Uncurrying
 
-If you annotate a function declaration signature on an `external` or simple `let` with a `[@bs]`, you turn that function into an similar-looking one that's uncurry-able:
+If you annotate a function declaration signature on an `external` or `let` with a `[@bs]` (or, in Reason syntax, annotate the start of the parameters with a dot), you'll turn that function into an similar-looking one that's guaranteed to be uncurried:
 
 ```ocaml
 type timerId
@@ -468,12 +468,12 @@ Reason syntax:
 
 ```reason
 type timerId;
-[@bs.val] external setTimeout : ([@bs] (unit => unit), int) => timerId = "setTimeout";
+[@bs.val] external setTimeout : ((. unit) => unit, int) => timerId = "setTimeout";
 
-let id = setTimeout([@bs] (() => Js.log("hello")), 1000);
+let id = setTimeout((.) => Js.log("hello"), 1000);
 ```
 
-**Note**: both the declaration site and the call site need to have the `[@bs]` annotation.
+**Note**: both the declaration site and the call site need to have the uncurry annotation. That's part of the guarantee/requirement.
 
 When you try to curry such a function, you'll get a type error:
 
@@ -485,9 +485,11 @@ let addFiveOops = add 5
 Reason syntax:
 
 ```reason
-let add = [@bs] ((x, y, z) => x + y + z);
+let add = (. x, y, z) => x + y + z;
 let addFiveOops = add(5);
 ```
+
+Error:
 
 ```
 This is an uncurried bucklescript function. It must be applied with [@bs].
@@ -499,7 +501,7 @@ The above solution is safe, guaranteed, and performant, but sometimes visually a
 
 - you're using `external`
 - the `external` function takes in an argument that's another function
-- you want the user not to need to annotate the call sites with `[@bs]`
+- you want the user **not** to need to annotate the call sites with `[@bs]` or the dot in Reason
 
 <!-- TODO: is this up-to-date info? -->
 
@@ -514,7 +516,7 @@ Reason syntax:
 
 ```reason
 [@bs.send] external map : (array('a), [@bs.uncurry] ('a => 'b)) => array('b) = "";
-map([|1, 2, 3|], (x) => x + 1);
+map([|1, 2, 3|], x => x + 1);
 ```
 
 #### Pitfall
@@ -528,7 +530,7 @@ let id : ('a -> 'a [@bs]) = ((fun v -> v) [@bs])
 Reason syntax:
 
 ```reason
-let id: [@bs] ('a => 'a) = [@bs] ((v) => v);
+let id: (. 'a) => 'a = (. v) => v;
 ```
 
 You’ll get this cryptic error message:
@@ -543,7 +545,13 @@ The issue here isn’t that the function is polymorphic. You can use polymorphic
 The simplest solution is in most cases to just not export it, by adding an interface to the module. Alternatively, if you really need to export it, you can do so in its curried form, and then wrap it in an uncurried lambda at the call site. E.g.:
 
 ```ocaml
-lat _ = map (fun v -> id v [@bs])
+let _ = map (fun v -> id v [@bs])
+```
+
+Reason syntax:
+
+```reason
+map(v => id(. v));
 ```
 
 ##### Design Decisions
