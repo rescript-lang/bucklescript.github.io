@@ -131,11 +131,11 @@ john##say(<span class="hljs-string">"hey"</span>, <span class="hljs-string">"jud
 <p><strong>Nota</strong>:no hay syntax azucar para crear un objeto vacio en OCaml ni razon (aka esto no trabaja:<code>(@bs.obj)</code>. Por favor utilice<code>js.Obj.vacio()</code>para ese proposito.</p>
 <p>El objeto creado tendrá un tipo inferido, ¡no se necesita declarar su tipo! El ejemplo anterior se inferirá como <code>&lt; info: &lt; author: string &gt; Js.t &gt; Js.t</code>. Sintaxis de Reason: <code>{. &quot;información&quot;: {. &quot;author&quot;: string}}</code>.</p>
 <p><strong>Nota</strong>: puesto que el valor tiene su tipo inferido, <strong>no</strong>accidentalmente hace esto:</p>
-<pre><code class="hljs css ocaml"><span class="hljs-keyword">type</span> person = &lt;age: <span class="hljs-built_in">string</span>&gt; <span class="hljs-type">Js</span>.t
+<pre><code class="hljs css ocaml"><span class="hljs-keyword">type</span> person = &lt;age: <span class="hljs-built_in">int</span>&gt; <span class="hljs-type">Js</span>.t
 <span class="hljs-keyword">let</span> jane = [%bs.obj {age = <span class="hljs-string">"hi"</span>}]
 </code></pre>
 <p>Sintaxis de razon:</p>
-<pre><code class="hljs css reason"><span class="hljs-attribute">type person</span> = {. <span class="hljs-string">"age"</span>: string};
+<pre><code class="hljs css reason"><span class="hljs-attribute">type person</span> = {. <span class="hljs-string">"age"</span>: int};
 <span class="hljs-attribute">let jane</span> = {<span class="hljs-string">"age"</span>: <span class="hljs-string">"hi"</span>};
 </code></pre>
 <p>¿ver que salio mal aqui? Hemos declarado un tipo <code>persona</code>, pero<code>jane</code>se infiere como su propio tipo de<code>persona</code>es ignorado y no sucede error! Para dar <code>jane</code>un tipo explicito, sinplemente anote:<code>dejar que jane: persona=...</code>. Esto sera un error correctamente.</p>
