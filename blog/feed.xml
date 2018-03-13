@@ -4,7 +4,7 @@
         <title>BuckleScript Blog</title>
         <link>https://bucklescript.github.io/blog</link>
         <description>The best place to stay up-to-date with the latest BuckleScript news and events.</description>
-        <lastBuildDate>Fri, 01 Dec 2017 06:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 13 Mar 2018 06:00:00 GMT</lastBuildDate>
         <docs>http://blogs.law.harvard.edu/tech/rss</docs>
         <generator>Feed for Node.js</generator>
         <image>
@@ -12,6 +12,15 @@
             <url>https://bucklescript.github.ioimg/logos/bucklescript_small.svg</url>
             <link>https://bucklescript.github.io/blog</link>
         </image>
+        <item>
+            <title><![CDATA[A Small Step for BuckleScript...]]></title>
+            <link>https://bucklescript.github.io/blog/2018/03/13/a-small-step-for-bucklescript.html</link>
+            <guid>https://bucklescript.github.io/blog/2018/03/13/a-small-step-for-bucklescript.html</guid>
+            <pubDate>Tue, 13 Mar 2018 06:00:00 GMT</pubDate>
+            <description><![CDATA[...and a big one for the community!
+
+BuckleScript is a compiler, a set of type system enhancements, a build system and a great deal of JavaScript interoperability features rolled into one. From day one, its goal has been to provide a rock solid, ligh]]></description>
+        </item>
         <item>
             <title><![CDATA[New Documentation Site!]]></title>
             <link>https://bucklescript.github.io/blog/2017/12/01/new-doc-site.html</link>
