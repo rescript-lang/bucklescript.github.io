@@ -182,14 +182,14 @@ The created object will have an inferred type, no type declaration needed! The a
 **Note**: since the value has its type inferred, **don't** accidentally do this:
 
 ```ocaml
-type person = <age: string> Js.t
+type person = <age: int> Js.t
 let jane = [%bs.obj {age = "hi"}]
 ```
 
 Reason syntax:
 
 ```reason
-type person = {. "age": string};
+type person = {. "age": int};
 let jane = {"age": "hi"};
 ```
 
