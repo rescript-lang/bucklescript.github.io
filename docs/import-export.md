@@ -47,6 +47,12 @@ You can then require the default as normal JS side:
 import studentName from 'FavoriteStudent.js';
 ```
 
+**Note**: the above JS snippet _only_ works if you're using that ES6 import/export syntax in JS. If you're still using `require`, you'd need to do:
+
+```js
+let studentName = require('FavoriteStudent').default;
+```
+
 ## Import
 
 Use `bs.module`. It's like a `bs.val` that accepts a string that's the module name or path.
@@ -97,7 +103,7 @@ var paddedResult = LeftPad("hi", 5);
 
 #### Import an ES6 Default Value
 
-This is a recurring question, so we'll answer it here. If your JS project is using ES6, you're likely using Babel to compile it to regular JavaScript. Babel's ES6 default export actually exports the default value under the name `default`. You'd bind to it like this:
+This is a recurring question, so we'll answer it here. **If your JS project is using ES6**, you're likely using Babel to compile it to regular JavaScript. Babel's ES6 default export actually exports the default value under the name `default`. You'd bind to it like this:
 
 ```ocaml
 external studentName: string = "default" [@@bs.module "./student"]
