@@ -41,43 +41,46 @@
 <pre><code class="hljs css js"><span class="hljs-comment">// teacher2.js</span>
 <span class="hljs-keyword">import</span> studentName <span class="hljs-keyword">from</span> <span class="hljs-string">'FavoriteStudent.js'</span>;
 </code></pre>
+<p><strong>Note</strong>: the above JS snippet <em>only</em> works if you're using that ES6 import/export syntax in JS. If you're still using <code>require</code>, you'd need to do:</p>
+<pre><code class="hljs css js"><span class="hljs-keyword">let</span> studentName = <span class="hljs-built_in">require</span>(<span class="hljs-string">'FavoriteStudent'</span>).default;
+</code></pre>
 <h2><a class="anchor" aria-hidden="true" name="importar"></a><a href="#importar" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Importar</h2>
-<p>Usa <code>bs.module</code>. Es como un <code>bs.val</code> que acepta una cadena que es el nombre o camino del módulo.</p>
+<p>Use <code>bs.module</code>. It's like a <code>bs.val</code> that accepts a string that's the module name or path.</p>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">external</span> dirname: <span class="hljs-built_in">string</span> -&gt; <span class="hljs-built_in">string</span> = <span class="hljs-string">"dirname"</span> [@@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"path"</span>]
 <span class="hljs-keyword">let</span> root = dirname <span class="hljs-string">"/User/chenglou"</span>
 </code></pre>
-<p>Sintaxis de Reason:</p>
+<p>Reason syntax:</p>
 <pre><code class="hljs css reason">[@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"path"</span>] <span class="hljs-keyword">external</span> dirname : <span class="hljs-built_in">string</span> =&gt; <span class="hljs-built_in">string</span> = <span class="hljs-string">"dirname"</span>;
 <span class="hljs-keyword">let</span> root = dirname(<span class="hljs-string">"/User/chenglou"</span>);
 </code></pre>
-<p>Salida:</p>
+<p>Output:</p>
 <pre><code class="hljs css js"><span class="hljs-keyword">var</span> Path = <span class="hljs-built_in">require</span>(<span class="hljs-string">"path"</span>);
 <span class="hljs-keyword">var</span> root = Path.dirname(<span class="hljs-string">"/User/chenglou"</span>);
 </code></pre>
-<p><strong>Nota</strong>: la cadena dentro de <code>bs.module</code> puede ser lo que sea: <code>&quot;./src/myJsFile&quot;</code>, <code>&quot;@myNpmNamespace/myLib&quot;</code>, etc.</p>
+<p><strong>Note</strong>: the string inside <code>bs.module</code> can be anything: <code>&quot;./src/myJsFile&quot;</code>, <code>&quot;@myNpmNamespace/myLib&quot;</code>, etc.</p>
 <h3><a class="anchor" aria-hidden="true" name="importar-un-valor-por-defecto"></a><a href="#importar-un-valor-por-defecto" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Importar un Valor Por Defecto</h3>
-<p>Omitiendo la carga a <code>bs.module</code>, puedes enlazar a todo el módulo JS:</p>
+<p>By omitting the payload to <code>bs.module</code>, you bind to the whole JS module:</p>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">external</span> leftPad: <span class="hljs-built_in">string</span> -&gt; <span class="hljs-built_in">int</span> -&gt; <span class="hljs-built_in">string</span> = <span class="hljs-string">"./leftPad"</span> [@@bs.<span class="hljs-keyword">module</span>]
 <span class="hljs-keyword">let</span> paddedResult = leftPad <span class="hljs-string">"hi"</span> <span class="hljs-number">5</span>
 </code></pre>
-<p>Sintaxis de Reason:</p>
+<p>Reason syntax:</p>
 <pre><code class="hljs css reason">[@bs.<span class="hljs-keyword">module</span>] <span class="hljs-keyword">external</span> leftPad : <span class="hljs-built_in">string</span> =&gt; <span class="hljs-built_in">int</span> =&gt; <span class="hljs-built_in">string</span> = <span class="hljs-string">"./leftPad"</span>;
 <span class="hljs-keyword">let</span> paddedResult = leftPad(<span class="hljs-string">"hi"</span>, <span class="hljs-number">5</span>);
 </code></pre>
-<p>Salida:</p>
+<p>Output:</p>
 <pre><code class="hljs css js"><span class="hljs-keyword">var</span> LeftPad = <span class="hljs-built_in">require</span>(<span class="hljs-string">"./leftPad"</span>);
 <span class="hljs-keyword">var</span> paddedResult = LeftPad(<span class="hljs-string">"hi"</span>, <span class="hljs-number">5</span>);
 </code></pre>
 <h4><a class="anchor" aria-hidden="true" name="importar-un-valor-es6-por-defecto"></a><a href="#importar-un-valor-es6-por-defecto" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Importar un Valor ES6 Por Defecto</h4>
-<p>Esta es una pregunta recurrente, así que la contestaremos aquí. Si tu proyecto JS está usando ES6, es posible que estés usando Babel para compilarlo a un JavaScript regular. La exportación ES6 por defecto de Babel en realidad exporta el valor por defecto bajo el nombre <code>default</code>. Te enlazarías a este así:</p>
+<p>This is a recurring question, so we'll answer it here. <strong>If your JS project is using ES6</strong>, you're likely using Babel to compile it to regular JavaScript. Babel's ES6 default export actually exports the default value under the name <code>default</code>. You'd bind to it like this:</p>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">external</span> studentName: <span class="hljs-built_in">string</span> = <span class="hljs-string">"default"</span> [@@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"./student"</span>]
 <span class="hljs-keyword">let</span> _ = <span class="hljs-type">Js</span>.log studentName
 </code></pre>
-<p>Sintaxis de Reason:</p>
+<p>Reason syntax:</p>
 <pre><code class="hljs css reason">[@<span class="hljs-keyword">bs.module </span><span class="hljs-string">"./student"</span>] <span class="hljs-keyword">external </span>studentName : string = <span class="hljs-string">"default"</span><span class="hljs-comment">;</span>
 <span class="hljs-keyword">Js.log(studentName);
 </span></code></pre>
-<p>Salida:</p>
+<p>Output:</p>
 <pre><code class="hljs css js"><span class="hljs-keyword">var</span> Student = <span class="hljs-built_in">require</span>(<span class="hljs-string">"./student"</span>);
 <span class="hljs-built_in">console</span>.log(Student.default);
 </code></pre>
@@ -85,7 +88,7 @@
 <p>When the name you're using on the BS side matches the name of the JS value, you can use the empty string shorthand:</p>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">external</span> dirname: <span class="hljs-built_in">string</span> -&gt; <span class="hljs-built_in">string</span> = <span class="hljs-string">""</span> [@@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"path"</span>]
 </code></pre>
-<p>Sintaxis de Reason:</p>
+<p>Reason syntax:</p>
 <pre><code class="hljs css reason">[@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"path"</span>] <span class="hljs-keyword">external</span> dirname : <span class="hljs-built_in">string</span> =&gt; <span class="hljs-built_in">string</span> = <span class="hljs-string">""</span>;
 </code></pre>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="function.html">← Función</a><a class="docs-next button" href="regular-expression.html">Expresión regular →</a></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.js"></script><script>window.foo = new Pjax({
