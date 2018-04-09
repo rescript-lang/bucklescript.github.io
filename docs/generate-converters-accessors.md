@@ -387,3 +387,25 @@ let kiwiString = fruitToJs(`Kiwi); /* "miniCoconut" */
 ```
 
 Deriving converters with abstract type through `newType` also still works.
+
+
+## abstract type (Since 2.2.0)
+
+`bs.deriving` can accept `abstract` for record types to completely hide the record but only expose its getter/setter, 
+this is helpful for writing cross platform code without using too much `##` or `#=`
+
+In ml files
+```ocaml
+type t = {
+  a : int;
+  mutable b : int;
+} [@@bs.deriving abstract]
+```
+
+It will generate such functions
+
+```ocaml
+type t 
+val t : a:int -> b:int -> t  
+
+```
