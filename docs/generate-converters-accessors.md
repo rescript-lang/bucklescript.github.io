@@ -389,14 +389,13 @@ let kiwiString = fruitToJs(`Kiwi); /* "miniCoconut" */
 Deriving converters with abstract type through `newType` also still works.
 
 
-## abstract type (Since 3.0.0) for platform agnostic code and fine tuning of runtime representation
+## Abstract Type
 
-OCaml has multiple backends, for the record type, 
-it has quite similar representations between native and JS backend: an array of values.
+(Since 3.0.0) for platform agnostic code and fine tuning of runtime representation.
 
-Sometimes, we want to have optimal runtime encoding while still make sure the code portable: 
-`bs.deriving` can accept `abstract` for record types to completely hide the record but only expose its getter/setter/maker, 
-this is helpful for writing cross platform code.
+OCaml has multiple backends. For the record type, it has quite similar representations between native and JS backend: an array of values.
+
+Sometimes, we want to have optimal runtime encoding while still make sure the code portable: `bs.deriving` can accept `abstract` for record types to completely hide the record but only expose its getter/setter/maker. This is helpful for writing cross platform code.
 
 In ml files
 ```ocaml
