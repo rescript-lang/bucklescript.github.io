@@ -568,5 +568,5 @@ type cord = private { x : int [@bs.optional]; y : int} [@@bs.deriving abstract]
 Will generate such signatures:
 ```ocaml
 val x : cord -> int option
-val y : cord -> int option
+val y : cord -> int 
 ```
