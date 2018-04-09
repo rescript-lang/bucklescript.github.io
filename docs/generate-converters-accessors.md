@@ -389,23 +389,184 @@ let kiwiString = fruitToJs(`Kiwi); /* "miniCoconut" */
 Deriving converters with abstract type through `newType` also still works.
 
 
-## abstract type (Since 2.2.0)
+## abstract type (Since 3.0.0) for platform agnostic code and fine tuning of runtime representation
 
-`bs.deriving` can accept `abstract` for record types to completely hide the record but only expose its getter/setter, 
-this is helpful for writing cross platform code without using too much `##` or `#=`
+OCaml has multiple backends, for the record type, 
+it has quite similar representations between native and JS backend: an array of values.
+
+Sometimes, we want to have optimal runtime encoding while still make sure the code portable: 
+`bs.deriving` can accept `abstract` for record types to completely hide the record but only expose its getter/setter/maker, 
+this is helpful for writing cross platform code.
 
 In ml files
 ```ocaml
-type t = {
-  a : int;
-  mutable b : int;
+type cord = {
+  x : int;
+  mutable y : int;
 } [@@bs.deriving abstract]
 ```
 
 It will generate such functions
 
 ```ocaml
-type t 
-val t : a:int -> b:int -> t  
+type cord 
+val cord : a:int -> b:int -> t  (* maker *)
+val x : cord -> int (* getter *)
+val y : cord -> int (* getter *)
+val ySet : cord -> int -> unit (* setter *)
+```
 
+Since now `cord` is completey abstract type, for BuckleScript backend, we compile it into a js object instead of array:
+
+```ocaml
+let u = cord ~x:2 ~y:3
+
+let () = 
+  let x, y = u |. x, u |. y in 
+  u |. ySet (x + y)
+```
+Will generate such code
+
+```js
+var u = {
+  x: 2,
+  y: 3
+};
+
+var x = u.x;
+
+var y = u.y;
+
+u.y = x + y | 0;
+```
+
+### bs.as to customize fields
+
+We can customize the label to be different names, suppose we change the type definition as below:
+
+```ocaml
+type cord = {
+  x : int;
+  mutable y : int [@bs.as "Content-Type"]; 
+} [@@bs.deriving abstract]
+
+
+let u = cord ~x:2 ~y:3
+
+let () = 
+  let x, y = u |. x, u |. y in 
+  u |. ySet (x + y)
+```
+
+It will generate code as below:
+
+```
+var u = {
+  x: 2,
+  "Content-Type": 3
+};
+
+var x = u.x;
+
+var y = u["Content-Type"];
+
+u["Content-Type"] = x + y | 0;
+```
+
+### bs.optional for the record field
+
+We can also mark some labels optional, so that it does not need to be supplied at the initialization time:
+
+```ocaml
+type cord = {
+  mutable x : int [@bs.optional]; 
+  y : int ; 
+} [@@bs.deriving abstract]
+
+```
+
+It will generate such functions:
+
+```ocaml
+type cord
+val cord : ?x:int -> y:int -> unit -> cord 
+val x : cord -> int option 
+val xSet : cord -> int -> unit 
+val y : cord -> int 
+```
+
+```ocaml
+let u = cord  ~y:3 ()
+
+let () = 
+  let x, y = u |. x, u |. y in 
+  match x with 
+  | None -> 
+	u |. xSet y
+  | Some x -> 
+  	u |. xSet (x + y )
+```
+
+The generated output is:
+```js
+var u = {
+  y: 3
+};
+
+var x = u.x;
+
+var y = u.y;
+
+if (x !== undefined) {
+  u.x = x + y | 0;
+} else {
+  u.x = y;
+}
+```
+
+### fine access control in signatures
+
+`bs.deriving` `abstract` is also applicable in `mli` files:
+
+```ocaml
+type cord = {
+  mutable x : int  [@bs.optional]; 
+  y : int ; 
+} [@@bs.deriving abstract] 
+```
+
+Will generate such signatures
+
+```ocaml
+val cord : ?x:int -> y:int -> unit -> cord
+val x : cord -> int option
+val xSet : cord -> int -> unit 
+val y : cord -> int 
+```
+
+We can make it a bit more restrictive when exposing to clients by removing `mutable` in `x`:
+```ocaml
+type cord = {
+  x : int [@bs.optional];
+  y : int
+} [@@bs.deriving abstract]
+```
+
+Will generate such signatures:
+```ocaml
+val cord : ?x:int -> y: int -> unit -> cord  
+val x : cord -> int option
+val y : cord -> int 
+```
+
+More restrictive by marking the contructor `private`:
+
+```ocaml
+type cord = private { x : int [@bs.optional]; y : int} [@@bs.deriving abstract]
+```
+
+Will generate such signatures:
+```ocaml
+val x : cord -> int option
+val y : cord -> int option
 ```
