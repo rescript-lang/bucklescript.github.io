@@ -284,6 +284,139 @@ type <span class="hljs-attr">fruit</span> =
 <span class="hljs-keyword">let</span> kiwiString = fruitToJs(<span class="hljs-type">`Kiwi</span>); /* <span class="hljs-string">"miniCoconut"</span> */
 </code></pre>
 <p>Deriving converters with abstract type through <code>newType</code> also still works.</p>
+<h2><a class="anchor" aria-hidden="true" name="abstract-type"></a><a href="#abstract-type" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Abstract Type</h2>
+<p>(Since 3.0.0) for platform agnostic code and fine tuning of runtime representation.</p>
+<p>OCaml has multiple backends. For the record type, it has quite similar representations between native and JS backend: an array of values.</p>
+<p>Sometimes, we want to have optimal runtime encoding while still make sure the code portable: <code>bs.deriving</code> can accept <code>abstract</code> for record types to completely hide the record but only expose its getter/setter/maker. This is helpful for writing cross platform code.</p>
+<p>In ml files</p>
+<pre><code class="hljs css ocaml"><span class="hljs-keyword">type</span> cord = {
+  x : <span class="hljs-built_in">int</span>;
+  <span class="hljs-keyword">mutable</span> y : <span class="hljs-built_in">int</span>;
+} [@@bs.deriving abstract]
+</code></pre>
+<p>It will generate such functions</p>
+<pre><code class="hljs css ocaml"><span class="hljs-keyword">type</span> cord 
+<span class="hljs-keyword">val</span> cord : a:<span class="hljs-built_in">int</span> -&gt; b:<span class="hljs-built_in">int</span> -&gt; t  <span class="hljs-comment">(* maker *)</span>
+<span class="hljs-keyword">val</span> x : cord -&gt; <span class="hljs-built_in">int</span> <span class="hljs-comment">(* getter *)</span>
+<span class="hljs-keyword">val</span> y : cord -&gt; <span class="hljs-built_in">int</span> <span class="hljs-comment">(* getter *)</span>
+<span class="hljs-keyword">val</span> ySet : cord -&gt; <span class="hljs-built_in">int</span> -&gt; <span class="hljs-built_in">unit</span> <span class="hljs-comment">(* setter *)</span>
+</code></pre>
+<p>Since now <code>cord</code> is completey abstract type, for BuckleScript backend, we compile it into a js object instead of array:</p>
+<pre><code class="hljs css ocaml"><span class="hljs-keyword">let</span> u = cord ~x:<span class="hljs-number">2</span> ~y:<span class="hljs-number">3</span>
+
+<span class="hljs-keyword">let</span> <span class="hljs-literal">()</span> = 
+  <span class="hljs-keyword">let</span> x, y = u |. x, u |. y <span class="hljs-keyword">in</span> 
+  u |. ySet (x + y)
+</code></pre>
+<p>Will generate such code</p>
+<pre><code class="hljs css js"><span class="hljs-keyword">var</span> u = {
+  <span class="hljs-attr">x</span>: <span class="hljs-number">2</span>,
+  <span class="hljs-attr">y</span>: <span class="hljs-number">3</span>
+};
+
+<span class="hljs-keyword">var</span> x = u.x;
+
+<span class="hljs-keyword">var</span> y = u.y;
+
+u.y = x + y | <span class="hljs-number">0</span>;
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" name="bsas-to-customize-fields"></a><a href="#bsas-to-customize-fields" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>bs.as to customize fields</h3>
+<p>We can customize the label to be different names, suppose we change the type definition as below:</p>
+<pre><code class="hljs css ocaml"><span class="hljs-keyword">type</span> cord = {
+  x : <span class="hljs-built_in">int</span>;
+  <span class="hljs-keyword">mutable</span> y : <span class="hljs-built_in">int</span> [@bs.<span class="hljs-keyword">as</span> <span class="hljs-string">"Content-Type"</span>]; 
+} [@@bs.deriving abstract]
+
+
+<span class="hljs-keyword">let</span> u = cord ~x:<span class="hljs-number">2</span> ~y:<span class="hljs-number">3</span>
+
+<span class="hljs-keyword">let</span> <span class="hljs-literal">()</span> = 
+  <span class="hljs-keyword">let</span> x, y = u |. x, u |. y <span class="hljs-keyword">in</span> 
+  u |. ySet (x + y)
+</code></pre>
+<p>It will generate code as below:</p>
+<pre><code class="hljs">var u = {
+  <span class="hljs-keyword">x</span>: <span class="hljs-number">2</span>,
+  <span class="hljs-string">"Content-Type"</span>: <span class="hljs-number">3</span>
+}<span class="hljs-comment">;
+</span>
+var <span class="hljs-keyword">x</span> = u.<span class="hljs-keyword">x</span><span class="hljs-comment">;
+</span>
+var y = u[<span class="hljs-string">"Content-Type"</span>]<span class="hljs-comment">;
+</span>
+u[<span class="hljs-string">"Content-Type"</span>] = <span class="hljs-keyword">x</span> + y | <span class="hljs-number">0</span><span class="hljs-comment">;
+</span></code></pre>
+<h3><a class="anchor" aria-hidden="true" name="bsoptional-for-the-record-field"></a><a href="#bsoptional-for-the-record-field" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>bs.optional for the record field</h3>
+<p>We can also mark some labels optional, so that it does not need to be supplied at the initialization time:</p>
+<pre><code class="hljs css ocaml"><span class="hljs-keyword">type</span> cord = {
+  <span class="hljs-keyword">mutable</span> x : <span class="hljs-built_in">int</span> [@bs.optional]; 
+  y : <span class="hljs-built_in">int</span> ; 
+} [@@bs.deriving abstract]
+
+</code></pre>
+<p>It will generate such functions:</p>
+<pre><code class="hljs css ocaml"><span class="hljs-keyword">type</span> cord
+<span class="hljs-keyword">val</span> cord : ?x:<span class="hljs-built_in">int</span> -&gt; y:<span class="hljs-built_in">int</span> -&gt; <span class="hljs-built_in">unit</span> -&gt; cord 
+<span class="hljs-keyword">val</span> x : cord -&gt; <span class="hljs-built_in">int</span> option 
+<span class="hljs-keyword">val</span> xSet : cord -&gt; <span class="hljs-built_in">int</span> -&gt; <span class="hljs-built_in">unit</span> 
+<span class="hljs-keyword">val</span> y : cord -&gt; <span class="hljs-built_in">int</span> 
+</code></pre>
+<pre><code class="hljs css ocaml"><span class="hljs-keyword">let</span> u = cord  ~y:<span class="hljs-number">3</span> <span class="hljs-literal">()</span>
+
+<span class="hljs-keyword">let</span> <span class="hljs-literal">()</span> = 
+  <span class="hljs-keyword">let</span> x, y = u |. x, u |. y <span class="hljs-keyword">in</span> 
+  <span class="hljs-keyword">match</span> x <span class="hljs-keyword">with</span> 
+  | <span class="hljs-type">None</span> -&gt; 
+    u |. xSet y
+  | <span class="hljs-type">Some</span> x -&gt; 
+    u |. xSet (x + y )
+</code></pre>
+<p>The generated output is:</p>
+<pre><code class="hljs css js"><span class="hljs-keyword">var</span> u = {
+  <span class="hljs-attr">y</span>: <span class="hljs-number">3</span>
+};
+
+<span class="hljs-keyword">var</span> x = u.x;
+
+<span class="hljs-keyword">var</span> y = u.y;
+
+<span class="hljs-keyword">if</span> (x !== <span class="hljs-literal">undefined</span>) {
+  u.x = x + y | <span class="hljs-number">0</span>;
+} <span class="hljs-keyword">else</span> {
+  u.x = y;
+}
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" name="fine-access-control-in-signatures"></a><a href="#fine-access-control-in-signatures" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>fine access control in signatures</h3>
+<p><code>bs.deriving</code> <code>abstract</code> is also applicable in <code>mli</code> files:</p>
+<pre><code class="hljs css ocaml"><span class="hljs-keyword">type</span> cord = {
+  <span class="hljs-keyword">mutable</span> x : <span class="hljs-built_in">int</span>  [@bs.optional]; 
+  y : <span class="hljs-built_in">int</span> ; 
+} [@@bs.deriving abstract] 
+</code></pre>
+<p>Will generate such signatures</p>
+<pre><code class="hljs css ocaml"><span class="hljs-keyword">val</span> cord : ?x:<span class="hljs-built_in">int</span> -&gt; y:<span class="hljs-built_in">int</span> -&gt; <span class="hljs-built_in">unit</span> -&gt; cord
+<span class="hljs-keyword">val</span> x : cord -&gt; <span class="hljs-built_in">int</span> option
+<span class="hljs-keyword">val</span> xSet : cord -&gt; <span class="hljs-built_in">int</span> -&gt; <span class="hljs-built_in">unit</span> 
+<span class="hljs-keyword">val</span> y : cord -&gt; <span class="hljs-built_in">int</span> 
+</code></pre>
+<p>We can make it a bit more restrictive when exposing to clients by removing <code>mutable</code> in <code>x</code>:</p>
+<pre><code class="hljs css ocaml"><span class="hljs-keyword">type</span> cord = {
+  x : <span class="hljs-built_in">int</span> [@bs.optional];
+  y : <span class="hljs-built_in">int</span>
+} [@@bs.deriving abstract]
+</code></pre>
+<p>Will generate such signatures:</p>
+<pre><code class="hljs css ocaml"><span class="hljs-keyword">val</span> cord : ?x:<span class="hljs-built_in">int</span> -&gt; y: <span class="hljs-built_in">int</span> -&gt; <span class="hljs-built_in">unit</span> -&gt; cord  
+<span class="hljs-keyword">val</span> x : cord -&gt; <span class="hljs-built_in">int</span> option
+<span class="hljs-keyword">val</span> y : cord -&gt; <span class="hljs-built_in">int</span> 
+</code></pre>
+<p>More restrictive by marking the contructor <code>private</code>:</p>
+<pre><code class="hljs css ocaml"><span class="hljs-keyword">type</span> cord = <span class="hljs-keyword">private</span> { x : <span class="hljs-built_in">int</span> [@bs.optional]; y : <span class="hljs-built_in">int</span>} [@@bs.deriving abstract]
+</code></pre>
+<p>Will generate such signatures:</p>
+<pre><code class="hljs css ocaml"><span class="hljs-keyword">val</span> x : cord -&gt; <span class="hljs-built_in">int</span> option
+<span class="hljs-keyword">val</span> y : cord -&gt; <span class="hljs-built_in">int</span> 
+</code></pre>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="json.html">← JSON</a><a class="docs-next button" href="nodejs-special-variables.html">NodeJS Special Variables →</a></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.js"></script><script>window.foo = new Pjax({
           areas: [
             // try to use the first query.
