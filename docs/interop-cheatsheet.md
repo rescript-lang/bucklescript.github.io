@@ -18,11 +18,11 @@ let add = [%raw "a + b"];
 [%%raw "var a = 1"];
 ```
 
-###  Generaizlied raw JS (Since 3.0.0)
+###  Generalized raw JS (Since 3.0.0)
 
 Since 3.0.0, the content in `raw` could be either a pure string or `fun a b c -> {||}`.
 
-The generalized abstraction form is encouraged since it conveys more information to the compiler, so 
+The second one (generalized abstraction form) is encouraged since it conveys more information to the compiler, so 
 that the compiler knows it is a function declaration which has no side effect and its arity is known.
 
 For the generalized form:
@@ -36,7 +36,7 @@ It would generate code like this
 
 ```js
 var sum = function(a,b){ return a + b }
-var hey = function(){cosonle.log("hei")}
+var hey = function(){console.log("hei")}
 ```
 
 Note OCaml has a sugar for such syntax, so you can also write it this way
