@@ -13,14 +13,15 @@
             <link>https://bucklescript.github.io/blog</link>
         </image>
         <item>
+            <title><![CDATA[BuckleScript 3.0]]></title>
             <link>https://bucklescript.github.io/blog/2018/04/16/release-3-0-0.html</link>
             <guid>https://bucklescript.github.io/blog/2018/04/16/release-3-0-0.html</guid>
             <pubDate>Mon, 16 Apr 2018 06:00:00 GMT</pubDate>
-            <description><![CDATA[bs-platform 3.0.0 is released. It is a major release with some nice stuff.
+            <description><![CDATA[`bs-platform` 3.0.0 is released! Go get it. This is a great release.
 
-Most highlighted features:
+Highlighted features:
 
-1) Compile OCaml boolean as JS boolean, due to the internal representation and pattern match compiler, `false/true` was compiled to `0/1`, it is c]]></description>
+- **OCaml/Reason boolean are finally compiled as JS boolean**! Due to historical limitations, OCaml `true`/`false` was compiled to `0`/`1` in JS. This caused]]></description>
         </item>
         <item>
             <title><![CDATA[A Small Step for BuckleScript...]]></title>
