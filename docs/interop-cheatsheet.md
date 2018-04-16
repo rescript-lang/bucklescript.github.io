@@ -9,6 +9,7 @@ The next few sections will cover these in detail. Feel free to skip this one if 
 ```ocaml
 let add = [%raw "a + b"]
 [%%raw "var a = 1"]
+let myFunction = [%raw fun a b -> "return a + b"]
 ```
 
 Reason syntax:
@@ -16,34 +17,7 @@ Reason syntax:
 ```reason
 let add = [%raw "a + b"];
 [%%raw "var a = 1"];
-```
-
-###  Generalized raw JS (Since 3.0.0)
-
-Since 3.0.0, the content in `raw` could be either a pure string or `fun a b c -> {||}`.
-
-The second one (generalized abstraction form) is encouraged since it conveys more information to the compiler, so
-that the compiler knows it is a function declaration which has no side effect and its arity is known.
-
-For the generalized form:
-
-```ocaml
-let sum = [%raw fun a b -> {|return a + b|}]
-let hey = [%raw fun () -> {|console.log("hei")|}]
-```
-
-It would generate code like this
-
-```js
-var sum = function(a,b){ return a + b }
-var hey = function(){console.log("hei")}
-```
-
-Note OCaml has a sugar for such syntax, so you can also write it this way
-
-```ocaml
-let sum = fun%raw a b -> {|return a + b|}
-let hey = fun%raw () -> {|console.log("hei")|}
+let myFunction = [%raw (a, b) => "return a + b"];
 ```
 
 ## String Unicode & Interpolation

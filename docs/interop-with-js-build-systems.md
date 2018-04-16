@@ -42,4 +42,4 @@ This will:
 
 "What if my build system uses a CSS/png/whatever loader and I'd like to use it in BuckleScript?"
 
-Loaders are indeed troublesome; in the meantime, please use e.g. `[%bs.raw {|require('./myStyles.css')|}]` at the top of your file. This just uses [`bs.raw`](embed-raw-javascript.md) to compile the snippet into an actual JS require.
+Loaders are indeed troublesome; in the meantime, please use e.g. `[%raw {|require('./myStyles.css')|}]` at the top of your file. This just uses [`raw`](embed-raw-javascript.md) to compile the snippet into an actual JS require.
