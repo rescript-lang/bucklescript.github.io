@@ -18,25 +18,12 @@
 <h2><a class="anchor" aria-hidden="true" name="js-crudo"></a><a href="#js-crudo" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>JS Crudo</h2>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">let</span> add = [%raw <span class="hljs-string">"a + b"</span>]
 [%%raw <span class="hljs-string">"var a = 1"</span>]
+<span class="hljs-keyword">let</span> myFunction = [%raw <span class="hljs-keyword">fun</span> a b -&gt; <span class="hljs-string">"return a + b"</span>]
 </code></pre>
 <p>Sintaxis de Reason:</p>
-<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> <span class="hljs-keyword">add</span> = [%raw <span class="hljs-string">"a + b"</span>];
-[<span class="hljs-meta">%%raw <span class="hljs-meta-string">"var a = 1"</span></span>];
-</code></pre>
-<h3><a class="anchor" aria-hidden="true" name="generalized-raw-js-since-300"></a><a href="#generalized-raw-js-since-300" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Generalized raw JS (Since 3.0.0)</h3>
-<p>Since 3.0.0, the content in <code>raw</code> could be either a pure string or <code>fun a b c -&gt; {||}</code>.</p>
-<p>The second one (generalized abstraction form) is encouraged since it conveys more information to the compiler, so that the compiler knows it is a function declaration which has no side effect and its arity is known.</p>
-<p>For the generalized form:</p>
-<pre><code class="hljs css ocaml"><span class="hljs-keyword">let</span> sum = [%raw <span class="hljs-keyword">fun</span> a b -&gt; {|return a + b|}]
-<span class="hljs-keyword">let</span> hey = [%raw <span class="hljs-keyword">fun</span> <span class="hljs-literal">()</span> -&gt; {|console.log(<span class="hljs-string">"hei"</span>)|}]
-</code></pre>
-<p>It would generate code like this</p>
-<pre><code class="hljs css js"><span class="hljs-keyword">var</span> sum = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">a,b</span>)</span>{ <span class="hljs-keyword">return</span> a + b }
-<span class="hljs-keyword">var</span> hey = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{<span class="hljs-built_in">console</span>.log(<span class="hljs-string">"hei"</span>)}
-</code></pre>
-<p>Note OCaml has a sugar for such syntax, so you can also write it this way</p>
-<pre><code class="hljs css ocaml"><span class="hljs-keyword">let</span> sum = <span class="hljs-keyword">fun</span>%raw a b -&gt; {|return a + b|}
-<span class="hljs-keyword">let</span> hey = <span class="hljs-keyword">fun</span>%raw <span class="hljs-literal">()</span> -&gt; {|console.log(<span class="hljs-string">"hei"</span>)|}
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> add = [<span class="hljs-comment">%raw "a + b"];</span>
+[<span class="hljs-comment">%%raw "var a = 1"];</span>
+<span class="hljs-keyword">let</span> myFunction = [<span class="hljs-comment">%raw (a, b) =&gt; "return a + b"];</span>
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" name="cadena-unicode-interpolacion"></a><a href="#cadena-unicode-interpolacion" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Cadena Unicode &amp; Interpolación</h2>
 <pre><code class="hljs css ocaml"><span class="hljs-type">Js</span>.log {js|你好，
@@ -45,7 +32,7 @@
 <span class="hljs-keyword">let</span> world = <span class="hljs-string">"world"</span>
 <span class="hljs-keyword">let</span> helloWorld = {j|hello, $world|j}
 </code></pre>
-<p>Sintaxis de Reason:</p>
+<p>Reason syntax:</p>
 <pre><code class="hljs css reason">Js.log({js|<span class="hljs-type">你好，
 世界|js</span>});
 
@@ -100,7 +87,7 @@ external getElementById : <span class="hljs-built_in">string</span> =&gt; option
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">let</span> myMap = <span class="hljs-type">Js</span>.<span class="hljs-type">Dict</span>.empty <span class="hljs-literal">()</span>
 <span class="hljs-keyword">let</span> _ = <span class="hljs-type">Js</span>.<span class="hljs-type">Dict</span>.set myMap <span class="hljs-string">"Allison"</span> <span class="hljs-number">10</span>
 </code></pre>
-<p>Sintaxis de Reason:</p>
+<p>Reason syntax:</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> myMap = Js.<span class="hljs-built_in">Dict</span>.empty();
 Js.<span class="hljs-built_in">Dict</span>.set(myMap, <span class="hljs-string">"Allison"</span>, <span class="hljs-number">10</span>);
 </code></pre>
@@ -138,7 +125,7 @@ john<span class="hljs-meta">##job#="Accountant";</span>
 
 <span class="hljs-keyword">let</span> name = bucklescript##info##author
 </code></pre>
-<p>Sintaxis de Reason:</p>
+<p>Reason syntax:</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> bucklescript = {
   <span class="hljs-string">"info"</span>: {
     author: <span class="hljs-string">"Bob"</span>
@@ -157,7 +144,7 @@ john<span class="hljs-meta">##job#="Accountant";</span>
 <span class="hljs-keyword">let</span> c1 = makeConfig ~high:<span class="hljs-number">3</span> <span class="hljs-literal">()</span>
 <span class="hljs-keyword">let</span> low: <span class="hljs-built_in">int</span> <span class="hljs-type">Js</span>.undefined = c1##low
 </code></pre>
-<p>Sintaxis de Reason:</p>
+<p>Reason syntax:</p>
 <pre><code class="hljs css reason">[@bs.obj]
 <span class="hljs-keyword">external</span> makeConfig : (
   ~high: <span class="hljs-built_in">int</span>,
@@ -194,7 +181,7 @@ type </span>textarea;
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">type</span> t
 <span class="hljs-keyword">external</span> createDate : <span class="hljs-built_in">unit</span> -&gt; t = <span class="hljs-string">"Date"</span> [@@bs.<span class="hljs-keyword">new</span>]
 </code></pre>
-<p>Sintaxis de Reason:</p>
+<p>Reason syntax:</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">type</span> t;
 [@bs.<span class="hljs-keyword">new</span>] <span class="hljs-keyword">external</span> createDate : <span class="hljs-built_in">unit</span> =&gt; t = <span class="hljs-string">"Date"</span>;
 </code></pre>
@@ -257,7 +244,7 @@ padLeft(<span class="hljs-string">"Hello World"</span>, <span class="hljs-type">
 <h2><a class="anchor" aria-hidden="true" name="module"></a><a href="#module" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Module</h2>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">external</span> dirname: <span class="hljs-built_in">string</span> -&gt; <span class="hljs-built_in">string</span> = <span class="hljs-string">"dirname"</span> [@@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"path"</span>]
 </code></pre>
-<p>Reason syntax:</p>
+<p>Sintaxis de Reason:</p>
 <pre><code class="hljs css reason">[@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"path"</span>] <span class="hljs-keyword">external</span> dirname : <span class="hljs-built_in">string</span> =&gt; <span class="hljs-built_in">string</span> = <span class="hljs-string">"dirname"</span>;
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" name="import-default"></a><a href="#import-default" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Import Default</h3>
@@ -269,7 +256,7 @@ padLeft(<span class="hljs-string">"Hello World"</span>, <span class="hljs-type">
 <p>Import ES6 default compiled from Babel:</p>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">external</span> studentName: <span class="hljs-built_in">string</span> = <span class="hljs-string">"default"</span> [@@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"./student"</span>]
 </code></pre>
-<p>Reason syntax:</p>
+<p>Sintaxis de Reason:</p>
 <pre><code class="hljs css reason">[<span class="hljs-keyword">@bs</span>.<span class="hljs-keyword">module</span> <span class="hljs-string">"./student"</span>] external studentName : <span class="hljs-built_in">string</span> = <span class="hljs-string">"default"</span>;
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" name="export-es6-default"></a><a href="#export-es6-default" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Export ES6 default</h3>
@@ -282,7 +269,7 @@ padLeft(<span class="hljs-string">"Hello World"</span>, <span class="hljs-type">
 <p>Final escape hatch converter. Do not abuse.</p>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">external</span> myShadyConversion : foo -&gt; bar = <span class="hljs-string">"%identity"</span>
 </code></pre>
-<p>Reason syntax:</p>
+<p>Sintaxis de Reason:</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">external </span>myShadyConversion : foo =&gt; <span class="hljs-keyword">bar </span>= <span class="hljs-string">"%identity"</span><span class="hljs-comment">;</span>
 </code></pre>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="interop-overview.html">← Resumen</a><a class="docs-next button" href="embed-raw-javascript.html">Insertar JavaScript crudo →</a></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.js"></script><script>window.foo = new Pjax({
