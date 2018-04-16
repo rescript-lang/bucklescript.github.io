@@ -22,7 +22,7 @@ let add = [%raw "a + b"];
 
 Since 3.0.0, the content in `raw` could be either a pure string or `fun a b c -> {||}`.
 
-The second one (generalized abstraction form) is encouraged since it conveys more information to the compiler, so 
+The second one (generalized abstraction form) is encouraged since it conveys more information to the compiler, so
 that the compiler knows it is a function declaration which has no side effect and its arity is known.
 
 For the generalized form:
@@ -43,7 +43,7 @@ Note OCaml has a sugar for such syntax, so you can also write it this way
 
 ```ocaml
 let sum = fun%raw a b -> {|return a + b|}
-let hey = fun%raw () -> {|console.log("hei")|} 
+let hey = fun%raw () -> {|console.log("hei")|}
 ```
 
 ## String Unicode & Interpolation
@@ -65,22 +65,6 @@ Js.log({js|你好，
 let world = "world";
 let helloWorld = {j|hello, $world|j};
 ```
-
-## Boolean
-
-Directly returning a `bool`, letting the compiler cast from `Js.boolean` to `bool` under the hood.
-
-```ocaml
-external isStudent: string -> bool = "isStudent" [@@bs.val]
-```
-
-Reason syntax:
-
-```reason
-[@bs.val] external isStudent : string => bool = "isStudent";
-```
-
-`Js.to_bool`, `Js.Boolean.to_js_boolean`.
 
 ## Global Value
 

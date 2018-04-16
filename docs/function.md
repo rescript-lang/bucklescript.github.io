@@ -33,7 +33,7 @@ draw(20, 20, true)
 It'd be nice if on the BS side, we can bind & call `draw` while labeling things a bit:
 
 ```ocaml
-external draw : x:int -> y:int -> ?border:Js.boolean -> unit -> unit = "" [@@bs.val]
+external draw : x:int -> y:int -> ?border:bool -> unit -> unit = "" [@@bs.val]
 
 let _ = draw ~x:10 ~y:20 ~border:Js.true_ ()
 let _ = draw ~x:10 ~y:20 ()
@@ -42,7 +42,7 @@ let _ = draw ~x:10 ~y:20 ()
 Reason syntax:
 
 ```reason
-[@bs.val] external draw : (~x: int, ~y: int, ~border: Js.boolean=?, unit) => unit = "";
+[@bs.val] external draw : (~x: int, ~y: int, ~border: bool=?, unit) => unit = "";
 
 draw(~x=10, ~y=20, ~border=Js.true_, ());
 draw(~x=10, ~y=20, ());
@@ -165,7 +165,7 @@ If you can exhaustively enumerate the many forms an overloaded JS function can t
 ```ocaml
 external drawCat: unit -> unit = "draw" [@@bs.module "Drawing"]
 external drawDog: giveName:string -> unit = "draw" [@@bs.module "Drawing"]
-external draw : string -> useRandomAnimal:Js.boolean -> unit = "draw" [@@bs.module "Drawing"]
+external draw : string -> useRandomAnimal:bool -> unit = "draw" [@@bs.module "Drawing"]
 ```
 
 Reason syntax:
@@ -173,7 +173,7 @@ Reason syntax:
 ```reason
 [@bs.module "Drawing"] external drawCat : unit => unit = "draw";
 [@bs.module "Drawing"] external drawDog : (~giveName: string) => unit = "draw";
-[@bs.module "Drawing"] external draw : (string, ~useRandomAnimal: Js.boolean) => unit = "draw";
+[@bs.module "Drawing"] external draw : (string, ~useRandomAnimal: bool) => unit = "draw";
 ```
 
 Note how all three externals bind to the same JS function, `draw`.

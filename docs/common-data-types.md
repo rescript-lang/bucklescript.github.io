@@ -100,7 +100,7 @@ float | number
 string | string
 array | array
 tuple | array. `(3, 4)` -> `[3, 4]`
-Js.boolean | boolean `Js.true_` -> `true` `Js.false_` -> `false`
+bool | boolean
 Js.Nullable.t | `null`/`undefined`
 Js.t object | object
 
@@ -110,7 +110,6 @@ Again, the representations are subject to change.
 
 OCaml/BS/Reason Type | JavaScript Value
 ---------------------|---------------
-bool | `true` -> `1`, `false` -> `0`
 int64 | array. [high, low]. high is signed, low unsigned
 char | `'a'` -> `97`
 bytes | number array (we might encode it as buffer in NodeJS)
