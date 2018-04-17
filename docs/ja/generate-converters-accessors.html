@@ -410,7 +410,7 @@ u[&quot;Content-Type&quot;] = x + y | 0;
 <span class="hljs-keyword">val</span> x : cord -&gt; <span class="hljs-built_in">int</span> option
 <span class="hljs-keyword">val</span> y : cord -&gt; <span class="hljs-built_in">int</span> 
 </code></pre>
-<p>More restrictive by marking the contructor <code>private</code>:</p>
+<p>More restrictive by marking the constructor <code>private</code>:</p>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">type</span> cord = <span class="hljs-keyword">private</span> { x : <span class="hljs-built_in">int</span> [@bs.optional]; y : <span class="hljs-built_in">int</span>} [@@bs.deriving abstract]
 </code></pre>
 <p>Will generate such signatures:</p>
