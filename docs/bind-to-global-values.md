@@ -72,7 +72,7 @@ This trick is often used to allow folks to agree on _what_ JS functionalities to
 
 ## Global Modules
 
-If you want to bind to a value inside a global module, e.g. `Math.random`, attrach a `bs.scope` to your `bs.val` external:
+If you want to bind to a value inside a global module, e.g. `Math.random`, attach a `bs.scope` to your `bs.val` external:
 
 ```ocaml
 external random: unit -> float = "random" [@@bs.val][@@bs.scope "Math"]
@@ -86,7 +86,7 @@ Reason syntax:
 let someNumber = random();
 ```
 
-you can bind to an arbitrary deep object by passing a tuple to `bs.scope`:
+you can bind to an arbitrarily deep object by passing a tuple to `bs.scope`:
 
 ```ocaml
 external length: int = "length" [@@bs.val][@@bs.scope "window", "ancestorOrigins", "ancestorOrigins"]

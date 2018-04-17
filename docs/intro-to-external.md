@@ -38,4 +38,4 @@ Reason syntax:
 external myShadyConversion : foo => bar = "%identity";
 ```
 
-This is a final escape hatch which does nothing but converting from the type `foo` to `bar`. In the following sections, if you ever fail to write an `external`, you can fall back to using this one. But try not to.
+This is a final escape hatch which does nothing but convert from the type `foo` to `bar`. In the following sections, if you ever fail to write an `external`, you can fall back to using this one. But try not to.
