@@ -23,6 +23,7 @@
     "embed-raw-javascript": "Embed Raw JavaScript",
     "exceptions": "Exceptions",
     "extended-compiler-options": "Extended Compiler Options",
+    "fast-pipe": "Fast Pipe",
     "function": "Function",
     "generate-converters-accessors": "Generate Converters & Helpers",
     "import-export": "Import & Export",

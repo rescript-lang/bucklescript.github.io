@@ -21,6 +21,7 @@
       "regular-expression",
       "exceptions",
       "json",
+      "fast-pipe",
       "generate-converters-accessors",
       "nodejs-special-variables",
       "interop-misc",

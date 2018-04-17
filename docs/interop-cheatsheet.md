@@ -254,21 +254,30 @@ type t;
 
 ## Function
 
-### Method & Chaining
+### Object Method & Chaining
 
 ```ocaml
-external getElementById : document -> string -> Dom.element = "getElementById" [@@bs.send]
+external map : 'a array -> ('a -> 'b) -> 'b array = "" [@@bs.send]
+external filter : 'a array -> ('a -> 'b) -> 'b array = "" [@@bs.send]
 
-external map : ('a -> 'b) -> 'b array = "" [@@bs.send.pipe: 'a array]
+(* 2, 4 *)
+let () = [|1; 2; 3|]
+  |. map (fun a -> a + 1)
+  |. filter (fun a -> a mod 2 = 0)
+  |. Js.log
 ```
 
 Reason syntax:
 
 ```reason
-[@bs.send] external getElementById : (document, string) => Dom.element = "getElementById";
+[@bs.send] external map : (array('a), 'a => 'b) => array('b) = "";
+[@bs.send] external filter : (array('a), 'a => 'b) => array('b) = "";
 
-[@bs.send.pipe : array('a)]
-external map : ('a => 'b) => array('b) = "";
+/* 2, 4 */
+[|1, 2, 3|]
+|. map(a => a + 1)
+|. filter(a => a mod 2 == 0)
+|. Js.log;
 ```
 
 ### Variadic

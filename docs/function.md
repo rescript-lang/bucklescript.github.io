@@ -91,43 +91,7 @@ In a `bs.send`, the object is always the first argument. Actual arguments of the
 
 ### Chaining
 
-Ever used `foo().bar().baz()` chaining ("fluent api") in JS OOP? We can model that in BuckleScript too, by turning `bs.send` into `bs.send.pipe`, and using the stock `|>` operator:
-
-```ocaml
-external map : ('a -> 'b) -> 'b array = "" [@@bs.send.pipe: 'a array]
-external forEach: ('a -> unit) -> 'a array = "" [@@bs.send.pipe: 'a array]
-
-let _ =
-  [|1; 2; 3|]
-  |> map (fun x -> x + 1)
-  |> forEach (fun x -> Js.log x)
-```
-
-Reason syntax:
-
-```reason
-[@bs.send.pipe : array('a)]
-external map : ('a => 'b) => array('b) = "";
-
-[@bs.send.pipe : array('a)]
-external forEach : ('a => unit) => array('a) = "";
-
-[|(1, 2, 3)|]
-|> map(x => x + 1)
-|> forEach(x => Js.log(x));
-```
-
-The payload to `bs.send.pipe` is what you'd previously have put as the first argument of `bs.send`. So the non-bs-send-pipe way of writing it would have been:
-
-```ocaml
-external map : 'a array -> ('a -> 'b) -> 'b array = "" [@@bs.send]
-```
-
-Reason syntax:
-
-```reason
-[@bs.send] external map : (array('a), 'a => 'b) => array('b) = "";
-```
+Ever used `foo().bar().baz()` chaining ("fluent api") in JS OOP? We can model that in BuckleScript too, through the fast pipe operator described in the next section.
 
 ## Variadic Function Arguments
 
@@ -312,17 +276,19 @@ One last trick with polymorphic variants:
 
 ```ocaml
 type readline
+
 external on :
-    (
-    [ `close of unit -> unit
-    | `line of string -> unit
-    ]
-    [@bs.string])
-    -> readline = "" [@@bs.send.pipe: readline]
+  readline
+  -> ([
+      |`close of unit -> unit
+      | `line of string -> unit
+      ] [@bs.string])
+  -> readline = "" [@@bs.send]
+
 let register rl =
   rl
-  |> on (`close (fun event -> ()))
-  |> on (`line (fun line -> print_endline line))
+  |. on (`close (fun event -> ()))
+  |. on (`line (fun line -> print_endline line))
 ```
 
 Reason syntax:
@@ -330,18 +296,17 @@ Reason syntax:
 ```reason
 type readline;
 
-[@bs.send.pipe : readline]
+[@bs.send]
 external on : (
-  [@bs.string] [
-    | `close(unit => unit)
-    | `line(string => unit)
-  ])
+    readline,
+    [@bs.string] [ | `close(unit => unit) | `line(string => unit)]
+  )
   => readline = "";
 
-let register = (rl) =>
+let register = rl =>
   rl
-  |> on(`close((event) => ()))
-  |> on(`line((line) => print_endline(line)));
+  |. on(`close(event => ()))
+  |. on(`line(line => print_endline(line)));
 ```
 
 Output:
