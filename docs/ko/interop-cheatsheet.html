@@ -62,16 +62,16 @@ let someNumber = <span class="hljs-built_in">random</span>()<span class="hljs-co
 <span class="hljs-keyword">let</span> jsUndefined = <span class="hljs-type">Js</span>.<span class="hljs-type">Nullable</span>.undefined
 
 <span class="hljs-keyword">let</span> result1: <span class="hljs-built_in">string</span> <span class="hljs-type">Js</span>.<span class="hljs-type">Nullable</span>.t = <span class="hljs-type">Js</span>.<span class="hljs-type">Nullable</span>.return <span class="hljs-string">"hello"</span>
-<span class="hljs-keyword">let</span> result2: <span class="hljs-built_in">int</span> <span class="hljs-type">Js</span>.<span class="hljs-type">Nullable</span>.t  = <span class="hljs-type">Js</span>.<span class="hljs-type">Nullable</span>.from_opt (<span class="hljs-type">Some</span> <span class="hljs-number">10</span>)
-<span class="hljs-keyword">let</span> result3: <span class="hljs-built_in">int</span> option  = <span class="hljs-type">Js</span>.<span class="hljs-type">Nullable</span>.to_opt (<span class="hljs-type">Js</span>.<span class="hljs-type">Nullable</span>.return <span class="hljs-number">10</span>)
+<span class="hljs-keyword">let</span> result2: <span class="hljs-built_in">int</span> <span class="hljs-type">Js</span>.<span class="hljs-type">Nullable</span>.t  = <span class="hljs-type">Js</span>.<span class="hljs-type">Nullable</span>.fromOption (<span class="hljs-type">Some</span> <span class="hljs-number">10</span>)
+<span class="hljs-keyword">let</span> result3: <span class="hljs-built_in">int</span> option  = <span class="hljs-type">Js</span>.<span class="hljs-type">Nullable</span>.toOption (<span class="hljs-type">Js</span>.<span class="hljs-type">Nullable</span>.return <span class="hljs-number">10</span>)
 </code></pre>
 <p>Reason syntax:</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> jsNull = Js.<span class="hljs-built_in">Nullable</span>.null;
 <span class="hljs-keyword">let</span> jsUndefined = Js.<span class="hljs-built_in">Nullable</span>.undefined;
 
 <span class="hljs-keyword">let</span> result1: Js.<span class="hljs-built_in">Nullable</span>.t(string) = Js.<span class="hljs-built_in">Nullable</span>.<span class="hljs-keyword">return</span>(<span class="hljs-string">"hello"</span>);
-<span class="hljs-keyword">let</span> result2: Js.<span class="hljs-built_in">Nullable</span>.t(int) = Js.<span class="hljs-built_in">Nullable</span>.from_opt(Some(<span class="hljs-number">10</span>));
-<span class="hljs-keyword">let</span> result3: option(int) = Js.<span class="hljs-built_in">Nullable</span>.to_opt(Js.<span class="hljs-built_in">Nullable</span>.<span class="hljs-keyword">return</span>(<span class="hljs-number">10</span>));
+<span class="hljs-keyword">let</span> result2: Js.<span class="hljs-built_in">Nullable</span>.t(int) = Js.<span class="hljs-built_in">Nullable</span>.fromOption(Some(<span class="hljs-number">10</span>));
+<span class="hljs-keyword">let</span> result3: option(int) = Js.<span class="hljs-built_in">Nullable</span>.toOption(Js.<span class="hljs-built_in">Nullable</span>.<span class="hljs-keyword">return</span>(<span class="hljs-number">10</span>));
 </code></pre>
 <p>Directly convert from <code>Js.Nullable.t</code> to <code>option</code>:</p>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">external</span> getElementById : <span class="hljs-built_in">string</span> -&gt; element option = <span class="hljs-string">"getElementById"</span> [@@bs.scope <span class="hljs-string">"document"</span>][@@bs.return nullable]
