@@ -58,18 +58,16 @@ Reason syntax:
 external random: unit -> float = "random" [@@bs.val][@@bs.scope "Math"]
 let someNumber = random ()
 
-external length: int = "length" [@@bs.val][@@bs.scope "window", "DocumentType", "toString"]
+external length: int = "length" [@@bs.val][@@bs.scope "window", "location", "ancestorOrigins"]
 ```
 
 Reason syntax:
 
 ```reason
-[@bs.val] [@bs.scope "Math"]
-external random : unit => float = "random";
+[@bs.val] [@bs.scope "Math"] external random : unit => float = "random";
 let someNumber = random();
 
-[@bs.val] [@bs.scope ("window", "DocumentType", "toString")]
-external length : int = "length";
+[@bs.val] [@bs.scope ("window", "location", "ancestorOrigins")] external length : int = "length";
 ```
 
 ## Nullable

@@ -89,14 +89,14 @@ let someNumber = random();
 you can bind to an arbitrary deep object by passing a tuple to `bs.scope`:
 
 ```ocaml
-external length: int = "length" [@@bs.val][@@bs.scope "window", "DocumentType", "toString"]
+external length: int = "length" [@@bs.val][@@bs.scope "window", "ancestorOrigins", "ancestorOrigins"]
 ```
 
 Reason syntax:
 
 ```reason
-[@bs.scope ("window", "DocumentType", "toString")] [@bs.val] external length : int = "length";
+[@bs.val] [@bs.scope ("window", "ancestorOrigins", "ancestorOrigins")] external length : int = "length";
 ```
 
-This binds to `window.DocumentType.toString.length` (because why not).
+This binds to `window.location.ancestorOrigins.length`.
 
