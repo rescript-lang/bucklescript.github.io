@@ -558,7 +558,7 @@ val x : cord -> int option
 val y : cord -> int 
 ```
 
-More restrictive by marking the contructor `private`:
+More restrictive by marking the constructor `private`:
 
 ```ocaml
 type cord = private { x : int [@bs.optional]; y : int} [@@bs.deriving abstract]
