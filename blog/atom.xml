@@ -17,7 +17,7 @@
 
 Highlighted features:
 
-- **OCaml/Reason boolean are finally compiled as JS boolean**! Due to historical limitations, OCaml `true`/`false` was compiled to `0`/`1` in JS. This caused]]></summary>
+- **OCaml/Reason boolean are finally compiled as JS boolean**! Due to historical limitations, OCaml `true`/`false` was compiled to `1`/`0` in JS. This caused]]></summary>
         <author>
         </author>
     </entry>
