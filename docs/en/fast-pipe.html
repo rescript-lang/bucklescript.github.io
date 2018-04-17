@@ -1,0 +1,123 @@
+<html><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/><title>Fast Pipe · BuckleScript</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta property="og:title" content="Fast Pipe · BuckleScript"/><meta property="og:type" content="website"/><meta property="og:url" content="https://bucklescript.github.io/index.html"/><meta property="og:description" content="BuckleScript and Reason have a special `|.` syntax for dealing with various situations. This operator has many uses."/><link rel="shortcut icon" href="/img/logos/bucklescript_small.svg"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/arduino-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://bucklescript.github.io/blog/atom.xml" title="BuckleScript Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://bucklescript.github.io/blog/feed.xml" title="BuckleScript Blog RSS Feed"/><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/logos/bucklescript_small.svg"/><h2 class="headerTitle">BuckleScript</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li><a href="/docs/en/installation.html" target="_self">Docs</a></li><li><a href="/docs/en/playground.html" target="_self">Try</a></li><li><a href="/docs/en/stdlib-overview.html" target="_self">API</a></li><li><a href="/docs/en/community.html" target="_self">Community</a></li><li><a href="/blog" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja">日本語</a></li><li><a href="/es-ES">Español</a></li><li><a href="/fr">Français</a></li><li><a href="/ko">한국어</a></li><li><a href="/pt-BR">Português (Brasil)</a></li><li><a href="/ru">Русский</a></li><li><a href="/zh-CN">中文</a></li><li><a href="/zh-TW">繁體中文</a></li><li><a href="https://crowdin.com/project/bucklescript" target="_blank">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(){
+          if(languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search"/></li><li><a href="https://github.com/bucklescript/bucklescript" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Interop</span></h2></div><div class="navGroups"><div class="navGroup navGroupActive"><h3>Intro</h3><ul><li class="navListItem"><a class="navItem" href="/docs/en/what-why.html">What &amp; Why</a></li><li class="navListItem"><a class="navItem" href="/docs/en/installation.html">Installation</a></li><li class="navListItem"><a class="navItem" href="/docs/en/new-project.html">New Project</a></li><li class="navListItem"><a class="navItem" href="/docs/en/concepts-overview.html">Concepts Overview</a></li></ul></div><div class="navGroup navGroupActive"><h3>Interop</h3><ul><li class="navListItem"><a class="navItem" href="/docs/en/interop-overview.html">Overview</a></li><li class="navListItem"><a class="navItem" href="/docs/en/interop-cheatsheet.html">Cheatsheet</a></li><li class="navListItem"><a class="navItem" href="/docs/en/embed-raw-javascript.html">Embed Raw JavaScript</a></li><li class="navListItem"><a class="navItem" href="/docs/en/common-data-types.html">Common Data Types</a></li><li class="navListItem"><a class="navItem" href="/docs/en/intro-to-external.html">Intro to External</a></li><li class="navListItem"><a class="navItem" href="/docs/en/bind-to-global-values.html">Bind to Global Values</a></li><li class="navListItem"><a class="navItem" href="/docs/en/null-undefined-option.html">Null, Undefined &amp; Option</a></li><li class="navListItem"><a class="navItem" href="/docs/en/object.html">Object</a></li><li class="navListItem"><a class="navItem" href="/docs/en/class.html">Class</a></li><li class="navListItem"><a class="navItem" href="/docs/en/function.html">Function</a></li><li class="navListItem"><a class="navItem" href="/docs/en/import-export.html">Import &amp; Export</a></li><li class="navListItem"><a class="navItem" href="/docs/en/regular-expression.html">Regular Expression</a></li><li class="navListItem"><a class="navItem" href="/docs/en/exceptions.html">Exceptions</a></li><li class="navListItem"><a class="navItem" href="/docs/en/json.html">JSON</a></li><li class="navListItem navListItemActive"><a class="navItem navItemActive" href="/docs/en/fast-pipe.html">Fast Pipe</a></li><li class="navListItem"><a class="navItem" href="/docs/en/generate-converters-accessors.html">Generate Converters &amp; Helpers</a></li><li class="navListItem"><a class="navItem" href="/docs/en/nodejs-special-variables.html">NodeJS Special Variables</a></li><li class="navListItem"><a class="navItem" href="/docs/en/interop-misc.html">Miscellaneous</a></li><li class="navListItem"><a class="navItem" href="/docs/en/typescript-support.html">TypeScript Support</a></li><li class="navListItem"><a class="navItem" href="/docs/en/browser-support-polyfills.html">Browser Support &amp; Polyfills</a></li></ul></div><div class="navGroup navGroupActive"><h3>Build System</h3><ul><li class="navListItem"><a class="navItem" href="/docs/en/build-overview.html">Overview</a></li><li class="navListItem"><a class="navItem" href="/docs/en/build-configuration.html">Configuration</a></li><li class="navListItem"><a class="navItem" href="/docs/en/automatic-interface-generation.html">Automatic Interface Generation</a></li><li class="navListItem"><a class="navItem" href="/docs/en/interop-with-js-build-systems.html">Interop with JS Build System</a></li><li class="navListItem"><a class="navItem" href="/docs/en/build-performance.html">Performance</a></li><li class="navListItem"><a class="navItem" href="/docs/en/build-advanced.html">Advanced</a></li></ul></div><div class="navGroup navGroupActive"><h3>Standard Library</h3><ul><li class="navListItem"><a class="navItem" href="/docs/en/stdlib-overview.html">Overview</a></li></ul></div><div class="navGroup navGroupActive"><h3>Advanced</h3><ul><li class="navListItem"><a class="navItem" href="/docs/en/conditional-compilation.html">Conditional Compilation</a></li><li class="navListItem"><a class="navItem" href="/docs/en/extended-compiler-options.html">Extended Compiler Options</a></li><li class="navListItem"><a class="navItem" href="/docs/en/use-existing-ocaml-libraries.html">Use Existing OCaml Libraries</a></li><li class="navListItem"><a class="navItem" href="/docs/en/difference-from-native-ocaml.html">Difference from Native OCaml</a></li><li class="navListItem"><a class="navItem" href="/docs/en/compiler-architecture-principles.html">Compiler Architecture &amp; Principles</a></li><li class="navListItem"><a class="navItem" href="/docs/en/comparison-to-jsoo.html">Comparison to Js_of_ocaml</a></li></ul></div></div></section></div><script>
+          var toggler = document.getElementById('navToggler');
+          var nav = document.getElementById('docsNav');
+          toggler.onclick = function() {
+            nav.classList.toggle('docsSliderActive');
+          };
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/bucklescript/bucklescript.github.io/tree/source/docs/fast-pipe.md" target="_blank">Edit</a><h1>Fast Pipe</h1></header><article><div><span><p>BuckleScript and Reason have a special <code>|.</code> syntax for dealing with various situations. This operator has many uses.</p>
+<h2><a class="anchor" aria-hidden="true" name="pipelining"></a><a href="#pipelining" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Pipelining</h2>
+<p><code>a |. foo b</code> is equal to <code>foo a b</code>. The operator takes the item on the left and put it as the first argument of the item on the right. Great for building pipelines of data processing: <code>a |. foo b |. bar</code> is equal to <code>bar(foo a b)</code>.</p>
+<p>Reason syntax: <code>a |. foo(b) |. bar</code> is equal to <code>bar(foo(a, b))</code>.</p>
+<h2><a class="anchor" aria-hidden="true" name="js-method-chaining"></a><a href="#js-method-chaining" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>JS Method Chaining</h2>
+<p>JavaScript's APIs are often attached to objects, and often chainable, like so:</p>
+<pre><code class="hljs css js"><span class="hljs-keyword">const</span> result = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>].map(<span class="hljs-function"><span class="hljs-params">a</span> =&gt;</span> a + <span class="hljs-number">1</span>).filter(<span class="hljs-function"><span class="hljs-params">a</span> =&gt;</span> a % <span class="hljs-number">2</span> === <span class="hljs-number">0</span>);
+
+asyncRequest().setWaitDuration(<span class="hljs-number">4000</span>).send();
+</code></pre>
+<p>Assuming we don't need the chaining behavior above, we'd bind to each case this using <code>bs.send</code> from the previous section:</p>
+<pre><code class="hljs css ocaml"><span class="hljs-keyword">external</span> map : <span class="hljs-symbol">'a</span> <span class="hljs-built_in">array</span> -&gt; (<span class="hljs-symbol">'a</span> -&gt; <span class="hljs-symbol">'b</span>) -&gt; <span class="hljs-symbol">'b</span> <span class="hljs-built_in">array</span> = <span class="hljs-string">""</span> [@@bs.send]
+<span class="hljs-keyword">external</span> filter : <span class="hljs-symbol">'a</span> <span class="hljs-built_in">array</span> -&gt; (<span class="hljs-symbol">'a</span> -&gt; <span class="hljs-symbol">'b</span>) -&gt; <span class="hljs-symbol">'b</span> <span class="hljs-built_in">array</span> = <span class="hljs-string">""</span> [@@bs.send]
+
+<span class="hljs-keyword">type</span> request
+<span class="hljs-keyword">external</span> asyncRequest: <span class="hljs-built_in">unit</span> -&gt; request = <span class="hljs-string">""</span>
+<span class="hljs-keyword">external</span> setWaitDuration: request -&gt; <span class="hljs-built_in">int</span> -&gt; request = <span class="hljs-string">""</span> [@@bs.send]
+<span class="hljs-keyword">external</span> send: request -&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">""</span> [@@bs.send]
+</code></pre>
+<p>Reason syntax:</p>
+<pre><code class="hljs css reason"><span class="hljs-selector-attr">[@bs.send]</span> <span class="hljs-selector-tag">external</span> <span class="hljs-selector-tag">map</span> : (array(<span class="hljs-string">'a), '</span>a =&gt; <span class="hljs-string">'b) =&gt; array('</span>b) = <span class="hljs-string">""</span>;
+[<span class="hljs-variable">@bs</span>.send] external <span class="hljs-attribute">filter </span>: (array(<span class="hljs-string">'a), '</span>a =&gt; <span class="hljs-string">'b) =&gt; array('</span>b) = <span class="hljs-string">""</span>;
+
+type request;
+external <span class="hljs-attribute">asyncRequest</span>: unit =&gt; request = <span class="hljs-string">""</span>;
+[<span class="hljs-variable">@bs</span>.send] external <span class="hljs-attribute">setWaitDuration</span>: (request, int) =&gt; request = <span class="hljs-string">""</span>;
+[<span class="hljs-variable">@bs</span>.send] external <span class="hljs-attribute">send</span>: request =&gt; unit = <span class="hljs-string">""</span>;
+</code></pre>
+<p>You'd use them like this:</p>
+<pre><code class="hljs css ocaml"><span class="hljs-keyword">let</span> result = filter (map [|<span class="hljs-number">1</span>; <span class="hljs-number">2</span>; <span class="hljs-number">3</span>|] (<span class="hljs-keyword">fun</span> a -&gt; a + <span class="hljs-number">1</span>)) (<span class="hljs-keyword">fun</span> a -&gt; a <span class="hljs-keyword">mod</span> <span class="hljs-number">2</span> = <span class="hljs-number">0</span>)
+
+<span class="hljs-keyword">let</span> <span class="hljs-literal">()</span> = send(setWaitDuration (asyncRequest<span class="hljs-literal">()</span>) <span class="hljs-number">4000</span>)
+</code></pre>
+<p>This looks much worse than the JS counterpart! Now we need to read the actual logic &quot;inside-out&quot;. We also cannot use the <code>|&gt;</code> operator here, since the object comes <em>first</em> in the binding. But <code>|.</code> works!</p>
+<pre><code class="hljs css ocaml"><span class="hljs-keyword">let</span> result = [|<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>|] |. map(a =&gt; a + <span class="hljs-number">1</span>) |. filter(a =&gt; a <span class="hljs-keyword">mod</span> <span class="hljs-number">2</span> == <span class="hljs-number">0</span>);
+
+<span class="hljs-keyword">let</span> <span class="hljs-literal">()</span> = asyncRequest<span class="hljs-literal">()</span> |. setWaitDuration(<span class="hljs-number">400</span>) |. send<span class="hljs-literal">()</span>;
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" name="get-multiple-results"></a><a href="#get-multiple-results" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Get Multiple Results</h2>
+<p>The fast pipe operator can also be used on a tuple:</p>
+<pre><code class="hljs css ocaml"><span class="hljs-keyword">let</span> (left, middle, right) = myData |. (getLeft, getMiddle, getRight)
+</code></pre>
+<p>This turns into:</p>
+<pre><code class="hljs css ocaml"><span class="hljs-keyword">let</span> left = getLeft myData
+<span class="hljs-keyword">let</span> middle = getMiddle myData
+<span class="hljs-keyword">let</span> right = getRight myData
+</code></pre>
+<p>Reason syntax:</p>
+<pre><code class="hljs css reason"><span class="hljs-attribute">let left</span> = getLeft(myData);
+<span class="hljs-attribute">let middle</span> = getMiddle(myData);
+<span class="hljs-attribute">let right</span> = getRight(myData);
+</code></pre>
+<p>Convenient for certain kind of operations.</p>
+<h2><a class="anchor" aria-hidden="true" name="chaining-imperative-apis"></a><a href="#chaining-imperative-apis" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Chaining Imperative APIs</h2>
+<p><strong>Unreleased</strong>, as we're still waiting for feedback on this one; if you'd like the feature, please <a href="https://github.com/BuckleScript/bucklescript/issues/2748">upvote here</a>!</p>
+<p>Mutative, imperative APIs usually look like this:</p>
+<pre><code class="hljs css ocaml"><span class="hljs-keyword">let</span> mySet = <span class="hljs-type">Set</span>.make<span class="hljs-literal">()</span>
+<span class="hljs-type">Set</span>.add mySet <span class="hljs-number">1</span>
+<span class="hljs-type">Set</span>.add mySet <span class="hljs-number">2</span>
+<span class="hljs-type">Set</span>.remove mySet <span class="hljs-number">1</span>
+</code></pre>
+<p>Reason syntax:</p>
+<pre><code class="hljs css reason">let mySet = <span class="hljs-keyword">Set</span>.make();
+<span class="hljs-keyword">Set</span>.add(mySet, 1);
+<span class="hljs-keyword">Set</span>.add(mySet, 2);
+<span class="hljs-keyword">Set</span>.remove(mySet, 1);
+</code></pre>
+<p>Unlike their immutable, functional counterpart, these operations cannot be chained with <code>|&gt;</code> (their return type is <code>unit</code>). But fast pipe works!</p>
+<pre><code class="hljs css ocaml"><span class="hljs-keyword">let</span> mySet = <span class="hljs-type">Set</span>.make<span class="hljs-literal">()</span>
+<span class="hljs-keyword">let</span> <span class="hljs-literal">()</span> = mySet |. [
+  <span class="hljs-type">Set</span>.add <span class="hljs-number">1</span>;
+  <span class="hljs-type">Set</span>.add <span class="hljs-number">2</span>;
+  <span class="hljs-type">Set</span>.remove <span class="hljs-number">1</span>;
+]
+</code></pre>
+<p>Reason syntax:</p>
+<pre><code class="hljs css reason">let mySet = <span class="hljs-keyword">Set</span>.make();
+mySet |. [
+  <span class="hljs-keyword">Set</span>.add(1),
+  <span class="hljs-keyword">Set</span>.add(2),
+  <span class="hljs-keyword">Set</span>.remove(1),
+];
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="json.html">← JSON</a><a class="docs-next button" href="generate-converters-accessors.html">Generate Converters &amp; Helpers →</a></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.js"></script><script>window.foo = new Pjax({
+          areas: [
+            // try to use the first query.
+            '.mainContainer, .docsNavContainer .toc .navWrapper',
+            // fallback
+            'body'
+          ],
+          link: '.docsNavContainer:not(.docsSliderActive) a',
+          update: {
+            script: false,
+          }
+        });
+        var languagesMenuItemCopy = document.getElementById("languages-menu");
+        languagesMenuItemCopy.addEventListener("click", function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          e.stopImmediatePropagation();
+        });</script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+              var search = docsearch({
+                apiKey: '0fd97db83891aa20810559812d9e69ac',
+                indexName: 'bucklescript',
+                inputSelector: '#search_input_react'
+              });
+            </script></body></html>
