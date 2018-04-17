@@ -77,8 +77,8 @@ let jsNull = Js.Nullable.null
 let jsUndefined = Js.Nullable.undefined
 
 let result1: string Js.Nullable.t = Js.Nullable.return "hello"
-let result2: int Js.Nullable.t  = Js.Nullable.from_opt (Some 10)
-let result3: int option  = Js.Nullable.to_opt (Js.Nullable.return 10)
+let result2: int Js.Nullable.t  = Js.Nullable.fromOption (Some 10)
+let result3: int option  = Js.Nullable.toOption (Js.Nullable.return 10)
 ```
 
 Reason syntax:
@@ -88,8 +88,8 @@ let jsNull = Js.Nullable.null;
 let jsUndefined = Js.Nullable.undefined;
 
 let result1: Js.Nullable.t(string) = Js.Nullable.return("hello");
-let result2: Js.Nullable.t(int) = Js.Nullable.from_opt(Some(10));
-let result3: option(int) = Js.Nullable.to_opt(Js.Nullable.return(10));
+let result2: Js.Nullable.t(int) = Js.Nullable.fromOption(Some(10));
+let result3: option(int) = Js.Nullable.toOption(Js.Nullable.return(10));
 ```
 
 Directly convert from `Js.Nullable.t` to `option`:
