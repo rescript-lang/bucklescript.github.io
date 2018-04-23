@@ -35,7 +35,7 @@ It'd be nice if on the BS side, we can bind & call `draw` while labeling things 
 ```ocaml
 external draw : x:int -> y:int -> ?border:bool -> unit -> unit = "" [@@bs.val]
 
-let _ = draw ~x:10 ~y:20 ~border:Js.true_ ()
+let _ = draw ~x:10 ~y:20 ~border:true ()
 let _ = draw ~x:10 ~y:20 ()
 ```
 
@@ -44,7 +44,7 @@ Reason syntax:
 ```reason
 [@bs.val] external draw : (~x: int, ~y: int, ~border: bool=?, unit) => unit = "";
 
-draw(~x=10, ~y=20, ~border=Js.true_, ());
+draw(~x=10, ~y=20, ~border=true, ());
 draw(~x=10, ~y=20, ());
 ```
 
