@@ -34,13 +34,13 @@ draw(<span class="hljs-number">20</span>, <span class="hljs-number">20</span>, <
 <p>It'd be nice if on the BS side, we can bind &amp; call <code>draw</code> while labeling things a bit:</p>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">external</span> draw : x:<span class="hljs-built_in">int</span> -&gt; y:<span class="hljs-built_in">int</span> -&gt; ?border:<span class="hljs-built_in">bool</span> -&gt; <span class="hljs-built_in">unit</span> -&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">""</span> [@@bs.<span class="hljs-keyword">val</span>]
 
-<span class="hljs-keyword">let</span> _ = draw ~x:<span class="hljs-number">10</span> ~y:<span class="hljs-number">20</span> ~border:<span class="hljs-type">Js</span>.true_ <span class="hljs-literal">()</span>
+<span class="hljs-keyword">let</span> _ = draw ~x:<span class="hljs-number">10</span> ~y:<span class="hljs-number">20</span> ~border:<span class="hljs-literal">true</span> <span class="hljs-literal">()</span>
 <span class="hljs-keyword">let</span> _ = draw ~x:<span class="hljs-number">10</span> ~y:<span class="hljs-number">20</span> <span class="hljs-literal">()</span>
 </code></pre>
 <p>Reason syntax:</p>
 <pre><code class="hljs css reason">[@bs.val] external draw : (~x: int, ~y: int, ~border: <span class="hljs-attribute">bool</span>=?, unit) =&gt; unit = <span class="hljs-string">""</span>;
 
-draw(~<span class="hljs-attribute">x</span>=10, ~<span class="hljs-attribute">y</span>=20, ~<span class="hljs-attribute">border</span>=Js.true_, ());
+draw(~<span class="hljs-attribute">x</span>=10, ~<span class="hljs-attribute">y</span>=20, ~<span class="hljs-attribute">border</span>=<span class="hljs-literal">true</span>, ());
 draw(~<span class="hljs-attribute">x</span>=10, ~<span class="hljs-attribute">y</span>=20, ());
 </code></pre>
 <p>Output:</p>
