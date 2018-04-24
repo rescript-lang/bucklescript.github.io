@@ -62,10 +62,6 @@ It'll generate `x.js` in `lib/js` as a commonjs module, `lib/amdjs` as an amdjs 
 
 You would then need a bundler for the different module systems: webpack supports `commonjs` and `amdjs`, rollup supports es6, while google closure compiler supports all.
 
-## -bs-gen-tds
-
-Trigger the generation of TypeScript `.d.ts` files. `bsc` has the ability to emit `.d.ts` for better integration with TypeScript. This is still **experimental**.
-
 ## -bs-no-warn-ffi-type
 
 Turn off warnings on FFI type declarations.
