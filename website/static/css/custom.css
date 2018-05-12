@@ -101,3 +101,28 @@
 }
 
 /* end override */
+
+.toggleSyntaxButton {
+  display: block;
+  position: absolute;
+  top: 96px;
+  right: 80px;
+  cursor: pointer;
+  z-index: 100;
+  font-size: 10px;
+}
+
+.hljs.reason,
+.toggleSyntaxButton-reason {
+  display: none;
+}
+
+.syntax__reason .hljs.ocaml,
+.syntax__reason .toggleSyntaxButton-ocaml {
+  display: none;
+}
+
+.syntax__reason .hljs.reason,
+.syntax__reason .toggleSyntaxButton-reason  {
+  display: block;
+}

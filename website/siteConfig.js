@@ -84,6 +84,7 @@ const siteConfig = {
     { search: true },
     { href: "https://github.com/bucklescript/bucklescript", label: "GitHub" },
   ],
+  scripts: ["/js/toggleSyntaxButton.js"],
   users,
   examples,
   headerIcon: "img/logos/bucklescript_small.svg",
