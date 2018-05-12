@@ -62,7 +62,7 @@ external dirname: string -> string = "dirname" [@@bs.module "path"]
 let root = dirname "/User/chenglou"
 ```
 
-Reason syntax:
+
 
 ```reason
 [@bs.module "path"] external dirname : string => string = "dirname";
@@ -87,7 +87,7 @@ external leftPad: string -> int -> string = "./leftPad" [@@bs.module]
 let paddedResult = leftPad "hi" 5
 ```
 
-Reason syntax:
+
 
 ```reason
 [@bs.module] external leftPad : string => int => string = "./leftPad";
@@ -110,7 +110,7 @@ external studentName: string = "default" [@@bs.module "./student"]
 let _ = Js.log studentName
 ```
 
-Reason syntax:
+
 
 ```reason
 [@bs.module "./student"] external studentName : string = "default";
@@ -132,7 +132,7 @@ When the name you're using on the BS side matches the name of the JS value, you 
 external dirname: string -> string = "" [@@bs.module "path"]
 ```
 
-Reason syntax:
+
 
 ```reason
 [@bs.module "path"] external dirname : string => string = "";

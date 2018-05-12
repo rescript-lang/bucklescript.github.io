@@ -8,7 +8,7 @@ BuckleScript and Reason have a special `|.` syntax for dealing with various situ
 
 `a |. foo b` is equal to `foo a b`. The operator takes the item on the left and put it as the first argument of the item on the right. Great for building pipelines of data processing: `a |. foo b |. bar` is equal to `bar(foo a b)`.
 
-Reason syntax: `a |. foo(b) |. bar` is equal to `bar(foo(a, b))`.
+ `a |. foo(b) |. bar` is equal to `bar(foo(a, b))`.
 
 ## JS Method Chaining
 
@@ -32,7 +32,7 @@ external setWaitDuration: request -> int -> request = "" [@@bs.send]
 external send: request -> unit = "" [@@bs.send]
 ```
 
-Reason syntax:
+
 
 ```reason
 [@bs.send] external map : (array('a), 'a => 'b) => array('b) = "";
@@ -76,7 +76,7 @@ let middle = getMiddle myData
 let right = getRight myData
 ```
 
-Reason syntax:
+
 
 ```reason
 let left = getLeft(myData);
@@ -99,7 +99,7 @@ Set.add mySet 2
 Set.remove mySet 1
 ```
 
-Reason syntax:
+
 
 ```reason
 let mySet = Set.make();
@@ -119,7 +119,7 @@ let () = mySet |. [
 ]
 ```
 
-Reason syntax:
+
 
 ```reason
 let mySet = Set.make();

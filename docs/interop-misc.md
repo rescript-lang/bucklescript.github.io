@@ -42,7 +42,7 @@ let handleData = function [@bs.open]
 (* val handleData : 'a -> int option *)
 ```
 
-Reason syntax:
+
 
 ```reason
 let handleData = [@bs.open] (

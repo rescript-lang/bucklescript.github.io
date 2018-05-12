@@ -19,7 +19,7 @@ external parseIntoMyData : string -> data = "parse" [@@bs.scope "JSON"][@@bs.val
 let result = parseIntoMyData "{\"name\": \"Luke\"}"
 ```
 
-Reason syntax:
+
 
 ```reason
 type data = {. "name": string};

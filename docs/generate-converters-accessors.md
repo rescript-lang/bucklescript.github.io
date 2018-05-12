@@ -16,7 +16,7 @@ type action =
   [@@bs.deriving accessors]
 ```
 
-Reason syntax:
+
 
 ```reason
 [@bs.deriving accessors]
@@ -54,7 +54,7 @@ exports.cancel = cancel;
 let s = submit "hello" (* gives Submit "hello" *)
 ```
 
-Reason syntax:
+
 
 ```reason
 let s = submit("hello"); /* gives Submit("hello") */
@@ -76,7 +76,7 @@ type coordinates = {
 } [@@bs.deriving jsConverter]
 ```
 
-Reason syntax:
+
 
 ```reason
 [@bs.deriving jsConverter]
@@ -94,7 +94,7 @@ val coordinatesToJs : coordinates -> <x : int ; y : int > Js.t
 val coordinatesFromJs : < x: int ; y : int ; .. > Js.t -> coordinates
 ```
 
-Reason syntax:
+
 
 ```reason
 let coordinatesToJs: coordinates => {. "x": int, "y": int};
@@ -115,7 +115,7 @@ This exports a `jsCoordinates` JS object (not a record!) for JS files to use:
 let jsCoordinates = coordinatesToJs {x = 1; y = 2}
 ```
 
-Reason syntax:
+
 
 ```reason
 let jsCoordinates = coordinatesToJs({x: 1, y: 2});
@@ -127,7 +127,7 @@ This binds to a `jsCoordinates` record (not a JS object!) that exists on the JS 
 external jsCoordinates: coordinates = "jsCoordinates" [@@bs.module "myGame"]
 ```
 
-Reason syntax:
+
 
 ```reason
 [@bs.module "myGame"] external jsCoordinates : coordinates = "jsCoordinates";
@@ -144,7 +144,7 @@ type coordinates = {
 } [@@bs.deriving {jsConverter = newType}]
 ```
 
-Reason syntax:
+
 
 ```reason
 [@bs.deriving {jsConverter: newType}]
@@ -162,7 +162,7 @@ val coordinatesToJs : coordinates -> abs_coordinates
 val coordinatesFromJs : abs_coordinates -> coordinates
 ```
 
-Reason syntax:
+
 
 ```reason
 let coordinatesToJs: coordinates => abs_coordinates;
@@ -184,7 +184,7 @@ let jsCoords = coordinatesToJs myCoordinates
 let x = jsCoords##x (* disallowed! Don't access the object's internal details *)
 ```
 
-Reason syntax:
+
 
 ```reason
 let myCoordinates = {
@@ -211,7 +211,7 @@ type fruit =
   [@@bs.deriving jsConverter]
 ```
 
-Reason syntax:
+
 
 ```reason
 [@bs.deriving jsConverter]
@@ -230,7 +230,7 @@ val fruitToJs : fruit -> int
 val fruitFromJs : int -> fruit option
 ```
 
-Reason syntax:
+
 
 ```reason
 let fruitToJs: fruit => int;
@@ -261,7 +261,7 @@ let _ = match fruitFromJs 100 with
 | _ -> Js.log "received something wrong from the JS side"
 ```
 
-Reason syntax:
+
 
 ```reason
 [@bs.deriving jsConverter]
@@ -293,7 +293,7 @@ type fruit =
   [@@bs.deriving {jsConverter = newType}]
 ```
 
-Reason syntax:
+
 
 ```reason
 [@bs.deriving {jsConverter: newType}]
@@ -311,7 +311,7 @@ val fruitToJs : fruit -> abs_fruit
 val fruitFromJs : abs_fruit -> fruit
 ```
 
-Reason syntax:
+
 
 ```reason
 let fruitToJs: fruit => abs_fruit;
@@ -338,7 +338,7 @@ let kiwi = fruitFromJs jsKiwi
 let error = fruitFromJs 100 (* nope, can't take a random int *)
 ```
 
-Reason syntax:
+
 
 ```reason
 [@bs.deriving {jsConverter: newType}]
@@ -372,7 +372,7 @@ let appleString = fruitToJs `Apple (* "Apple" *)
 let kiwiString = fruitToJs `Kiwi (* "miniCoconut" *)
 ```
 
-Reason syntax:
+
 
 ```reason
 [@bs.deriving jsConverter]
@@ -408,7 +408,7 @@ type cord = {
 It will generate such functions
 
 ```ocaml
-type cord 
+type cord
 val cord : a:int -> b:int -> t  (* maker *)
 val x : cord -> int (* getter *)
 val y : cord -> int (* getter *)
@@ -420,8 +420,8 @@ Since now `cord` is completey abstract type, for BuckleScript backend, we compil
 ```ocaml
 let u = cord ~x:2 ~y:3
 
-let () = 
-  let x, y = u |. x, u |. y in 
+let () =
+  let x, y = u |. x, u |. y in
   u |. ySet (x + y)
 ```
 Will generate such code
@@ -446,14 +446,14 @@ We can customize the label to be different names, suppose we change the type def
 ```ocaml
 type cord = {
   x : int;
-  mutable y : int [@bs.as "Content-Type"]; 
+  mutable y : int [@bs.as "Content-Type"];
 } [@@bs.deriving abstract]
 
 
 let u = cord ~x:2 ~y:3
 
-let () = 
-  let x, y = u |. x, u |. y in 
+let () =
+  let x, y = u |. x, u |. y in
   u |. ySet (x + y)
 ```
 
@@ -478,8 +478,8 @@ We can also mark some labels optional, so that it does not need to be supplied a
 
 ```ocaml
 type cord = {
-  mutable x : int [@bs.optional]; 
-  y : int ; 
+  mutable x : int [@bs.optional];
+  y : int ;
 } [@@bs.deriving abstract]
 
 ```
@@ -488,21 +488,21 @@ It will generate such functions:
 
 ```ocaml
 type cord
-val cord : ?x:int -> y:int -> unit -> cord 
-val x : cord -> int option 
-val xSet : cord -> int -> unit 
-val y : cord -> int 
+val cord : ?x:int -> y:int -> unit -> cord
+val x : cord -> int option
+val xSet : cord -> int -> unit
+val y : cord -> int
 ```
 
 ```ocaml
 let u = cord  ~y:3 ()
 
-let () = 
-  let x, y = u |. x, u |. y in 
-  match x with 
-  | None -> 
+let () =
+  let x, y = u |. x, u |. y in
+  match x with
+  | None ->
 	u |. xSet y
-  | Some x -> 
+  | Some x ->
   	u |. xSet (x + y )
 ```
 
@@ -529,9 +529,9 @@ if (x !== undefined) {
 
 ```ocaml
 type cord = {
-  mutable x : int  [@bs.optional]; 
-  y : int ; 
-} [@@bs.deriving abstract] 
+  mutable x : int  [@bs.optional];
+  y : int ;
+} [@@bs.deriving abstract]
 ```
 
 Will generate such signatures
@@ -539,8 +539,8 @@ Will generate such signatures
 ```ocaml
 val cord : ?x:int -> y:int -> unit -> cord
 val x : cord -> int option
-val xSet : cord -> int -> unit 
-val y : cord -> int 
+val xSet : cord -> int -> unit
+val y : cord -> int
 ```
 
 We can make it a bit more restrictive when exposing to clients by removing `mutable` in `x`:
@@ -553,9 +553,9 @@ type cord = {
 
 Will generate such signatures:
 ```ocaml
-val cord : ?x:int -> y: int -> unit -> cord  
+val cord : ?x:int -> y: int -> unit -> cord
 val x : cord -> int option
-val y : cord -> int 
+val y : cord -> int
 ```
 
 More restrictive by marking the constructor `private`:
@@ -567,5 +567,5 @@ type cord = private { x : int [@bs.optional]; y : int} [@@bs.deriving abstract]
 Will generate such signatures:
 ```ocaml
 val x : cord -> int option
-val y : cord -> int 
+val y : cord -> int
 ```

@@ -15,7 +15,7 @@ external setTimeout : (unit -> unit) -> int -> float = "setTimeout" [@@bs.val]
 external clearTimeout : float -> unit = "clearTimeout" [@@bs.val]
 ```
 
-Reason syntax:
+
 
 ```reason
 [@bs.val] external setTimeout : (unit => unit, int) => float = "setTimeout";
@@ -38,7 +38,7 @@ When the name you're using on the BS side matches the JS value you're modeling, 
 external clearTimeout : float -> unit = "" [@@bs.val]
 ```
 
-Reason syntax:
+
 
 ```reason
 [@bs.val] external clearTimeout : float => unit = "";
@@ -56,7 +56,7 @@ external setTimeout : (unit -> unit) -> int -> timerId = "setTimeout" [@@bs.val]
 external clearTimeout : timerId -> unit = "clearTimeout" [@@bs.val]
 ```
 
-Reason syntax:
+
 
 ```reason
 type timerId;
@@ -79,7 +79,7 @@ external random: unit -> float = "random" [@@bs.val][@@bs.scope "Math"]
 let someNumber = random ()
 ```
 
-Reason syntax:
+
 
 ```reason
 [@bs.scope "Math"] [@bs.val] external random : unit => float = "random";
@@ -92,7 +92,7 @@ you can bind to an arbitrarily deep object by passing a tuple to `bs.scope`:
 external length: int = "length" [@@bs.val][@@bs.scope "window", "ancestorOrigins", "ancestorOrigins"]
 ```
 
-Reason syntax:
+
 
 ```reason
 [@bs.val] [@bs.scope ("window", "ancestorOrigins", "ancestorOrigins")] external length : int = "length";

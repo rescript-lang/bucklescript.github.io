@@ -16,7 +16,7 @@ with
   | None -> Js.log "An unknown error occurred"
 ```
 
-Reason syntax:
+
 
 ```reason
 try (
@@ -51,7 +51,7 @@ let _ =
   )
 ```
 
-Reason syntax:
+
 
 ```reason
 exception UnhandledPromise;

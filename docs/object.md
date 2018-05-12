@@ -25,7 +25,7 @@ let myMap = Js.Dict.empty ()
 let _ = Js.Dict.set myMap "Allison" 10
 ```
 
-Reason syntax:
+
 
 ```reason
 let myMap = Js.Dict.empty();
@@ -64,7 +64,7 @@ type person = <
 external john : person = "john" [@@bs.val]
 ```
 
-Reason syntax:
+
 
 ```reason
 type person = Js.t({
@@ -98,7 +98,7 @@ external john: person = "john" [@@bs.val]
 let _ = john##age #= 99
 ```
 
-Reason syntax:
+
 
 ```reason
 type person = {. [@bs.set] "age": int};
@@ -120,7 +120,7 @@ external john: person = "john" [@@bs.val]
 let _ = john##say "hey" "jude"
 ```
 
-Reason syntax:
+
 
 ```reason
 type person = {. [@bs.meth] "say": (string, string) => unit};
@@ -139,7 +139,7 @@ let jude = talkTo "jude"
 let paul = talkTo "paul"
 ```
 
-Reason syntax:
+
 
 ```reason
 /* wrong */
@@ -163,7 +163,7 @@ let bucklescript = [%bs.obj {
 let name = bucklescript##info##author
 ```
 
-Reason syntax:
+
 
 ```reason
 let bucklescript = [%bs.obj {
@@ -177,7 +177,7 @@ Because object values are used often, Reason gives it a nicer sugar. `[%bs.obj {
 
 **Note**: there's no syntax sugar for creating an empty object in OCaml nor Reason (aka this doesn't work: `[@bs.obj {}]`. Please use `Js.Obj.empty()` for that purpose.
 
-The created object will have an inferred type, no type declaration needed! The above example will infer as `< info: < author: string > Js.t > Js.t`. Reason syntax: `{. "info": {. "author": string}}`.
+The created object will have an inferred type, no type declaration needed! The above example will infer as `< info: < author: string > Js.t > Js.t`.  `{. "info": {. "author": string}}`.
 
 **Note**: since the value has its type inferred, **don't** accidentally do this:
 
@@ -186,7 +186,7 @@ type person = <age: int> Js.t
 let jane = [%bs.obj {age = "hi"}]
 ```
 
-Reason syntax:
+
 
 ```reason
 type person = {. "age": int};
@@ -210,7 +210,7 @@ let high: int = c1##high
 let low: int Js.undefined = c1##low
 ```
 
-Reason syntax:
+
 
 ```reason
 [@bs.obj] external makeConfig : (~high: int, ~low: int=?, unit) => _ = "";
@@ -251,7 +251,7 @@ external makeIOConfig :
 let config = makeIOConfig ~cwd:"." ()
 ```
 
-Reason syntax:
+
 
 ```reason
 [@bs.obj]
@@ -306,7 +306,7 @@ f##draw__int 3 4
 f##draw__float 3.2 4.5
 ```
 
-Reason syntax:
+
 
 ```reason
 f##draw__int(3, 4);
@@ -347,7 +347,7 @@ let _ = set i32arr 0 42
 let _ = Js.log (get i32arr 0)
 ```
 
-Reason syntax:
+
 
 ```reason
 type t;
@@ -381,7 +381,7 @@ external myTextArea: textarea = "" [@@bs.val]
 let _ = setName myTextArea "asd"
 ```
 
-Reason syntax:
+
 
 ```reason
 type textarea;
