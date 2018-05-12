@@ -117,26 +117,23 @@
   padding: 10px;
 }
 
-.toggleSyntaxButton:hover,
-.syntax__reason .toggleSyntaxButton-ocaml {
+.toggleSyntaxButton:hover {
   background: none;
   color: #a1639f;
 }
 
-.toggleSyntaxButton-ocaml,
+.syntax__ocaml .toggleSyntaxButton-ocaml,
 .syntax__reason .toggleSyntaxButton-reason {
   background: #a1639f;
   color: #fff;
 }
 
-.hljs.reason {
+.hljs.reason,
+.hljs.ocaml {
   display: none;
 }
 
-.syntax__reason .hljs.ocaml {
-  display: none;
-}
-
-.syntax__reason .hljs.reason {
+.syntax__reason .hljs.reason,
+.syntax__ocaml .hljs.ocaml {
   display: block;
 }
