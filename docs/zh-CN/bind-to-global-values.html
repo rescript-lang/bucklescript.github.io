@@ -64,10 +64,10 @@ external clearTimeout : float -> unit = "clearTimeout" [@@bs.val]
 let someNumber = <span class="hljs-built_in">random</span>()<span class="hljs-comment">;</span>
 </code></pre>
 <p>you can bind to an arbitrarily deep object by passing a tuple to <code>bs.scope</code>:</p>
-<pre><code class="hljs css ocaml"><span class="hljs-keyword">external</span> length: <span class="hljs-built_in">int</span> = <span class="hljs-string">"length"</span> [@@bs.<span class="hljs-keyword">val</span>][@@bs.scope <span class="hljs-string">"window"</span>, <span class="hljs-string">"ancestorOrigins"</span>, <span class="hljs-string">"ancestorOrigins"</span>]
+<pre><code class="hljs css ocaml"><span class="hljs-keyword">external</span> length: <span class="hljs-built_in">int</span> = <span class="hljs-string">"length"</span> [@@bs.<span class="hljs-keyword">val</span>][@@bs.scope <span class="hljs-string">"window"</span>, <span class="hljs-string">"location"</span>, <span class="hljs-string">"ancestorOrigins"</span>]
 </code></pre>
 <p>Reason syntax:</p>
-<pre><code class="hljs css reason">[<span class="hljs-keyword">@bs</span>.val] [<span class="hljs-keyword">@bs</span>.<span class="hljs-keyword">scope</span> (<span class="hljs-string">"window"</span>, <span class="hljs-string">"ancestorOrigins"</span>, <span class="hljs-string">"ancestorOrigins"</span>)] external length : <span class="hljs-keyword">int</span> = <span class="hljs-string">"length"</span>;
+<pre><code class="hljs css reason">[<span class="hljs-keyword">@bs</span>.val] [<span class="hljs-keyword">@bs</span>.<span class="hljs-keyword">scope</span> (<span class="hljs-string">"window"</span>, <span class="hljs-string">"location"</span>, <span class="hljs-string">"ancestorOrigins"</span>)] external length : <span class="hljs-keyword">int</span> = <span class="hljs-string">"length"</span>;
 </code></pre>
 <p>This binds to <code>window.location.ancestorOrigins.length</code>.</p>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="intro-to-external.html">← External简介</a><a class="docs-next button" href="null-undefined-option.html">Null， Undefined， Option →</a></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.js"></script><script>window.foo = new Pjax({
