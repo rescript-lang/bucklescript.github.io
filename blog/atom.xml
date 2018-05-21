@@ -8,25 +8,19 @@
     <subtitle>The best place to stay up-to-date with the latest BuckleScript news and events.</subtitle>
     <logo>https://bucklescript.github.ioimg/logos/bucklescript_small.svg</logo>
     <entry>
-        <title type="html"><![CDATA[BuckleScript 3.1.0]]></title>
+        <title type="html"><![CDATA[BuckleScript 3.1]]></title>
         <id>https://bucklescript.github.io/blog/2018/05/21/release-3-1-0.html</id>
         <link href="https://bucklescript.github.io/blog/2018/05/21/release-3-1-0.html">
         </link>
         <updated>2018-05-21T06:00:00Z</updated>
-        <summary type="html"><![CDATA[This release is a minor release but with some nice features:
+        <summary type="html"><![CDATA[List of changes [here](https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#310)! Highlights:
 
-The most exicited one is a new flag, "-bs-g"
+## Print Record Keys and Variant Tags
 
-By adding a flag into your `bsconfig.json`
+A picture's worth a thousand words:
 
-```json
-  "bsc-flags" : ["-bs-g"],
-```
-Suppose your code is like this:
-
-
-```ocaml
-[%%debugger.chro]]></summary>
+<table>
+  <thead> <tr><th>Before</th><th>After</th></tr> </thead]]></summary>
         <author>
         </author>
     </entry>
