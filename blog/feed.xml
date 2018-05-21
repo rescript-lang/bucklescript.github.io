@@ -4,7 +4,7 @@
         <title>BuckleScript Blog</title>
         <link>https://bucklescript.github.io/blog</link>
         <description>The best place to stay up-to-date with the latest BuckleScript news and events.</description>
-        <lastBuildDate>Mon, 16 Apr 2018 06:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 21 May 2018 06:00:00 GMT</lastBuildDate>
         <docs>http://blogs.law.harvard.edu/tech/rss</docs>
         <generator>Feed for Node.js</generator>
         <image>
@@ -12,6 +12,26 @@
             <url>https://bucklescript.github.ioimg/logos/bucklescript_small.svg</url>
             <link>https://bucklescript.github.io/blog</link>
         </image>
+        <item>
+            <title><![CDATA[BuckleScript 3.1.0]]></title>
+            <link>https://bucklescript.github.io/blog/2018/05/21/release-3-1-0.html</link>
+            <guid>https://bucklescript.github.io/blog/2018/05/21/release-3-1-0.html</guid>
+            <pubDate>Mon, 21 May 2018 06:00:00 GMT</pubDate>
+            <description><![CDATA[This release is a minor release but with some nice features:
+
+The most exicited one is a new flag, "-bs-g"
+
+By adding a flag into your `bsconfig.json`
+
+```json
+  "bsc-flags" : ["-bs-g"],
+```
+Suppose your code is like this:
+
+
+```ocaml
+[%%debugger.chro]]></description>
+        </item>
         <item>
             <title><![CDATA[BuckleScript 3.0]]></title>
             <link>https://bucklescript.github.io/blog/2018/04/16/release-3-0-0.html</link>

@@ -2,11 +2,34 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://bucklescript.github.io/blog</id>
     <title>BuckleScript Blog</title>
-    <updated>2018-04-16T06:00:00Z</updated>
+    <updated>2018-05-21T06:00:00Z</updated>
     <generator>Feed for Node.js</generator>
     <link rel="alternate" href="https://bucklescript.github.io/blog"/>
     <subtitle>The best place to stay up-to-date with the latest BuckleScript news and events.</subtitle>
     <logo>https://bucklescript.github.ioimg/logos/bucklescript_small.svg</logo>
+    <entry>
+        <title type="html"><![CDATA[BuckleScript 3.1.0]]></title>
+        <id>https://bucklescript.github.io/blog/2018/05/21/release-3-1-0.html</id>
+        <link href="https://bucklescript.github.io/blog/2018/05/21/release-3-1-0.html">
+        </link>
+        <updated>2018-05-21T06:00:00Z</updated>
+        <summary type="html"><![CDATA[This release is a minor release but with some nice features:
+
+The most exicited one is a new flag, "-bs-g"
+
+By adding a flag into your `bsconfig.json`
+
+```json
+  "bsc-flags" : ["-bs-g"],
+```
+Suppose your code is like this:
+
+
+```ocaml
+[%%debugger.chro]]></summary>
+        <author>
+        </author>
+    </entry>
     <entry>
         <title type="html"><![CDATA[BuckleScript 3.0]]></title>
         <id>https://bucklescript.github.io/blog/2018/04/16/release-3-0-0.html</id>
