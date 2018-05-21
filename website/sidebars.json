@@ -23,6 +23,7 @@
       "json",
       "fast-pipe",
       "generate-converters-accessors",
+      "better-data-structures-printing-debug-mode",
       "nodejs-special-variables",
       "interop-misc",
       "browser-support-polyfills"

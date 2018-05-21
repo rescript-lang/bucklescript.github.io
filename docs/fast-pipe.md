@@ -60,6 +60,20 @@ let result = [|1, 2, 3|] |. map(a => a + 1) |. filter(a => a mod 2 == 0);
 let () = asyncRequest() |. setWaitDuration(400) |. send();
 ```
 
+## Pipe Into Variants
+
+This works:
+
+```ocaml
+let result = name |. preprocess |. Some
+```
+
+We turn this into:
+
+```ocaml
+let result = Some(preprocess(name))
+```
+
 ## Get Multiple Results
 
 The fast pipe operator can also be used on a tuple:

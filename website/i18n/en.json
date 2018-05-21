@@ -5,6 +5,7 @@
     "previous": "Previous",
     "tagline": "Write safer and simpler code in OCaml & Reason, compile to JavaScript.",
     "automatic-interface-generation": "Automatic Interface Generation",
+    "better-data-structures-printing-debug-mode": "Better Data Structures Printing (Debug Mode)",
     "bind-to-global-values": "Bind to Global Values",
     "browser-support-polyfills": "Browser Support & Polyfills",
     "build-advanced": "Advanced",
