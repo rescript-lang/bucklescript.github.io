@@ -1,4 +1,4 @@
-<html><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/><title>Objeto · BuckleScript</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta property="og:title" content="Objeto · BuckleScript"/><meta property="og:type" content="website"/><meta property="og:url" content="https://bucklescript.github.io/index.html"/><meta property="og:description" content="Objetos Javascript son usados para muchos propositos si tuvieramos una sola API para escribirlos, es problable que terminemos con &quot;este es un objeto que puede tomar potencialmente muchos campos desconocidos con muchos tipos de valor desconocido&quot; que no es muy util."/><link rel="shortcut icon" href="/img/logos/bucklescript_small.svg"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/arduino-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://bucklescript.github.io/blog/atom.xml" title="BuckleScript Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://bucklescript.github.io/blog/feed.xml" title="BuckleScript Blog RSS Feed"/><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/logos/bucklescript_small.svg"/><h2 class="headerTitle">BuckleScript</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li><a href="/docs/es-ES/installation.html" target="_self">Documentación</a></li><li><a href="/docs/es-ES/playground.html" target="_self">Try</a></li><li><a href="/docs/es-ES/stdlib-overview.html" target="_self">API</a></li><li><a href="/docs/es-ES/community.html" target="_self">Comunidad</a></li><li><a href="/blog" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>Español</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja">日本語</a></li><li><a href="/en">English</a></li><li><a href="/fr">Français</a></li><li><a href="/ko">한국어</a></li><li><a href="/pt-BR">Português (Brasil)</a></li><li><a href="/ru">Русский</a></li><li><a href="/zh-CN">中文</a></li><li><a href="/zh-TW">繁體中文</a></li><li><a href="https://crowdin.com/project/bucklescript" target="_blank">Ayúdanos a Traducir</a></li></ul></div></li><script>
+<html><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/><title>Objeto · BuckleScript</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta property="og:title" content="Objeto · BuckleScript"/><meta property="og:type" content="website"/><meta property="og:url" content="https://bucklescript.github.io/index.html"/><meta property="og:description" content="JavaScript objects are used for two major purposes:"/><link rel="shortcut icon" href="/img/logos/bucklescript_small.svg"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/arduino-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://bucklescript.github.io/blog/atom.xml" title="BuckleScript Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://bucklescript.github.io/blog/feed.xml" title="BuckleScript Blog RSS Feed"/><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/logos/bucklescript_small.svg"/><h2 class="headerTitle">BuckleScript</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li><a href="/docs/es-ES/installation.html" target="_self">Documentación</a></li><li><a href="/docs/es-ES/playground.html" target="_self">Try</a></li><li><a href="/docs/es-ES/stdlib-overview.html" target="_self">API</a></li><li><a href="/docs/es-ES/community.html" target="_self">Comunidad</a></li><li><a href="/blog" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>Español</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja">日本語</a></li><li><a href="/en">English</a></li><li><a href="/fr">Français</a></li><li><a href="/ko">한국어</a></li><li><a href="/pt-BR">Português (Brasil)</a></li><li><a href="/ru">Русский</a></li><li><a href="/zh-CN">中文</a></li><li><a href="/zh-TW">繁體中文</a></li><li><a href="https://crowdin.com/project/bucklescript" target="_blank">Ayúdanos a Traducir</a></li></ul></div></li><script>
         const languagesMenuItem = document.getElementById("languages-menu");
         const languagesDropDown = document.getElementById("languages-dropdown");
         languagesMenuItem.addEventListener("click", function(){
@@ -8,281 +8,197 @@
             languagesDropDown.className = "hide";
           }
         });
-      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search"/></li><li><a href="https://github.com/bucklescript/bucklescript" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Interop</span></h2></div><div class="navGroups"><div class="navGroup navGroupActive"><h3>Introducción</h3><ul><li class="navListItem"><a class="navItem" href="/docs/es-ES/what-why.html">Qué y para qué</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/installation.html">Instalación</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/new-project.html">Nuevo proyecto</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/concepts-overview.html">Resumen de conceptos</a></li></ul></div><div class="navGroup navGroupActive"><h3>Interop</h3><ul><li class="navListItem"><a class="navItem" href="/docs/es-ES/interop-overview.html">Resumen</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/interop-cheatsheet.html">Cheatsheet</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/embed-raw-javascript.html">Insertar JavaScript crudo</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/common-data-types.html">Tipos de datos comunes</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/intro-to-external.html">Introduccion a externo</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/bind-to-global-values.html">Enlazar a valores globales</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/null-undefined-option.html">Null, Indefinido&amp; Opcion</a></li><li class="navListItem navListItemActive"><a class="navItem navItemActive" href="/docs/es-ES/object.html">Objeto</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/class.html">Clase</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/function.html">Función</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/import-export.html">Importar y Exportar</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/regular-expression.html">Expresión regular</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/exceptions.html">Excepciones</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/json.html">JSON</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/fast-pipe.html">Fast Pipe</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/generate-converters-accessors.html">Generar convertidores y ayudantes</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/better-data-structures-printing-debug-mode.html">Better Data Structures Printing (Debug Mode)</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/nodejs-special-variables.html">Variables especiales de NodeJS</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/interop-misc.html">Varios</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/browser-support-polyfills.html">Compatibilidad con navegadores y Polyfills</a></li></ul></div><div class="navGroup navGroupActive"><h3>Sistema de Construcción</h3><ul><li class="navListItem"><a class="navItem" href="/docs/es-ES/build-overview.html">Introducción</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/build-configuration.html">Configuración</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/automatic-interface-generation.html">Generación automática de la interfaz</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/interop-with-js-build-systems.html">Interoperabilidad con el sistema de compilación de JS</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/build-performance.html">Rendimiento</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/build-advanced.html">Avanzado</a></li></ul></div><div class="navGroup navGroupActive"><h3>Librería Estándar</h3><ul><li class="navListItem"><a class="navItem" href="/docs/es-ES/stdlib-overview.html">Resumen</a></li></ul></div><div class="navGroup navGroupActive"><h3>Avanzado</h3><ul><li class="navListItem"><a class="navItem" href="/docs/es-ES/conditional-compilation.html">Compilación condicional</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/extended-compiler-options.html">Opciones del compilador extendido</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/use-existing-ocaml-libraries.html">Utilizar las bibliotecas existentes de OCaml</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/difference-from-native-ocaml.html">Diferencia de OCaml Nativo</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/compiler-architecture-principles.html">Arquitectura de compilador y principios</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/comparison-to-jsoo.html">Comparación a Js_of_ocaml</a></li></ul></div></div></section></div><script>
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search"/></li><li><a href="https://github.com/bucklescript/bucklescript" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Interop</span></h2></div><div class="navGroups"><div class="navGroup navGroupActive"><h3>Introducción</h3><ul><li class="navListItem"><a class="navItem" href="/docs/es-ES/what-why.html">Qué y para qué</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/installation.html">Instalación</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/new-project.html">Nuevo proyecto</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/concepts-overview.html">Resumen de conceptos</a></li></ul></div><div class="navGroup navGroupActive"><h3>Interop</h3><ul><li class="navListItem"><a class="navItem" href="/docs/es-ES/interop-overview.html">Resumen</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/interop-cheatsheet.html">Cheatsheet</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/embed-raw-javascript.html">Insertar JavaScript crudo</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/common-data-types.html">Tipos de datos comunes</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/intro-to-external.html">Introduccion a externo</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/bind-to-global-values.html">Enlazar a valores globales</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/null-undefined-option.html">Null, Indefinido&amp; Opcion</a></li><li class="navListItem navListItemActive"><a class="navItem navItemActive" href="/docs/es-ES/object.html">Objeto</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/object-deprecated.html">Object (Deprecated)</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/class.html">Clase</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/function.html">Función</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/import-export.html">Importar y Exportar</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/regular-expression.html">Expresión regular</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/exceptions.html">Excepciones</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/json.html">JSON</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/fast-pipe.html">Fast Pipe</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/generate-converters-accessors.html">Generar convertidores y ayudantes</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/better-data-structures-printing-debug-mode.html">Better Data Structures Printing (Debug Mode)</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/nodejs-special-variables.html">Variables especiales de NodeJS</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/interop-misc.html">Varios</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/browser-support-polyfills.html">Compatibilidad con navegadores y Polyfills</a></li></ul></div><div class="navGroup navGroupActive"><h3>Sistema de Construcción</h3><ul><li class="navListItem"><a class="navItem" href="/docs/es-ES/build-overview.html">Introducción</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/build-configuration.html">Configuración</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/automatic-interface-generation.html">Generación automática de la interfaz</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/interop-with-js-build-systems.html">Interoperabilidad con el sistema de compilación de JS</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/build-performance.html">Rendimiento</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/build-advanced.html">Avanzado</a></li></ul></div><div class="navGroup navGroupActive"><h3>Librería Estándar</h3><ul><li class="navListItem"><a class="navItem" href="/docs/es-ES/stdlib-overview.html">Resumen</a></li></ul></div><div class="navGroup navGroupActive"><h3>Avanzado</h3><ul><li class="navListItem"><a class="navItem" href="/docs/es-ES/conditional-compilation.html">Compilación condicional</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/extended-compiler-options.html">Opciones del compilador extendido</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/use-existing-ocaml-libraries.html">Utilizar las bibliotecas existentes de OCaml</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/difference-from-native-ocaml.html">Diferencia de OCaml Nativo</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/compiler-architecture-principles.html">Arquitectura de compilador y principios</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/comparison-to-jsoo.html">Comparación a Js_of_ocaml</a></li></ul></div></div></section></div><script>
           var toggler = document.getElementById('navToggler');
           var nav = document.getElementById('docsNav');
           toggler.onclick = function() {
             nav.classList.toggle('docsSliderActive');
           };
-        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/bucklescript/es-ES" target="_blank">Translate</a><h1>Objeto</h1></header><article><div><span><p>Objetos Javascript son usados para muchos propositos si tuvieramos una sola API para escribirlos, es problable que terminemos con &quot;este es un objeto que puede tomar potencialmente muchos campos desconocidos con muchos tipos de valor desconocido&quot; que no es muy util.</p>
-<p>BS divide el uso sobrecargado de muchos de los objetos JS en distinta categorias, para mejor UX y perf.</p>
-<h2><a class="anchor" aria-hidden="true" name="objeto-como-mapa-de-hash"></a><a href="#objeto-como-mapa-de-hash" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Objeto como mapa de Hash</h2>
-<p>Hasta hace poco, Donde JS finalmente consiguio apoyo de mapa adecuado, los objetos se han usado como un mapa. Las caracteristicas del objeto como mapa son las siguientes:</p>
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/bucklescript/es-ES" target="_blank">Translate</a><h1>Objeto</h1></header><article><div><span><p>JavaScript objects are used for two major purposes:</p>
 <ul>
-<li>contiene valores que son todas del mismo tipo</li>
-<li>podria o no podria quitar llaves arbitrarias</li>
-<li>podria o no podria acceder con una clave dinamica/llave computada</li>
+<li>As a <strong>hash map</strong> (or &quot;dictionary&quot;), where keys can be dynamically added/removed and where values are of the same type.</li>
+<li>As a <strong>record</strong>, where fields are fixed (though still maybe sometimes optional) and where values can be of different types.</li>
 </ul>
-<p>Si estos puntos(especialmente el primero)describen el uso del objeto, entonces no busque mas que usar el<a href="https://bucklescript.github.io/bucklescript/api/Js.Dict.html"><code>js.Dict</code></a>API! This is a thin wrapper we've made for such situation. Under the hood, a <code>Js.Dict</code> is just an object, and the whole API is erased after compilation. Sin costo de rendimiento. En realidad,<strong>mejor</strong>que no perf costo! Ver las decisiones de diseño abajo.</p>
-<p>En este modo, usted puede hacer toda la metaprogramacion que usted esta acostumbrado con objetos JS: Obtenga todas las teclas a traves de<code>js.dict.keys</code>, obten valores a traves de <code>js.dictvalores</code>,etc.</p>
+<p>Correspondingly, BuckleScript works with JS objects in these 2 ways.</p>
+<h2><a class="anchor" aria-hidden="true" name="hash-map-mode"></a><a href="#hash-map-mode" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Hash Map Mode</h2>
+<p>Until recently, where JS finally got proper Map support, objects have been (ab)used as a map. If you use your JS object like this:</p>
+<ul>
+<li>might or might not add/remove arbitrary keys</li>
+<li>values might or might not be accessed using a dynamic/computed key</li>
+<li>values are all of the same type</li>
+</ul>
+<p>Then use our <a href="https://bucklescript.github.io/bucklescript/api/Js.Dict.html"><code>Js.Dict</code></a> (for &quot;dictionary&quot;) API to bind to that JS object! In this mode, you can do all the metaprogramming you're used to with JS objects: get all keys through <code>Js.Dict.keys</code>, get values through <code>Js.Dict.values</code>, etc.</p>
 <h3><a class="anchor" aria-hidden="true" name="ejemplo"></a><a href="#ejemplo" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Ejemplo</h3>
-<pre><code class="hljs css ocaml"><span class="hljs-keyword">let</span> myMap = <span class="hljs-type">Js</span>.<span class="hljs-type">Dict</span>.empty <span class="hljs-literal">()</span>
-<span class="hljs-keyword">let</span> _ = <span class="hljs-type">Js</span>.<span class="hljs-type">Dict</span>.set myMap <span class="hljs-string">"Allison"</span> <span class="hljs-number">10</span>
+<pre><code class="hljs css ocaml"><span class="hljs-comment">(* Create a JS object ourselves *)</span>
+<span class="hljs-keyword">let</span> myMap = <span class="hljs-type">Js</span>.<span class="hljs-type">Dict</span>.empty <span class="hljs-literal">()</span>
+<span class="hljs-keyword">let</span> <span class="hljs-literal">()</span> = <span class="hljs-type">Js</span>.<span class="hljs-type">Dict</span>.set myMap <span class="hljs-string">"Allison"</span> <span class="hljs-number">10</span>
+
+<span class="hljs-comment">(* Use an existing JS object *)</span>
+<span class="hljs-keyword">external</span> studentAges : <span class="hljs-built_in">int</span> <span class="hljs-type">Js</span>.<span class="hljs-type">Dict</span>.t = <span class="hljs-string">"student"</span> [@@bs.<span class="hljs-keyword">val</span>]
+<span class="hljs-keyword">let</span> <span class="hljs-literal">()</span> =
+  <span class="hljs-keyword">match</span> <span class="hljs-type">Js</span>.<span class="hljs-type">Dict</span>.get studentAges <span class="hljs-string">"Joe"</span> <span class="hljs-keyword">with</span>
+  | <span class="hljs-type">None</span> -&gt; <span class="hljs-type">Js</span>.log <span class="hljs-string">"Joe can't be found"</span>
+  | <span class="hljs-type">Some</span> age -&gt; <span class="hljs-type">Js</span>.log (<span class="hljs-string">"Joe is "</span> ^ (string_of_int age))
 </code></pre>
-<p>Sintaxis de Reason:</p>
-<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> myMap = Js.<span class="hljs-built_in">Dict</span>.empty();
-Js.<span class="hljs-built_in">Dict</span>.set(myMap, <span class="hljs-string">"Allison"</span>, <span class="hljs-number">10</span>);
+<p>Reason syntax:</p>
+<pre><code class="hljs css reason"><span class="hljs-comment">/* Create a JS object ourselves */</span>
+let myMap = Js.Dict.empty();
+Js.Dict.<span class="hljs-keyword">set</span>(myMap, <span class="hljs-string">"Allison"</span>, <span class="hljs-number">10</span>);
+
+<span class="hljs-comment">/* Use an existing JS object */</span>
+[<span class="hljs-meta">@bs</span>.val] <span class="hljs-keyword">external</span> studentAges : Js.Dict.t(<span class="hljs-built_in">int</span>) = <span class="hljs-string">"student"</span>;
+<span class="hljs-keyword">switch</span> (Js.Dict.<span class="hljs-keyword">get</span>(studentAges, <span class="hljs-string">"Joe"</span>)) {
+| None =&gt; Js.log(<span class="hljs-string">"Joe can't be found"</span>)
+| Some(age) =&gt; Js.log(<span class="hljs-string">"Joe is "</span> ++ string_of_int(age))
+};
 </code></pre>
-<p>Salida:</p>
+<p>Output:</p>
 <pre><code class="hljs css js"><span class="hljs-keyword">var</span> myMap = { };
 myMap[<span class="hljs-string">"Allison"</span>] = <span class="hljs-number">10</span>;
+
+<span class="hljs-keyword">var</span> match = student[<span class="hljs-string">"Joe"</span>];
+<span class="hljs-keyword">if</span> (match !== <span class="hljs-literal">undefined</span>) {
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Joe is "</span> + <span class="hljs-built_in">String</span>(match));
+} <span class="hljs-keyword">else</span> {
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Joe can't be found"</span>);
+}
 </code></pre>
-<h2><a class="anchor" aria-hidden="true" name="objeto-como-grabar"></a><a href="#objeto-como-grabar" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Objeto como &quot;grabar&quot;</h2>
-<p>Si su objetivo:</p>
+<h3><a class="anchor" aria-hidden="true" name="design-decisions"></a><a href="#design-decisions" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Design Decisions</h3>
+<p>You can see that under the hood, a <code>Js.Dict</code> is simply backed by a JS object. The entire API uses nothing but ordinary BuckleScript <code>external</code>s, so the whole API disappears after compilation. There should be no mention of <code>Dict</code> anywhere in the generated output. Very convenient when converting files over from JS to BuckleScript.</p>
+<h2><a class="anchor" aria-hidden="true" name="record-mode"></a><a href="#record-mode" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Record Mode</h2>
+<p>If your JS object:</p>
 <ul>
-<li>tiene un numero conocido de campos</li>
-<li>puede o no puede contener valores de tipo heterogeneo</li>
+<li>has a known, fixed set of fields</li>
+<li>might or might not contain values of different types</li>
 </ul>
-<p>Entonces usted esta realmente usando como un &quot;registro&quot; en la mayoria de los lenguajes. Por ejemplo, piensa en las diferencias entre el caso de uso y la intención de los objetos <code>{name: &quot;John&quot;, age: 10, job: &quot;CEO&quot;}</code> y <code>{&quot;John&quot;: 10, &quot;Allison&quot;: 20, &quot;Jimmy&quot;: 15}</code>.</p>
-<p>Este ultimo caso seria el anterior &quot;modo mapa hash&quot;. El primer caso seria el &quot;modo de grabacion&quot;, tratado aqui.</p>
-<h3><a class="anchor" aria-hidden="true" name="escribir"></a><a href="#escribir" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Escribir</h3>
-<p>Utilice el tipo <code>js.t</code>que envuelve un tipo de objeto de OCaml:</p>
-<pre><code class="hljs css ocaml"><span class="hljs-keyword">type</span> person = &lt;
+<p>Then you're really using it like a &quot;record&quot; in most other languages. For example, think of the difference of use-case and intent between the object <code>{&quot;John&quot;: 10, &quot;Allison&quot;: 20, &quot;Jimmy&quot;: 15}</code> and <code>{name: &quot;John&quot;, age: 10, job: &quot;CEO&quot;}</code>. The former case would be the aforementioned &quot;hash map mode&quot;. The latter would be &quot;record mode&quot;, which in BuckleScript is modeled with the <code>bs.deriving abstract</code> feature:</p>
+<pre><code class="hljs css ocaml"><span class="hljs-keyword">type</span> person = {
   name: <span class="hljs-built_in">string</span>;
   age: <span class="hljs-built_in">int</span>;
-  job: <span class="hljs-built_in">string</span>
-&gt; <span class="hljs-type">Js</span>.t
+  job: <span class="hljs-built_in">string</span>;
+} [@@bs.deriving abstract]
 
 <span class="hljs-keyword">external</span> john : person = <span class="hljs-string">"john"</span> [@@bs.<span class="hljs-keyword">val</span>]
 </code></pre>
-<p>Sintaxis de razon:</p>
-<pre><code class="hljs css reason">type person = <span class="hljs-keyword">Js.t({
-</span>  .
-<span class="hljs-symbol">  name:</span> string,
-<span class="hljs-symbol">  age:</span> int,
-<span class="hljs-symbol">  job:</span> string
-})<span class="hljs-comment">;</span>
+<p>Reason syntax:</p>
+<pre><code class="hljs css reason">[@bs.deriving abstract]<span class="hljs-built_in">
+type </span>person = {
+  name: string,
+  age: int,
+  job: string,
+};
 
-[@<span class="hljs-keyword">bs.val] </span><span class="hljs-keyword">external </span><span class="hljs-keyword">john </span>: person = <span class="hljs-string">"john"</span><span class="hljs-comment">;</span>
-</code></pre>
-<p><strong>de ahosra en adelante</strong>, llamaremos a BuckleScript interoperatividad objeto<code>js.t</code>objeto, para eliminar la ambiguedad con objetos normales y objetos js.</p>
-<p>Porque los tipos de objetos se utilizan a menudo, la razon da un mejor azucar mas agradable.<code>js.t{. name: string}</code>formateara a<code>(&quot;nombre:string)</code>.</p>
-<h3><a class="anchor" aria-hidden="true" name="accesores"></a><a href="#accesores" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Accesores</h3>
-<h4><a class="anchor" aria-hidden="true" name="leer"></a><a href="#leer" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Leer</h4>
-<p>Para acceder a un campo, usa <code>##</code>: <code>let johnName = john##name</code>.</p>
-<h4><a class="anchor" aria-hidden="true" name="escribir"></a><a href="#escribir" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Escribir</h4>
-<p>Para modificar un campo, es necesario primero marcar un campo como mutable. de forma predeterminada. el tipo de objeto de<code>js.t</code>es inmutable.</p>
-<pre><code class="hljs css ocaml"><span class="hljs-keyword">type</span> person = &lt; age : <span class="hljs-built_in">int</span> [@bs.set] &gt; <span class="hljs-type">Js</span>.t
-<span class="hljs-keyword">external</span> john: person = <span class="hljs-string">"john"</span> [@@bs.<span class="hljs-keyword">val</span>]
-
-<span class="hljs-keyword">let</span> _ = john##age #= <span class="hljs-number">99</span>
-</code></pre>
-<p>Sintaxis de Reason:</p>
-<pre><code class="hljs css reason">type person = {. [@<span class="hljs-keyword">bs.set] </span><span class="hljs-string">"age"</span>: int}<span class="hljs-comment">;</span>
-[@<span class="hljs-keyword">bs.val] </span><span class="hljs-keyword">external </span><span class="hljs-keyword">john </span>: person = <span class="hljs-string">"john"</span><span class="hljs-comment">;</span>
-
-<span class="hljs-keyword">john##age </span><span class="hljs-comment">#= 99;</span>
-</code></pre>
-<p><strong>Nota</strong>Usted no puede utilizar llaves dinamicas/conputadas en este paradigma.</p>
-<h4><a class="anchor" aria-hidden="true" name="llamar"></a><a href="#llamar" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Llamar</h4>
-<p>Para llamar a metodo del campo, marque la funcion firma como <code>(@bs.meth)</code>:</p>
-<pre><code class="hljs css ocaml"><span class="hljs-keyword">type</span> person = &lt; say : <span class="hljs-built_in">string</span> -&gt; <span class="hljs-built_in">string</span> -&gt; <span class="hljs-built_in">unit</span> [@bs.meth] &gt; <span class="hljs-type">Js</span>.t
-<span class="hljs-keyword">external</span> john: person = <span class="hljs-string">"john"</span> [@@bs.<span class="hljs-keyword">val</span>]
-
-<span class="hljs-keyword">let</span> _ = john##say <span class="hljs-string">"hey"</span> <span class="hljs-string">"jude"</span>
-</code></pre>
-<p>Sintaxis de Reason:</p>
-<pre><code class="hljs css reason"><span class="hljs-built_in">type</span> person = {. [@bs.meth] <span class="hljs-string">"say"</span>: <span class="hljs-function"><span class="hljs-params">(<span class="hljs-built_in">string</span>, <span class="hljs-built_in">string</span>)</span> =&gt;</span> unit};
 [@bs.val] external john : person = <span class="hljs-string">"john"</span>;
-
-john##say(<span class="hljs-string">"hey"</span>, <span class="hljs-string">"jude"</span>);
 </code></pre>
-<p>¿<strong>Por qué <code>[bs.meth]</code></strong>? ¿Por que no simplemente llamarlo directamente? Un objeto JS podria llevar una referencia para <code>este</code>, y tristemente, lo que<code>este</code> señala a puede cambiar. Las funciones OCaml/BuckleScript son al curry por defecto; esto significa que si usted intencionalmente curry<code>decir</code>para el momento que usted lo aplique totalmente,<code>este</code>contexto podria ser incorrecto:</p>
-<pre><code class="hljs css ocaml"><span class="hljs-comment">(* equivocado *)</span>
-<span class="hljs-keyword">let</span> talkTo = john##say(<span class="hljs-string">"hey"</span>)
-
-<span class="hljs-keyword">let</span> jude = talkTo <span class="hljs-string">"jude"</span>
-<span class="hljs-keyword">let</span> paul = talkTo <span class="hljs-string">"paul"</span>
+<p><strong>Note</strong>: the <code>person</code> type is <strong>not</strong> a record! It's a record-looking type that uses the record's syntax and type-checking. The <code>bs.deriving abstract</code> annotation turns it into an &quot;abstract type&quot; (aka you don't know what the actual value's shape).</p>
+<h3><a class="anchor" aria-hidden="true" name="creation"></a><a href="#creation" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Creation</h3>
+<p>You don't have to bind to an existing <code>person</code> object from the JS side. You can also create such <code>person</code> JS object from BuckleScript's side.</p>
+<p>Since <code>bs.deriving abstract</code> turns the above <code>person</code> record into an abstract type, you can't directly create a person record as you would usually. This doesn't work: <code>{name: &quot;Joe&quot;, age: 20, job: &quot;teacher&quot;}</code>.</p>
+<p>Instead, you'd use the <strong>creation function</strong> of the same name as the record type, implicitly generated by the <code>bs.deriving abstract</code> annotation:</p>
+<pre><code class="hljs css ocaml"><span class="hljs-keyword">let</span> joe = person ~name:<span class="hljs-string">"Joe"</span> ~age:<span class="hljs-number">20</span> ~job:<span class="hljs-string">"teacher"</span>
 </code></pre>
-<p>Sintaxis de Reason:</p>
-<pre><code class="hljs css reason"><span class="hljs-comment">/* equivocado */</span>
-<span class="hljs-keyword">let</span> <span class="hljs-attr">talkTo</span> = john<span class="hljs-comment">##say("hey");</span>
-
-<span class="hljs-keyword">let</span> <span class="hljs-attr">jude</span> = talkTo(<span class="hljs-string">"jude"</span>);
-<span class="hljs-keyword">let</span> <span class="hljs-attr">paul</span> = talkTo(<span class="hljs-string">"paul"</span>);
+<p>Reason syntax:</p>
+<pre><code class="hljs css reason">let joe = person(~<span class="hljs-attribute">name</span>=<span class="hljs-string">"Joe"</span>, ~<span class="hljs-attribute">age</span>=20, ~<span class="hljs-attribute">job</span>=<span class="hljs-string">"teacher"</span>)
 </code></pre>
-<p>Para evitar que la gente nocurry accidentalmente un metodo Javascript, hacemos un seguimiento de cada llamada al metodo usando<code>&amp;&amp;</code>para asegurarse que ha aplicado completamente <em>inmediatamente</em>. Bajo el capo, efectivamente pasamos una llamada funcion de aspecto en una llamada especial<code>bs.meth</code>llamada (solo se <em>ve</em>como una funcion). Anotar la definicion del tipo de <code>decir</code>con<code>bs.meth</code>completa esta comprobacion.</p>
-<h3><a class="anchor" aria-hidden="true" name="creacion"></a><a href="#creacion" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Creacion</h3>
-<p>Puedes usar el DSL <code>[%bs.obj putAnOCamlRecordHere]</code> para crear un objeto JS:</p>
-<pre><code class="hljs css ocaml"><span class="hljs-keyword">let</span> bucklescript = [%bs.obj {
-  info = {author = <span class="hljs-string">"Bob"</span>}
-}]
-
-<span class="hljs-keyword">let</span> name = bucklescript##info##author
-</code></pre>
-<p>Sintaxis de Reason:</p>
-<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> bucklescript = [%bs.obj {
-  info: {author: <span class="hljs-string">"Bob"</span>}
-}];
-
-<span class="hljs-keyword">let</span> name = bucklescript##info##author;
-</code></pre>
-<p>Porque los tipos de objetos se utilizan a menudo, la razon da un mejor azucar,&lt;code<code>(%b.ob){foo: 1}</code>formateara a<code>(&quot;foo&quot;:1)</code>.</p>
-<p><strong>Nota</strong>:no hay syntax azucar para crear un objeto vacio en OCaml ni razon (aka esto no trabaja:<code>(@bs.obj)</code>. Por favor utilice<code>js.Obj.vacio()</code>para ese proposito.</p>
-<p>El objeto creado tendrá un tipo inferido, ¡no se necesita declarar su tipo! El ejemplo anterior se inferirá como <code>&lt; info: &lt; author: string &gt; Js.t &gt; Js.t</code>. Sintaxis de Reason: <code>{. &quot;información&quot;: {. &quot;author&quot;: string}}</code>.</p>
-<p><strong>Nota</strong>: puesto que el valor tiene su tipo inferido, <strong>no</strong>accidentalmente hace esto:</p>
-<pre><code class="hljs css ocaml"><span class="hljs-keyword">type</span> person = &lt;age: <span class="hljs-built_in">int</span>&gt; <span class="hljs-type">Js</span>.t
-<span class="hljs-keyword">let</span> jane = [%bs.obj {age = <span class="hljs-string">"hi"</span>}]
-</code></pre>
-<p>Sintaxis de razon:</p>
-<pre><code class="hljs css reason"><span class="hljs-attribute">type person</span> = {. <span class="hljs-string">"age"</span>: int};
-<span class="hljs-attribute">let jane</span> = {<span class="hljs-string">"age"</span>: <span class="hljs-string">"hi"</span>};
-</code></pre>
-<p>¿ver que salio mal aqui? Hemos declarado un tipo <code>persona</code>, pero<code>jane</code>se infiere como su propio tipo de<code>persona</code>es ignorado y no sucede error! Para dar <code>jane</code>un tipo explicito, sinplemente anote:<code>dejar que jane: persona=...</code>. Esto sera un error correctamente.</p>
-<h4><a class="anchor" aria-hidden="true" name="funcion-de-creacion-especial"></a><a href="#funcion-de-creacion-especial" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Funcion de creacion especial</h4>
-<p>Funcion etiquetada opcional de OCaml mapas bastante bien a una creacion de objetos JS. Nosotros proveemos una manera alternativa de crear objetos,<code>bs.obj</code>, que es conveniente si dicho objeto contiene campos opcionales:</p>
-<pre><code class="hljs css ocaml"><span class="hljs-keyword">external</span> makeConfig : high:<span class="hljs-built_in">int</span> -&gt; ?low:<span class="hljs-built_in">int</span> -&gt; <span class="hljs-built_in">unit</span> -&gt; _ = <span class="hljs-string">""</span> [@@bs.obj]
-
-<span class="hljs-keyword">let</span> c1 = makeConfig ~high:<span class="hljs-number">3</span> <span class="hljs-literal">()</span>
-<span class="hljs-keyword">let</span> c2 = makeConfig ~low:<span class="hljs-number">2</span> ~high:<span class="hljs-number">3</span> <span class="hljs-literal">()</span>
-
-<span class="hljs-comment">(* access them as Js.t objects! *)</span>
-<span class="hljs-keyword">let</span> high: <span class="hljs-built_in">int</span> = c1##high
-<span class="hljs-keyword">let</span> low: <span class="hljs-built_in">int</span> <span class="hljs-type">Js</span>.undefined = c1##low
-</code></pre>
-<p>Sintaxis de Reason:</p>
-<pre><code class="hljs css reason">[@bs.obj] external makeConfig : (~high: int, ~low: <span class="hljs-attr">int=?,</span> unit) =&gt; <span class="hljs-attr">_</span> = <span class="hljs-string">""</span>;
-
-<span class="hljs-keyword">let</span> <span class="hljs-attr">c1</span> = makeConfig(~<span class="hljs-attr">high=3,</span> ());
-<span class="hljs-keyword">let</span> <span class="hljs-attr">c2</span> = makeConfig(~<span class="hljs-attr">low=2,</span> ~<span class="hljs-attr">high=3,</span> ());
-
-<span class="hljs-comment">/* ¡accede a ellos como objetos Js.t! */</span>
-<span class="hljs-keyword">let</span> high: <span class="hljs-attr">int</span> = c1<span class="hljs-comment">##high;</span>
-<span class="hljs-keyword">let</span> low: Js.undefined(int) = c1<span class="hljs-comment">##low;</span>
-</code></pre>
-<p>Salida:</p>
-<pre><code class="hljs css js"><span class="hljs-keyword">var</span> c1 = {<span class="hljs-attr">high</span>: <span class="hljs-number">3</span>};
-<span class="hljs-keyword">var</span> c2 = {<span class="hljs-attr">high</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">low</span>: <span class="hljs-number">2</span>};
-<span class="hljs-keyword">var</span> high = c1.high;
-<span class="hljs-keyword">var</span> low = c1.low;
-</code></pre>
-<p><strong>Nota</strong>:</p>
-<ul>
-<li><p>Haciendo el valor de retorno un<code>_</code>inferira a<code>js.t</code>objeto de la forma esperada!</p></li>
-<li><p>El final<code>unidad</code>esta hay para indicar que usted a terminado de aplicar los argumentos opcionales. Mas informacion<a href="https://reasonml.github.io/docs/en/function.html#labeled-arguments">aqui</a>.</p></li>
-</ul>
-<p>Usted tambien puede añadir datos constantes en un objeto usando<code>(@bs.as)</code>:</p>
-<pre><code class="hljs css ocaml"><span class="hljs-keyword">external</span> makeIOConfig :
-  stdio:(_ [@bs.<span class="hljs-keyword">as</span> <span class="hljs-string">"inherit"</span>]) -&gt;
-  cwd:<span class="hljs-built_in">string</span> -&gt;
-  detached:(_ [@bs.<span class="hljs-keyword">as</span> {json|<span class="hljs-literal">true</span>|json}]) -&gt;
-  <span class="hljs-built_in">unit</span> -&gt;
-  _ = <span class="hljs-string">""</span> [@@bs.obj]
-
-<span class="hljs-keyword">let</span> config = makeIOConfig ~cwd:<span class="hljs-string">"."</span> <span class="hljs-literal">()</span>
-</code></pre>
-<p>Sintaxis de Reason:</p>
-<pre><code class="hljs css reason">[@bs.obj]
-external makeIOConfig : (
-  ~stdio: [@bs.as <span class="hljs-string">"inherit"</span>] _,
-  ~cwd: string,
-  ~detached: [@bs.as {json|<span class="hljs-literal">true</span>|json}] _,
-  unit
-) =&gt; _ = <span class="hljs-string">""</span>;
-
-let<span class="hljs-built_in"> config </span>= makeIOConfig(~<span class="hljs-attribute">cwd</span>=<span class="hljs-string">"."</span>, ());
-</code></pre>
-<p>Salida:</p>
-<pre><code class="hljs css js"><span class="hljs-keyword">var</span> config = {
-  <span class="hljs-attr">stdio</span>: <span class="hljs-string">"inherit"</span>,
-  <span class="hljs-attr">cwd</span>: <span class="hljs-string">"."</span>,
-  <span class="hljs-attr">detached</span>: <span class="hljs-literal">true</span>
+<p>Output:</p>
+<pre><code class="hljs css js"><span class="hljs-keyword">var</span> joe = {
+  <span class="hljs-attr">name</span>: <span class="hljs-string">"Joe"</span>,
+  <span class="hljs-attr">age</span>: <span class="hljs-number">20</span>,
+  <span class="hljs-attr">job</span>: <span class="hljs-string">"teacher"</span>
 };
 </code></pre>
-<h3><a class="anchor" aria-hidden="true" name="destruccion-de-nombre"></a><a href="#destruccion-de-nombre" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Destrucción de nombre</h3>
-<h4><a class="anchor" aria-hidden="true" name="nombre-del-campo-invalido"></a><a href="#nombre-del-campo-invalido" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Nombre del campo invalido</h4>
-<p>Sometimes, you might encounter JavaScript object fields that start with capital letters or use reserved words. Este ultimo es invalido y el anterior se reserva para nombres de modulo y variantes. Para evitar esto, apoyamos el objeto etiqueta estropear/traduccion:</p>
-<pre><code class="hljs css ocaml">stream##_open
-stream##_MAX_LENGTH
+<p>Look ma, no runtime cost!</p>
+<h4><a class="anchor" aria-hidden="true" name="rename-fields"></a><a href="#rename-fields" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Rename Fields</h4>
+<p>Sometimes you might be binding to a JS object with field names that are invalid in BuckleScript/Reason. Two examples would be <code>{type: &quot;foo&quot;}</code> (reserved keyword in BS/Reason) and <code>{&quot;aria-checked&quot;: true}</code>. Choose a valid field name then use <code>[@bs.as]</code> to circumvent this:</p>
+<pre><code class="hljs css ocaml"><span class="hljs-keyword">type</span> data = {
+  type_: <span class="hljs-built_in">string</span> [@bs.<span class="hljs-keyword">as</span> <span class="hljs-string">"type"</span>];
+  ariaLabel: <span class="hljs-built_in">string</span> [@bs.<span class="hljs-keyword">as</span> <span class="hljs-string">"aria-label"</span>];
+} [@@bs.deriving abstract]
+
+<span class="hljs-keyword">let</span> d = data ~type_:<span class="hljs-string">"message"</span> ~ariaLabel:<span class="hljs-string">"hello"</span>
 </code></pre>
-<p>Salida:</p>
-<pre><code class="hljs css js">stream.open;
-stream.MAX_LENGTH;
+<p>Reason syntax:</p>
+<pre><code class="hljs css reason">[@bs.deriving abstract]<span class="hljs-built_in">
+type </span>data = {
+  [@bs.as <span class="hljs-string">"type"</span>] type_: string,
+  [@bs.as <span class="hljs-string">"aria-label"</span>] ariaLabel: string,
+};
+
+let d = data(~<span class="hljs-attribute">type_</span>=<span class="hljs-string">"message"</span>, ~<span class="hljs-attribute">ariaLabel</span>=<span class="hljs-string">"hello"</span>);
 </code></pre>
-<p><strong>Comprobar su salida JL</strong>para asegurarse que su nombre estropear trabajado.</p>
-<p><strong>Si la clave contiene guiones</strong>, tendras que usarlo como un disco dinamico, descrito mas tarde.</p>
-<h4><a class="anchor" aria-hidden="true" name="poliformismo-ad-hoc"></a><a href="#poliformismo-ad-hoc" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Poliformismo ad-hoc</h4>
-<p>Otra forma de estropear el nombre es tambien soportado, donde puede ser usado un doble guion bajo (<code>_</code>) añadir un identificador desambiguador que se eliminara en el JS generado.</p>
-<pre><code class="hljs css ocaml">f##draw__int <span class="hljs-number">3</span> <span class="hljs-number">4</span>
-f##draw__float <span class="hljs-number">3.2</span> <span class="hljs-number">4.5</span>
+<p>Output:</p>
+<pre><code class="hljs css js"><span class="hljs-keyword">var</span> d = {
+  <span class="hljs-attr">type</span>: <span class="hljs-string">"message"</span>,
+  <span class="hljs-string">"aria-label"</span>: <span class="hljs-string">"hello"</span>
+};
+</code></pre>
+<h4><a class="anchor" aria-hidden="true" name="optional-labels"></a><a href="#optional-labels" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Optional Labels</h4>
+<p>You can omit fields during the creation of the object:</p>
+<pre><code class="hljs css ocaml"><span class="hljs-keyword">type</span> person = {
+  name: <span class="hljs-built_in">string</span> [@bs.optional];
+  age: <span class="hljs-built_in">int</span>;
+  job: <span class="hljs-built_in">string</span>;
+} [@@bs.deriving abstract]
+
+<span class="hljs-keyword">let</span> joe = person ~age:<span class="hljs-number">20</span> ~job:<span class="hljs-string">"teacher"</span> <span class="hljs-literal">()</span>
 </code></pre>
 <p>Sintaxis de Reason:</p>
-<pre><code class="hljs css reason">f<span class="hljs-function"><span class="hljs-keyword">##</span><span class="hljs-title">draw__int</span><span class="hljs-params">(3, 4)</span></span>;
-f<span class="hljs-function"><span class="hljs-keyword">##</span><span class="hljs-title">draw__float</span><span class="hljs-params">(3.2, 4.5)</span></span>;
-</code></pre>
-<p>Salida:</p>
-<pre><code class="hljs css js">f.draw(<span class="hljs-number">3</span>, <span class="hljs-number">4</span>);
-f.draw(<span class="hljs-number">3.2</span>, <span class="hljs-number">4.5</span>);
-</code></pre>
-<p>Esto puede ser util en circunstancias poco comunes, pero generalmente no se recomienda ya que produce identificadores no idiomaticos y no es muy intuitivo. Prefieren en su lugar implementar el objeto como un registro dinamico (descrito abajo), o definir un tipo abstracto de union sin etiquetar para encapsular los valores de cualquier tipo antes de pasarlos a o desde JavaScript.</p>
-<h3><a class="anchor" aria-hidden="true" name="objeto-js-convercion-de-registro-ocaml"></a><a href="#objeto-js-convercion-de-registro-ocaml" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Objeto JS&lt;-&gt;Convercion de registro OCaml</h3>
-<p>Si usted no desea trabajar con objetos de <code>js.t</code>y desea utilizar registros idiomaticos de OCaml/razon, proveemos generacion automatica de ayudantes que convierten objetos entre <code>js.t</code>y un tipo correspondiente de registro. Ver la seccion en<a href="/docs/es-ES/generate-converters-accessors.html">Generar conversores&amp;ayudantes</a>.</p>
-<!-- TODO: playground link -->
-<h2><a class="anchor" aria-hidden="true" name="objeto-como-registro-dinamico"></a><a href="#objeto-como-registro-dinamico" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Objeto como registro Dinamico</h2>
-<p>When The two above modes of talking to JS objects fail, you can always fall back to this one. And sometimes this the <strong>preferable</strong> way of talking to JS objects, because it:</p>
-<ul>
-<li>trata de objetos con formas potencialmente arbitrarias</li>
-<li>permite valores heterogeneos</li>
-<li><strong>permite guion y otros simbolos en las teclas del objeto</strong></li>
-</ul>
-<pre><code class="hljs css ocaml"><span class="hljs-keyword">type</span> t
-<span class="hljs-keyword">external</span> create : <span class="hljs-built_in">int</span> -&gt; t = <span class="hljs-string">"Int32Array"</span> [@@bs.<span class="hljs-keyword">new</span>] <span class="hljs-comment">(* bs.new es documentado en la sección de clases *)</span>
-<span class="hljs-keyword">external</span> get : t -&gt; <span class="hljs-built_in">int</span> -&gt; <span class="hljs-built_in">int</span> = <span class="hljs-string">""</span> [@@bs.get_index]
-<span class="hljs-keyword">external</span> set : t -&gt; <span class="hljs-built_in">int</span> -&gt; <span class="hljs-built_in">int</span> -&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">""</span> [@@bs.set_index]
+<pre><code class="hljs css reason">[@bs.deriving abstract]<span class="hljs-built_in">
+type </span>person = {
+  [@bs.optional] name: string,
+  age: int,
+  job: string,
+};
 
-<span class="hljs-keyword">let</span> i32arr = (create <span class="hljs-number">3</span>)
-<span class="hljs-keyword">let</span> _ = set i32arr <span class="hljs-number">0</span> <span class="hljs-number">42</span>
-<span class="hljs-keyword">let</span> _ = <span class="hljs-type">Js</span>.log (get i32arr <span class="hljs-number">0</span>)
+let joe = person(~<span class="hljs-attribute">age</span>=20, ~<span class="hljs-attribute">job</span>=<span class="hljs-string">"teacher"</span>, ());
 </code></pre>
-<p>Sintaxis de Reason:</p>
-<pre><code class="hljs css reason">type t;
-[<span class="hljs-meta">@bs</span>.<span class="hljs-keyword">new</span>] <span class="hljs-keyword">external</span> create : <span class="hljs-built_in">int</span> =&gt; t = <span class="hljs-string">"Int32Array"</span>; <span class="hljs-comment">/* bs.new es documentado en la sección de clases */</span>
-[<span class="hljs-meta">@bs</span>.get_index] <span class="hljs-keyword">external</span> <span class="hljs-keyword">get</span> : (t, <span class="hljs-built_in">int</span>) =&gt; <span class="hljs-built_in">int</span> = <span class="hljs-string">""</span>;
-[<span class="hljs-meta">@bs</span>.set_index] <span class="hljs-keyword">external</span> <span class="hljs-keyword">set</span> : (t, <span class="hljs-built_in">int</span>, <span class="hljs-built_in">int</span>) =&gt; unit = <span class="hljs-string">""</span>;
-
-let i32arr = create(<span class="hljs-number">3</span>);
-<span class="hljs-keyword">set</span>(i32arr, <span class="hljs-number">0</span>, <span class="hljs-number">42</span>);
-Js.log(<span class="hljs-keyword">get</span>(i32arr, <span class="hljs-number">0</span>));
+<p><strong>Note</strong> that the <code>[@bs.optional]</code> tag turned the <code>name</code> field optional. Merely typing <code>name</code> as <code>option(string)</code> wouldn't work.</p>
+<p><strong>Note</strong>: now that your creation function contains optional fields, we mandate an unlabeled <code>()</code> at the end to indicate that <a href="https://reasonml.github.io/docs/en/function.html#optional-labeled-arguments">you've finished applying the function</a>.</p>
+<h3><a class="anchor" aria-hidden="true" name="accessors"></a><a href="#accessors" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Accessors</h3>
+<p>Again, since <code>bs.deriving abstract</code> hides the actual record shape, you can't access a field using e.g. <code>joe.age</code>. We remediate this by generating getter and setters.</p>
+<h4><a class="anchor" aria-hidden="true" name="read"></a><a href="#read" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Read</h4>
+<p>One getter function is generated per <code>bs.deriving abstract</code> record type field. In the above example, you'd get 3 functions: <code>name</code>, <code>age</code>, <code>job</code>. They take in a <code>person</code> value and return <code>string</code>, <code>int</code>, <code>string</code> respectively:</p>
+<pre><code class="hljs css ocaml"><span class="hljs-keyword">let</span> twenty = age joe
 </code></pre>
-<p>Si bien los nombres son <code>get_index</code> y <code>set_index</code>, es realmente dinámico el accedo de campos de objetos y/o arreglos.</p>
-<p>Salida:</p>
-<pre><code class="hljs css js"><span class="hljs-keyword">var</span> i32arr = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Int32Array</span>(<span class="hljs-number">3</span>);
-i32arr[<span class="hljs-number">0</span>] = <span class="hljs-number">42</span>;
-<span class="hljs-built_in">console</span>.log(i32arr[<span class="hljs-number">0</span>]);
+<p>Reason syntax:</p>
+<pre><code class="hljs css reason">let twenty = age(<span class="hljs-name">joe</span>)
 </code></pre>
-<h3><a class="anchor" aria-hidden="true" name="obtensores-establecedores-especificos"></a><a href="#obtensores-establecedores-especificos" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Obtensores/Establecedores Específicos</h3>
-<pre><code class="hljs css ocaml"><span class="hljs-keyword">type</span> textarea
-<span class="hljs-keyword">external</span> setName : textarea -&gt; <span class="hljs-built_in">string</span> -&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">"nombre"</span> [@@bs.set]
-<span class="hljs-keyword">external</span> getName : textarea -&gt; <span class="hljs-built_in">string</span> = <span class="hljs-string">"nombre"</span> [@@bs.get]
-
-<span class="hljs-keyword">external</span> myTextArea: textarea = <span class="hljs-string">""</span> [@@bs.<span class="hljs-keyword">val</span>]
-<span class="hljs-keyword">let</span> _ = setName myTextArea <span class="hljs-string">"asd"</span>
+<p>Alternatively, you can use the <a href="/fast-pipe.md">Fast Pipe</a> feature in a later section for a nicer-looking access syntax:</p>
+<pre><code class="hljs css ocaml"><span class="hljs-keyword">let</span> twenty = joe |. age
 </code></pre>
-<p>Sintaxis de Reason:</p>
-<pre><code class="hljs css reason">type textarea<span class="hljs-comment">;</span>
-[@<span class="hljs-keyword">bs.set] </span><span class="hljs-keyword">external </span>setName : (textarea, string) =&gt; unit = <span class="hljs-string">"nombre"</span><span class="hljs-comment">;</span>
-[@<span class="hljs-keyword">bs.get] </span><span class="hljs-keyword">external </span>getName : textarea =&gt; string = <span class="hljs-string">"nombre"</span><span class="hljs-comment">;</span>
-
-[@<span class="hljs-keyword">bs.val] </span><span class="hljs-keyword">external </span>myTextArea : textarea = <span class="hljs-string">""</span><span class="hljs-comment">;</span>
-setName(myTextArea, <span class="hljs-string">"asd"</span>)<span class="hljs-comment">;</span>
+<h4><a class="anchor" aria-hidden="true" name="write"></a><a href="#write" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Write</h4>
+<p>A <code>bs.deriving abstract</code> value is immutable by default. To mutate such value, you need to first mark one of the abstract record field as <code>mutable</code>, the same way you'd mark a normal record as mutable:</p>
+<pre><code class="hljs css ocaml"><span class="hljs-keyword">type</span> person = {
+  name: <span class="hljs-built_in">string</span>;
+  <span class="hljs-keyword">mutable</span> age: <span class="hljs-built_in">int</span>;
+  job: <span class="hljs-built_in">string</span>;
+} [@@bs.deriving abstract]
 </code></pre>
-<p>Salida:</p>
-<pre><code class="hljs css js">myTextArea.name = <span class="hljs-string">"asd"</span>;
+<p>Sintaxis de razon:</p>
+<pre><code class="hljs css reason">[@bs.deriving abstract]<span class="hljs-built_in">
+type </span>person = {
+  name: string,
+  mutable age: int,
+  job: string,
+};
 </code></pre>
-<p>Hay tambien un truco con metodos objetos y cadenas de metodo en la proxima seccion funcion.</p>
-<h2><a class="anchor" aria-hidden="true" name="conclucion"></a><a href="#conclucion" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Conclucion</h2>
-<p>Todos estos trucos para unirse a objetos JS pueden ser abrumadores; no se preocupe, usted puede recoger lo que sea a medida que avanza. Pero ojala usted pueda ver que casi siempre es una forma de enlazar a la biblioteca JS favorito sin costo!</p>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="null-undefined-option.html">← Null, Indefinido&amp; Opcion</a><a class="docs-next button" href="class.html">Clase →</a></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.js"></script><script>window.foo = new Pjax({
+<p>Then, a setter of the name <code>ageSet</code> will be generated. Use it like so:</p>
+<pre><code class="hljs css ocaml"><span class="hljs-keyword">let</span> joe = person ~name:<span class="hljs-string">"Joe"</span> ~age:<span class="hljs-number">20</span> ~job:<span class="hljs-string">"teacher"</span>
+<span class="hljs-keyword">let</span> <span class="hljs-literal">()</span> = ageSet joe <span class="hljs-number">21</span>
+</code></pre>
+<p>Reason syntax:</p>
+<pre><code class="hljs css reason">let joe = person(~<span class="hljs-attribute">name</span>=<span class="hljs-string">"Joe"</span>, ~<span class="hljs-attribute">age</span>=20, ~<span class="hljs-attribute">job</span>=<span class="hljs-string">"teacher"</span>);
+ageSet(joe, 21);
+</code></pre>
+<p>Alternatively, with the fast pipe syntax:</p>
+<pre><code class="hljs css ocaml">joe |. ageSet <span class="hljs-number">21</span>
+</code></pre>
+<p>Reason syntax:</p>
+<pre><code class="hljs css reason">joe <span class="hljs-string">|. ageSet(21)</span>
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" name="methods"></a><a href="#methods" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Methods</h3>
+<p>You can attach arbitrary methods onto a type (<em>any</em> type, as a matter of fact. Not just <code>bs.deriving abstract</code> record types). See <a href="/function.md#object-method">Object Method</a> in the function section later.</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="null-undefined-option.html">← Null, Indefinido&amp; Opcion</a><a class="docs-next button" href="object-deprecated.html">Object (Deprecated) →</a></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.js"></script><script>window.foo = new Pjax({
           areas: [
             // try to use the first query.
             '.mainContainer, .docsNavContainer .toc .navWrapper',
