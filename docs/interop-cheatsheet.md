@@ -124,116 +124,38 @@ Js.Dict.set(myMap, "Allison", 10);
 ### Record Mode
 
 ```ocaml
-type person = <
-  name: string;
+type person = {
+  name: string [@bs.optional];
   age: int;
-  job: string [@bs.set];
-  getNickname: unit -> string [@bs.meth]
-> Js.t
+  mutable job: string;
+} [@@bs.deriving abstract]
+
+external getNickname: person -> string = "getNickname" [@@bs.send]
 
 external john : person = "john" [@@bs.val]
-let age = john##age
-let _ = john##job #= "Accountant"
-let nick = john##getNickname ()
+
+let age = john |. age
+let () = john |. jobSet "Accountant"
+let nick = john |. getNickname
 ```
 
 Reason syntax:
 
 ```reason
+[@bs.deriving abstract]
 type person = {
-  .
-  "name": string,
-  "age": int,
-  [@bs.set] "job" : string,
-  [@bs.meth] "getNickname" : unit => string
+  [@bs.optional] name: string,
+  age: int,
+  mutable job: string,
 };
+
+[@bs.send] external getNickname : person => string = "getNickname";
 
 [@bs.val] external john : person = "john";
-let age = john##age;
-john##job#="Accountant";
-let nick = john##getNickname();
-```
 
-### Creation
-
-```ocaml
-let bucklescript = [%bs.obj {
-  info = {author = "Bob"}
-}]
-
-let name = bucklescript##info##author
-```
-
-Reason syntax:
-
-```reason
-let bucklescript = {
-  "info": {
-    author: "Bob"
-  }
-};
-
-let name = bucklescript##info##author;
-```
-
-```ocaml
-external makeConfig :
-  high:int ->
-  ?low:int ->
-  name:(_ [@bs.as {json|false|json}]) ->
-  unit ->
-  _ = "" [@@bs.obj]
-
-let c1 = makeConfig ~high:3 ()
-let low: int Js.undefined = c1##low
-```
-
-Reason syntax:
-
-```reason
-[@bs.obj]
-external makeConfig : (
-  ~high: int,
-  ~low: int=?,
-  ~name: [@bs.as {json|false|json}] _, unit
-) => _ = "";
-
-let c1 = makeConfig(~high=3, ());
-let low: Js.undefined(int) = c1##low;
-```
-
-### Name Mangling
-
-```ocaml
-stream##_open (* open *)
-stream##_MAX_LENGTH (* MAX_LENGTH *)
-```
-
-Reason syntax:
-
-```reason
-stream##_open /* open */
-stream##_MAX_LENGTH /* MAX_LENGTH */
-```
-
-### Getter/Setter
-
-```ocaml
-type t
-external get : t -> int -> int = "" [@@bs.get_index]
-
-type textarea
-external setName : textarea -> string -> unit = "name" [@@bs.set]
-```
-
-Reason syntax:
-
-```reason
-type t;
-[@bs.get_index] external get : (t, int) => int = "";
-
-type textarea;
-[@bs.set] external setName : (textarea, string) => unit = "name";
+let age = john |. age;
+john |. jobSet("Accountant");
+let nick = john |. getNickname;
 ```
 
 ### New Instance

@@ -85,7 +85,6 @@ As to why we don't compile list to JS array or vice-versa, it's because OCaml ar
 The same justification applies for records. OCaml records are fixed, nominally typed, and in general doesn't work well with JS objects. We do provide excellent facilities to bind to JS objects in the [object section](object.md).
 
 <!-- TODO: playground link -->
-<!-- TODO: API docs revamp -->
 
 ## Cheat Sheet
 
@@ -102,7 +101,7 @@ array | array
 tuple | array. `(3, 4)` -> `[3, 4]`
 bool | boolean
 Js.Nullable.t | `null`/`undefined`
-Js.t object | object
+special `bs.deriving abstract` record | object
 
 ### Non-shared
 

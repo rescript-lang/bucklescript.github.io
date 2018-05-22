@@ -15,6 +15,7 @@
       "bind-to-global-values",
       "null-undefined-option",
       "object",
+      "object-deprecated",
       "class",
       "function",
       "import-export",

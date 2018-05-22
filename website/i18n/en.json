@@ -39,6 +39,7 @@
     "new-project": "New Project",
     "nodejs-special-variables": "NodeJS Special Variables",
     "null-undefined-option": "Null, Undefined & Option",
+    "object-deprecated": "Object (Deprecated)",
     "object": "Object",
     "playground": "Playground",
     "regular-expression": "Regular Expression",

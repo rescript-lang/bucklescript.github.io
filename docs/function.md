@@ -61,7 +61,7 @@ We've compiled to the same function, but now the usage is much clearer on the BS
 
 ## Object Method
 
-You might have seen in the object and record section that you can attach a `bs.meth` onto a `Js.t` object and call it as a method. This section presents an alternative using `bs.send`.
+Functions attached to a JS objects require a special way of binding to them, using `bs.send`:
 
 ```ocaml
 type document (* abstract type for a document object *)

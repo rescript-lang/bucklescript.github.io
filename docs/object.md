@@ -2,34 +2,51 @@
 title: Object
 ---
 
-JavaScript objects are used for so many purposes that if we had a single API for typing them, we'd likely end up with "this is an object that can take potentially many unknown fields with many unknown value types", which isn't very useful.
+JavaScript objects are used for two major purposes:
 
-BS splits the many overloaded usage of JS objects into distinct categories, for better UX and perf.
+- As a **hash map** (or "dictionary"), where keys can be dynamically added/removed and where values are of the same type.
+- As a **record**, where fields are fixed (though still maybe sometimes optional) and where values can be of different types.
 
-## Object as Hash Map
+Correspondingly, BuckleScript works with JS objects in these 2 ways.
 
-Up until recently, where JS finally got proper Map support, objects have been used as a map. The characteristics of object-as-map are the following:
+## Hash Map Mode
 
-- contains values that are all of the same type
+Until recently, where JS finally got proper Map support, objects have been (ab)used as a map. If you use your JS object like this:
+
 - might or might not add/remove arbitrary keys
-- might or might not be accessed using a dynamic/computed key
+- values might or might not be accessed using a dynamic/computed key
+- values are all of the same type
 
-If these points (especially the first one) describe your object usage, then look no further than using the [`Js.Dict`](https://bucklescript.github.io/bucklescript/api/Js.Dict.html) API! This is a thin wrapper we've made for such situation. Under the hood, a `Js.Dict` is just an object, and the whole API is erased after compilation. No performance cost. Actually, **better** than no perf cost! See the Design Decisions below.
-
-In this mode, you can do all the metaprogramming you're used to with JS objects: get all keys through `Js.Dict.keys`, get values through `Js.Dict.values`, etc.
+Then use our [`Js.Dict`](https://bucklescript.github.io/bucklescript/api/Js.Dict.html) (for "dictionary") API to bind to that JS object! In this mode, you can do all the metaprogramming you're used to with JS objects: get all keys through `Js.Dict.keys`, get values through `Js.Dict.values`, etc.
 
 ### Example
 
 ```ocaml
+(* Create a JS object ourselves *)
 let myMap = Js.Dict.empty ()
-let _ = Js.Dict.set myMap "Allison" 10
+let () = Js.Dict.set myMap "Allison" 10
+
+(* Use an existing JS object *)
+external studentAges : int Js.Dict.t = "student" [@@bs.val]
+let () =
+  match Js.Dict.get studentAges "Joe" with
+  | None -> Js.log "Joe can't be found"
+  | Some age -> Js.log ("Joe is " ^ (string_of_int age))
 ```
 
 Reason syntax:
 
 ```reason
+/* Create a JS object ourselves */
 let myMap = Js.Dict.empty();
 Js.Dict.set(myMap, "Allison", 10);
+
+/* Use an existing JS object */
+[@bs.val] external studentAges : Js.Dict.t(int) = "student";
+switch (Js.Dict.get(studentAges, "Joe")) {
+| None => Js.log("Joe can't be found")
+| Some(age) => Js.log("Joe is " ++ string_of_int(age))
+};
 ```
 
 Output:
@@ -37,29 +54,34 @@ Output:
 ```js
 var myMap = { };
 myMap["Allison"] = 10;
+
+var match = student["Joe"];
+if (match !== undefined) {
+  console.log("Joe is " + String(match));
+} else {
+  console.log("Joe can't be found");
+}
 ```
 
-## Object as "Record"
+### Design Decisions
 
-If your object:
+You can see that under the hood, a `Js.Dict` is simply backed by a JS object. The entire API uses nothing but ordinary BuckleScript `external`s, so the whole API disappears after compilation. There should be no mention of `Dict` anywhere in the generated output. Very convenient when converting files over from JS to BuckleScript.
 
-- has a known number of fields
-- might or might not contain values of heterogeneous types
+## Record Mode
 
-Then you're really using it like a "record" in most languages. For example, think of the difference of use-case and intent between the object `{name: "John", age: 10, job: "CEO"}` and `{"John": 10, "Allison": 20, "Jimmy": 15}`.
+If your JS object:
 
-The latter case would be the previous "hash map mode". The former case would be "record mode", treated here.
+- has a known, fixed set of fields
+- might or might not contain values of different types
 
-### Typing
-
-Use the type `Js.t` that wraps an OCaml object type:
+Then you're really using it like a "record" in most other languages. For example, think of the difference of use-case and intent between the object `{"John": 10, "Allison": 20, "Jimmy": 15}` and `{name: "John", age: 10, job: "CEO"}`. The former case would be the aforementioned "hash map mode". The latter would be "record mode", which in BuckleScript is modeled with the `bs.deriving abstract` feature:
 
 ```ocaml
-type person = <
+type person = {
   name: string;
   age: int;
-  job: string
-> Js.t
+  job: string;
+} [@@bs.deriving abstract]
 
 external john : person = "john" [@@bs.val]
 ```
@@ -67,339 +89,186 @@ external john : person = "john" [@@bs.val]
 Reason syntax:
 
 ```reason
-type person = Js.t({
-  .
+[@bs.deriving abstract]
+type person = {
   name: string,
   age: int,
-  job: string
-});
+  job: string,
+};
 
 [@bs.val] external john : person = "john";
 ```
 
-**From now on**, we'll call the BuckleScript interop object "`Js.t` object", to disambiguate it with normal object and JS object.
-
-Because object types are used often, Reason gives it a nicer sugar. `Js.t({. name: string})` will format to `{. "name": string}`.
-
-### Accessors
-
-#### Read
-
-To access a field, use `##`: `let johnName = john##name`.
-
-#### Write
-
-To modify a field, you need to first mark a field as mutable. By default, the `Js.t` object type is immutable.
-
-```ocaml
-type person = < age : int [@bs.set] > Js.t
-external john: person = "john" [@@bs.val]
-
-let _ = john##age #= 99
-```
-
-Reason syntax:
-
-```reason
-type person = {. [@bs.set] "age": int};
-[@bs.val] external john : person = "john";
-
-john##age #= 99;
-```
-
-**Note**: you can't use dynamic/computed keys in this paradigm.
-
-#### Call
-
-To call a method of a field, mark the function signature as `[@bs.meth]`:
-
-```ocaml
-type person = < say : string -> string -> unit [@bs.meth] > Js.t
-external john: person = "john" [@@bs.val]
-
-let _ = john##say "hey" "jude"
-```
-
-Reason syntax:
-
-```reason
-type person = {. [@bs.meth] "say": (string, string) => unit};
-[@bs.val] external john : person = "john";
-
-john##say("hey", "jude");
-```
-
-**Why `[bs.meth]`**? Why not just call it directly? A JS object might carry around a reference to `this`, and infamously, what `this` points to can change. OCaml/BuckleScript functions are curried by default; this means that if you intentionally curry `say`, by the time you fully apply it, the `this` context could be wrong:
-
-```ocaml
-(* wrong *)
-let talkTo = john##say("hey")
-
-let jude = talkTo "jude"
-let paul = talkTo "paul"
-```
-
-Reason syntax:
-
-```reason
-/* wrong */
-let talkTo = john##say("hey");
-
-let jude = talkTo("jude");
-let paul = talkTo("paul");
-```
-
-To ensure that folks don't accidentally curry a JavaScript method, we track every method call using `##` to make sure it's fully applied _immediately_. Under the hood, we effectively turn a function-looking call into a special `bs.meth` call (it only _looks_ like a function). Annotating the type definition of `say` with `bs.meth` completes this check.
+**Note**: the `person` type is **not** a record! It's a record-looking type that uses the record's syntax and type-checking. The `bs.deriving abstract` annotation turns it into an "abstract type" (aka you don't know what the actual value's shape).
 
 ### Creation
 
-You can use `[%bs.obj putAnOCamlRecordHere]` DSL to create a JS object:
+You don't have to bind to an existing `person` object from the JS side. You can also create such `person` JS object from BuckleScript's side.
+
+Since `bs.deriving abstract` turns the above `person` record into an abstract type, you can't directly create a person record as you would usually. This doesn't work: `{name: "Joe", age: 20, job: "teacher"}`.
+
+Instead, you'd use the **creation function** of the same name as the record type, implicitly generated by the `bs.deriving abstract` annotation:
 
 ```ocaml
-let bucklescript = [%bs.obj {
-  info = {author = "Bob"}
-}]
-
-let name = bucklescript##info##author
+let joe = person ~name:"Joe" ~age:20 ~job:"teacher"
 ```
 
 Reason syntax:
 
 ```reason
-let bucklescript = [%bs.obj {
-  info: {author: "Bob"}
-}];
-
-let name = bucklescript##info##author;
-```
-
-Because object values are used often, Reason gives it a nicer sugar. `[%bs.obj {foo: 1}]` will format to `{"foo": 1}`.
-
-**Note**: there's no syntax sugar for creating an empty object in OCaml nor Reason (aka this doesn't work: `[@bs.obj {}]`. Please use `Js.Obj.empty()` for that purpose.
-
-The created object will have an inferred type, no type declaration needed! The above example will infer as `< info: < author: string > Js.t > Js.t`. Reason syntax: `{. "info": {. "author": string}}`.
-
-**Note**: since the value has its type inferred, **don't** accidentally do this:
-
-```ocaml
-type person = <age: int> Js.t
-let jane = [%bs.obj {age = "hi"}]
-```
-
-Reason syntax:
-
-```reason
-type person = {. "age": int};
-let jane = {"age": "hi"};
-```
-
-See what went wrong here? We've declared a `person` type, but `jane` is inferred as its own type, so `person` is ignored and no error happens! To give `jane` an explicit type, simply annotate it: `let jane: person = ...`. This will then error correctly.
-
-#### Special Creation Function
-
-OCaml's optional labeled function maps rather nicely to a JS object creation. We provide an alternative way of creating objects, `bs.obj`, that is convenient if said object contains optional fields:
-
-```ocaml
-external makeConfig : high:int -> ?low:int -> unit -> _ = "" [@@bs.obj]
-
-let c1 = makeConfig ~high:3 ()
-let c2 = makeConfig ~low:2 ~high:3 ()
-
-(* access them as Js.t objects! *)
-let high: int = c1##high
-let low: int Js.undefined = c1##low
-```
-
-Reason syntax:
-
-```reason
-[@bs.obj] external makeConfig : (~high: int, ~low: int=?, unit) => _ = "";
-
-let c1 = makeConfig(~high=3, ());
-let c2 = makeConfig(~low=2, ~high=3, ());
-
-/* access them as Js.t objects! */
-let high: int = c1##high;
-let low: Js.undefined(int) = c1##low;
+let joe = person(~name="Joe", ~age=20, ~job="teacher")
 ```
 
 Output:
 
 ```js
-var c1 = {high: 3};
-var c2 = {high: 3, low: 2};
-var high = c1.high;
-var low = c1.low;
-```
-
-**Note**:
-
-- Marking the return value as `_` will infer a `Js.t` object of the expected shape!
-
-- The final `unit` is there to indicate that you've finished applying optional arguments. More info [here](https://reasonml.github.io/docs/en/function.html#labeled-arguments).
-
-You can also attach constant data unto an object using `[@bs.as]`:
-
-```ocaml
-external makeIOConfig :
-  stdio:(_ [@bs.as "inherit"]) ->
-  cwd:string ->
-  detached:(_ [@bs.as {json|true|json}]) ->
-  unit ->
-  _ = "" [@@bs.obj]
-
-let config = makeIOConfig ~cwd:"." ()
-```
-
-Reason syntax:
-
-```reason
-[@bs.obj]
-external makeIOConfig : (
-  ~stdio: [@bs.as "inherit"] _,
-  ~cwd: string,
-  ~detached: [@bs.as {json|true|json}] _,
-  unit
-) => _ = "";
-
-let config = makeIOConfig(~cwd=".", ());
-```
-
-Output:
-
-```js
-var config = {
-  stdio: "inherit",
-  cwd: ".",
-  detached: true
+var joe = {
+  name: "Joe",
+  age: 20,
+  job: "teacher"
 };
 ```
 
-### Name mangling
+Look ma, no runtime cost!
 
-#### Invalid field names
+#### Rename Fields
 
-Sometimes, you might encounter JavaScript object fields that start with capital letters or use reserved words. The latter is invalid and the former is reserved for module and variant names. To circumvent this, we support object label mangling/translation:
-
-```ocaml
-stream##_open
-stream##_MAX_LENGTH
-```
-
-Output:
-
-```js
-stream.open;
-stream.MAX_LENGTH;
-```
-
-**Double check your JS output** to make sure your name mangling worked.
-
-**If your key contains hyphens**, you'll have to use it as a dynamic record, described later.
-
-#### Ad-hoc Polymorphism
-
-Another form of name mangling is also supported, where a double underscore (`__`) can be used add a disambiguating identifier which will be removed in the generated JS.
+Sometimes you might be binding to a JS object with field names that are invalid in BuckleScript/Reason. Two examples would be `{type: "foo"}` (reserved keyword in BS/Reason) and `{"aria-checked": true}`. Choose a valid field name then use `[@bs.as]` to circumvent this:
 
 ```ocaml
-f##draw__int 3 4
-f##draw__float 3.2 4.5
+type data = {
+  type_: string [@bs.as "type"];
+  ariaLabel: string [@bs.as "aria-label"];
+} [@@bs.deriving abstract]
+
+let d = data ~type_:"message" ~ariaLabel:"hello"
 ```
 
 Reason syntax:
 
 ```reason
-f##draw__int(3, 4);
-f##draw__float(3.2, 4.5);
+[@bs.deriving abstract]
+type data = {
+  [@bs.as "type"] type_: string,
+  [@bs.as "aria-label"] ariaLabel: string,
+};
+
+let d = data(~type_="message", ~ariaLabel="hello");
 ```
 
 Output:
 
 ```js
-f.draw(3, 4);
-f.draw(3.2, 4.5);
+var d = {
+  type: "message",
+  "aria-label": "hello"
+};
 ```
 
-This can be useful in rare circumstances, but is generally not recommended since it produces non-idiomatic identifiers and is not very intuitive. Prefer instead to implement the object as a dynamic record (described below), or define an abstract untagged union type to encapsulate values of either type before passing them to or from JavaScript.
+#### Optional Labels
 
-### Js Object <-> OCaml Record conversion
-
-If you don't want to work with `Js.t` objects and want to use idiomatic OCaml/Reason records, we provide automatic generation of helpers that convert between a `Js.t` object and a corresponding record type. See the section on [Generate Converters & Helpers](generate-converters-accessors.md).
-
-<!-- TODO: playground link -->
-
-## Object as Dynamic Record
-
-When The two above modes of talking to JS objects fail, you can always fall back to this one. And sometimes this the **preferable** way of talking to JS objects, because it:
-
-- deals with objects with potentially arbitrary shapes
-- allows heterogeneous values
-- **allows hyphen and other symbols in object keys**
+You can omit fields during the creation of the object:
 
 ```ocaml
-type t
-external create : int -> t = "Int32Array" [@@bs.new] (* bs.new is documented in the class section *)
-external get : t -> int -> int = "" [@@bs.get_index]
-external set : t -> int -> int -> unit = "" [@@bs.set_index]
+type person = {
+  name: string [@bs.optional];
+  age: int;
+  job: string;
+} [@@bs.deriving abstract]
 
-let i32arr = (create 3)
-let _ = set i32arr 0 42
-let _ = Js.log (get i32arr 0)
+let joe = person ~age:20 ~job:"teacher" ()
 ```
 
 Reason syntax:
 
 ```reason
-type t;
-[@bs.new] external create : int => t = "Int32Array"; /* bs.new is documented in the class section */
-[@bs.get_index] external get : (t, int) => int = "";
-[@bs.set_index] external set : (t, int, int) => unit = "";
+[@bs.deriving abstract]
+type person = {
+  [@bs.optional] name: string,
+  age: int,
+  job: string,
+};
 
-let i32arr = create(3);
-set(i32arr, 0, 42);
-Js.log(get(i32arr, 0));
+let joe = person(~age=20, ~job="teacher", ());
 ```
 
-Albeit the names are called `get_index` and `set_index`, it's really dynamic access of objects fields and/or arrays.
+**Note** that the `[@bs.optional]` tag turned the `name` field optional. Merely typing `name` as `option(string)` wouldn't work.
 
-Output:
+**Note**: now that your creation function contains optional fields, we mandate an unlabeled `()` at the end to indicate that [you've finished applying the function](https://reasonml.github.io/docs/en/function.html#optional-labeled-arguments).
 
-```js
-var i32arr = new Int32Array(3);
-i32arr[0] = 42;
-console.log(i32arr[0]);
-```
+### Accessors
 
-### Specific Getter/Setter
+Again, since `bs.deriving abstract` hides the actual record shape, you can't access a field using e.g. `joe.age`. We remediate this by generating getter and setters.
+
+#### Read
+
+One getter function is generated per `bs.deriving abstract` record type field. In the above example, you'd get 3 functions: `name`, `age`, `job`. They take in a `person` value and return `string`, `int`, `string` respectively:
 
 ```ocaml
-type textarea
-external setName : textarea -> string -> unit = "name" [@@bs.set]
-external getName : textarea -> string = "name" [@@bs.get]
-
-external myTextArea: textarea = "" [@@bs.val]
-let _ = setName myTextArea "asd"
+let twenty = age joe
 ```
 
 Reason syntax:
 
 ```reason
-type textarea;
-[@bs.set] external setName : (textarea, string) => unit = "name";
-[@bs.get] external getName : textarea => string = "name";
-
-[@bs.val] external myTextArea : textarea = "";
-setName(myTextArea, "asd");
+let twenty = age(joe)
 ```
 
-Output:
+Alternatively, you can use the [Fast Pipe](/fast-pipe.md) feature in a later section for a nicer-looking access syntax:
 
-```js
-myTextArea.name = "asd";
+```ocaml
+let twenty = joe |. age
 ```
 
-There's also a trick with object methods and method chaining in the next function section.
+#### Write
 
-## Conclusion
+A `bs.deriving abstract` value is immutable by default. To mutate such value, you need to first mark one of the abstract record field as `mutable`, the same way you'd mark a normal record as mutable:
 
-All these tricks to bind to JS objects might be overwhelming; don't worry, you can just pick whatever you need as you go. But hopefully you can see that there's almost always a way to bind to your favorite JS library with no cost!
+```ocaml
+type person = {
+  name: string;
+  mutable age: int;
+  job: string;
+} [@@bs.deriving abstract]
+```
+
+Reason syntax:
+
+```reason
+[@bs.deriving abstract]
+type person = {
+  name: string,
+  mutable age: int,
+  job: string,
+};
+```
+
+Then, a setter of the name `ageSet` will be generated. Use it like so:
+
+```ocaml
+let joe = person ~name:"Joe" ~age:20 ~job:"teacher"
+let () = ageSet joe 21
+```
+
+Reason syntax:
+
+```reason
+let joe = person(~name="Joe", ~age=20, ~job="teacher");
+ageSet(joe, 21);
+```
+
+Alternatively, with the fast pipe syntax:
+
+```ocaml
+joe |. ageSet 21
+```
+
+Reason syntax:
+
+```reason
+joe |. ageSet(21)
+```
+
+### Methods
+
+You can attach arbitrary methods onto a type (_any_ type, as a matter of fact. Not just `bs.deriving abstract` record types). See [Object Method](/function.md#object-method) in the function section later.

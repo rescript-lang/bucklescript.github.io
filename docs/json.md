@@ -13,25 +13,31 @@ This emulates JavaScript's JSON conversion.
 Simply use the (last resort) special [identity external](intro-to-external.md#special-identity-external):
 
 ```ocaml
-type data = < name :string  > Js.t
+type data = {name: string} [@@bs.deriving abstract]
 external parseIntoMyData : string -> data = "parse" [@@bs.scope "JSON"][@@bs.val]
 
 let result = parseIntoMyData "{\"name\": \"Luke\"}"
+let n = result |. name
 ```
 
 Reason syntax:
 
 ```reason
-type data = {. "name": string};
-[@bs.scope "JSON"][@bs.val] external parseIntoMyData: string => data = "parse";
+[@bs.deriving abstract]
+type data = {name: string};
+
+[@bs.scope "JSON"] [@bs.val]
+external parseIntoMyData : string => data = "parse";
 
 let result = parseIntoMyData("{\"name\": \"Luke\"}");
+let n = result |. name;
 ```
 
 Output:
 
 ```js
 var result = JSON.parse("{\"name\": \"Luke\"}");
+var n = result.name;
 ```
 
 Where `data` can be any type you assume the JSON is. As you can see, this compiles to a straightforward `JSON.parse` call. As with regular JS, this is convenient, but has no guarantee that e.g. the data is correctly shaped, or even syntactically valid.
