@@ -65,9 +65,9 @@ BuckleScript's build time is **one or two orders of magnitude** faster than alte
 
 Unreadable JavaScript code generated from other compiled-to-js languages makes it so that it could be, practically speaking:
 
-- Hard to debug
-- Hard to learn from
-- Hard to profile for performance
+- Hard to debug (cryptic stack trace, mangled variable names)
+- Hard to learn from (non-straightforward mapping of concepts from one language to another)
+- Hard to profile for performance (unclear what runtime performance cost there is)
 - Hard to integrate with existing hand-written JS code
 
 <!-- TODO: playground link -->
