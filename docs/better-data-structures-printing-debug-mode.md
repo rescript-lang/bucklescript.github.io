@@ -27,6 +27,7 @@ To remediate this, we introduce a flag for `bsc` (the BuckleScript compiler), `-
 - Add `"bsc-flags": ["-bs-g"]` to your `bsconfig.json`.
 - In the BuckleScript/Reason file you'd like to debug, add `[%%debugger.chrome]` at the top \*.
 - If you're on Node.js, run: `node --inspect-brk MyCompiledFile.js` and open this URL in Chrome: `chrome://inspect`.
+- Make sure you've got [Chrome custom formatter enabled](http://www.mattzeunert.com/2016/02/19/custom-chrome-devtools-object-formatters.html).
 - Click on inspect, then step through code as you would usually:
 
 ![debugger inspector](/img/debugger-inspector.png)
