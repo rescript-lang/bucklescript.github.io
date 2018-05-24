@@ -2,11 +2,21 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://bucklescript.github.io/blog</id>
     <title>BuckleScript Blog</title>
-    <updated>2018-05-21T06:00:00Z</updated>
+    <updated>2018-05-23T06:00:00Z</updated>
     <generator>Feed for Node.js</generator>
     <link rel="alternate" href="https://bucklescript.github.io/blog"/>
     <subtitle>The best place to stay up-to-date with the latest BuckleScript news and events.</subtitle>
     <logo>https://bucklescript.github.ioimg/logos/bucklescript_small.svg</logo>
+    <entry>
+        <title type="html"><![CDATA[BuckleScript 3.1.4]]></title>
+        <id>https://bucklescript.github.io/blog/2018/05/23/release-3-1-4.html</id>
+        <link href="https://bucklescript.github.io/blog/2018/05/23/release-3-1-4.html">
+        </link>
+        <updated>2018-05-23T06:00:00Z</updated>
+        <summary type="html"><![CDATA[Hey again! The release two days ago removed the deprecated Js Boolean APIs (no longer needed since we compile OCaml booleans to JS boolean since `3.0.0`). But folks have voiced that the removal was too hasty, as some of their dependencies still haven]]></summary>
+        <author>
+        </author>
+    </entry>
     <entry>
         <title type="html"><![CDATA[BuckleScript 3.1]]></title>
         <id>https://bucklescript.github.io/blog/2018/05/21/release-3-1-0.html</id>

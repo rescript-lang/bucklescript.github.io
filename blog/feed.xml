@@ -4,7 +4,7 @@
         <title>BuckleScript Blog</title>
         <link>https://bucklescript.github.io/blog</link>
         <description>The best place to stay up-to-date with the latest BuckleScript news and events.</description>
-        <lastBuildDate>Mon, 21 May 2018 06:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 23 May 2018 06:00:00 GMT</lastBuildDate>
         <docs>http://blogs.law.harvard.edu/tech/rss</docs>
         <generator>Feed for Node.js</generator>
         <image>
@@ -12,6 +12,13 @@
             <url>https://bucklescript.github.ioimg/logos/bucklescript_small.svg</url>
             <link>https://bucklescript.github.io/blog</link>
         </image>
+        <item>
+            <title><![CDATA[BuckleScript 3.1.4]]></title>
+            <link>https://bucklescript.github.io/blog/2018/05/23/release-3-1-4.html</link>
+            <guid>https://bucklescript.github.io/blog/2018/05/23/release-3-1-4.html</guid>
+            <pubDate>Wed, 23 May 2018 06:00:00 GMT</pubDate>
+            <description><![CDATA[Hey again! The release two days ago removed the deprecated Js Boolean APIs (no longer needed since we compile OCaml booleans to JS boolean since `3.0.0`). But folks have voiced that the removal was too hasty, as some of their dependencies still haven]]></description>
+        </item>
         <item>
             <title><![CDATA[BuckleScript 3.1]]></title>
             <link>https://bucklescript.github.io/blog/2018/05/21/release-3-1-0.html</link>
