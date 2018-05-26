@@ -214,7 +214,7 @@ Reason syntax:
 let twenty = age(joe)
 ```
 
-Alternatively, you can use the [Fast Pipe](/fast-pipe.md) feature in a later section for a nicer-looking access syntax:
+Alternatively, you can use the [Fast Pipe](fast-pipe.md) feature in a later section for a nicer-looking access syntax:
 
 ```ocaml
 let twenty = joe |. age
@@ -271,4 +271,4 @@ joe |. ageSet(21)
 
 ### Methods
 
-You can attach arbitrary methods onto a type (_any_ type, as a matter of fact. Not just `bs.deriving abstract` record types). See [Object Method](/function.md#object-method) in the function section later.
+You can attach arbitrary methods onto a type (_any_ type, as a matter of fact. Not just `bs.deriving abstract` record types). See [Object Method](function.md#object-method) in the function section later.
