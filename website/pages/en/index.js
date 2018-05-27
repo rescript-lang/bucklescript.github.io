@@ -28,10 +28,18 @@ const pre = "```";
 const code = "`";
 const codeExample =`${pre}ocaml
 let result = Js.(
-  [| 1; 2; 3; 4 |]
+  [|1; 2; 3; 4|]
   |> Array.filter (fun x -> x > 2)
   |> Array.mapi (fun x i -> x + i)
   |> Array.reduce (fun x y -> x + y) 0
+)
+${pre}`;
+const codeExampleReason =`${pre}reason
+let result = Js.(
+  [|1, 2, 3, 4|]
+  |> Array.filter(x => x > 2)
+  |> Array.mapi((x, i) => x + i)
+  |> Array.reduce((x, y) => x + y, 0)
 )
 ${pre}`;
 
@@ -88,6 +96,7 @@ class HomeSplash extends React.Component {
               <div className="homeTagLine">{siteConfig.tagline}</div>
               <div className="homeCodeSnippet">
                 <MarkdownBlock>{codeExample}</MarkdownBlock>
+                <MarkdownBlock>{codeExampleReason}</MarkdownBlock>
               </div>
             </div>
 
