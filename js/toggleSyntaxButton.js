@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.setItem('syntax', currentSyntax)
   }
 
-  setCurrentSyntax(localStorage.getItem('syntax', currentSyntax))
+  setCurrentSyntax(localStorage.getItem('syntax', currentSyntax) || SYNTAXES[0])
 
   $toggleSyntaxButton.addEventListener('click', () => {
     setCurrentSyntax(currentSyntax == SYNTAXES[0] ? SYNTAXES[1] : SYNTAXES[0])
