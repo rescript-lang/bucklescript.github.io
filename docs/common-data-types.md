@@ -24,6 +24,10 @@ OCaml string is an immutable byte sequence. If the user types some unicode:
 Js.log "你好"
 ```
 
+```reason
+Js.log("你好")
+```
+
 It'll compile to the follow JS:
 
 ```js
@@ -35,6 +39,11 @@ Which gives you cryptic console output. To rectify this, BuckleScript exposes a 
 ```ocaml
 Js.log {js|你好，
 世界|js}
+```
+
+```reason
+Js.log({js|你好，
+世界|js})
 ```
 
 This'll correctly output:
@@ -50,6 +59,11 @@ For convenience, we also expose another special tag quoted string annotation, `j
 ```ocaml
 let world = {j|世界|j}
 let helloWorld = {j|你好，$world|j}
+```
+
+```reason
+let world = {j|世界|j};
+let helloWorld = {j|你好，$world|j};
 ```
 
 You can surround the variable in parentheses too: `{j|你好，$(world)|j}`.
@@ -129,17 +143,34 @@ type tree = Leaf | Node of int * tree * tree
 (* Node a b c -> [a, b, c] *)
 ```
 
+```reason
+type tree = Leaf | Node(int, tree, tree);
+/* Leaf -> 0 */
+/* Node a b c -> [a, b, c] */
+```
+
 Variants with more than one non-nullary constructor:
 
 ```ocaml
 type u = A of string | B of int
 (* A a -> [a].tag = 0 -- tag 0 assignment is optional *)
-(* B b -> [b].tag=1 *)
+(* B b -> [b].tag = 1 *)
+```
+
+```reason
+type u = A(string) | B(int);
+/* A(a) -> [a].tag = 0 -- tag 0 assignment is optional */
+/* B(b) -> [b].tag = 1 */
 ```
 
 \*\* Polymorphic Variant:
 
 ```ocaml
 `a (* 97 *)
-`a 1 2 (* [ 97, [1, 2] ] *)
+`a (1, 2) (* [ 97, [1, 2] ] *)
+```
+
+```reason
+`a /* 97 */
+`a(1, 2) (* [ 97, [1, 2] ] *)
 ```

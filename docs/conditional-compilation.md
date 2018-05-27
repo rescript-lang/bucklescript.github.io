@@ -17,7 +17,7 @@ Instead of a preprocessor, BuckleScript adds language-level static `if` compilat
 
 `lwt_unix.mli`
 
-```ocaml
+```
 type open_flag =
     Unix.open_flag =
   | O_RDONLY
@@ -123,7 +123,7 @@ semver Location.none "1.2.3" "1.2.3" = true;;
 
 This is a very small extension to OCaml. It's backward compatible with OCaml except in the following case:
 
-```ocaml
+```
 let f x =
   x
 #elif //

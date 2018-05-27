@@ -17,6 +17,10 @@ We have a shorthand for creating the regex:
 let f = [%bs.re "/b/g"]
 ```
 
+```reason
+let f = [%bs.re "/b/g"]
+```
+
 Output:
 
 ```js

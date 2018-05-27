@@ -115,15 +115,4 @@ Don’t print BS version at the beginning of each JS file.
 
 ## -bs-g (Experimental, since @3.1.0)
 
-This flag allows compiler intrusment more data so that some debugger tools(Chrome) would visualize data better in the debug runtime.
-Any observable semantics difference between debug mode and release mode would be considered a bug or properly documented.
-
-To enjoy the debug mode, you should have such code in the beginning
-
-```ocaml
-let () = Belt.Debug.setupChromeDebugger ()
-```
-It works with NodeJS as well
-```sh
-node --inspect-brk main.bs.js
-```
+See [Better Data Structures Printing (Debug Mode)](./better-data-structures-printing-debug-mode.md).

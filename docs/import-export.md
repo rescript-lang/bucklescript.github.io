@@ -38,6 +38,11 @@ Technically, since a BuckleScript file maps to a module, there's no such thing a
 let default = "Bob"
 ```
 
+```reason
+/* FavoriteStudent.ml */
+let default = "Bob"
+```
+
 <!-- TODO: playground link on the result -->
 
 You can then require the default as normal JS side:

@@ -208,6 +208,10 @@ Alternatively, you can use the [Fast Pipe](fast-pipe.md) feature in a later sect
 let twenty = joe |. age
 ```
 
+```reason
+let twenty = joe |. age
+```
+
 #### Write
 
 A `bs.deriving abstract` value is immutable by default. To mutate such value, you need to first mark one of the abstract record field as `mutable`, the same way you'd mark a normal record as mutable:

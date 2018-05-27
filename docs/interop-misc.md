@@ -12,9 +12,7 @@ external draw: (_ [@bs.as "dog"]) -> int array -> unit = "draw" [@@bs.val] [@@bs
 let _ = draw [|1;2|]
 ```
 
-Reason
-
-```ocaml
+```reason
 [@bs.val] [@bs.scope "global"] [@bs.splice]
 external draw : ([@bs.as "dog"] _, array(int)) => unit = "draw";
 
