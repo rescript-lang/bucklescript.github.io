@@ -50,12 +50,24 @@ let result = filter (map [|1; 2; 3|] (fun a -> a + 1)) (fun a -> a mod 2 = 0)
 let () = send(setWaitDuration (asyncRequest()) 4000)
 ```
 
+```reason
+let result = filter(map([|1, 2, 3|], a => a + 1), a => a mod 2 == 0);
+
+send(setWaitDuration(asyncRequest(), 4000));
+```
+
 This looks much worse than the JS counterpart! Now we need to read the actual logic "inside-out". We also cannot use the `|>` operator here, since the object comes _first_ in the binding. But `|.` works!
 
 ```ocaml
-let result = [|1, 2, 3|] |. map(a => a + 1) |. filter(a => a mod 2 == 0);
+let result = [|1; 2; 3|] |. map(fun a -> a + 1) |. filter(fun a -> a mod 2 == 0)
 
-let () = asyncRequest() |. setWaitDuration(400) |. send();
+let () = asyncRequest () |. setWaitDuration 400 |. send ()
+```
+
+```reason
+let result = [|1, 2, 3|] |. map(a => a + 1) |. filter(a => a mod 2 === 0);
+
+asyncRequest() |. setWaitDuration(400) |. send();
 ```
 
 ## Pipe Into Variants
@@ -66,9 +78,17 @@ This works:
 let result = name |. preprocess |. Some
 ```
 
+```reason
+let result = name |. preprocess |. Some
+```
+
 We turn this into:
 
 ```ocaml
+let result = Some(preprocess(name))
+```
+
+```reason
 let result = Some(preprocess(name))
 ```
 
@@ -77,6 +97,10 @@ let result = Some(preprocess(name))
 The fast pipe operator can also be used on a tuple:
 
 ```ocaml
+let (left, middle, right) = myData |. (getLeft, getMiddle, getRight)
+```
+
+```reason
 let (left, middle, right) = myData |. (getLeft, getMiddle, getRight)
 ```
 
