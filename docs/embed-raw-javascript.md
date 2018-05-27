@@ -15,8 +15,6 @@ let add = [%raw {|
 let _ = Js.log (add 1 2)
 ```
 
-Reason syntax:
-
 ```reason
 let add = [%raw {|
   function(a, b) {
@@ -38,8 +36,6 @@ The `{|foo|}` syntax stands for OCaml/BuckleScript/Reason's multi-line, "quoted 
 let f = [%raw "function() {return 1}"]
 ```
 
-Reason syntax:
-
 ```reason
 [%%raw "var a = 1"];
 
@@ -51,8 +47,6 @@ You can also pass a function declaration with a string body in `raw`:
 ```ocaml
 let f: (int -> int -> int) = [%raw fun a b -> "{return a + b}"]
 ```
-
-Reason syntax:
 
 ```reason
 let f: (int, int) => int = [%raw (a, b) => "{return a + b}"];
@@ -78,8 +72,6 @@ let f x y =
   [%debugger];
   x + y
 ```
-
-Reason syntax:
 
 ```reason
 let f = (x, y) => {

@@ -16,8 +16,6 @@ with
   | None -> Js.log "An unknown error occurred"
 ```
 
-Reason syntax:
-
 ```reason
 try (
   Js.Exn.raiseError("oops!")
@@ -50,8 +48,6 @@ let _ =
       | None -> raise UnhandledPromise
   )
 ```
-
-Reason syntax:
 
 ```reason
 exception UnhandledPromise;

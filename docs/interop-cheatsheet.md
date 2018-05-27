@@ -12,8 +12,6 @@ let add = [%raw "a + b"]
 let myFunction = [%raw fun a b -> "return a + b"]
 ```
 
-Reason syntax:
-
 ```reason
 let add = [%raw "a + b"];
 [%%raw "var a = 1"];
@@ -30,8 +28,6 @@ let world = "world"
 let helloWorld = {j|hello, $world|j}
 ```
 
-Reason syntax:
-
 ```reason
 Js.log({js|你好，
 世界|js});
@@ -46,8 +42,6 @@ let helloWorld = {j|hello, $world|j};
 external setTimeout : (unit -> unit) -> int -> float = "setTimeout" [@@bs.val]
 ```
 
-Reason syntax:
-
 ```reason
 [@bs.val] external setTimeout : (unit => unit, int) => float = "setTimeout";
 ```
@@ -60,8 +54,6 @@ let someNumber = random ()
 
 external length: int = "length" [@@bs.val][@@bs.scope "window", "location", "ancestorOrigins"]
 ```
-
-Reason syntax:
 
 ```reason
 [@bs.val] [@bs.scope "Math"] external random : unit => float = "random";
@@ -81,8 +73,6 @@ let result2: int Js.Nullable.t  = Js.Nullable.fromOption (Some 10)
 let result3: int option  = Js.Nullable.toOption (Js.Nullable.return 10)
 ```
 
-Reason syntax:
-
 ```reason
 let jsNull = Js.Nullable.null;
 let jsUndefined = Js.Nullable.undefined;
@@ -98,8 +88,6 @@ Directly convert from `Js.Nullable.t` to `option`:
 external getElementById : string -> element option = "getElementById" [@@bs.val][@@bs.scope "document"][@@bs.return nullable]
 ```
 
-Reason syntax:
-
 ```reason
 [@bs.val] [@bs.scope "document"] [@bs.return nullable]
 external getElementById : string => option(element) = "getElementById";
@@ -113,8 +101,6 @@ external getElementById : string => option(element) = "getElementById";
 let myMap = Js.Dict.empty ()
 let _ = Js.Dict.set myMap "Allison" 10
 ```
-
-Reason syntax:
 
 ```reason
 let myMap = Js.Dict.empty();
@@ -138,8 +124,6 @@ let age = john |. age
 let () = john |. jobSet "Accountant"
 let nick = john |. getNickname
 ```
-
-Reason syntax:
 
 ```reason
 [@bs.deriving abstract]
@@ -165,8 +149,6 @@ type t
 external createDate : unit -> t = "Date" [@@bs.new]
 ```
 
-Reason syntax:
-
 ```reason
 type t;
 [@bs.new] external createDate : unit => t = "Date";
@@ -187,8 +169,6 @@ let () = [|1; 2; 3|]
   |. Js.log
 ```
 
-Reason syntax:
-
 ```reason
 [@bs.send] external map : (array('a), 'a => 'b) => array('b) = "";
 [@bs.send] external filter : (array('a), 'a => 'b) => array('b) = "";
@@ -206,8 +186,6 @@ Reason syntax:
 external join : string array -> string = "" [@@bs.module "path"] [@@bs.splice]
 ```
 
-Reason syntax:
-
 ```reason
 [@bs.module "path"] [@bs.splice]
 external join : array(string) => string = "";
@@ -219,8 +197,6 @@ external join : array(string) => string = "";
 external drawCat: unit -> unit = "draw" [@@bs.module "Drawing"]
 external drawDog: giveName:string -> unit = "draw" [@@bs.module "Drawing"]
 ```
-
-Reason syntax:
 
 ```reason
 [@bs.module "Drawing"] external drawCat : unit => unit = "draw";
@@ -238,8 +214,6 @@ external padLeft :
 
 let _ = padLeft "Hello World" (`Int 4)
 ```
-
-Reason syntax:
 
 ```reason
 [@bs.val] external padLeft : (
@@ -260,8 +234,6 @@ let add = fun [@bs] x y z -> x + y + z
 let six = (add 1 2 3) [@bs]
 ```
 
-Reason syntax:
-
 ```reason
 let add = [@bs] ((x, y, z) => x + y + z);
 let six = [@bs] add(1, 2, 3);
@@ -273,8 +245,6 @@ let six = [@bs] add(1, 2, 3);
 external dirname: string -> string = "dirname" [@@bs.module "path"]
 ```
 
-Reason syntax:
-
 ```reason
 [@bs.module "path"] external dirname : string => string = "dirname";
 ```
@@ -284,8 +254,6 @@ Reason syntax:
 ```ocaml
 external leftPad: string -> int -> string = "./leftPad" [@@bs.module]
 ```
-
-Reason syntax:
 
 ```reason
 [@bs.module] external leftPad : (string, int) => string = "./leftPad";
@@ -297,8 +265,6 @@ Import ES6 default compiled from Babel:
 external studentName: string = "default" [@@bs.module "./student"]
 ```
 
-Reason syntax:
-
 ```reason
 [@bs.module "./student"] external studentName : string = "default";
 ```
@@ -308,8 +274,6 @@ Reason syntax:
 ```ocaml
 let default = "Bob"
 ```
-
-Reason syntax:
 
 ```reason
 let default = "Bob";
@@ -322,8 +286,6 @@ Final escape hatch converter. Do not abuse.
 ```ocaml
 external myShadyConversion : foo -> bar = "%identity"
 ```
-
-Reason syntax:
 
 ```reason
 external myShadyConversion : foo => bar = "%identity";

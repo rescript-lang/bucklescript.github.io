@@ -20,8 +20,6 @@ let result = parseIntoMyData "{\"name\": \"Luke\"}"
 let n = result |. name
 ```
 
-Reason syntax:
-
 ```reason
 [@bs.deriving abstract]
 type data = {name: string};

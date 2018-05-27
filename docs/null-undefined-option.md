@@ -16,8 +16,6 @@ If you're receiving, for example, a JS string that can also be null, type it as:
 let theJsValue: string Js.Nullable.t = /* the value you've gotten here */
 ```
 
-Reason syntax:
-
 ```reason
 let theJsValue: Js.Nullable.t(string) = /* the value you've gotten here */
 ```
@@ -27,8 +25,6 @@ To create a nullable string, do:
 ```ocaml
 let nullableString: string Js.Nullable.t = Js.Nullable.return "hello"
 ```
-
-Reason syntax:
 
 ```reason
 let nullableString: Js.Nullable.t(string) = Js.Nullable.return("hello");
@@ -52,8 +48,6 @@ In an external, you can directly convert a `Js.Nullable.t` into an `option` thro
 type element
 external getElementById : string -> element option = "getElementById" [@@bs.val][@@bs.scope "document"][@@bs.return nullable]
 ```
-
-Reason syntax:
 
 ```reason
 type element;

@@ -13,8 +13,6 @@ external createDate : unit -> t = "Date" [@@bs.new]
 let date = createDate ()
 ```
 
-Reason syntax:
-
 ```reason
 type t;
 [@bs.new] external createDate : unit => t = "Date";
@@ -35,8 +33,6 @@ type t
 external book : unit -> t = "Book" [@@bs.new] [@@bs.module]
 let bookInstance = book ()
 ```
-
-Reason syntax:
 
 ```reason
 type t;
@@ -66,8 +62,6 @@ end [@bs]
 
 type rect = _rect Js.t
 ```
-
-Reason syntax:
 
 ```reason
 class type _rect =

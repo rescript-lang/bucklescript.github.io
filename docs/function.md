@@ -9,8 +9,6 @@ external encodeURI: string -> string = "encodeURI" [@@bs.val]
 let result = encodeURI "hello"
 ```
 
-Reason syntax:
-
 ```reason
 [@bs.val] external encodeURI : string => string = "encodeURI";
 let result = encodeURI("hello");
@@ -38,8 +36,6 @@ external draw : x:int -> y:int -> ?border:bool -> unit -> unit = "" [@@bs.val]
 let _ = draw ~x:10 ~y:20 ~border:true ()
 let _ = draw ~x:10 ~y:20 ()
 ```
-
-Reason syntax:
 
 ```reason
 [@bs.val] external draw : (~x: int, ~y: int, ~border: bool=?, unit) => unit = "";
@@ -71,8 +67,6 @@ external doc: document = "document" [@@bs.val]
 let el = getElementById doc "myId"
 ```
 
-Reason syntax:
-
 ```reason
 type document; /* abstract type for a document object */
 [@bs.send] external getElementById : (document, string) => Dom.element = "getElementById";
@@ -102,8 +96,6 @@ external join : string array -> string = "" [@@bs.module "path"] [@@bs.splice]
 let v = join [| "a"; "b"|]
 ```
 
-Reason syntax:
-
 ```reason
 [@bs.module "path"] [@bs.splice] external join : array(string) => string = "";
 let v = join([|"a", "b"|]);
@@ -131,8 +123,6 @@ external drawCat: unit -> unit = "draw" [@@bs.module "Drawing"]
 external drawDog: giveName:string -> unit = "draw" [@@bs.module "Drawing"]
 external draw : string -> useRandomAnimal:bool -> unit = "draw" [@@bs.module "Drawing"]
 ```
-
-Reason syntax:
 
 ```reason
 [@bs.module "Drawing"] external drawCat : unit => unit = "draw";
@@ -173,8 +163,6 @@ let _ = padLeft "Hello World" (`Int 4)
 let _ = padLeft "Hello World" (`Str "Message from BS: ")
 ```
 
-Reason syntax:
-
 ```reason
 [@bs.val]
 external padLeft : (
@@ -211,8 +199,6 @@ external readFileSync :
 
 let _ = readFileSync ~name:"xx.txt" `useAscii
 ```
-
-Reason syntax:
 
 ```reason
 [@bs.module "fs"]
@@ -253,8 +239,6 @@ external test_int_type :
 let _ = test_int_type `in_bin
 ```
 
-Reason syntax:
-
 ```reason
 [@bs.val]
 external test_int_type : (
@@ -290,8 +274,6 @@ let register rl =
   |. on (`close (fun event -> ()))
   |. on (`line (fun line -> print_endline line))
 ```
-
-Reason syntax:
 
 ```reason
 type readline;
@@ -341,8 +323,6 @@ let () = process_on_exit (fun exit_code ->
 )
 ```
 
-Reason syntax:
-
 ```reason
 [@bs.val]
 external process_on_exit : (
@@ -376,8 +356,6 @@ let addFive = add 5
 let twelve = addFive 3 4
 ```
 
-Reason syntax:
-
 ```reason
 let add = (x, y, z) => x + y + z;
 let addFive = add(5);
@@ -391,8 +369,6 @@ val add: int -> int -> int -> int
 val addFive: int -> int -> int
 val twelve: int
 ```
-
-Reason syntax:
 
 ```reason
 let add: (int, int, int) => int;
@@ -429,8 +405,6 @@ external setTimeout : (unit -> unit [@bs]) -> int -> timerId = "setTimeout" [@@b
 let id = setTimeout (fun [@bs] () -> Js.log "hello") 1000
 ```
 
-Reason syntax:
-
 ```reason
 type timerId;
 [@bs.val] external setTimeout : ((. unit) => unit, int) => timerId = "setTimeout";
@@ -446,8 +420,6 @@ When you try to curry such a function, you'll get a type error:
 let add = fun [@bs] x y z -> x + y + z
 let addFiveOops = add 5
 ```
-
-Reason syntax:
 
 ```reason
 let add = (. x, y, z) => x + y + z;
@@ -477,8 +449,6 @@ external map : 'a array -> ('a -> 'b [@bs.uncurry]) -> 'b array = "" [@@bs.send]
 let _ = map [|1; 2; 3|] (fun x -> x+ 1)
 ```
 
-Reason syntax:
-
 ```reason
 [@bs.send] external map : (array('a), [@bs.uncurry] ('a => 'b)) => array('b) = "";
 map([|1, 2, 3|], x => x + 1);
@@ -491,8 +461,6 @@ If you try to do this:
 ```ocaml
 let id : ('a -> 'a [@bs]) = ((fun v -> v) [@bs])
 ```
-
-Reason syntax:
 
 ```reason
 let id: (. 'a) => 'a = (. v) => v;
@@ -512,8 +480,6 @@ The simplest solution is in most cases to just not export it, by adding an inter
 ```ocaml
 let _ = map (fun v -> id v [@bs])
 ```
-
-Reason syntax:
 
 ```reason
 map(v => id(. v));
@@ -548,8 +514,6 @@ let _ =
     Js.log(resp o + v )
   end
 ```
-
-Reason syntax:
 
 ```reason
 type x;

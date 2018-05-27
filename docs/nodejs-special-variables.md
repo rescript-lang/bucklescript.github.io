@@ -13,8 +13,6 @@ let _module : Node.node_module option = [%bs.node _module]
 let require : Node.node_require option = [%bs.node require]
 ```
 
-Reason syntax:
-
 ```reason
 let dirname: option(string) = [%bs.node __dirname];
 let filename: option(string) = [%bs.node __filename];

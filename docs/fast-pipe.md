@@ -32,8 +32,6 @@ external setWaitDuration: request -> int -> request = "" [@@bs.send]
 external send: request -> unit = "" [@@bs.send]
 ```
 
-Reason syntax:
-
 ```reason
 [@bs.send] external map : (array('a), 'a => 'b) => array('b) = "";
 [@bs.send] external filter : (array('a), 'a => 'b) => array('b) = "";
@@ -90,8 +88,6 @@ let middle = getMiddle myData
 let right = getRight myData
 ```
 
-Reason syntax:
-
 ```reason
 let left = getLeft(myData);
 let middle = getMiddle(myData);
@@ -113,8 +109,6 @@ Set.add mySet 2
 Set.remove mySet 1
 ```
 
-Reason syntax:
-
 ```reason
 let mySet = Set.make();
 Set.add(mySet, 1);
@@ -132,8 +126,6 @@ let () = mySet |. [
   Set.remove 1;
 ]
 ```
-
-Reason syntax:
 
 ```reason
 let mySet = Set.make();

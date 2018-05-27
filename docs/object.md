@@ -34,8 +34,6 @@ let () =
   | Some age -> Js.log ("Joe is " ^ (string_of_int age))
 ```
 
-Reason syntax:
-
 ```reason
 /* Create a JS object ourselves */
 let myMap = Js.Dict.empty();
@@ -86,8 +84,6 @@ type person = {
 external john : person = "john" [@@bs.val]
 ```
 
-Reason syntax:
-
 ```reason
 [@bs.deriving abstract]
 type person = {
@@ -112,8 +108,6 @@ Instead, you'd use the **creation function** of the same name as the record type
 ```ocaml
 let joe = person ~name:"Joe" ~age:20 ~job:"teacher"
 ```
-
-Reason syntax:
 
 ```reason
 let joe = person(~name="Joe", ~age=20, ~job="teacher")
@@ -143,8 +137,6 @@ type data = {
 
 let d = data ~type_:"message" ~ariaLabel:"hello"
 ```
-
-Reason syntax:
 
 ```reason
 [@bs.deriving abstract]
@@ -179,8 +171,6 @@ type person = {
 let joe = person ~age:20 ~job:"teacher" ()
 ```
 
-Reason syntax:
-
 ```reason
 [@bs.deriving abstract]
 type person = {
@@ -208,8 +198,6 @@ One getter function is generated per `bs.deriving abstract` record type field. I
 let twenty = age joe
 ```
 
-Reason syntax:
-
 ```reason
 let twenty = age(joe)
 ```
@@ -232,8 +220,6 @@ type person = {
 } [@@bs.deriving abstract]
 ```
 
-Reason syntax:
-
 ```reason
 [@bs.deriving abstract]
 type person = {
@@ -250,8 +236,6 @@ let joe = person ~name:"Joe" ~age:20 ~job:"teacher"
 let () = ageSet joe 21
 ```
 
-Reason syntax:
-
 ```reason
 let joe = person(~name="Joe", ~age=20, ~job="teacher");
 ageSet(joe, 21);
@@ -262,8 +246,6 @@ Alternatively, with the fast pipe syntax:
 ```ocaml
 joe |. ageSet 21
 ```
-
-Reason syntax:
 
 ```reason
 joe |. ageSet(21)

@@ -10,8 +10,6 @@ Many parts of the interop system uses a concept called `external`, so we'll spec
 external myCFunction : int -> string = "theCFunctionName"
 ```
 
-Reason syntax:
-
 ```reason
 external myCFunction : int => string = "theCFunctionName";
 ```
@@ -31,8 +29,6 @@ One external worth mentioning is the following one:
 ```ocaml
 external myShadyConversion : foo -> bar = "%identity"
 ```
-
-Reason syntax:
 
 ```reason
 external myShadyConversion : foo => bar = "%identity";
