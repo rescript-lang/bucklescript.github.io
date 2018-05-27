@@ -20,18 +20,17 @@
 
 <span class="hljs-keyword">let</span> _ = draw [|<span class="hljs-number">1</span>;<span class="hljs-number">2</span>|]
 </code></pre>
-<p>Reason</p>
-<pre><code class="hljs css ocaml">[@bs.<span class="hljs-keyword">val</span>] [@bs.scope <span class="hljs-string">"global"</span>] [@bs.splice]
-<span class="hljs-keyword">external</span> draw : ([@bs.<span class="hljs-keyword">as</span> <span class="hljs-string">"dog"</span>] _, <span class="hljs-built_in">array</span>(<span class="hljs-built_in">int</span>)) =&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">"draw"</span>;
+<pre><code class="hljs css reason">[@bs.val] [@bs.scope <span class="hljs-string">"global"</span>] [@bs.splice]
+external draw : <span class="hljs-function"><span class="hljs-params">([@bs.<span class="hljs-keyword">as</span> <span class="hljs-string">"dog"</span>] _, array(int))</span> =&gt;</span> unit = <span class="hljs-string">"draw"</span>;
 
 draw([|<span class="hljs-number">1</span>, <span class="hljs-number">2</span>|]);
 </code></pre>
-<p>Salida:</p>
+<p>Output:</p>
 <pre><code class="hljs css js">global.draw(<span class="hljs-string">"dog"</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>);
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" name="manejo-seguro-de-datos-externos"></a><a href="#manejo-seguro-de-datos-externos" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Manejo Seguro de Datos Externos</h2>
-<p>En algunos casos, los datos pueden venir tanto de JS o de BS; es muy difícil dar información precisa del tipo debido a esto. Por ejemplo, para una compromiso external que su creación podría venir de la API JS, su valor fallido causado por <code>Promise.reject</code> puede ser de cualquier tipo.</p>
-<p>BuckleScript provee una solución, <code>bs.open</code>, para filtrar los datos de estructura de excepción de OCaml de los datos de origen mezclados. Esto preserva el tipo seguro mientras te permite trabajar con distintos orígenes mezclados. Esto hace uso de la variante extensible de OCaml, así que el usuario puede mezclar valores del tipo <code>exn</code> con datos JS.</p>
+<p>In some cases, the data could either come from JS or BS; it's very hard to give precise type information because of this. For example, for an external promise whose creation could come from the JS API, its failed value caused by <code>Promise.reject</code> could be of any shape.</p>
+<p>BuckleScript provides a solution, <code>bs.open</code>, to filter out OCaml structured exception data from the mixed data source. It preserves type safety while allowing you to deal with mixed source. It makes use of OCaml’s extensible variant, so that users can mix values of type <code>exn</code> with JS data.</p>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">let</span> handleData = <span class="hljs-keyword">function</span> [@bs.<span class="hljs-keyword">open</span>]
  | <span class="hljs-type">Invalid_argument</span> _ -&gt; <span class="hljs-number">0</span>
  | <span class="hljs-type">Not_found</span> -&gt; <span class="hljs-number">1</span>

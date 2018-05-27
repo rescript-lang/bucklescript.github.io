@@ -20,9 +20,8 @@
 
 <span class="hljs-keyword">let</span> _ = draw [|<span class="hljs-number">1</span>;<span class="hljs-number">2</span>|]
 </code></pre>
-<p>Reason</p>
-<pre><code class="hljs css ocaml">[@bs.<span class="hljs-keyword">val</span>] [@bs.scope <span class="hljs-string">"global"</span>] [@bs.splice]
-<span class="hljs-keyword">external</span> draw : ([@bs.<span class="hljs-keyword">as</span> <span class="hljs-string">"dog"</span>] _, <span class="hljs-built_in">array</span>(<span class="hljs-built_in">int</span>)) =&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">"draw"</span>;
+<pre><code class="hljs css reason">[@bs.val] [@bs.scope <span class="hljs-string">"global"</span>] [@bs.splice]
+external draw : <span class="hljs-function"><span class="hljs-params">([@bs.<span class="hljs-keyword">as</span> <span class="hljs-string">"dog"</span>] _, array(int))</span> =&gt;</span> unit = <span class="hljs-string">"draw"</span>;
 
 draw([|<span class="hljs-number">1</span>, <span class="hljs-number">2</span>|]);
 </code></pre>

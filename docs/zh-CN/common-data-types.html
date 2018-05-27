@@ -25,12 +25,17 @@
 <p>OCaml字符串是不可变的字节序列，如果用户输入了一些unicode:</p>
 <pre><code class="hljs css ocaml"><span class="hljs-type">Js</span>.log <span class="hljs-string">"你好"</span>
 </code></pre>
+<pre><code class="hljs css reason">Js.<span class="hljs-built_in">log</span>(<span class="hljs-string">"你好"</span>)
+</code></pre>
 <p>将编译成下面的JS：</p>
 <pre><code class="hljs css js"><span class="hljs-built_in">console</span>.log(<span class="hljs-string">"\xe4\xbd\xa0\xe5\xa5\xbd"</span>);
 </code></pre>
 <p>可以让你在控制台里神秘的输出。 BuckleScript暴漏了一个特殊的js注解，在语言中默认内置了<a href="https://reasonml.github.io/docs/en/string-and-char.html#quoted-string">带引号的字符串</a>语法。 可以这样使用</p>
 <pre><code class="hljs css ocaml"><span class="hljs-type">Js</span>.log {js|你好，
 世界|js}
+</code></pre>
+<pre><code class="hljs css reason">Js.<span class="hljs-built_in">log</span>({js<span class="hljs-string">|你好，</span>
+世界<span class="hljs-string">|js})</span>
 </code></pre>
 <p>将会正确的输出</p>
 <pre><code class="hljs css js"><span class="hljs-built_in">console</span>.log(<span class="hljs-string">"你好，\n世界"</span>);
@@ -39,6 +44,9 @@
 <p>为了方便，我们又暴漏了另外一个特殊的标签引用字符串，<code>j</code>, 支持了和JS字符串一样的插值。</p>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">let</span> world = {j|世界|j}
 <span class="hljs-keyword">let</span> helloWorld = {j|你好，$world|j}
+</code></pre>
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> world = {j|<span class="hljs-type">世界|j</span>};
+<span class="hljs-keyword">let</span> helloWorld = {j|<span class="hljs-type">你好，$world</span>|<span class="hljs-type">j</span>};
 </code></pre>
 <p>你也可以把变量放在大括号里：<code>{j|你好，$(world)|j}</code></p>
 <h3><a class="anchor" aria-hidden="true" name="float"></a><a href="#float" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>浮点类型 Float</h3>
@@ -101,14 +109,25 @@
 <span class="hljs-comment">(* Leaf -&gt; 0 *)</span>
 <span class="hljs-comment">(* Node a b c -&gt; [a, b, c] *)</span>
 </code></pre>
+<pre><code class="hljs css reason"><span class="hljs-keyword">type</span> tree = Leaf | <span class="hljs-keyword">Node</span><span class="hljs-title">(int</span>, tree, tree);
+/* Leaf -&gt; <span class="hljs-number">0</span> */
+/* <span class="hljs-keyword">Node</span> <span class="hljs-title">a</span> b c -&gt; [a, b, c] */
+</code></pre>
 <p>Variants with more than one non-nullary constructor:</p>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">type</span> u = <span class="hljs-type">A</span> <span class="hljs-keyword">of</span> <span class="hljs-built_in">string</span> | <span class="hljs-type">B</span> <span class="hljs-keyword">of</span> <span class="hljs-built_in">int</span>
 <span class="hljs-comment">(* A a -&gt; [a].tag = 0 -- tag 0 assignment is optional *)</span>
-<span class="hljs-comment">(* B b -&gt; [b].tag=1 *)</span>
+<span class="hljs-comment">(* B b -&gt; [b].tag = 1 *)</span>
+</code></pre>
+<pre><code class="hljs css reason"><span class="hljs-keyword">type</span> u = A(<span class="hljs-keyword">string</span>) | B(int);
+/* A(a) -&gt; [a].<span class="hljs-keyword">tag</span> <span class="hljs-title">= 0</span> -- <span class="hljs-keyword">tag</span> <span class="hljs-title">0</span> assignment is optional */
+/* B(b) -&gt; [b].<span class="hljs-keyword">tag</span> <span class="hljs-title">= 1</span> */
 </code></pre>
 <p>** Polymorphic Variant:</p>
 <pre><code class="hljs css ocaml">`a <span class="hljs-comment">(* 97 *)</span>
-`a <span class="hljs-number">1</span> <span class="hljs-number">2</span> <span class="hljs-comment">(* [ 97, [1, 2] ] *)</span>
+`a (<span class="hljs-number">1</span>, <span class="hljs-number">2</span>) <span class="hljs-comment">(* [ 97, [1, 2] ] *)</span>
+</code></pre>
+<pre><code class="hljs css reason">`a <span class="hljs-comment">/* 97 */</span>
+`a(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>) (* [ <span class="hljs-number">97</span>, [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>] ] *)
 </code></pre>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="embed-raw-javascript.html">← 嵌入原生Javascript</a><a class="docs-next button" href="intro-to-external.html">External简介 →</a></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.js"></script><script>window.foo = new Pjax({
           areas: [
