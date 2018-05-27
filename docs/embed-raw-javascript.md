@@ -99,7 +99,6 @@ match [%external __DEV__] with
 | None -> Js.log "production mode"
 ```
 <!-- TODO: change it to `= None` which is more idiomatic -->
-Reason syntax
 
 ```reason
 switch ([%external __DEV__]) {
@@ -128,8 +127,6 @@ match [%external __filename] with
 | None -> Js.log "non-node environment"
 ```
 
-Reason syntax
-
 ```reason
 switch ([%external __filename]) {
 | Some(f) => Js.log(f)
@@ -151,7 +148,7 @@ if (match !== undefined) {
 
 ### Tips & Tricks
 
-Embedding raw JS snippets is **highly discouraged**, though also highly useful if you're just starting out. As a matter of fact, the first few Reason BuckleScript projects were converted through:
+Embedding raw JS snippets is **discouraged**, though also highly useful if you're just starting out. As a matter of fact, the first few Reason BuckleScript projects were converted through:
 
 - pasting raw JS snippets inside a file
 - examining the JS output (identical)

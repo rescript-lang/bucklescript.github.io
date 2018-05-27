@@ -6,9 +6,29 @@ BuckleScript and Reason have a special `|.` syntax for dealing with various situ
 
 ## Pipelining
 
-`a |. foo b` is equal to `foo a b`. The operator takes the item on the left and put it as the first argument of the item on the right. Great for building pipelines of data processing: `a |. foo b |. bar` is equal to `bar(foo a b)`.
+`a |. foo b` is equal to `foo a b`. The operator takes the item on the left and put it as the first argument of the item on the right. Great for building pipelines of data processing:
 
-Reason syntax: `a |. foo(b) |. bar` is equal to `bar(foo(a, b))`.
+```ocaml
+a
+|. foo b
+|. bar
+```
+
+```reason
+a
+|. foo(b)
+|. bar
+```
+
+is equal to
+
+```ocaml
+bar(foo a b)
+```
+
+```reason
+bar(foo(a, b))
+```
 
 ## JS Method Chaining
 
