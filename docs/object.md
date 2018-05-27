@@ -258,3 +258,69 @@ joe |. ageSet(21)
 ### Methods
 
 You can attach arbitrary methods onto a type (_any_ type, as a matter of fact. Not just `bs.deriving abstract` record types). See [Object Method](function.md#object-method) in the function section later.
+
+### Tips & Tricks
+
+You can leverage `bs.deriving abstract` for finer-grained access control.
+
+#### Mutability
+
+You can mark a field as mutable in the implementation (`ml`/`re`) file, while _hiding_ such mutability in the interface file:
+
+```ocaml
+(* test.ml *)
+type cord = {
+  mutable x: int [@bs.optional];
+  y: int;
+} [@@bs.deriving abstract]
+```
+
+```reason
+/* test.re */
+[@bs.deriving abstract]
+type cord = {
+  [@bs.optional] mutable x: int,
+  y: int,
+};
+```
+
+```ocaml
+(* test.mli *)
+type cord = {
+  x: int [@bs.optional];
+  y: int;
+} [@@bs.deriving abstract]
+```
+
+```reason
+/* test.rei */
+[@bs.deriving abstract]
+type cord = {
+  [@bs.optional] x: int,
+  y: int,
+};
+```
+
+Tada! Now you can mutate inside your own file as much as you want, and prevent others from doing so!
+
+#### Hide the Creation Function
+
+Mark the record as `private` to disable the creation function:
+
+```ocaml
+type cord = private {
+  x: int [@bs.optional];
+  y: int
+} [@@bs.deriving abstract]
+```
+
+```reason
+[@bs.deriving abstract]
+type cord = pri {
+  [@bs.optional]
+  x: int,
+  y: int,
+};
+```
+
+The accessors are still there, but you can no longer create such data structure. Great for binding to a JS object while preventing others from creating more such object!
