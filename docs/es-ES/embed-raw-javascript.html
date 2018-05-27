@@ -24,7 +24,6 @@
 
 <span class="hljs-keyword">let</span> _ = <span class="hljs-type">Js</span>.log (add <span class="hljs-number">1</span> <span class="hljs-number">2</span>)
 </code></pre>
-<p>Sintaxis de Reason:</p>
 <pre><code class="hljs css reason">let <span class="hljs-keyword">add</span><span class="bash"> = [%raw {|
 </span>  function(a, b) {
     console.log(<span class="hljs-string">"¡hola desde JavaScript crudo!"</span>);
@@ -34,13 +33,12 @@
 
 Js.log(<span class="hljs-keyword">add</span><span class="bash">(1, 2));
 </span></code></pre>
-<p>La sintaxis <code>{|foo|}</code> significa para las multi-líneas de OCaml/BuckleScript/Reason, una sintaxis de &quot;cadena citada&quot;. Piensa en ellos como el equivalente de plantillas literales de JavaScript. Ningún escape es necesario dentro de esa cadena.</p>
-<p><strong>Cuidado</strong> con la sintaxis de OCaml/Reason aquí. <code>[%raw foo]</code> te permite incrustar una expresión. Para declaraciones de alto nivel en OCaml/Reason, usa <code>[%%raw foo]</code> (dos <code>%</code>):</p>
+<p>The <code>{|foo|}</code> syntax stands for OCaml/BuckleScript/Reason's multi-line, &quot;quoted string&quot; syntax. Think of them as the equivalent of JavaScript's template literals. No escaping is needed inside that string.</p>
+<p><strong>Careful</strong> with the OCaml/Reason syntax here. <code>[%raw foo]</code> allows you to embed an expression. For top-level declarations in OCaml/Reason, use <code>[%%raw foo]</code> (two <code>%</code>):</p>
 <pre><code class="hljs css ocaml">[%%raw <span class="hljs-string">"var a = 1"</span>]
 
 <span class="hljs-keyword">let</span> f = [%raw <span class="hljs-string">"function() {return 1}"</span>]
 </code></pre>
-<p>Sintaxis de Reason:</p>
 <pre><code class="hljs css reason">[<span class="hljs-meta">%</span><span class="hljs-meta">%</span>raw <span class="hljs-string">"var a = 1"</span>];
 
 let f = [<span class="hljs-meta">%</span>raw <span class="hljs-string">"function() {return 1}"</span>];
@@ -48,7 +46,6 @@ let f = [<span class="hljs-meta">%</span>raw <span class="hljs-string">"function
 <p>You can also pass a function declaration with a string body in <code>raw</code>:</p>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">let</span> f: (<span class="hljs-built_in">int</span> -&gt; <span class="hljs-built_in">int</span> -&gt; <span class="hljs-built_in">int</span>) = [%raw <span class="hljs-keyword">fun</span> a b -&gt; <span class="hljs-string">"{return a + b}"</span>]
 </code></pre>
-<p>Reason syntax:</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> f: (<span class="hljs-built_in">int</span>, <span class="hljs-built_in">int</span>) =&gt; <span class="hljs-built_in">int</span> = [%raw (a, b) =&gt; <span class="hljs-string">"{return a + b}"</span>];
 </code></pre>
 <p>Output:</p>
@@ -63,7 +60,6 @@ let f = [<span class="hljs-meta">%</span>raw <span class="hljs-string">"function
   [%debugger];
   x + y
 </code></pre>
-<p>Reason syntax:</p>
 <pre><code class="hljs css reason">let f = <span class="hljs-function"><span class="hljs-params">(x, y)</span> =&gt;</span> {
   [%<span class="hljs-keyword">debugger</span>];
   x + y

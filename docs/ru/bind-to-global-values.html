@@ -21,11 +21,10 @@
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">external</span> setTimeout : (<span class="hljs-built_in">unit</span> -&gt; <span class="hljs-built_in">unit</span>) -&gt; <span class="hljs-built_in">int</span> -&gt; <span class="hljs-built_in">float</span> = <span class="hljs-string">"setTimeout"</span> [@@bs.<span class="hljs-keyword">val</span>]
 <span class="hljs-keyword">external</span> clearTimeout : <span class="hljs-built_in">float</span> -&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">"clearTimeout"</span> [@@bs.<span class="hljs-keyword">val</span>]
 </code></pre>
-<p>Синтакс Reason:</p>
 <pre><code class="hljs css reason">[@bs.<span class="hljs-keyword">val</span>] <span class="hljs-keyword">external</span> setTimeout : (<span class="hljs-built_in">unit</span> =&gt; <span class="hljs-built_in">unit</span>, <span class="hljs-built_in">int</span>) =&gt; <span class="hljs-built_in">float</span> = <span class="hljs-string">"setTimeout"</span>;
 [@bs.<span class="hljs-keyword">val</span>] <span class="hljs-keyword">external</span> clearTimeout : <span class="hljs-built_in">float</span> =&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">"clearTimeout"</span>;
 </code></pre>
-<p>Это связывает метод <a href="https://developer.mozilla.org/en-US/docs/Web/API/WindowOrworkerGlobalScope/setTimeout"> <code>setTimeout</code></a> JavaScript и <code>clearTimeout</code> соответственно. <code>external</code> аннотация указывает что <code>setTimeout</code>:</p>
+<p>This binds to the JavaScript <a href="https://developer.mozilla.org/en-US/docs/Web/API/WindowOrworkerGlobalScope/setTimeout"><code>setTimeout</code></a> methods and the corresponding <code>clearTimeout</code>. The <code>external</code>'s type annotation specifies that <code>setTimeout</code>:</p>
 <ul>
 <li>takes a function that accepts <code>unit</code> and returns <code>unit</code> (which on the JS side turns into a function that accepts nothing and returns nothing. More on modeling functions later)</li>
 <li>и целое число, указывающее продолжительность до вызова указанной функции</li>
@@ -36,7 +35,6 @@
 <p>When the name you're using on the BS side matches the JS value you're modeling, you can use the empty string shorthand:</p>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">external</span> clearTimeout : <span class="hljs-built_in">float</span> -&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">""</span> [@@bs.<span class="hljs-keyword">val</span>]
 </code></pre>
-<p>Синтакс Reason:</p>
 <pre><code class="hljs css reason">[@bs.<span class="hljs-keyword">val</span>] <span class="hljs-keyword">external</span> clearTimeout : <span class="hljs-built_in">float</span> =&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">""</span>;
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Абстрактный тип</h3>
@@ -46,7 +44,6 @@
 <span class="hljs-keyword">external</span> setTimeout : (<span class="hljs-built_in">unit</span> -&gt; <span class="hljs-built_in">unit</span>) -&gt; <span class="hljs-built_in">int</span> -&gt; timerId = <span class="hljs-string">"setTimeout"</span> [@@bs.<span class="hljs-keyword">val</span>]
 <span class="hljs-keyword">external</span> clearTimeout : timerId -&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">"clearTimeout"</span> [@@bs.<span class="hljs-keyword">val</span>]
 </code></pre>
-<p>Reason syntax:</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">type</span> timerId;
 [@bs.<span class="hljs-keyword">val</span>] <span class="hljs-keyword">external</span> setTimeout : (<span class="hljs-built_in">unit</span> =&gt; <span class="hljs-built_in">unit</span>, <span class="hljs-built_in">int</span>) =&gt; timerId = <span class="hljs-string">"setTimeout"</span>;
 [@bs.<span class="hljs-keyword">val</span>] <span class="hljs-keyword">external</span> clearTimeout : timerId =&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">"clearTimeout"</span>;
@@ -59,14 +56,12 @@
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">external</span> random: <span class="hljs-built_in">unit</span> -&gt; <span class="hljs-built_in">float</span> = <span class="hljs-string">"random"</span> [@@bs.<span class="hljs-keyword">val</span>][@@bs.scope <span class="hljs-string">"Math"</span>]
 <span class="hljs-keyword">let</span> someNumber = random <span class="hljs-literal">()</span>
 </code></pre>
-<p>Reason syntax:</p>
 <pre><code class="hljs css reason">[@<span class="hljs-keyword">bs.scope </span><span class="hljs-string">"Math"</span>] [@<span class="hljs-keyword">bs.val] </span><span class="hljs-keyword">external </span><span class="hljs-built_in">random</span> : unit =&gt; float = <span class="hljs-string">"random"</span><span class="hljs-comment">;</span>
 let someNumber = <span class="hljs-built_in">random</span>()<span class="hljs-comment">;</span>
 </code></pre>
 <p>you can bind to an arbitrarily deep object by passing a tuple to <code>bs.scope</code>:</p>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">external</span> length: <span class="hljs-built_in">int</span> = <span class="hljs-string">"length"</span> [@@bs.<span class="hljs-keyword">val</span>][@@bs.scope <span class="hljs-string">"window"</span>, <span class="hljs-string">"location"</span>, <span class="hljs-string">"ancestorOrigins"</span>]
 </code></pre>
-<p>Reason syntax:</p>
 <pre><code class="hljs css reason">[<span class="hljs-keyword">@bs</span>.val] [<span class="hljs-keyword">@bs</span>.<span class="hljs-keyword">scope</span> (<span class="hljs-string">"window"</span>, <span class="hljs-string">"location"</span>, <span class="hljs-string">"ancestorOrigins"</span>)] external length : <span class="hljs-keyword">int</span> = <span class="hljs-string">"length"</span>;
 </code></pre>
 <p>This binds to <code>window.location.ancestorOrigins.length</code>.</p>

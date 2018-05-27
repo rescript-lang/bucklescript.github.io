@@ -25,7 +25,6 @@
 <span class="hljs-keyword">let</span> result = parseIntoMyData <span class="hljs-string">"{\"name\": \"Luke\"}"</span>
 <span class="hljs-keyword">let</span> n = result |. name
 </code></pre>
-<p>Sintaxis de Reason:</p>
 <pre><code class="hljs css reason">[@bs.deriving abstract]<span class="hljs-built_in">
 type </span>data = {name: string};
 
@@ -35,18 +34,18 @@ external parseIntoMyData : string =&gt; data = <span class="hljs-string">"parse"
 let result = parseIntoMyData(<span class="hljs-string">"{\"name\": \"Luke\"}"</span>);
 let n = result |. name;
 </code></pre>
-<p>Salida:</p>
+<p>Output:</p>
 <pre><code class="hljs css js"><span class="hljs-keyword">var</span> result = <span class="hljs-built_in">JSON</span>.parse(<span class="hljs-string">"{\"name\": \"Luke\"}"</span>);
 <span class="hljs-keyword">var</span> n = result.name;
 </code></pre>
-<p>Donde <code>data</code> puede ser de cualquier tipo que tu asumas que es JSON. Como puedes ver, esto compila directo a una llamada <code>JSON.parse</code>. Como un JS regular, esto es conveniente, pero no tiene garantía de que por ejemplo, los datos ester formados correctamente, o siquiera sintácticamente válidos.</p>
+<p>Where <code>data</code> can be any type you assume the JSON is. As you can see, this compiles to a straightforward <code>JSON.parse</code> call. As with regular JS, this is convenient, but has no guarantee that e.g. the data is correctly shaped, or even syntactically valid.</p>
 <h3><a class="anchor" aria-hidden="true" name="encadenamiento"></a><a href="#encadenamiento" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Encadenamiento</h3>
-<p>Como el JSON.stringify es <em>un poco</em> más seguro que <code>JSON.parse</code>, lo hemos proporcionado fuera de la caja en <a href="https://bucklescript.github.io/bucklescript/api/Js.Json.html#VALstringifyAny">Js.Json</a>. Esto compila a <code>JSON.stringify</code>.</p>
+<p>Since JSON.stringify is <em>slightly</em> safer than <code>JSON.parse</code>, we've provided it out of the box in <a href="https://bucklescript.github.io/bucklescript/api/Js.Json.html#VALstringifyAny">Js.Json</a>. It compiles to <code>JSON.stringify</code>.</p>
 <h2><a class="anchor" aria-hidden="true" name="uso-correcto-de-jsjson"></a><a href="#uso-correcto-de-jsjson" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Uso correcto de <code>Js.Json</code></h2>
-<p>Técnicamente, la manera correcta de manejar JSON es para analizar recursivamente cada campo, y manejar datos inválidos de manera acorde. <a href="https://bucklescript.github.io/bucklescript/api/Js.Json.html">Js.Json</a> provee un tipo de bloques de construcción de bajo nivel. Ve el ejemplo en los documentos de la API.</p>
+<p>Technically, the correct way to handle JSON is to recursively parse each field, and handle invalid data accordingly. <a href="https://bucklescript.github.io/bucklescript/api/Js.Json.html">Js.Json</a> provides such low-level building blocks. See the examples in the API docs.</p>
 <h2><a class="anchor" aria-hidden="true" name="ayudantes-de-alto-nivel"></a><a href="#ayudantes-de-alto-nivel" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Ayudantes de Alto Nivel</h2>
-<p>Tenemos un ayudante pseudo-oficial, mantenido por la comunidad, de las librerías de JSON, llamado <a href="https://github.com/reasonml-community/bs-json">bs-json</a>. Aquellos interesados en combinadores también pueden revisar <a href="https://github.com/state-machine-systems/JsonCodec">JsonCodec</a>. Ambos proveen ayudantes de análisis/impresión más conveniente JSON que aprovechan las secciones anteriores de APIs de bajo nivel.</p>
-<p>Proporcionaremos una mejor, y de primera mano, solución para JSON también en el futuro. ¡Atentos!</p>
+<p>We have a community-maintaned, pseudo-official JSON helper library called <a href="https://github.com/reasonml-community/bs-json">bs-json</a>. Those interested in combinators can also check out <a href="https://github.com/state-machine-systems/JsonCodec">JsonCodec</a>. Both provide more convenient JSON parsing/printing helpers that leverage the previous section's low-level API.</p>
+<p>We'll provide a better, first-party solution to JSON too in the future. Stay tuned!</p>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="exceptions.html">← Excepciones</a><a class="docs-next button" href="fast-pipe.html">Fast Pipe →</a></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.js"></script><script>window.foo = new Pjax({
           areas: [
             // try to use the first query.

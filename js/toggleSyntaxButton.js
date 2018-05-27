@@ -1,14 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
   const SYNTAXES = ['reason', 'ocaml']
   const CLASS_PREFIX = 'syntax__'
-  const $toggleSyntaxButton = document.createElement('button')
+  const $toggleSyntaxButton = document.createElement('div')
 
   $toggleSyntaxButton.classList.add('button', 'toggleSyntaxButton')
   $toggleSyntaxButton.innerHTML = `
     <span class="toggleSyntaxButton-reason">Reason</span>
     <span class="toggleSyntaxButton-ocaml">OCaml</span>
   `
-  document.body.appendChild($toggleSyntaxButton)
+  document.querySelector('.headerWrapper.wrapper > header > a').insertAdjacentElement('afterend', $toggleSyntaxButton);
 
   let currentSyntax
   let setCurrentSyntax = (syntax = SYNTAXES[0]) => {

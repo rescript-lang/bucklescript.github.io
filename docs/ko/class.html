@@ -21,7 +21,6 @@
 
 <span class="hljs-keyword">let</span> date = createDate <span class="hljs-literal">()</span>
 </code></pre>
-<p>Reason syntax:</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">type</span> t;
 [@bs.<span class="hljs-keyword">new</span>] <span class="hljs-keyword">external</span> createDate : <span class="hljs-built_in">unit</span> =&gt; t = <span class="hljs-string">"Date"</span>;
 
@@ -35,7 +34,6 @@
 <span class="hljs-keyword">external</span> book : <span class="hljs-built_in">unit</span> -&gt; t = <span class="hljs-string">"Book"</span> [@@bs.<span class="hljs-keyword">new</span>] [@@bs.<span class="hljs-keyword">module</span>]
 <span class="hljs-keyword">let</span> bookInstance = book <span class="hljs-literal">()</span>
 </code></pre>
-<p>Reason syntax:</p>
 <pre><code class="hljs css reason">type t<span class="hljs-comment">;</span>
 [@<span class="hljs-keyword">bs.new] </span>[@<span class="hljs-keyword">bs.module] </span><span class="hljs-keyword">external </span><span class="hljs-keyword">book </span>: unit =&gt; t = <span class="hljs-string">"Book"</span><span class="hljs-comment">;</span>
 let <span class="hljs-keyword">bookInstance </span>= <span class="hljs-keyword">book();
@@ -55,7 +53,6 @@ let <span class="hljs-keyword">bookInstance </span>= <span class="hljs-keyword">
 
 <span class="hljs-keyword">type</span> rect = _rect <span class="hljs-type">Js</span>.t
 </code></pre>
-<p>Reason syntax:</p>
 <pre><code class="hljs css reason">class<span class="hljs-built_in"> type </span>_rect =
   [@bs]
   {

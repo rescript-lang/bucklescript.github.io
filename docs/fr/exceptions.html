@@ -24,7 +24,6 @@
   | <span class="hljs-type">Some</span> message -&gt; <span class="hljs-type">Js</span>.log {j|<span class="hljs-type">Error</span>: $message|j}
   | <span class="hljs-type">None</span> -&gt; <span class="hljs-type">Js</span>.log <span class="hljs-string">"An unknown error occurred"</span>
 </code></pre>
-<p>Reason syntax:</p>
 <pre><code class="hljs css reason"><span class="hljs-built_in">try</span> (
   Js.Exn.raiseError(<span class="hljs-string">"oops!"</span>)
 ) {
@@ -52,7 +51,6 @@
       | <span class="hljs-type">None</span> -&gt; raise <span class="hljs-type">UnhandledPromise</span>
   )
 </code></pre>
-<p>Reason syntax:</p>
 <pre><code class="hljs css reason">exception UnhandledPromise;
 
 <span class="hljs-keyword">let</span> handlePromiseFailure =

@@ -33,7 +33,6 @@ asyncRequest().setWaitDuration(<span class="hljs-number">4000</span>).send();
 <span class="hljs-keyword">external</span> setWaitDuration: request -&gt; <span class="hljs-built_in">int</span> -&gt; request = <span class="hljs-string">""</span> [@@bs.send]
 <span class="hljs-keyword">external</span> send: request -&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">""</span> [@@bs.send]
 </code></pre>
-<p>Reason syntax:</p>
 <pre><code class="hljs css reason"><span class="hljs-selector-attr">[@bs.send]</span> <span class="hljs-selector-tag">external</span> <span class="hljs-selector-tag">map</span> : (array(<span class="hljs-string">'a), '</span>a =&gt; <span class="hljs-string">'b) =&gt; array('</span>b) = <span class="hljs-string">""</span>;
 [<span class="hljs-variable">@bs</span>.send] external <span class="hljs-attribute">filter </span>: (array(<span class="hljs-string">'a), '</span>a =&gt; <span class="hljs-string">'b) =&gt; array('</span>b) = <span class="hljs-string">""</span>;
 
@@ -68,7 +67,6 @@ external <span class="hljs-attribute">asyncRequest</span>: unit =&gt; request = 
 <span class="hljs-keyword">let</span> middle = getMiddle myData
 <span class="hljs-keyword">let</span> right = getRight myData
 </code></pre>
-<p>Reason syntax:</p>
 <pre><code class="hljs css reason"><span class="hljs-attribute">let left</span> = getLeft(myData);
 <span class="hljs-attribute">let middle</span> = getMiddle(myData);
 <span class="hljs-attribute">let right</span> = getRight(myData);
@@ -82,7 +80,6 @@ external <span class="hljs-attribute">asyncRequest</span>: unit =&gt; request = 
 <span class="hljs-type">Set</span>.add mySet <span class="hljs-number">2</span>
 <span class="hljs-type">Set</span>.remove mySet <span class="hljs-number">1</span>
 </code></pre>
-<p>Reason syntax:</p>
 <pre><code class="hljs css reason">let mySet = <span class="hljs-keyword">Set</span>.make();
 <span class="hljs-keyword">Set</span>.add(mySet, 1);
 <span class="hljs-keyword">Set</span>.add(mySet, 2);
@@ -96,7 +93,6 @@ external <span class="hljs-attribute">asyncRequest</span>: unit =&gt; request = 
   <span class="hljs-type">Set</span>.remove <span class="hljs-number">1</span>;
 ]
 </code></pre>
-<p>Reason syntax:</p>
 <pre><code class="hljs css reason">let mySet = <span class="hljs-keyword">Set</span>.make();
 mySet |. [
   <span class="hljs-keyword">Set</span>.add(1),

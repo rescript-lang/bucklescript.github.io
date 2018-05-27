@@ -20,7 +20,6 @@
 [%%raw <span class="hljs-string">"var a = 1"</span>]
 <span class="hljs-keyword">let</span> myFunction = [%raw <span class="hljs-keyword">fun</span> a b -&gt; <span class="hljs-string">"return a + b"</span>]
 </code></pre>
-<p>Reason syntax:</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> add = [<span class="hljs-comment">%raw "a + b"];</span>
 [<span class="hljs-comment">%%raw "var a = 1"];</span>
 <span class="hljs-keyword">let</span> myFunction = [<span class="hljs-comment">%raw (a, b) =&gt; "return a + b"];</span>
@@ -32,7 +31,6 @@
 <span class="hljs-keyword">let</span> world = <span class="hljs-string">"world"</span>
 <span class="hljs-keyword">let</span> helloWorld = {j|hello, $world|j}
 </code></pre>
-<p>Reason syntax:</p>
 <pre><code class="hljs css reason">Js.log({js|<span class="hljs-type">你好，
 世界|js</span>});
 
@@ -42,7 +40,6 @@
 <h2><a class="anchor" aria-hidden="true" name="global-value"></a><a href="#global-value" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Global Value</h2>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">external</span> setTimeout : (<span class="hljs-built_in">unit</span> -&gt; <span class="hljs-built_in">unit</span>) -&gt; <span class="hljs-built_in">int</span> -&gt; <span class="hljs-built_in">float</span> = <span class="hljs-string">"setTimeout"</span> [@@bs.<span class="hljs-keyword">val</span>]
 </code></pre>
-<p>Reason syntax:</p>
 <pre><code class="hljs css reason">[@bs.<span class="hljs-keyword">val</span>] <span class="hljs-keyword">external</span> setTimeout : (<span class="hljs-built_in">unit</span> =&gt; <span class="hljs-built_in">unit</span>, <span class="hljs-built_in">int</span>) =&gt; <span class="hljs-built_in">float</span> = <span class="hljs-string">"setTimeout"</span>;
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" name="global-module"></a><a href="#global-module" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Global Module</h2>
@@ -51,7 +48,6 @@
 
 <span class="hljs-keyword">external</span> length: <span class="hljs-built_in">int</span> = <span class="hljs-string">"length"</span> [@@bs.<span class="hljs-keyword">val</span>][@@bs.scope <span class="hljs-string">"window"</span>, <span class="hljs-string">"location"</span>, <span class="hljs-string">"ancestorOrigins"</span>]
 </code></pre>
-<p>Reason syntax:</p>
 <pre><code class="hljs css reason">[@<span class="hljs-keyword">bs.val] </span>[@<span class="hljs-keyword">bs.scope </span><span class="hljs-string">"Math"</span>] <span class="hljs-keyword">external </span><span class="hljs-built_in">random</span> : unit =&gt; float = <span class="hljs-string">"random"</span><span class="hljs-comment">;</span>
 let someNumber = <span class="hljs-built_in">random</span>()<span class="hljs-comment">;</span>
 
@@ -65,7 +61,6 @@ let someNumber = <span class="hljs-built_in">random</span>()<span class="hljs-co
 <span class="hljs-keyword">let</span> result2: <span class="hljs-built_in">int</span> <span class="hljs-type">Js</span>.<span class="hljs-type">Nullable</span>.t  = <span class="hljs-type">Js</span>.<span class="hljs-type">Nullable</span>.fromOption (<span class="hljs-type">Some</span> <span class="hljs-number">10</span>)
 <span class="hljs-keyword">let</span> result3: <span class="hljs-built_in">int</span> option  = <span class="hljs-type">Js</span>.<span class="hljs-type">Nullable</span>.toOption (<span class="hljs-type">Js</span>.<span class="hljs-type">Nullable</span>.return <span class="hljs-number">10</span>)
 </code></pre>
-<p>Reason syntax:</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> jsNull = Js.<span class="hljs-built_in">Nullable</span>.null;
 <span class="hljs-keyword">let</span> jsUndefined = Js.<span class="hljs-built_in">Nullable</span>.undefined;
 
@@ -76,7 +71,6 @@ let someNumber = <span class="hljs-built_in">random</span>()<span class="hljs-co
 <p>Directly convert from <code>Js.Nullable.t</code> to <code>option</code>:</p>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">external</span> getElementById : <span class="hljs-built_in">string</span> -&gt; element option = <span class="hljs-string">"getElementById"</span> [@@bs.<span class="hljs-keyword">val</span>][@@bs.scope <span class="hljs-string">"document"</span>][@@bs.return nullable]
 </code></pre>
-<p>Reason syntax:</p>
 <pre><code class="hljs css reason">[<span class="hljs-keyword">@bs</span>.val] [<span class="hljs-keyword">@bs</span>.<span class="hljs-keyword">scope</span> <span class="hljs-string">"document"</span>] [<span class="hljs-keyword">@bs</span>.<span class="hljs-keyword">return</span> nullable]
 external getElementById : <span class="hljs-built_in">string</span> =&gt; option(element) = <span class="hljs-string">"getElementById"</span>;
 </code></pre>
@@ -85,7 +79,6 @@ external getElementById : <span class="hljs-built_in">string</span> =&gt; option
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">let</span> myMap = <span class="hljs-type">Js</span>.<span class="hljs-type">Dict</span>.empty <span class="hljs-literal">()</span>
 <span class="hljs-keyword">let</span> _ = <span class="hljs-type">Js</span>.<span class="hljs-type">Dict</span>.set myMap <span class="hljs-string">"Allison"</span> <span class="hljs-number">10</span>
 </code></pre>
-<p>Reason syntax:</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> myMap = Js.<span class="hljs-built_in">Dict</span>.empty();
 Js.<span class="hljs-built_in">Dict</span>.set(myMap, <span class="hljs-string">"Allison"</span>, <span class="hljs-number">10</span>);
 </code></pre>
@@ -104,7 +97,6 @@ Js.<span class="hljs-built_in">Dict</span>.set(myMap, <span class="hljs-string">
 <span class="hljs-keyword">let</span> <span class="hljs-literal">()</span> = john |. jobSet <span class="hljs-string">"Accountant"</span>
 <span class="hljs-keyword">let</span> nick = john |. getNickname
 </code></pre>
-<p>Reason syntax:</p>
 <pre><code class="hljs css reason">[<span class="hljs-meta">@bs</span>.deriving <span class="hljs-keyword">abstract</span>]
 <span class="hljs-keyword">type</span> person = {
   [<span class="hljs-meta">@bs</span>.optional] name: <span class="hljs-built_in">string</span>,
@@ -124,7 +116,6 @@ john |. jobSet(<span class="hljs-string">"Accountant"</span>);
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">type</span> t
 <span class="hljs-keyword">external</span> createDate : <span class="hljs-built_in">unit</span> -&gt; t = <span class="hljs-string">"Date"</span> [@@bs.<span class="hljs-keyword">new</span>]
 </code></pre>
-<p>Reason syntax:</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">type</span> t;
 [@bs.<span class="hljs-keyword">new</span>] <span class="hljs-keyword">external</span> createDate : <span class="hljs-built_in">unit</span> =&gt; t = <span class="hljs-string">"Date"</span>;
 </code></pre>
@@ -139,7 +130,6 @@ john |. jobSet(<span class="hljs-string">"Accountant"</span>);
   |. filter (<span class="hljs-keyword">fun</span> a -&gt; a <span class="hljs-keyword">mod</span> <span class="hljs-number">2</span> = <span class="hljs-number">0</span>)
   |. <span class="hljs-type">Js</span>.log
 </code></pre>
-<p>Reason syntax:</p>
 <pre><code class="hljs css reason">[@bs.send] <span class="hljs-keyword">external</span> map : (<span class="hljs-built_in">array</span>(<span class="hljs-symbol">'a</span>), <span class="hljs-symbol">'a</span> =&gt; <span class="hljs-symbol">'b</span>) =&gt; <span class="hljs-built_in">array</span>(<span class="hljs-symbol">'b</span>) = <span class="hljs-string">""</span>;
 [@bs.send] <span class="hljs-keyword">external</span> filter : (<span class="hljs-built_in">array</span>(<span class="hljs-symbol">'a</span>), <span class="hljs-symbol">'a</span> =&gt; <span class="hljs-symbol">'b</span>) =&gt; <span class="hljs-built_in">array</span>(<span class="hljs-symbol">'b</span>) = <span class="hljs-string">""</span>;
 
@@ -152,7 +142,6 @@ john |. jobSet(<span class="hljs-string">"Accountant"</span>);
 <h3><a class="anchor" aria-hidden="true" name="variadic"></a><a href="#variadic" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Variadic</h3>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">external</span> join : <span class="hljs-built_in">string</span> <span class="hljs-built_in">array</span> -&gt; <span class="hljs-built_in">string</span> = <span class="hljs-string">""</span> [@@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"path"</span>] [@@bs.splice]
 </code></pre>
-<p>Reason syntax:</p>
 <pre><code class="hljs css reason">[@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"path"</span>] [@bs.splice]
 <span class="hljs-keyword">external</span> join : <span class="hljs-built_in">array</span>(<span class="hljs-built_in">string</span>) =&gt; <span class="hljs-built_in">string</span> = <span class="hljs-string">""</span>;
 </code></pre>
@@ -160,7 +149,6 @@ john |. jobSet(<span class="hljs-string">"Accountant"</span>);
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">external</span> drawCat: <span class="hljs-built_in">unit</span> -&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">"draw"</span> [@@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"Drawing"</span>]
 <span class="hljs-keyword">external</span> drawDog: giveName:<span class="hljs-built_in">string</span> -&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">"draw"</span> [@@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"Drawing"</span>]
 </code></pre>
-<p>Reason syntax:</p>
 <pre><code class="hljs css reason">[@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"Drawing"</span>] <span class="hljs-keyword">external</span> drawCat : <span class="hljs-built_in">unit</span> =&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">"draw"</span>;
 [@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"Drawing"</span>] <span class="hljs-keyword">external</span> drawDog : (~giveName: <span class="hljs-built_in">string</span>) =&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">"draw"</span>;
 </code></pre>
@@ -174,7 +162,6 @@ john |. jobSet(<span class="hljs-string">"Accountant"</span>);
 
 <span class="hljs-keyword">let</span> _ = padLeft <span class="hljs-string">"Hello World"</span> (<span class="hljs-type">`Int</span> <span class="hljs-number">4</span>)
 </code></pre>
-<p>Reason syntax:</p>
 <pre><code class="hljs css reason">[@bs.<span class="hljs-keyword">val</span>] <span class="hljs-keyword">external</span> padLeft : (
   <span class="hljs-built_in">string</span>,
   [@bs.unwrap] [
@@ -189,39 +176,33 @@ padLeft(<span class="hljs-string">"Hello World"</span>, <span class="hljs-type">
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">let</span> add = <span class="hljs-keyword">fun</span> [@bs] x y z -&gt; x + y + z
 <span class="hljs-keyword">let</span> six = (add <span class="hljs-number">1</span> <span class="hljs-number">2</span> <span class="hljs-number">3</span>) [@bs]
 </code></pre>
-<p>Reason syntax:</p>
 <pre><code class="hljs css reason">let <span class="hljs-keyword">add</span><span class="bash"> = [@bs] ((x, y, z) =&gt; x + y + z);
 </span>let six = [@bs] <span class="hljs-keyword">add</span><span class="bash">(1, 2, 3);
 </span></code></pre>
 <h2><a class="anchor" aria-hidden="true" name="module"></a><a href="#module" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Module</h2>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">external</span> dirname: <span class="hljs-built_in">string</span> -&gt; <span class="hljs-built_in">string</span> = <span class="hljs-string">"dirname"</span> [@@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"path"</span>]
 </code></pre>
-<p>Reason syntax:</p>
 <pre><code class="hljs css reason">[@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"path"</span>] <span class="hljs-keyword">external</span> dirname : <span class="hljs-built_in">string</span> =&gt; <span class="hljs-built_in">string</span> = <span class="hljs-string">"dirname"</span>;
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" name="import-default"></a><a href="#import-default" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Import Default</h3>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">external</span> leftPad: <span class="hljs-built_in">string</span> -&gt; <span class="hljs-built_in">int</span> -&gt; <span class="hljs-built_in">string</span> = <span class="hljs-string">"./leftPad"</span> [@@bs.<span class="hljs-keyword">module</span>]
 </code></pre>
-<p>Reason syntax:</p>
 <pre><code class="hljs css reason">[@bs.<span class="hljs-built_in">module</span>] external leftPad : <span class="hljs-function"><span class="hljs-params">(<span class="hljs-built_in">string</span>, int)</span> =&gt;</span> <span class="hljs-built_in">string</span> = <span class="hljs-string">"./leftPad"</span>;
 </code></pre>
 <p>Import ES6 default compiled from Babel:</p>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">external</span> studentName: <span class="hljs-built_in">string</span> = <span class="hljs-string">"default"</span> [@@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"./student"</span>]
 </code></pre>
-<p>Reason syntax:</p>
 <pre><code class="hljs css reason">[<span class="hljs-keyword">@bs</span>.<span class="hljs-keyword">module</span> <span class="hljs-string">"./student"</span>] external studentName : <span class="hljs-built_in">string</span> = <span class="hljs-string">"default"</span>;
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" name="export-es6-default"></a><a href="#export-es6-default" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Export ES6 default</h3>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">let</span> default = <span class="hljs-string">"Bob"</span>
 </code></pre>
-<p>Reason syntax:</p>
 <pre><code class="hljs css reason">let<span class="hljs-built_in"> default </span>= <span class="hljs-string">"Bob"</span>;
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" name="identity-external"></a><a href="#identity-external" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Identity External</h2>
 <p>Final escape hatch converter. Do not abuse.</p>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">external</span> myShadyConversion : foo -&gt; bar = <span class="hljs-string">"%identity"</span>
 </code></pre>
-<p>Reason syntax:</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">external </span>myShadyConversion : foo =&gt; <span class="hljs-keyword">bar </span>= <span class="hljs-string">"%identity"</span><span class="hljs-comment">;</span>
 </code></pre>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="interop-overview.html">← 概要</a><a class="docs-next button" href="embed-raw-javascript.html">生の JavaScript を埋め込む →</a></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.js"></script><script>window.foo = new Pjax({

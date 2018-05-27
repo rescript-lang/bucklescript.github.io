@@ -21,7 +21,6 @@
 <span class="hljs-keyword">let</span> _module : <span class="hljs-type">Node</span>.node_module option = [%bs.node _module]
 <span class="hljs-keyword">let</span> require : <span class="hljs-type">Node</span>.node_require option = [%bs.node require]
 </code></pre>
-<p>Sintaxis de Reason:</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> dirname: <span class="hljs-keyword">option</span>(string) = [<span class="hljs-meta">%bs</span>.node __dirname];
 <span class="hljs-keyword">let</span> filename: <span class="hljs-keyword">option</span>(string) = [<span class="hljs-meta">%bs</span>.node __filename];
 <span class="hljs-keyword">let</span> _module: <span class="hljs-keyword">option</span>(Node.node_module) = [<span class="hljs-meta">%bs</span>.node _module];

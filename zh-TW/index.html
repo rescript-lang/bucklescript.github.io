@@ -9,10 +9,17 @@
           }
         });
       </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search"/></li><li><a href="https://github.com/bucklescript/bucklescript" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div><div class="homeContainer"><div id="redirectBanner"><div>Hello! This particular page hash has moved to <a id="redirectLink"></a>. Please update the URLs to reflect it. Thanks!</div></div><div class="homeWrapperWrapper"><div class="wrapper homeWrapper"><div class="projectTitle">BuckleScript</div><div class="homeWrapperInner"><div class="homeTagLine">Write safer and simpler code in OCaml &amp; Reason, compile to JavaScript.</div><div class="homeCodeSnippet"><div><span><pre><code class="hljs css ocaml"><span class="hljs-keyword">let</span> result = <span class="hljs-type">Js</span>.(
-  [| <span class="hljs-number">1</span>; <span class="hljs-number">2</span>; <span class="hljs-number">3</span>; <span class="hljs-number">4</span> |]
+  [|<span class="hljs-number">1</span>; <span class="hljs-number">2</span>; <span class="hljs-number">3</span>; <span class="hljs-number">4</span>|]
   |&gt; <span class="hljs-type">Array</span>.filter (<span class="hljs-keyword">fun</span> x -&gt; x &gt; <span class="hljs-number">2</span>)
   |&gt; <span class="hljs-type">Array</span>.mapi (<span class="hljs-keyword">fun</span> x i -&gt; x + i)
   |&gt; <span class="hljs-type">Array</span>.reduce (<span class="hljs-keyword">fun</span> x y -&gt; x + y) <span class="hljs-number">0</span>
+)
+</code></pre>
+</span></div><div><span><pre><code class="hljs css reason"><span class="hljs-keyword">let</span> result = Js.(
+  [|<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>|]
+  |&gt; <span class="hljs-built_in">Array</span>.filter(<span class="hljs-function"><span class="hljs-params">x</span> =&gt;</span> x &gt; <span class="hljs-number">2</span>)
+  |&gt; <span class="hljs-built_in">Array</span>.mapi(<span class="hljs-function">(<span class="hljs-params">x, i</span>) =&gt;</span> x + i)
+  |&gt; <span class="hljs-built_in">Array</span>.reduce(<span class="hljs-function">(<span class="hljs-params">x, y</span>) =&gt;</span> x + y, <span class="hljs-number">0</span>)
 )
 </code></pre>
 </span></div></div></div><div class="section promoSection"><div class="promoRow"><div class="pluginRowBlock"><div class="pluginWrapper"><a class="button getStarted" href="/docs/zh-TW/installation.html" target="_self">開始使用</a></div><div class="pluginWrapper"><a class="button " href="https://reasonml.github.io/docs/en/interop.html" target="_self">Tutorial</a></div></div></div></div></div></div></div><div class="mainContainer"><div class="container homeThreePoints"><div class="wrapper"><div class="gridBlock"><div class="blockElement alignCenter threeByGridBlock"><div class="blockContent"><h2><div><span><p>Lean Developer Experience</p>

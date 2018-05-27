@@ -39,7 +39,6 @@ draw([|<span class="hljs-number">1</span>, <span class="hljs-number">2</span>|])
 
 <span class="hljs-comment">(* val handleData : 'a -&gt; int option *)</span>
 </code></pre>
-<p>Sintaxis de Reason:</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> handleData = [@bs.open] (
   <span class="hljs-keyword">fun</span>
   | <span class="hljs-type">Invalid_argument</span>(<span class="hljs-keyword">_</span>) =&gt; <span class="hljs-number">0</span>
@@ -49,7 +48,7 @@ draw([|<span class="hljs-number">1</span>, <span class="hljs-number">2</span>|])
 
 <span class="hljs-comment">(* let handleData: 'a =&gt; option(int) *)</span>
 </code></pre>
-<p>Para cada origen de entrada, siempre que esta concuerde con el patrón de excepción (patrones anidados de igualdad son compatibles), el valor igualado es regresado, de otra manera devuelve un <code>None</code>.</p>
+<p>For any input source, as long as it matches the exception pattern (nested pattern match supported), the matched value is returned, otherwise return <code>None</code>.</p>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="nodejs-special-variables.html">← Variables especiales de NodeJS</a><a class="docs-next button" href="browser-support-polyfills.html">Compatibilidad con navegadores y Polyfills →</a></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.js"></script><script>window.foo = new Pjax({
           areas: [
             // try to use the first query.

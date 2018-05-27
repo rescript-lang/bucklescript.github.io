@@ -49,7 +49,6 @@
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">external</span> dirname: <span class="hljs-built_in">string</span> -&gt; <span class="hljs-built_in">string</span> = <span class="hljs-string">"dirname"</span> [@@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"path"</span>]
 <span class="hljs-keyword">let</span> root = dirname <span class="hljs-string">"/User/chenglou"</span>
 </code></pre>
-<p>Reason syntax:</p>
 <pre><code class="hljs css reason">[@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"path"</span>] <span class="hljs-keyword">external</span> dirname : <span class="hljs-built_in">string</span> =&gt; <span class="hljs-built_in">string</span> = <span class="hljs-string">"dirname"</span>;
 <span class="hljs-keyword">let</span> root = dirname(<span class="hljs-string">"/User/chenglou"</span>);
 </code></pre>
@@ -63,7 +62,6 @@
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">external</span> leftPad: <span class="hljs-built_in">string</span> -&gt; <span class="hljs-built_in">int</span> -&gt; <span class="hljs-built_in">string</span> = <span class="hljs-string">"./leftPad"</span> [@@bs.<span class="hljs-keyword">module</span>]
 <span class="hljs-keyword">let</span> paddedResult = leftPad <span class="hljs-string">"hi"</span> <span class="hljs-number">5</span>
 </code></pre>
-<p>Reason syntax:</p>
 <pre><code class="hljs css reason">[@bs.<span class="hljs-keyword">module</span>] <span class="hljs-keyword">external</span> leftPad : <span class="hljs-built_in">string</span> =&gt; <span class="hljs-built_in">int</span> =&gt; <span class="hljs-built_in">string</span> = <span class="hljs-string">"./leftPad"</span>;
 <span class="hljs-keyword">let</span> paddedResult = leftPad(<span class="hljs-string">"hi"</span>, <span class="hljs-number">5</span>);
 </code></pre>
@@ -76,7 +74,6 @@
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">external</span> studentName: <span class="hljs-built_in">string</span> = <span class="hljs-string">"default"</span> [@@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"./student"</span>]
 <span class="hljs-keyword">let</span> _ = <span class="hljs-type">Js</span>.log studentName
 </code></pre>
-<p>Reason syntax:</p>
 <pre><code class="hljs css reason">[@<span class="hljs-keyword">bs.module </span><span class="hljs-string">"./student"</span>] <span class="hljs-keyword">external </span>studentName : string = <span class="hljs-string">"default"</span><span class="hljs-comment">;</span>
 <span class="hljs-keyword">Js.log(studentName);
 </span></code></pre>
@@ -88,7 +85,6 @@
 <p>When the name you're using on the BS side matches the name of the JS value, you can use the empty string shorthand:</p>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">external</span> dirname: <span class="hljs-built_in">string</span> -&gt; <span class="hljs-built_in">string</span> = <span class="hljs-string">""</span> [@@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"path"</span>]
 </code></pre>
-<p>Reason syntax:</p>
 <pre><code class="hljs css reason">[@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"path"</span>] <span class="hljs-keyword">external</span> dirname : <span class="hljs-built_in">string</span> =&gt; <span class="hljs-built_in">string</span> = <span class="hljs-string">""</span>;
 </code></pre>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="function.html">← Function</a><a class="docs-next button" href="regular-expression.html">Regular Expression →</a></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.js"></script><script>window.foo = new Pjax({

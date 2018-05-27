@@ -21,13 +21,11 @@
 <p>If you're receiving, for example, a JS string that can also be null, type it as:</p>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">let</span> theJsValue: <span class="hljs-built_in">string</span> <span class="hljs-type">Js</span>.<span class="hljs-type">Nullable</span>.t = /* the <span class="hljs-keyword">value</span> you've gotten here */
 </code></pre>
-<p>Reason syntax:</p>
 <pre><code class="hljs css reason">let theJsValue: Js<span class="hljs-selector-class">.Nullable</span><span class="hljs-selector-class">.t</span>(string) = <span class="hljs-comment">/* the value you've gotten here */</span>
 </code></pre>
 <p>To create a nullable string, do:</p>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">let</span> nullableString: <span class="hljs-built_in">string</span> <span class="hljs-type">Js</span>.<span class="hljs-type">Nullable</span>.t = <span class="hljs-type">Js</span>.<span class="hljs-type">Nullable</span>.return <span class="hljs-string">"hello"</span>
 </code></pre>
-<p>Reason syntax:</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> nullableString: Js.<span class="hljs-built_in">Nullable</span>.t(string) = Js.<span class="hljs-built_in">Nullable</span>.<span class="hljs-keyword">return</span>(<span class="hljs-string">"hello"</span>);
 </code></pre>
 <p>The <code>return</code> part &quot;wraps&quot; a string into a nullable string, to make the type system understand and track the fact that, as you pass this value around, it's not just a string, but a string that can be <code>null</code> or <code>undefined</code>. Tada! No more nullable bugs!</p>
@@ -40,7 +38,6 @@
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">type</span> element
 <span class="hljs-keyword">external</span> getElementById : <span class="hljs-built_in">string</span> -&gt; element option = <span class="hljs-string">"getElementById"</span> [@@bs.<span class="hljs-keyword">val</span>][@@bs.scope <span class="hljs-string">"document"</span>][@@bs.return nullable]
 </code></pre>
-<p>Reason syntax:</p>
 <pre><code class="hljs css reason"><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">element</span></span>;
 [<span class="hljs-meta">@bs</span>.<span class="hljs-keyword">val</span>] [<span class="hljs-meta">@bs</span>.<span class="hljs-keyword">return</span> nullable] [<span class="hljs-meta">@bs</span>.scope <span class="hljs-string">"document"</span>] external getElementById : string =&gt; option(element) = <span class="hljs-string">"getElementById"</span>;
 </code></pre>

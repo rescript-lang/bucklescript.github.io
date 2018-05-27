@@ -23,20 +23,19 @@
   | <span class="hljs-type">Cancelar</span>
   [@@bs.deriving accessors]
 </code></pre>
-<p>Sintaxis de Reason:</p>
 <pre><code class="hljs css reason">[@bs.deriving accessors]<span class="hljs-built_in">
 type </span>action =
   | Click
   | Envío(cadena)
   | Cancelar;
 </code></pre>
-<p>Constructores de variantes con cargas generan funciones, constructores sin carga generan enteros planos. <strong>Nota</strong>:</p>
+<p>Variants constructors with payloads generate functions, payload-less constructors generate plain integers. <strong>Note</strong>:</p>
 <ul>
 <li>Los accesores generados son minúsculas.</li>
 <li>¡Ahora puedes usar estos ayudantes en el lado JavaScript! Pero no dependas de sus valores reales, por favor.</li>
 <li>No funciona con variantes polimórficas aún.</li>
 </ul>
-<p>Salida:</p>
+<p>Output:</p>
 <pre><code class="hljs css js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">submit</span>(<span class="hljs-params">param_0</span>) </span>{
   <span class="hljs-keyword">return</span> <span class="hljs-comment">/* Enviar */</span>[param_0];
 }
@@ -52,82 +51,75 @@ exports.cancel = cancel;
 <h3><a class="anchor" aria-hidden="true" name="uso"></a><a href="#uso" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Uso</h3>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">let</span> s = submit <span class="hljs-string">"hola"</span> <span class="hljs-comment">(* da Enviar "hola" *)</span>
 </code></pre>
-<p>Sintaxis de Reason:</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> <span class="hljs-attr">s</span> = submit(<span class="hljs-string">"hola"</span>); <span class="hljs-comment">/* da enviar("hola") */</span>
 </code></pre>
-<p>Esto es útil:</p>
+<p>This is useful:</p>
 <ul>
 <li>Cuando estás pasando una función accesora como una función de alto nivel (cosa que no son los constructores de variantes planas).</li>
 <li>Cuando te gustaría que el lado JS use estos valores &amp; funciones opacamente y te devuelvan un constructor de variante (ya que JS no tiene algo así).</li>
 </ul>
 <h2><a class="anchor" aria-hidden="true" name="convertir-entre-objeto-y-registro-de-jst"></a><a href="#convertir-entre-objeto-y-registro-de-jst" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Convertir Entre Objeto y Registro de <code>Js.t</code></h2>
-<p>Usa <code>jsConverter</code>.</p>
+<p>Use <code>jsConverter</code>.</p>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">type</span> coordinates = {
   x : <span class="hljs-built_in">int</span>;
   y : <span class="hljs-built_in">int</span>
 } [@@bs.deriving jsConverter]
 </code></pre>
-<p>Sintaxis de Reason:</p>
 <pre><code class="hljs css reason">[@bs.deriving jsConverter]<span class="hljs-built_in">
 type </span>coordinates = {
   x: int,
   y: int
 };
 </code></pre>
-<p>Genera 2 funciones del siguiente tipo:</p>
+<p>Generates 2 functions of the following types:</p>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">val</span> coordinatesToJs : coordinates -&gt; &lt;x : <span class="hljs-built_in">int</span> ; y : <span class="hljs-built_in">int</span> &gt; <span class="hljs-type">Js</span>.t
 
 <span class="hljs-keyword">val</span> coordinatesFromJs : &lt; x: <span class="hljs-built_in">int</span> ; y : <span class="hljs-built_in">int</span> ; .. &gt; <span class="hljs-type">Js</span>.t -&gt; coordinates
 </code></pre>
-<p>Sintaxis de Reason:</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> coordinatesToJs: coordinates =&gt; {. <span class="hljs-string">"x"</span>: <span class="hljs-built_in">int</span>, <span class="hljs-string">"y"</span>: <span class="hljs-built_in">int</span>};
 
 <span class="hljs-keyword">let</span> coordinatesFromJs: {.. <span class="hljs-string">"x"</span>: <span class="hljs-built_in">int</span>, <span class="hljs-string">"y"</span>: <span class="hljs-built_in">int</span>} =&gt; coordinates;
 </code></pre>
-<p><strong>Nota</strong>:</p>
+<p><strong>Note</strong>:</p>
 <ul>
 <li><code>coordinatesFromJs</code> usa un tipo de objeto abierto que acepta más campos, sólo para ser más permisivo.</li>
 <li>Los convertidores son superficiales. No penetran recursivamente en los campos y los convierten. Esto preserva la velocidad y simplicidad de la salida mientras satisfacen el 80% de los casos. ¡Envía un problema si te gustaría ver la conversión recursiva!</li>
 </ul>
 <h3><a class="anchor" aria-hidden="true" name="uso"></a><a href="#uso" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Uso</h3>
-<p>Esto exporta un objeto JS <code>jsCoordinates</code> (¡no un registro!) para que lo usen los archivos JS:</p>
+<p>This exports a <code>jsCoordinates</code> JS object (not a record!) for JS files to use:</p>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">let</span> jsCoordinates = coordinatesToJs {x = <span class="hljs-number">1</span>; y = <span class="hljs-number">2</span>}
 </code></pre>
-<p>Sintaxis de Reason:</p>
 <pre><code class="hljs css reason"><span class="hljs-attribute">let jsCoordinates</span> = coordinatesToJs({x: 1, y: 2});
 </code></pre>
-<p>Esto enlaza a un registro <code>jsCoordinates</code> (¡no un objeto!) que existe en el lado JS, presuntamente creado por JS llamando a la función <code>coordinatesFromJs</code>:</p>
+<p>This binds to a <code>jsCoordinates</code> record (not a JS object!) that exists on the JS side, presumably created by JS calling the function <code>coordinatesFromJs</code>:</p>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">external</span> jsCoordinates: coordinates = <span class="hljs-string">"jsCoordinates"</span> [@@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"myGame"</span>]
 </code></pre>
-<p>Sintaxis de Reason:</p>
 <pre><code class="hljs css reason">[@<span class="hljs-keyword">bs.module </span><span class="hljs-string">"myGame"</span>] <span class="hljs-keyword">external </span><span class="hljs-keyword">jsCoordinates </span>: coordinates = <span class="hljs-string">"jsCoordinates"</span><span class="hljs-comment">;</span>
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" name="mas-seguridad"></a><a href="#mas-seguridad" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Más Seguridad</h3>
-<p>La función generada anteriormente usa objetos del tipo <code>Js.t</code>. Puedes además esconder este detalle de implementación haciendo el tipo de objeto <strong>abstracto</strong> mediante <code>newType</code>:</p>
+<p>The above generated functions use <code>Js.t</code> object types. You can also hide this implementation detail by making the object type <strong>abstract</strong> through <code>newType</code>:</p>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">type</span> coordinates = {
   x : <span class="hljs-built_in">int</span>;
   y : <span class="hljs-built_in">int</span>
 } [@@bs.deriving {jsConverter = newType}]
 </code></pre>
-<p>Sintaxis de Reason:</p>
 <pre><code class="hljs css reason">[@bs.deriving {jsConverter: newType}]<span class="hljs-built_in">
 type </span>coordinates = {
   x: int,
   y: int
 };
 </code></pre>
-<p>Genera dos funciones del siguiente tipo:</p>
+<p>Generates 2 functions of the following types:</p>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">val</span> coordinatesToJs : coordinates -&gt; abs_coordinates
 
 <span class="hljs-keyword">val</span> coordinatesFromJs : abs_coordinates -&gt; coordinates
 </code></pre>
-<p>Sintaxis de Reason:</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> coordinatesToJs: <span class="hljs-function"><span class="hljs-params">coordinates</span> =&gt;</span> abs_coordinates;
 
 <span class="hljs-keyword">let</span> coordinatesFromJs: <span class="hljs-function"><span class="hljs-params">abs_coordinates</span> =&gt;</span> coordinates;
 </code></pre>
 <h4><a class="anchor" aria-hidden="true" name="uso"></a><a href="#uso" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Uso</h4>
-<p>Usando <code>newType</code>, has prevenido a los consumidores de inadvertidamente hacer lo siguiente:</p>
+<p>Using <code>newType</code>, you've now prevented consumers from inadvertently doing the following:</p>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">let</span> myCoordinates = {
   x = <span class="hljs-number">10</span>;
   y = <span class="hljs-number">20</span>
@@ -136,7 +128,6 @@ type </span>coordinates = {
 
 <span class="hljs-keyword">let</span> x = jsCoords##x <span class="hljs-comment">(* ¡No permitido! No accedas a los detalles internos del objeto *)</span>
 </code></pre>
-<p>Sintaxis de Reason:</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> <span class="hljs-attr">myCoordinates</span> = {
   x: <span class="hljs-number">10</span>,
   y: <span class="hljs-number">20</span>
@@ -145,9 +136,9 @@ type </span>coordinates = {
 
 <span class="hljs-keyword">let</span> <span class="hljs-attr">x</span> = jsCoords<span class="hljs-comment">##x; /* ¡No permitido! No accedas a los detalles internos del objeto */</span>
 </code></pre>
-<p>La misma salida generada. ¿No es genial que los tipos previenen accesos inválidos que de otra manera tendrías que codificar en el tiempo de ejecución?</p>
+<p>Same generated output. Isn't it great that types prevent invalid accesses you'd otherwise have to encode at runtime?</p>
 <h2><a class="anchor" aria-hidden="true" name="convertir-entre-enteros-js-enumerados-y-variantes-bs"></a><a href="#convertir-entre-enteros-js-enumerados-y-variantes-bs" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Convertir entre Enteros JS Enumerados y Variantes BS</h2>
-<p>Usa <code>jsConverter</code>.</p>
+<p>Use <code>jsConverter</code>.</p>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">type</span> fruit =
   | <span class="hljs-type">Manzana</span>
   | <span class="hljs-type">Naranja</span>
@@ -155,7 +146,6 @@ type </span>coordinates = {
   | <span class="hljs-type">Sand</span>ía
   [@@bs.deriving jsConverter]
 </code></pre>
-<p>Sintaxis de Reason:</p>
 <pre><code class="hljs css reason">[@bs.deriving jsConverter]<span class="hljs-built_in">
 type </span>fruit =
   | Manzana
@@ -163,19 +153,18 @@ type </span>fruit =
   | Kiwi
   | Sandía;
 </code></pre>
-<p>Genera 2 funciones de los siguientes tipos:</p>
+<p>Generates 2 functions of the following types:</p>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">val</span> fruitToJs : fruit -&gt; <span class="hljs-built_in">int</span>
 
 <span class="hljs-keyword">val</span> fruitFromJs : <span class="hljs-built_in">int</span> -&gt; fruit option
 </code></pre>
-<p>Sintaxis de Reason:</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> fruitToJs: fruit =&gt; <span class="hljs-built_in">int</span>;
 
 <span class="hljs-keyword">let</span> fruitFromJs: <span class="hljs-built_in">int</span> =&gt; <span class="hljs-built_in">option</span>(fruit);
 </code></pre>
-<p>Para <code>fruitToJs</code>, cada constructor de variante de fruta mapearía a un entero, empezando en 0, en el orden en el que son declarados.</p>
-<p>Para <code>fruitFromJs</code>, el valor de retorno es un <code>option</code>, porque no todos los int mapean a un constructor.</p>
-<p>Además puedes adjuntar un <code>[@bs.as alternativeIntValue]</code> a cada constructor para personalizar su salida.</p>
+<p>For <code>fruitToJs</code>, each fruit variant constructor would map into an integer, starting at 0, in the order they're declared.</p>
+<p>For <code>fruitFromJs</code>, the return value is an <code>option</code>, because not every int maps to a constructor.</p>
+<p>You can also attach a <code>[@bs.as alternativeIntValue]</code> to each constructor to customize their output.</p>
 <h3><a class="anchor" aria-hidden="true" name="uso"></a><a href="#uso" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Uso</h3>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">type</span> fruit =
   | <span class="hljs-type">Manzana</span>
@@ -190,7 +179,6 @@ type </span>fruit =
 | <span class="hljs-type">Some</span> <span class="hljs-type">Kiwi</span> -&gt; <span class="hljs-type">Js</span>.log <span class="hljs-string">"this is Kiwi"</span>
 | _ -&gt; <span class="hljs-type">Js</span>.log <span class="hljs-string">"se ha recibido algo mal del lado JS"</span>
 </code></pre>
-<p>Sintaxis de Reason:</p>
 <pre><code class="hljs css reason">[@bs.deriving jsConverter]
 type fruit =
   | <span class="hljs-type">Manzana</span>
@@ -205,33 +193,31 @@ switch (fruitFromJs(<span class="hljs-number">100</span>)) {
 | <span class="hljs-type">_</span> =&gt; Js.log(<span class="hljs-string">"se ha recibido algo mal del lado JS"</span>)
 };
 </code></pre>
-<p><strong>Nota</strong>: usando <code>bs.as</code> aquí, todos los números de codificación subsecuentes cambian. ¡<code>Apple</code> sigue siendo ``, <code>Orange</code> es <code>10</code>, <code>Kiwi</code> es <code>100</code> y <code>Watermelon</code> es <strong><code>101</code></strong>!</p>
+<p><strong>Note</strong>: by using <code>bs.as</code> here, all subsequent number encoding changes. <code>Apple</code> is still ``, <code>Orange</code> is <code>10</code>, <code>Kiwi</code> is <code>100</code> and <code>Watermelon</code> is <strong><code>101</code></strong>!</p>
 <h3><a class="anchor" aria-hidden="true" name="mas-seguridad"></a><a href="#mas-seguridad" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Más Seguridad</h3>
-<p>Similar al objeto JS &lt;-&gt; derivado de un registro, puedes esconder el hecho de que JS enum son ints usando <code>newType</code>:</p>
+<p>Similar to the JS object &lt;-&gt; record deriving, you can hide the fact that the JS enum are ints by using <code>newType</code>:</p>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">type</span> fruit =
   | <span class="hljs-type">Manzana</span>
   | <span class="hljs-type">Kiwi</span> [@bs.<span class="hljs-keyword">as</span> <span class="hljs-number">100</span>]
   | <span class="hljs-type">Sand</span>ía
   [@@bs.deriving {jsConverter = newType}]
 </code></pre>
-<p>Sintaxis de Reason:</p>
 <pre><code class="hljs css reason">[@bs.deriving {jsConverter: newType}]<span class="hljs-built_in">
 type </span>fruit =
   | Manzana
   | [@bs.as 100] Kiwi
   | Sandía;
 </code></pre>
-<p>Genera 2 funciones del siguiente tipo:</p>
+<p>Generates 2 functions of the following types:</p>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">val</span> fruitToJs : fruit -&gt; abs_fruit
 
 <span class="hljs-keyword">val</span> fruitFromJs : abs_fruit -&gt; fruit
 </code></pre>
-<p>Sintaxis de Reason:</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> fruitToJs: <span class="hljs-function"><span class="hljs-params">fruit</span> =&gt;</span> abs_fruit;
 
 <span class="hljs-keyword">let</span> fruitFromJs: <span class="hljs-function"><span class="hljs-params">abs_fruit</span> =&gt;</span> fruit;
 </code></pre>
-<p>Para <code>fruitFromJs</code>, el valor de retorno, a diferencia de los anteriores casos de tipos no abstractos, no contiene un <code>option</code>, porque no hay manera de pasar un valor erróneo; ¡el único creador de valores <code>abs_fruit</code> es <code>fruitToJs</code>!</p>
+<p>For <code>fruitFromJs</code>, the return value, unlike the previous non-abstract type case, doesn't contain an <code>option</code>, because there's no way a bad value can be passed into it; the only creator of <code>abs_fruit</code> values is <code>fruitToJs</code>!</p>
 <h4><a class="anchor" aria-hidden="true" name="uso"></a><a href="#uso" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Uso</h4>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">type</span> fruit =
   | <span class="hljs-type">Manzana</span>
@@ -246,7 +232,6 @@ type </span>fruit =
 
 <span class="hljs-keyword">let</span> error = fruitFromJs <span class="hljs-number">100</span> <span class="hljs-comment">(* no, no se puede tomar un int al azar *)</span>
 </code></pre>
-<p>Sintaxis de Reason:</p>
 <pre><code class="hljs css reason">[@bs.deriving {jsConverter: newType}]
 type <span class="hljs-attr">fruit</span> =
   | Manzana
@@ -261,7 +246,7 @@ type <span class="hljs-attr">fruit</span> =
 <span class="hljs-keyword">let</span> <span class="hljs-attr">error</span> = fruitFromJs(<span class="hljs-number">100</span>); <span class="hljs-comment">/* no, no se puede tomar un int al azar*/</span>
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" name="convertir-entre-cadenas-enum-js-y-variantes-bs-polimorficas"></a><a href="#convertir-entre-cadenas-enum-js-y-variantes-bs-polimorficas" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Convertir entre Cadenas Enum JS y Variantes BS Polimórficas</h2>
-<p>Similar a la sección previa, excepto que las variantes polimórficas son convertidas en <code>string</code> en vez de <code>int</code>.</p>
+<p>Similar to previous section, except polymorphic variants are converted to <code>string</code> instead of <code>int</code>.</p>
 <h3><a class="anchor" aria-hidden="true" name="uso"></a><a href="#uso" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Uso</h3>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">type</span> fruit = [
   | <span class="hljs-type">`Manzana</span>
@@ -272,7 +257,6 @@ type <span class="hljs-attr">fruit</span> =
 <span class="hljs-keyword">let</span> appleString = fruitToJs <span class="hljs-type">`Manzana</span> <span class="hljs-comment">(* Manzana" *)</span>
 <span class="hljs-keyword">let</span> kiwiString = fruitToJs <span class="hljs-type">`Kiwi</span> <span class="hljs-comment">(* "miniCoco" *)</span>
 </code></pre>
-<p>Sintaxis de Reason:</p>
 <pre><code class="hljs css reason">[@bs.deriving jsConverter]
 <span class="hljs-keyword">type</span> fruit = [
   | <span class="hljs-type">`Manzana</span>
@@ -283,7 +267,7 @@ type <span class="hljs-attr">fruit</span> =
 <span class="hljs-keyword">let</span> appleString = fruitToJs(<span class="hljs-type">`Manzana</span>); /* <span class="hljs-string">"Manzana"</span> */
 <span class="hljs-keyword">let</span> kiwiString = fruitToJs(<span class="hljs-type">`Kiwi</span>); /* <span class="hljs-string">"miniCoco"</span> */
 </code></pre>
-<p>Derivar convertidores con tipos abstractos mediante <code>newType</code> aún funciona.</p>
+<p>Deriving converters with abstract type through <code>newType</code> also still works.</p>
 <h2><a class="anchor" aria-hidden="true" name="abstract-type"></a><a href="#abstract-type" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Abstract Type</h2>
 <p>(Since 3.0.0) for platform agnostic code and fine tuning of runtime representation.</p>
 <p>OCaml has multiple backends. For the record type, it has quite similar representations between native and JS backend: an array of values.</p>
@@ -295,7 +279,7 @@ type <span class="hljs-attr">fruit</span> =
 } [@@bs.deriving abstract]
 </code></pre>
 <p>It will generate such functions</p>
-<pre><code class="hljs css ocaml"><span class="hljs-keyword">type</span> cord 
+<pre><code class="hljs css ocaml"><span class="hljs-keyword">type</span> cord
 <span class="hljs-keyword">val</span> cord : a:<span class="hljs-built_in">int</span> -&gt; b:<span class="hljs-built_in">int</span> -&gt; t  <span class="hljs-comment">(* maker *)</span>
 <span class="hljs-keyword">val</span> x : cord -&gt; <span class="hljs-built_in">int</span> <span class="hljs-comment">(* getter *)</span>
 <span class="hljs-keyword">val</span> y : cord -&gt; <span class="hljs-built_in">int</span> <span class="hljs-comment">(* getter *)</span>
@@ -304,8 +288,8 @@ type <span class="hljs-attr">fruit</span> =
 <p>Since now <code>cord</code> is completey abstract type, for BuckleScript backend, we compile it into a js object instead of array:</p>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">let</span> u = cord ~x:<span class="hljs-number">2</span> ~y:<span class="hljs-number">3</span>
 
-<span class="hljs-keyword">let</span> <span class="hljs-literal">()</span> = 
-  <span class="hljs-keyword">let</span> x, y = u |. x, u |. y <span class="hljs-keyword">in</span> 
+<span class="hljs-keyword">let</span> <span class="hljs-literal">()</span> =
+  <span class="hljs-keyword">let</span> x, y = u |. x, u |. y <span class="hljs-keyword">in</span>
   u |. ySet (x + y)
 </code></pre>
 <p>Will generate such code</p>
@@ -324,14 +308,14 @@ u.y = x + y | <span class="hljs-number">0</span>;
 <p>We can customize the label to be different names, suppose we change the type definition as below:</p>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">type</span> cord = {
   x : <span class="hljs-built_in">int</span>;
-  <span class="hljs-keyword">mutable</span> y : <span class="hljs-built_in">int</span> [@bs.<span class="hljs-keyword">as</span> <span class="hljs-string">"Content-Type"</span>]; 
+  <span class="hljs-keyword">mutable</span> y : <span class="hljs-built_in">int</span> [@bs.<span class="hljs-keyword">as</span> <span class="hljs-string">"Content-Type"</span>];
 } [@@bs.deriving abstract]
 
 
 <span class="hljs-keyword">let</span> u = cord ~x:<span class="hljs-number">2</span> ~y:<span class="hljs-number">3</span>
 
-<span class="hljs-keyword">let</span> <span class="hljs-literal">()</span> = 
-  <span class="hljs-keyword">let</span> x, y = u |. x, u |. y <span class="hljs-keyword">in</span> 
+<span class="hljs-keyword">let</span> <span class="hljs-literal">()</span> =
+  <span class="hljs-keyword">let</span> x, y = u |. x, u |. y <span class="hljs-keyword">in</span>
   u |. ySet (x + y)
 </code></pre>
 <p>It will generate code as below:</p>
@@ -349,26 +333,26 @@ u[&quot;Content-Type&quot;] = x + y | 0;
 <h3><a class="anchor" aria-hidden="true" name="bsoptional-for-the-record-field"></a><a href="#bsoptional-for-the-record-field" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>bs.optional for the record field</h3>
 <p>We can also mark some labels optional, so that it does not need to be supplied at the initialization time:</p>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">type</span> cord = {
-  <span class="hljs-keyword">mutable</span> x : <span class="hljs-built_in">int</span> [@bs.optional]; 
-  y : <span class="hljs-built_in">int</span> ; 
+  <span class="hljs-keyword">mutable</span> x : <span class="hljs-built_in">int</span> [@bs.optional];
+  y : <span class="hljs-built_in">int</span> ;
 } [@@bs.deriving abstract]
 
 </code></pre>
 <p>It will generate such functions:</p>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">type</span> cord
-<span class="hljs-keyword">val</span> cord : ?x:<span class="hljs-built_in">int</span> -&gt; y:<span class="hljs-built_in">int</span> -&gt; <span class="hljs-built_in">unit</span> -&gt; cord 
-<span class="hljs-keyword">val</span> x : cord -&gt; <span class="hljs-built_in">int</span> option 
-<span class="hljs-keyword">val</span> xSet : cord -&gt; <span class="hljs-built_in">int</span> -&gt; <span class="hljs-built_in">unit</span> 
-<span class="hljs-keyword">val</span> y : cord -&gt; <span class="hljs-built_in">int</span> 
+<span class="hljs-keyword">val</span> cord : ?x:<span class="hljs-built_in">int</span> -&gt; y:<span class="hljs-built_in">int</span> -&gt; <span class="hljs-built_in">unit</span> -&gt; cord
+<span class="hljs-keyword">val</span> x : cord -&gt; <span class="hljs-built_in">int</span> option
+<span class="hljs-keyword">val</span> xSet : cord -&gt; <span class="hljs-built_in">int</span> -&gt; <span class="hljs-built_in">unit</span>
+<span class="hljs-keyword">val</span> y : cord -&gt; <span class="hljs-built_in">int</span>
 </code></pre>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">let</span> u = cord  ~y:<span class="hljs-number">3</span> <span class="hljs-literal">()</span>
 
-<span class="hljs-keyword">let</span> <span class="hljs-literal">()</span> = 
-  <span class="hljs-keyword">let</span> x, y = u |. x, u |. y <span class="hljs-keyword">in</span> 
-  <span class="hljs-keyword">match</span> x <span class="hljs-keyword">with</span> 
-  | <span class="hljs-type">None</span> -&gt; 
+<span class="hljs-keyword">let</span> <span class="hljs-literal">()</span> =
+  <span class="hljs-keyword">let</span> x, y = u |. x, u |. y <span class="hljs-keyword">in</span>
+  <span class="hljs-keyword">match</span> x <span class="hljs-keyword">with</span>
+  | <span class="hljs-type">None</span> -&gt;
     u |. xSet y
-  | <span class="hljs-type">Some</span> x -&gt; 
+  | <span class="hljs-type">Some</span> x -&gt;
     u |. xSet (x + y )
 </code></pre>
 <p>The generated output is:</p>
@@ -389,15 +373,15 @@ u[&quot;Content-Type&quot;] = x + y | 0;
 <h3><a class="anchor" aria-hidden="true" name="fine-access-control-in-signatures"></a><a href="#fine-access-control-in-signatures" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>fine access control in signatures</h3>
 <p><code>bs.deriving</code> <code>abstract</code> is also applicable in <code>mli</code> files:</p>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">type</span> cord = {
-  <span class="hljs-keyword">mutable</span> x : <span class="hljs-built_in">int</span>  [@bs.optional]; 
-  y : <span class="hljs-built_in">int</span> ; 
-} [@@bs.deriving abstract] 
+  <span class="hljs-keyword">mutable</span> x : <span class="hljs-built_in">int</span>  [@bs.optional];
+  y : <span class="hljs-built_in">int</span> ;
+} [@@bs.deriving abstract]
 </code></pre>
 <p>Will generate such signatures</p>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">val</span> cord : ?x:<span class="hljs-built_in">int</span> -&gt; y:<span class="hljs-built_in">int</span> -&gt; <span class="hljs-built_in">unit</span> -&gt; cord
 <span class="hljs-keyword">val</span> x : cord -&gt; <span class="hljs-built_in">int</span> option
-<span class="hljs-keyword">val</span> xSet : cord -&gt; <span class="hljs-built_in">int</span> -&gt; <span class="hljs-built_in">unit</span> 
-<span class="hljs-keyword">val</span> y : cord -&gt; <span class="hljs-built_in">int</span> 
+<span class="hljs-keyword">val</span> xSet : cord -&gt; <span class="hljs-built_in">int</span> -&gt; <span class="hljs-built_in">unit</span>
+<span class="hljs-keyword">val</span> y : cord -&gt; <span class="hljs-built_in">int</span>
 </code></pre>
 <p>We can make it a bit more restrictive when exposing to clients by removing <code>mutable</code> in <code>x</code>:</p>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">type</span> cord = {
@@ -406,16 +390,16 @@ u[&quot;Content-Type&quot;] = x + y | 0;
 } [@@bs.deriving abstract]
 </code></pre>
 <p>Will generate such signatures:</p>
-<pre><code class="hljs css ocaml"><span class="hljs-keyword">val</span> cord : ?x:<span class="hljs-built_in">int</span> -&gt; y: <span class="hljs-built_in">int</span> -&gt; <span class="hljs-built_in">unit</span> -&gt; cord  
+<pre><code class="hljs css ocaml"><span class="hljs-keyword">val</span> cord : ?x:<span class="hljs-built_in">int</span> -&gt; y: <span class="hljs-built_in">int</span> -&gt; <span class="hljs-built_in">unit</span> -&gt; cord
 <span class="hljs-keyword">val</span> x : cord -&gt; <span class="hljs-built_in">int</span> option
-<span class="hljs-keyword">val</span> y : cord -&gt; <span class="hljs-built_in">int</span> 
+<span class="hljs-keyword">val</span> y : cord -&gt; <span class="hljs-built_in">int</span>
 </code></pre>
 <p>More restrictive by marking the constructor <code>private</code>:</p>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">type</span> cord = <span class="hljs-keyword">private</span> { x : <span class="hljs-built_in">int</span> [@bs.optional]; y : <span class="hljs-built_in">int</span>} [@@bs.deriving abstract]
 </code></pre>
 <p>Will generate such signatures:</p>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">val</span> x : cord -&gt; <span class="hljs-built_in">int</span> option
-<span class="hljs-keyword">val</span> y : cord -&gt; <span class="hljs-built_in">int</span> 
+<span class="hljs-keyword">val</span> y : cord -&gt; <span class="hljs-built_in">int</span>
 </code></pre>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="fast-pipe.html">← Fast Pipe</a><a class="docs-next button" href="better-data-structures-printing-debug-mode.html">Better Data Structures Printing (Debug Mode) →</a></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.js"></script><script>window.foo = new Pjax({
           areas: [

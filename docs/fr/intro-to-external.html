@@ -18,21 +18,19 @@
 <p><code>external</code> est un mot-clé pour déclarer une valeur en BuckleScript/OCaml/Reason :</p>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">external</span> myCFunction : <span class="hljs-built_in">int</span> -&gt; <span class="hljs-built_in">string</span> = <span class="hljs-string">"theCFunctionName"</span>
 </code></pre>
-<p>En Reason:</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">external</span> myCFunction : <span class="hljs-built_in">int</span> =&gt; <span class="hljs-built_in">string</span> = <span class="hljs-string">"theCFunctionName"</span>;
 </code></pre>
-<p>C’est comme un <code>let</code>, sauf que le corps d’un external est, comme on le voit ci-dessus, une chaîne. La signification de cette chaîne dépend du contexte. En OCaml natif, cela pointe généralement sur une fonction C portant ce nom. En BuckleScript, les externals sont généralement décorés d'attributs <code>[@bs.blabla]</code>.</p>
-<p>Une fois déclarée, vous pouvez utiliser un <code>external</code> comme n'importe quelle valeur.</p>
-<p>Les <code>external</code>s BuckleScript sont remplacés par les valeurs JS attendues, puis inlinées dans leurs appelants durant la compilation, <strong>et enfin complètement effacés</strong>. Vous ne les verrez pas apparaître dans la sortie JS. C’est comme si vous aviez écrit ce code JS généré, à la main ! Cela n'a aucun impact sur les performances.</p>
-<p><strong>Note</strong>: utilisez également les <code>external</code>s et les attributs <code>[@bs.blabla]</code> dans les fichiers d’interface, sinon la phase d'inlinage n'aura pas lieu.</p>
+<p>It's like a <code>let</code>, except that the body of an external is, as seen above, a string. That string usually has specific meanings depending on the context. For native OCaml, it usually points to a C function of that name. For BuckleScript, these externals are usually decorated with certain <code>[@bs.blabla]</code> attributes.</p>
+<p>Once declared, you can use an <code>external</code> as a normal value.</p>
+<p>BuckleScript <code>external</code>s are turned into the expected JS values, inlined into their callers during compilation, <strong>and completely erased afterward</strong>. You won't see them in the JS output. It's as if you wrote the generated JS code by hand! No performance cost either, naturally.</p>
+<p><strong>Note</strong>: do also use <code>external</code>s and the <code>[@bs.blabla]</code> attributes in the interface files. Otherwise the inlining won't happen.</p>
 <h2><a class="anchor" aria-hidden="true" name="identity-external"></a><a href="#identity-external" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Identity External</h2>
-<p>Un external mérite d'être approfondi, celui-ci:</p>
+<p>One external worth mentioning is the following one:</p>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">external</span> myShadyConversion : foo -&gt; bar = <span class="hljs-string">"%identity"</span>
 </code></pre>
-<p>En Reason:</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">external </span>myShadyConversion : foo =&gt; <span class="hljs-keyword">bar </span>= <span class="hljs-string">"%identity"</span><span class="hljs-comment">;</span>
 </code></pre>
-<p>This is a final escape hatch which does nothing but convert from the type <code>foo</code> to <code>bar</code>. Dans les sections suivantes, si jamais, vous ne parvenez pas à écrire un <code>external</code>, vous pouvez l'utiliser. Mais essayez d'éviter.</p>
+<p>This is a final escape hatch which does nothing but convert from the type <code>foo</code> to <code>bar</code>. In the following sections, if you ever fail to write an <code>external</code>, you can fall back to using this one. But try not to.</p>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="common-data-types.html">← Types de données communs</a><a class="docs-next button" href="bind-to-global-values.html">Bind to Global Values →</a></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.js"></script><script>window.foo = new Pjax({
           areas: [
             // try to use the first query.

@@ -24,7 +24,6 @@
 
 let _ = Js.log (add 1 2)
 </code></pre>
-<p>Reason syntax:</p>
 <pre><code class="hljs css reason">let <span class="hljs-keyword">add</span><span class="bash"> = [%raw {|
 </span>  function(a, b) {
     console.log(<span class="hljs-string">"hello from raw JavaScript!"</span>);
@@ -40,7 +39,6 @@ Js.log(<span class="hljs-keyword">add</span><span class="bash">(1, 2));
 
 <span class="hljs-keyword">let</span> f = [%raw <span class="hljs-string">"function() {return 1}"</span>]
 </code></pre>
-<p>Reason syntax:</p>
 <pre><code class="hljs css reason">[<span class="hljs-meta">%</span><span class="hljs-meta">%</span>raw <span class="hljs-string">"var a = 1"</span>];
 
 let f = [<span class="hljs-meta">%</span>raw <span class="hljs-string">"function() {return 1}"</span>];
@@ -48,7 +46,6 @@ let f = [<span class="hljs-meta">%</span>raw <span class="hljs-string">"function
 <p>You can also pass a function declaration with a string body in <code>raw</code>:</p>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">let</span> f: (<span class="hljs-built_in">int</span> -&gt; <span class="hljs-built_in">int</span> -&gt; <span class="hljs-built_in">int</span>) = [%raw <span class="hljs-keyword">fun</span> a b -&gt; <span class="hljs-string">"{return a + b}"</span>]
 </code></pre>
-<p>Reason syntax:</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> f: (<span class="hljs-built_in">int</span>, <span class="hljs-built_in">int</span>) =&gt; <span class="hljs-built_in">int</span> = [%raw (a, b) =&gt; <span class="hljs-string">"{return a + b}"</span>];
 </code></pre>
 <p>Output:</p>
@@ -63,7 +60,6 @@ let f = [<span class="hljs-meta">%</span>raw <span class="hljs-string">"function
   [%debugger];
   x + y
 </code></pre>
-<p>Reason syntax:</p>
 <pre><code class="hljs css reason">let f = <span class="hljs-function"><span class="hljs-params">(x, y)</span> =&gt;</span> {
   [%<span class="hljs-keyword">debugger</span>];
   x + y

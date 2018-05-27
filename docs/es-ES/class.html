@@ -21,31 +21,29 @@
 
 <span class="hljs-keyword">let</span> date = createDate <span class="hljs-literal">()</span>
 </code></pre>
-<p>Sintaxis de la Razón:</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">type</span> t;
 [@bs.<span class="hljs-keyword">new</span>] <span class="hljs-keyword">external</span> createDate : <span class="hljs-built_in">unit</span> =&gt; t = <span class="hljs-string">"Date"</span>;
 
 <span class="hljs-keyword">let</span> date = createDate<span class="hljs-literal">()</span>;
 </code></pre>
-<p>Salida:</p>
+<p>Output:</p>
 <pre><code class="hljs css js"><span class="hljs-keyword">var</span> date = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>();
 </code></pre>
-<p>Usted puede encadenar <code>bs.new</code> and <code>bs.module</code> si el modulo de JS que usted esta importando es una clase:</p>
+<p>You can chain <code>bs.new</code> and <code>bs.module</code> if the JS module you're importing is itself a class:</p>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">type</span> t
 <span class="hljs-keyword">external</span> book : <span class="hljs-built_in">unit</span> -&gt; t = <span class="hljs-string">"Book"</span> [@@bs.<span class="hljs-keyword">new</span>] [@@bs.<span class="hljs-keyword">module</span>]
 <span class="hljs-keyword">let</span> bookInstance = book <span class="hljs-literal">()</span>
 </code></pre>
-<p>Sintaxis de la Razón:</p>
 <pre><code class="hljs css reason">type t<span class="hljs-comment">;</span>
 [@<span class="hljs-keyword">bs.new] </span>[@<span class="hljs-keyword">bs.module] </span><span class="hljs-keyword">external </span><span class="hljs-keyword">book </span>: unit =&gt; t = <span class="hljs-string">"Book"</span><span class="hljs-comment">;</span>
 let <span class="hljs-keyword">bookInstance </span>= <span class="hljs-keyword">book();
 </span></code></pre>
-<p>Salida:</p>
+<p>Output:</p>
 <pre><code class="hljs css js"><span class="hljs-keyword">var</span> Book = <span class="hljs-built_in">require</span>(<span class="hljs-string">"Book"</span>);
 <span class="hljs-keyword">var</span> bookInstance = <span class="hljs-keyword">new</span> Book();
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" name="unir-a-clases-js"></a><a href="#unir-a-clases-js" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Unir a Clases JS</h2>
-<p>Las clases JS son realmente objetos JS conectados graciosamente. <strong>En general</strong>, preferimos usar las características de objetos de secciones previas para enlazar a un objeto JS.</p>
+<p>JS classes are really just JS objects wired up funnily. <strong>In general</strong>, prefer using the previous object section's features to bind to a JS object.</p>
 <p>OCaml having classes really helps with modeling JS classes. Just add a <code>[@bs]</code> to a class type to turn them into a <code>Js.t</code> class:</p>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">class</span> <span class="hljs-keyword">type</span> _rect = <span class="hljs-keyword">object</span>
   <span class="hljs-keyword">method</span> height : <span class="hljs-built_in">int</span> [@@bs.set]
@@ -55,7 +53,6 @@ let <span class="hljs-keyword">bookInstance </span>= <span class="hljs-keyword">
 
 <span class="hljs-keyword">type</span> rect = _rect <span class="hljs-type">Js</span>.t
 </code></pre>
-<p>Sintaxis de Reason:</p>
 <pre><code class="hljs css reason">class<span class="hljs-built_in"> type </span>_rect =
   [@bs]
   {
@@ -66,7 +63,7 @@ let <span class="hljs-keyword">bookInstance </span>= <span class="hljs-keyword">
 <span class="hljs-built_in">
 type </span>rect = Js.t(_rect);
 </code></pre>
-<p>Para clases <code>Js.t</code>, métodos con tipos de flecha son tratados como métodos reales (automáticamente anotados con <code>[@bs.meth]</code>) mientras los métodos con tipos sin flecha son tratados como propiedades. Añadir a<code>bs.set</code> a esos métodos los harán mutables, lo que permite establecerlos usando <code>#=</code> después. Soltar el atributo <code>bs.set</code> hace al método/propiedad inmutable. Básicamente, como las características en la sección de objeto.</p>
+<p>For <code>Js.t</code> classes, methods with arrow types are treated as real methods (automatically annotated with <code>[@bs.meth]</code>) while methods with non-arrow types are treated as properties. Adding <code>bs.set</code> to those methods will make them mutable, which enables you to set them using <code>#=</code> later. Dropping the <code>bs.set</code> attribute makes the method/property immutable. Basically like the object section's features.</p>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="object-deprecated.html">← Object (Deprecated)</a><a class="docs-next button" href="function.html">Función →</a></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.js"></script><script>window.foo = new Pjax({
           areas: [
             // try to use the first query.

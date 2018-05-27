@@ -34,7 +34,6 @@
 
 <span class="hljs-keyword">external</span> john : person = <span class="hljs-string">"john"</span> [@@bs.<span class="hljs-keyword">val</span>]
 </code></pre>
-<p>Reason syntax:</p>
 <pre><code class="hljs css reason">type person = <span class="hljs-keyword">Js.t({
 </span>  .
 <span class="hljs-symbol">  name:</span> string,
@@ -56,7 +55,6 @@
 
 <span class="hljs-keyword">let</span> _ = john##age #= <span class="hljs-number">99</span>
 </code></pre>
-<p>Reason syntax:</p>
 <pre><code class="hljs css reason">type person = {. [@<span class="hljs-keyword">bs.set] </span><span class="hljs-string">"age"</span>: int}<span class="hljs-comment">;</span>
 [@<span class="hljs-keyword">bs.val] </span><span class="hljs-keyword">external </span><span class="hljs-keyword">john </span>: person = <span class="hljs-string">"john"</span><span class="hljs-comment">;</span>
 
@@ -70,7 +68,6 @@
 
 <span class="hljs-keyword">let</span> _ = john##say <span class="hljs-string">"hey"</span> <span class="hljs-string">"jude"</span>
 </code></pre>
-<p>Reason syntax:</p>
 <pre><code class="hljs css reason"><span class="hljs-built_in">type</span> person = {. [@bs.meth] <span class="hljs-string">"say"</span>: <span class="hljs-function"><span class="hljs-params">(<span class="hljs-built_in">string</span>, <span class="hljs-built_in">string</span>)</span> =&gt;</span> unit};
 [@bs.val] external john : person = <span class="hljs-string">"john"</span>;
 
@@ -83,7 +80,6 @@ john##say(<span class="hljs-string">"hey"</span>, <span class="hljs-string">"jud
 <span class="hljs-keyword">let</span> jude = talkTo <span class="hljs-string">"jude"</span>
 <span class="hljs-keyword">let</span> paul = talkTo <span class="hljs-string">"paul"</span>
 </code></pre>
-<p>Reason syntax:</p>
 <pre><code class="hljs css reason"><span class="hljs-comment">/* wrong */</span>
 <span class="hljs-keyword">let</span> <span class="hljs-attr">talkTo</span> = john<span class="hljs-comment">##say("hey");</span>
 
@@ -99,7 +95,6 @@ john##say(<span class="hljs-string">"hey"</span>, <span class="hljs-string">"jud
 
 <span class="hljs-keyword">let</span> name = bucklescript##info##author
 </code></pre>
-<p>Reason syntax:</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> bucklescript = [%bs.obj {
   info: {author: <span class="hljs-string">"Bob"</span>}
 }];
@@ -113,7 +108,6 @@ john##say(<span class="hljs-string">"hey"</span>, <span class="hljs-string">"jud
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">type</span> person = &lt;age: <span class="hljs-built_in">int</span>&gt; <span class="hljs-type">Js</span>.t
 <span class="hljs-keyword">let</span> jane = [%bs.obj {age = <span class="hljs-string">"hi"</span>}]
 </code></pre>
-<p>Reason syntax:</p>
 <pre><code class="hljs css reason"><span class="hljs-attribute">type person</span> = {. <span class="hljs-string">"age"</span>: int};
 <span class="hljs-attribute">let jane</span> = {<span class="hljs-string">"age"</span>: <span class="hljs-string">"hi"</span>};
 </code></pre>
@@ -129,7 +123,6 @@ john##say(<span class="hljs-string">"hey"</span>, <span class="hljs-string">"jud
 <span class="hljs-keyword">let</span> high: <span class="hljs-built_in">int</span> = c1##high
 <span class="hljs-keyword">let</span> low: <span class="hljs-built_in">int</span> <span class="hljs-type">Js</span>.undefined = c1##low
 </code></pre>
-<p>Reason syntax:</p>
 <pre><code class="hljs css reason">[@bs.obj] external makeConfig : (~high: int, ~low: <span class="hljs-attr">int=?,</span> unit) =&gt; <span class="hljs-attr">_</span> = <span class="hljs-string">""</span>;
 
 <span class="hljs-keyword">let</span> <span class="hljs-attr">c1</span> = makeConfig(~<span class="hljs-attr">high=3,</span> ());
@@ -160,7 +153,6 @@ john##say(<span class="hljs-string">"hey"</span>, <span class="hljs-string">"jud
 
 <span class="hljs-keyword">let</span> config = makeIOConfig ~cwd:<span class="hljs-string">"."</span> <span class="hljs-literal">()</span>
 </code></pre>
-<p>Reason syntax:</p>
 <pre><code class="hljs css reason">[@bs.obj]
 external makeIOConfig : (
   ~stdio: [@bs.as <span class="hljs-string">"inherit"</span>] _,
@@ -195,7 +187,6 @@ stream.MAX_LENGTH;
 <pre><code class="hljs css ocaml">f##draw__int <span class="hljs-number">3</span> <span class="hljs-number">4</span>
 f##draw__float <span class="hljs-number">3.2</span> <span class="hljs-number">4.5</span>
 </code></pre>
-<p>Reason syntax:</p>
 <pre><code class="hljs css reason">f<span class="hljs-function"><span class="hljs-keyword">##</span><span class="hljs-title">draw__int</span><span class="hljs-params">(3, 4)</span></span>;
 f<span class="hljs-function"><span class="hljs-keyword">##</span><span class="hljs-title">draw__float</span><span class="hljs-params">(3.2, 4.5)</span></span>;
 </code></pre>
@@ -223,7 +214,6 @@ f.draw(<span class="hljs-number">3.2</span>, <span class="hljs-number">4.5</span
 <span class="hljs-keyword">let</span> _ = set i32arr <span class="hljs-number">0</span> <span class="hljs-number">42</span>
 <span class="hljs-keyword">let</span> _ = <span class="hljs-type">Js</span>.log (get i32arr <span class="hljs-number">0</span>)
 </code></pre>
-<p>Reason syntax:</p>
 <pre><code class="hljs css reason">type t;
 [<span class="hljs-meta">@bs</span>.<span class="hljs-keyword">new</span>] <span class="hljs-keyword">external</span> create : <span class="hljs-built_in">int</span> =&gt; t = <span class="hljs-string">"Int32Array"</span>; <span class="hljs-comment">/* bs.new is documented in the class section */</span>
 [<span class="hljs-meta">@bs</span>.get_index] <span class="hljs-keyword">external</span> <span class="hljs-keyword">get</span> : (t, <span class="hljs-built_in">int</span>) =&gt; <span class="hljs-built_in">int</span> = <span class="hljs-string">""</span>;
@@ -247,7 +237,6 @@ i32arr[<span class="hljs-number">0</span>] = <span class="hljs-number">42</span>
 <span class="hljs-keyword">external</span> myTextArea: textarea = <span class="hljs-string">""</span> [@@bs.<span class="hljs-keyword">val</span>]
 <span class="hljs-keyword">let</span> _ = setName myTextArea <span class="hljs-string">"asd"</span>
 </code></pre>
-<p>Reason syntax:</p>
 <pre><code class="hljs css reason">type textarea<span class="hljs-comment">;</span>
 [@<span class="hljs-keyword">bs.set] </span><span class="hljs-keyword">external </span>setName : (textarea, string) =&gt; unit = <span class="hljs-string">"name"</span><span class="hljs-comment">;</span>
 [@<span class="hljs-keyword">bs.get] </span><span class="hljs-keyword">external </span>getName : textarea =&gt; string = <span class="hljs-string">"name"</span><span class="hljs-comment">;</span>
