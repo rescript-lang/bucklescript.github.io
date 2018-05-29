@@ -10,7 +10,7 @@ A well-crafted interop system that is simple, performant, local and non-prescrip
 
 ## Implementation
 
-The above section might sound a bit buzzword-y; here's is how we've designed BuckleScript's interop, from the lowest part of the stack to the highest.
+The above section might sound a bit buzzword-y; here is how we've designed BuckleScript's interop, from the lowest part of the stack to the highest.
 
 ### Variables
 
