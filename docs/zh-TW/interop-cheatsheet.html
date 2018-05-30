@@ -1,0 +1,231 @@
+<html><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/><title>快捷手冊 · BuckleScript</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta property="og:title" content="快捷手冊 · BuckleScript"/><meta property="og:type" content="website"/><meta property="og:url" content="https://bucklescript.github.io/index.html"/><meta property="og:description" content="接下來章節將會詳細介紹這些東西。如果感到疑惑隨時可以跳過這部份！"/><link rel="shortcut icon" href="/img/logos/bucklescript_small.svg"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/arduino-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://bucklescript.github.io/blog/atom.xml" title="BuckleScript Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://bucklescript.github.io/blog/feed.xml" title="BuckleScript Blog RSS Feed"/><script type="text/javascript" src="/js/toggleSyntaxButton.js"></script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/logos/bucklescript_small.svg"/><h2 class="headerTitle">BuckleScript</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li><a href="/docs/zh-TW/installation.html" target="_self">文件</a></li><li><a href="/docs/zh-TW/playground.html" target="_self">體驗</a></li><li><a href="/docs/zh-TW/stdlib-overview.html" target="_self">API</a></li><li><a href="/docs/zh-TW/community.html" target="_self">社群</a></li><li><a href="/blog" target="_self">部落格</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>繁體中文</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja">日本語</a></li><li><a href="/en">English</a></li><li><a href="/es-ES">Español</a></li><li><a href="/fr">Français</a></li><li><a href="/ko">한국어</a></li><li><a href="/pt-BR">Português (Brasil)</a></li><li><a href="/ru">Русский</a></li><li><a href="/zh-CN">中文</a></li><li><a href="https://crowdin.com/project/bucklescript" target="_blank">協助翻譯</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(){
+          if(languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search"/></li><li><a href="https://github.com/bucklescript/bucklescript" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Interop</span></h2></div><div class="navGroups"><div class="navGroup navGroupActive"><h3>簡介</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-TW/what-why.html">什麼 &amp; 為何</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/installation.html">安裝</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/new-project.html">新增專案</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/concepts-overview.html">概念概述</a></li></ul></div><div class="navGroup navGroupActive"><h3>交互作用</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-TW/interop-overview.html">概覽</a></li><li class="navListItem navListItemActive"><a class="navItem navItemActive" href="/docs/zh-TW/interop-cheatsheet.html">快捷手冊</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/embed-raw-javascript.html">嵌入原始 JavaScript</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/common-data-types.html">常見資料型別</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/intro-to-external.html">External 介紹</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/bind-to-global-values.html">繫結全域值</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/null-undefined-option.html">Null、Undefined &amp; Option</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/object.html">物件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/object-deprecated.html">物件（過時）</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/class.html">Class</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/function.html">函式</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/import-export.html">匯入 &amp; 匯出</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/regular-expression.html">正規表示式</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/exceptions.html">例外</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/json.html">JSON</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/fast-pipe.html">快速 Pipe</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/generate-converters-accessors.html">產生轉譯器 &amp; Helpers</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/better-data-structures-printing-debug-mode.html">輸出更好的資料結構（除錯模式）</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/nodejs-special-variables.html">NodeJS 特殊變數</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/interop-misc.html">其他設定</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/browser-support-polyfills.html">瀏覽器支援 &amp; Polyfills</a></li></ul></div><div class="navGroup navGroupActive"><h3>建置系統</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-TW/build-overview.html">概覽</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/build-configuration.html">配置</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/automatic-interface-generation.html">自動產生介面</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/interop-with-js-build-systems.html">與 JS 建置系統交互作用</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/build-performance.html">效能</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/build-advanced.html">進階</a></li></ul></div><div class="navGroup navGroupActive"><h3>標準函式庫</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-TW/stdlib-overview.html">概要</a></li></ul></div><div class="navGroup navGroupActive"><h3>進階</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-TW/conditional-compilation.html">條件編譯</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/extended-compiler-options.html">擴展編譯器選項</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/use-existing-ocaml-libraries.html">使用既有 OCaml 函式庫</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/difference-from-native-ocaml.html">與原生 OCaml 差異</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/compiler-architecture-principles.html">編譯器架構 &amp; 原則</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/comparison-to-jsoo.html">與 Js_of_ocaml 的比較</a></li></ul></div></div></section></div><script>
+          var toggler = document.getElementById('navToggler');
+          var nav = document.getElementById('docsNav');
+          toggler.onclick = function() {
+            nav.classList.toggle('docsSliderActive');
+          };
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/bucklescript/zh-TW" target="_blank">Translate</a><h1>快捷手冊</h1></header><article><div><span><p>接下來章節將會詳細介紹這些東西。如果感到疑惑隨時可以跳過這部份！</p>
+<h2><a class="anchor" aria-hidden="true" name="js"></a><a href="#js" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>原始的 JS</h2>
+<pre><code class="hljs css ocaml"><span class="hljs-keyword">let</span> add = [%raw <span class="hljs-string">"a + b"</span>]
+[%%raw <span class="hljs-string">"var a = 1"</span>]
+<span class="hljs-keyword">let</span> myFunction = [%raw <span class="hljs-keyword">fun</span> a b -&gt; <span class="hljs-string">"return a + b"</span>]
+</code></pre>
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> add = [<span class="hljs-comment">%raw "a + b"];</span>
+[<span class="hljs-comment">%%raw "var a = 1"];</span>
+<span class="hljs-keyword">let</span> myFunction = [<span class="hljs-comment">%raw (a, b) =&gt; "return a + b"];</span>
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" name="unicode"></a><a href="#unicode" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>字串 Unicode &amp; 內插</h2>
+<pre><code class="hljs css ocaml"><span class="hljs-type">Js</span>.log {js|你好，
+世界|js}
+
+<span class="hljs-keyword">let</span> world = <span class="hljs-string">"world"</span>
+<span class="hljs-keyword">let</span> helloWorld = {j|hello, $world|j}
+</code></pre>
+<pre><code class="hljs css reason">Js.log({js|<span class="hljs-type">你好，
+世界|js</span>});
+
+<span class="hljs-keyword">let</span> world = <span class="hljs-string">"world"</span>;
+<span class="hljs-keyword">let</span> helloWorld = {j|<span class="hljs-type">hello</span>, $world|<span class="hljs-type">j</span>};
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>全域變數</h2>
+<pre><code class="hljs css ocaml"><span class="hljs-keyword">external</span> setTimeout : (<span class="hljs-built_in">unit</span> -&gt; <span class="hljs-built_in">unit</span>) -&gt; <span class="hljs-built_in">int</span> -&gt; <span class="hljs-built_in">float</span> = <span class="hljs-string">"setTimeout"</span> [@@bs.<span class="hljs-keyword">val</span>]
+</code></pre>
+<pre><code class="hljs css reason">[@bs.<span class="hljs-keyword">val</span>] <span class="hljs-keyword">external</span> setTimeout : (<span class="hljs-built_in">unit</span> =&gt; <span class="hljs-built_in">unit</span>, <span class="hljs-built_in">int</span>) =&gt; <span class="hljs-built_in">float</span> = <span class="hljs-string">"setTimeout"</span>;
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>全域模組</h2>
+<pre><code class="hljs css ocaml"><span class="hljs-keyword">external</span> random: <span class="hljs-built_in">unit</span> -&gt; <span class="hljs-built_in">float</span> = <span class="hljs-string">"random"</span> [@@bs.<span class="hljs-keyword">val</span>][@@bs.scope <span class="hljs-string">"Math"</span>]
+<span class="hljs-keyword">let</span> someNumber = random <span class="hljs-literal">()</span>
+
+<span class="hljs-keyword">external</span> length: <span class="hljs-built_in">int</span> = <span class="hljs-string">"length"</span> [@@bs.<span class="hljs-keyword">val</span>][@@bs.scope <span class="hljs-string">"window"</span>, <span class="hljs-string">"location"</span>, <span class="hljs-string">"ancestorOrigins"</span>]
+</code></pre>
+<pre><code class="hljs css reason">[@<span class="hljs-keyword">bs.val] </span>[@<span class="hljs-keyword">bs.scope </span><span class="hljs-string">"Math"</span>] <span class="hljs-keyword">external </span><span class="hljs-built_in">random</span> : unit =&gt; float = <span class="hljs-string">"random"</span><span class="hljs-comment">;</span>
+let someNumber = <span class="hljs-built_in">random</span>()<span class="hljs-comment">;</span>
+
+[@<span class="hljs-keyword">bs.val] </span>[@<span class="hljs-keyword">bs.scope </span>(<span class="hljs-string">"window"</span>, <span class="hljs-string">"location"</span>, <span class="hljs-string">"ancestorOrigins"</span>)] <span class="hljs-keyword">external </span>length : int = <span class="hljs-string">"length"</span><span class="hljs-comment">;</span>
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>可空值</h2>
+<pre><code class="hljs css ocaml"><span class="hljs-keyword">let</span> jsNull = <span class="hljs-type">Js</span>.<span class="hljs-type">Nullable</span>.null
+<span class="hljs-keyword">let</span> jsUndefined = <span class="hljs-type">Js</span>.<span class="hljs-type">Nullable</span>.undefined
+
+<span class="hljs-keyword">let</span> result1: <span class="hljs-built_in">string</span> <span class="hljs-type">Js</span>.<span class="hljs-type">Nullable</span>.t = <span class="hljs-type">Js</span>.<span class="hljs-type">Nullable</span>.return <span class="hljs-string">"hello"</span>
+<span class="hljs-keyword">let</span> result2: <span class="hljs-built_in">int</span> <span class="hljs-type">Js</span>.<span class="hljs-type">Nullable</span>.t  = <span class="hljs-type">Js</span>.<span class="hljs-type">Nullable</span>.fromOption (<span class="hljs-type">Some</span> <span class="hljs-number">10</span>)
+<span class="hljs-keyword">let</span> result3: <span class="hljs-built_in">int</span> option  = <span class="hljs-type">Js</span>.<span class="hljs-type">Nullable</span>.toOption (<span class="hljs-type">Js</span>.<span class="hljs-type">Nullable</span>.return <span class="hljs-number">10</span>)
+</code></pre>
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> jsNull = Js.<span class="hljs-built_in">Nullable</span>.null;
+<span class="hljs-keyword">let</span> jsUndefined = Js.<span class="hljs-built_in">Nullable</span>.undefined;
+
+<span class="hljs-keyword">let</span> result1: Js.<span class="hljs-built_in">Nullable</span>.t(string) = Js.<span class="hljs-built_in">Nullable</span>.<span class="hljs-keyword">return</span>(<span class="hljs-string">"hello"</span>);
+<span class="hljs-keyword">let</span> result2: Js.<span class="hljs-built_in">Nullable</span>.t(int) = Js.<span class="hljs-built_in">Nullable</span>.fromOption(Some(<span class="hljs-number">10</span>));
+<span class="hljs-keyword">let</span> result3: option(int) = Js.<span class="hljs-built_in">Nullable</span>.toOption(Js.<span class="hljs-built_in">Nullable</span>.<span class="hljs-keyword">return</span>(<span class="hljs-number">10</span>));
+</code></pre>
+<p>直接從 <code>Js.Nullable.t</code> 轉換成 <code>option</code>：</p>
+<pre><code class="hljs css ocaml"><span class="hljs-keyword">external</span> getElementById : <span class="hljs-built_in">string</span> -&gt; element option = <span class="hljs-string">"getElementById"</span> [@@bs.<span class="hljs-keyword">val</span>][@@bs.scope <span class="hljs-string">"document"</span>][@@bs.return nullable]
+</code></pre>
+<pre><code class="hljs css reason">[<span class="hljs-keyword">@bs</span>.val] [<span class="hljs-keyword">@bs</span>.<span class="hljs-keyword">scope</span> <span class="hljs-string">"document"</span>] [<span class="hljs-keyword">@bs</span>.<span class="hljs-keyword">return</span> nullable]
+external getElementById : <span class="hljs-built_in">string</span> =&gt; option(element) = <span class="hljs-string">"getElementById"</span>;
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>物件</h2>
+<h3><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>雜湊表模式</h3>
+<pre><code class="hljs css ocaml"><span class="hljs-keyword">let</span> myMap = <span class="hljs-type">Js</span>.<span class="hljs-type">Dict</span>.empty <span class="hljs-literal">()</span>
+<span class="hljs-keyword">let</span> _ = <span class="hljs-type">Js</span>.<span class="hljs-type">Dict</span>.set myMap <span class="hljs-string">"Allison"</span> <span class="hljs-number">10</span>
+</code></pre>
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> myMap = Js.<span class="hljs-built_in">Dict</span>.empty();
+Js.<span class="hljs-built_in">Dict</span>.set(myMap, <span class="hljs-string">"Allison"</span>, <span class="hljs-number">10</span>);
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" name="record"></a><a href="#record" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Record 模式</h3>
+<pre><code class="hljs css ocaml"><span class="hljs-keyword">type</span> person = {
+  name: <span class="hljs-built_in">string</span> [@bs.optional];
+  age: <span class="hljs-built_in">int</span>;
+  <span class="hljs-keyword">mutable</span> job: <span class="hljs-built_in">string</span>;
+} [@@bs.deriving abstract]
+
+<span class="hljs-keyword">external</span> getNickname: person -&gt; <span class="hljs-built_in">string</span> = <span class="hljs-string">"getNickname"</span> [@@bs.send]
+
+<span class="hljs-keyword">external</span> john : person = <span class="hljs-string">"john"</span> [@@bs.<span class="hljs-keyword">val</span>]
+
+<span class="hljs-keyword">let</span> age = john |. age
+<span class="hljs-keyword">let</span> <span class="hljs-literal">()</span> = john |. jobSet <span class="hljs-string">"Accountant"</span>
+<span class="hljs-keyword">let</span> nick = john |. getNickname
+</code></pre>
+<pre><code class="hljs css reason">[<span class="hljs-meta">@bs</span>.deriving <span class="hljs-keyword">abstract</span>]
+<span class="hljs-keyword">type</span> person = {
+  [<span class="hljs-meta">@bs</span>.optional] name: <span class="hljs-built_in">string</span>,
+  age: int,
+  mutable job: <span class="hljs-built_in">string</span>,
+};
+
+[<span class="hljs-meta">@bs</span>.send] external getNickname : <span class="hljs-function"><span class="hljs-params">person</span> =&gt;</span> <span class="hljs-built_in">string</span> = <span class="hljs-string">"getNickname"</span>;
+
+[<span class="hljs-meta">@bs</span>.val] external john : person = <span class="hljs-string">"john"</span>;
+
+<span class="hljs-keyword">let</span> age = john |. age;
+john |. jobSet(<span class="hljs-string">"Accountant"</span>);
+<span class="hljs-keyword">let</span> nick = john |. getNickname;
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>新的實例</h3>
+<pre><code class="hljs css ocaml"><span class="hljs-keyword">type</span> t
+<span class="hljs-keyword">external</span> createDate : <span class="hljs-built_in">unit</span> -&gt; t = <span class="hljs-string">"Date"</span> [@@bs.<span class="hljs-keyword">new</span>]
+</code></pre>
+<pre><code class="hljs css reason"><span class="hljs-keyword">type</span> t;
+[@bs.<span class="hljs-keyword">new</span>] <span class="hljs-keyword">external</span> createDate : <span class="hljs-built_in">unit</span> =&gt; t = <span class="hljs-string">"Date"</span>;
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>函數</h2>
+<h3><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>物件方法 &amp; 鏈接</h3>
+<pre><code class="hljs css ocaml"><span class="hljs-keyword">external</span> map : <span class="hljs-symbol">'a</span> <span class="hljs-built_in">array</span> -&gt; (<span class="hljs-symbol">'a</span> -&gt; <span class="hljs-symbol">'b</span>) -&gt; <span class="hljs-symbol">'b</span> <span class="hljs-built_in">array</span> = <span class="hljs-string">""</span> [@@bs.send]
+<span class="hljs-keyword">external</span> filter : <span class="hljs-symbol">'a</span> <span class="hljs-built_in">array</span> -&gt; (<span class="hljs-symbol">'a</span> -&gt; <span class="hljs-symbol">'b</span>) -&gt; <span class="hljs-symbol">'b</span> <span class="hljs-built_in">array</span> = <span class="hljs-string">""</span> [@@bs.send]
+
+<span class="hljs-comment">(* 2, 4 *)</span>
+<span class="hljs-keyword">let</span> <span class="hljs-literal">()</span> = [|<span class="hljs-number">1</span>; <span class="hljs-number">2</span>; <span class="hljs-number">3</span>|]
+  |. map (<span class="hljs-keyword">fun</span> a -&gt; a + <span class="hljs-number">1</span>)
+  |. filter (<span class="hljs-keyword">fun</span> a -&gt; a <span class="hljs-keyword">mod</span> <span class="hljs-number">2</span> = <span class="hljs-number">0</span>)
+  |. <span class="hljs-type">Js</span>.log
+</code></pre>
+<pre><code class="hljs css reason">[@bs.send] <span class="hljs-keyword">external</span> map : (<span class="hljs-built_in">array</span>(<span class="hljs-symbol">'a</span>), <span class="hljs-symbol">'a</span> =&gt; <span class="hljs-symbol">'b</span>) =&gt; <span class="hljs-built_in">array</span>(<span class="hljs-symbol">'b</span>) = <span class="hljs-string">""</span>;
+[@bs.send] <span class="hljs-keyword">external</span> filter : (<span class="hljs-built_in">array</span>(<span class="hljs-symbol">'a</span>), <span class="hljs-symbol">'a</span> =&gt; <span class="hljs-symbol">'b</span>) =&gt; <span class="hljs-built_in">array</span>(<span class="hljs-symbol">'b</span>) = <span class="hljs-string">""</span>;
+
+/* <span class="hljs-number">2</span>, <span class="hljs-number">4</span> */
+[|<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>|]
+|. map(a =&gt; a + <span class="hljs-number">1</span>)
+|. filter(a =&gt; a <span class="hljs-keyword">mod</span> <span class="hljs-number">2</span> == <span class="hljs-number">0</span>)
+|. <span class="hljs-type">Js</span>.log;
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>參數長度可變</h3>
+<pre><code class="hljs css ocaml"><span class="hljs-keyword">external</span> join : <span class="hljs-built_in">string</span> <span class="hljs-built_in">array</span> -&gt; <span class="hljs-built_in">string</span> = <span class="hljs-string">""</span> [@@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"path"</span>] [@@bs.splice]
+</code></pre>
+<pre><code class="hljs css reason">[@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"path"</span>] [@bs.splice]
+<span class="hljs-keyword">external</span> join : <span class="hljs-built_in">array</span>(<span class="hljs-built_in">string</span>) =&gt; <span class="hljs-built_in">string</span> = <span class="hljs-string">""</span>;
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>函數多型</h3>
+<pre><code class="hljs css ocaml"><span class="hljs-keyword">external</span> drawCat: <span class="hljs-built_in">unit</span> -&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">"draw"</span> [@@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"Drawing"</span>]
+<span class="hljs-keyword">external</span> drawDog: giveName:<span class="hljs-built_in">string</span> -&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">"draw"</span> [@@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"Drawing"</span>]
+</code></pre>
+<pre><code class="hljs css reason">[@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"Drawing"</span>] <span class="hljs-keyword">external</span> drawCat : <span class="hljs-built_in">unit</span> =&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">"draw"</span>;
+[@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"Drawing"</span>] <span class="hljs-keyword">external</span> drawDog : (~giveName: <span class="hljs-built_in">string</span>) =&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">"draw"</span>;
+</code></pre>
+<pre><code class="hljs css ocaml"><span class="hljs-keyword">external</span> padLeft :
+  <span class="hljs-built_in">string</span>
+  -&gt; ([ <span class="hljs-type">`Str</span> <span class="hljs-keyword">of</span> <span class="hljs-built_in">string</span>
+      | <span class="hljs-type">`Int</span> <span class="hljs-keyword">of</span> <span class="hljs-built_in">int</span>
+      ] [@bs.unwrap])
+  -&gt; <span class="hljs-built_in">string</span>
+  = <span class="hljs-string">""</span> [@@bs.<span class="hljs-keyword">val</span>]
+
+<span class="hljs-keyword">let</span> _ = padLeft <span class="hljs-string">"Hello World"</span> (<span class="hljs-type">`Int</span> <span class="hljs-number">4</span>)
+</code></pre>
+<pre><code class="hljs css reason">[@bs.<span class="hljs-keyword">val</span>] <span class="hljs-keyword">external</span> padLeft : (
+  <span class="hljs-built_in">string</span>,
+  [@bs.unwrap] [
+    | <span class="hljs-type">`Str</span>(<span class="hljs-built_in">string</span>)
+    | <span class="hljs-type">`Int</span>(<span class="hljs-built_in">int</span>)
+  ]
+) =&gt; <span class="hljs-built_in">string</span> = <span class="hljs-string">""</span>;
+
+padLeft(<span class="hljs-string">"Hello World"</span>, <span class="hljs-type">`Int</span>(<span class="hljs-number">4</span>));
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" name="curry-uncurry"></a><a href="#curry-uncurry" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Curry/Uncurry</h3>
+<pre><code class="hljs css ocaml"><span class="hljs-keyword">let</span> add = <span class="hljs-keyword">fun</span> [@bs] x y z -&gt; x + y + z
+<span class="hljs-keyword">let</span> six = (add <span class="hljs-number">1</span> <span class="hljs-number">2</span> <span class="hljs-number">3</span>) [@bs]
+</code></pre>
+<pre><code class="hljs css reason">let <span class="hljs-keyword">add</span><span class="bash"> = [@bs] ((x, y, z) =&gt; x + y + z);
+</span>let six = [@bs] <span class="hljs-keyword">add</span><span class="bash">(1, 2, 3);
+</span></code></pre>
+<h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>模組</h2>
+<pre><code class="hljs css ocaml"><span class="hljs-keyword">external</span> dirname: <span class="hljs-built_in">string</span> -&gt; <span class="hljs-built_in">string</span> = <span class="hljs-string">"dirname"</span> [@@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"path"</span>]
+</code></pre>
+<pre><code class="hljs css reason">[@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"path"</span>] <span class="hljs-keyword">external</span> dirname : <span class="hljs-built_in">string</span> =&gt; <span class="hljs-built_in">string</span> = <span class="hljs-string">"dirname"</span>;
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>預設匯入</h3>
+<pre><code class="hljs css ocaml"><span class="hljs-keyword">external</span> leftPad: <span class="hljs-built_in">string</span> -&gt; <span class="hljs-built_in">int</span> -&gt; <span class="hljs-built_in">string</span> = <span class="hljs-string">"./leftPad"</span> [@@bs.<span class="hljs-keyword">module</span>]
+</code></pre>
+<pre><code class="hljs css reason">[@bs.<span class="hljs-built_in">module</span>] external leftPad : <span class="hljs-function"><span class="hljs-params">(<span class="hljs-built_in">string</span>, int)</span> =&gt;</span> <span class="hljs-built_in">string</span> = <span class="hljs-string">"./leftPad"</span>;
+</code></pre>
+<p>匯入 Babel 編譯的預設 ES6：</p>
+<pre><code class="hljs css ocaml"><span class="hljs-keyword">external</span> studentName: <span class="hljs-built_in">string</span> = <span class="hljs-string">"default"</span> [@@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"./student"</span>]
+</code></pre>
+<pre><code class="hljs css reason">[<span class="hljs-keyword">@bs</span>.<span class="hljs-keyword">module</span> <span class="hljs-string">"./student"</span>] external studentName : <span class="hljs-built_in">string</span> = <span class="hljs-string">"default"</span>;
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" name="es6"></a><a href="#es6" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>輸出預設 ES6</h3>
+<pre><code class="hljs css ocaml"><span class="hljs-keyword">let</span> default = <span class="hljs-string">"Bob"</span>
+</code></pre>
+<pre><code class="hljs css reason">let<span class="hljs-built_in"> default </span>= <span class="hljs-string">"Bob"</span>;
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>外部標別</h2>
+<p>最終的逃生出口。不要濫用。</p>
+<pre><code class="hljs css ocaml"><span class="hljs-keyword">external</span> myShadyConversion : foo -&gt; bar = <span class="hljs-string">"%identity"</span>
+</code></pre>
+<pre><code class="hljs css reason"><span class="hljs-keyword">external </span>myShadyConversion : foo =&gt; <span class="hljs-keyword">bar </span>= <span class="hljs-string">"%identity"</span><span class="hljs-comment">;</span>
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="interop-overview.html">← 概覽</a><a class="docs-next button" href="embed-raw-javascript.html">嵌入原始 JavaScript →</a></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.js"></script><script>window.foo = new Pjax({
+          areas: [
+            // try to use the first query.
+            '.mainContainer, .docsNavContainer .toc .navWrapper',
+            // fallback
+            'body'
+          ],
+          link: '.docsNavContainer:not(.docsSliderActive) a',
+          update: {
+            script: false,
+          }
+        });
+        var languagesMenuItemCopy = document.getElementById("languages-menu");
+        languagesMenuItemCopy.addEventListener("click", function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          e.stopImmediatePropagation();
+        });</script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+              var search = docsearch({
+                apiKey: '0fd97db83891aa20810559812d9e69ac',
+                indexName: 'bucklescript',
+                inputSelector: '#search_input_react'
+              });
+            </script></body></html>
