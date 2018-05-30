@@ -13,7 +13,7 @@ To create a JS `null`, use the value `Js.Nullable.null`. To create a Js `undefin
 If you're receiving, for example, a JS string that can also be null, type it as:
 
 ```ocaml
-let theJsValue: string Js.Nullable.t = /* the value you've gotten here */
+let theJsValue: string Js.Nullable.t = (* the value you've gotten here *)
 ```
 
 ```reason
