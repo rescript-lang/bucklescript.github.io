@@ -124,6 +124,7 @@
 .syntax__reason .toggleSyntaxButton-reason {
   background: white;
   color: #a1639f;
+  box-shadow: 0 0 10px white;
 }
 
 .syntax__reason .hljs.ocaml,
