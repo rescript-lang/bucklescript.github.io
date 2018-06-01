@@ -25,7 +25,6 @@ Button.defaultProps = {
   target: "_self"
 };
 const pre = "```";
-const code = "`";
 const codeExample =`${pre}ocaml
 let result = Js.(
   [|1; 2; 3; 4|]
@@ -95,8 +94,8 @@ class HomeSplash extends React.Component {
             <div className="homeWrapperInner">
               <div className="homeTagLine">{siteConfig.tagline}</div>
               <div className="homeCodeSnippet">
-                <MarkdownBlock>{codeExample}</MarkdownBlock>
                 <MarkdownBlock>{codeExampleReason}</MarkdownBlock>
+                <MarkdownBlock>{codeExample}</MarkdownBlock>
               </div>
             </div>
 
@@ -128,7 +127,7 @@ class Index extends React.Component {
       <div>
         <HomeSplash language={language} />
         <div className="mainContainer">
-          <Container className="homeThreePoints">
+          <Container>
             <GridBlock
               align="center"
               contents={[

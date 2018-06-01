@@ -84,9 +84,10 @@ const siteConfig = {
     { search: true },
     { href: "https://github.com/bucklescript/bucklescript", label: "GitHub" },
   ],
-  scripts: ["/js/toggleSyntaxButton.js"],
   users,
   examples,
+  onPageNav: 'separate',
+  scripts: ["/js/toggleSyntaxButton.js", "/js/pjax-api.min.js"],
   headerIcon: "img/logos/bucklescript_small.svg",
   // footerIcon: "img/logo.svg",
   favicon: "img/logos/bucklescript_small.svg",
@@ -94,8 +95,6 @@ const siteConfig = {
   colors: {
     primaryColor: "#ab5ea3",
     secondaryColor: "#ab5ea3",
-    codeColor:
-      "rgba(171, 94, 163, 0.03)" /* primaryColor in rgba form, with 0.03 alpha */
   },
   highlight: {
     theme: 'arduino-light',
