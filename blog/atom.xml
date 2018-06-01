@@ -6,14 +6,15 @@
     <generator>Feed for Node.js</generator>
     <link rel="alternate" href="https://bucklescript.github.io/blog"/>
     <subtitle>The best place to stay up-to-date with the latest BuckleScript news and events.</subtitle>
-    <logo>https://bucklescript.github.ioimg/logos/bucklescript_small.svg</logo>
+    <logo>https://bucklescript.github.io/img/logos/bucklescript_small.svg</logo>
     <entry>
         <title type="html"><![CDATA[BuckleScript 3.1.4]]></title>
         <id>https://bucklescript.github.io/blog/2018/05/23/release-3-1-4.html</id>
         <link href="https://bucklescript.github.io/blog/2018/05/23/release-3-1-4.html">
         </link>
         <updated>2018-05-23T06:00:00Z</updated>
-        <summary type="html"><![CDATA[Hey again! The release two days ago removed the deprecated Js Boolean APIs (no longer needed since we compile OCaml booleans to JS boolean since `3.0.0`). But folks have voiced that the removal was too hasty, as some of their dependencies still haven]]></summary>
+        <summary type="html"><![CDATA[<p>Hey again! The release two days ago removed the deprecated Js Boolean APIs (no longer needed since we compile OCaml booleans to JS boolean since <code>3.0.0</code>). But folks have voiced that the removal was too hasty, as some of their dependencies still haven</p>
+]]></summary>
         <author>
         </author>
     </entry>
@@ -23,12 +24,9 @@
         <link href="https://bucklescript.github.io/blog/2018/05/21/release-3-1-0.html">
         </link>
         <updated>2018-05-21T06:00:00Z</updated>
-        <summary type="html"><![CDATA[List of changes [here](https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#310)! Highlights:
-
-## Print Record Keys and Variant Tags
-
-A picture's worth a thousand words:
-
+        <summary type="html"><![CDATA[<p>List of changes <a href="https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#310">here</a>! Highlights:</p>
+<h2><a class="anchor" aria-hidden="true" id="print-record-keys-and-variant-tags"></a><a href="#print-record-keys-and-variant-tags" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Print Record Keys and Variant Tags</h2>
+<p>A picture's worth a thousand words:</p>
 <table>
   <thead> <tr><th>Before</th><th>After</th></tr> </thead]]></summary>
         <author>
@@ -40,11 +38,12 @@ A picture's worth a thousand words:
         <link href="https://bucklescript.github.io/blog/2018/04/16/release-3-0-0.html">
         </link>
         <updated>2018-04-16T06:00:00Z</updated>
-        <summary type="html"><![CDATA[`bs-platform` 3.0.0 is released! Go get it. This is a great release.
-
-Highlighted features:
-
-- **OCaml/Reason boolean are finally compiled as JS boolean**! Due to historical limitations, OCaml `true`/`false` was compiled to `1`/`0` in JS. This caused]]></summary>
+        <summary type="html"><![CDATA[<p><code>bs-platform</code> 3.0.0 is released! Go get it. This is a great release.</p>
+<p>Highlighted features:</p>
+<ul>
+<li><strong>OCaml/Reason boolean are finally compiled as JS boolean</strong>! Due to historical limitations, OCaml <code>true</code>/<code>false</code> was compiled to <code>1</code>/<code>0</code> in JS. This caused</li>
+</ul>
+]]></summary>
         <author>
         </author>
     </entry>
@@ -54,9 +53,9 @@ Highlighted features:
         <link href="https://bucklescript.github.io/blog/2018/03/13/a-small-step-for-bucklescript.html">
         </link>
         <updated>2018-03-13T06:00:00Z</updated>
-        <summary type="html"><![CDATA[...and a big one for the community!
-
-BuckleScript is a compiler, a set of type system enhancements, a build system and a great deal of JavaScript interoperability features rolled into one. From day one, its goal has been to provide a rock solid, ligh]]></summary>
+        <summary type="html"><![CDATA[<p>...and a big one for the community!</p>
+<p>BuckleScript is a compiler, a set of type system enhancements, a build system and a great deal of JavaScript interoperability features rolled into one. From day one, its goal has been to provide a rock solid, ligh</p>
+]]></summary>
         <author>
         </author>
     </entry>
@@ -66,11 +65,12 @@ BuckleScript is a compiler, a set of type system enhancements, a build system an
         <link href="https://bucklescript.github.io/blog/2017/12/01/new-doc-site.html">
         </link>
         <updated>2017-12-01T06:00:00Z</updated>
-        <summary type="html"><![CDATA[Surprise! We've unified our documentation process with [ReasonReact](https://reasonml.github.io/reason-react/)'s. The docs revamp addresses one of the biggest demands for BuckleScript.
-
-A few highlights:
-
-- The old doc site still exists at the [same ]]></summary>
+        <summary type="html"><![CDATA[<p>Surprise! We've unified our documentation process with <a href="https://reasonml.github.io/reason-react/">ReasonReact</a>'s. The docs revamp addresses one of the biggest demands for BuckleScript.</p>
+<p>A few highlights:</p>
+<ul>
+<li>The old doc site still exists at the [same</li>
+</ul>
+]]></summary>
         <author>
         </author>
     </entry>
@@ -80,11 +80,8 @@ A few highlights:
         <link href="https://bucklescript.github.io/blog/2017/10/09/release-1-7-5.html">
         </link>
         <updated>2017-10-09T06:00:00Z</updated>
-        <summary type="html"><![CDATA[
-Since BuckleScript has grown and developed its own community, it is moving to its own GitHub organization. This will allow the community to continue to grow and to set the future direction of the project.
-
-At the same time, we are truly thankful for the support of Bloomberg who allowed this amazing project to happen!
-
+        <summary type="html"><![CDATA[<p>Since BuckleScript has grown and developed its own community, it is moving to its own GitHub organization. This will allow the community to continue to grow and to set the future direction of the project.</p>
+<p>At the same time, we are truly thankful for the support of Bloomberg who allowed this amazing project to happen!</p>
 ]]></summary>
         <author>
         </author>
@@ -95,11 +92,12 @@ At the same time, we are truly thankful for the support of Bloomberg who allowed
         <link href="https://bucklescript.github.io/blog/2017/10/08/release-1-7-4.html">
         </link>
         <updated>2017-10-08T06:00:00Z</updated>
-        <summary type="html"><![CDATA[Full changes: https://github.com/bucklescript/bucklescript/blob/master/Changes.md#bucklescript-174may-24-2017
-
-Main highlights:
-
-1. Create a BuckleScript project and build in a single line(works on all platforms with zero dependencies including Windo]]></summary>
+        <summary type="html"><![CDATA[<p>Full changes: <a href="https://github.com/bucklescript/bucklescript/blob/master/Changes.md#bucklescript-174may-24-2017">https://github.com/bucklescript/bucklescript/blob/master/Changes.md#bucklescript-174may-24-2017</a></p>
+<p>Main highlights:</p>
+<ol>
+<li>Create a BuckleScript project and build in a single line(works on all platforms with zero dependencies including Windo</li>
+</ol>
+]]></summary>
         <author>
         </author>
     </entry>
@@ -109,14 +107,10 @@ Main highlights:
         <link href="https://bucklescript.github.io/blog/2017/10/07/release-1-7-0.html">
         </link>
         <updated>2017-10-07T06:00:00Z</updated>
-        <summary type="html"><![CDATA[
-#### First class uncurried calling convention
-
-As a functional language, the vanilla OCaml only provides curried calling convention,
-BuckleScript employs fairly [advanced optimizations](http://bucklescript.github.io/bucklescript-playground/#Curry_Optimization) for curried calling convention, however, the most efficient code is efficient code not relying on optimizations.
-
-Since this release, we provide first class uncurried calling convention, _all toolchains provided by BuckleScript_ can understand uncurried calling convention
-
+        <summary type="html"><![CDATA[<h4><a class="anchor" aria-hidden="true" id="first-class-uncurried-calling-convention"></a><a href="#first-class-uncurried-calling-convention" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>First class uncurried calling convention</h4>
+<p>As a functional language, the vanilla OCaml only provides curried calling convention,
+BuckleScript employs fairly <a href="http://bucklescript.github.io/bucklescript-playground/#Curry_Optimization">advanced optimizations</a> for curried calling convention, however, the most efficient code is efficient code not relying on optimizations.</p>
+<p>Since this release, we provide first class uncurried calling convention, <em>all toolchains provided by BuckleScript</em> can understand uncurried calling convention</p>
 ]]></summary>
         <author>
         </author>
@@ -127,10 +121,12 @@ Since this release, we provide first class uncurried calling convention, _all to
         <link href="https://bucklescript.github.io/blog/2017/10/06/release-1-5-2.html">
         </link>
         <updated>2017-10-06T06:00:00Z</updated>
-        <summary type="html"><![CDATA[## Features
-1. [FFI: Unicode literal support]( http://bucklescript.github.io/bucklescript/Manual.html#_unicode_support_since_1_5_1)
-
-2. [FFI: Return value checking](http://bucklescript.github.io/bucklescript/Manual.html#_return_value_checking_since_1]]></summary>
+        <summary type="html"><![CDATA[<h2><a class="anchor" aria-hidden="true" id="features"></a><a href="#features" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Features</h2>
+<ol>
+<li><p><a href="http://bucklescript.github.io/bucklescript/Manual.html#_unicode_support_since_1_5_1">FFI: Unicode literal support</a></p></li>
+<li><p>[FFI: Return value checking](<a href="http://bucklescript.github.io/bucklescript/Manual.html#_return_value_checking_since_1">http://bucklescript.github.io/bucklescript/Manual.html#_return_value_checking_since_1</a></p></li>
+</ol>
+]]></summary>
         <author>
         </author>
     </entry>
@@ -140,11 +136,11 @@ Since this release, we provide first class uncurried calling convention, _all to
         <link href="https://bucklescript.github.io/blog/2017/10/05/release-1-5-1.html">
         </link>
         <updated>2017-10-05T06:00:00Z</updated>
-        <summary type="html"><![CDATA[## Features
-1. [FFI: Unicode literal support](http://bucklescript.github.io/bucklescript/Manual.html#_unicode_support_since_1_5_1)
-
-2. [FFI: return value checking](http://bucklescript.github.io/bucklescript/Manual.html#_unicode_support_since_1_5_1)
-
+        <summary type="html"><![CDATA[<h2><a class="anchor" aria-hidden="true" id="features"></a><a href="#features" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Features</h2>
+<ol>
+<li><p><a href="http://bucklescript.github.io/bucklescript/Manual.html#_unicode_support_since_1_5_1">FFI: Unicode literal support</a></p></li>
+<li><p><a href="http://bucklescript.github.io/bucklescript/Manual.html#_unicode_support_since_1_5_1">FFI: return value checking</a></p></li>
+</ol>
 ]]></summary>
         <author>
         </author>
@@ -155,9 +151,10 @@ Since this release, we provide first class uncurried calling convention, _all to
         <link href="https://bucklescript.github.io/blog/2017/10/04/release-1-5-0.html">
         </link>
         <updated>2017-10-04T06:00:00Z</updated>
-        <summary type="html"><![CDATA[Besides a number of minor bug fixes and perf improvement, most notable changes
-
-- Bundled Reason together thanks to Reason team, so that Reason syntax support is also first class, this also makes Reason for the first time available to Windows users.
+        <summary type="html"><![CDATA[<p>Besides a number of minor bug fixes and perf improvement, most notable changes</p>
+<ul>
+<li>Bundled Reason together thanks to Reason team, so that Reason syntax support is also first class, this also makes Reason for the first time available to Windows users.</li>
+</ul>
 ]]></summary>
         <author>
         </author>
@@ -168,12 +165,13 @@ Since this release, we provide first class uncurried calling convention, _all to
         <link href="https://bucklescript.github.io/blog/2017/10/03/release-1-4-3.html">
         </link>
         <updated>2017-10-03T06:00:00Z</updated>
-        <summary type="html"><![CDATA[Besides a number of minor bug fixes, most notable changes
-
-- ES6 module support, "es6", "es6-global" , "amdjs-global"
-
-"es6" package-spec will generate es6 modules for each ocaml module,
-"es6-global" will also generate es6 modules but the path does n]]></summary>
+        <summary type="html"><![CDATA[<p>Besides a number of minor bug fixes, most notable changes</p>
+<ul>
+<li>ES6 module support, &quot;es6&quot;, &quot;es6-global&quot; , &quot;amdjs-global&quot;</li>
+</ul>
+<p>&quot;es6&quot; package-spec will generate es6 modules for each ocaml module,
+&quot;es6-global&quot; will also generate es6 modules but the path does n</p>
+]]></summary>
         <author>
         </author>
     </entry>
@@ -183,12 +181,13 @@ Since this release, we provide first class uncurried calling convention, _all to
         <link href="https://bucklescript.github.io/blog/2017/10/02/release-1-4-2.html">
         </link>
         <updated>2017-10-02T06:00:00Z</updated>
-        <summary type="html"><![CDATA[BuckleScript 1.4.2 release comes with quite a few enhancement.
-
-Most notable features:
-
-1. The build system is ready to handle multiple npm packages, and its module system can be
-overriden by the end user. For example, if the library A(end user) depe]]></summary>
+        <summary type="html"><![CDATA[<p>BuckleScript 1.4.2 release comes with quite a few enhancement.</p>
+<p>Most notable features:</p>
+<ol>
+<li>The build system is ready to handle multiple npm packages, and its module system can be
+overriden by the end user. For example, if the library A(end user) depe</li>
+</ol>
+]]></summary>
         <author>
         </author>
     </entry>
@@ -198,7 +197,8 @@ overriden by the end user. For example, if the library A(end user) depe]]></summ
         <link href="https://bucklescript.github.io/blog/2017/10/01/announcing-1-0.html">
         </link>
         <updated>2017-10-01T06:00:00Z</updated>
-        <summary type="html"><![CDATA[The BuckleScript announcement can be found on the [Tech at Bloomberg blog](https://www.techatbloomberg.com/blog/bucklescript-1-0-release-arrived/).]]></summary>
+        <summary type="html"><![CDATA[<p>The BuckleScript announcement can be found on the <a href="https://www.techatbloomberg.com/blog/bucklescript-1-0-release-arrived/">Tech at Bloomberg blog</a>.</p>
+]]></summary>
         <author>
         </author>
     </entry>
