@@ -84,6 +84,10 @@ Idiomatic OCaml arrays are supposed to be fix-sized. This constraint is relaxed 
 
 OCaml tuples are compiled to JS arrays. Convenient when you're interop-ing with a JS array that contains heterogeneous values, but happens to have a fixed length. Model it as a tuple on the BS side!
 
+### Bool
+
+Since BuckleScript 3, OCaml/Reason bool now compile to JS boolean.
+
 ## Non-shared Data Types
 
 Record, variant (including `option` and `list`), object and others can be exported as well, but you should **not** rely on their internal representation on the JS side. Aka, don't grab a BS list and start manipulating its structure on the JS side.
