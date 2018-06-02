@@ -57,7 +57,7 @@ To access a field, use `##`: `let johnName = john##name`.
 To modify a field, you need to first mark a field as mutable. By default, the `Js.t` object type is immutable.
 
 ```ocaml
-type person = < age : int [@bs.set] > Js.t
+type person = < age [@bs.set] : int > Js.t
 external john: person = "john" [@@bs.val]
 
 let _ = john##age #= 99
