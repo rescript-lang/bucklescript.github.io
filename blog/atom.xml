@@ -6,7 +6,7 @@
     <generator>Feed for Node.js</generator>
     <link rel="alternate" href="https://bucklescript.github.io/blog"/>
     <subtitle>The best place to stay up-to-date with the latest BuckleScript news and events.</subtitle>
-    <logo>https://bucklescript.github.io/img/logos/bucklescript_small.svg</logo>
+    <logo>https://bucklescript.github.io/img/logos/bucklescript.svg</logo>
     <entry>
         <title type="html"><![CDATA[BuckleScript 3.1.4]]></title>
         <id>https://bucklescript.github.io/blog/2018/05/23/release-3-1-4.html</id>
