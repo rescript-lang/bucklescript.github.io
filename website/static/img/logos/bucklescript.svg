@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="40px" height="30px" viewBox="0 0 40 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>bucklescript</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="2.73388929%" y1="39.0211096%" x2="100%" y2="39.0211105%" id="linearGradient-1">
+            <stop stop-color="#BF9155" offset="0%"></stop>
+            <stop stop-color="#8B582B" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="88.8572981%" y1="18.5339804%" x2="11.1427019%" y2="81.4660196%" id="linearGradient-2">
+            <stop stop-color="#FFFFFF" offset="0%"></stop>
+            <stop stop-color="#B0854D" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-3">
+            <stop stop-color="#6F4824" offset="0%"></stop>
+            <stop stop-color="#8F5D2F" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="bucklescript" transform="translate(-4.000000, -9.000000)">
+            <g transform="translate(4.000000, 9.000000)">
+                <path d="M40,22.5 C40,25.5375661 31.045695,28 20,28 C8.954305,28 0,25.5375661 0,22.5 L0,6 L40,6 L40,22.5 Z" id="Combined-Shape" fill="url(#linearGradient-1)"></path>
+                <path d="M4.91588825,12.2833032 C5.33591895,12.403808 5.77867587,12.5192323 6.24248925,12.6291588 L3.700915,14.687285 C2.41329741,15.7299772 2.21474613,17.6190665 3.25743829,18.9066841 L7.73224903,24.4326151 C8.0855178,24.8688657 8.53594321,25.1801041 9.02721641,25.3604119 C7.97972958,25.5556142 6.86112545,25.1852932 6.14347224,24.2990653 L1.6686615,18.7731342 C0.625969337,17.4855167 0.824520624,15.5964274 2.11213821,14.5537352 L4.91588825,12.2833032 Z" id="Combined-Shape" fill="url(#linearGradient-2)" opacity="0.247169384"></path>
+                <path d="M0,5 C0,7.76142375 8.954305,10 20,10 C31.045695,10 40,7.76142375 40,5 L40,10 L39.5999275,10 C37.7468462,12.2822403 29.6758316,14 20,14 C10.3241684,14 2.2531538,12.2822403 0.400072462,10 L0,10 L0,5 Z" id="Combined-Shape-Copy-2" fill="#FFFFFF" opacity="0.159929801"></path>
+                <ellipse id="Oval" fill="url(#linearGradient-3)" cx="20" cy="5.5" rx="20" ry="5.5"></ellipse>
+                <path d="M0,22 C0,24.9823376 8.954305,27.4 20,27.4 C31.045695,27.4 40,24.9823376 40,22 L40,23.8 C40,26.7823376 31.045695,29.2 20,29.2 C8.954305,29.2 0,26.7823376 0,23.8 L0,22 Z" id="Combined-Shape" fill="#000000" opacity="0.0661798007"></path>
+                <ellipse id="Oval-5" fill-opacity="0.23680933" fill="#000000" cx="8.5" cy="19.5" rx="1" ry="1"></ellipse>
+                <ellipse id="Oval-5" fill-opacity="0.23680933" fill="#000000" cx="6.5" cy="18.5" rx="1" ry="1"></ellipse>
+                <ellipse id="Oval-5" fill-opacity="0.23680933" fill="#000000" cx="4.5" cy="17.5" rx="1" ry="1"></ellipse>
+                <path d="M29,19 C28.7238576,19 28.5,19.2238576 28.5,19.5 L28.5,20.5 C28.5,20.7761424 28.7238576,21 29,21 L29.5,21 L29.5,25 C29.5,26.9329966 27.9329966,28.5 26,28.5 L12,28.5 C11.1715729,28.5 10.5,27.8284271 10.5,27 L10.5,13 C10.5,12.1715729 11.1715729,11.5 12,11.5 L26,11.5 C27.9329966,11.5 29.5,13.0670034 29.5,15 L29.5,19 L29,19 Z M26.3823529,18.5 L26.3823529,16.1333333 C26.3823529,15.3049062 25.7107801,14.6333333 24.8823529,14.6333333 L13.6176471,14.6333333 L13.6176471,25.3666667 L24.8823529,25.3666667 C25.7107801,25.3666667 26.3823529,24.6950938 26.3823529,23.8666667 L26.3823529,21.5 L14.5,21.5 L14.5,18.5 L26.3823529,18.5 Z" id="Combined-Shape" stroke-opacity="0.331578351" stroke="#000000" fill="#EDEDED"></path>
+            </g>
+        </g>
+    </g>
+</svg>
