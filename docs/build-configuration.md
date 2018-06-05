@@ -6,7 +6,7 @@ title: Configuration
 
 **The complete configuration schema is [here](https://bucklescript.github.io/bucklescript/docson/#build-schema.json)**. We'll _non-exhaustively_ highlight the important parts in prose here.
 
-### name, namespace
+## name, namespace
 
 `name` is the name of the library, used as its "namespace". You can activate namespacing through `"namespace": true` in your `bsconfig.json`. Namespacing is almost **mandatory**; we haven't turned it on by default yet to preserve backward-compatibility.
 
@@ -18,7 +18,7 @@ We don't do folder-level namespacing for your own project; all your own file nam
 
 **Note**: the `bsconfig.json` `name` should be the same as the `package.json` `name`, to avoid confusing corner-cases. However, this means that you can't use a camelCased names such as `MyProject`, since `package.json` and npm forbid you to do so (some file systems are case-insensitive). To have the namespace/module as `MyProject`, write `"name": "my-project"`. Bsb will turn that into the camelCased name correctly.
 
-### sources
+## sources
 
 Your source files need to be specified explicitly (we don't want to accidentally drill down into some unrelated directories). Examples:
 
@@ -59,11 +59,11 @@ You can mark your directories as dev-only (for e.g. tests). These won't be built
 }
 ```
 
-### bs-dependencies, bs-dev-dependencies
+## bs-dependencies, bs-dev-dependencies
 
 List of BuckleScript/Reason dependencies. Just like `package.json`'s dependencies, they'll be searched in `node_modules`.
 
-### reason, refmt
+## reason, refmt
 
 `reason` config is enabled by default. To turn on JSX for [ReasonReact](https://reasonml.github.io/reason-react/), specify:
 
@@ -75,7 +75,7 @@ List of BuckleScript/Reason dependencies. Just like `package.json`'s dependencie
 
 The `refmt` config **should be explicitly specified**: `"refmt": 3` for the new [Reason V3 syntax](https://reasonml.github.io/blog/2017/10/27/reason3.html).
 
-### js-post-build
+## js-post-build
 
 Hook that's invoked every time a file is recompiled. Good for JS build system interop, but please use it **sparingly**. Calling your custom command for every recompiled file slows down your build and worsens the building experience for even third-party users of your lib.
 
@@ -98,7 +98,7 @@ Note that the command's path resolution is done through the following:
 
 The command itself is called from inside `lib/bs`.
 
-### package-specs
+## package-specs
 
 Output to either CommonJS (the default), ES6 modules or AMD. Example:
 
@@ -116,11 +116,11 @@ Output to either CommonJS (the default), ES6 modules or AMD. Example:
 
 This configuration only applies to you, when you develop the project. When the project is used as a third-party library, the consumer's own `bsconfig.json` `package-specs` overrides the configuration here, logically.
 
-### suffix
+## suffix
 
 Either `".js"` or `".bs.js"`. Strongly prefer the latter.
 
-#### Design Decisions
+### Design Decisions
 
 Generating JS files with the `.bs.js` suffix means that, on the JS side, you can do `const myBuckleScriptFile = require('./theFile.bs')`. The benefits:
 
@@ -129,7 +129,7 @@ Generating JS files with the `.bs.js` suffix means that, on the JS side, you can
 - It avoids the need of using a build system loader for BuckleScript files. This + in-source build means integrating a BuckleScript project into your pure JS codebase **basically doesn't touch anything in your build pipeline at all**.
 - The `.bs.js` suffix [lets bsb track JS artifacts much better](build-overview.md#tips-tricks).
 
-### warnings
+## warnings
 
 Selectively turn on/off certain warnings and/or turn them into hard errors. Example:
 
@@ -146,6 +146,6 @@ Turn off warning `44` and `102` (polymorphic comparison). Turn warning `5` (part
 
 The warning number are shown in the build output when they're triggered. The complete list is [here](https://caml.inria.fr/pub/docs/manual-ocaml/comp.html#sec281), a little bit below. `100` and up are BuckleScript-specific.
 
-### bsc-flags
+## bsc-flags
 
 Extra flags to pass to the underlying `bsc` call. Notably: `["-bs-super-errors"]` for turning on [cleaning error output](https://reasonml.github.io/blog/2017/08/25/way-nicer-error-messages.html). No need to pass this flag for a Reason project; it's enabled by default.

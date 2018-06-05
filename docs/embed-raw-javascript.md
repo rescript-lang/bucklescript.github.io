@@ -63,7 +63,7 @@ If you _have_ to use `raw` in the first place, then prefer this format when you'
 <!-- TODO: add explaination about extension syntax  -->
 <!-- TODO: add reason counter part -->
 
-### Debugger
+## Debugger
 
 You can also drop a `[%debugger]` expression in a body:
 
@@ -89,7 +89,7 @@ function f (x,y) {
 }
 ```
 
-### Detect Global Variables
+## Detect Global Variables
 
 BuckleScript provides a relatively type safe approach for such use case: `external`. `[%external a_single_identifier]` is a value of type `option`. Example:
 
@@ -146,7 +146,7 @@ if (match !== undefined) {
 }
 ```
 
-### Tips & Tricks
+## Tips & Tricks
 
 Embedding raw JS snippets is **discouraged**, though also highly useful if you're just starting out. As a matter of fact, the first few Reason BuckleScript projects were converted through:
 
