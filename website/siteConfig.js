@@ -56,6 +56,12 @@ const users = [
     infoLink: "https://astrocoders.com",
     pinned: true
   },
+  {
+    caption: "Appier",
+    image: "img/logos/appier.svg",
+    infoLink: "https://appier.com",
+    pinned: true
+  },
 ];
 
 const examples = [
