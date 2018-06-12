@@ -227,7 +227,10 @@ const siteConfig = {
   },
   algolia: {
     apiKey: "0fd97db83891aa20810559812d9e69ac",
-    indexName: "bucklescript"
+    indexName: "bucklescript",
+    algoliaOptions: {
+      facetFilters: ["lang:LANGUAGE"] 
+    }
   },
 };
 
