@@ -69,11 +69,12 @@ List of BuckleScript/Reason dependencies. Just like `package.json`'s dependencie
 
 ```json
 {
-  "reason": {"react-jsx": 2}
+  "reason": {"react-jsx": 2},
+  "refmt": 3
 }
 ```
 
-The `refmt` config **should be explicitly specified**: `"refmt": 3` for the new [Reason V3 syntax](https://reasonml.github.io/blog/2017/10/27/reason3.html).
+The `refmt` config **should be explicitly specified** as `3`, as in the [Reason V3 syntax](https://reasonml.github.io/blog/2017/10/27/reason3.html).
 
 ## js-post-build
 
