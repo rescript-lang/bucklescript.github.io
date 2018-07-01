@@ -64,12 +64,12 @@ class HomeSplash extends React.Component {
                 siteConfig.baseUrl +
                 "docs/" +
                 this.props.language +
-                "/installation.html"
+                "/installation"
               }
             >
               <translate>Get Started</translate>
             </Button>
-            <Button href="https://reasonml.github.io/docs/en/interop.html">
+            <Button href="https://reasonml.github.io/docs/en/interop">
               Tutorial
             </Button>
           </div>
@@ -150,16 +150,18 @@ class Index extends React.Component {
 
           <Container background="light" className="quickStartAndExamples homeCodeSnippet">
             <div>
-              <h2>Quick Start</h2>
+              <h2><translate>QuickStart</translate></h2>
               <div>
-                BuckleScript seamlessly integrates with <a href="https://reasonml.github.io">Reason</a>.
+                <translate>BuckleScript seamlessly integrates with</translate>
+                {' '}
+                <a href="https://reasonml.github.io">Reason</a>.
               </div>
               <MarkdownBlock>
                 {quickStart}
               </MarkdownBlock>
             </div>
             <div>
-              <h2>Examples</h2>
+              <h2><translate>Examples</translate></h2>
               <GridBlock
                 className="examples"
                 align="center"
@@ -170,7 +172,6 @@ class Index extends React.Component {
                   imageAlign: "top",
                   content: "",
                 }))}
-                layout="twoColumn"
               />
           </div>
           </Container>
@@ -185,7 +186,7 @@ class Index extends React.Component {
             <div className="more-users">
               <a
                 className="button"
-                href={`${siteConfig.baseUrl}${this.props.language}/built-with-bucklescript.html`}
+                href={`${siteConfig.baseUrl}${this.props.language}/built-with-bucklescript`}
               >
                 <translate>See Full List</translate>
               </a>

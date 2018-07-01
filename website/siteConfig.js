@@ -107,10 +107,13 @@ const siteConfig = {
   /* colors for website */
   colors: {
     primaryColor: "#ab5ea3",
-    secondaryColor: "#ab5ea3",
+    // darkened 10%
+    secondaryColor: "#92458A",
   },
+  // no .html suffix needed
+  cleanUrl: true,
   highlight: {
-    theme: 'arduino-light',
+    theme: 'atom-one-light',
     hljs: function(hljs) {
       hljs.registerLanguage('reason', function(hljs) {
         var SWIFT_KEYWORDS = {
@@ -229,7 +232,7 @@ const siteConfig = {
     apiKey: "0fd97db83891aa20810559812d9e69ac",
     indexName: "bucklescript",
     algoliaOptions: {
-      facetFilters: ["lang:LANGUAGE"] 
+      facetFilters: ["lang:LANGUAGE"]
     }
   },
 };

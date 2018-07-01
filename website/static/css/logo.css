@@ -1,0 +1,11 @@
+.fixedHeaderContainer header > a > img {
+  /* zooming logo */
+  transition: transform 0.5s cubic-bezier(0.18, 0.89, 0.31, 1.16);
+  /* make sure it's a square. Spins at the center */
+  height: 34px;
+  width: 34px;
+}
+
+.fixedHeaderContainer header > a:hover > img {
+  transform: scale(1.3);
+}
