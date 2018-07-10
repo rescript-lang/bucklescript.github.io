@@ -4,7 +4,7 @@
         <title>BuckleScript Blog</title>
         <link>https://bucklescript.github.io/blog</link>
         <description>The best place to stay up-to-date with the latest BuckleScript news and events.</description>
-        <lastBuildDate>Wed, 23 May 2018 06:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 17 Jul 2018 06:00:00 GMT</lastBuildDate>
         <docs>http://blogs.law.harvard.edu/tech/rss</docs>
         <generator>Feed for Node.js</generator>
         <image>
@@ -12,6 +12,15 @@
             <url>https://bucklescript.github.io/img/logos/bucklescript.svg</url>
             <link>https://bucklescript.github.io/blog</link>
         </image>
+        <item>
+            <title><![CDATA[BuckleScript 4.0.0 (Part One)]]></title>
+            <link>https://bucklescript.github.io/blog/2018/07/17/release-4-0-0.html</link>
+            <guid>https://bucklescript.github.io/blog/2018/07/17/release-4-0-0.html</guid>
+            <pubDate>Tue, 17 Jul 2018 06:00:00 GMT</pubDate>
+            <description><![CDATA[<p><code>bs-platform</code> 4.0.0 is released! It has some  nice features that we want to share with you, a more detailed list of changes is available <a href="https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#400">here</a></p>
+<p>In this post, I will talk about</p>
+]]></description>
+        </item>
         <item>
             <title><![CDATA[BuckleScript 3.1.4]]></title>
             <link>https://bucklescript.github.io/blog/2018/05/23/release-3-1-4.html</link>

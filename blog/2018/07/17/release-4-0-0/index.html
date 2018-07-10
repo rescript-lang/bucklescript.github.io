@@ -1,0 +1,102 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>BuckleScript 4.0.0 (Part One) · BuckleScript</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="`bs-platform` 4.0.0 is released! It has some  nice features that we want to share with you, a more detailed list of changes is available [here](https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#400)"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="BuckleScript 4.0.0 (Part One) · BuckleScript"/><meta property="og:type" content="website"/><meta property="og:url" content="https://bucklescript.github.io/blog/2018/07/17/release-4-0-0"/><meta property="og:description" content="`bs-platform` 4.0.0 is released! It has some  nice features that we want to share with you, a more detailed list of changes is available [here](https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#400)"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/logos/bucklescript.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://bucklescript.github.io/blog/atom.xml" title="BuckleScript Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://bucklescript.github.io/blog/feed.xml" title="BuckleScript Blog RSS Feed"/><script type="text/javascript" src="/js/toggleSyntaxButton.js"></script><script type="text/javascript" src="/js/pjax-api.min.js"></script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/logos/bucklescript.svg" alt="BuckleScript"/><h2 class="headerTitleWithLogo">BuckleScript</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/en/installation" target="_self">Docs</a></li><li class=""><a href="/docs/en/playground" target="_self">Try</a></li><li class=""><a href="/docs/en/stdlib-overview" target="_self">API</a></li><li class=""><a href="/docs/en/community" target="_self">Community</a></li><li class="siteNavGroupActive"><a href="/blog" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja">日本語</a></li><li><a href="/es-ES">Español</a></li><li><a href="/fr">Français</a></li><li><a href="/ko">한국어</a></li><li><a href="/pt-BR">Português (Brasil)</a></li><li><a href="/ru">Русский</a></li><li><a href="/zh-CN">中文</a></li><li><a href="/zh-TW">繁體中文</a></li><li><a href="https://crowdin.com/project/bucklescript" target="_blank" rel="noreferrer noopener">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(){
+          if(languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/bucklescript/bucklescript" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul><li class="navListItem navListItemActive"><a class="navItem" href="/blog/2018/07/17/release-4-0-0">BuckleScript 4.0.0 (Part One)</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/05/23/release-3-1-4">BuckleScript 3.1.4</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/05/21/release-3-1-0">BuckleScript 3.1</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/04/16/release-3-0-0">BuckleScript 3.0</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/03/13/a-small-step-for-bucklescript">A Small Step for BuckleScript...</a></li></ul></div></div></section></div><script>
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              const headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                if (event.target.tagName === 'A') {
+                  document.body.classList.remove('tocActive');
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="lonePost"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2018/07/17/release-4-0-0">BuckleScript 4.0.0 (Part One)</a></h1><p class="post-meta">July 17, 2018</p><div class="authorBlock"></div></header><div><span><p><code>bs-platform</code> 4.0.0 is released! It has some  nice features that we want to share with you, a more detailed list of changes is available <a href="https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#400">here</a></p>
+<p>In this post, I will talk about a new development workflow, all toolchains are self-contained in <code>bs-platform</code>, <a href="https://twitter.com/ccrisccris">Cristiano</a> will talk about the new runtime encoding for optional.</p>
+<h1><a class="anchor" aria-hidden="true" id="a-simple-approach-to-accelerate-feedback-loop-in-a-reliable-way"></a><a href="#a-simple-approach-to-accelerate-feedback-loop-in-a-reliable-way" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>A simple approach to accelerate feedback loop in a reliable way</h1>
+<p>For mordern day-to-day development, developers expect that whenever files are changed, the build process is re-triggered automatically and browser reloaded instantly, this feedback loop should be quick enough to make developers not get distracted.</p>
+<p>What we have before this release is as below:</p>
+<ul>
+<li>Source file changes detected by bsb watch mode, rebuild</li>
+<li>Webpack noticed JS files modified, rebundle and update the browser state</li>
+</ul>
+<p>Both <code>bsb</code> and <code>webpack</code> has a watch mode, but they are architectured in fundamentally different ways that they achive different levels of reliability.</p>
+<p>In <code>bsb</code> watch mode, there is no long running memory-hungry process, so whenever a file changed, a fresh process is started very fast and dies quickly, our experiment shows that in practice, a long running bsb process can work for a week without going into bad state, and such feedback loop is still instant.</p>
+<p><code>Webpack</code> holds lots of objects in memory and running for a longtime, it results in less reliability and OOM from time to time.</p>
+<p>Another complexity introduced by a JS bundler is that it explodes users directory structure, for beginners trying to get started with bucklescript, installing such huge amount of directories is intimidating. In a slow network, this used to result in installation failure.</p>
+<p>We understand that existing JS bundler has a huge ecosystem and it is invaluable in production mode, but we are exploring whether we can provide similar or even more reliable development experience without introducing such complexity.</p>
+<p>Below is a new workflow we are exploring in this release:</p>
+<h1><a class="anchor" aria-hidden="true" id="nodejs-module-loader-in-browser"></a><a href="#nodejs-module-loader-in-browser" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>NodeJS module loader in browser</h1>
+<p>Instead of bundling the modules like normal bundlers, we provide a NodeJS module loader so that it simply reloads the module without bundling.</p>
+<p>Note ideally this can be achieved using ES6 moudle spec, however, it is not practical due to following reasons:</p>
+<ul>
+<li>Most dependencies are not strictly ES6 compilant, this is true even for libraries authored in ES6 style</li>
+</ul>
+<pre><code class="hljs css languages- js"><span class="hljs-keyword">import</span> {createElement} form <span class="hljs-string">"react"</span> ; <span class="hljs-comment">// not es6 compliant</span>
+<span class="hljs-keyword">import</span> {createElement} <span class="hljs-keyword">from</span> <span class="hljs-string">"node_modules/react/index"</span> <span class="hljs-comment">// not es6 compilant</span>
+<span class="hljs-keyword">import</span> {createElement} <span class="hljs-keyword">from</span> <span class="hljs-string">"./node_modules/react/index.js"</span> <span class="hljs-comment">// correct es6 module</span>
+</code></pre>
+<ul>
+<li>ES6 modules does not allow an indirection, by introducing our own NodeJS module loader, we have an indirection and more meta-data about each module, so that we can do more reflection work in the future.</li>
+</ul>
+<p>Loading in clean state without packing seems to introduce some reduandant work, but on the contratry, it is very fast, it used to load 200 modules under 150ms, even better, since there is no cached state in a long running process, it is much more reliable.</p>
+<h1><a class="anchor" aria-hidden="true" id="websocket-integration-with-bsb"></a><a href="#websocket-integration-with-bsb" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>WebSocket integration with bsb</h1>
+<p>We need a mechanism to communciate between browser and the build system so that whenever a rebuild finished, the browser get notified.</p>
+<p>Instead of introducing more dependencies, we implemented a minimal websocket interface so that whenever a rebuild finishes, the weboscket clients which subscribe the port will get notified.</p>
+<h1><a class="anchor" aria-hidden="true" id="to-conclude-and-try-it-out"></a><a href="#to-conclude-and-try-it-out" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>To conclude and try it out</h1>
+<p>So the proposed new work flow is as below: whenever a source file is changed, the bsb rebuild, if it build successfully, it will notify the browser to reload the NodeJS modules directly.</p>
+<p>All the devtools are provided by bs-platform, the good thing is that there is no long running memory-hungry process, so that we expect it will deliver a more reliable and consistent experience.</p>
+<p>You can try it out in <code>bs-platform@4.0.0</code></p>
+<pre><code class="hljs css languages- sh">bsb -init <span class="hljs-built_in">test</span> -theme react-lite
+<span class="hljs-built_in">cd</span> <span class="hljs-built_in">test</span>
+npm install
+npm start 
+http-server <span class="hljs-comment"># start a http server</span>
+</code></pre>
+<p>open <code>localhost:port/index.html</code>, changes the reason source code and expect the browser show the changes.</p>
+</span></div></div><div class="blogSocialSection"></div></div><div class="blog-recent"><a class="button" href="/blog">Recent Posts</a></div></div></div><nav class="onPageNav"></nav></div><span><script src="/js/redirectBlog.js"></script><script>window.foo = new Pjax({
+          areas: [
+            // try to use the first query.
+            '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
+            // fallback
+            'body'
+          ],
+          link: '.docsNavContainer:not(.docsSliderActive) a',
+          update: {
+            script: false,
+          }
+        });
+        var languagesMenuItemCopy = document.getElementById("languages-menu");
+        languagesMenuItemCopy.addEventListener("click", function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          e.stopImmediatePropagation();
+        });</script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+              var search = docsearch({
+                
+                apiKey: '0fd97db83891aa20810559812d9e69ac',
+                indexName: 'bucklescript',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:en"]}
+              });
+            </script></body></html>
