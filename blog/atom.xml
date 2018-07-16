@@ -8,6 +8,19 @@
     <subtitle>The best place to stay up-to-date with the latest BuckleScript news and events.</subtitle>
     <logo>https://bucklescript.github.io/img/logos/bucklescript.svg</logo>
     <entry>
+        <title type="html"><![CDATA[BuckleScript 4.0.0 (Part Two)]]></title>
+        <id>https://bucklescript.github.io/blog/2018/07/17/release-4-0-0II.html</id>
+        <link href="https://bucklescript.github.io/blog/2018/07/17/release-4-0-0II.html">
+        </link>
+        <updated>2018-07-17T06:00:00Z</updated>
+        <summary type="html"><![CDATA[<p><code>bs-platform</code> 4.0.0 introduces a new runtime representation for optionals.</p>
+<p>While beforehand <code>None</code> was represented at runtime as <code>0</code> and <code>Some(&quot;hello&quot;)</code> as an array <code>[&quot;hello&quot;]</code>, the new representation tries to unbox optionals as much as possible.</p>
+<p>N</p>
+]]></summary>
+        <author>
+        </author>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[BuckleScript 4.0.0 (Part One)]]></title>
         <id>https://bucklescript.github.io/blog/2018/07/17/release-4-0-0.html</id>
         <link href="https://bucklescript.github.io/blog/2018/07/17/release-4-0-0.html">

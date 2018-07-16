@@ -1,0 +1,68 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>BuckleScript 4.0.0 (Part Two) · BuckleScript</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="`bs-platform` 4.0.0 introduces a new runtime representation for optionals."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="BuckleScript 4.0.0 (Part Two) · BuckleScript"/><meta property="og:type" content="website"/><meta property="og:url" content="https://bucklescript.github.io/blog/2018/07/17/release-4-0-0II"/><meta property="og:description" content="`bs-platform` 4.0.0 introduces a new runtime representation for optionals."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/logos/bucklescript.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://bucklescript.github.io/blog/atom.xml" title="BuckleScript Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://bucklescript.github.io/blog/feed.xml" title="BuckleScript Blog RSS Feed"/><script type="text/javascript" src="/js/toggleSyntaxButton.js"></script><script type="text/javascript" src="/js/pjax-api.min.js"></script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/logos/bucklescript.svg" alt="BuckleScript"/><h2 class="headerTitleWithLogo">BuckleScript</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/en/installation" target="_self">Docs</a></li><li class=""><a href="/docs/en/playground" target="_self">Try</a></li><li class=""><a href="/docs/en/stdlib-overview" target="_self">API</a></li><li class=""><a href="/docs/en/community" target="_self">Community</a></li><li class="siteNavGroupActive"><a href="/blog" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja">日本語</a></li><li><a href="/es-ES">Español</a></li><li><a href="/fr">Français</a></li><li><a href="/ko">한국어</a></li><li><a href="/pt-BR">Português (Brasil)</a></li><li><a href="/ru">Русский</a></li><li><a href="/zh-CN">中文</a></li><li><a href="/zh-TW">繁體中文</a></li><li><a href="https://crowdin.com/project/bucklescript" target="_blank" rel="noreferrer noopener">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(){
+          if(languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/bucklescript/bucklescript" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul><li class="navListItem navListItemActive"><a class="navItem" href="/blog/2018/07/17/release-4-0-0II">BuckleScript 4.0.0 (Part Two)</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/07/17/release-4-0-0">BuckleScript 4.0.0 (Part One)</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/05/23/release-3-1-4">BuckleScript 3.1.4</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/05/21/release-3-1-0">BuckleScript 3.1</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/04/16/release-3-0-0">BuckleScript 3.0</a></li></ul></div></div></section></div><script>
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              const headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                if (event.target.tagName === 'A') {
+                  document.body.classList.remove('tocActive');
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="lonePost"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2018/07/17/release-4-0-0II">BuckleScript 4.0.0 (Part Two)</a></h1><p class="post-meta">July 17, 2018</p><div class="authorBlock"></div></header><div><span><p><code>bs-platform</code> 4.0.0 introduces a new runtime representation for optionals.</p>
+<p>While beforehand <code>None</code> was represented at runtime as <code>0</code> and <code>Some(&quot;hello&quot;)</code> as an array <code>[&quot;hello&quot;]</code>, the new representation tries to unbox optionals as much as possible.</p>
+<p>Now <code>None</code> is represented as <code>undefined</code> and <code>Some(&quot;hello&quot;)</code> simply as <code>&quot;hello&quot;</code>.</p>
+<p>Generally speaking, <code>Some(v)</code> is represented as <code>v</code>, i.e. unboxed. The only exception is when <code>v</code> itself is <code>None</code> or <code>Some(...(Some(None))</code>, in which case a special boxed representation is used.</p>
+<p>The construction of new values <code>Some(-)</code>, and pattern matching <code>| Some(-) =&gt; ...</code>, perform some case analysis to decide when to box or unbox values. In the absence of nested optionals, the result of both operations will <em>always</em> be the indentity.</p>
+<p>Because of that, it's possible to use type-based optimization to avoid performing case analysis in the first place.
+So while the generic function <code>(x) =&gt; Some(x)</code> will generate code to check wheter <code>x</code> should be boxed, the more type-specific function <code>(x:int) =&gt; Some(x)</code> is just compiled as the identity function, as it's clear from the type that no boxing is required.</p>
+<p>For a high-level formalization of the boxing and unboxing operations, as well as the polymorphic comparison functions, see this <a href="https://gist.github.com/cristianoc/791aac26f94dbded0fc137d61f4bd2a8">gist</a>.</p>
+<p>One design choice was whether to represent <code>None</code> as <code>null</code> or as <code>undefined</code>. The choice of <code>undefined</code> was made because this allows a direct mapping for <a href="https://reasonml.github.io/docs/en/function#optional-labeled-arguments">optional labeled arguments</a>. As a consequence <code>null</code> is never boxed, so e.g. <code>Some(null)</code> is represented as <code>null</code>.</p>
+</span></div></div><div class="blogSocialSection"></div></div><div class="blog-recent"><a class="button" href="/blog">Recent Posts</a></div></div></div><nav class="onPageNav"></nav></div><span><script src="/js/redirectBlog.js"></script><script>window.foo = new Pjax({
+          areas: [
+            // try to use the first query.
+            '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
+            // fallback
+            'body'
+          ],
+          link: '.docsNavContainer:not(.docsSliderActive) a',
+          update: {
+            script: false,
+          }
+        });
+        var languagesMenuItemCopy = document.getElementById("languages-menu");
+        languagesMenuItemCopy.addEventListener("click", function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          e.stopImmediatePropagation();
+        });</script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+              var search = docsearch({
+                
+                apiKey: '0fd97db83891aa20810559812d9e69ac',
+                indexName: 'bucklescript',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:en"]}
+              });
+            </script></body></html>

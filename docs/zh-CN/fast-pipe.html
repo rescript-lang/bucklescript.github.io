@@ -79,7 +79,7 @@ external <span class="hljs-attribute">asyncRequest</span>: unit =&gt; request = 
 
 send(<span class="hljs-name">setWaitDuration</span>(<span class="hljs-name">asyncRequest</span>(), <span class="hljs-number">4000</span>))<span class="hljs-comment">;</span>
 </code></pre>
-<p>这比JS版本的差很多！ Now we need to read the actual logic &quot;inside-out&quot;. We also cannot use the <code>|&gt;</code> operator here, since the object comes <em>first</em> in the binding. But <code>|.</code> works!</p>
+<p>这比JS版本的差很多！ 现在我们需要阅读它实际的逻辑 &quot;inside-out&quot;。 我们也不能使用 <code>|&gt;</code> 运算符, 因为在绑定中对象优先。 <code>|.</code> 可以做到。</p>
 <pre><code class="hljs css languages- ocaml"><span class="hljs-keyword">let</span> result = [|<span class="hljs-number">1</span>; <span class="hljs-number">2</span>; <span class="hljs-number">3</span>|] |. map(<span class="hljs-keyword">fun</span> a -&gt; a + <span class="hljs-number">1</span>) |. filter(<span class="hljs-keyword">fun</span> a -&gt; a <span class="hljs-keyword">mod</span> <span class="hljs-number">2</span> == <span class="hljs-number">0</span>)
 
 <span class="hljs-keyword">let</span> <span class="hljs-literal">()</span> = asyncRequest <span class="hljs-literal">()</span> |. setWaitDuration <span class="hljs-number">400</span> |. send <span class="hljs-literal">()</span>
@@ -88,24 +88,24 @@ send(<span class="hljs-name">setWaitDuration</span>(<span class="hljs-name">asyn
 
 asyncRequest() |<span class="hljs-type">. setWaitDuration</span>(<span class="hljs-number">400</span>) |<span class="hljs-type">. send</span>();
 </code></pre>
-<h2><a class="anchor" aria-hidden="true" id="pipe-into-variants"></a><a href="#pipe-into-variants" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Pipe Into Variants</h2>
-<p>This works:</p>
+<h2><a class="anchor" aria-hidden="true" id="变体管道"></a><a href="#变体管道" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>变体管道</h2>
+<p>这样是可以的：</p>
 <pre><code class="hljs css languages- ocaml"><span class="hljs-keyword">let</span> result = name |. preprocess |. <span class="hljs-type">Some</span>
 </code></pre>
 <pre><code class="hljs css languages- reason"><span class="hljs-keyword">let</span> result = name |<span class="hljs-type">. preprocess</span> |<span class="hljs-type">. Some</span>
 </code></pre>
-<p>We turn this into:</p>
+<p>我们把它变成:</p>
 <pre><code class="hljs css languages- ocaml"><span class="hljs-keyword">let</span> result = <span class="hljs-type">Some</span>(preprocess(name))
 </code></pre>
 <pre><code class="hljs css languages- reason">let result = Some(<span class="hljs-name">preprocess</span>(<span class="hljs-name">name</span>))
 </code></pre>
-<h2><a class="anchor" aria-hidden="true" id="get-multiple-results"></a><a href="#get-multiple-results" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Get Multiple Results</h2>
-<p>The fast pipe operator can also be used on a tuple:</p>
+<h2><a class="anchor" aria-hidden="true" id="获取多个结果"></a><a href="#获取多个结果" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>获取多个结果</h2>
+<p>快速管运算符也可用于元组:</p>
 <pre><code class="hljs css languages- ocaml"><span class="hljs-keyword">let</span> (left, middle, right) = myData |. (getLeft, getMiddle, getRight)
 </code></pre>
 <pre><code class="hljs css languages- reason"><span class="hljs-keyword">let</span> (<span class="hljs-built_in">left</span>, middle, <span class="hljs-built_in">right</span>) = myData |<span class="hljs-type">. (getLeft</span>, getMiddle, getRight)
 </code></pre>
-<p>This turns into:</p>
+<p>这将转换成:</p>
 <pre><code class="hljs css languages- ocaml"><span class="hljs-keyword">let</span> left = getLeft myData
 <span class="hljs-keyword">let</span> middle = getMiddle myData
 <span class="hljs-keyword">let</span> right = getRight myData
@@ -114,10 +114,10 @@ asyncRequest() |<span class="hljs-type">. setWaitDuration</span>(<span class="hl
 <span class="hljs-attribute">let middle</span> = getMiddle(myData);
 <span class="hljs-attribute">let right</span> = getRight(myData);
 </code></pre>
-<p>Convenient for certain kind of operations.</p>
-<h2><a class="anchor" aria-hidden="true" id="chaining-imperative-apis"></a><a href="#chaining-imperative-apis" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Chaining Imperative APIs</h2>
-<p><strong>Unreleased</strong>, as we're still waiting for feedback on this one; if you'd like the feature, please <a href="https://github.com/BuckleScript/bucklescript/issues/2748">upvote here</a>!</p>
-<p>Mutative, imperative APIs usually look like this:</p>
+<p>对于某些操作很便利。</p>
+<h2><a class="anchor" aria-hidden="true" id="链接命令-api"></a><a href="#链接命令-api" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>链接命令 api</h2>
+<p><strong>未发布</strong>, 因为我们仍在等待对此的反馈;如果您想要该功能, 请 <a href="https://github.com/BuckleScript/bucklescript/issues/2748">upvote 这里</a>!</p>
+<p>Mutative, imperative APIs 通常是这样的：</p>
 <pre><code class="hljs css languages- ocaml"><span class="hljs-keyword">let</span> mySet = <span class="hljs-type">Set</span>.make<span class="hljs-literal">()</span>
 <span class="hljs-type">Set</span>.add mySet <span class="hljs-number">1</span>
 <span class="hljs-type">Set</span>.add mySet <span class="hljs-number">2</span>
@@ -128,7 +128,7 @@ asyncRequest() |<span class="hljs-type">. setWaitDuration</span>(<span class="hl
 <span class="hljs-keyword">Set</span>.add(mySet, 2);
 <span class="hljs-keyword">Set</span>.remove(mySet, 1);
 </code></pre>
-<p>Unlike their immutable, functional counterpart, these operations cannot be chained with <code>|&gt;</code> (their return type is <code>unit</code>). But fast pipe works!</p>
+<p>与immutable，functional对对应的不同的是，这些操作不能与 <code>|&gt;</code>链式调用 (因为返回类型为 <code>unit</code>)。但是快速管道可以!</p>
 <pre><code class="hljs css languages- ocaml"><span class="hljs-keyword">let</span> mySet = <span class="hljs-type">Set</span>.make<span class="hljs-literal">()</span>
 <span class="hljs-keyword">let</span> <span class="hljs-literal">()</span> = mySet |. [
   <span class="hljs-type">Set</span>.add <span class="hljs-number">1</span>;
@@ -143,7 +143,7 @@ mySet |. [
   <span class="hljs-keyword">Set</span>.remove(1),
 ];
 </code></pre>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/zh-CN/json">← JSON</a><a class="docs-next button" href="/docs/zh-CN/generate-converters-accessors">生成转换器 &amp; 助手 →</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#管道线">管道线</a></li><li><a href="#js-链式操作">Js 链式操作</a></li><li><a href="#pipe-into-variants">Pipe Into Variants</a></li><li><a href="#get-multiple-results">Get Multiple Results</a></li><li><a href="#chaining-imperative-apis">Chaining Imperative APIs</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script>window.foo = new Pjax({
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/zh-CN/json">← JSON</a><a class="docs-next button" href="/docs/zh-CN/generate-converters-accessors">生成转换器 &amp; 助手 →</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#管道线">管道线</a></li><li><a href="#js-链式操作">Js 链式操作</a></li><li><a href="#变体管道">变体管道</a></li><li><a href="#获取多个结果">获取多个结果</a></li><li><a href="#链接命令-api">链接命令 api</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script>window.foo = new Pjax({
           areas: [
             // try to use the first query.
             '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
