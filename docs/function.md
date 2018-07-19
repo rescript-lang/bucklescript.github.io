@@ -108,7 +108,7 @@ var Path = require("path");
 var v = Path.join("a", "b");
 ```
 
-_`bs.module` will be explaned in the Import & Export section next_.
+_`bs.module` will be explained in the Import & Export section next_.
 
 ## Modeling Polymorphic Function
 
