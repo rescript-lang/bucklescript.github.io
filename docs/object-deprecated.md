@@ -1,5 +1,5 @@
 ---
-title: Object (Deprecated)
+title: Object 
 ---
 
 **Note**: this is the old API for binding to JS objects, kept for backward-compatibility. Please check the previous page for the current way of doing it.
@@ -245,6 +245,10 @@ stream##_open
 stream##_MAX_LENGTH
 ```
 
+```reason
+stream##_open
+stream##_MAX_LENGTH
+```
 Output:
 
 ```js
