@@ -2,11 +2,11 @@
 title: Fast Pipe
 ---
 
-BuckleScript and Reason have a special `|.` syntax for dealing with various situations. This operator has many uses.
+BuckleScript has a special `|.` (or `->` for Reason) pipe syntax for dealing with various situations. This operator has many uses.
 
 ## Pipelining
 
-`a |. foo b` is equal to `foo a b`. The operator takes the item on the left and put it as the first argument of the item on the right. Great for building pipelines of data processing:
+The pipe takes the item on the left and put it as the first argument of the item on the right. Great for building pipelines of data processing:
 
 ```ocaml
 a
@@ -16,8 +16,8 @@ a
 
 ```reason
 a
-|. foo(b)
-|. bar
+->foo(b)
+->bar
 ```
 
 is equal to
@@ -87,7 +87,7 @@ let () = asyncRequest () |. setWaitDuration 400 |. send ()
 ```reason
 let result = [|1, 2, 3|] |. map(a => a + 1) |. filter(a => a mod 2 === 0);
 
-asyncRequest() |. setWaitDuration(400) |. send();
+asyncRequest()->setWaitDuration(400)->send();
 ```
 
 ## Pipe Into Variants
@@ -99,7 +99,7 @@ let result = name |. preprocess |. Some
 ```
 
 ```reason
-let result = name |. preprocess |. Some
+let result = name->preprocess->Some
 ```
 
 We turn this into:
@@ -110,72 +110,4 @@ let result = Some(preprocess(name))
 
 ```reason
 let result = Some(preprocess(name))
-```
-
-## Get Multiple Results
-
-The fast pipe operator can also be used on a tuple:
-
-```ocaml
-let (left, middle, right) = myData |. (getLeft, getMiddle, getRight)
-```
-
-```reason
-let (left, middle, right) = myData |. (getLeft, getMiddle, getRight)
-```
-
-This turns into:
-
-```ocaml
-let left = getLeft myData
-let middle = getMiddle myData
-let right = getRight myData
-```
-
-```reason
-let left = getLeft(myData);
-let middle = getMiddle(myData);
-let right = getRight(myData);
-```
-
-Convenient for certain kind of operations.
-
-## Chaining Imperative APIs
-
-**Unreleased**, as we're still waiting for feedback on this one; if you'd like the feature, please [upvote here](https://github.com/BuckleScript/bucklescript/issues/2748)!
-
-Mutative, imperative APIs usually look like this:
-
-```ocaml
-let mySet = Set.make()
-Set.add mySet 1
-Set.add mySet 2
-Set.remove mySet 1
-```
-
-```reason
-let mySet = Set.make();
-Set.add(mySet, 1);
-Set.add(mySet, 2);
-Set.remove(mySet, 1);
-```
-
-Unlike their immutable, functional counterpart, these operations cannot be chained with `|>` (their return type is `unit`). But fast pipe works!
-
-```ocaml
-let mySet = Set.make()
-let () = mySet |. [
-  Set.add 1;
-  Set.add 2;
-  Set.remove 1;
-]
-```
-
-```reason
-let mySet = Set.make();
-mySet |. [
-  Set.add(1),
-  Set.add(2),
-  Set.remove(1),
-];
 ```
