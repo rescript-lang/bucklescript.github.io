@@ -192,24 +192,24 @@ Again, since `bs.deriving abstract` hides the actual record shape, you can't acc
 
 #### Read
 
-One getter function is generated per `bs.deriving abstract` record type field. In the above example, you'd get 3 functions: `name`, `age`, `job`. They take in a `person` value and return `string`, `int`, `string` respectively:
+One getter function is generated per `bs.deriving abstract` record type field. In the above example, you'd get 3 functions: `nameGet`, `ageGet`, `jobGet`. They take in a `person` value and return `string`, `int`, `string` respectively:
 
 ```ocaml
-let twenty = age joe
+let twenty = ageGet joe
 ```
 
 ```reason
-let twenty = age(joe)
+let twenty = ageGet(joe)
 ```
 
 Alternatively, you can use the [Fast Pipe](fast-pipe.md) feature in a later section for a nicer-looking access syntax:
 
 ```ocaml
-let twenty = joe |. age
+let twenty = joe |. ageGet
 ```
 
 ```reason
-let twenty = joe |. age
+let twenty = joe->ageGet
 ```
 
 #### Write
