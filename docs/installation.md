@@ -7,16 +7,24 @@ title: Installation
 If you'd like to install BuckleScript globally, do:
 
 ```sh
+yarn global add bs-platform
+```
+
+or
+
+```sh
 npm install -g bs-platform
 ```
 
 This gives you a few globally exposed commands you can run, described later. But usually, you'd install the project locally:
 
 ```sh
-npm install --save-dev bs-platform
+yarn add --dev bs-platform
 ```
 
-**Note that for Windows**, if you're using BuckleScript in conjunction with a tool like [Merlin](https://reasonml.github.io/docs/en/extra-goodies.html#merlin), please follow [this guide that we share with Reason](https://github.com/reasonml/reasonml.github.io/issues/195).
+```sh
+npm install --save-dev bs-platform
+```
 
 The commands that are exposed are:
 
