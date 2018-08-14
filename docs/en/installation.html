@@ -35,12 +35,16 @@
             });
         </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/bucklescript/bucklescript.github.io/tree/source/docs/installation.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 class="postHeaderTitle">Installation</h1></header><article><div><span><p><strong>Prerequisite</strong>: either NPM (comes with <a href="https://nodejs.org/en/">node</a>) or <a href="https://yarnpkg.com/en/">Yarn</a>.</p>
 <p>If you'd like to install BuckleScript globally, do:</p>
+<pre><code class="hljs css languages- sh">yarn global add bs-platform
+</code></pre>
+<p>or</p>
 <pre><code class="hljs css languages- sh">npm install -g bs-platform
 </code></pre>
 <p>This gives you a few globally exposed commands you can run, described later. But usually, you'd install the project locally:</p>
+<pre><code class="hljs css languages- sh">yarn add --dev bs-platform
+</code></pre>
 <pre><code class="hljs css languages- sh">npm install --save-dev bs-platform
 </code></pre>
-<p><strong>Note that for Windows</strong>, if you're using BuckleScript in conjunction with a tool like <a href="https://reasonml.github.io/docs/en/extra-goodies.html#merlin">Merlin</a>, please follow <a href="https://github.com/reasonml/reasonml.github.io/issues/195">this guide that we share with Reason</a>.</p>
 <p>The commands that are exposed are:</p>
 <ul>
 <li><code>bsb</code>, the build system.</li>

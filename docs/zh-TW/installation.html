@@ -38,12 +38,16 @@
 <hr>
 <p><strong>必要條件</strong>：NPM（<a href="https://nodejs.org/en/">node</a> 內建）或 <a href="https://yarnpkg.com/en/">Yarn</a>。</p>
 <p>如果要全域安裝 BuckleScript，請執行：</p>
+<pre><code class="hljs css languages- sh">yarn global add bs-platform
+</code></pre>
+<p>or</p>
 <pre><code class="hljs css languages- sh">npm install -g bs-platform
 </code></pre>
-<p>安裝後會有幾個可以全域執行的指令，稍候介紹。</p>
+<p>This gives you a few globally exposed commands you can run, described later. But usually, you'd install the project locally:</p>
+<pre><code class="hljs css languages- sh">yarn add --dev bs-platform
+</code></pre>
 <pre><code class="hljs css languages- sh">npm install --save-dev bs-platform
 </code></pre>
-<p><strong>Windows 請注意</strong>，如果同時使用 BuckleScript 及 <a href="https://reasonml.github.io/docs/en/extra-goodies.html#merlin">Merlin</a>，請參考<a href="https://github.com/reasonml/reasonml.github.io/issues/195">這個分享給 Reason 的指南</a>。</p>
 <p>可供全域執行的指令有：</p>
 <ul>
 <li><code>bsb</code>，建置系統。</li>
@@ -62,7 +66,7 @@ npm install
 <p>首先，建置 OCaml 編譯器：</p>
 <pre><code class="hljs css languages- sh">git <span class="hljs-built_in">clone</span> https://github.com/bucklescript/bucklescript
 <span class="hljs-built_in">cd</span> bucklescript/vendor/ocaml
-./configure -prefix `<span class="hljs-built_in">pwd</span>` <span class="hljs-comment"># 填入你所希望的安裝位置</span>
+./configure -prefix `<span class="hljs-built_in">pwd</span>` <span class="hljs-comment"># put your preferred directory</span>
 make world.opt
 make install
 </code></pre>

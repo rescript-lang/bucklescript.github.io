@@ -38,12 +38,16 @@
 <hr>
 <p><strong>Prerequisito</strong>: ya sea NPM (viene con <a href="https://nodejs.org/en/">node</a>) o <a href="https://yarnpkg.com/en/">Yarn</a>.</p>
 <p>Si te gustaría instalar BuckleScript globalmente haz lo siguiente:</p>
+<pre><code class="hljs css languages- sh">yarn global add bs-platform
+</code></pre>
+<p>or</p>
 <pre><code class="hljs css languages- sh">npm install -g bs-platform
 </code></pre>
-<p>Esto da algunos comandos globales expuestos que puedes ejecutar, descritos después. Pero usualmente, instalarías el proyecto localmente:</p>
+<p>This gives you a few globally exposed commands you can run, described later. But usually, you'd install the project locally:</p>
+<pre><code class="hljs css languages- sh">yarn add --dev bs-platform
+</code></pre>
 <pre><code class="hljs css languages- sh">npm install --save-dev bs-platform
 </code></pre>
-<p><strong>Ten en cuenta para Windows</strong>, si estás usando BuckleScript en conjunto con una herramienta como <a href="https://reasonml.github.io/docs/en/extra-goodies.html#merlin">Merlin</a>, por favor sigue <a href="https://github.com/reasonml/reasonml.github.io/issues/195">esta guía que compartimos con Reason</a>.</p>
 <p>Los comandos que están expuestos son:</p>
 <ul>
 <li><code>bsb</code>, el sistema de construcción.</li>
