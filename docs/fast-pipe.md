@@ -83,7 +83,7 @@ let result = [|1; 2; 3|]
   |. map(fun a -> a + 1)
   |. filter(fun a -> a mod 2 == 0)
 
-let () = asyncRequest () |. setWaitDuration 400 |. send ()
+let () = asyncRequest () |. setWaitDuration 400 |. send
 ```
 
 ```reason
@@ -91,7 +91,7 @@ let result = [|1, 2, 3|]
   ->map(a => a + 1)
   ->filter(a => a mod 2 === 0);
 
-asyncRequest()->setWaitDuration(400)->send();
+asyncRequest()->setWaitDuration(400)->send;
 ```
 
 ## Pipe Into Variants
