@@ -150,3 +150,17 @@ The warning number are shown in the build output when they're triggered. The com
 ## bsc-flags
 
 Extra flags to pass to the underlying `bsc` call. Notably: `["-bs-super-errors"]` for turning on [cleaning error output](https://reasonml.github.io/blog/2017/08/25/way-nicer-error-messages.html). No need to pass this flag for a Reason project; it's enabled by default.
+
+## Environment Variables
+
+We heavily disrecommend the usage of environment variables, but for certain cases, they're justified.
+
+### Error Output Coloring: `NINJA_ANSI_FORCED`
+
+This is mostly for other programmatic usage of `bsb` where outputting colors is not desired.
+
+When `NINJA_ANSI_FORCED` is set to `1`: `bsb` produces color.
+When `NINJA_ANSI_FORCED` is set to `0`: `bsb` doesn't produce color.
+When `NINJA_ANSI_FORCED` is not set: `bsb` might or might not produce color, depending on a smart detection of where it's outputted.
+
+> Note that bsc, the barebone compiler, will always be passed `-color always`. See more details in [this issue](https://github.com/BuckleScript/bucklescript/issues/2984#issuecomment-410669163).
