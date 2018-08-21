@@ -252,7 +252,7 @@ joe |. ageSet 21
 ```
 
 ```reason
-joe |. ageSet(21)
+joe->ageSet(21)
 ```
 
 ### Methods
