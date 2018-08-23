@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="zh-TW"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>常見資料型別 · BuckleScript</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="## Shared Data Types"/><meta name="docsearch:language" content="zh-TW"/><meta property="og:title" content="常見資料型別 · BuckleScript"/><meta property="og:type" content="website"/><meta property="og:url" content="https://bucklescript.github.io/index.html"/><meta property="og:description" content="## Shared Data Types"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/logos/bucklescript.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://bucklescript.github.io/blog/atom.xml" title="BuckleScript Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://bucklescript.github.io/blog/feed.xml" title="BuckleScript Blog RSS Feed"/><script type="text/javascript" src="/js/toggleSyntaxButton.js"></script><script type="text/javascript" src="/js/pjax-api.min.js"></script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/zh-TW"><img class="logo" src="/img/logos/bucklescript.svg" alt="BuckleScript"/><h2 class="headerTitleWithLogo">BuckleScript</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/zh-TW/installation" target="_self">文件</a></li><li class=""><a href="/docs/zh-TW/playground" target="_self">體驗</a></li><li class="siteNavGroupActive"><a href="/docs/zh-TW/stdlib-overview" target="_self">API</a></li><li class=""><a href="/docs/zh-TW/community" target="_self">社群</a></li><li class=""><a href="/blog" target="_self">部落格</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>繁體中文</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/ja/common-data-types">日本語</a></li><li><a href="/docs/en/common-data-types">English</a></li><li><a href="/docs/es-ES/common-data-types">Español</a></li><li><a href="/docs/fr/common-data-types">Français</a></li><li><a href="/docs/ko/common-data-types">한국어</a></li><li><a href="/docs/pt-BR/common-data-types">Português (Brasil)</a></li><li><a href="/docs/ru/common-data-types">Русский</a></li><li><a href="/docs/zh-CN/common-data-types">中文</a></li><li><a href="https://crowdin.com/project/bucklescript" target="_blank" rel="noreferrer noopener">協助翻譯</a></li></ul></div></li><script>
+<!DOCTYPE html><html lang="zh-TW"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>常見資料型別 · BuckleScript</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="## Shared Data Types"/><meta name="docsearch:language" content="zh-TW"/><meta property="og:title" content="常見資料型別 · BuckleScript"/><meta property="og:type" content="website"/><meta property="og:url" content="https://bucklescript.github.io/index.html"/><meta property="og:description" content="## Shared Data Types"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/logos/bucklescript.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://bucklescript.github.io/blog/atom.xml" title="BuckleScript Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://bucklescript.github.io/blog/feed.xml" title="BuckleScript Blog RSS Feed"/><script type="text/javascript" src="/js/toggleSyntaxButton.js"></script><script type="text/javascript" src="/js/pjax-api.min.js"></script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/zh-TW"><img class="logo" src="/img/logos/bucklescript.svg" alt="BuckleScript"/><h2 class="headerTitleWithLogo">BuckleScript</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/zh-TW/installation" target="_self">文件</a></li><li class=""><a href="/docs/zh-TW/playground" target="_self">體驗</a></li><li class="siteNavGroupActive"><a href="/docs/zh-TW/stdlib-overview" target="_self">API</a></li><li class=""><a href="/docs/zh-TW/community" target="_self">社群</a></li><li class=""><a href="/blog" target="_self">部落格</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>繁體中文</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/ja/common-data-types">日本語</a></li><li><a href="/docs/en/common-data-types">English</a></li><li><a href="/docs/es-ES/common-data-types">Español</a></li><li><a href="/docs/fr/common-data-types">Français</a></li><li><a href="/docs/ko/common-data-types">한국어</a></li><li><a href="/docs/pt-BR/common-data-types">Português (Brasil)</a></li><li><a href="/docs/ru/common-data-types">Русский</a></li><li><a href="/docs/zh-CN/common-data-types">中文</a></li><li><a href="https://crowdin.com/project/bucklescript" target="_blank" rel="noreferrer noopener">協助翻譯</a></li></ul></div></li><script>
         const languagesMenuItem = document.getElementById("languages-menu");
         const languagesDropDown = document.getElementById("languages-dropdown");
         languagesMenuItem.addEventListener("click", function(event) {
@@ -26,6 +26,10 @@
                 var toggler = document.querySelector(togglerSelector);
                 var target = document.querySelector(targetSelector);
 
+                if (!toggler) {
+                  return;
+                }
+
                 toggler.onclick = function(event) {
                   event.preventDefault();
 
@@ -42,29 +46,29 @@
 <p>Immutable on both sides, as expected. <a href="https://reasonml.github.io/api/String.html">BuckleScript String API</a>. <a href="https://bucklescript.github.io/bucklescript/api/Js.String.html">JS String API</a>.</p>
 <h4><a class="anchor" aria-hidden="true" id="unicode-support"></a><a href="#unicode-support" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Unicode Support</h4>
 <p>OCaml string is an immutable byte sequence. If the user types some unicode:</p>
-<pre><code class="hljs css languages- ocaml"><span class="hljs-type">Js</span>.log <span class="hljs-string">"你好"</span>
+<pre><code class="hljs css language-ocaml"><span class="hljs-type">Js</span>.log <span class="hljs-string">"你好"</span>
 </code></pre>
-<pre><code class="hljs css languages- reason">Js.<span class="hljs-built_in">log</span>(<span class="hljs-string">"你好"</span>)
+<pre><code class="hljs css language-reason">Js.<span class="hljs-built_in">log</span>(<span class="hljs-string">"你好"</span>)
 </code></pre>
 <p>It'll compile to the follow JS:</p>
-<pre><code class="hljs css languages- js"><span class="hljs-built_in">console</span>.log(<span class="hljs-string">"\xe4\xbd\xa0\xe5\xa5\xbd"</span>);
+<pre><code class="hljs css language-js"><span class="hljs-built_in">console</span>.log(<span class="hljs-string">"\xe4\xbd\xa0\xe5\xa5\xbd"</span>);
 </code></pre>
 <p>Which gives you cryptic console output. To rectify this, BuckleScript exposes a special <code>js</code> annotation to the default <a href="https://reasonml.github.io/docs/en/string-and-char.html#quoted-string">quoted string syntax</a> built into the language. Use it like this:</p>
-<pre><code class="hljs css languages- ocaml"><span class="hljs-type">Js</span>.log {js|你好，
+<pre><code class="hljs css language-ocaml"><span class="hljs-type">Js</span>.log {js|你好，
 世界|js}
 </code></pre>
-<pre><code class="hljs css languages- reason">Js.<span class="hljs-built_in">log</span>({js<span class="hljs-string">|你好，</span>
+<pre><code class="hljs css language-reason">Js.<span class="hljs-built_in">log</span>({js<span class="hljs-string">|你好，</span>
 世界<span class="hljs-string">|js})</span>
 </code></pre>
 <p>This'll correctly output:</p>
-<pre><code class="hljs css languages- js"><span class="hljs-built_in">console</span>.log(<span class="hljs-string">"你好，\n世界"</span>);
+<pre><code class="hljs css language-js"><span class="hljs-built_in">console</span>.log(<span class="hljs-string">"你好，\n世界"</span>);
 </code></pre>
 <h4><a class="anchor" aria-hidden="true" id="interpolation"></a><a href="#interpolation" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Interpolation</h4>
 <p>For convenience, we also expose another special tag quoted string annotation, <code>j</code>, which supports the equivalent of JS' string interpolation:</p>
-<pre><code class="hljs css languages- ocaml"><span class="hljs-keyword">let</span> world = {j|世界|j}
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> world = {j|世界|j}
 <span class="hljs-keyword">let</span> helloWorld = {j|你好，$world|j}
 </code></pre>
-<pre><code class="hljs css languages- reason"><span class="hljs-keyword">let</span> world = {j|<span class="hljs-type">世界|j</span>};
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> world = {j|<span class="hljs-type">世界|j</span>};
 <span class="hljs-keyword">let</span> helloWorld = {j|<span class="hljs-type">你好，$world</span>|<span class="hljs-type">j</span>};
 </code></pre>
 <p>You can surround the variable in parentheses too: <code>{j|你好，$(world)|j}</code>.</p>
@@ -126,28 +130,28 @@
 </tbody>
 </table>
 <p>* Variants with a single non-nullary constructor:</p>
-<pre><code class="hljs css languages- ocaml"><span class="hljs-keyword">type</span> tree = <span class="hljs-type">Leaf</span> | <span class="hljs-type">Node</span> <span class="hljs-keyword">of</span> <span class="hljs-built_in">int</span> * tree * tree
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">type</span> tree = <span class="hljs-type">Leaf</span> | <span class="hljs-type">Node</span> <span class="hljs-keyword">of</span> <span class="hljs-built_in">int</span> * tree * tree
 <span class="hljs-comment">(* Leaf -&gt; 0 *)</span>
 <span class="hljs-comment">(* Node a b c -&gt; [a, b, c] *)</span>
 </code></pre>
-<pre><code class="hljs css languages- reason"><span class="hljs-keyword">type</span> tree = Leaf | <span class="hljs-keyword">Node</span><span class="hljs-title">(int</span>, tree, tree);
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> tree = Leaf | <span class="hljs-keyword">Node</span><span class="hljs-title">(int</span>, tree, tree);
 /* Leaf -&gt; <span class="hljs-number">0</span> */
 /* <span class="hljs-keyword">Node</span> <span class="hljs-title">a</span> b c -&gt; [a, b, c] */
 </code></pre>
 <p>Variants with more than one non-nullary constructor:</p>
-<pre><code class="hljs css languages- ocaml"><span class="hljs-keyword">type</span> u = <span class="hljs-type">A</span> <span class="hljs-keyword">of</span> <span class="hljs-built_in">string</span> | <span class="hljs-type">B</span> <span class="hljs-keyword">of</span> <span class="hljs-built_in">int</span>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">type</span> u = <span class="hljs-type">A</span> <span class="hljs-keyword">of</span> <span class="hljs-built_in">string</span> | <span class="hljs-type">B</span> <span class="hljs-keyword">of</span> <span class="hljs-built_in">int</span>
 <span class="hljs-comment">(* A a -&gt; [a].tag = 0 -- tag 0 assignment is optional *)</span>
 <span class="hljs-comment">(* B b -&gt; [b].tag = 1 *)</span>
 </code></pre>
-<pre><code class="hljs css languages- reason"><span class="hljs-keyword">type</span> u = A(<span class="hljs-keyword">string</span>) | B(int);
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> u = A(<span class="hljs-keyword">string</span>) | B(int);
 /* A(a) -&gt; [a].<span class="hljs-keyword">tag</span> <span class="hljs-title">= 0</span> -- <span class="hljs-keyword">tag</span> <span class="hljs-title">0</span> assignment is optional */
 /* B(b) -&gt; [b].<span class="hljs-keyword">tag</span> <span class="hljs-title">= 1</span> */
 </code></pre>
 <p>** Polymorphic Variant:</p>
-<pre><code class="hljs css languages- ocaml">`a <span class="hljs-comment">(* 97 *)</span>
+<pre><code class="hljs css language-ocaml">`a <span class="hljs-comment">(* 97 *)</span>
 `a (<span class="hljs-number">1</span>, <span class="hljs-number">2</span>) <span class="hljs-comment">(* [ 97, [1, 2] ] *)</span>
 </code></pre>
-<pre><code class="hljs css languages- reason">`a <span class="hljs-comment">/* 97 */</span>
+<pre><code class="hljs css language-reason">`a <span class="hljs-comment">/* 97 */</span>
 `a(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>) (* [ <span class="hljs-number">97</span>, [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>] ] *)
 </code></pre>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/zh-TW/embed-raw-javascript">← 嵌入原始 JavaScript</a><a class="docs-next button" href="/docs/zh-TW/intro-to-external">External 介紹 →</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#shared-data-types">Shared Data Types</a><ul class="toc-headings"><li><a href="#string">String</a></li><li><a href="#float">Float</a></li><li><a href="#int">Int</a></li><li><a href="#array">Array</a></li><li><a href="#tuple">Tuple</a></li><li><a href="#bool">Bool</a></li></ul></li><li><a href="#non-shared-data-types">Non-shared Data Types</a><ul class="toc-headings"><li><a href="#design-decisions">Design Decisions</a></li></ul></li><li><a href="#cheat-sheet">Cheat Sheet</a><ul class="toc-headings"><li><a href="#shared">Shared</a></li><li><a href="#non-shared">Non-shared</a></li></ul></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script>window.foo = new Pjax({

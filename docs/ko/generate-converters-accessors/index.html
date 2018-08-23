@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="ko"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Generate Converters &amp; Helpers · BuckleScript</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Sometimes, you might want to generate e.g. function accessors from a variant declaration, or a `Js.t` object + converter functions from a record definition. BuckleScript comes with a few annotations that allow you to generate those."/><meta name="docsearch:language" content="ko"/><meta property="og:title" content="Generate Converters &amp; Helpers · BuckleScript"/><meta property="og:type" content="website"/><meta property="og:url" content="https://bucklescript.github.io/index.html"/><meta property="og:description" content="Sometimes, you might want to generate e.g. function accessors from a variant declaration, or a `Js.t` object + converter functions from a record definition. BuckleScript comes with a few annotations that allow you to generate those."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/logos/bucklescript.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://bucklescript.github.io/blog/atom.xml" title="BuckleScript Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://bucklescript.github.io/blog/feed.xml" title="BuckleScript Blog RSS Feed"/><script type="text/javascript" src="/js/toggleSyntaxButton.js"></script><script type="text/javascript" src="/js/pjax-api.min.js"></script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/ko"><img class="logo" src="/img/logos/bucklescript.svg" alt="BuckleScript"/><h2 class="headerTitleWithLogo">BuckleScript</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/ko/installation" target="_self">Docs</a></li><li class=""><a href="/docs/ko/playground" target="_self">Try</a></li><li class="siteNavGroupActive"><a href="/docs/ko/stdlib-overview" target="_self">API</a></li><li class=""><a href="/docs/ko/community" target="_self">Community</a></li><li class=""><a href="/blog" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>한국어</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/ja/generate-converters-accessors">日本語</a></li><li><a href="/docs/en/generate-converters-accessors">English</a></li><li><a href="/docs/es-ES/generate-converters-accessors">Español</a></li><li><a href="/docs/fr/generate-converters-accessors">Français</a></li><li><a href="/docs/pt-BR/generate-converters-accessors">Português (Brasil)</a></li><li><a href="/docs/ru/generate-converters-accessors">Русский</a></li><li><a href="/docs/zh-CN/generate-converters-accessors">中文</a></li><li><a href="/docs/zh-TW/generate-converters-accessors">繁體中文</a></li><li><a href="https://crowdin.com/project/bucklescript" target="_blank" rel="noreferrer noopener">Help Translate</a></li></ul></div></li><script>
+<!DOCTYPE html><html lang="ko"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Generate Converters &amp; Helpers · BuckleScript</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Sometimes, you might want to generate e.g. function accessors from a variant declaration, or a `Js.t` object + converter functions from a record definition. BuckleScript comes with a few annotations that allow you to generate those."/><meta name="docsearch:language" content="ko"/><meta property="og:title" content="Generate Converters &amp; Helpers · BuckleScript"/><meta property="og:type" content="website"/><meta property="og:url" content="https://bucklescript.github.io/index.html"/><meta property="og:description" content="Sometimes, you might want to generate e.g. function accessors from a variant declaration, or a `Js.t` object + converter functions from a record definition. BuckleScript comes with a few annotations that allow you to generate those."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/logos/bucklescript.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://bucklescript.github.io/blog/atom.xml" title="BuckleScript Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://bucklescript.github.io/blog/feed.xml" title="BuckleScript Blog RSS Feed"/><script type="text/javascript" src="/js/toggleSyntaxButton.js"></script><script type="text/javascript" src="/js/pjax-api.min.js"></script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/ko"><img class="logo" src="/img/logos/bucklescript.svg" alt="BuckleScript"/><h2 class="headerTitleWithLogo">BuckleScript</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/ko/installation" target="_self">Docs</a></li><li class=""><a href="/docs/ko/playground" target="_self">Try</a></li><li class="siteNavGroupActive"><a href="/docs/ko/stdlib-overview" target="_self">API</a></li><li class=""><a href="/docs/ko/community" target="_self">Community</a></li><li class=""><a href="/blog" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>한국어</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/ja/generate-converters-accessors">日本語</a></li><li><a href="/docs/en/generate-converters-accessors">English</a></li><li><a href="/docs/es-ES/generate-converters-accessors">Español</a></li><li><a href="/docs/fr/generate-converters-accessors">Français</a></li><li><a href="/docs/pt-BR/generate-converters-accessors">Português (Brasil)</a></li><li><a href="/docs/ru/generate-converters-accessors">Русский</a></li><li><a href="/docs/zh-CN/generate-converters-accessors">中文</a></li><li><a href="/docs/zh-TW/generate-converters-accessors">繁體中文</a></li><li><a href="https://crowdin.com/project/bucklescript" target="_blank" rel="noreferrer noopener">Help Translate</a></li></ul></div></li><script>
         const languagesMenuItem = document.getElementById("languages-menu");
         const languagesDropDown = document.getElementById("languages-dropdown");
         languagesMenuItem.addEventListener("click", function(event) {
@@ -26,6 +26,10 @@
                 var toggler = document.querySelector(togglerSelector);
                 var target = document.querySelector(targetSelector);
 
+                if (!toggler) {
+                  return;
+                }
+
                 toggler.onclick = function(event) {
                   event.preventDefault();
 
@@ -36,13 +40,13 @@
         </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/bucklescript/ko" target="_blank" rel="noreferrer noopener">Translate</a><h1 class="postHeaderTitle">Generate Converters &amp; Helpers</h1></header><article><div><span><p>Sometimes, you might want to generate e.g. function accessors from a variant declaration, or a <code>Js.t</code> object + converter functions from a record definition. BuckleScript comes with a few annotations that allow you to generate those.</p>
 <h2><a class="anchor" aria-hidden="true" id="functions-plain-values-for-variant"></a><a href="#functions-plain-values-for-variant" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Functions &amp; Plain Values for Variant</h2>
 <p>Use <code>accessors</code>.</p>
-<pre><code class="hljs css languages- ocaml"><span class="hljs-keyword">type</span> action =
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">type</span> action =
   | <span class="hljs-type">Click</span>
   | <span class="hljs-type">Submit</span> <span class="hljs-keyword">of</span> <span class="hljs-built_in">string</span>
   | <span class="hljs-type">Cancel</span>
   [@@bs.deriving accessors]
 </code></pre>
-<pre><code class="hljs css languages- reason">[@bs.deriving accessors]<span class="hljs-built_in">
+<pre><code class="hljs css language-reason">[@bs.deriving accessors]<span class="hljs-built_in">
 type </span>action =
   | Click
   | Submit(string)
@@ -55,7 +59,7 @@ type </span>action =
 <li>Doesn't work with polymorphic variants yet.</li>
 </ul>
 <p>Output:</p>
-<pre><code class="hljs css languages- js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">submit</span>(<span class="hljs-params">param_0</span>) </span>{
+<pre><code class="hljs css language-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">submit</span>(<span class="hljs-params">param_0</span>) </span>{
   <span class="hljs-keyword">return</span> <span class="hljs-comment">/* Submit */</span>[param_0];
 }
 
@@ -68,9 +72,9 @@ exports.submit = submit;
 exports.cancel = cancel;
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="usage"></a><a href="#usage" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Usage</h3>
-<pre><code class="hljs css languages- ocaml"><span class="hljs-keyword">let</span> s = submit <span class="hljs-string">"hello"</span> <span class="hljs-comment">(* gives Submit "hello" *)</span>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> s = submit <span class="hljs-string">"hello"</span> <span class="hljs-comment">(* gives Submit "hello" *)</span>
 </code></pre>
-<pre><code class="hljs css languages- reason"><span class="hljs-keyword">let</span> <span class="hljs-attr">s</span> = submit(<span class="hljs-string">"hello"</span>); <span class="hljs-comment">/* gives Submit("hello") */</span>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> <span class="hljs-attr">s</span> = submit(<span class="hljs-string">"hello"</span>); <span class="hljs-comment">/* gives Submit("hello") */</span>
 </code></pre>
 <p>This is useful:</p>
 <ul>
@@ -79,23 +83,23 @@ exports.cancel = cancel;
 </ul>
 <h2><a class="anchor" aria-hidden="true" id="convert-between-jst-object-and-record"></a><a href="#convert-between-jst-object-and-record" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Convert Between <code>Js.t</code> Object and Record</h2>
 <p>Use <code>jsConverter</code>.</p>
-<pre><code class="hljs css languages- ocaml"><span class="hljs-keyword">type</span> coordinates = {
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">type</span> coordinates = {
   x : <span class="hljs-built_in">int</span>;
   y : <span class="hljs-built_in">int</span>
 } [@@bs.deriving jsConverter]
 </code></pre>
-<pre><code class="hljs css languages- reason">[@bs.deriving jsConverter]<span class="hljs-built_in">
+<pre><code class="hljs css language-reason">[@bs.deriving jsConverter]<span class="hljs-built_in">
 type </span>coordinates = {
   x: int,
   y: int
 };
 </code></pre>
 <p>Generates 2 functions of the following types:</p>
-<pre><code class="hljs css languages- ocaml"><span class="hljs-keyword">val</span> coordinatesToJs : coordinates -&gt; &lt;x : <span class="hljs-built_in">int</span> ; y : <span class="hljs-built_in">int</span> &gt; <span class="hljs-type">Js</span>.t
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">val</span> coordinatesToJs : coordinates -&gt; &lt;x : <span class="hljs-built_in">int</span> ; y : <span class="hljs-built_in">int</span> &gt; <span class="hljs-type">Js</span>.t
 
 <span class="hljs-keyword">val</span> coordinatesFromJs : &lt; x: <span class="hljs-built_in">int</span> ; y : <span class="hljs-built_in">int</span> ; .. &gt; <span class="hljs-type">Js</span>.t -&gt; coordinates
 </code></pre>
-<pre><code class="hljs css languages- reason"><span class="hljs-keyword">let</span> coordinatesToJs: coordinates =&gt; {. <span class="hljs-string">"x"</span>: <span class="hljs-built_in">int</span>, <span class="hljs-string">"y"</span>: <span class="hljs-built_in">int</span>};
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> coordinatesToJs: coordinates =&gt; {. <span class="hljs-string">"x"</span>: <span class="hljs-built_in">int</span>, <span class="hljs-string">"y"</span>: <span class="hljs-built_in">int</span>};
 
 <span class="hljs-keyword">let</span> coordinatesFromJs: {.. <span class="hljs-string">"x"</span>: <span class="hljs-built_in">int</span>, <span class="hljs-string">"y"</span>: <span class="hljs-built_in">int</span>} =&gt; coordinates;
 </code></pre>
@@ -106,40 +110,40 @@ type </span>coordinates = {
 </ul>
 <h3><a class="anchor" aria-hidden="true" id="usage-1"></a><a href="#usage-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Usage</h3>
 <p>This exports a <code>jsCoordinates</code> JS object (not a record!) for JS files to use:</p>
-<pre><code class="hljs css languages- ocaml"><span class="hljs-keyword">let</span> jsCoordinates = coordinatesToJs {x = <span class="hljs-number">1</span>; y = <span class="hljs-number">2</span>}
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> jsCoordinates = coordinatesToJs {x = <span class="hljs-number">1</span>; y = <span class="hljs-number">2</span>}
 </code></pre>
-<pre><code class="hljs css languages- reason"><span class="hljs-attribute">let jsCoordinates</span> = coordinatesToJs({x: 1, y: 2});
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">let jsCoordinates</span> = coordinatesToJs({x: 1, y: 2});
 </code></pre>
 <p>This binds to a <code>jsCoordinates</code> record (not a JS object!) that exists on the JS side, presumably created by JS calling the function <code>coordinatesFromJs</code>:</p>
-<pre><code class="hljs css languages- ocaml"><span class="hljs-keyword">external</span> jsCoordinates: coordinates = <span class="hljs-string">"jsCoordinates"</span> [@@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"myGame"</span>]
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> jsCoordinates: coordinates = <span class="hljs-string">"jsCoordinates"</span> [@@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"myGame"</span>]
 </code></pre>
-<pre><code class="hljs css languages- reason">[@<span class="hljs-keyword">bs.module </span><span class="hljs-string">"myGame"</span>] <span class="hljs-keyword">external </span><span class="hljs-keyword">jsCoordinates </span>: coordinates = <span class="hljs-string">"jsCoordinates"</span><span class="hljs-comment">;</span>
+<pre><code class="hljs css language-reason">[@<span class="hljs-keyword">bs.module </span><span class="hljs-string">"myGame"</span>] <span class="hljs-keyword">external </span><span class="hljs-keyword">jsCoordinates </span>: coordinates = <span class="hljs-string">"jsCoordinates"</span><span class="hljs-comment">;</span>
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="more-safety"></a><a href="#more-safety" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>More Safety</h3>
 <p>The above generated functions use <code>Js.t</code> object types. You can also hide this implementation detail by making the object type <strong>abstract</strong> by passing the <code>newType</code> option to the <code>jsConverter</code> plugin:</p>
-<pre><code class="hljs css languages- ocaml"><span class="hljs-keyword">type</span> coordinates = {
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">type</span> coordinates = {
   x : <span class="hljs-built_in">int</span>;
   y : <span class="hljs-built_in">int</span>
 } [@@bs.deriving {jsConverter = newType}]
 </code></pre>
-<pre><code class="hljs css languages- reason">[@bs.deriving {jsConverter: newType}]<span class="hljs-built_in">
+<pre><code class="hljs css language-reason">[@bs.deriving {jsConverter: newType}]<span class="hljs-built_in">
 type </span>coordinates = {
   x: int,
   y: int
 };
 </code></pre>
 <p>Generates 2 functions of the following types:</p>
-<pre><code class="hljs css languages- ocaml"><span class="hljs-keyword">val</span> coordinatesToJs : coordinates -&gt; abs_coordinates
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">val</span> coordinatesToJs : coordinates -&gt; abs_coordinates
 
 <span class="hljs-keyword">val</span> coordinatesFromJs : abs_coordinates -&gt; coordinates
 </code></pre>
-<pre><code class="hljs css languages- reason"><span class="hljs-keyword">let</span> coordinatesToJs: <span class="hljs-function"><span class="hljs-params">coordinates</span> =&gt;</span> abs_coordinates;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> coordinatesToJs: <span class="hljs-function"><span class="hljs-params">coordinates</span> =&gt;</span> abs_coordinates;
 
 <span class="hljs-keyword">let</span> coordinatesFromJs: <span class="hljs-function"><span class="hljs-params">abs_coordinates</span> =&gt;</span> coordinates;
 </code></pre>
 <h4><a class="anchor" aria-hidden="true" id="usage-2"></a><a href="#usage-2" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Usage</h4>
 <p>Using <code>newType</code>, you've now prevented consumers from inadvertently doing the following:</p>
-<pre><code class="hljs css languages- ocaml"><span class="hljs-keyword">let</span> myCoordinates = {
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> myCoordinates = {
   x = <span class="hljs-number">10</span>;
   y = <span class="hljs-number">20</span>
 }
@@ -147,7 +151,7 @@ type </span>coordinates = {
 
 <span class="hljs-keyword">let</span> x = jsCoords##x <span class="hljs-comment">(* disallowed! Don't access the object's internal details *)</span>
 </code></pre>
-<pre><code class="hljs css languages- reason"><span class="hljs-keyword">let</span> <span class="hljs-attr">myCoordinates</span> = {
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> <span class="hljs-attr">myCoordinates</span> = {
   x: <span class="hljs-number">10</span>,
   y: <span class="hljs-number">20</span>
 };
@@ -158,14 +162,14 @@ type </span>coordinates = {
 <p>Same generated output. Isn't it great that types prevent invalid accesses you'd otherwise have to encode at runtime?</p>
 <h2><a class="anchor" aria-hidden="true" id="convert-between-js-integer-enum-and-bs-variant"></a><a href="#convert-between-js-integer-enum-and-bs-variant" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Convert between JS Integer Enum and BS Variant</h2>
 <p>Use <code>jsConverter</code>.</p>
-<pre><code class="hljs css languages- ocaml"><span class="hljs-keyword">type</span> fruit =
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">type</span> fruit =
   | <span class="hljs-type">Apple</span>
   | <span class="hljs-type">Orange</span>
   | <span class="hljs-type">Kiwi</span>
   | <span class="hljs-type">Watermelon</span>
   [@@bs.deriving jsConverter]
 </code></pre>
-<pre><code class="hljs css languages- reason">[@bs.deriving jsConverter]<span class="hljs-built_in">
+<pre><code class="hljs css language-reason">[@bs.deriving jsConverter]<span class="hljs-built_in">
 type </span>fruit =
   | Apple
   | Orange
@@ -173,11 +177,11 @@ type </span>fruit =
   | Watermelon;
 </code></pre>
 <p>This option causes <code>jsConverter</code> to, again, generate functions of the following types:</p>
-<pre><code class="hljs css languages- ocaml"><span class="hljs-keyword">val</span> fruitToJs : fruit -&gt; <span class="hljs-built_in">int</span>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">val</span> fruitToJs : fruit -&gt; <span class="hljs-built_in">int</span>
 
 <span class="hljs-keyword">val</span> fruitFromJs : <span class="hljs-built_in">int</span> -&gt; fruit option
 </code></pre>
-<pre><code class="hljs css languages- reason"><span class="hljs-keyword">let</span> fruitToJs: fruit =&gt; <span class="hljs-built_in">int</span>;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> fruitToJs: fruit =&gt; <span class="hljs-built_in">int</span>;
 
 <span class="hljs-keyword">let</span> fruitFromJs: <span class="hljs-built_in">int</span> =&gt; <span class="hljs-built_in">option</span>(fruit);
 </code></pre>
@@ -185,7 +189,7 @@ type </span>fruit =
 <p>For <code>fruitFromJs</code>, the return value is an <code>option</code>, because not every int maps to a constructor.</p>
 <p>You can also attach a <code>[@bs.as alternativeIntValue]</code> to each constructor to customize their output.</p>
 <h3><a class="anchor" aria-hidden="true" id="usage-3"></a><a href="#usage-3" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Usage</h3>
-<pre><code class="hljs css languages- ocaml"><span class="hljs-keyword">type</span> fruit =
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">type</span> fruit =
   | <span class="hljs-type">Apple</span>
   | <span class="hljs-type">Orange</span> [@bs.<span class="hljs-keyword">as</span> <span class="hljs-number">10</span>]
   | <span class="hljs-type">Kiwi</span> [@bs.<span class="hljs-keyword">as</span> <span class="hljs-number">100</span>]
@@ -198,7 +202,7 @@ type </span>fruit =
 | <span class="hljs-type">Some</span> <span class="hljs-type">Kiwi</span> -&gt; <span class="hljs-type">Js</span>.log <span class="hljs-string">"this is Kiwi"</span>
 | _ -&gt; <span class="hljs-type">Js</span>.log <span class="hljs-string">"received something wrong from the JS side"</span>
 </code></pre>
-<pre><code class="hljs css languages- reason">[@bs.deriving jsConverter]
+<pre><code class="hljs css language-reason">[@bs.deriving jsConverter]
 type fruit =
   | <span class="hljs-type">Apple</span>
   | <span class="hljs-type">[@bs</span>.<span class="hljs-built_in">as</span> <span class="hljs-number">10</span>] Orange
@@ -215,30 +219,30 @@ switch (fruitFromJs(<span class="hljs-number">100</span>)) {
 <p><strong>Note</strong>: by using <code>bs.as</code> here, all subsequent number encoding changes. <code>Apple</code> is still <code>0</code>, <code>Orange</code> is <code>10</code>, <code>Kiwi</code> is <code>100</code> and <code>Watermelon</code> is <strong><code>101</code></strong>!</p>
 <h3><a class="anchor" aria-hidden="true" id="more-safety-1"></a><a href="#more-safety-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>More Safety</h3>
 <p>Similar to the JS object &lt;-&gt; record deriving, you can hide the fact that the JS enum are ints by passing the same <code>newType</code> option to the <code>jsConverter</code> plugin:</p>
-<pre><code class="hljs css languages- ocaml"><span class="hljs-keyword">type</span> fruit =
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">type</span> fruit =
   | <span class="hljs-type">Apple</span>
   | <span class="hljs-type">Kiwi</span> [@bs.<span class="hljs-keyword">as</span> <span class="hljs-number">100</span>]
   | <span class="hljs-type">Watermelon</span>
   [@@bs.deriving {jsConverter = newType}]
 </code></pre>
-<pre><code class="hljs css languages- reason">[@bs.deriving {jsConverter: newType}]<span class="hljs-built_in">
+<pre><code class="hljs css language-reason">[@bs.deriving {jsConverter: newType}]<span class="hljs-built_in">
 type </span>fruit =
   | Apple
   | [@bs.as 100] Kiwi
   | Watermelon;
 </code></pre>
 <p>This option causes <code>jsConverter</code> to generate functions of the following types:</p>
-<pre><code class="hljs css languages- ocaml"><span class="hljs-keyword">val</span> fruitToJs : fruit -&gt; abs_fruit
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">val</span> fruitToJs : fruit -&gt; abs_fruit
 
 <span class="hljs-keyword">val</span> fruitFromJs : abs_fruit -&gt; fruit
 </code></pre>
-<pre><code class="hljs css languages- reason"><span class="hljs-keyword">let</span> fruitToJs: <span class="hljs-function"><span class="hljs-params">fruit</span> =&gt;</span> abs_fruit;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> fruitToJs: <span class="hljs-function"><span class="hljs-params">fruit</span> =&gt;</span> abs_fruit;
 
 <span class="hljs-keyword">let</span> fruitFromJs: <span class="hljs-function"><span class="hljs-params">abs_fruit</span> =&gt;</span> fruit;
 </code></pre>
 <p>For <code>fruitFromJs</code>, the return value, unlike the previous non-abstract type case, doesn't contain an <code>option</code>, because there's no way a bad value can be passed into it; the only creator of <code>abs_fruit</code> values is <code>fruitToJs</code>!</p>
 <h4><a class="anchor" aria-hidden="true" id="usage-4"></a><a href="#usage-4" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Usage</h4>
-<pre><code class="hljs css languages- ocaml"><span class="hljs-keyword">type</span> fruit =
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">type</span> fruit =
   | <span class="hljs-type">Apple</span>
   | <span class="hljs-type">Kiwi</span> [@bs.<span class="hljs-keyword">as</span> <span class="hljs-number">100</span>]
   | <span class="hljs-type">Watermelon</span>
@@ -251,7 +255,7 @@ type </span>fruit =
 
 <span class="hljs-keyword">let</span> error = fruitFromJs <span class="hljs-number">100</span> <span class="hljs-comment">(* nope, can't take a random int *)</span>
 </code></pre>
-<pre><code class="hljs css languages- reason">[@bs.deriving {jsConverter: newType}]
+<pre><code class="hljs css language-reason">[@bs.deriving {jsConverter: newType}]
 type <span class="hljs-attr">fruit</span> =
   | Apple
   | [@bs.as <span class="hljs-number">100</span>] Kiwi
@@ -267,7 +271,7 @@ type <span class="hljs-attr">fruit</span> =
 <h2><a class="anchor" aria-hidden="true" id="convert-between-js-string-enum-and-bs-polymorphic-variant"></a><a href="#convert-between-js-string-enum-and-bs-polymorphic-variant" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Convert between JS String Enum and BS Polymorphic Variant</h2>
 <p>Similar to previous section, except polymorphic variants are converted to <code>string</code> instead of <code>int</code>.</p>
 <h3><a class="anchor" aria-hidden="true" id="usage-5"></a><a href="#usage-5" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Usage</h3>
-<pre><code class="hljs css languages- ocaml"><span class="hljs-keyword">type</span> fruit = [
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">type</span> fruit = [
   | <span class="hljs-type">`Apple</span>
   | <span class="hljs-type">`Kiwi</span> [@bs.<span class="hljs-keyword">as</span> <span class="hljs-string">"miniCoconut"</span>]
   | <span class="hljs-type">`Watermelon</span>
@@ -276,7 +280,7 @@ type <span class="hljs-attr">fruit</span> =
 <span class="hljs-keyword">let</span> appleString = fruitToJs <span class="hljs-type">`Apple</span> <span class="hljs-comment">(* "Apple" *)</span>
 <span class="hljs-keyword">let</span> kiwiString = fruitToJs <span class="hljs-type">`Kiwi</span> <span class="hljs-comment">(* "miniCoconut" *)</span>
 </code></pre>
-<pre><code class="hljs css languages- reason">[@bs.deriving jsConverter]
+<pre><code class="hljs css language-reason">[@bs.deriving jsConverter]
 <span class="hljs-keyword">type</span> fruit = [
   | <span class="hljs-type">`Apple</span>
   | [@bs.<span class="hljs-keyword">as</span> <span class="hljs-string">"miniCoconut"</span>] <span class="hljs-type">`Kiwi</span>

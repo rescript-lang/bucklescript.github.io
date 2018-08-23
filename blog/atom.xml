@@ -13,10 +13,7 @@
         <link href="https://bucklescript.github.io/blog/2018/07/17/release-4-0-0II.html">
         </link>
         <updated>2018-07-17T06:00:00Z</updated>
-        <summary type="html"><![CDATA[<p><code>bs-platform</code> 4.0.0 introduces a new runtime representation for optionals.</p>
-<p>While beforehand <code>None</code> was represented at runtime as <code>0</code> and <code>Some(&quot;hello&quot;)</code> as an array <code>[&quot;hello&quot;]</code>, the new representation tries to unbox optionals as much as possible.</p>
-<p>N</p>
-]]></summary>
+        <summary type="html"><![CDATA[<p><code>bs-platform</code> 4.0.0 introduces a new runtime representation for optionals.</p> <p>While beforehand <code>None</code> was represented at runtime as <code>0</code> and <code>Some(&quot;hello&quot;)</code> as an array <code>[&quot;hello&quot;]</code>, the new representation tries to unbox optionals as much as pos...</p>]]></summary>
         <author>
         </author>
     </entry>
@@ -26,9 +23,7 @@
         <link href="https://bucklescript.github.io/blog/2018/07/17/release-4-0-0.html">
         </link>
         <updated>2018-07-17T06:00:00Z</updated>
-        <summary type="html"><![CDATA[<p><code>bs-platform</code> 4.0.0 is released! It has some  nice features that we want to share with you, a more detailed list of changes is available <a href="https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#400">here</a></p>
-<p>In this post, I will talk about</p>
-]]></summary>
+        <summary type="html"><![CDATA[<p><code>bs-platform</code> 4.0.0 is released! It has some nice features that we want to share with you, a more detailed list of changes is available <a href="https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#400">here</a></p> <p>In this post, I will talk about a new development workflow, all toolchains are self-contained in <code>bs-platform</code>, <a href="https://twitter.com/ccrisccris">C...</a></p>]]></summary>
         <author>
         </author>
     </entry>
@@ -38,8 +33,7 @@
         <link href="https://bucklescript.github.io/blog/2018/05/23/release-3-1-4.html">
         </link>
         <updated>2018-05-23T06:00:00Z</updated>
-        <summary type="html"><![CDATA[<p>Hey again! The release two days ago removed the deprecated Js Boolean APIs (no longer needed since we compile OCaml booleans to JS boolean since <code>3.0.0</code>). But folks have voiced that the removal was too hasty, as some of their dependencies still haven</p>
-]]></summary>
+        <summary type="html"><![CDATA[<p>Hey again! The release two days ago removed the deprecated Js Boolean APIs (no longer needed since we compile OCaml booleans to JS boolean since <code>3.0.0</code>). But folks have voiced that the removal was too hasty, as some of their dependencies still haven't ...</p>]]></summary>
         <author>
         </author>
     </entry>
@@ -49,11 +43,7 @@
         <link href="https://bucklescript.github.io/blog/2018/05/21/release-3-1-0.html">
         </link>
         <updated>2018-05-21T06:00:00Z</updated>
-        <summary type="html"><![CDATA[<p>List of changes <a href="https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#310">here</a>! Highlights:</p>
-<h2><a class="anchor" aria-hidden="true" id="print-record-keys-and-variant-tags"></a><a href="#print-record-keys-and-variant-tags" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Print Record Keys and Variant Tags</h2>
-<p>A picture's worth a thousand words:</p>
-<table>
-  <thead> <tr><th>Before</th><th>After</th></tr> </thead]]></summary>
+        <summary type="html"><![CDATA[<p>List of changes <a href="https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#310">here</a>! Highlights:</p> <h2><a class="anchor" aria-hidden="true" id="print-record-keys-and-variant-tags"></a><a href="#print-record-keys-and-variant-tags" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"/></svg></a>Print Record Keys and Variant Tags</h2> <p>A picture's worth a thousand words:</p> <table> <thead> <tr><th>Before</th><th>After</th></tr> </thead> <tbody> <tr> <td> <img src="/img/debugger-before.png" alt="debugger before"> </td> <td style="vertical-align: middle"> <img src="/img/debugger-after.png" alt="debugger after"> </td> </tr> </tbody> </table> <p>Please see <a href="/docs/en/better-data-structures-printing-debug-mode.html">Better Data Structures Printing (Debug Mode)</a> for usage.</p> <h2><a class="anchor" aria-hidden="true" id="even-better-bsderiving-abstract"></a><a href="#even-better-bsderiving-abstract" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"/></svg></a>Even Better <code>bs.deriving abstract</code></h2> <p>We've further polis...</p>]]></summary>
         <author>
         </author>
     </entry>
@@ -63,12 +53,7 @@
         <link href="https://bucklescript.github.io/blog/2018/04/16/release-3-0-0.html">
         </link>
         <updated>2018-04-16T06:00:00Z</updated>
-        <summary type="html"><![CDATA[<p><code>bs-platform</code> 3.0.0 is released! Go get it. This is a great release.</p>
-<p>Highlighted features:</p>
-<ul>
-<li><strong>OCaml/Reason boolean are finally compiled as JS boolean</strong>! Due to historical limitations, OCaml <code>true</code>/<code>false</code> was compiled to <code>1</code>/<code>0</code> in JS. This caused</li>
-</ul>
-]]></summary>
+        <summary type="html"><![CDATA[<p><code>bs-platform</code> 3.0.0 is released! Go get it. This is a great release.</p> <p>Highlighted features:</p> <ul> <li><strong>OCaml/Reason boolean are finally compiled as JS boolean</strong>! Due to historical limitations, OCaml <code>true</code>/<code>false</code> was compiled to <code>1</code>/<code>0</code> in JS. This caused quite a bit of c...</li></ul>]]></summary>
         <author>
         </author>
     </entry>
@@ -78,9 +63,7 @@
         <link href="https://bucklescript.github.io/blog/2018/03/13/a-small-step-for-bucklescript.html">
         </link>
         <updated>2018-03-13T06:00:00Z</updated>
-        <summary type="html"><![CDATA[<p>...and a big one for the community!</p>
-<p>BuckleScript is a compiler, a set of type system enhancements, a build system and a great deal of JavaScript interoperability features rolled into one. From day one, its goal has been to provide a rock solid, ligh</p>
-]]></summary>
+        <summary type="html"><![CDATA[<p>...and a big one for the community!</p> <p>BuckleScript is a compiler, a set of type system enhancements, a build system and a great deal of JavaScript interoperability features rolled into one. From day one, its goal has been to provide a rock solid, light...</p>]]></summary>
         <author>
         </author>
     </entry>
@@ -90,12 +73,7 @@
         <link href="https://bucklescript.github.io/blog/2017/12/01/new-doc-site.html">
         </link>
         <updated>2017-12-01T06:00:00Z</updated>
-        <summary type="html"><![CDATA[<p>Surprise! We've unified our documentation process with <a href="https://reasonml.github.io/reason-react/">ReasonReact</a>'s. The docs revamp addresses one of the biggest demands for BuckleScript.</p>
-<p>A few highlights:</p>
-<ul>
-<li>The old doc site still exists at the [same</li>
-</ul>
-]]></summary>
+        <summary type="html"><![CDATA[<p>Surprise! We've unified our documentation process with <a href="https://reasonml.github.io/reason-react/">ReasonReact</a>'s. The docs revamp addresses one of the biggest demands for BuckleScript.</p> <p>A few highlights:</p> <ul> <li>The old doc site still exists at the <a href="https://bucklescript.github.io/bucklescript/Manual.html">same location</a>, to preserve backward-compat for docs f...</li></ul>]]></summary>
         <author>
         </author>
     </entry>
@@ -117,12 +95,7 @@
         <link href="https://bucklescript.github.io/blog/2017/10/08/release-1-7-4.html">
         </link>
         <updated>2017-10-08T06:00:00Z</updated>
-        <summary type="html"><![CDATA[<p>Full changes: <a href="https://github.com/bucklescript/bucklescript/blob/master/Changes.md#bucklescript-174may-24-2017">https://github.com/bucklescript/bucklescript/blob/master/Changes.md#bucklescript-174may-24-2017</a></p>
-<p>Main highlights:</p>
-<ol>
-<li>Create a BuckleScript project and build in a single line(works on all platforms with zero dependencies including Windo</li>
-</ol>
-]]></summary>
+        <summary type="html"><![CDATA[<p>Full changes: <a href="https://github.com/bucklescript/bucklescript/blob/master/Changes.md#bucklescript-174may-24-2017">https://github.com/bucklescript/bucklescript/blob/master/Changes.md#bucklescript-174may-24-2017</a></p> <p>Main highlights:</p> <ol> <li>Create a BuckleScript project and build in a single line(works on all platforms with zero dependencies including Windows)</li> ...</ol>]]></summary>
         <author>
         </author>
     </entry>
@@ -146,12 +119,7 @@ BuckleScript employs fairly <a href="http://bucklescript.github.io/bucklescript-
         <link href="https://bucklescript.github.io/blog/2017/10/06/release-1-5-2.html">
         </link>
         <updated>2017-10-06T06:00:00Z</updated>
-        <summary type="html"><![CDATA[<h2><a class="anchor" aria-hidden="true" id="features"></a><a href="#features" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Features</h2>
-<ol>
-<li><p><a href="http://bucklescript.github.io/bucklescript/Manual.html#_unicode_support_since_1_5_1">FFI: Unicode literal support</a></p></li>
-<li><p>[FFI: Return value checking](<a href="http://bucklescript.github.io/bucklescript/Manual.html#_return_value_checking_since_1">http://bucklescript.github.io/bucklescript/Manual.html#_return_value_checking_since_1</a></p></li>
-</ol>
-]]></summary>
+        <summary type="html"><![CDATA[<h2><a class="anchor" aria-hidden="true" id="features"></a><a href="#features" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"/></svg></a>Features</h2> <ol> <li><p><a href="http://bucklescript.github.io/bucklescript/Manual.html#_unicode_support_since_1_5_1">FFI: Unicode literal support</a></p></li> <li><p><a href="http://bucklescript.github.io/bucklescript/Manual.html#_return_value_checking_since_1_5_1">FFI: Return value checking</a></p></li> <li><p><a href="http://bucklescript.github.io/bucklescript/Manual.html#_detect_global_varialbe_existence_code_bs_external_code_since_1_5_1">FFI: Detect global variable existence</a></p></li> </ol> <h2><a class="anchor" aria-hidden="true" id="minor-breaking-changes"></a><a href="#minor-breaking-changes" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"/></svg></a>Minor breaking changes</h2> <ol> <li><p>changes NodeJS special variables from <code>module_</code> to <code>_module</code> to make it more consistent</p></li> <li><p>[%node ] return [_ option] type inste...</p></li></ol>]]></summary>
         <author>
         </author>
     </entry>
@@ -161,12 +129,7 @@ BuckleScript employs fairly <a href="http://bucklescript.github.io/bucklescript-
         <link href="https://bucklescript.github.io/blog/2017/10/05/release-1-5-1.html">
         </link>
         <updated>2017-10-05T06:00:00Z</updated>
-        <summary type="html"><![CDATA[<h2><a class="anchor" aria-hidden="true" id="features"></a><a href="#features" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Features</h2>
-<ol>
-<li><p><a href="http://bucklescript.github.io/bucklescript/Manual.html#_unicode_support_since_1_5_1">FFI: Unicode literal support</a></p></li>
-<li><p><a href="http://bucklescript.github.io/bucklescript/Manual.html#_unicode_support_since_1_5_1">FFI: return value checking</a></p></li>
-</ol>
-]]></summary>
+        <summary type="html"><![CDATA[<h2><a class="anchor" aria-hidden="true" id="features"></a><a href="#features" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"/></svg></a>Features</h2> <ol> <li><p><a href="http://bucklescript.github.io/bucklescript/Manual.html#_unicode_support_since_1_5_1">FFI: Unicode literal support</a></p></li> <li><p><a href="http://bucklescript.github.io/bucklescript/Manual.html#_unicode_support_since_1_5_1">FFI: return value checking</a></p></li> <li><p><a href="http://bucklescript.github.io/bucklescript/Manual.html#_detect_global_varialbe_existence_code_bs_external_code_since_1_5_1">FFI: Detect global variable existence</a></p></li> </ol> <h2><a class="anchor" aria-hidden="true" id="minor-breaking-changes"></a><a href="#minor-breaking-changes" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"/></svg></a>Minor breaking changes</h2> <ol> <li><p>changes NodeJS special variables from <code>module_</code> to <code>_module</code> to make it more consistent</p></li> <li><p>[%node ] return [_ option] type inste...</p></li></ol>]]></summary>
         <author>
         </author>
     </entry>
@@ -176,11 +139,7 @@ BuckleScript employs fairly <a href="http://bucklescript.github.io/bucklescript-
         <link href="https://bucklescript.github.io/blog/2017/10/04/release-1-5-0.html">
         </link>
         <updated>2017-10-04T06:00:00Z</updated>
-        <summary type="html"><![CDATA[<p>Besides a number of minor bug fixes and perf improvement, most notable changes</p>
-<ul>
-<li>Bundled Reason together thanks to Reason team, so that Reason syntax support is also first class, this also makes Reason for the first time available to Windows users.</li>
-</ul>
-]]></summary>
+        <summary type="html"><![CDATA[<p>Besides a number of minor bug fixes and perf improvement, most notable changes</p> <ul> <li>Bundled Reason together thanks to Reason team, so that Reason syntax support is also first class, this also makes Reason for the first time available to Windows users.</li> <li>FF...</li></ul>]]></summary>
         <author>
         </author>
     </entry>
@@ -190,13 +149,7 @@ BuckleScript employs fairly <a href="http://bucklescript.github.io/bucklescript-
         <link href="https://bucklescript.github.io/blog/2017/10/03/release-1-4-3.html">
         </link>
         <updated>2017-10-03T06:00:00Z</updated>
-        <summary type="html"><![CDATA[<p>Besides a number of minor bug fixes, most notable changes</p>
-<ul>
-<li>ES6 module support, &quot;es6&quot;, &quot;es6-global&quot; , &quot;amdjs-global&quot;</li>
-</ul>
-<p>&quot;es6&quot; package-spec will generate es6 modules for each ocaml module,
-&quot;es6-global&quot; will also generate es6 modules but the path does n</p>
-]]></summary>
+        <summary type="html"><![CDATA[<p>Besides a number of minor bug fixes, most notable changes</p> <ul> <li>ES6 module support, &quot;es6&quot;, &quot;es6-global&quot; , &quot;amdjs-global&quot;</li> </ul> <p>&quot;es6&quot; package-spec will generate es6 modules for each ocaml module, &quot;es6-global&quot; wi...</p>]]></summary>
         <author>
         </author>
     </entry>
@@ -206,13 +159,7 @@ BuckleScript employs fairly <a href="http://bucklescript.github.io/bucklescript-
         <link href="https://bucklescript.github.io/blog/2017/10/02/release-1-4-2.html">
         </link>
         <updated>2017-10-02T06:00:00Z</updated>
-        <summary type="html"><![CDATA[<p>BuckleScript 1.4.2 release comes with quite a few enhancement.</p>
-<p>Most notable features:</p>
-<ol>
-<li>The build system is ready to handle multiple npm packages, and its module system can be
-overriden by the end user. For example, if the library A(end user) depe</li>
-</ol>
-]]></summary>
+        <summary type="html"><![CDATA[<p>BuckleScript 1.4.2 release comes with quite a few enhancement.</p> <p>Most notable features:</p> <ol> <li>The build system is ready to handle multiple npm packages, and its module system can be overriden by the end user. For example, if the library A(end user) depends ...</li></ol>]]></summary>
         <author>
         </author>
     </entry>
@@ -222,8 +169,7 @@ overriden by the end user. For example, if the library A(end user) depe</li>
         <link href="https://bucklescript.github.io/blog/2017/10/01/announcing-1-0.html">
         </link>
         <updated>2017-10-01T06:00:00Z</updated>
-        <summary type="html"><![CDATA[<p>The BuckleScript announcement can be found on the <a href="https://www.techatbloomberg.com/blog/bucklescript-1-0-release-arrived/">Tech at Bloomberg blog</a>.</p>
-]]></summary>
+        <summary type="html"><![CDATA[<p>The BuckleScript announcement can be found on the <a href="https://www.techatbloomberg.com/blog/bucklescript-1-0-release-arrived/">Tech at Bloomberg blog</a>.</p> ]]></summary>
         <author>
         </author>
     </entry>

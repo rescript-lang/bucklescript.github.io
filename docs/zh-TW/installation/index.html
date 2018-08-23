@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="zh-TW"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>安裝 · BuckleScript</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="* * *"/><meta name="docsearch:language" content="zh-TW"/><meta property="og:title" content="安裝 · BuckleScript"/><meta property="og:type" content="website"/><meta property="og:url" content="https://bucklescript.github.io/index.html"/><meta property="og:description" content="* * *"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/logos/bucklescript.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://bucklescript.github.io/blog/atom.xml" title="BuckleScript Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://bucklescript.github.io/blog/feed.xml" title="BuckleScript Blog RSS Feed"/><script type="text/javascript" src="/js/toggleSyntaxButton.js"></script><script type="text/javascript" src="/js/pjax-api.min.js"></script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/zh-TW"><img class="logo" src="/img/logos/bucklescript.svg" alt="BuckleScript"/><h2 class="headerTitleWithLogo">BuckleScript</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive siteNavItemActive"><a href="/docs/zh-TW/installation" target="_self">文件</a></li><li class=""><a href="/docs/zh-TW/playground" target="_self">體驗</a></li><li class="siteNavGroupActive"><a href="/docs/zh-TW/stdlib-overview" target="_self">API</a></li><li class=""><a href="/docs/zh-TW/community" target="_self">社群</a></li><li class=""><a href="/blog" target="_self">部落格</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>繁體中文</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/ja/installation">日本語</a></li><li><a href="/docs/en/installation">English</a></li><li><a href="/docs/es-ES/installation">Español</a></li><li><a href="/docs/fr/installation">Français</a></li><li><a href="/docs/ko/installation">한국어</a></li><li><a href="/docs/pt-BR/installation">Português (Brasil)</a></li><li><a href="/docs/ru/installation">Русский</a></li><li><a href="/docs/zh-CN/installation">中文</a></li><li><a href="https://crowdin.com/project/bucklescript" target="_blank" rel="noreferrer noopener">協助翻譯</a></li></ul></div></li><script>
+<!DOCTYPE html><html lang="zh-TW"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>安裝 · BuckleScript</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="* * *"/><meta name="docsearch:language" content="zh-TW"/><meta property="og:title" content="安裝 · BuckleScript"/><meta property="og:type" content="website"/><meta property="og:url" content="https://bucklescript.github.io/index.html"/><meta property="og:description" content="* * *"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/logos/bucklescript.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://bucklescript.github.io/blog/atom.xml" title="BuckleScript Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://bucklescript.github.io/blog/feed.xml" title="BuckleScript Blog RSS Feed"/><script type="text/javascript" src="/js/toggleSyntaxButton.js"></script><script type="text/javascript" src="/js/pjax-api.min.js"></script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/zh-TW"><img class="logo" src="/img/logos/bucklescript.svg" alt="BuckleScript"/><h2 class="headerTitleWithLogo">BuckleScript</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive siteNavItemActive"><a href="/docs/zh-TW/installation" target="_self">文件</a></li><li class=""><a href="/docs/zh-TW/playground" target="_self">體驗</a></li><li class="siteNavGroupActive"><a href="/docs/zh-TW/stdlib-overview" target="_self">API</a></li><li class=""><a href="/docs/zh-TW/community" target="_self">社群</a></li><li class=""><a href="/blog" target="_self">部落格</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>繁體中文</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/ja/installation">日本語</a></li><li><a href="/docs/en/installation">English</a></li><li><a href="/docs/es-ES/installation">Español</a></li><li><a href="/docs/fr/installation">Français</a></li><li><a href="/docs/ko/installation">한국어</a></li><li><a href="/docs/pt-BR/installation">Português (Brasil)</a></li><li><a href="/docs/ru/installation">Русский</a></li><li><a href="/docs/zh-CN/installation">中文</a></li><li><a href="https://crowdin.com/project/bucklescript" target="_blank" rel="noreferrer noopener">協助翻譯</a></li></ul></div></li><script>
         const languagesMenuItem = document.getElementById("languages-menu");
         const languagesDropDown = document.getElementById("languages-dropdown");
         languagesMenuItem.addEventListener("click", function(event) {
@@ -26,6 +26,10 @@
                 var toggler = document.querySelector(togglerSelector);
                 var target = document.querySelector(targetSelector);
 
+                if (!toggler) {
+                  return;
+                }
+
                 toggler.onclick = function(event) {
                   event.preventDefault();
 
@@ -38,15 +42,15 @@
 <hr>
 <p><strong>必要條件</strong>：NPM（<a href="https://nodejs.org/en/">node</a> 內建）或 <a href="https://yarnpkg.com/en/">Yarn</a>。</p>
 <p>如果要全域安裝 BuckleScript，請執行：</p>
-<pre><code class="hljs css languages- sh">yarn global add bs-platform
+<pre><code class="hljs css language-sh">yarn global add bs-platform
 </code></pre>
 <p>or</p>
-<pre><code class="hljs css languages- sh">npm install -g bs-platform
+<pre><code class="hljs css language-sh">npm install -g bs-platform
 </code></pre>
 <p>This gives you a few globally exposed commands you can run, described later. But usually, you'd install the project locally:</p>
-<pre><code class="hljs css languages- sh">yarn add --dev bs-platform
+<pre><code class="hljs css language-sh">yarn add --dev bs-platform
 </code></pre>
-<pre><code class="hljs css languages- sh">npm install --save-dev bs-platform
+<pre><code class="hljs css language-sh">npm install --save-dev bs-platform
 </code></pre>
 <p>可供全域執行的指令有：</p>
 <ul>
@@ -57,14 +61,14 @@
 <h2><a class="anchor" aria-hidden="true" id="替代方案-進階用戶"></a><a href="#替代方案-進階用戶" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>替代方案（進階用戶）</h2>
 <h3><a class="anchor" aria-hidden="true" id="透過-npm-yarn-使用程式碼安裝"></a><a href="#透過-npm-yarn-使用程式碼安裝" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>透過 NPM/Yarn，使用程式碼安裝</h3>
 <p><strong>必要條件</strong>：npm 或 yarn，外加標準 C 工具鏈。</p>
-<pre><code class="hljs css languages- sh">git <span class="hljs-built_in">clone</span> https://github.com/bucklescript/bucklescript
+<pre><code class="hljs css language-sh">git <span class="hljs-built_in">clone</span> https://github.com/bucklescript/bucklescript
 <span class="hljs-built_in">cd</span> bucklescript
 npm install
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="不透過-npm-yarn-使用程式碼安裝"></a><a href="#不透過-npm-yarn-使用程式碼安裝" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>不透過 NPM/Yarn，使用程式碼安裝</h3>
 <p><strong>必要條件</strong>：標準 C 工具鏈（gcc、make）。</p>
 <p>首先，建置 OCaml 編譯器：</p>
-<pre><code class="hljs css languages- sh">git <span class="hljs-built_in">clone</span> https://github.com/bucklescript/bucklescript
+<pre><code class="hljs css language-sh">git <span class="hljs-built_in">clone</span> https://github.com/bucklescript/bucklescript
 <span class="hljs-built_in">cd</span> bucklescript/vendor/ocaml
 ./configure -prefix `<span class="hljs-built_in">pwd</span>` <span class="hljs-comment"># put your preferred directory</span>
 make world.opt
@@ -72,7 +76,7 @@ make install
 </code></pre>
 <p>編譯器將安裝於 <code>$(pwd)/bin</code>。 若要暫時地使用，檢查 <code>ocamlc.opt</code> 和 <code>ocamlopt.opt</code> 使否存在 <code>$(pwd)/bin</code>，並暫時地加入路徑於 <code>$(PATH)</code>（例如：<code>PATH=$(pwd)/bin:$PATH</code>）。</p>
 <p>接著，建置 BuckleScript 本身：</p>
-<pre><code class="hljs css languages- sh"><span class="hljs-built_in">cd</span> ../../
+<pre><code class="hljs css language-sh"><span class="hljs-built_in">cd</span> ../../
 make world
 </code></pre>
 <p>最後，位於 <code>jscomp/bin</code> 目錄底下會有個二進制檔案 <code>bsc.exe</code>，可以加入到你的 <code>$PATH</code>。 另外也可以設定環境變數，指定標準函式庫的位置，例如 <code>BSC_LIB=/path/to/jscomp/stdlib</code>，方便使用。</p>
