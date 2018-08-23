@@ -65,6 +65,18 @@ let someNumber = random();
 ## Nullable
 
 ```ocaml
+let a = Some 5 (* compiles to 5 *)
+let b = None (* compiles to undefined *)
+```
+
+```reason
+let a = Some(5); /* compiles to 5 */
+let b = None; /* compiles to undefined */
+```
+
+Handling a value that can be `undefined` and `null`, by ditching the `option` type and using `Js.Nullable.t`:
+
+```ocaml
 let jsNull = Js.Nullable.null
 let jsUndefined = Js.Nullable.undefined
 
@@ -80,17 +92,6 @@ let jsUndefined = Js.Nullable.undefined;
 let result1: Js.Nullable.t(string) = Js.Nullable.return("hello");
 let result2: Js.Nullable.t(int) = Js.Nullable.fromOption(Some(10));
 let result3: option(int) = Js.Nullable.toOption(Js.Nullable.return(10));
-```
-
-Directly convert from `Js.Nullable.t` to `option`:
-
-```ocaml
-external getElementById : string -> element option = "getElementById" [@@bs.val][@@bs.scope "document"][@@bs.return nullable]
-```
-
-```reason
-[@bs.val] [@bs.scope "document"] [@bs.return nullable]
-external getElementById : string => option(element) = "getElementById";
 ```
 
 ## Object
