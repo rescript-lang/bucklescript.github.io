@@ -23,8 +23,8 @@
   box-shadow: 0 0 10px white;
 }
 
-.syntax__reason .hljs.ocaml,
-.syntax__ocaml .hljs.reason {
+.syntax__reason .hljs.language-ocaml,
+.syntax__ocaml .hljs.language-reason {
   display: none;
 }
 
