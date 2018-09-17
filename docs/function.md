@@ -287,8 +287,8 @@ external on : (
 
 let register = rl =>
   rl
-  |. on(`close(event => ()))
-  |. on(`line(line => print_endline(line)));
+  ->on(`close(event => ()))
+  ->on(`line(line => print_endline(line)));
 ```
 
 Output:

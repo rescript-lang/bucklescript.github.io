@@ -121,7 +121,7 @@ external getNickname: person -> string = "getNickname" [@@bs.send]
 
 external john : person = "john" [@@bs.val]
 
-let age = john |. age
+let age = john |. ageGet
 let () = john |. jobSet "Accountant"
 let nick = john |. getNickname
 ```
@@ -138,9 +138,9 @@ type person = {
 
 [@bs.val] external john : person = "john";
 
-let age = john |. age;
-john |. jobSet("Accountant");
-let nick = john |. getNickname;
+let age = john->ageGet;
+john->jobSet("Accountant");
+let nick = john->getNickname;
 ```
 
 ### New Instance
@@ -176,9 +176,9 @@ let () = [|1; 2; 3|]
 
 /* 2, 4 */
 [|1, 2, 3|]
--> map(a => a + 1)
--> filter(a => a mod 2 == 0)
--> Js.log;
+->map(a => a + 1)
+->filter(a => a mod 2 == 0)
+->Js.log;
 ```
 
 ### Variadic
