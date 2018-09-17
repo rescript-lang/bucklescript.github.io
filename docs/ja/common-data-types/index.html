@@ -1,0 +1,182 @@
+<!DOCTYPE html><html lang="ja"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>基本的なデータ型 · BuckleScript</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="## Shared Data Types"/><meta name="docsearch:language" content="ja"/><meta property="og:title" content="基本的なデータ型 · BuckleScript"/><meta property="og:type" content="website"/><meta property="og:url" content="https://bucklescript.github.io/index.html"/><meta property="og:description" content="## Shared Data Types"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/logos/bucklescript.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://bucklescript.github.io/blog/atom.xml" title="BuckleScript Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://bucklescript.github.io/blog/feed.xml" title="BuckleScript Blog RSS Feed"/><script type="text/javascript" src="/js/toggleSyntaxButton.js"></script><script type="text/javascript" src="/js/pjax-api.min.js"></script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/ja"><img class="logo" src="/img/logos/bucklescript.svg" alt="BuckleScript"/><h2 class="headerTitleWithLogo">BuckleScript</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/ja/installation" target="_self">ドキュメント</a></li><li class=""><a href="/docs/ja/playground" target="_self">試してみる</a></li><li class="siteNavGroupActive"><a href="/docs/ja/stdlib-overview" target="_self">API</a></li><li class=""><a href="/docs/ja/community" target="_self">コミュニティ</a></li><li class=""><a href="/blog" target="_self">ブログ</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>日本語</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/en/common-data-types">English</a></li><li><a href="/docs/es-ES/common-data-types">Español</a></li><li><a href="/docs/fr/common-data-types">Français</a></li><li><a href="/docs/ko/common-data-types">한국어</a></li><li><a href="/docs/pt-BR/common-data-types">Português (Brasil)</a></li><li><a href="/docs/ru/common-data-types">Русский</a></li><li><a href="/docs/zh-CN/common-data-types">中文</a></li><li><a href="/docs/zh-TW/common-data-types">繁體中文</a></li><li><a href="https://crowdin.com/project/bucklescript" target="_blank" rel="noreferrer noopener">翻訳に参加する</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/bucklescript/bucklescript" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>相互運用</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">はじめに</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ja/what-why">What &amp; Why</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/installation">インストール</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/new-project">新しいプロジェクト</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/concepts-overview">基本コンセプト</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">相互運用</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ja/interop-overview">概要</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/interop-cheatsheet">チートシート</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/embed-raw-javascript">生の JavaScript を埋め込む</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/ja/common-data-types">基本的なデータ型</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/intro-to-external">Intro to External</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/bind-to-global-values">グローバル変数のバインド</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/null-undefined-option">Null、Undefined、オプション</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/object">オブジェクト</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/object-2">Object 2</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/class">クラス</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/function">関数</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/import-export">インポート / エクスポート</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/regular-expression">正規表現</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/exceptions">例外</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/json">JSON</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/fast-pipe">Fast Pipe</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/generate-converters-accessors">コンバーターとヘルパーの生成</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/better-data-structures-printing-debug-mode">Better Data Structures Printing (Debug Mode)</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/nodejs-special-variables">NodeJS の特殊な変数</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/interop-misc">その他</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/browser-support-polyfills">ブラウザー対応と Polyfill</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">ビルドシステム</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ja/build-overview">概要</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/build-configuration">設定</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/automatic-interface-generation">インターフェースの自動生成</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/interop-with-js-build-systems">JavaScript ビルド システムとの相互運用</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/build-performance">パフォーマンス</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/build-advanced">高度な設定</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">標準ライブラリ</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ja/stdlib-overview">概要</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">高度な設定</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ja/conditional-compilation">条件付きコンパイル</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/extended-compiler-options">拡張コンパイラ オプション</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/use-existing-ocaml-libraries">既存のOCamlのライブラリを使う</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/difference-from-native-ocaml">ネイティブ OCaml との違い</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/compiler-architecture-principles">コンパイラのアーキテクチャと原則</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/comparison-to-jsoo">Js_of_ocaml との比較</a></li></ul></div></div></section></div><script>
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              const headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                if (event.target.tagName === 'A') {
+                  document.body.classList.remove('tocActive');
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/bucklescript/ja" target="_blank" rel="noreferrer noopener">Translate</a><h1 class="postHeaderTitle">基本的なデータ型</h1></header><article><div><span><h2><a class="anchor" aria-hidden="true" id="shared-data-types"></a><a href="#shared-data-types" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Shared Data Types</h2>
+<p>BuckleScript's primitives such as <code>string</code>, <code>float</code>, <code>array</code> and a few others have a rather interesting property: they compile to the exact same thing in JavaScript! Thanks to this, there's close to no API to learn for these data types.</p>
+<p>This means that if you receive e.g. a string from the JS side, you can use it <strong>without conversion</strong> on the BS side, and vice-versa. In other words, string and others are &quot;<em>guaranteed public representations</em>&quot;.</p>
+<p>P.S. if you need an overview of the language primitives themselves, see <a href="https://reasonml.github.io/docs/en/overview.html">the Reason docs</a>.</p>
+<p><strong>BuckleScript uses the same standard library as OCaml</strong>; see the docs <a href="https://reasonml.github.io/api/">here</a> (in Reason syntax). <strong>Additionally</strong>, we provide access to all the familiar JS primitives <a href="https://bucklescript.github.io/bucklescript/api/Js">here</a>. You can mix and match these two.</p>
+<h3><a class="anchor" aria-hidden="true" id="string"></a><a href="#string" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>String</h3>
+<p>Immutable on both sides, as expected. <a href="https://reasonml.github.io/api/String.html">BuckleScript String API</a>. <a href="https://bucklescript.github.io/bucklescript/api/Js.String.html">JS String API</a>.</p>
+<h4><a class="anchor" aria-hidden="true" id="unicode-support"></a><a href="#unicode-support" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Unicode Support</h4>
+<p>OCaml string is an immutable byte sequence. If the user types some unicode:</p>
+<pre><code class="hljs css language-ocaml"><span class="hljs-type">Js</span>.log <span class="hljs-string">"你好"</span>
+</code></pre>
+<pre><code class="hljs css language-reason">Js.<span class="hljs-built_in">log</span>(<span class="hljs-string">"你好"</span>)
+</code></pre>
+<p>It'll compile to the follow JS:</p>
+<pre><code class="hljs css language-js"><span class="hljs-built_in">console</span>.log(<span class="hljs-string">"\xe4\xbd\xa0\xe5\xa5\xbd"</span>);
+</code></pre>
+<p>Which gives you cryptic console output. To rectify this, BuckleScript exposes a special <code>js</code> annotation to the default <a href="https://reasonml.github.io/docs/en/string-and-char.html#quoted-string">quoted string syntax</a> built into the language. Use it like this:</p>
+<pre><code class="hljs css language-ocaml"><span class="hljs-type">Js</span>.log {js|你好，
+世界|js}
+</code></pre>
+<pre><code class="hljs css language-reason">Js.<span class="hljs-built_in">log</span>({js<span class="hljs-string">|你好，</span>
+世界<span class="hljs-string">|js})</span>
+</code></pre>
+<p>This'll correctly output:</p>
+<pre><code class="hljs css language-js"><span class="hljs-built_in">console</span>.log(<span class="hljs-string">"你好，\n世界"</span>);
+</code></pre>
+<h4><a class="anchor" aria-hidden="true" id="interpolation"></a><a href="#interpolation" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Interpolation</h4>
+<p>For convenience, we also expose another special tag quoted string annotation, <code>j</code>, which supports the equivalent of JS' string interpolation:</p>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> world = {j|世界|j}
+<span class="hljs-keyword">let</span> helloWorld = {j|你好，$world|j}
+</code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> world = {j|<span class="hljs-type">世界|j</span>};
+<span class="hljs-keyword">let</span> helloWorld = {j|<span class="hljs-type">你好，$world</span>|<span class="hljs-type">j</span>};
+</code></pre>
+<p>You can surround the variable in parentheses too: <code>{j|你好，$(world)|j}</code>.</p>
+<h3><a class="anchor" aria-hidden="true" id="float"></a><a href="#float" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Float</h3>
+<p>BuckleScript floats are JS numbers, vice-versa. The OCaml standard library doesn't come with a Float module. JS Float API is <a href="https://bucklescript.github.io/bucklescript/api/Js.Float.html">here</a>.</p>
+<h3><a class="anchor" aria-hidden="true" id="int"></a><a href="#int" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Int</h3>
+<p><strong>Ints are 32-bits</strong>! Be careful, you can potentially treat them as JS numbers and vice-versa, but if the number's large, then you better treat JS numbers as floats. For example, we bind to Js.Date using <code>float</code>s. Js Int API <a href="https://bucklescript.github.io/bucklescript/api/Js.Int.html">here</a>.</p>
+<h3><a class="anchor" aria-hidden="true" id="array"></a><a href="#array" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Array</h3>
+<p>Idiomatic OCaml arrays are supposed to be fix-sized. This constraint is relaxed on the BuckleScript size. You can change its length using the usual <a href="https://bucklescript.github.io/bucklescript/api/Js.Array.html#VALdefault">JS Array API</a>. BuckleScript's own Array API is <a href="https://reasonml.github.io/api/Array.html">here</a>.</p>
+<h3><a class="anchor" aria-hidden="true" id="tuple"></a><a href="#tuple" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Tuple</h3>
+<p>OCaml tuples are compiled to JS arrays. Convenient when you're interop-ing with a JS array that contains heterogeneous values, but happens to have a fixed length. Model it as a tuple on the BS side!</p>
+<h3><a class="anchor" aria-hidden="true" id="bool"></a><a href="#bool" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Bool</h3>
+<p>Since BuckleScript 3, OCaml/Reason bool now compile to JS boolean.</p>
+<h2><a class="anchor" aria-hidden="true" id="non-shared-data-types"></a><a href="#non-shared-data-types" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Non-shared Data Types</h2>
+<p>Record, variant (including <code>option</code> and <code>list</code>), object and others can be exported as well, but you should <strong>not</strong> rely on their internal representation on the JS side. Aka, don't grab a BS list and start manipulating its structure on the JS side.</p>
+<p>However, for record and variant, we provide <a href="/docs/ja/generate-converters-accessors">generation of converters and accessors</a>. Once you convert e.g. a record to a JS object, you can naturally use them on the JS side.</p>
+<p>For list, use <code>Array.of_list</code> and <code>Array.to_list</code> in the <a href="https://reasonml.github.io/api/Array.html">Array</a> module. <code>option</code> will be treated later on.</p>
+<h3><a class="anchor" aria-hidden="true" id="design-decisions"></a><a href="#design-decisions" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Design Decisions</h3>
+<p>As to why we don't compile list to JS array or vice-versa, it's because OCaml array and JS array share similar characteristics: mutable, similar read/write performance, etc. List, on the other hand, is immutable and has different access perf characteristics.</p>
+<p>The same justification applies for records. OCaml records are fixed, nominally typed, and in general doesn't work well with JS objects. We do provide excellent facilities to bind to JS objects in the <a href="/docs/ja/object">object section</a>.</p>
+<!-- TODO: playground link -->
+<h2><a class="anchor" aria-hidden="true" id="cheat-sheet"></a><a href="#cheat-sheet" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Cheat Sheet</h2>
+<h3><a class="anchor" aria-hidden="true" id="shared"></a><a href="#shared" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Shared</h3>
+<table>
+<thead>
+<tr><th>OCaml/BS/Reason Type</th><th>JavaScript Type</th></tr>
+</thead>
+<tbody>
+<tr><td>int</td><td>number</td></tr>
+<tr><td>nativeint</td><td>number</td></tr>
+<tr><td>int32</td><td>number</td></tr>
+<tr><td>float</td><td>number</td></tr>
+<tr><td>string</td><td>string</td></tr>
+<tr><td>array</td><td>array</td></tr>
+<tr><td>tuple</td><td>array. <code>(3, 4)</code> -&gt; <code>[3, 4]</code></td></tr>
+<tr><td>bool</td><td>boolean</td></tr>
+<tr><td>Js.Nullable.t</td><td><code>null</code>/<code>undefined</code></td></tr>
+<tr><td>special <code>bs.deriving abstract</code> record</td><td>object</td></tr>
+</tbody>
+</table>
+<h3><a class="anchor" aria-hidden="true" id="non-shared"></a><a href="#non-shared" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Non-shared</h3>
+<p>Again, the representations are subject to change.</p>
+<table>
+<thead>
+<tr><th>OCaml/BS/Reason Type</th><th>JavaScript Value</th></tr>
+</thead>
+<tbody>
+<tr><td>int64</td><td>array. [high, low]. high is signed, low unsigned</td></tr>
+<tr><td>char</td><td><code>'a'</code> -&gt; <code>97</code></td></tr>
+<tr><td>bytes</td><td>number array (we might encode it as buffer in NodeJS)</td></tr>
+<tr><td>record</td><td>array. <code>{x: 1; y: 2}</code> -&gt; <code>[1, 2]</code></td></tr>
+<tr><td>option</td><td><code>None</code> -&gt; <code>0</code>, <code>Some(a)</code> -&gt; <code>[a]</code></td></tr>
+<tr><td>list</td><td><code>[]</code> -&gt; <code>0</code>, <code>[x, y]</code> -&gt; <code>[x, y]</code>, <code>[1, 2, 3]</code> -&gt; <code>[ 1, [ 2, [ 3, 0 ] ] ]</code></td></tr>
+<tr><td>Variant</td><td>*</td></tr>
+<tr><td>Polymorphic variant</td><td>**</td></tr>
+<tr><td>exception</td><td>-</td></tr>
+<tr><td>extension</td><td>-</td></tr>
+<tr><td>object</td><td>-</td></tr>
+</tbody>
+</table>
+<p>* Variants with a single non-nullary constructor:</p>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">type</span> tree = <span class="hljs-type">Leaf</span> | <span class="hljs-type">Node</span> <span class="hljs-keyword">of</span> <span class="hljs-built_in">int</span> * tree * tree
+<span class="hljs-comment">(* Leaf -&gt; 0 *)</span>
+<span class="hljs-comment">(* Node a b c -&gt; [a, b, c] *)</span>
+</code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> tree = Leaf | <span class="hljs-keyword">Node</span><span class="hljs-title">(int</span>, tree, tree);
+/* Leaf -&gt; <span class="hljs-number">0</span> */
+/* <span class="hljs-keyword">Node</span> <span class="hljs-title">a</span> b c -&gt; [a, b, c] */
+</code></pre>
+<p>Variants with more than one non-nullary constructor:</p>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">type</span> u = <span class="hljs-type">A</span> <span class="hljs-keyword">of</span> <span class="hljs-built_in">string</span> | <span class="hljs-type">B</span> <span class="hljs-keyword">of</span> <span class="hljs-built_in">int</span>
+<span class="hljs-comment">(* A a -&gt; [a].tag = 0 -- tag 0 assignment is optional *)</span>
+<span class="hljs-comment">(* B b -&gt; [b].tag = 1 *)</span>
+</code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> u = A(<span class="hljs-keyword">string</span>) | B(int);
+/* A(a) -&gt; [a].<span class="hljs-keyword">tag</span> <span class="hljs-title">= 0</span> -- <span class="hljs-keyword">tag</span> <span class="hljs-title">0</span> assignment is optional */
+/* B(b) -&gt; [b].<span class="hljs-keyword">tag</span> <span class="hljs-title">= 1</span> */
+</code></pre>
+<p>** Polymorphic Variant:</p>
+<pre><code class="hljs css language-ocaml">`a <span class="hljs-comment">(* 97 *)</span>
+`a (<span class="hljs-number">1</span>, <span class="hljs-number">2</span>) <span class="hljs-comment">(* [ 97, [1, 2] ] *)</span>
+</code></pre>
+<pre><code class="hljs css language-reason">`a <span class="hljs-comment">/* 97 */</span>
+`a(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>) (* [ <span class="hljs-number">97</span>, [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>] ] *)
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/ja/embed-raw-javascript">← 生の JavaScript を埋め込む</a><a class="docs-next button" href="/docs/ja/intro-to-external">Intro to External →</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#shared-data-types">Shared Data Types</a><ul class="toc-headings"><li><a href="#string">String</a></li><li><a href="#float">Float</a></li><li><a href="#int">Int</a></li><li><a href="#array">Array</a></li><li><a href="#tuple">Tuple</a></li><li><a href="#bool">Bool</a></li></ul></li><li><a href="#non-shared-data-types">Non-shared Data Types</a><ul class="toc-headings"><li><a href="#design-decisions">Design Decisions</a></li></ul></li><li><a href="#cheat-sheet">Cheat Sheet</a><ul class="toc-headings"><li><a href="#shared">Shared</a></li><li><a href="#non-shared">Non-shared</a></li></ul></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script>window.foo = new Pjax({
+          areas: [
+            // try to use the first query.
+            '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
+            // fallback
+            'body'
+          ],
+          link: '.docsNavContainer:not(.docsSliderActive) a',
+          update: {
+            script: false,
+          }
+        });
+        var languagesMenuItemCopy = document.getElementById("languages-menu");
+        languagesMenuItemCopy.addEventListener("click", function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          e.stopImmediatePropagation();
+        });</script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+              var search = docsearch({
+                
+                apiKey: '0fd97db83891aa20810559812d9e69ac',
+                indexName: 'bucklescript',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:ja"]}
+              });
+            </script></body></html>

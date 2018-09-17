@@ -63,7 +63,7 @@ So while the generic function <code>(x) =&gt; Some(x)</code> will generate code 
 <p>Below is a new workflow we are exploring in this release:</p>
 <h1><a class="anchor" aria-hidden="true" id="nodejs-module-loader-in-browser"></a><a href="#nodejs-module-loader-in-browser" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>NodeJS module loader in browser</h1>
 <p>Instead of bundling the modules like normal bundlers, we provide a NodeJS module loader so that it simply reloads the module without bundling.</p>
-<p>Note ideally this can be achieved using ES6 moudle spec, however, it is not practical due to following reasons:</p>
+<p>Note ideally this can be achieved using ES6 module spec, however, it is not practical due to following reasons:</p>
 <ul>
 <li>Most dependencies are not strictly ES6 compilant, this is true even for libraries authored in ES6 style</li>
 </ul>
@@ -74,7 +74,7 @@ So while the generic function <code>(x) =&gt; Some(x)</code> will generate code 
 <ul>
 <li>ES6 modules does not allow an indirection, by introducing our own NodeJS module loader, we have an indirection and more meta-data about each module, so that we can do more reflection work in the future.</li>
 </ul>
-<p>Loading in clean state without packing seems to introduce some reduandant work, but on the contratry, it is very fast, it used to load 200 modules under 150ms, even better, since there is no cached state in a long running process, it is much more reliable.</p>
+<p>Loading in clean state without packing seems to introduce some redundant work, but on the contratry, it is very fast, it used to load 200 modules under 150ms, even better, since there is no cached state in a long running process, it is much more reliable.</p>
 <h1><a class="anchor" aria-hidden="true" id="websocket-integration-with-bsb"></a><a href="#websocket-integration-with-bsb" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>WebSocket integration with bsb</h1>
 <p>We need a mechanism to communciate between browser and the build system so that whenever a rebuild finished, the browser get notified.</p>
 <p>Instead of introducing more dependencies, we implemented a minimal websocket interface so that whenever a rebuild finishes, the weboscket clients which subscribe the port will get notified.</p>

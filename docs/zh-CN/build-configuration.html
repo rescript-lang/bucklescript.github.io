@@ -1,0 +1,176 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>配置 · BuckleScript</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="`bsconfig` 是 bsb 所需的强制生成的单个元文件。"/><meta name="docsearch:language" content="zh-CN"/><meta property="og:title" content="配置 · BuckleScript"/><meta property="og:type" content="website"/><meta property="og:url" content="https://bucklescript.github.io/index.html"/><meta property="og:description" content="`bsconfig` 是 bsb 所需的强制生成的单个元文件。"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/logos/bucklescript.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://bucklescript.github.io/blog/atom.xml" title="BuckleScript Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://bucklescript.github.io/blog/feed.xml" title="BuckleScript Blog RSS Feed"/><script type="text/javascript" src="/js/toggleSyntaxButton.js"></script><script type="text/javascript" src="/js/pjax-api.min.js"></script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/zh-CN"><img class="logo" src="/img/logos/bucklescript.svg" alt="BuckleScript"/><h2 class="headerTitleWithLogo">BuckleScript</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/zh-CN/installation" target="_self">文档</a></li><li class=""><a href="/docs/zh-CN/playground" target="_self">Try</a></li><li class="siteNavGroupActive"><a href="/docs/zh-CN/stdlib-overview" target="_self">API</a></li><li class=""><a href="/docs/zh-CN/community" target="_self">社区</a></li><li class=""><a href="/blog" target="_self">博客</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>中文</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/ja/build-configuration">日本語</a></li><li><a href="/docs/en/build-configuration">English</a></li><li><a href="/docs/es-ES/build-configuration">Español</a></li><li><a href="/docs/fr/build-configuration">Français</a></li><li><a href="/docs/ko/build-configuration">한국어</a></li><li><a href="/docs/pt-BR/build-configuration">Português (Brasil)</a></li><li><a href="/docs/ru/build-configuration">Русский</a></li><li><a href="/docs/zh-TW/build-configuration">繁體中文</a></li><li><a href="https://crowdin.com/project/bucklescript" target="_blank" rel="noreferrer noopener">帮助我们翻译</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/bucklescript/bucklescript" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>构建系统</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">简介</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-CN/what-why">什么 &amp; 为什么</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/installation">安装</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/new-project">新建项目</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/concepts-overview">概念一览</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">互操作</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-CN/interop-overview">总览</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/interop-cheatsheet">备忘清单</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/embed-raw-javascript">嵌入原生Javascript</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/common-data-types">通用数据类型</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/intro-to-external">External简介</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/bind-to-global-values">全局变量</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/null-undefined-option">Null， Undefined， Option</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/object">对象</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/object-2">Object 2</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/class">类</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/function">函数</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/import-export">导入 / 导出</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/regular-expression">正则表达式</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/exceptions">异常</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/json">JSON</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/fast-pipe">快速管道</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/generate-converters-accessors">生成转换器 &amp; 助手</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/better-data-structures-printing-debug-mode">更好的数据结构打印 (调试模式)</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/nodejs-special-variables">NodeJS 特殊变量</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/interop-misc">其他</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/browser-support-polyfills">浏览器支持和兼容</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">构建系统</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-CN/build-overview">总览</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/zh-CN/build-configuration">配置</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/automatic-interface-generation">Automatic Interface Generation</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/interop-with-js-build-systems">与 JS 构建系统互操作</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/build-performance">性能</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/build-advanced">高级</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">标准库</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-CN/stdlib-overview">总览</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">进阶</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-CN/conditional-compilation">条件编译</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/extended-compiler-options">扩展编译器选项</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/use-existing-ocaml-libraries">使用现有的 OCaml 库</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/difference-from-native-ocaml">与原生 OCaml 的区别</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/compiler-architecture-principles">编译器体系结构和原则</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/comparison-to-jsoo">与 Js_of_ocaml 的比较</a></li></ul></div></div></section></div><script>
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              const headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                if (event.target.tagName === 'A') {
+                  document.body.classList.remove('tocActive');
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/bucklescript/zh-CN" target="_blank" rel="noreferrer noopener">Translate</a><h1 class="postHeaderTitle">配置</h1></header><article><div><span><p><code>bsconfig</code> 是 bsb 所需的强制生成的单个元文件。</p>
+<p><strong>完整的配置描述 <a href="https://bucklescript.github.io/bucklescript/docson/#build-schema.json">在这里</a></strong>。 我们将 <em>非详尽的</em> 介绍一下最重要的部分。</p>
+<h2><a class="anchor" aria-hidden="true" id="name-namespace"></a><a href="#name-namespace" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>name, namespace</h2>
+<p><code>name</code> 是库的名称, 也用来作为其 &quot;命名空间&quot;。 您可以在<code>bsconfig.json</code>中通过 <code>&quot;namespace&quot;: true</code> 来激活命名空间。 Namespacing 几乎是 <strong>强制</strong>的， 默认情况下, 我们还没有打开它以保留向后兼容性。</p>
+<p><strong>解释</strong>: 默认情况下, 您的文件 (一旦用作第三方依赖项) 可在全球范围内提供给使用者。 例如, 如果您有 <code>Util</code> , 并且使用者也有同名的文件, 它们就会发生冲突。 打开 <code>命名空间</code> 可通过将所有项目的文件包装到额外的模块层来避免此问题。使用者将看到你的包为 <code>MyProject. Util</code>，而不是全局 <code>Util</code> 模块。 <strong>namespacing 影响的是使用者, 而不是您自己的</strong>。</p>
+<p>在 Bsb 中, &quot;命名空间&quot; 只是一个自动生成的模块的一个花哨术语, 它将所有项目的文件 (当然是有效的和正确的) 包装在命名空间里，以能被第三方引用而不导致冲突。</p>
+<p>我们不为您自己的项目做文件夹级命名空间; 所有您自己的文件名必须是唯一的。 这是一个约束, 它支持一些功能, 如快速搜索和更容易的项目重组。</p>
+<p><strong>注释</strong>: <code>bsconfig. json</code>中 <code>name</code> 应与 <code>package.json</code> 中<code>name</code>相同, 以避免混淆。 但是, 这意味着您不能使用 camelCased 驼峰式命名 (如 <code>MyProject</code>), 因为 <code>package. json</code> 和 npm 禁止您这样做 (某些文件系统不区分大小写)。 要将命名空间/模块作为 <code>MyProject</code>, 请配置 <code>&quot;name&quot;: &quot;my-project&quot;</code>。 Bsb 将正确地将其转化为 camelCased 驼峰式名称。</p>
+<h2><a class="anchor" aria-hidden="true" id="sources"></a><a href="#sources" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>sources</h2>
+<p>您的源文件需要显式指定 (我们不希望意外地深入到一些不相关的目录)。例子：</p>
+<pre><code class="hljs css language-json">{
+  <span class="hljs-attr">"sources"</span>: [<span class="hljs-string">"src"</span>, <span class="hljs-string">"examples"</span>]
+}
+</code></pre>
+<pre><code class="hljs css language-json">{
+  <span class="hljs-attr">"sources"</span>: {
+    <span class="hljs-attr">"dir"</span>: <span class="hljs-string">"src"</span>,
+    <span class="hljs-attr">"subdirs"</span>: [<span class="hljs-string">"page"</span>]
+  }
+}
+</code></pre>
+<pre><code class="hljs css language-json">{
+  <span class="hljs-attr">"sources"</span>: [
+    <span class="hljs-string">"examples"</span>,
+    {
+      <span class="hljs-attr">"dir"</span>: <span class="hljs-string">"src"</span>,
+      <span class="hljs-attr">"subdirs"</span>: <span class="hljs-literal">true</span> // recursively builds every subdirectory
+    }
+  ]
+}
+</code></pre>
+<p>您可以将目录标记为dev-only (例如, 测试)。这些就不会将这些目录进行处理生成代码并暴露给第三方, 同一项目中的其他 &quot;开发&quot; 目录同样也不会。</p>
+<pre><code class="hljs css language-json">{
+  <span class="hljs-attr">"sources"</span> : {
+    <span class="hljs-attr">"dir"</span> : <span class="hljs-string">"test"</span>,
+    <span class="hljs-attr">"type"</span> : <span class="hljs-string">"dev"</span>
+  }
+}
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="bs-dependencies-bs-dev-dependencies"></a><a href="#bs-dependencies-bs-dev-dependencies" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>bs-dependencies, bs-dev-dependencies</h2>
+<p>BuckleScript/Reason 的依赖列表，和<code>package.json</code>中的dependenciesyi依赖是一样的，将会在<code>node_modules</code>中去搜索这些模块。</p>
+<h2><a class="anchor" aria-hidden="true" id="reason-refmt"></a><a href="#reason-refmt" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>reason, refmt</h2>
+<p>默认情况下, <code>原因</code> 配置已启用。要打开 <a href="https://reasonml.github.io/reason-react/">ReasonReact</a>的 JSX, 请指定:</p>
+<pre><code class="hljs css language-json">{
+  <span class="hljs-attr">"reason"</span>: {<span class="hljs-attr">"react-jsx"</span>: <span class="hljs-number">2</span>},
+  <span class="hljs-attr">"refmt"</span>: <span class="hljs-number">3</span>
+}
+</code></pre>
+<p><code>refmt</code>配置<strong>应显式指定</strong>为 <code>3</code> , 如&lt;a href=&quot;&quot;https://reasonml.github.io/blog/2017/10/27/reason3.html&quot;&quot;&gt;V3 语法的原因</a>。</p>
+<h2><a class="anchor" aria-hidden="true" id="js-post-build"></a><a href="#js-post-build" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>js-post-build</h2>
+<p>每次重新编译文件时调用的钩子。 可以更好的用于与 JS 构建系统互操作, 但请<strong>谨慎</strong>使用它。 为每个重新编译的文件调用自定义命令会减慢生成速度, 并使您的 lib 的第三方用户的构建体验更差。</p>
+<p>举个例子：</p>
+<pre><code class="hljs css language-json">{
+  <span class="hljs-attr">"js-post-build"</span>: {
+    <span class="hljs-attr">"cmd"</span>: <span class="hljs-string">"/path/to/node ../../postProcessTheFile.js"</span>
+  }
+}
+</code></pre>
+<p>请注意, 命令的路径解析是通过以下操作完成的:</p>
+<ul>
+<li><code>/myCommand</code>解析成 <code>/myCommand</code></li>
+<li><code>myCommand/</code>解析成 <code>node_modules/myCommand</code></li>
+<li><code>./myCommand</code>解析成 <code>myProjectRoot/myCommand</code></li>
+<li><code>myCommand</code> 被当作 <code>myCommand</code>执行. 但是请注意, Bsb 没有读取您的环境, 因此, 如果您放到 <code>node</code>中运行 , 它不会找到它, 除非您指定绝对路径。 或者, 在脚本头部进行标明 <code>#!/usr/local/bin/node</code> 。</li>
+</ul>
+<p>命令本身从内部调用 <code>lib/bs</code> 。</p>
+<h2><a class="anchor" aria-hidden="true" id="package-specs"></a><a href="#package-specs" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>package-specs</h2>
+<p>输出到 CommonJS (默认值)、ES6 模块或 AMD。例子：</p>
+<pre><code class="hljs css language-json">{
+  <span class="hljs-attr">"package-specs"</span>: {
+    <span class="hljs-attr">"module"</span>: <span class="hljs-string">"commonjs"</span>,
+    <span class="hljs-attr">"in-source"</span>: <span class="hljs-literal">true</span>
+  }
+}
+</code></pre>
+<ul>
+<li><code>&quot;module&quot;: &quot;es6-global&quot;</code> 使用相对路径解析 <code>node_modules</code> 模块。 好在是浏览器已经支持在开发时用的ES6的用法, 如 Safari 和火狐已经支持 ES6 模块了。 <strong>不再需要开发时打包了！</strong>!</li>
+<li><code>&quot;in-source&quot;: true</code>与源文件一起生成输出。如果省略它, 它将生成的代码放在 <code>lib/js</code> 下面。如果没有额外配置输出目录的话。</li>
+</ul>
+<p>当您开发项目时, 此配置仅适用于您。 当该项目用作第三方库时, 使用者本身就会在 <code>bsconfig.json</code>和 <code>package-specs</code> 中覆盖该配置。</p>
+<h2><a class="anchor" aria-hidden="true" id="suffix"></a><a href="#suffix" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>suffix</h2>
+<p><code>&quot;.js&quot;</code>或者 <code>&quot;.bs.js&quot;</code> 。强烈推荐后者。</p>
+<h3><a class="anchor" aria-hidden="true" id="设计决策"></a><a href="#设计决策" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>设计决策</h3>
+<p>使用 <code>.bs.js</code> 后缀生成 js 文件意味着, 在 js 这一侧, 您可以这样做 <code>const myBuckleScriptFile = require('./theFile.bs')</code> 。好处如下:</p>
+<ul>
+<li>很明显, 我们正在处理的是一个生成的 JS 文件。</li>
+<li>它避免与 <code>theFile.js</code> 同一文件夹中的潜在文件发生冲突。</li>
+<li>它避免了需要使用一个构建的loader去处理 BuckleScript 文件。 in-source 源代码生成意味着可以将 BuckleScript 项目集成到您的纯 JS 代码库中，<strong>基本上不用改动任何构建管道中的任何内容</strong>。</li>
+<li><code>bs. js</code> 后缀 <a href="/docs/zh-CN/build-overview#tips-tricks">可以让 bsb 更好的跟踪 js 生成代码</a>。</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="warnings"></a><a href="#warnings" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>warnings</h2>
+<p>有选择地打开/关闭某些警告并/或将它们变成硬错误。例子：</p>
+<pre><code class="hljs css language-json">{
+  <span class="hljs-attr">"warnings"</span>: {
+    <span class="hljs-attr">"number"</span>: <span class="hljs-string">"-44-102"</span>,
+    <span class="hljs-attr">"error"</span>: <span class="hljs-string">"+5"</span>
+  }
+}
+</code></pre>
+<p>关闭警告 <code>44</code> 和 <code>102</code> (多态比较)。打开警告 <code>5</code> (部分应用程序的结果具有函数类型并且被忽略) 为硬错误。</p>
+<p>警告编号将在生成输出中显示, 当它们被触发时。 完整的编码列表&lt;a href=&quot;&quot;https://caml.inria.fr/pub/docs/manual-ocaml/comp.html#sec281&quot;&quot;&gt;在这里</a>, 在页面的下面。 <code>100</code> 以上的是 BuckleScript规范。</p>
+<h2><a class="anchor" aria-hidden="true" id="bsc-flags"></a><a href="#bsc-flags" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>bsc-flags</h2>
+<p>Extra标志是传递给底层<code>bsc</code> 调用的 。 注意： <code>[&quot;-bs-super-errors&quot;]</code> 是打开&lt;a href=&quot;&quot;https://reasonml.github.io/blog/2017/08/25/way-nicer-error-messages.html&quot;&quot;&gt;清除错误输出</a>的。 不需要把这个标志传递给Reason项目;因为默认情况下已经启用。</p>
+<h2><a class="anchor" aria-hidden="true" id="environment-variables"></a><a href="#environment-variables" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Environment Variables</h2>
+<p>We heavily disrecommend the usage of environment variables, but for certain cases, they're justified.</p>
+<h3><a class="anchor" aria-hidden="true" id="error-output-coloring-ninja-ansi-forced"></a><a href="#error-output-coloring-ninja-ansi-forced" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Error Output Coloring: <code>NINJA_ANSI_FORCED</code></h3>
+<p>This is mostly for other programmatic usage of <code>bsb</code> where outputting colors is not desired.</p>
+<p>When <code>NINJA_ANSI_FORCED</code> is set to <code>1</code>: <code>bsb</code> produces color. When <code>NINJA_ANSI_FORCED</code> is set to <code>0</code>: <code>bsb</code> doesn't produce color. When <code>NINJA_ANSI_FORCED</code> is not set: <code>bsb</code> might or might not produce color, depending on a smart detection of where it's outputted.</p>
+<blockquote>
+<p>Note that bsc, the barebone compiler, will always be passed <code>-color always</code>. See more details in <a href="https://github.com/BuckleScript/bucklescript/issues/2984#issuecomment-410669163">this issue</a>.</p>
+</blockquote>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/zh-CN/build-overview">← 总览</a><a class="docs-next button" href="/docs/zh-CN/automatic-interface-generation">Automatic Interface Generation →</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#name-namespace">name, namespace</a></li><li><a href="#sources">sources</a></li><li><a href="#bs-dependencies-bs-dev-dependencies">bs-dependencies, bs-dev-dependencies</a></li><li><a href="#reason-refmt">reason, refmt</a></li><li><a href="#js-post-build">js-post-build</a></li><li><a href="#package-specs">package-specs</a></li><li><a href="#suffix">suffix</a><ul class="toc-headings"><li><a href="#设计决策">设计决策</a></li></ul></li><li><a href="#warnings">warnings</a></li><li><a href="#bsc-flags">bsc-flags</a></li><li><a href="#environment-variables">Environment Variables</a><ul class="toc-headings"><li><a href="#error-output-coloring-ninja-ansi-forced">Error Output Coloring: <code>NINJA_ANSI_FORCED</code></a></li></ul></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script>window.foo = new Pjax({
+          areas: [
+            // try to use the first query.
+            '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
+            // fallback
+            'body'
+          ],
+          link: '.docsNavContainer:not(.docsSliderActive) a',
+          update: {
+            script: false,
+          }
+        });
+        var languagesMenuItemCopy = document.getElementById("languages-menu");
+        languagesMenuItemCopy.addEventListener("click", function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          e.stopImmediatePropagation();
+        });</script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+              var search = docsearch({
+                
+                apiKey: '0fd97db83891aa20810559812d9e69ac',
+                indexName: 'bucklescript',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:zh-CN"]}
+              });
+            </script></body></html>

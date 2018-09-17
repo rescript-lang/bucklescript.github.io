@@ -1,0 +1,97 @@
+<!DOCTYPE html><html lang="ru"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Use Existing OCaml Libraries · BuckleScript</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="&gt; This section is reserved for advanced usages. Usually, you&#x27;d pick an OCaml/Reason library that&#x27;s already configured to work with our higher-level build system `bsb` (aka has a `bsconfig.json`). If not, you&#x27;d usually add a `bsconfig.json` to it. But if you want to directly use an OCaml package that&#x27;s not part of the npm workflow, or are building some quirky infra with BuckleScript, keep reading!"/><meta name="docsearch:language" content="ru"/><meta property="og:title" content="Use Existing OCaml Libraries · BuckleScript"/><meta property="og:type" content="website"/><meta property="og:url" content="https://bucklescript.github.io/index.html"/><meta property="og:description" content="&gt; This section is reserved for advanced usages. Usually, you&#x27;d pick an OCaml/Reason library that&#x27;s already configured to work with our higher-level build system `bsb` (aka has a `bsconfig.json`). If not, you&#x27;d usually add a `bsconfig.json` to it. But if you want to directly use an OCaml package that&#x27;s not part of the npm workflow, or are building some quirky infra with BuckleScript, keep reading!"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/logos/bucklescript.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://bucklescript.github.io/blog/atom.xml" title="BuckleScript Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://bucklescript.github.io/blog/feed.xml" title="BuckleScript Blog RSS Feed"/><script type="text/javascript" src="/js/toggleSyntaxButton.js"></script><script type="text/javascript" src="/js/pjax-api.min.js"></script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/ru"><img class="logo" src="/img/logos/bucklescript.svg" alt="BuckleScript"/><h2 class="headerTitleWithLogo">BuckleScript</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/ru/installation" target="_self">Docs</a></li><li class=""><a href="/docs/ru/playground" target="_self">Try</a></li><li class="siteNavGroupActive"><a href="/docs/ru/stdlib-overview" target="_self">API</a></li><li class=""><a href="/docs/ru/community" target="_self">Community</a></li><li class=""><a href="/blog" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>Русский</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/ja/use-existing-ocaml-libraries">日本語</a></li><li><a href="/docs/en/use-existing-ocaml-libraries">English</a></li><li><a href="/docs/es-ES/use-existing-ocaml-libraries">Español</a></li><li><a href="/docs/fr/use-existing-ocaml-libraries">Français</a></li><li><a href="/docs/ko/use-existing-ocaml-libraries">한국어</a></li><li><a href="/docs/pt-BR/use-existing-ocaml-libraries">Português (Brasil)</a></li><li><a href="/docs/zh-CN/use-existing-ocaml-libraries">中文</a></li><li><a href="/docs/zh-TW/use-existing-ocaml-libraries">繁體中文</a></li><li><a href="https://crowdin.com/project/bucklescript" target="_blank" rel="noreferrer noopener">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/bucklescript/bucklescript" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Advanced</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Intro</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ru/what-why">What &amp; Why</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/installation">Installation</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/new-project">New Project</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/concepts-overview">Concepts Overview</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Interop</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ru/interop-overview">Overview</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/interop-cheatsheet">Cheatsheet</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/embed-raw-javascript">Embed Raw JavaScript</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/common-data-types">Common Data Types</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/intro-to-external">Intro to External</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/bind-to-global-values">Bind to Global Values</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/null-undefined-option">Null, Undefined &amp; Option</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/object">Object</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/object-2">Object 2</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/class">Class</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/function">Function</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/import-export">Import &amp; Export</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/regular-expression">Regular Expression</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/exceptions">Exceptions</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/json">JSON</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/fast-pipe">Fast Pipe</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/generate-converters-accessors">Generate Converters &amp; Helpers</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/better-data-structures-printing-debug-mode">Better Data Structures Printing (Debug Mode)</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/nodejs-special-variables">NodeJS Special Variables</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/interop-misc">Miscellaneous</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/browser-support-polyfills">Browser Support &amp; Polyfills</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Build System</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ru/build-overview">Overview</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/build-configuration">Configuration</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/automatic-interface-generation">Automatic Interface Generation</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/interop-with-js-build-systems">Interop with JS Build System</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/build-performance">Performance</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/build-advanced">Advanced</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Standard Library</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ru/stdlib-overview">Overview</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Advanced</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ru/conditional-compilation">Conditional Compilation</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/extended-compiler-options">Extended Compiler Options</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/ru/use-existing-ocaml-libraries">Use Existing OCaml Libraries</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/difference-from-native-ocaml">Difference from Native OCaml</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/compiler-architecture-principles">Compiler Architecture &amp; Principles</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/comparison-to-jsoo">Comparison to Js_of_ocaml</a></li></ul></div></div></section></div><script>
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              const headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                if (event.target.tagName === 'A') {
+                  document.body.classList.remove('tocActive');
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/bucklescript/ru" target="_blank" rel="noreferrer noopener">Translate</a><h1 class="postHeaderTitle">Use Existing OCaml Libraries</h1></header><article><div><span><blockquote>
+<p>This section is reserved for advanced usages. Usually, you'd pick an OCaml/Reason library that's already configured to work with our higher-level build system <code>bsb</code> (aka has a <code>bsconfig.json</code>). If not, you'd usually add a <code>bsconfig.json</code> to it. But if you want to directly use an OCaml package that's not part of the npm workflow, or are building some quirky infra with BuckleScript, keep reading!</p>
+</blockquote>
+<p>This guide is also a small walkthrough of how <code>bsb</code> works under the hood.</p>
+<h2><a class="anchor" aria-hidden="true" id="built-in-npm-support"></a><a href="#built-in-npm-support" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Built in NPM support</h2>
+<h3><a class="anchor" aria-hidden="true" id="build-an-ocaml-library-as-a-npm-package"></a><a href="#build-an-ocaml-library-as-a-npm-package" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Build an OCaml Library as a NPM Package</h3>
+<p><strong>Note</strong>: this section might be slightly stale. If any of the steps aren't working, please file us an issue! Thanks.</p>
+<p><strong>We highly recommend</strong> you try this endeavour on a dependency-less library first. It'd avoid lots of trouble.</p>
+<p>BuckleScript's compiler, <code>bsc</code>, extends the OCaml compiler options with several flags to provide a better experience for NPM users.</p>
+<p>In general, you are expected to see two kinds of build artifacts: the generated JS files and metadata that your OCaml dependencies rely on.</p>
+<p>Since CommonJS has no namespaces, to allow JS files to live in different directories, we have a flag</p>
+<pre><code class="hljs css language-sh">bsc.exe -bs-package-name <span class="hljs-variable">$npm_package_name</span> -bs-package-output modulesystem:path/to/your/js/dir -c a.ml
+</code></pre>
+<p>By passing this flag, <code>bsc.exe</code> will store your <code>package_name</code> and relative path to <code>package.json</code> in <code>.cmj</code> files. It will also generate JS files in the directory you specified. You can, and are encouraged to, store JavaScript files in a hierarchical directory.</p>
+<p>For the binary artifacts (Note that this is not necessary if you only want your libraries to be consumed by JS developers, and it has benefit since end users don’t need these binary data any more), the convention is to store all <code>*.cm</code> data in a <em>single</em> directory <code>package.json/lib/ocaml</code> and Javascript files in a <em>hierachical</em> directory like <code>package.json/lib/js</code>.</p>
+<h3><a class="anchor" aria-hidden="true" id="use-an-ocaml-library-as-a-npm-package"></a><a href="#use-an-ocaml-library-as-a-npm-package" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Use an OCaml Library as a NPM Package</h3>
+<p>If you follow the layout convention above, using an OCaml package is pretty straightforward:</p>
+<pre><code class="hljs css language-sh">bsc.exe -I path/to/ocaml/package/installed -c a.ml
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="together"></a><a href="#together" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Together</h3>
+<p>Your command line would be like this:</p>
+<pre><code class="hljs css language-sh">bsc.exe -I path/to/ocaml/package1/installed -I path/to/ocaml/package2/installed  -bs-package-name <span class="hljs-variable">$npm_package_name</span> -bs-package-output commonjs:path/to/lib/js/ -c a.ml
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="examples"></a><a href="#examples" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Examples</h3>
+<p>You can see a more elaborate <code>bsc</code> setup like so:</p>
+<pre><code class="hljs css language-sh">bsb -init dummy-project
+<span class="hljs-built_in">cd</span> dummy-project
+npm run build
+cat lib/bs/build.ninja
+</code></pre>
+<p>The <a href="https://ninja-build.org">Ninja</a> file, generated by <code>bsb</code>, describes the exact steps needed to build a trivial project using <code>bsc</code>.</p>
+<p>Additionally, please consult <a href="https://github.com/chenglou/intro-to-reason-compilation">https://github.com/chenglou/intro-to-reason-compilation</a>, which covers the lowest-level <a href="https://reasonml.github.io">Reason</a> + BuckleScript compilation mechanisms.</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/ru/extended-compiler-options">← Extended Compiler Options</a><a class="docs-next button" href="/docs/ru/difference-from-native-ocaml">Difference from Native OCaml →</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#built-in-npm-support">Built in NPM support</a><ul class="toc-headings"><li><a href="#build-an-ocaml-library-as-a-npm-package">Build an OCaml Library as a NPM Package</a></li><li><a href="#use-an-ocaml-library-as-a-npm-package">Use an OCaml Library as a NPM Package</a></li><li><a href="#together">Together</a></li><li><a href="#examples">Examples</a></li></ul></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script>window.foo = new Pjax({
+          areas: [
+            // try to use the first query.
+            '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
+            // fallback
+            'body'
+          ],
+          link: '.docsNavContainer:not(.docsSliderActive) a',
+          update: {
+            script: false,
+          }
+        });
+        var languagesMenuItemCopy = document.getElementById("languages-menu");
+        languagesMenuItemCopy.addEventListener("click", function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          e.stopImmediatePropagation();
+        });</script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+              var search = docsearch({
+                
+                apiKey: '0fd97db83891aa20810559812d9e69ac',
+                indexName: 'bucklescript',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:ru"]}
+              });
+            </script></body></html>
