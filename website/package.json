@@ -2,10 +2,7 @@
   "name": "bucklescript-site",
   "scripts": {
     "start": "docusaurus-start",
-    "build": "docusaurus-build",
-    "write-translations": "docusaurus-write-translations",
-    "crowdin-upload": "export CROWDIN_DOCUSAURUS_PROJECT_ID=\"bucklescript\"; export CROWDIN_DOCUSAURUS_API_KEY=$BS_CROWDIN_API_KEY; crowdin --config ../crowdin.yaml upload sources --auto-update -b master",
-    "crowdin-download": "export CROWDIN_DOCUSAURUS_PROJECT_ID=\"bucklescript\"; export CROWDIN_DOCUSAURUS_API_KEY=$BS_CROWDIN_API_KEY; crowdin --config ../crowdin.yaml download -b master"
+    "build": "docusaurus-build"
   },
   "keywords": [],
   "author": "",
@@ -15,7 +12,7 @@
     "url": "git+https://github.com/bucklescript/bucklescript.github.io.git"
   },
   "dependencies": {
-    "docusaurus": "^1.3.1"
+    "docusaurus": "chenglou/Docusaurus#bade05e408bef8d94a6ba3281fdb3f6295c30284"
   },
   "devDependencies": {
     "pjax-api": "^3.23.0"
