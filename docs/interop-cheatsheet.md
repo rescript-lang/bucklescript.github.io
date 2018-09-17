@@ -176,9 +176,9 @@ let () = [|1; 2; 3|]
 
 /* 2, 4 */
 [|1, 2, 3|]
-|. map(a => a + 1)
-|. filter(a => a mod 2 == 0)
-|. Js.log;
+-> map(a => a + 1)
+-> filter(a => a mod 2 == 0)
+-> Js.log;
 ```
 
 ### Variadic
