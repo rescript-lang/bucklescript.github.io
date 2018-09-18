@@ -10,11 +10,11 @@
             languagesDropDown.className = "hide";
           }
         });
-      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/bucklescript/bucklescript" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div><div class="homeContainer"><div id="redirectBanner"><div>Hello! This particular page hash has moved to <a id="redirectLink"></a>. Please update the URLs to reflect it. Thanks!</div></div><div class="homeWrapperWrapper"><div class="wrapper homeWrapper"><div class="projectTitle">BuckleScript</div><div class="homeWrapperInner"><div class="homeTagLine">Write safer and simpler code in OCaml &amp; Reason, compile to JavaScript.</div><div class="homeCodeSnippet"><div><span><pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> result = <span class="hljs-type">Js</span>.(
-  [|<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>|]
-  |&gt; <span class="hljs-type">Array</span>.<span class="hljs-built_in">filter</span>(x =&gt; x &gt; <span class="hljs-number">2</span>)
-  |&gt; <span class="hljs-type">Array</span>.mapi((x, i) =&gt; x + i)
-  |&gt; <span class="hljs-type">Array</span>.<span class="hljs-built_in">reduce</span>((x, y) =&gt; x + y, <span class="hljs-number">0</span>)
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/bucklescript/bucklescript" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div><div class="homeContainer"><div id="redirectBanner"><div>Hello! This particular page hash has moved to <a id="redirectLink"></a>. Please update the URLs to reflect it. Thanks!</div></div><div class="homeWrapperWrapper"><div class="wrapper homeWrapper"><div class="projectTitle">BuckleScript</div><div class="homeWrapperInner"><div class="homeTagLine">Write safer and simpler code in OCaml &amp; Reason, compile to JavaScript.</div><div class="homeCodeSnippet"><div><span><pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> result = <span class="hljs-module-identifier">Js</span>.(
+  <span class="hljs-literal">[|</span><span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span><span class="hljs-literal">|]</span>
+  <span class="hljs-operator">|&gt;</span> <span class="hljs-module-identifier">Array</span>.filter(x =&gt; x &gt; <span class="hljs-number">2</span>)
+  <span class="hljs-operator">|&gt;</span> <span class="hljs-module-identifier">Array</span>.mapi((x, i) =&gt; x <span class="hljs-operator">+</span> i)
+  <span class="hljs-operator">|&gt;</span> <span class="hljs-module-identifier">Array</span>.reduce((x, y) =&gt; x <span class="hljs-operator">+</span> y, <span class="hljs-number">0</span>)
 )
 </code></pre>
 </span></div><div><span><pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> result = <span class="hljs-type">Js</span>.(

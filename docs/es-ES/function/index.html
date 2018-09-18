@@ -40,7 +40,8 @@
         </script></nav></div><div class="container mainContainer docMainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/bucklescript/es-ES" target="_blank" rel="noreferrer noopener">Translate</a><h1 class="postHeaderTitle">Function</h1></header><article><div><span><p>Modeling a JS function is like modeling a normal value:</p>
 <pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> encodeURI: <span class="hljs-built_in">string</span> -&gt; <span class="hljs-built_in">string</span> = <span class="hljs-string">"encodeURI"</span> [@@ bs.<span class="hljs-keyword">val</span>] <span class="hljs-keyword">let</span> result = encodeURI <span class="hljs-string">"hello"</span>
 </code></pre>
-<pre><code class="hljs css language-reason">[@bs.<span class="hljs-keyword">val</span>] external encodeURI : string =&gt; string = <span class="hljs-string">"encodeURI"</span>; <span class="hljs-keyword">let</span> result = encodeURI(<span class="hljs-string">"hola"</span>);
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.val]</span> <span class="hljs-keyword">external</span> encodeURI: string =&gt; string = <span class="hljs-string">"encodeURI"</span>;
+<span class="hljs-keyword">let</span> result = encodeURI(<span class="hljs-string">"hello"</span>);
 </code></pre>
 <p>We also expose a few special features, described below.</p>
 <h2><a class="anchor" aria-hidden="true" id="argumentos-etiquetados"></a><a href="#argumentos-etiquetados" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Argumentos etiquetados</h2>
@@ -52,12 +53,12 @@ draw(<span class="hljs-number">10</span>, <span class="hljs-number">20</span>)
 draw(<span class="hljs-number">20</span>, <span class="hljs-number">20</span>, <span class="hljs-literal">true</span>)
 </code></pre>
 <p>It'd be nice if on the BS side, we can bind &amp; call <code>draw</code> while labeling things a bit:</p>
-<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> draw : x:<span class="hljs-built_in">int</span> -&gt; y:<span class="hljs-built_in">int</span> -&gt; ?border:<span class="hljs-built_in">bool</span> -&gt; <span class="hljs-built_in">unit</span> -&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">""</span> [@@bs.<span class="hljs-keyword">val</span>]
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> draw: x:<span class="hljs-built_in">int</span> -&gt; y:<span class="hljs-built_in">int</span> -&gt; ?border:<span class="hljs-built_in">bool</span> -&gt; <span class="hljs-built_in">unit</span> -&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">""</span> [@@bs.<span class="hljs-keyword">val</span>]
 
 <span class="hljs-keyword">let</span> _ = draw ~x:<span class="hljs-number">10</span> ~y:<span class="hljs-number">20</span> ~border:<span class="hljs-literal">true</span> <span class="hljs-literal">()</span>
 <span class="hljs-keyword">let</span> _ = draw ~x:<span class="hljs-number">10</span> ~y:<span class="hljs-number">20</span> <span class="hljs-literal">()</span>
 </code></pre>
-<pre><code class="hljs css language-reason">[@bs.<span class="hljs-keyword">val</span>] external draw : (~x: int, ~y: int, ~border: bool=?, unit) =&gt; unit = <span class="hljs-string">""</span>;
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.val]</span> <span class="hljs-keyword">external</span> draw: (~x: int, ~y: int, ~border: bool=?, unit) =&gt; unit = <span class="hljs-string">""</span>;
 
 draw(~x=<span class="hljs-number">10</span>, ~y=<span class="hljs-number">20</span>, ~border=<span class="hljs-literal">true</span>, ());
 draw(~x=<span class="hljs-number">10</span>, ~y=<span class="hljs-number">20</span>, ());
@@ -70,15 +71,15 @@ draw(<span class="hljs-number">10</span>, <span class="hljs-number">20</span>, <
 <p><strong>Note</strong>: in this particular case, you need a unit, <code>()</code> after <code>border</code>, since <code>border</code> is an <a href="https://reasonml.github.io/docs/en/function.html#optional-labeled-arguments">optional argument at the last position</a>. Not having a unit to indicate you've finished applying the function would generate a warning.</p>
 <h2><a class="anchor" aria-hidden="true" id="metodo-de-objeto"></a><a href="#metodo-de-objeto" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Método de Objeto</h2>
 <p>Functions attached to a JS objects require a special way of binding to them, using <code>bs.send</code>:</p>
-<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">type</span> document <span class="hljs-comment">(* tipo abstracto para un objeto de documento *)</span>
-<span class="hljs-keyword">external</span> getElementById : document -&gt; <span class="hljs-built_in">string</span> -&gt; <span class="hljs-type">Dom</span>.element = <span class="hljs-string">"getElementById"</span> [@@bs.send]
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">type</span> document <span class="hljs-comment">(* abstract type for a document object *)</span>
+<span class="hljs-keyword">external</span> getElementById: document -&gt; <span class="hljs-built_in">string</span> -&gt; <span class="hljs-type">Dom</span>.element = <span class="hljs-string">"getElementById"</span> [@@bs.send]
 <span class="hljs-keyword">external</span> doc: document = <span class="hljs-string">"document"</span> [@@bs.<span class="hljs-keyword">val</span>]
 
 <span class="hljs-keyword">let</span> el = getElementById doc <span class="hljs-string">"myId"</span>
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> document; <span class="hljs-comment">/* tipo abstracto para un objeto de documento */</span>
-[@bs.send] external getElementById : (document, string) =&gt; <span class="hljs-type">Dom</span>.element = <span class="hljs-string">"getElementById"</span>;
-[@bs.<span class="hljs-keyword">val</span>] external doc : document = <span class="hljs-string">"document"</span>;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> document; <span class="hljs-comment">/* abstract type for a document object */</span>
+<span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> getElementById: (document, string) =&gt; <span class="hljs-module-identifier">Dom</span>.element = <span class="hljs-string">"getElementById"</span>;
+<span class="hljs-attribute">[@bs.val]</span> <span class="hljs-keyword">external</span> doc : document = <span class="hljs-string">"document"</span>;
 
 <span class="hljs-keyword">let</span> el = getElementById(doc, <span class="hljs-string">"myId"</span>);
 </code></pre>
@@ -90,11 +91,11 @@ draw(<span class="hljs-number">10</span>, <span class="hljs-number">20</span>, <
 <p>Ever used <code>foo().bar().baz()</code> chaining (&quot;fluent api&quot;) in JS OOP? We can model that in BuckleScript too, through the fast pipe operator described in the next section.</p>
 <h2><a class="anchor" aria-hidden="true" id="argumento-de-funcion-variadica"></a><a href="#argumento-de-funcion-variadica" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Argumento de Función Variádica</h2>
 <p>You might have JS functions that take an arbitrary amount of arguments. BuckleScript supports modeling those, under the condition that the arbitrary arguments part is homogenous (aka of the same type). If so, add <code>bs.splice</code> to your <code>external</code>.</p>
-<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> join : <span class="hljs-built_in">string</span> <span class="hljs-built_in">array</span> -&gt; <span class="hljs-built_in">string</span> = <span class="hljs-string">""</span> [@@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"path"</span>] [@@bs.splice]
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> join: <span class="hljs-built_in">string</span> <span class="hljs-built_in">array</span> -&gt; <span class="hljs-built_in">string</span> = <span class="hljs-string">""</span> [@@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"path"</span>] [@@bs.splice]
 <span class="hljs-keyword">let</span> v = join [| <span class="hljs-string">"a"</span>; <span class="hljs-string">"b"</span>|]
 </code></pre>
-<pre><code class="hljs css language-reason">[@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"path"</span>] [@bs.splice] external <span class="hljs-built_in">join</span> : array(string) =&gt; string = <span class="hljs-string">""</span>;
-<span class="hljs-keyword">let</span> v = <span class="hljs-built_in">join</span>([|<span class="hljs-string">"a"</span>, <span class="hljs-string">"b"</span>|]);
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.module "path"]</span> <span class="hljs-attribute">[@bs.splice]</span> <span class="hljs-keyword">external</span> join: array(string) =&gt; string = <span class="hljs-string">""</span>;
+<span class="hljs-keyword">let</span> v = join(<span class="hljs-literal">[|</span><span class="hljs-string">"a"</span>, <span class="hljs-string">"b"</span><span class="hljs-literal">|]</span>);
 </code></pre>
 <p>Output:</p>
 <pre><code class="hljs css language-js"><span class="hljs-keyword">var</span> Path = <span class="hljs-built_in">require</span>(<span class="hljs-string">"path"</span>);
@@ -109,9 +110,9 @@ draw(<span class="hljs-number">10</span>, <span class="hljs-number">20</span>, <
 <span class="hljs-keyword">external</span> drawDog: giveName:<span class="hljs-built_in">string</span> -&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">"draw"</span> [@@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"Drawing"</span>]
 <span class="hljs-keyword">external</span> draw : <span class="hljs-built_in">string</span> -&gt; useRandomAnimal:<span class="hljs-built_in">bool</span> -&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">"draw"</span> [@@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"Drawing"</span>]
 </code></pre>
-<pre><code class="hljs css language-reason">[@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"Drawing"</span>] external drawCat : unit =&gt; unit = <span class="hljs-string">"draw"</span>;
-[@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"Drawing"</span>] external drawDog : (~giveName: string) =&gt; unit = <span class="hljs-string">"draw"</span>;
-[@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"Drawing"</span>] external draw : (string, ~useRandomAnimal: bool) =&gt; unit = <span class="hljs-string">"draw"</span>;
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.module "Drawing"]</span> <span class="hljs-keyword">external</span> drawCat: unit =&gt; unit = <span class="hljs-string">"draw"</span>;
+<span class="hljs-attribute">[@bs.module "Drawing"]</span> <span class="hljs-keyword">external</span> drawDog: (~giveName: string) =&gt; unit = <span class="hljs-string">"draw"</span>;
+<span class="hljs-attribute">[@bs.module "Drawing"]</span> <span class="hljs-keyword">external</span> draw: (string, ~useRandomAnimal: bool) =&gt; unit = <span class="hljs-string">"draw"</span>;
 </code></pre>
 <p>Note how all three externals bind to the same JS function, <code>draw</code>.</p>
 <h3><a class="anchor" aria-hidden="true" id="truco-2-variante-polimorfica-bsunwrap"></a><a href="#truco-2-variante-polimorfica-bsunwrap" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Truco 2: Variante Polimórfica + <code>bs.unwrap</code></h3>
@@ -127,7 +128,7 @@ draw(<span class="hljs-number">10</span>, <span class="hljs-number">20</span>, <
 }
 </code></pre>
 <p>Here, <code>padding</code> is really conceptually a variant. Let's model it as such.</p>
-<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> padLeft :
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> padLeft:
   <span class="hljs-built_in">string</span>
   -&gt; ([ <span class="hljs-type">`Str</span> <span class="hljs-keyword">of</span> <span class="hljs-built_in">string</span>
       | <span class="hljs-type">`Int</span> <span class="hljs-keyword">of</span> <span class="hljs-built_in">int</span>
@@ -138,17 +139,17 @@ draw(<span class="hljs-number">10</span>, <span class="hljs-number">20</span>, <
 <span class="hljs-keyword">let</span> _ = padLeft <span class="hljs-string">"Hello World"</span> (<span class="hljs-type">`Int</span> <span class="hljs-number">4</span>)
 <span class="hljs-keyword">let</span> _ = padLeft <span class="hljs-string">"Hello World"</span> (<span class="hljs-type">`Str</span> <span class="hljs-string">"Message from BS: "</span>)
 </code></pre>
-<pre><code class="hljs css language-reason">[@bs.<span class="hljs-keyword">val</span>]
-external padLeft : (
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.val]</span>
+<span class="hljs-keyword">external</span> padLeft: (
   string,
-  [@bs.unwrap] [
-    | `<span class="hljs-type">Str</span>(string)
-    | `<span class="hljs-type">Int</span>(int)
-  ])
+  <span class="hljs-attribute">[@bs.unwrap]</span> <span class="hljs-literal">[</span>
+    | <span class="hljs-constructor">`Str</span>(string)
+    | <span class="hljs-constructor">`Int</span>(int)
+  <span class="hljs-literal">]</span>)
   =&gt; string = <span class="hljs-string">""</span>;
 
-padLeft(<span class="hljs-string">"Hello World"</span>, `<span class="hljs-type">Int</span>(<span class="hljs-number">4</span>));
-padLeft(<span class="hljs-string">"Hello World"</span>, `<span class="hljs-type">Str</span>(<span class="hljs-string">"Message from BS: "</span>));
+padLeft(<span class="hljs-string">"Hello World"</span>, <span class="hljs-constructor">`Int</span>(<span class="hljs-number">4</span>));
+padLeft(<span class="hljs-string">"Hello World"</span>, <span class="hljs-constructor">`Str</span>(<span class="hljs-string">"Message from BS: "</span>));
 </code></pre>
 <p>Obviously, the JS side couldn't have an argument that's a polymorphic variant! But here, we're just piggy backing on poly variants' type checking and syntax. The secret is the <code>[@bs.unwrap]</code> annotation on the type. It strips the variant constructors and compile to just the payload's value. Output:</p>
 <pre><code class="hljs css language-js">padLeft(<span class="hljs-string">"Hello World"</span>, <span class="hljs-number">4</span>);
@@ -156,7 +157,7 @@ padLeft(<span class="hljs-string">"Hello World"</span>, <span class="hljs-string
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="mejora-de-argumentos-de-restricciones"></a><a href="#mejora-de-argumentos-de-restricciones" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Mejora de Argumentos de Restricciones</h2>
 <p>Consider the Node <code>fs.readFileSync</code>'s second argument. It can take a string, but really only a defined set: <code>&quot;ascii&quot;</code>, <code>&quot;utf8&quot;</code>, etc. You can still bind it as a string, but we can use poly variants + <code>bs.string</code> to ensure that our usage's more correct:</p>
-<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> readFileSync :
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> readFileSync:
   name:<span class="hljs-built_in">string</span> -&gt;
   ([ `utf8
    | `useAscii [@bs.<span class="hljs-keyword">as</span> <span class="hljs-string">"ascii"</span>]
@@ -166,16 +167,16 @@ padLeft(<span class="hljs-string">"Hello World"</span>, <span class="hljs-string
 
 <span class="hljs-keyword">let</span> _ = readFileSync ~name:<span class="hljs-string">"xx.txt"</span> `useAscii
 </code></pre>
-<pre><code class="hljs css language-reason">[@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"fs"</span>]
-external readFileSync : (
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.module "fs"]</span>
+<span class="hljs-keyword">external</span> readFileSync: (
   ~name: string,
-  [@bs.string] [
-    | `utf8
-    | [@bs.<span class="hljs-keyword">as</span> <span class="hljs-string">"ascii"</span>] `useAscii
-  ])
+  <span class="hljs-attribute">[@bs.string]</span> <span class="hljs-literal">[</span>
+    | <span class="hljs-constructor">`utf8</span>
+    | <span class="hljs-attribute">[@bs.as "ascii"]</span> <span class="hljs-constructor">`useAscii</span>
+  <span class="hljs-literal">]</span>)
   =&gt; string = <span class="hljs-string">""</span>;
 
-readFileSync(~name=<span class="hljs-string">"xx.txt"</span>, `useAscii);
+readFileSync(~name=<span class="hljs-string">"xx.txt"</span>, <span class="hljs-constructor">`useAscii</span>);
 </code></pre>
 <p>Output:</p>
 <pre><code class="hljs css language-js"><span class="hljs-keyword">var</span> Fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">"fs"</span>);
@@ -187,7 +188,7 @@ Fs.readFileSync(<span class="hljs-string">"xx.txt"</span>, <span class="hljs-str
 </ul>
 <p>And now, passing something like <code>&quot;myOwnUnicode&quot;</code> or other variant constructor names to <code>readFileSync</code> would correctly error.</p>
 <p>Aside from string, you can also compile an argument to an int, using <code>bs.int</code> instead of <code>bs.string</code> in a similar way:</p>
-<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> test_int_type :
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> test_int_type:
   ([ `on_closed
    | `on_open [@bs.<span class="hljs-keyword">as</span> <span class="hljs-number">20</span>]
    | `in_bin
@@ -197,23 +198,23 @@ Fs.readFileSync(<span class="hljs-string">"xx.txt"</span>, <span class="hljs-str
 
 <span class="hljs-keyword">let</span> _ = test_int_type `in_bin
 </code></pre>
-<pre><code class="hljs css language-reason">[@bs.<span class="hljs-keyword">val</span>]
-external test_int_type : (
-  [@bs.int] [
-    | `on_closed
-    | [@bs.<span class="hljs-keyword">as</span> <span class="hljs-number">20</span>] `on_open
-    | `in_bin
-  ])
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.val]</span>
+<span class="hljs-keyword">external</span> test_int_type: (
+  <span class="hljs-attribute">[@bs.int]</span> <span class="hljs-literal">[</span>
+    | <span class="hljs-constructor">`on_closed</span>
+    | <span class="hljs-attribute">[@bs.as 20]</span> <span class="hljs-constructor">`on_open</span>
+    | <span class="hljs-constructor">`in_bin</span>
+  <span class="hljs-literal">]</span>)
   =&gt; int = <span class="hljs-string">""</span>;
 
-test_int_type(`in_bin);
+test_int_type(<span class="hljs-constructor">`in_bin</span>);
 </code></pre>
 <p><code>on_closed</code> will compile to <code>0</code>, <code>on_open</code> to <code>20</code> and <code>in_bin</code> to <strong><code>21</code></strong>.</p>
 <h2><a class="anchor" aria-hidden="true" id="caso-especial-detectores-de-evento"></a><a href="#caso-especial-detectores-de-evento" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Caso especial: Detectores de Evento</h2>
 <p>One last trick with polymorphic variants:</p>
 <pre><code class="hljs css language-ocaml"><span class="hljs-keyword">type</span> readline
 
-<span class="hljs-keyword">external</span> on :
+<span class="hljs-keyword">external</span> on:
   readline
   -&gt; ([
       |`close <span class="hljs-keyword">of</span> <span class="hljs-built_in">unit</span> -&gt; <span class="hljs-built_in">unit</span>
@@ -228,17 +229,17 @@ test_int_type(`in_bin);
 </code></pre>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> readline;
 
-[@bs.send]
-external on : (
+<span class="hljs-attribute">[@bs.send]</span>
+<span class="hljs-keyword">external</span> on: (
     readline,
-    [@bs.string] [ | `close(unit =&gt; unit) | `line(string =&gt; unit)]
+    <span class="hljs-attribute">[@bs.string]</span> <span class="hljs-literal">[</span> | <span class="hljs-constructor">`close</span>(unit =&gt; unit) | <span class="hljs-constructor">`line</span>(string =&gt; unit)<span class="hljs-literal">]</span>
   )
   =&gt; readline = <span class="hljs-string">""</span>;
 
 <span class="hljs-keyword">let</span> register = rl =&gt;
   rl
-  -&gt;on(`close(event =&gt; ()))
-  -&gt;on(`line(line =&gt; print_endline(line)));
+  <span class="hljs-operator">-&gt;</span>on(<span class="hljs-constructor">`close</span>(event =&gt; ()))
+  <span class="hljs-operator">-&gt;</span>on(<span class="hljs-constructor">`line</span>(line =&gt; print_endline(line)));
 </code></pre>
 <p>Output:</p>
 <pre><code class="hljs css language-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">register</span>(<span class="hljs-params">rl</span>) </span>{
@@ -254,7 +255,7 @@ external on : (
 <!-- TODO: GADT phantom type -->
 <h2><a class="anchor" aria-hidden="true" id="argumentos-fijos"></a><a href="#argumentos-fijos" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Argumentos Fijos</h2>
 <p>Sometimes it's convenient to bind to a function using an <code>external</code>, while passing predetermined argument values to the JS function:</p>
-<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> process_on_exit :
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> process_on_exit:
   (_ [@bs.<span class="hljs-keyword">as</span> <span class="hljs-string">"exit"</span>]) -&gt;
   (<span class="hljs-built_in">int</span> -&gt; <span class="hljs-built_in">unit</span>) -&gt;
   <span class="hljs-built_in">unit</span> =
@@ -264,14 +265,14 @@ external on : (
   <span class="hljs-type">Js</span>.log (<span class="hljs-string">"error code: "</span> ^ string_of_int exit_code)
 )
 </code></pre>
-<pre><code class="hljs css language-reason">[@bs.<span class="hljs-keyword">val</span>]
-external process_on_exit : (
-  [@bs.<span class="hljs-keyword">as</span> <span class="hljs-string">"exit"</span>] <span class="hljs-number">_</span>,
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.val]</span>
+<span class="hljs-keyword">external</span> process_on_exit: (
+  <span class="hljs-attribute">[@bs.as "exit"]</span> _,
   int =&gt; unit
 ) =&gt; unit = <span class="hljs-string">"process.on"</span>;
 
 <span class="hljs-keyword">let</span> () = process_on_exit(exit_code =&gt;
-  <span class="hljs-type">Js</span>.log(<span class="hljs-string">"error code: "</span> ++ string_of_int(exit_code))
+  <span class="hljs-module-identifier">Js</span>.log(<span class="hljs-string">"error code: "</span> <span class="hljs-operator">++</span> string_of_int(exit_code))
 );
 </code></pre>
 <p>Output:</p>
@@ -287,7 +288,7 @@ external process_on_exit : (
 <span class="hljs-keyword">let</span> addFive = add <span class="hljs-number">5</span>
 <span class="hljs-keyword">let</span> twelve = addFive <span class="hljs-number">3</span> <span class="hljs-number">4</span>
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> add = (x, y, z) =&gt; x + y + z;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> add = (x, y, z) =&gt; x <span class="hljs-operator">+</span> y <span class="hljs-operator">+</span> z;
 <span class="hljs-keyword">let</span> addFive = add(<span class="hljs-number">5</span>);
 <span class="hljs-keyword">let</span> twelve = addFive(<span class="hljs-number">3</span>, <span class="hljs-number">4</span>);
 </code></pre>
@@ -314,21 +315,21 @@ external process_on_exit : (
 <h3><a class="anchor" aria-hidden="true" id="solucion-garantia-para-quitar-el-curry"></a><a href="#solucion-garantia-para-quitar-el-curry" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Solución: Garantía para quitar el Curry</h3>
 <p>If you annotate a function declaration signature on an <code>external</code> or <code>let</code> with a <code>[@bs]</code> (or, in Reason syntax, annotate the start of the parameters with a dot), you'll turn that function into an similar-looking one that's guaranteed to be uncurried:</p>
 <pre><code class="hljs css language-ocaml"><span class="hljs-keyword">type</span> timerId
-<span class="hljs-keyword">external</span> setTimeout : (<span class="hljs-built_in">unit</span> -&gt; <span class="hljs-built_in">unit</span> [@bs]) -&gt; <span class="hljs-built_in">int</span> -&gt; timerId = <span class="hljs-string">"setTimeout"</span> [@@bs.<span class="hljs-keyword">val</span>]
+<span class="hljs-keyword">external</span> setTimeout: (<span class="hljs-built_in">unit</span> -&gt; <span class="hljs-built_in">unit</span> [@bs]) -&gt; <span class="hljs-built_in">int</span> -&gt; timerId = <span class="hljs-string">"setTimeout"</span> [@@bs.<span class="hljs-keyword">val</span>]
 
 <span class="hljs-keyword">let</span> id = setTimeout (<span class="hljs-keyword">fun</span> [@bs] <span class="hljs-literal">()</span> -&gt; <span class="hljs-type">Js</span>.log <span class="hljs-string">"hello"</span>) <span class="hljs-number">1000</span>
 </code></pre>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> timerId;
-[@bs.<span class="hljs-keyword">val</span>] external setTimeout : ((. unit) =&gt; unit, int) =&gt; timerId = <span class="hljs-string">"setTimeout"</span>;
+<span class="hljs-attribute">[@bs.val]</span> <span class="hljs-keyword">external</span> setTimeout: ((. unit) =&gt; unit, int) =&gt; timerId = <span class="hljs-string">"setTimeout"</span>;
 
-<span class="hljs-keyword">let</span> id = setTimeout((.) =&gt; <span class="hljs-type">Js</span>.log(<span class="hljs-string">"hello"</span>), <span class="hljs-number">1000</span>);
+<span class="hljs-keyword">let</span> id = setTimeout((.) =&gt; <span class="hljs-module-identifier">Js</span>.log(<span class="hljs-string">"hello"</span>), <span class="hljs-number">1000</span>);
 </code></pre>
 <p><strong>Note</strong>: both the declaration site and the call site need to have the uncurry annotation. That's part of the guarantee/requirement.</p>
 <p>When you try to curry such a function, you'll get a type error:</p>
 <pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> add = <span class="hljs-keyword">fun</span> [@bs] x y z -&gt; x + y + z
 <span class="hljs-keyword">let</span> addFiveOops = add <span class="hljs-number">5</span>
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> add = (. x, y, z) =&gt; x + y + z;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> add = (. x, y, z) =&gt; x <span class="hljs-operator">+</span> y <span class="hljs-operator">+</span> z;
 <span class="hljs-keyword">let</span> addFiveOops = add(<span class="hljs-number">5</span>);
 </code></pre>
 <p>Error:</p>
@@ -343,15 +344,15 @@ external process_on_exit : (
 </ul>
 <!-- TODO: is this up-to-date info? -->
 <p>Then try <code>[@bs.uncurry]</code>:</p>
-<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> map : <span class="hljs-symbol">'a</span> <span class="hljs-built_in">array</span> -&gt; (<span class="hljs-symbol">'a</span> -&gt; <span class="hljs-symbol">'b</span> [@bs.uncurry]) -&gt; <span class="hljs-symbol">'b</span> <span class="hljs-built_in">array</span> = <span class="hljs-string">""</span> [@@bs.send]
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> map: <span class="hljs-symbol">'a</span> <span class="hljs-built_in">array</span> -&gt; (<span class="hljs-symbol">'a</span> -&gt; <span class="hljs-symbol">'b</span> [@bs.uncurry]) -&gt; <span class="hljs-symbol">'b</span> <span class="hljs-built_in">array</span> = <span class="hljs-string">""</span> [@@bs.send]
 <span class="hljs-keyword">let</span> _ = map [|<span class="hljs-number">1</span>; <span class="hljs-number">2</span>; <span class="hljs-number">3</span>|] (<span class="hljs-keyword">fun</span> x -&gt; x+ <span class="hljs-number">1</span>)
 </code></pre>
-<pre><code class="hljs css language-reason">[@bs.send] external <span class="hljs-built_in">map</span> : (array('a), [@bs.uncurry] ('a =&gt; 'b)) =&gt; array('b) = <span class="hljs-string">""</span>;
-<span class="hljs-built_in">map</span>([|<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>|], x =&gt; x + <span class="hljs-number">1</span>);
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> map: (array('a), <span class="hljs-attribute">[@bs.uncurry]</span> ('a =&gt; 'b)) =&gt; array('b) = <span class="hljs-string">""</span>;
+map(<span class="hljs-literal">[|</span><span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span><span class="hljs-literal">|]</span>, x =&gt; x <span class="hljs-operator">+</span> <span class="hljs-number">1</span>);
 </code></pre>
 <h4><a class="anchor" aria-hidden="true" id="excepciones"></a><a href="#excepciones" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Excepciones</h4>
 <p>If you try to do this:</p>
-<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> id : (<span class="hljs-symbol">'a</span> -&gt; <span class="hljs-symbol">'a</span> [@bs]) = ((<span class="hljs-keyword">fun</span> v -&gt; v) [@bs])
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> id: (<span class="hljs-symbol">'a</span> -&gt; <span class="hljs-symbol">'a</span> [@bs]) = ((<span class="hljs-keyword">fun</span> v -&gt; v) [@bs])
 </code></pre>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> id: (. 'a) =&gt; 'a = (. v) =&gt; v;
 </code></pre>
@@ -363,7 +364,7 @@ external process_on_exit : (
 <p>The simplest solution is in most cases to just not export it, by adding an interface to the module. Alternatively, if you really need to export it, you can do so in its curried form, and then wrap it in an uncurried lambda at the call site. E.g.:</p>
 <pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> _ = map (<span class="hljs-keyword">fun</span> v -&gt; id v [@bs])
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-built_in">map</span>(v =&gt; id(. v));
+<pre><code class="hljs css language-reason">map(v =&gt; id(. v));
 </code></pre>
 <h5><a class="anchor" aria-hidden="true" id="decisiones-de-diseno"></a><a href="#decisiones-de-diseno" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Decisiones de Diseño</h5>
 <p>In general, <code>bs.uncurry</code> is recommended; the compiler will do lots of optimizations to resolve the currying to uncurrying at compile time. However, there are some cases the compiler can't optimize it. In these case, it will be converted to a runtime check.</p>
@@ -377,8 +378,8 @@ external process_on_exit : (
 <p>Here, <code>this</code> would point to <code>x</code> (actually, it depends on how <code>onload</code> is called, but we digress). It's not correct to declare <code>x.onload</code> of type <code>unit → unit [@bs]</code>. Instead, we introduced a special attribute, <code>bs.this</code>, which allows us to type <code>x</code> as so:</p>
 <pre><code class="hljs css language-ocaml"><span class="hljs-keyword">type</span> x
 <span class="hljs-keyword">external</span> x: x = <span class="hljs-string">""</span> [@@bs.<span class="hljs-keyword">val</span>]
-<span class="hljs-keyword">external</span> set_onload : x -&gt; (x -&gt; <span class="hljs-built_in">int</span> -&gt; <span class="hljs-built_in">unit</span> [@bs.this]) -&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">"onload"</span> [@@bs.set]
-<span class="hljs-keyword">external</span> resp : x -&gt; <span class="hljs-built_in">int</span> = <span class="hljs-string">"response"</span> [@@bs.get]
+<span class="hljs-keyword">external</span> set_onload: x -&gt; (x -&gt; <span class="hljs-built_in">int</span> -&gt; <span class="hljs-built_in">unit</span> [@bs.this]) -&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">"onload"</span> [@@bs.set]
+<span class="hljs-keyword">external</span> resp: x -&gt; <span class="hljs-built_in">int</span> = <span class="hljs-string">"response"</span> [@@bs.get]
 
 <span class="hljs-keyword">let</span> _ =
   set_onload x <span class="hljs-keyword">begin</span> <span class="hljs-keyword">fun</span> [@bs.this] o v -&gt;
@@ -386,11 +387,11 @@ external process_on_exit : (
   <span class="hljs-keyword">end</span>
 </code></pre>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> x;
-[@bs.<span class="hljs-keyword">val</span>] external x : x = <span class="hljs-string">""</span>;
-[@bs.<span class="hljs-keyword">set</span>] external set_onload : (x, [@bs.this] ((x, int) =&gt; unit)) =&gt; unit = <span class="hljs-string">"onload"</span>;
-[@bs.<span class="hljs-keyword">get</span>] external resp : x =&gt; int = <span class="hljs-string">"response"</span>;
+<span class="hljs-attribute">[@bs.val]</span> <span class="hljs-keyword">external</span> x: x = <span class="hljs-string">""</span>;
+<span class="hljs-attribute">[@bs.set]</span> <span class="hljs-keyword">external</span> set_onload: (x, <span class="hljs-attribute">[@bs.this]</span> ((x, int) =&gt; unit)) =&gt; unit = <span class="hljs-string">"onload"</span>;
+<span class="hljs-attribute">[@bs.get]</span> <span class="hljs-keyword">external</span> resp: x =&gt; int = <span class="hljs-string">"response"</span>;
 
-set_onload(x, [@bs.this] ((o, v) =&gt; <span class="hljs-type">Js</span>.log(resp(o) + v)));
+set_onload(x, <span class="hljs-attribute">[@bs.this]</span> ((o, v) =&gt; <span class="hljs-module-identifier">Js</span>.log(resp(o) <span class="hljs-operator">+</span> v)));
 </code></pre>
 <p>Output:</p>
 <pre><code class="hljs css language-js">x.onload = (<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">v</span>) </span>{

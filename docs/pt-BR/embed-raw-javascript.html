@@ -47,14 +47,14 @@
 
 let _ = Js.log (add 1 2)
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> add = [%raw {|
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> add = <span class="hljs-attribute">[%raw {|
   function(a, b) {
-    console.log(<span class="hljs-string">"hello from raw JavaScript!"</span>);
-    <span class="hljs-keyword">return</span> a + b
+    console.log("hello from raw JavaScript!");
+    return a + b
   }
-|}];
+|}]</span>;
 
-<span class="hljs-type">Js</span>.log(add(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>));
+<span class="hljs-module-identifier">Js</span>.log(add(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>));
 </code></pre>
 <p>The <code>{|foo|}</code> syntax stands for OCaml/BuckleScript/Reason's multi-line, &quot;quoted string&quot; syntax. Think of them as the equivalent of JavaScript's template literals. No escaping is needed inside that string.</p>
 <p><strong>Careful</strong> with the OCaml/Reason syntax here. <code>[%raw foo]</code> allows you to embed an expression. For top-level declarations in OCaml/Reason, use <code>[%%raw foo]</code> (two <code>%</code>):</p>
@@ -62,14 +62,14 @@ let _ = Js.log (add 1 2)
 
 <span class="hljs-keyword">let</span> f = [%raw <span class="hljs-string">"function() {return 1}"</span>]
 </code></pre>
-<pre><code class="hljs css language-reason">[%%raw <span class="hljs-string">"var a = 1"</span>];
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[%%raw "var a = 1"]</span>;
 
-<span class="hljs-keyword">let</span> f = [%raw <span class="hljs-string">"function() {return 1}"</span>];
+<span class="hljs-keyword">let</span> f = <span class="hljs-attribute">[%raw "function() {return 1}"]</span>;
 </code></pre>
 <p>You can also pass a function declaration with a string body in <code>raw</code>:</p>
 <pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> f: (<span class="hljs-built_in">int</span> -&gt; <span class="hljs-built_in">int</span> -&gt; <span class="hljs-built_in">int</span>) = [%raw <span class="hljs-keyword">fun</span> a b -&gt; <span class="hljs-string">"{return a + b}"</span>]
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> f: (int, int) =&gt; int = [%raw (a, b) =&gt; <span class="hljs-string">"{return a + b}"</span>];
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> f: (int, int) =&gt; int = <span class="hljs-attribute">[%raw (a, b) =&gt; "{return a + b}"]</span>;
 </code></pre>
 <p>Output:</p>
 <pre><code class="hljs css language-js"><span class="hljs-keyword">var</span> f = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">a,b</span>)</span>{{<span class="hljs-keyword">return</span> a + b}};
@@ -84,8 +84,8 @@ let _ = Js.log (add 1 2)
   x + y
 </code></pre>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> f = (x, y) =&gt; {
-  [%debugger];
-  x + y
+  <span class="hljs-attribute">[%debugger]</span>;
+  x <span class="hljs-operator">+</span> y
 };
 </code></pre>
 <p>Output:</p>
@@ -101,9 +101,9 @@ let _ = Js.log (add 1 2)
 | <span class="hljs-type">None</span> -&gt; <span class="hljs-type">Js</span>.log <span class="hljs-string">"production mode"</span>
 </code></pre>
 <!-- TODO: change it to `= None` which is more idiomatic -->
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">switch</span> ([%external __DEV__]) {
-| <span class="hljs-type">Some</span>(<span class="hljs-number">_</span>) =&gt; <span class="hljs-type">Js</span>.log(<span class="hljs-string">"dev mode"</span>)
-| <span class="hljs-type">None</span> =&gt; <span class="hljs-type">Js</span>.log(<span class="hljs-string">"production mode"</span>)
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">switch</span> (<span class="hljs-attribute">[%external __DEV__]</span>) {
+| <span class="hljs-constructor">Some</span>(_) =&gt; <span class="hljs-module-identifier">Js</span>.log(<span class="hljs-string">"dev mode"</span>)
+| <span class="hljs-constructor">None</span> =&gt; <span class="hljs-module-identifier">Js</span>.log(<span class="hljs-string">"production mode"</span>)
 };
 </code></pre>
 <p>Output:</p>
@@ -120,9 +120,9 @@ let _ = Js.log (add 1 2)
 | <span class="hljs-type">Some</span> f -&gt; <span class="hljs-type">Js</span>.log f
 | <span class="hljs-type">None</span> -&gt; <span class="hljs-type">Js</span>.log <span class="hljs-string">"non-node environment"</span>
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">switch</span> ([%external __filename]) {
-| <span class="hljs-type">Some</span>(f) =&gt; <span class="hljs-type">Js</span>.log(f)
-| <span class="hljs-type">None</span> =&gt; <span class="hljs-type">Js</span>.log(<span class="hljs-string">"non-node environment"</span>)
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">switch</span> (<span class="hljs-attribute">[%external __filename]</span>) {
+| <span class="hljs-constructor">Some</span>(f) =&gt; <span class="hljs-module-identifier">Js</span>.log(f)
+| <span class="hljs-constructor">None</span> =&gt; <span class="hljs-module-identifier">Js</span>.log(<span class="hljs-string">"non-node environment"</span>)
 };
 </code></pre>
 <p>Output:</p>

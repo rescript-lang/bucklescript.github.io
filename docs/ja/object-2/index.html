@@ -72,14 +72,14 @@
 
 <span class="hljs-keyword">external</span> john : person = <span class="hljs-string">"john"</span> [@@bs.<span class="hljs-keyword">val</span>]
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> person = <span class="hljs-type">Js</span>.t({
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> person = <span class="hljs-module-identifier">Js</span>.t({
   .
   name: string,
   age: int,
   job: string
 });
 
-[@bs.<span class="hljs-keyword">val</span>] external john : person = <span class="hljs-string">"john"</span>;
+<span class="hljs-attribute">[@bs.val]</span> <span class="hljs-keyword">external</span> john : person = <span class="hljs-string">"john"</span>;
 </code></pre>
 <p><strong>From now on</strong>, we'll call the BuckleScript interop object &quot;<code>Js.t</code> object&quot;, to disambiguate it with normal object and JS object.</p>
 <p>Because object types are used often, Reason gives it a nicer sugar. <code>Js.t({. name: string})</code> will format to <code>{. &quot;name&quot;: string}</code>.</p>
@@ -93,8 +93,8 @@
 
 <span class="hljs-keyword">let</span> _ = john##age #= <span class="hljs-number">99</span>
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> person = {. [@bs.<span class="hljs-keyword">set</span>] <span class="hljs-string">"age"</span>: int};
-[@bs.<span class="hljs-keyword">val</span>] external john : person = <span class="hljs-string">"john"</span>;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> person = {. <span class="hljs-attribute">[@bs.set]</span> <span class="hljs-string">"age"</span>: int};
+<span class="hljs-attribute">[@bs.val]</span> <span class="hljs-keyword">external</span> john : person = <span class="hljs-string">"john"</span>;
 
 john##age #= <span class="hljs-number">99</span>;
 </code></pre>
@@ -106,8 +106,8 @@ john##age #= <span class="hljs-number">99</span>;
 
 <span class="hljs-keyword">let</span> _ = john##say <span class="hljs-string">"hey"</span> <span class="hljs-string">"jude"</span>
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> person = {. [@bs.meth] <span class="hljs-string">"say"</span>: (string, string) =&gt; unit};
-[@bs.<span class="hljs-keyword">val</span>] external john : person = <span class="hljs-string">"john"</span>;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> person = {. <span class="hljs-attribute">[@bs.meth]</span> <span class="hljs-string">"say"</span>: (string, string) =&gt; unit};
+<span class="hljs-attribute">[@bs.val]</span> <span class="hljs-keyword">external</span> john : person = <span class="hljs-string">"john"</span>;
 
 john##say(<span class="hljs-string">"hey"</span>, <span class="hljs-string">"jude"</span>);
 </code></pre>
@@ -133,9 +133,9 @@ john##say(<span class="hljs-string">"hey"</span>, <span class="hljs-string">"jud
 
 <span class="hljs-keyword">let</span> name = bucklescript##info##author
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> bucklescript = [%bs.obj {
-  info: {author: <span class="hljs-string">"Bob"</span>}
-}];
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> bucklescript = <span class="hljs-attribute">[%bs.obj {
+  info: {author: "Bob"}
+}]</span>;
 
 <span class="hljs-keyword">let</span> name = bucklescript##info##author;
 </code></pre>

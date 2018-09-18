@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Conditional Compilation · BuckleScript</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Sometimes you want to write code that works with different versions of compilers and libraries."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Conditional Compilation · BuckleScript"/><meta property="og:type" content="website"/><meta property="og:url" content="https://bucklescript.github.io/index.html"/><meta property="og:description" content="Sometimes you want to write code that works with different versions of compilers and libraries."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/logos/bucklescript.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://bucklescript.github.io/blog/atom.xml" title="BuckleScript Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://bucklescript.github.io/blog/feed.xml" title="BuckleScript Blog RSS Feed"/><script type="text/javascript" src="/js/toggleSyntaxButton.js"></script><script type="text/javascript" src="/js/pjax-api.min.js"></script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/logos/bucklescript.svg" alt="BuckleScript"/><h2 class="headerTitleWithLogo">BuckleScript</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/en/installation" target="_self">Docs</a></li><li class=""><a href="/docs/en/playground" target="_self">Try</a></li><li class="siteNavGroupActive"><a href="/docs/en/stdlib-overview" target="_self">API</a></li><li class=""><a href="/docs/en/community" target="_self">Community</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/ja/conditional-compilation">日本語</a></li><li><a href="/docs/es-ES/conditional-compilation">Español</a></li><li><a href="/docs/fr/conditional-compilation">Français</a></li><li><a href="/docs/ko/conditional-compilation">한국어</a></li><li><a href="/docs/pt-BR/conditional-compilation">Português (Brasil)</a></li><li><a href="/docs/ru/conditional-compilation">Русский</a></li><li><a href="/docs/zh-CN/conditional-compilation">中文</a></li><li><a href="/docs/zh-TW/conditional-compilation">繁體中文</a></li><li><a href="https://crowdin.com/project/bucklescript" target="_blank" rel="noreferrer noopener">Help Translate</a></li></ul></div></li><script>
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Conditional Compilation · BuckleScript</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="&gt; This doesn&#x27;t work with the Reason syntax right now, only the OCaml syntax."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Conditional Compilation · BuckleScript"/><meta property="og:type" content="website"/><meta property="og:url" content="https://bucklescript.github.io/index.html"/><meta property="og:description" content="&gt; This doesn&#x27;t work with the Reason syntax right now, only the OCaml syntax."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/logos/bucklescript.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://bucklescript.github.io/blog/atom.xml" title="BuckleScript Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://bucklescript.github.io/blog/feed.xml" title="BuckleScript Blog RSS Feed"/><script type="text/javascript" src="/js/toggleSyntaxButton.js"></script><script type="text/javascript" src="/js/pjax-api.min.js"></script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/logos/bucklescript.svg" alt="BuckleScript"/><h2 class="headerTitleWithLogo">BuckleScript</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/en/installation" target="_self">Docs</a></li><li class=""><a href="/docs/en/playground" target="_self">Try</a></li><li class="siteNavGroupActive"><a href="/docs/en/stdlib-overview" target="_self">API</a></li><li class=""><a href="/docs/en/community" target="_self">Community</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/ja/conditional-compilation">日本語</a></li><li><a href="/docs/es-ES/conditional-compilation">Español</a></li><li><a href="/docs/fr/conditional-compilation">Français</a></li><li><a href="/docs/ko/conditional-compilation">한국어</a></li><li><a href="/docs/pt-BR/conditional-compilation">Português (Brasil)</a></li><li><a href="/docs/ru/conditional-compilation">Русский</a></li><li><a href="/docs/zh-CN/conditional-compilation">中文</a></li><li><a href="/docs/zh-TW/conditional-compilation">繁體中文</a></li><li><a href="https://crowdin.com/project/bucklescript" target="_blank" rel="noreferrer noopener">Help Translate</a></li></ul></div></li><script>
         const languagesMenuItem = document.getElementById("languages-menu");
         const languagesDropDown = document.getElementById("languages-dropdown");
         languagesMenuItem.addEventListener("click", function(event) {
@@ -37,7 +37,10 @@
                 };
               }
             });
-        </script></nav></div><div class="container mainContainer docMainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/bucklescript/bucklescript.github.io/tree/source/docs/conditional-compilation.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 class="postHeaderTitle">Conditional Compilation</h1></header><article><div><span><p>Sometimes you want to write code that works with different versions of compilers and libraries.</p>
+        </script></nav></div><div class="container mainContainer docMainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/bucklescript/bucklescript.github.io/tree/source/docs/conditional-compilation.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 class="postHeaderTitle">Conditional Compilation</h1></header><article><div><span><blockquote>
+<p>This doesn't work with the Reason syntax right now, only the OCaml syntax.</p>
+</blockquote>
+<p>Sometimes you want to write code that works with different versions of compilers and libraries.</p>
 <p>People used to use preprocessors like <a href="http://tigcc.ticalc.org/doc/cpp.html">C preprocessor</a> for the C family languages. The OCaml community uses several preprocessors: <a href="https://github.com/mjambon/cppo">cppo</a>, <a href="https://github.com/OCamlPro/typerex-build/tree/master/tools/ocp-pp">ocp-pp</a>, camlp4 IFDEF macros, <a href="https://github.com/diml/optcomp">optcomp</a> and <a href="https://github.com/janestreet/ppx_optcomp">ppx optcomp</a>.</p>
 <p>Instead of a preprocessor, BuckleScript adds language-level static <code>if</code> compilation. It's less powerful than other preprocessors since it only supports static <code>if</code> (no <code>#define</code>, <code>#undefine</code>, <code>#include</code>), but there are several advantages.</p>
 <ul>
@@ -47,26 +50,26 @@
 <p><strong>Note</strong>: BuckleScript's conditional compilation doesn't work with Reason yet.</p>
 <h2><a class="anchor" aria-hidden="true" id="usage"></a><a href="#usage" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Usage</h2>
 <p><code>lwt_unix.mli</code></p>
-<pre><code class="hljs">type open_flag =
-    Unix.open_flag =
-  | <span class="hljs-type">O_RDONLY</span>
-  | <span class="hljs-type">O_WRONLY</span>
-  | <span class="hljs-type">O_RDWR</span>
-  | <span class="hljs-type">O_NONBLOCK</span>
-  | <span class="hljs-type">O_APPEND</span>
-  | <span class="hljs-type">O_CREAT</span>
-  | <span class="hljs-type">O_TRUNC</span>
-  | <span class="hljs-type">O_EXCL</span>
-  | <span class="hljs-type">O_NOCTTY</span>
-  | <span class="hljs-type">O_DSYNC</span>
-  | <span class="hljs-type">O_SYNC</span>
-  | <span class="hljs-type">O_RSYNC</span>
-#<span class="hljs-keyword">if</span> OCAML_VERSION =~ <span class="hljs-string">"&gt;=3.13"</span> <span class="hljs-keyword">then</span>
-  | <span class="hljs-type">O_SHARE_DELETE</span>
-#<span class="hljs-keyword">end</span>
-#<span class="hljs-keyword">if</span> OCAML_VERSION =~ <span class="hljs-string">"&gt;=4.01"</span> <span class="hljs-keyword">then</span>
-  | <span class="hljs-type">O_CLOEXEC</span>
-#<span class="hljs-keyword">end</span>
+<pre><code class="hljs"><span class="hljs-keyword">type</span> <span class="hljs-keyword">open</span><span class="hljs-module-identifier">_flag</span> =
+    <span class="hljs-module-identifier">Unix</span>.<span class="hljs-keyword">open</span><span class="hljs-module-identifier">_flag</span> =
+  | <span class="hljs-constructor">O_RDONLY</span>
+  | <span class="hljs-constructor">O_WRONLY</span>
+  | <span class="hljs-constructor">O_RDWR</span>
+  | <span class="hljs-constructor">O_NONBLOCK</span>
+  | <span class="hljs-constructor">O_APPEND</span>
+  | <span class="hljs-constructor">O_CREAT</span>
+  | <span class="hljs-constructor">O_TRUNC</span>
+  | <span class="hljs-constructor">O_EXCL</span>
+  | <span class="hljs-constructor">O_NOCTTY</span>
+  | <span class="hljs-constructor">O_DSYNC</span>
+  | <span class="hljs-constructor">O_SYNC</span>
+  | <span class="hljs-constructor">O_RSYNC</span>
+#<span class="hljs-keyword">if</span> <span class="hljs-constructor">OCAML_VERSION</span> =~ <span class="hljs-string">"&gt;=3.13"</span> <span class="hljs-keyword">then</span>
+  | <span class="hljs-constructor">O_SHARE_DELETE</span>
+#end
+#<span class="hljs-keyword">if</span> <span class="hljs-constructor">OCAML_VERSION</span> =~ <span class="hljs-string">"&gt;=4.01"</span> <span class="hljs-keyword">then</span>
+  | <span class="hljs-constructor">O_CLOEXEC</span>
+#end
 </code></pre>
 <p>You don't have to add anything to the build to have these work. The compiler <code>bsc</code> understands these already.</p>
 <h2><a class="anchor" aria-hidden="true" id="built-in-custom-variables"></a><a href="#built-in-custom-variables" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Built-in &amp; Custom Variables</h2>
@@ -91,29 +94,29 @@ MY_VAR=<span class="hljs-string">"bla"</span>
 ...
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="concrete-syntax"></a><a href="#concrete-syntax" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Concrete Syntax</h2>
-<pre><code class="hljs">static-if
-|<span class="hljs-string"> HASH-IF-BOL conditional-expression THEN //
+<pre><code class="hljs">static<span class="hljs-operator">-</span><span class="hljs-keyword">if</span>
+| <span class="hljs-constructor">HASH</span><span class="hljs-operator">-</span><span class="hljs-constructor">IF</span><span class="hljs-operator">-</span><span class="hljs-constructor">BOL</span> conditional<span class="hljs-operator">-</span>expression <span class="hljs-constructor">THEN</span> <span class="hljs-operator">/</span><span class="hljs-operator">/</span>
    tokens
-(HASH-ELIF-BOL conditional-expression THEN) *
-(ELSE-BOL tokens)?
-HASH-END-BOL
+(<span class="hljs-constructor">HASH</span><span class="hljs-operator">-</span><span class="hljs-constructor">ELIF</span><span class="hljs-operator">-</span><span class="hljs-constructor">BOL</span> conditional<span class="hljs-operator">-</span>expression <span class="hljs-constructor">THEN</span>) <span class="hljs-operator">*</span>
+(<span class="hljs-constructor">ELSE</span><span class="hljs-operator">-</span><span class="hljs-constructor">BOL</span> tokens)?
+<span class="hljs-constructor">HASH</span><span class="hljs-operator">-</span><span class="hljs-constructor">END</span><span class="hljs-operator">-</span><span class="hljs-constructor">BOL</span>
 
-conditional-expression
-</span>|<span class="hljs-string"> conditional-expression &amp;&amp; conditional-expression
-</span>|<span class="hljs-string"> conditional-expression </span>||<span class="hljs-string"> conditional-expression
-</span>|<span class="hljs-string"> atom-predicate
+conditional<span class="hljs-operator">-</span>expression
+| conditional<span class="hljs-operator">-</span>expression <span class="hljs-operator">&amp;&amp;</span> conditional<span class="hljs-operator">-</span>expression
+| conditional<span class="hljs-operator">-</span>expression <span class="hljs-operator">||</span> conditional<span class="hljs-operator">-</span>expression
+| atom<span class="hljs-operator">-</span>predicate
 
-atom-predicate
-</span>|<span class="hljs-string"> atom operator atom
-</span>|<span class="hljs-string"> defined UIDENT
-</span>|<span class="hljs-string"> undefined UIDENT
+atom<span class="hljs-operator">-</span>predicate
+| atom operator atom
+| defined <span class="hljs-constructor">UIDENT</span>
+| undefined <span class="hljs-constructor">UIDENT</span>
 
 operator
-</span>|<span class="hljs-string"> (= </span>|<span class="hljs-string"> &lt; </span>|<span class="hljs-string"> &gt; </span>|<span class="hljs-string"> &lt;= </span>|<span class="hljs-string"> &gt;= </span>|<span class="hljs-string"> =~ )
+| (= | &lt; | &gt; | &lt;= | &gt;= | =~ )
 
 atom
-</span>|<span class="hljs-string"> UIDENT </span>|<span class="hljs-string"> INT </span>|<span class="hljs-string"> STRING </span>|<span class="hljs-string"> FLOAT
-</span></code></pre>
+| <span class="hljs-constructor">UIDENT</span> | <span class="hljs-constructor">INT</span> | <span class="hljs-constructor">STRING</span> | <span class="hljs-constructor">FLOAT</span>
+</code></pre>
 <ul>
 <li>IF-BOL means <code>#IF</code> should be in the beginning of a line.</li>
 </ul>
@@ -126,13 +129,13 @@ atom
 <li>In <code>lhs operator rhs</code>, <code>lhs</code> and <code>rhs</code> are always the same type and return boolean. <code>=~</code> is a semantic version operator which requires both sides to be string.</li>
 </ul>
 <p>Evaluation rules are obvious. <code>=~</code> respect semantic version, for example, the underlying engine</p>
-<pre><code class="hljs">semver Location.<span class="hljs-literal">none</span> <span class="hljs-string">"1.2.3"</span> <span class="hljs-string">"~1.3.0"</span> = <span class="hljs-literal">false</span>;;
-semver Location.<span class="hljs-literal">none</span> <span class="hljs-string">"1.2.3"</span> <span class="hljs-string">"^1.3.0"</span> = <span class="hljs-literal">true</span> ;;
-semver Location.<span class="hljs-literal">none</span> <span class="hljs-string">"1.2.3"</span> <span class="hljs-string">"&gt;1.3.0"</span> = <span class="hljs-literal">false</span> ;;
-semver Location.<span class="hljs-literal">none</span> <span class="hljs-string">"1.2.3"</span> <span class="hljs-string">"&gt;=1.3.0"</span> = <span class="hljs-literal">false</span> ;;
-semver Location.<span class="hljs-literal">none</span> <span class="hljs-string">"1.2.3"</span> <span class="hljs-string">"&lt;1.3.0"</span> = <span class="hljs-literal">true</span> ;;
-semver Location.<span class="hljs-literal">none</span> <span class="hljs-string">"1.2.3"</span> <span class="hljs-string">"&lt;=1.3.0"</span> = <span class="hljs-literal">true</span> ;;
-semver Location.<span class="hljs-literal">none</span> <span class="hljs-string">"1.2.3"</span> <span class="hljs-string">"1.2.3"</span> = <span class="hljs-literal">true</span>;;
+<pre><code class="hljs">semver <span class="hljs-module-identifier">Location</span>.none <span class="hljs-string">"1.2.3"</span> <span class="hljs-string">"~1.3.0"</span> = <span class="hljs-literal">false</span>;;
+semver <span class="hljs-module-identifier">Location</span>.none <span class="hljs-string">"1.2.3"</span> <span class="hljs-string">"^1.3.0"</span> = <span class="hljs-literal">true</span> ;;
+semver <span class="hljs-module-identifier">Location</span>.none <span class="hljs-string">"1.2.3"</span> <span class="hljs-string">"&gt;1.3.0"</span> = <span class="hljs-literal">false</span> ;;
+semver <span class="hljs-module-identifier">Location</span>.none <span class="hljs-string">"1.2.3"</span> <span class="hljs-string">"&gt;=1.3.0"</span> = <span class="hljs-literal">false</span> ;;
+semver <span class="hljs-module-identifier">Location</span>.none <span class="hljs-string">"1.2.3"</span> <span class="hljs-string">"&lt;1.3.0"</span> = <span class="hljs-literal">true</span> ;;
+semver <span class="hljs-module-identifier">Location</span>.none <span class="hljs-string">"1.2.3"</span> <span class="hljs-string">"&lt;=1.3.0"</span> = <span class="hljs-literal">true</span> ;;
+semver <span class="hljs-module-identifier">Location</span>.none <span class="hljs-string">"1.2.3"</span> <span class="hljs-string">"1.2.3"</span> = <span class="hljs-literal">true</span>;;
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="tips-tricks"></a><a href="#tips-tricks" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Tips &amp; Tricks</h2>
 <p>This is a very small extension to OCaml. It's backward compatible with OCaml except in the following case:</p>

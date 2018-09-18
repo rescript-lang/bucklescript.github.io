@@ -64,14 +64,14 @@
   | <span class="hljs-type">Some</span> age -&gt; <span class="hljs-type">Js</span>.log (<span class="hljs-string">"Joe is "</span> ^ (string_of_int age))
 </code></pre>
 <pre><code class="hljs css language-reason"><span class="hljs-comment">/* Create a JS object ourselves */</span>
-<span class="hljs-keyword">let</span> myMap = <span class="hljs-type">Js</span>.<span class="hljs-type">Dict</span>.empty();
-<span class="hljs-type">Js</span>.<span class="hljs-type">Dict</span>.<span class="hljs-keyword">set</span>(myMap, <span class="hljs-string">"Allison"</span>, <span class="hljs-number">10</span>);
+<span class="hljs-keyword">let</span> myMap = <span class="hljs-module-identifier">Js</span>.<span class="hljs-module-identifier">Dict</span>.empty();
+<span class="hljs-module-identifier">Js</span>.<span class="hljs-module-identifier">Dict</span>.set(myMap, <span class="hljs-string">"Allison"</span>, <span class="hljs-number">10</span>);
 
 <span class="hljs-comment">/* Use an existing JS object */</span>
-[@bs.<span class="hljs-keyword">val</span>] external studentAges : <span class="hljs-type">Js</span>.<span class="hljs-type">Dict</span>.t(int) = <span class="hljs-string">"student"</span>;
-<span class="hljs-keyword">switch</span> (<span class="hljs-type">Js</span>.<span class="hljs-type">Dict</span>.<span class="hljs-keyword">get</span>(studentAges, <span class="hljs-string">"Joe"</span>)) {
-| <span class="hljs-type">None</span> =&gt; <span class="hljs-type">Js</span>.log(<span class="hljs-string">"Joe can't be found"</span>)
-| <span class="hljs-type">Some</span>(age) =&gt; <span class="hljs-type">Js</span>.log(<span class="hljs-string">"Joe is "</span> ++ string_of_int(age))
+<span class="hljs-attribute">[@bs.val]</span> <span class="hljs-keyword">external</span> studentAges : <span class="hljs-module-identifier">Js</span>.<span class="hljs-module-identifier">Dict</span>.t(int) = <span class="hljs-string">"student"</span>;
+<span class="hljs-keyword">switch</span> (<span class="hljs-module-identifier">Js</span>.<span class="hljs-module-identifier">Dict</span>.get(studentAges, <span class="hljs-string">"Joe"</span>)) {
+| <span class="hljs-constructor">None</span> =&gt; <span class="hljs-module-identifier">Js</span>.log(<span class="hljs-string">"Joe can't be found"</span>)
+| <span class="hljs-constructor">Some</span>(age) =&gt; <span class="hljs-module-identifier">Js</span>.log(<span class="hljs-string">"Joe is "</span> <span class="hljs-operator">++</span> string_of_int(age))
 };
 </code></pre>
 <p>Output:</p>
@@ -102,14 +102,14 @@ myMap[<span class="hljs-string">"Allison"</span>] = <span class="hljs-number">10
 
 <span class="hljs-keyword">external</span> john : person = <span class="hljs-string">"john"</span> [@@bs.<span class="hljs-keyword">val</span>]
 </code></pre>
-<pre><code class="hljs css language-reason">[@bs.deriving abstract]
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.deriving abstract]</span>
 <span class="hljs-keyword">type</span> person = {
   name: string,
   age: int,
   job: string,
 };
 
-[@bs.<span class="hljs-keyword">val</span>] external john : person = <span class="hljs-string">"john"</span>;
+<span class="hljs-attribute">[@bs.val]</span> <span class="hljs-keyword">external</span> john : person = <span class="hljs-string">"john"</span>;
 </code></pre>
 <p><strong>Note</strong>: the <code>person</code> type is <strong>not</strong> a record! It's a record-looking type that uses the record's syntax and type-checking. The <code>bs.deriving abstract</code> annotation turns it into an &quot;abstract type&quot; (aka you don't know what the actual value's shape).</p>
 <h3><a class="anchor" aria-hidden="true" id="creation"></a><a href="#creation" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Creation</h3>
@@ -137,10 +137,10 @@ myMap[<span class="hljs-string">"Allison"</span>] = <span class="hljs-number">10
 
 <span class="hljs-keyword">let</span> d = data ~type_:<span class="hljs-string">"message"</span> ~ariaLabel:<span class="hljs-string">"hello"</span>
 </code></pre>
-<pre><code class="hljs css language-reason">[@bs.deriving abstract]
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.deriving abstract]</span>
 <span class="hljs-keyword">type</span> data = {
-  [@bs.<span class="hljs-keyword">as</span> <span class="hljs-string">"type"</span>] type_: string,
-  [@bs.<span class="hljs-keyword">as</span> <span class="hljs-string">"aria-label"</span>] ariaLabel: string,
+  <span class="hljs-attribute">[@bs.as "type"]</span> type_: string,
+  <span class="hljs-attribute">[@bs.as "aria-label"]</span> ariaLabel: string,
 };
 
 <span class="hljs-keyword">let</span> d = data(~type_=<span class="hljs-string">"message"</span>, ~ariaLabel=<span class="hljs-string">"hello"</span>);
@@ -161,9 +161,9 @@ myMap[<span class="hljs-string">"Allison"</span>] = <span class="hljs-number">10
 
 <span class="hljs-keyword">let</span> joe = person ~age:<span class="hljs-number">20</span> ~job:<span class="hljs-string">"teacher"</span> <span class="hljs-literal">()</span>
 </code></pre>
-<pre><code class="hljs css language-reason">[@bs.deriving abstract]
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.deriving abstract]</span>
 <span class="hljs-keyword">type</span> person = {
-  [@bs.optional] name: string,
+  <span class="hljs-attribute">[@bs.optional]</span> name: string,
   age: int,
   job: string,
 };
@@ -183,7 +183,7 @@ myMap[<span class="hljs-string">"Allison"</span>] = <span class="hljs-number">10
 <p>Alternatively, you can use the <a href="/docs/zh-TW/fast-pipe">Fast Pipe</a> feature in a later section for a nicer-looking access syntax:</p>
 <pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> twenty = joe |. ageGet
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> twenty = joe-&gt;ageGet
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> twenty = joe<span class="hljs-operator">-&gt;</span>ageGet
 </code></pre>
 <h4><a class="anchor" aria-hidden="true" id="write"></a><a href="#write" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Write</h4>
 <p>A <code>bs.deriving abstract</code> value is immutable by default. To mutate such value, you need to first mark one of the abstract record field as <code>mutable</code>, the same way you'd mark a normal record as mutable:</p>
@@ -193,7 +193,7 @@ myMap[<span class="hljs-string">"Allison"</span>] = <span class="hljs-number">10
   job: <span class="hljs-built_in">string</span>;
 } [@@bs.deriving abstract]
 </code></pre>
-<pre><code class="hljs css language-reason">[@bs.deriving abstract]
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.deriving abstract]</span>
 <span class="hljs-keyword">type</span> person = {
   name: string,
   <span class="hljs-keyword">mutable</span> age: int,
@@ -210,7 +210,7 @@ ageSet(joe, <span class="hljs-number">21</span>);
 <p>Alternatively, with the fast pipe syntax:</p>
 <pre><code class="hljs css language-ocaml">joe |. ageSet <span class="hljs-number">21</span>
 </code></pre>
-<pre><code class="hljs css language-reason">joe-&gt;ageSet(<span class="hljs-number">21</span>)
+<pre><code class="hljs css language-reason">joe<span class="hljs-operator">-&gt;</span>ageSet(<span class="hljs-number">21</span>)
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="methods"></a><a href="#methods" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Methods</h3>
 <p>You can attach arbitrary methods onto a type (<em>any</em> type, as a matter of fact. Not just <code>bs.deriving abstract</code> record types). See <a href="/docs/zh-TW/function#object-method">Object Method</a> in the function section later.</p>
@@ -225,9 +225,9 @@ ageSet(joe, <span class="hljs-number">21</span>);
 } [@@bs.deriving abstract]
 </code></pre>
 <pre><code class="hljs css language-reason"><span class="hljs-comment">/* test.re */</span>
-[@bs.deriving abstract]
+<span class="hljs-attribute">[@bs.deriving abstract]</span>
 <span class="hljs-keyword">type</span> cord = {
-  [@bs.optional] <span class="hljs-keyword">mutable</span> x: int,
+  <span class="hljs-attribute">[@bs.optional]</span> <span class="hljs-keyword">mutable</span> x: int,
   y: int,
 };
 </code></pre>
@@ -238,9 +238,9 @@ ageSet(joe, <span class="hljs-number">21</span>);
 } [@@bs.deriving abstract]
 </code></pre>
 <pre><code class="hljs css language-reason"><span class="hljs-comment">/* test.rei */</span>
-[@bs.deriving abstract]
+<span class="hljs-attribute">[@bs.deriving abstract]</span>
 <span class="hljs-keyword">type</span> cord = {
-  [@bs.optional] x: int,
+  <span class="hljs-attribute">[@bs.optional]</span> x: int,
   y: int,
 };
 </code></pre>
@@ -252,10 +252,9 @@ ageSet(joe, <span class="hljs-number">21</span>);
   y: <span class="hljs-built_in">int</span>
 } [@@bs.deriving abstract]
 </code></pre>
-<pre><code class="hljs css language-reason">[@bs.deriving abstract]
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.deriving abstract]</span>
 <span class="hljs-keyword">type</span> cord = <span class="hljs-keyword">pri</span> {
-  [@bs.optional]
-  x: int,
+  <span class="hljs-attribute">[@bs.optional]</span> x: int,
   y: int,
 };
 </code></pre>

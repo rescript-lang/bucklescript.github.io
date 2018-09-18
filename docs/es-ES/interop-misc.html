@@ -43,10 +43,10 @@
 
 <span class="hljs-keyword">let</span> _ = draw [|<span class="hljs-number">1</span>;<span class="hljs-number">2</span>|]
 </code></pre>
-<pre><code class="hljs css language-reason">[@bs.<span class="hljs-keyword">val</span>] [@bs.scope <span class="hljs-string">"global"</span>] [@bs.splice]
-external draw : ([@bs.<span class="hljs-keyword">as</span> <span class="hljs-string">"dog"</span>] <span class="hljs-number">_</span>, array(int)) =&gt; unit = <span class="hljs-string">"draw"</span>;
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.val]</span> <span class="hljs-attribute">[@bs.scope "global"]</span> <span class="hljs-attribute">[@bs.splice]</span>
+<span class="hljs-keyword">external</span> draw : (<span class="hljs-attribute">[@bs.as "dog"]</span> _, array(int)) =&gt; unit = <span class="hljs-string">"draw"</span>;
 
-draw([|<span class="hljs-number">1</span>, <span class="hljs-number">2</span>|]);
+draw(<span class="hljs-literal">[|</span><span class="hljs-number">1</span>, <span class="hljs-number">2</span><span class="hljs-literal">|]</span>);
 </code></pre>
 <p>Output:</p>
 <pre><code class="hljs css language-js">global.draw(<span class="hljs-string">"dog"</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>);
@@ -59,16 +59,16 @@ draw([|<span class="hljs-number">1</span>, <span class="hljs-number">2</span>|])
  | <span class="hljs-type">Not_found</span> -&gt; <span class="hljs-number">1</span>
  | <span class="hljs-type">Sys_error</span> _ -&gt; <span class="hljs-number">2</span>
 
-<span class="hljs-comment">(* val handleData : 'a -&gt; int option *)</span>
+<span class="hljs-comment">(* handleData is 'a -&gt; int option *)</span>
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> handleData = [@bs.open] (
-  <span class="hljs-func"><span class="hljs-keyword">fun</span><span class="hljs-params">
-<span class="hljs-params"> <span class="hljs-params"> |<span class="hljs-params"> Invalid_argument(<span class="hljs-number">_</span>)<span class="hljs-params"> </span></span></span></span></span></span>=&gt; <span class="hljs-number">0</span>
-  | <span class="hljs-type">Not_found</span> =&gt; <span class="hljs-number">1</span>
-  | <span class="hljs-type">Sys_error</span>(<span class="hljs-number">_</span>) =&gt; <span class="hljs-number">2</span>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> handleData = <span class="hljs-attribute">[@bs.open]</span> (
+  <span class="hljs-keyword">fun</span>
+  | <span class="hljs-constructor">Invalid_argument</span>(_) =&gt; <span class="hljs-number">0</span>
+  | <span class="hljs-constructor">Not_found</span> =&gt; <span class="hljs-number">1</span>
+  | <span class="hljs-constructor">Sys_error</span>(_) =&gt; <span class="hljs-number">2</span>
 );
 
-(* <span class="hljs-keyword">let</span> handleData: 'a =&gt; option(int) *)
+<span class="hljs-comment">/* handleData is 'a =&gt; option(int) */</span>
 </code></pre>
 <p>For any input source, as long as it matches the exception pattern (nested pattern match supported), the matched value is returned, otherwise return <code>None</code>.</p>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/es-ES/nodejs-special-variables"><span class="arrow-prev">← </span><span>Anterior</span></a><a class="docs-next button" href="/docs/es-ES/browser-support-polyfills"><span>Siguiente</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav docOnPageNav"><ul class="toc-headings"><li><a href="#componer-atributos-bs">Componer Atributos <code>bs</code></a></li><li><a href="#manejo-seguro-de-datos-externos">Manejo Seguro de Datos Externos</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script>window.foo = new Pjax({
