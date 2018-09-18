@@ -317,8 +317,7 @@ type cord = private {
 ```reason
 [@bs.deriving abstract]
 type cord = pri {
-  [@bs.optional]
-  x: int,
+  [@bs.optional] x: int,
   y: int,
 };
 ```

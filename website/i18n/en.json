@@ -4,61 +4,157 @@
     "next": "Next",
     "previous": "Previous",
     "tagline": "Write safer and simpler code in OCaml & Reason, compile to JavaScript.",
-    "automatic-interface-generation": "Automatic Interface Generation",
-    "better-data-structures-printing-debug-mode": "Better Data Structures Printing (Debug Mode)",
-    "bind-to-global-values": "Bind to Global Values",
-    "browser-support-polyfills": "Browser Support & Polyfills",
-    "build-advanced": "Advanced",
-    "build-configuration": "Configuration",
-    "build-overview": "Overview",
-    "build-performance": "Performance",
-    "class": "Class",
-    "common-data-types": "Common Data Types",
-    "community": "Community",
-    "comparison-to-jsoo": "Comparison to Js_of_ocaml",
-    "compiler-architecture-principles": "Compiler Architecture & Principles",
-    "concepts-overview": "Concepts Overview",
-    "conditional-compilation": "Conditional Compilation",
-    "difference-from-native-ocaml": "Difference from Native OCaml",
-    "ecosystem": "Ecosystem",
-    "embed-raw-javascript": "Embed Raw JavaScript",
-    "exceptions": "Exceptions",
-    "extended-compiler-options": "Extended Compiler Options",
-    "fast-pipe": "Fast Pipe",
-    "function": "Function",
-    "generate-converters-accessors": "Generate Converters & Helpers",
-    "import-export": "Import & Export",
-    "installation": "Installation",
-    "interop-cheatsheet": "Cheatsheet",
-    "interop-misc": "Miscellaneous",
-    "interop-overview": "Overview",
-    "interop-with-js-build-systems": "Interop with JS Build System",
-    "intro-to-external": "Intro to External",
-    "json": "JSON",
-    "load-third-party-libraries": "Load Third-party Libraries",
-    "new-project": "New Project",
-    "nodejs-special-variables": "NodeJS Special Variables",
-    "null-undefined-option": "Null, Undefined & Option",
-    "object-2": "Object 2",
-    "object": "Object",
-    "playground": "Playground",
-    "regular-expression": "Regular Expression",
-    "roadmap": "Roadmap & Contribution",
-    "stdlib-overview": "Overview",
-    "use-existing-ocaml-libraries": "Use Existing OCaml Libraries",
-    "what-why": "What & Why",
-    "why-bucklescript-matters-for-javascript-platform": "why-bucklescript-matters-for-javascript-platform",
-    "Docs": "Docs",
-    "Try": "Try",
-    "API": "API",
-    "Community": "Community",
-    "Blog": "Blog",
-    "GitHub": "GitHub",
-    "Intro": "Intro",
-    "Interop": "Interop",
-    "Build System": "Build System",
-    "Standard Library": "Standard Library",
-    "Advanced": "Advanced"
+    "docs": {
+      "automatic-interface-generation": {
+        "title": "Automatic Interface Generation"
+      },
+      "better-data-structures-printing-debug-mode": {
+        "title": "Better Data Structures Printing (Debug Mode)"
+      },
+      "bind-to-global-values": {
+        "title": "Bind to Global Values"
+      },
+      "browser-support-polyfills": {
+        "title": "Browser Support & Polyfills"
+      },
+      "build-advanced": {
+        "title": "Advanced"
+      },
+      "build-configuration": {
+        "title": "Configuration"
+      },
+      "build-overview": {
+        "title": "Overview"
+      },
+      "build-performance": {
+        "title": "Performance"
+      },
+      "class": {
+        "title": "Class"
+      },
+      "common-data-types": {
+        "title": "Common Data Types"
+      },
+      "community": {
+        "title": "Community"
+      },
+      "comparison-to-jsoo": {
+        "title": "Comparison to Js_of_ocaml"
+      },
+      "compiler-architecture-principles": {
+        "title": "Compiler Architecture & Principles"
+      },
+      "concepts-overview": {
+        "title": "Concepts Overview"
+      },
+      "conditional-compilation": {
+        "title": "Conditional Compilation"
+      },
+      "difference-from-native-ocaml": {
+        "title": "Difference from Native OCaml"
+      },
+      "ecosystem": {
+        "title": "Ecosystem"
+      },
+      "embed-raw-javascript": {
+        "title": "Embed Raw JavaScript"
+      },
+      "exceptions": {
+        "title": "Exceptions"
+      },
+      "extended-compiler-options": {
+        "title": "Extended Compiler Options"
+      },
+      "fast-pipe": {
+        "title": "Fast Pipe"
+      },
+      "function": {
+        "title": "Function"
+      },
+      "generate-converters-accessors": {
+        "title": "Generate Converters & Helpers"
+      },
+      "import-export": {
+        "title": "Import & Export"
+      },
+      "installation": {
+        "title": "Installation"
+      },
+      "interop-cheatsheet": {
+        "title": "Cheatsheet"
+      },
+      "interop-misc": {
+        "title": "Miscellaneous"
+      },
+      "interop-overview": {
+        "title": "Overview"
+      },
+      "interop-with-js-build-systems": {
+        "title": "Interop with JS Build System"
+      },
+      "intro-to-external": {
+        "title": "Intro to External"
+      },
+      "json": {
+        "title": "JSON"
+      },
+      "load-third-party-libraries": {
+        "title": "Load Third-party Libraries"
+      },
+      "new-project": {
+        "title": "New Project"
+      },
+      "nodejs-special-variables": {
+        "title": "NodeJS Special Variables"
+      },
+      "null-undefined-option": {
+        "title": "Null, Undefined & Option"
+      },
+      "object-2": {
+        "title": "Object 2"
+      },
+      "object": {
+        "title": "Object"
+      },
+      "playground": {
+        "title": "Playground"
+      },
+      "regular-expression": {
+        "title": "Regular Expression"
+      },
+      "roadmap": {
+        "title": "Roadmap & Contribution"
+      },
+      "stdlib-overview": {
+        "title": "Overview"
+      },
+      "use-existing-ocaml-libraries": {
+        "title": "Use Existing OCaml Libraries"
+      },
+      "what-why": {
+        "title": "What & Why"
+      },
+      "why-bucklescript-matters-for-javascript-platform": {
+        "title": "why-bucklescript-matters-for-javascript-platform"
+      }
+    },
+    "links": {
+      "Docs": "Docs",
+      "Try": "Try",
+      "API": "API",
+      "Community": "Community",
+      "Blog": "Blog",
+      "GitHub": "GitHub"
+    },
+    "categories": {
+      "Intro": "Intro",
+      "Interop": "Interop",
+      "Build System": "Build System",
+      "Standard Library": "Standard Library",
+      "Advanced": "Advanced",
+      "Try": "Try",
+      "Community": "Community"
+    }
   },
   "pages-strings": {
     "Built With BuckleScript|no description given": "Built With BuckleScript",

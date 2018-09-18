@@ -10,7 +10,7 @@ let result = encodeURI "hello"
 ```
 
 ```reason
-[@bs.val] external encodeURI : string => string = "encodeURI";
+[@bs.val] external encodeURI: string => string = "encodeURI";
 let result = encodeURI("hello");
 ```
 
@@ -31,14 +31,14 @@ draw(20, 20, true)
 It'd be nice if on the BS side, we can bind & call `draw` while labeling things a bit:
 
 ```ocaml
-external draw : x:int -> y:int -> ?border:bool -> unit -> unit = "" [@@bs.val]
+external draw: x:int -> y:int -> ?border:bool -> unit -> unit = "" [@@bs.val]
 
 let _ = draw ~x:10 ~y:20 ~border:true ()
 let _ = draw ~x:10 ~y:20 ()
 ```
 
 ```reason
-[@bs.val] external draw : (~x: int, ~y: int, ~border: bool=?, unit) => unit = "";
+[@bs.val] external draw: (~x: int, ~y: int, ~border: bool=?, unit) => unit = "";
 
 draw(~x=10, ~y=20, ~border=true, ());
 draw(~x=10, ~y=20, ());
@@ -61,7 +61,7 @@ Functions attached to a JS objects require a special way of binding to them, usi
 
 ```ocaml
 type document (* abstract type for a document object *)
-external getElementById : document -> string -> Dom.element = "getElementById" [@@bs.send]
+external getElementById: document -> string -> Dom.element = "getElementById" [@@bs.send]
 external doc: document = "document" [@@bs.val]
 
 let el = getElementById doc "myId"
@@ -69,7 +69,7 @@ let el = getElementById doc "myId"
 
 ```reason
 type document; /* abstract type for a document object */
-[@bs.send] external getElementById : (document, string) => Dom.element = "getElementById";
+[@bs.send] external getElementById: (document, string) => Dom.element = "getElementById";
 [@bs.val] external doc : document = "document";
 
 let el = getElementById(doc, "myId");
@@ -92,12 +92,12 @@ Ever used `foo().bar().baz()` chaining ("fluent api") in JS OOP? We can model th
 You might have JS functions that take an arbitrary amount of arguments. BuckleScript supports modeling those, under the condition that the arbitrary arguments part is homogenous (aka of the same type). If so, add `bs.splice` to your `external`.
 
 ```ocaml
-external join : string array -> string = "" [@@bs.module "path"] [@@bs.splice]
+external join: string array -> string = "" [@@bs.module "path"] [@@bs.splice]
 let v = join [| "a"; "b"|]
 ```
 
 ```reason
-[@bs.module "path"] [@bs.splice] external join : array(string) => string = "";
+[@bs.module "path"] [@bs.splice] external join: array(string) => string = "";
 let v = join([|"a", "b"|]);
 ```
 
@@ -125,9 +125,9 @@ external draw : string -> useRandomAnimal:bool -> unit = "draw" [@@bs.module "Dr
 ```
 
 ```reason
-[@bs.module "Drawing"] external drawCat : unit => unit = "draw";
-[@bs.module "Drawing"] external drawDog : (~giveName: string) => unit = "draw";
-[@bs.module "Drawing"] external draw : (string, ~useRandomAnimal: bool) => unit = "draw";
+[@bs.module "Drawing"] external drawCat: unit => unit = "draw";
+[@bs.module "Drawing"] external drawDog: (~giveName: string) => unit = "draw";
+[@bs.module "Drawing"] external draw: (string, ~useRandomAnimal: bool) => unit = "draw";
 ```
 
 Note how all three externals bind to the same JS function, `draw`.
@@ -151,7 +151,7 @@ function padLeft(value, padding) {
 Here, `padding` is really conceptually a variant. Let's model it as such.
 
 ```ocaml
-external padLeft :
+external padLeft:
   string
   -> ([ `Str of string
       | `Int of int
@@ -165,7 +165,7 @@ let _ = padLeft "Hello World" (`Str "Message from BS: ")
 
 ```reason
 [@bs.val]
-external padLeft : (
+external padLeft: (
   string,
   [@bs.unwrap] [
     | `Str(string)
@@ -189,7 +189,7 @@ padLeft("Hello World", "Message from BS: ");
 Consider the Node `fs.readFileSync`'s second argument. It can take a string, but really only a defined set: `"ascii"`, `"utf8"`, etc. You can still bind it as a string, but we can use poly variants + `bs.string` to ensure that our usage's more correct:
 
 ```ocaml
-external readFileSync :
+external readFileSync:
   name:string ->
   ([ `utf8
    | `useAscii [@bs.as "ascii"]
@@ -202,7 +202,7 @@ let _ = readFileSync ~name:"xx.txt" `useAscii
 
 ```reason
 [@bs.module "fs"]
-external readFileSync : (
+external readFileSync: (
   ~name: string,
   [@bs.string] [
     | `utf8
@@ -228,7 +228,7 @@ And now, passing something like `"myOwnUnicode"` or other variant constructor na
 Aside from string, you can also compile an argument to an int, using `bs.int` instead of `bs.string` in a similar way:
 
 ```ocaml
-external test_int_type :
+external test_int_type:
   ([ `on_closed
    | `on_open [@bs.as 20]
    | `in_bin
@@ -241,7 +241,7 @@ let _ = test_int_type `in_bin
 
 ```reason
 [@bs.val]
-external test_int_type : (
+external test_int_type: (
   [@bs.int] [
     | `on_closed
     | [@bs.as 20] `on_open
@@ -261,7 +261,7 @@ One last trick with polymorphic variants:
 ```ocaml
 type readline
 
-external on :
+external on:
   readline
   -> ([
       |`close of unit -> unit
@@ -279,7 +279,7 @@ let register rl =
 type readline;
 
 [@bs.send]
-external on : (
+external on: (
     readline,
     [@bs.string] [ | `close(unit => unit) | `line(string => unit)]
   )
@@ -312,7 +312,7 @@ function register(rl) {
 Sometimes it's convenient to bind to a function using an `external`, while passing predetermined argument values to the JS function:
 
 ```ocaml
-external process_on_exit :
+external process_on_exit:
   (_ [@bs.as "exit"]) ->
   (int -> unit) ->
   unit =
@@ -325,7 +325,7 @@ let () = process_on_exit (fun exit_code ->
 
 ```reason
 [@bs.val]
-external process_on_exit : (
+external process_on_exit: (
   [@bs.as "exit"] _,
   int => unit
 ) => unit = "process.on";
@@ -400,14 +400,14 @@ If you annotate a function declaration signature on an `external` or `let` with 
 
 ```ocaml
 type timerId
-external setTimeout : (unit -> unit [@bs]) -> int -> timerId = "setTimeout" [@@bs.val]
+external setTimeout: (unit -> unit [@bs]) -> int -> timerId = "setTimeout" [@@bs.val]
 
 let id = setTimeout (fun [@bs] () -> Js.log "hello") 1000
 ```
 
 ```reason
 type timerId;
-[@bs.val] external setTimeout : ((. unit) => unit, int) => timerId = "setTimeout";
+[@bs.val] external setTimeout: ((. unit) => unit, int) => timerId = "setTimeout";
 
 let id = setTimeout((.) => Js.log("hello"), 1000);
 ```
@@ -445,12 +445,12 @@ The above solution is safe, guaranteed, and performant, but sometimes visually a
 Then try `[@bs.uncurry]`:
 
 ```ocaml
-external map : 'a array -> ('a -> 'b [@bs.uncurry]) -> 'b array = "" [@@bs.send]
+external map: 'a array -> ('a -> 'b [@bs.uncurry]) -> 'b array = "" [@@bs.send]
 let _ = map [|1; 2; 3|] (fun x -> x+ 1)
 ```
 
 ```reason
-[@bs.send] external map : (array('a), [@bs.uncurry] ('a => 'b)) => array('b) = "";
+[@bs.send] external map: (array('a), [@bs.uncurry] ('a => 'b)) => array('b) = "";
 map([|1, 2, 3|], x => x + 1);
 ```
 
@@ -459,7 +459,7 @@ map([|1, 2, 3|], x => x + 1);
 If you try to do this:
 
 ```ocaml
-let id : ('a -> 'a [@bs]) = ((fun v -> v) [@bs])
+let id: ('a -> 'a [@bs]) = ((fun v -> v) [@bs])
 ```
 
 ```reason
@@ -506,8 +506,8 @@ Here, `this` would point to `x` (actually, it depends on how `onload` is called,
 ```ocaml
 type x
 external x: x = "" [@@bs.val]
-external set_onload : x -> (x -> int -> unit [@bs.this]) -> unit = "onload" [@@bs.set]
-external resp : x -> int = "response" [@@bs.get]
+external set_onload: x -> (x -> int -> unit [@bs.this]) -> unit = "onload" [@@bs.set]
+external resp: x -> int = "response" [@@bs.get]
 
 let _ =
   set_onload x begin fun [@bs.this] o v ->
@@ -517,9 +517,9 @@ let _ =
 
 ```reason
 type x;
-[@bs.val] external x : x = "";
-[@bs.set] external set_onload : (x, [@bs.this] ((x, int) => unit)) => unit = "onload";
-[@bs.get] external resp : x => int = "response";
+[@bs.val] external x: x = "";
+[@bs.set] external set_onload: (x, [@bs.this] ((x, int) => unit)) => unit = "onload";
+[@bs.get] external resp: x => int = "response";
 
 set_onload(x, [@bs.this] ((o, v) => Js.log(resp(o) + v)));
 ```

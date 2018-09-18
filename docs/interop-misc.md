@@ -37,7 +37,7 @@ let handleData = function [@bs.open]
  | Not_found -> 1
  | Sys_error _ -> 2
 
-(* val handleData : 'a -> int option *)
+(* handleData is 'a -> int option *)
 ```
 
 ```reason
@@ -48,7 +48,7 @@ let handleData = [@bs.open] (
   | Sys_error(_) => 2
 );
 
-(* let handleData: 'a => option(int) *)
+/* handleData is 'a => option(int) */
 ```
 
 For any input source, as long as it matches the exception pattern (nested pattern match supported), the matched value is returned, otherwise return `None`.

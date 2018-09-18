@@ -2,6 +2,8 @@
 title: Conditional Compilation
 ---
 
+> This doesn't work with the Reason syntax right now, only the OCaml syntax.
+
 Sometimes you want to write code that works with different versions of compilers and libraries.
 
 People used to use preprocessors like [C preprocessor](http://tigcc.ticalc.org/doc/cpp.html) for the C family languages. The OCaml community uses several preprocessors: [cppo](https://github.com/mjambon/cppo), [ocp-pp](https://github.com/OCamlPro/typerex-build/tree/master/tools/ocp-pp), camlp4 IFDEF macros, [optcomp](https://github.com/diml/optcomp) and [ppx optcomp](https://github.com/janestreet/ppx_optcomp).

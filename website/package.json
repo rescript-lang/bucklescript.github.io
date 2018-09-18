@@ -15,6 +15,7 @@
     "docusaurus": "chenglou/Docusaurus#bade05e408bef8d94a6ba3281fdb3f6295c30284"
   },
   "devDependencies": {
-    "pjax-api": "^3.23.0"
+    "pjax-api": "^3.23.0",
+    "reason-highlightjs": "0.2.0"
   }
 }
