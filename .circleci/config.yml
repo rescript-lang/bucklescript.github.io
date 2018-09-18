@@ -11,10 +11,10 @@ aliases:
       - ~/.cache/yarn
     key: v1-yarn-{{ .Branch }}-{{ checksum "website/yarn.lock" }}
 
-  - &filter-only-master
+  - &filter-only-source
     branches:
       only:
-        - master
+        - source
 
   - &yarn
     |
@@ -63,4 +63,4 @@ workflows:
   website:
     jobs:
       - deploy-website:
-          filters: *filter-only-master
+          filters: *filter-only-source
