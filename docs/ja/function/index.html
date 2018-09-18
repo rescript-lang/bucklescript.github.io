@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="ja"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>関数 · BuckleScript</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Modeling a JS function is like modeling a normal value:"/><meta name="docsearch:language" content="ja"/><meta property="og:title" content="関数 · BuckleScript"/><meta property="og:type" content="website"/><meta property="og:url" content="https://bucklescript.github.io/index.html"/><meta property="og:description" content="Modeling a JS function is like modeling a normal value:"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/logos/bucklescript.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://bucklescript.github.io/blog/atom.xml" title="BuckleScript Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://bucklescript.github.io/blog/feed.xml" title="BuckleScript Blog RSS Feed"/><script type="text/javascript" src="/js/toggleSyntaxButton.js"></script><script type="text/javascript" src="/js/pjax-api.min.js"></script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/ja"><img class="logo" src="/img/logos/bucklescript.svg" alt="BuckleScript"/><h2 class="headerTitleWithLogo">BuckleScript</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/ja/installation" target="_self">ドキュメント</a></li><li class=""><a href="/docs/ja/playground" target="_self">試してみる</a></li><li class="siteNavGroupActive"><a href="/docs/ja/stdlib-overview" target="_self">API</a></li><li class=""><a href="/docs/ja/community" target="_self">コミュニティ</a></li><li class=""><a href="/blog" target="_self">ブログ</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>日本語</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/en/function">English</a></li><li><a href="/docs/es-ES/function">Español</a></li><li><a href="/docs/fr/function">Français</a></li><li><a href="/docs/ko/function">한국어</a></li><li><a href="/docs/pt-BR/function">Português (Brasil)</a></li><li><a href="/docs/ru/function">Русский</a></li><li><a href="/docs/zh-CN/function">中文</a></li><li><a href="/docs/zh-TW/function">繁體中文</a></li><li><a href="https://crowdin.com/project/bucklescript" target="_blank" rel="noreferrer noopener">翻訳に参加する</a></li></ul></div></li><script>
+<!DOCTYPE html><html lang="ja"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Function · BuckleScript</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Modeling a JS function is like modeling a normal value:"/><meta name="docsearch:language" content="ja"/><meta property="og:title" content="Function · BuckleScript"/><meta property="og:type" content="website"/><meta property="og:url" content="https://bucklescript.github.io/index.html"/><meta property="og:description" content="Modeling a JS function is like modeling a normal value:"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/logos/bucklescript.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://bucklescript.github.io/blog/atom.xml" title="BuckleScript Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://bucklescript.github.io/blog/feed.xml" title="BuckleScript Blog RSS Feed"/><script type="text/javascript" src="/js/toggleSyntaxButton.js"></script><script type="text/javascript" src="/js/pjax-api.min.js"></script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/ja"><img class="logo" src="/img/logos/bucklescript.svg" alt="BuckleScript"/><h2 class="headerTitleWithLogo">BuckleScript</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/ja/installation" target="_self">Docs</a></li><li class=""><a href="/docs/ja/playground" target="_self">Try</a></li><li class="siteNavGroupActive"><a href="/docs/ja/stdlib-overview" target="_self">API</a></li><li class=""><a href="/docs/ja/community" target="_self">Community</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>日本語</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/en/function">English</a></li><li><a href="/docs/es-ES/function">Español</a></li><li><a href="/docs/fr/function">Français</a></li><li><a href="/docs/ko/function">한국어</a></li><li><a href="/docs/pt-BR/function">Português (Brasil)</a></li><li><a href="/docs/ru/function">Русский</a></li><li><a href="/docs/zh-CN/function">中文</a></li><li><a href="/docs/zh-TW/function">繁體中文</a></li><li><a href="https://crowdin.com/project/bucklescript" target="_blank" rel="noreferrer noopener">翻訳に参加する</a></li></ul></div></li><script>
         const languagesMenuItem = document.getElementById("languages-menu");
         const languagesDropDown = document.getElementById("languages-dropdown");
         languagesMenuItem.addEventListener("click", function(event) {
@@ -10,7 +10,7 @@
             languagesDropDown.className = "hide";
           }
         });
-      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/bucklescript/bucklescript" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>相互運用</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">はじめに</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ja/what-why">What &amp; Why</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/installation">インストール</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/new-project">新しいプロジェクト</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/concepts-overview">基本コンセプト</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">相互運用</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ja/interop-overview">概要</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/interop-cheatsheet">チートシート</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/embed-raw-javascript">生の JavaScript を埋め込む</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/common-data-types">基本的なデータ型</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/intro-to-external">Intro to External</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/bind-to-global-values">グローバル変数のバインド</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/null-undefined-option">Null、Undefined、オプション</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/object">オブジェクト</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/object-2">Object 2</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/class">クラス</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/ja/function">関数</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/import-export">インポート / エクスポート</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/regular-expression">正規表現</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/exceptions">例外</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/json">JSON</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/fast-pipe">Fast Pipe</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/generate-converters-accessors">コンバーターとヘルパーの生成</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/better-data-structures-printing-debug-mode">Better Data Structures Printing (Debug Mode)</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/nodejs-special-variables">NodeJS の特殊な変数</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/interop-misc">その他</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/browser-support-polyfills">ブラウザー対応と Polyfill</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">ビルドシステム</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ja/build-overview">概要</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/build-configuration">設定</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/automatic-interface-generation">インターフェースの自動生成</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/interop-with-js-build-systems">JavaScript ビルド システムとの相互運用</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/build-performance">パフォーマンス</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/build-advanced">高度な設定</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">標準ライブラリ</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ja/stdlib-overview">概要</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">高度な設定</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ja/conditional-compilation">条件付きコンパイル</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/extended-compiler-options">拡張コンパイラ オプション</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/use-existing-ocaml-libraries">既存のOCamlのライブラリを使う</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/difference-from-native-ocaml">ネイティブ OCaml との違い</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/compiler-architecture-principles">コンパイラのアーキテクチャと原則</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/comparison-to-jsoo">Js_of_ocaml との比較</a></li></ul></div></div></section></div><script>
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/bucklescript/bucklescript" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Interop</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Intro</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ja/what-why">What &amp; Why</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/installation">Installation</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/new-project">New Project</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/concepts-overview">Concepts Overview</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Interop</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ja/interop-overview">Overview</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/interop-cheatsheet">Cheatsheet</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/embed-raw-javascript">Embed Raw JavaScript</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/common-data-types">Common Data Types</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/intro-to-external">Intro to External</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/bind-to-global-values">Bind to Global Values</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/null-undefined-option">Null, Undefined &amp; Option</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/object">Object</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/object-2">Object 2</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/class">Class</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/ja/function">Function</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/import-export">Import &amp; Export</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/regular-expression">Regular Expression</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/exceptions">Exceptions</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/json">JSON</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/fast-pipe">Fast Pipe</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/generate-converters-accessors">Generate Converters &amp; Helpers</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/better-data-structures-printing-debug-mode">Better Data Structures Printing (Debug Mode)</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/nodejs-special-variables">NodeJS Special Variables</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/interop-misc">Miscellaneous</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/browser-support-polyfills">Browser Support &amp; Polyfills</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Build System</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ja/build-overview">Overview</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/build-configuration">Configuration</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/automatic-interface-generation">Automatic Interface Generation</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/interop-with-js-build-systems">Interop with JS Build System</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/build-performance">Performance</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/build-advanced">Advanced</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Standard Library</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ja/stdlib-overview">Overview</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Advanced</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ja/conditional-compilation">Conditional Compilation</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/extended-compiler-options">Extended Compiler Options</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/use-existing-ocaml-libraries">Use Existing OCaml Libraries</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/difference-from-native-ocaml">Difference from Native OCaml</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/compiler-architecture-principles">Compiler Architecture &amp; Principles</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/comparison-to-jsoo">Comparison to Js_of_ocaml</a></li></ul></div></div></section></div><script>
             document.addEventListener('DOMContentLoaded', function() {
               createToggler('#navToggler', '#docsNav', 'docsSliderActive');
               createToggler('#tocToggler', 'body', 'tocActive');
@@ -37,12 +37,12 @@
                 };
               }
             });
-        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/bucklescript/ja" target="_blank" rel="noreferrer noopener">Translate</a><h1 class="postHeaderTitle">関数</h1></header><article><div><span><p>Modeling a JS function is like modeling a normal value:</p>
+        </script></nav></div><div class="container mainContainer docMainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/bucklescript/ja" target="_blank" rel="noreferrer noopener">Translate</a><h1 class="postHeaderTitle">Function</h1></header><article><div><span><p>Modeling a JS function is like modeling a normal value:</p>
 <pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> encodeURI: <span class="hljs-built_in">string</span> -&gt; <span class="hljs-built_in">string</span> = <span class="hljs-string">"encodeURI"</span> [@@bs.<span class="hljs-keyword">val</span>]
 <span class="hljs-keyword">let</span> result = encodeURI <span class="hljs-string">"hello"</span>
 </code></pre>
-<pre><code class="hljs css language-reason">[<span class="hljs-meta">@bs</span>.val] external <span class="hljs-built_in">encodeURI</span> : <span class="hljs-function"><span class="hljs-params">string</span> =&gt;</span> <span class="hljs-built_in">string</span> = <span class="hljs-string">"encodeURI"</span>;
-<span class="hljs-keyword">let</span> result = <span class="hljs-built_in">encodeURI</span>(<span class="hljs-string">"hello"</span>);
+<pre><code class="hljs css language-reason">[@bs.<span class="hljs-keyword">val</span>] external encodeURI : string =&gt; string = <span class="hljs-string">"encodeURI"</span>;
+<span class="hljs-keyword">let</span> result = encodeURI(<span class="hljs-string">"hello"</span>);
 </code></pre>
 <p>We also expose a few special features, described below.</p>
 <h2><a class="anchor" aria-hidden="true" id="labeled-arguments"></a><a href="#labeled-arguments" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Labeled Arguments</h2>
@@ -59,10 +59,10 @@ draw(<span class="hljs-number">20</span>, <span class="hljs-number">20</span>, <
 <span class="hljs-keyword">let</span> _ = draw ~x:<span class="hljs-number">10</span> ~y:<span class="hljs-number">20</span> ~border:<span class="hljs-literal">true</span> <span class="hljs-literal">()</span>
 <span class="hljs-keyword">let</span> _ = draw ~x:<span class="hljs-number">10</span> ~y:<span class="hljs-number">20</span> <span class="hljs-literal">()</span>
 </code></pre>
-<pre><code class="hljs css language-reason">[@bs.val] external draw : (~x: int, ~y: int, ~border: <span class="hljs-attribute">bool</span>=?, unit) =&gt; unit = <span class="hljs-string">""</span>;
+<pre><code class="hljs css language-reason">[@bs.<span class="hljs-keyword">val</span>] external draw : (~x: int, ~y: int, ~border: bool=?, unit) =&gt; unit = <span class="hljs-string">""</span>;
 
-draw(~<span class="hljs-attribute">x</span>=10, ~<span class="hljs-attribute">y</span>=20, ~<span class="hljs-attribute">border</span>=<span class="hljs-literal">true</span>, ());
-draw(~<span class="hljs-attribute">x</span>=10, ~<span class="hljs-attribute">y</span>=20, ());
+draw(~x=<span class="hljs-number">10</span>, ~y=<span class="hljs-number">20</span>, ~border=<span class="hljs-literal">true</span>, ());
+draw(~x=<span class="hljs-number">10</span>, ~y=<span class="hljs-number">20</span>, ());
 </code></pre>
 <p>Output:</p>
 <pre><code class="hljs css language-js">draw(<span class="hljs-number">10</span>, <span class="hljs-number">20</span>, <span class="hljs-literal">true</span>);
@@ -78,9 +78,9 @@ draw(<span class="hljs-number">10</span>, <span class="hljs-number">20</span>, <
 
 <span class="hljs-keyword">let</span> el = getElementById doc <span class="hljs-string">"myId"</span>
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> <span class="hljs-built_in">document</span>; <span class="hljs-comment">/* abstract type for a document object */</span>
-[<span class="hljs-meta">@bs</span>.send] external getElementById : <span class="hljs-function">(<span class="hljs-params"><span class="hljs-built_in">document</span>, <span class="hljs-built_in">string</span></span>) =&gt;</span> Dom.element = <span class="hljs-string">"getElementById"</span>;
-[<span class="hljs-meta">@bs</span>.val] external doc : <span class="hljs-built_in">document</span> = <span class="hljs-string">"document"</span>;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> document; <span class="hljs-comment">/* abstract type for a document object */</span>
+[@bs.send] external getElementById : (document, string) =&gt; <span class="hljs-type">Dom</span>.element = <span class="hljs-string">"getElementById"</span>;
+[@bs.<span class="hljs-keyword">val</span>] external doc : document = <span class="hljs-string">"document"</span>;
 
 <span class="hljs-keyword">let</span> el = getElementById(doc, <span class="hljs-string">"myId"</span>);
 </code></pre>
@@ -95,8 +95,8 @@ draw(<span class="hljs-number">10</span>, <span class="hljs-number">20</span>, <
 <pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> join : <span class="hljs-built_in">string</span> <span class="hljs-built_in">array</span> -&gt; <span class="hljs-built_in">string</span> = <span class="hljs-string">""</span> [@@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"path"</span>] [@@bs.splice]
 <span class="hljs-keyword">let</span> v = join [| <span class="hljs-string">"a"</span>; <span class="hljs-string">"b"</span>|]
 </code></pre>
-<pre><code class="hljs css language-reason">[@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"path"</span>] [@bs.splice] <span class="hljs-keyword">external</span> join : <span class="hljs-built_in">array</span>(<span class="hljs-built_in">string</span>) =&gt; <span class="hljs-built_in">string</span> = <span class="hljs-string">""</span>;
-<span class="hljs-keyword">let</span> v = join([|<span class="hljs-string">"a"</span>, <span class="hljs-string">"b"</span>|]);
+<pre><code class="hljs css language-reason">[@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"path"</span>] [@bs.splice] external <span class="hljs-built_in">join</span> : array(string) =&gt; string = <span class="hljs-string">""</span>;
+<span class="hljs-keyword">let</span> v = <span class="hljs-built_in">join</span>([|<span class="hljs-string">"a"</span>, <span class="hljs-string">"b"</span>|]);
 </code></pre>
 <p>Output:</p>
 <pre><code class="hljs css language-js"><span class="hljs-keyword">var</span> Path = <span class="hljs-built_in">require</span>(<span class="hljs-string">"path"</span>);
@@ -111,9 +111,9 @@ draw(<span class="hljs-number">10</span>, <span class="hljs-number">20</span>, <
 <span class="hljs-keyword">external</span> drawDog: giveName:<span class="hljs-built_in">string</span> -&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">"draw"</span> [@@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"Drawing"</span>]
 <span class="hljs-keyword">external</span> draw : <span class="hljs-built_in">string</span> -&gt; useRandomAnimal:<span class="hljs-built_in">bool</span> -&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">"draw"</span> [@@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"Drawing"</span>]
 </code></pre>
-<pre><code class="hljs css language-reason">[@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"Drawing"</span>] <span class="hljs-keyword">external</span> drawCat : <span class="hljs-built_in">unit</span> =&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">"draw"</span>;
-[@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"Drawing"</span>] <span class="hljs-keyword">external</span> drawDog : (~giveName: <span class="hljs-built_in">string</span>) =&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">"draw"</span>;
-[@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"Drawing"</span>] <span class="hljs-keyword">external</span> draw : (<span class="hljs-built_in">string</span>, ~useRandomAnimal: <span class="hljs-built_in">bool</span>) =&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">"draw"</span>;
+<pre><code class="hljs css language-reason">[@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"Drawing"</span>] external drawCat : unit =&gt; unit = <span class="hljs-string">"draw"</span>;
+[@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"Drawing"</span>] external drawDog : (~giveName: string) =&gt; unit = <span class="hljs-string">"draw"</span>;
+[@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"Drawing"</span>] external draw : (string, ~useRandomAnimal: bool) =&gt; unit = <span class="hljs-string">"draw"</span>;
 </code></pre>
 <p>Note how all three externals bind to the same JS function, <code>draw</code>.</p>
 <h3><a class="anchor" aria-hidden="true" id="trick-2-polymorphic-variant-bsunwrap"></a><a href="#trick-2-polymorphic-variant-bsunwrap" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Trick 2: Polymorphic Variant + <code>bs.unwrap</code></h3>
@@ -141,16 +141,16 @@ draw(<span class="hljs-number">10</span>, <span class="hljs-number">20</span>, <
 <span class="hljs-keyword">let</span> _ = padLeft <span class="hljs-string">"Hello World"</span> (<span class="hljs-type">`Str</span> <span class="hljs-string">"Message from BS: "</span>)
 </code></pre>
 <pre><code class="hljs css language-reason">[@bs.<span class="hljs-keyword">val</span>]
-<span class="hljs-keyword">external</span> padLeft : (
-  <span class="hljs-built_in">string</span>,
+external padLeft : (
+  string,
   [@bs.unwrap] [
-    | <span class="hljs-type">`Str</span>(<span class="hljs-built_in">string</span>)
-    | <span class="hljs-type">`Int</span>(<span class="hljs-built_in">int</span>)
+    | `<span class="hljs-type">Str</span>(string)
+    | `<span class="hljs-type">Int</span>(int)
   ])
-  =&gt; <span class="hljs-built_in">string</span> = <span class="hljs-string">""</span>;
+  =&gt; string = <span class="hljs-string">""</span>;
 
-padLeft(<span class="hljs-string">"Hello World"</span>, <span class="hljs-type">`Int</span>(<span class="hljs-number">4</span>));
-padLeft(<span class="hljs-string">"Hello World"</span>, <span class="hljs-type">`Str</span>(<span class="hljs-string">"Message from BS: "</span>));
+padLeft(<span class="hljs-string">"Hello World"</span>, `<span class="hljs-type">Int</span>(<span class="hljs-number">4</span>));
+padLeft(<span class="hljs-string">"Hello World"</span>, `<span class="hljs-type">Str</span>(<span class="hljs-string">"Message from BS: "</span>));
 </code></pre>
 <p>Obviously, the JS side couldn't have an argument that's a polymorphic variant! But here, we're just piggy backing on poly variants' type checking and syntax. The secret is the <code>[@bs.unwrap]</code> annotation on the type. It strips the variant constructors and compile to just the payload's value. Output:</p>
 <pre><code class="hljs css language-js">padLeft(<span class="hljs-string">"Hello World"</span>, <span class="hljs-number">4</span>);
@@ -168,14 +168,14 @@ padLeft(<span class="hljs-string">"Hello World"</span>, <span class="hljs-string
 
 <span class="hljs-keyword">let</span> _ = readFileSync ~name:<span class="hljs-string">"xx.txt"</span> `useAscii
 </code></pre>
-<pre><code class="hljs css language-reason">[@bs.<span class="hljs-built_in">module</span> <span class="hljs-string">"fs"</span>]
+<pre><code class="hljs css language-reason">[@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"fs"</span>]
 external readFileSync : (
-  ~<span class="hljs-name">name</span>: <span class="hljs-built_in">string</span>,
-  [@bs.<span class="hljs-built_in">string</span>] [
+  ~name: string,
+  [@bs.string] [
     | `utf8
-    | [@bs.as <span class="hljs-string">"ascii"</span>] `useAscii
+    | [@bs.<span class="hljs-keyword">as</span> <span class="hljs-string">"ascii"</span>] `useAscii
   ])
-  =&gt; <span class="hljs-built_in">string</span> = <span class="hljs-string">""</span>;
+  =&gt; string = <span class="hljs-string">""</span>;
 
 readFileSync(~name=<span class="hljs-string">"xx.txt"</span>, `useAscii);
 </code></pre>
@@ -199,16 +199,16 @@ Fs.readFileSync(<span class="hljs-string">"xx.txt"</span>, <span class="hljs-str
 
 <span class="hljs-keyword">let</span> _ = test_int_type `in_bin
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-selector-attr">[@bs.val]</span>
-<span class="hljs-selector-tag">external</span> <span class="hljs-selector-tag">test_int_type</span> : (
-  [<span class="hljs-variable">@bs</span>.int] [
-    | <span class="hljs-built_in">`on_closed
-    | [@bs.as 20] `</span>on_open
-    | <span class="hljs-built_in">`in_bin
+<pre><code class="hljs css language-reason">[@bs.<span class="hljs-keyword">val</span>]
+external test_int_type : (
+  [@bs.int] [
+    | `on_closed
+    | [@bs.<span class="hljs-keyword">as</span> <span class="hljs-number">20</span>] `on_open
+    | `in_bin
   ])
-  =&gt; int = "";
+  =&gt; int = <span class="hljs-string">""</span>;
 
-test_int_type(`</span>in_bin);
+test_int_type(`in_bin);
 </code></pre>
 <p><code>on_closed</code> will compile to <code>0</code>, <code>on_open</code> to <code>20</code> and <code>in_bin</code> to <strong><code>21</code></strong>.</p>
 <h2><a class="anchor" aria-hidden="true" id="special-case-event-listeners"></a><a href="#special-case-event-listeners" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Special-case: Event Listeners</h2>
@@ -231,15 +231,15 @@ test_int_type(`</span>in_bin);
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> readline;
 
 [@bs.send]
-<span class="hljs-keyword">external</span> on : (
+external on : (
     readline,
-    [@bs.<span class="hljs-built_in">string</span>] [ | `close(<span class="hljs-built_in">unit</span> =&gt; <span class="hljs-built_in">unit</span>) | `line(<span class="hljs-built_in">string</span> =&gt; <span class="hljs-built_in">unit</span>)]
+    [@bs.string] [ | `close(unit =&gt; unit) | `line(string =&gt; unit)]
   )
   =&gt; readline = <span class="hljs-string">""</span>;
 
 <span class="hljs-keyword">let</span> register = rl =&gt;
   rl
-  -&gt;on(`close(event =&gt; <span class="hljs-literal">()</span>))
+  -&gt;on(`close(event =&gt; ()))
   -&gt;on(`line(line =&gt; print_endline(line)));
 </code></pre>
 <p>Output:</p>
@@ -267,12 +267,12 @@ test_int_type(`</span>in_bin);
 )
 </code></pre>
 <pre><code class="hljs css language-reason">[@bs.<span class="hljs-keyword">val</span>]
-<span class="hljs-keyword">external</span> process_on_exit : (
-  [@bs.<span class="hljs-keyword">as</span> <span class="hljs-string">"exit"</span>] _,
-  <span class="hljs-built_in">int</span> =&gt; <span class="hljs-built_in">unit</span>
-) =&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">"process.on"</span>;
+external process_on_exit : (
+  [@bs.<span class="hljs-keyword">as</span> <span class="hljs-string">"exit"</span>] <span class="hljs-number">_</span>,
+  int =&gt; unit
+) =&gt; unit = <span class="hljs-string">"process.on"</span>;
 
-<span class="hljs-keyword">let</span> <span class="hljs-literal">()</span> = process_on_exit(exit_code =&gt;
+<span class="hljs-keyword">let</span> () = process_on_exit(exit_code =&gt;
   <span class="hljs-type">Js</span>.log(<span class="hljs-string">"error code: "</span> ++ string_of_int(exit_code))
 );
 </code></pre>
@@ -289,18 +289,18 @@ test_int_type(`</span>in_bin);
 <span class="hljs-keyword">let</span> addFive = add <span class="hljs-number">5</span>
 <span class="hljs-keyword">let</span> twelve = addFive <span class="hljs-number">3</span> <span class="hljs-number">4</span>
 </code></pre>
-<pre><code class="hljs css language-reason">let <span class="hljs-keyword">add</span><span class="bash"> = (x, y, z) =&gt; x + y + z;
-</span>let addFive = <span class="hljs-keyword">add</span><span class="bash">(5);
-</span>let twelve = addFive(<span class="hljs-number">3</span>, <span class="hljs-number">4</span>);
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> add = (x, y, z) =&gt; x + y + z;
+<span class="hljs-keyword">let</span> addFive = add(<span class="hljs-number">5</span>);
+<span class="hljs-keyword">let</span> twelve = addFive(<span class="hljs-number">3</span>, <span class="hljs-number">4</span>);
 </code></pre>
 <p>See the <code>addFive</code> intermediate function? <code>add</code> takes in 3 arguments but received only 1. It's interpreted as &quot;currying&quot; the argument <code>5</code> and waiting for the next 2 arguments to be applied later on. Type signatures:</p>
 <pre><code class="hljs css language-ocaml"><span class="hljs-keyword">val</span> add: <span class="hljs-built_in">int</span> -&gt; <span class="hljs-built_in">int</span> -&gt; <span class="hljs-built_in">int</span> -&gt; <span class="hljs-built_in">int</span>
 <span class="hljs-keyword">val</span> addFive: <span class="hljs-built_in">int</span> -&gt; <span class="hljs-built_in">int</span> -&gt; <span class="hljs-built_in">int</span>
 <span class="hljs-keyword">val</span> twelve: <span class="hljs-built_in">int</span>
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> add: (<span class="hljs-built_in">int</span>, <span class="hljs-built_in">int</span>, <span class="hljs-built_in">int</span>) =&gt; <span class="hljs-built_in">int</span>;
-<span class="hljs-keyword">let</span> addFive: (<span class="hljs-built_in">int</span>, <span class="hljs-built_in">int</span>) =&gt; <span class="hljs-built_in">int</span>;
-<span class="hljs-keyword">let</span> twelve: <span class="hljs-built_in">int</span>;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> add: (int, int, int) =&gt; int;
+<span class="hljs-keyword">let</span> addFive: (int, int) =&gt; int;
+<span class="hljs-keyword">let</span> twelve: int;
 </code></pre>
 <p>(In a dynamic language such as JS, currying would be dangerous, since accidentally forgetting to pass an argument doesn't error at compile time).</p>
 <h3><a class="anchor" aria-hidden="true" id="drawback"></a><a href="#drawback" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Drawback</h3>
@@ -321,7 +321,7 @@ test_int_type(`</span>in_bin);
 <span class="hljs-keyword">let</span> id = setTimeout (<span class="hljs-keyword">fun</span> [@bs] <span class="hljs-literal">()</span> -&gt; <span class="hljs-type">Js</span>.log <span class="hljs-string">"hello"</span>) <span class="hljs-number">1000</span>
 </code></pre>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> timerId;
-[@bs.<span class="hljs-keyword">val</span>] <span class="hljs-keyword">external</span> setTimeout : ((. <span class="hljs-built_in">unit</span>) =&gt; <span class="hljs-built_in">unit</span>, <span class="hljs-built_in">int</span>) =&gt; timerId = <span class="hljs-string">"setTimeout"</span>;
+[@bs.<span class="hljs-keyword">val</span>] external setTimeout : ((. unit) =&gt; unit, int) =&gt; timerId = <span class="hljs-string">"setTimeout"</span>;
 
 <span class="hljs-keyword">let</span> id = setTimeout((.) =&gt; <span class="hljs-type">Js</span>.log(<span class="hljs-string">"hello"</span>), <span class="hljs-number">1000</span>);
 </code></pre>
@@ -330,9 +330,9 @@ test_int_type(`</span>in_bin);
 <pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> add = <span class="hljs-keyword">fun</span> [@bs] x y z -&gt; x + y + z
 <span class="hljs-keyword">let</span> addFiveOops = add <span class="hljs-number">5</span>
 </code></pre>
-<pre><code class="hljs css language-reason">let <span class="hljs-keyword">add</span><span class="bash"> = (. x, y, z) =&gt; x + y + z;
-</span>let addFiveOops = <span class="hljs-keyword">add</span><span class="bash">(5);
-</span></code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> add = (. x, y, z) =&gt; x + y + z;
+<span class="hljs-keyword">let</span> addFiveOops = add(<span class="hljs-number">5</span>);
+</code></pre>
 <p>Error:</p>
 <pre><code class="hljs">This is an uncurried bucklescript function. It must be applied with [@bs].
 </code></pre>
@@ -348,14 +348,14 @@ test_int_type(`</span>in_bin);
 <pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> map : <span class="hljs-symbol">'a</span> <span class="hljs-built_in">array</span> -&gt; (<span class="hljs-symbol">'a</span> -&gt; <span class="hljs-symbol">'b</span> [@bs.uncurry]) -&gt; <span class="hljs-symbol">'b</span> <span class="hljs-built_in">array</span> = <span class="hljs-string">""</span> [@@bs.send]
 <span class="hljs-keyword">let</span> _ = map [|<span class="hljs-number">1</span>; <span class="hljs-number">2</span>; <span class="hljs-number">3</span>|] (<span class="hljs-keyword">fun</span> x -&gt; x+ <span class="hljs-number">1</span>)
 </code></pre>
-<pre><code class="hljs css language-reason">[@bs.send] <span class="hljs-keyword">external</span> map : (<span class="hljs-built_in">array</span>(<span class="hljs-symbol">'a</span>), [@bs.uncurry] (<span class="hljs-symbol">'a</span> =&gt; <span class="hljs-symbol">'b</span>)) =&gt; <span class="hljs-built_in">array</span>(<span class="hljs-symbol">'b</span>) = <span class="hljs-string">""</span>;
-map([|<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>|], x =&gt; x + <span class="hljs-number">1</span>);
+<pre><code class="hljs css language-reason">[@bs.send] external <span class="hljs-built_in">map</span> : (array('a), [@bs.uncurry] ('a =&gt; 'b)) =&gt; array('b) = <span class="hljs-string">""</span>;
+<span class="hljs-built_in">map</span>([|<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>|], x =&gt; x + <span class="hljs-number">1</span>);
 </code></pre>
 <h4><a class="anchor" aria-hidden="true" id="pitfall"></a><a href="#pitfall" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Pitfall</h4>
 <p>If you try to do this:</p>
 <pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> id : (<span class="hljs-symbol">'a</span> -&gt; <span class="hljs-symbol">'a</span> [@bs]) = ((<span class="hljs-keyword">fun</span> v -&gt; v) [@bs])
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> id: (. <span class="hljs-symbol">'a</span>) =&gt; <span class="hljs-symbol">'a</span> = (. v) =&gt; v;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> id: (. 'a) =&gt; 'a = (. v) =&gt; v;
 </code></pre>
 <p>You’ll get this cryptic error message:</p>
 <pre><code class="hljs">Error: The type of this expression, ('_a -&gt; '_a [@bs]),
@@ -365,7 +365,7 @@ map([|<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <s
 <p>The simplest solution is in most cases to just not export it, by adding an interface to the module. Alternatively, if you really need to export it, you can do so in its curried form, and then wrap it in an uncurried lambda at the call site. E.g.:</p>
 <pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> _ = map (<span class="hljs-keyword">fun</span> v -&gt; id v [@bs])
 </code></pre>
-<pre><code class="hljs css language-reason">map(<span class="hljs-name">v</span> =&gt; id(. v))<span class="hljs-comment">;</span>
+<pre><code class="hljs css language-reason"><span class="hljs-built_in">map</span>(v =&gt; id(. v));
 </code></pre>
 <h5><a class="anchor" aria-hidden="true" id="design-decisions"></a><a href="#design-decisions" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Design Decisions</h5>
 <p>In general, <code>bs.uncurry</code> is recommended; the compiler will do lots of optimizations to resolve the currying to uncurrying at compile time. However, there are some cases the compiler can't optimize it. In these case, it will be converted to a runtime check.</p>
@@ -387,12 +387,12 @@ map([|<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <s
     <span class="hljs-type">Js</span>.log(resp o + v )
   <span class="hljs-keyword">end</span>
 </code></pre>
-<pre><code class="hljs css language-reason">type x;
-[<span class="hljs-meta">@bs</span>.val] <span class="hljs-keyword">external</span> x : x = <span class="hljs-string">""</span>;
-[<span class="hljs-meta">@bs</span>.<span class="hljs-keyword">set</span>] <span class="hljs-keyword">external</span> set_onload : (x, [<span class="hljs-meta">@bs</span>.<span class="hljs-keyword">this</span>] ((x, <span class="hljs-built_in">int</span>) =&gt; unit)) =&gt; unit = <span class="hljs-string">"onload"</span>;
-[<span class="hljs-meta">@bs</span>.<span class="hljs-keyword">get</span>] <span class="hljs-keyword">external</span> resp : x =&gt; <span class="hljs-built_in">int</span> = <span class="hljs-string">"response"</span>;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> x;
+[@bs.<span class="hljs-keyword">val</span>] external x : x = <span class="hljs-string">""</span>;
+[@bs.<span class="hljs-keyword">set</span>] external set_onload : (x, [@bs.this] ((x, int) =&gt; unit)) =&gt; unit = <span class="hljs-string">"onload"</span>;
+[@bs.<span class="hljs-keyword">get</span>] external resp : x =&gt; int = <span class="hljs-string">"response"</span>;
 
-set_onload(x, [<span class="hljs-meta">@bs</span>.<span class="hljs-keyword">this</span>] ((o, v) =&gt; Js.log(resp(o) + v)));
+set_onload(x, [@bs.this] ((o, v) =&gt; <span class="hljs-type">Js</span>.log(resp(o) + v)));
 </code></pre>
 <p>Output:</p>
 <pre><code class="hljs css language-js">x.onload = (<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">v</span>) </span>{
@@ -402,7 +402,7 @@ set_onload(x, [<span class="hljs-meta">@bs</span>.<span class="hljs-keyword">thi
   });
 </code></pre>
 <p><code>bs.this</code> is the same as <code>bs</code>, except that its first parameter is reserved for <code>this</code> and for arity of 0, there is no need for a redundant <code>unit</code> type.</p>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/ja/class">← クラス</a><a class="docs-next button" href="/docs/ja/import-export">インポート / エクスポート →</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#labeled-arguments">Labeled Arguments</a></li><li><a href="#object-method">Object Method</a><ul class="toc-headings"><li><a href="#chaining">Chaining</a></li></ul></li><li><a href="#variadic-function-arguments">Variadic Function Arguments</a></li><li><a href="#modeling-polymorphic-function">Modeling Polymorphic Function</a><ul class="toc-headings"><li><a href="#trick-1-multiple-external-s">Trick 1: Multiple <code>external</code>s</a></li><li><a href="#trick-2-polymorphic-variant-bsunwrap">Trick 2: Polymorphic Variant + <code>bs.unwrap</code></a></li></ul></li><li><a href="#constraint-arguments-better">Constraint Arguments Better</a></li><li><a href="#special-case-event-listeners">Special-case: Event Listeners</a></li><li><a href="#fixed-arguments">Fixed Arguments</a></li><li><a href="#curry-uncurry">Curry &amp; Uncurry</a><ul class="toc-headings"><li><a href="#drawback">Drawback</a></li><li><a href="#solution-guaranteed-uncurrying">Solution: Guaranteed Uncurrying</a></li></ul></li><li><a href="#modeling-this-based-callbacks">Modeling <code>this</code>-based Callbacks</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script>window.foo = new Pjax({
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/ja/class"><span class="arrow-prev">← </span><span>前へ</span></a><a class="docs-next button" href="/docs/ja/import-export"><span>次へ</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav docOnPageNav"><ul class="toc-headings"><li><a href="#labeled-arguments">Labeled Arguments</a></li><li><a href="#object-method">Object Method</a><ul class="toc-headings"><li><a href="#chaining">Chaining</a></li></ul></li><li><a href="#variadic-function-arguments">Variadic Function Arguments</a></li><li><a href="#modeling-polymorphic-function">Modeling Polymorphic Function</a><ul class="toc-headings"><li><a href="#trick-1-multiple-external-s">Trick 1: Multiple <code>external</code>s</a></li><li><a href="#trick-2-polymorphic-variant-bsunwrap">Trick 2: Polymorphic Variant + <code>bs.unwrap</code></a></li></ul></li><li><a href="#constraint-arguments-better">Constraint Arguments Better</a></li><li><a href="#special-case-event-listeners">Special-case: Event Listeners</a></li><li><a href="#fixed-arguments">Fixed Arguments</a></li><li><a href="#curry-uncurry">Curry &amp; Uncurry</a><ul class="toc-headings"><li><a href="#drawback">Drawback</a></li><li><a href="#solution-guaranteed-uncurrying">Solution: Guaranteed Uncurrying</a></li></ul></li><li><a href="#modeling-this-based-callbacks">Modeling <code>this</code>-based Callbacks</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script>window.foo = new Pjax({
           areas: [
             // try to use the first query.
             '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
