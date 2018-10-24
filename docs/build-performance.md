@@ -57,7 +57,7 @@ OCaml/BuckleScript/Reason uses the concept of interface files (`.mli` or `.rei`)
 
 ## Programmatic Usage
 
-Unfortunately, JS build systems are usually the bottleneck for building a JS project nowadays. Having part of the build finishes blazingly fast doesn't matter much if the rest of the build takes seconds or literally minutes. Here are a few suggestions:
+Unfortunately, JS build systems are usually the bottleneck for building a JS project nowadays. Having parts of the build blazingly fast doesn't matter much if the rest of the build takes seconds or literally minutes. Here are a few suggestions:
 
 - Convert more files into BuckleScript/Reason =). Fewer files going through fewer parts of the JS pipeline helps a ton.
 - Careful with bringing in more dependencies: libraries, syntax transforms, build step loaders, etc. The bulk of these dragging down the editing & building experience might out-weight the API benefits they provide.
