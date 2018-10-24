@@ -28,7 +28,7 @@ Js.log "你好"
 Js.log("你好")
 ```
 
-It'll compile to the follow JS:
+It'll compile to the following JS:
 
 ```js
 console.log("\xe4\xbd\xa0\xe5\xa5\xbd");
