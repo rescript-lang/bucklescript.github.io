@@ -50,7 +50,7 @@
 </code></pre>
 <pre><code class="hljs css language-reason"><span class="hljs-module-identifier">Js</span>.log(<span class="hljs-string">"你好"</span>)
 </code></pre>
-<p>It'll compile to the follow JS:</p>
+<p>It'll compile to the following JS:</p>
 <pre><code class="hljs css language-js"><span class="hljs-built_in">console</span>.log(<span class="hljs-string">"\xe4\xbd\xa0\xe5\xa5\xbd"</span>);
 </code></pre>
 <p>Which gives you cryptic console output. To rectify this, BuckleScript exposes a special <code>js</code> annotation to the default <a href="https://reasonml.github.io/docs/en/string-and-char.html#quoted-string">quoted string syntax</a> built into the language. Use it like this:</p>
