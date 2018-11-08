@@ -119,6 +119,7 @@ array | array
 tuple | array. `(3, 4)` -> `[3, 4]`
 bool | boolean
 Js.Nullable.t | `null`/`undefined`
+option | `None` -> `undefined`, `Some(a)` -> `a`
 special `bs.deriving abstract` record | object
 
 ### Non-shared
@@ -131,8 +132,7 @@ int64 | array. [high, low]. high is signed, low unsigned
 char | `'a'` -> `97`
 bytes | number array (we might encode it as buffer in NodeJS)
 record | array. `{x: 1; y: 2}` -> `[1, 2]`
-option | `None` -> `0`, `Some(a)` -> `[a]`
-list | `[]` -> `0`, `[x, y]` -> `[x, y]`, `[1, 2, 3]` -> `[ 1, [ 2, [ 3, 0 ] ] ]`
+list | `[]` -> `0`, `[x, y]` -> `[x, [y, 0]]`, `[1, 2, 3]` -> `[ 1, [ 2, [ 3, 0 ] ] ]`
 Variant | \*
 Polymorphic variant | \*\*
 exception | -
