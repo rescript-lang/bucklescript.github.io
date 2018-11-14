@@ -10,7 +10,7 @@
             languagesDropDown.className = "hide";
           }
         });
-      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/bucklescript/bucklescript" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul><li class="navListItem"><a class="navItem" href="/blog/2018/07/17/release-4-0-0II">BuckleScript 4.0.0 (Part Two)</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/07/17/release-4-0-0">BuckleScript 4.0.0 (Part One)</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/05/23/release-3-1-4">BuckleScript 3.1.4</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/05/21/release-3-1-0">BuckleScript 3.1</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/04/16/release-3-0-0">BuckleScript 3.0</a></li></ul></div></div></section></div><script>
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/bucklescript/bucklescript" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul><li class="navListItem"><a class="navItem" href="/blog/2018/11/13/arity-zero">A change of undefined behavior in BuckleScript 4.0.7</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/07/17/release-4-0-0">BuckleScript 4.0.0 (Part One)</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/07/17/release-4-0-0II">BuckleScript 4.0.0 (Part Two)</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/05/23/release-3-1-4">BuckleScript 3.1.4</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/05/21/release-3-1-0">BuckleScript 3.1</a></li></ul></div></div></section></div><script>
             document.addEventListener('DOMContentLoaded', function() {
               createToggler('#navToggler', '#docsNav', 'docsSliderActive');
               createToggler('#tocToggler', 'body', 'tocActive');
@@ -37,15 +37,50 @@
                 };
               }
             });
-        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="posts"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2018/07/17/release-4-0-0II">BuckleScript 4.0.0 (Part Two)</a></h1><p class="post-meta">July 17, 2018</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p><code>bs-platform</code> 4.0.0 introduces a new runtime representation for optionals.</p>
-<p>While beforehand <code>None</code> was represented at runtime as <code>0</code> and <code>Some(&quot;hello&quot;)</code> as an array <code>[&quot;hello&quot;]</code>, the new representation tries to unbox optionals as much as possible.</p>
-<p>Now <code>None</code> is represented as <code>undefined</code> and <code>Some(&quot;hello&quot;)</code> simply as <code>&quot;hello&quot;</code>.</p>
-<p>Generally speaking, <code>Some(v)</code> is represented as <code>v</code>, i.e. unboxed. The only exception is when <code>v</code> itself is <code>None</code> or <code>Some(...(Some(None))</code>, in which case a special boxed representation is used.</p>
-<p>The construction of new values <code>Some(-)</code>, and pattern matching <code>| Some(-) =&gt; ...</code>, perform some case analysis to decide when to box or unbox values. In the absence of nested optionals, the result of both operations will <em>always</em> be the indentity.</p>
-<p>Because of that, it's possible to use type-based optimization to avoid performing case analysis in the first place.
-So while the generic function <code>(x) =&gt; Some(x)</code> will generate code to check wheter <code>x</code> should be boxed, the more type-specific function <code>(x:int) =&gt; Some(x)</code> is just compiled as the identity function, as it's clear from the type that no boxing is required.</p>
-<p>For a high-level formalization of the boxing and unboxing operations, as well as the polymorphic comparison functions, see this <a href="https://gist.github.com/cristianoc/791aac26f94dbded0fc137d61f4bd2a8">gist</a>.</p>
-<p>One design choice was whether to represent <code>None</code> as <code>null</code> or as <code>undefined</code>. The choice of <code>undefined</code> was made because this allows a direct mapping for <a href="https://reasonml.github.io/docs/en/function#optional-labeled-arguments">optional labeled arguments</a>. As a consequence <code>null</code> is never boxed, so e.g. <code>Some(null)</code> is represented as <code>null</code>.</p>
+        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="posts"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2018/11/13/arity-zero">A change of undefined behavior in BuckleScript 4.0.7</a></h1><p class="post-meta">November 13, 2018</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p>In the latest BuckleScript release, we introduced a minor change in the codegen which broken some user libraries. Note this change only broke the code in the FFI boundary(the interop between JS).</p>
+<p>In the early days of BuckleScript, there is no built-in uncurried calling convention support, since OCaml is a curried language, which means every function has arity one, so there is no way to express that a function has arity zero, this makes some interop challenging. In the mocha unit test library, it expects its callback to be function of arity zero.</p>
+<p>To work around this issue, before this release, we did a small codegen optimization, for a function of type <code>unit -&gt; unit</code>, if its argument is not used, we remove its argument in the output.</p>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> f : <span class="hljs-built_in">unit</span> -&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-keyword">fun</span> <span class="hljs-literal">()</span> -&gt; <span class="hljs-number">3</span> 
+<span class="hljs-keyword">let</span> f_used : <span class="hljs-built_in">unit</span> -&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-keyword">fun</span> x -&gt; <span class="hljs-type">Js</span>.log x  
+</code></pre>
+<p>Output JS prior to v4.0.7</p>
+<pre><code class="hljs css language-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f</span> (<span class="hljs-params"></span>)</span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-number">3</span>
+}
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f_used</span> (<span class="hljs-params">x</span>)</span>{
+    <span class="hljs-built_in">console</span>.log(x)
+}
+</code></pre>
+<p>To make this hack work, in the application side,
+for a curried function application, we treat the function
+of arity 0 and arity 1 in the same way, this still works since
+curried function application could only happen on the ocaml function.</p>
+<p>This trick is unintuitive, it makes code generated less predictable and it is not relevant any more, since
+we added native uncurried calling convention support later.</p>
+<p>Therefore, we generate JS code in a more consistent style in this release:</p>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> f : <span class="hljs-built_in">unit</span> -&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-keyword">fun</span> <span class="hljs-literal">()</span> -&gt; <span class="hljs-number">3</span> 
+</code></pre>
+<pre><code class="hljs css language-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f</span> (<span class="hljs-params">param</span>)</span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-number">3</span>
+}
+</code></pre>
+<p>So in your FFI code, if you have a callback which is expected to be of arity zero, use <code>unit -&gt; unit [@bs]</code> or <code>unit -&gt; unit [@bs.uncurry]</code>, it is 100% correct. Note our previous trick will only make <code>unit -&gt; unit</code> work most time, but it can not provide any guarantee.</p>
+<p>Since we removed the trick, the curried runtime does not treat function of arity 0 and arity 1 in the same way, so if you have code like this</p>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> f : <span class="hljs-built_in">unit</span> -&gt; <span class="hljs-built_in">int</span> = [%bs.raw {|<span class="hljs-keyword">function</span> <span class="hljs-literal">()</span> {
+    return <span class="hljs-number">3</span>
+}|}]
+</code></pre>
+<p>It is not correct any more, the fix would be</p>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> f : <span class="hljs-built_in">unit</span> -&gt; <span class="hljs-built_in">unit</span> = [%bs.raw{|<span class="hljs-keyword">function</span>(param){
+    return <span class="hljs-number">3</span>
+}|}]
+</code></pre>
+<p>Or</p>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> f : <span class="hljs-built_in">unit</span> -&gt; <span class="hljs-built_in">unit</span> [@bs] = [%bs.raw{|<span class="hljs-keyword">function</span><span class="hljs-literal">()</span>{
+    return <span class="hljs-number">3</span>
+}|}]
+</code></pre>
+<p>FFI is a double edge sword, it is a must have to ship your product, yet it is tricky, and there may be some undefined behavior you rely on but don't recognize, it is encouarged to always test your FFI in the boundary.</p>
 </span></div></article></div><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2018/07/17/release-4-0-0">BuckleScript 4.0.0 (Part One)</a></h1><p class="post-meta">July 17, 2018</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p><code>bs-platform</code> 4.0.0 is released! It has some  nice features that we want to share with you, a more detailed list of changes is available <a href="https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#400">here</a></p>
 <p>In this post, I will talk about a new development workflow, all toolchains are self-contained in <code>bs-platform</code>, <a href="https://twitter.com/ccrisccris">Cristiano</a> will talk about the new runtime encoding for optional.</p>
 <h1><a class="anchor" aria-hidden="true" id="a-simple-approach-to-accelerate-feedback-loop-in-a-reliable-way"></a><a href="#a-simple-approach-to-accelerate-feedback-loop-in-a-reliable-way" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>A simple approach to accelerate feedback loop in a reliable way</h1>
@@ -89,6 +124,15 @@ npm start
 http-server <span class="hljs-comment"># start a http server</span>
 </code></pre>
 <p>open <code>localhost:port/index.html</code>, changes the reason source code and expect the browser show the changes.</p>
+</span></div></article></div><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2018/07/17/release-4-0-0II">BuckleScript 4.0.0 (Part Two)</a></h1><p class="post-meta">July 17, 2018</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p><code>bs-platform</code> 4.0.0 introduces a new runtime representation for optionals.</p>
+<p>While beforehand <code>None</code> was represented at runtime as <code>0</code> and <code>Some(&quot;hello&quot;)</code> as an array <code>[&quot;hello&quot;]</code>, the new representation tries to unbox optionals as much as possible.</p>
+<p>Now <code>None</code> is represented as <code>undefined</code> and <code>Some(&quot;hello&quot;)</code> simply as <code>&quot;hello&quot;</code>.</p>
+<p>Generally speaking, <code>Some(v)</code> is represented as <code>v</code>, i.e. unboxed. The only exception is when <code>v</code> itself is <code>None</code> or <code>Some(...(Some(None))</code>, in which case a special boxed representation is used.</p>
+<p>The construction of new values <code>Some(-)</code>, and pattern matching <code>| Some(-) =&gt; ...</code>, perform some case analysis to decide when to box or unbox values. In the absence of nested optionals, the result of both operations will <em>always</em> be the indentity.</p>
+<p>Because of that, it's possible to use type-based optimization to avoid performing case analysis in the first place.
+So while the generic function <code>(x) =&gt; Some(x)</code> will generate code to check wheter <code>x</code> should be boxed, the more type-specific function <code>(x:int) =&gt; Some(x)</code> is just compiled as the identity function, as it's clear from the type that no boxing is required.</p>
+<p>For a high-level formalization of the boxing and unboxing operations, as well as the polymorphic comparison functions, see this <a href="https://gist.github.com/cristianoc/791aac26f94dbded0fc137d61f4bd2a8">gist</a>.</p>
+<p>One design choice was whether to represent <code>None</code> as <code>null</code> or as <code>undefined</code>. The choice of <code>undefined</code> was made because this allows a direct mapping for <a href="https://reasonml.github.io/docs/en/function#optional-labeled-arguments">optional labeled arguments</a>. As a consequence <code>null</code> is never boxed, so e.g. <code>Some(null)</code> is represented as <code>null</code>.</p>
 </span></div></article></div><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2018/05/23/release-3-1-4">BuckleScript 3.1.4</a></h1><p class="post-meta">May 23, 2018</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p>Hey again! The release two days ago removed the deprecated Js Boolean APIs (no longer needed since we compile OCaml booleans to JS boolean since <code>3.0.0</code>). But folks have voiced that the removal was too hasty, as some of their dependencies still haven't upgraded to <code>3.0.0</code> and thus still needed the deprecated APIs.</p>
 <p>We try to be diligent with our releases; hopefully this didn't churn too many people. To remediate the situation, <strong>we're putting those calls back for this version</strong>. Finger crossed that you don't have to wait on too many dependencies!</p>
 <p>Sorry for the small churn, and thanks for all your feedback!</p>
@@ -173,11 +217,7 @@ http-server <span class="hljs-comment"># start a http server</span>
 <li>Adding several modules to Js namespace, including Option, Result, List and Vector.
 Note it is still work in progress, but these libraries are optimized for both performance and size, they can provide an even smaller code size than current case</li>
 </ol>
-</span></div></article></div><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2017/10/07/release-1-7-0">BuckleScript 1.7.0</a></h1><p class="post-meta">October 7, 2017</p><div class="authorBlock"></div></header><article class="post-content"><div><span><h4><a class="anchor" aria-hidden="true" id="first-class-uncurried-calling-convention"></a><a href="#first-class-uncurried-calling-convention" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>First class uncurried calling convention</h4>
-<p>As a functional language, the vanilla OCaml only provides curried calling convention,
-BuckleScript employs fairly <a href="http://bucklescript.github.io/bucklescript-playground/#Curry_Optimization">advanced optimizations</a> for curried calling convention, however, the most efficient code is efficient code not relying on optimizations.</p>
-<p>Since this release, we provide first class uncurried calling convention, <em>all toolchains provided by BuckleScript</em> can understand uncurried calling convention</p>
-</span></div><div class="read-more"><a class="button" href="/blog/2017/10/07/release-1-7-0">Read More</a></div></article></div><div class="docs-prevnext"><a class="docs-next" href="/blog/page2/">Next →</a></div></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script>window.foo = new Pjax({
+</span></div></article></div><div class="docs-prevnext"><a class="docs-next" href="/blog/page2/">Next →</a></div></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script>window.foo = new Pjax({
           areas: [
             // try to use the first query.
             '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
