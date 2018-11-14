@@ -54,7 +54,7 @@ let f : unit -> int = [%bs.raw {|function () {
 
 It is not correct any more, the fix would be 
 
-```ocaml
+```
 let f : unit -> unit = [%bs.raw{|function(param){
     return 3
 }|}]
@@ -62,7 +62,7 @@ let f : unit -> unit = [%bs.raw{|function(param){
 
 Or 
 
-```ocaml
+```
 let f : unit -> unit [@bs] = [%bs.raw{|function(){
     return 3
 }|}]
