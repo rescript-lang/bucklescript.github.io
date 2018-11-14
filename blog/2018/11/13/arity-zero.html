@@ -71,14 +71,14 @@ we added native uncurried calling convention support later.</p>
 }|}]
 </code></pre>
 <p>It is not correct any more, the fix would be</p>
-<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> f : <span class="hljs-built_in">unit</span> -&gt; <span class="hljs-built_in">unit</span> = [%bs.raw{|<span class="hljs-keyword">function</span>(param){
-    return <span class="hljs-number">3</span>
+<pre><code class="hljs">let f : <span class="hljs-keyword">unit</span> -&gt; <span class="hljs-keyword">unit</span> = [%bs.raw{|<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(param)</span></span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-number">3</span>
 }|}]
 </code></pre>
 <p>Or</p>
-<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> f : <span class="hljs-built_in">unit</span> -&gt; <span class="hljs-built_in">unit</span> [@bs] = [%bs.raw{|<span class="hljs-keyword">function</span><span class="hljs-literal">()</span>{
-    return <span class="hljs-number">3</span>
-}|}]
+<pre><code class="hljs"><span class="hljs-keyword">let</span> f : unit <span class="hljs-operator">-&gt;</span> unit <span class="hljs-attribute">[@bs]</span> = <span class="hljs-attribute">[%bs.raw{|function(){
+    return 3
+}|}]</span>
 </code></pre>
 <p>FFI is a double edge sword, it is a must have to ship your product, yet it is tricky, and there may be some undefined behavior you rely on but don't recognize, it is encouarged to always test your FFI in the boundary.</p>
 </span></div></div><div class="blogSocialSection"></div></div><div class="blog-recent"><a class="button" href="/blog">Recent Posts</a></div></div></div><nav class="onPageNav"></nav></div><span><script src="/js/redirectBlog.js"></script><script>window.foo = new Pjax({
