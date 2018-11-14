@@ -32,7 +32,7 @@ we added native uncurried calling convention support later.
 
 Therefore, we generate JS code in a more consistent style in this release:
 
-```ocaml
+```
 let f : unit -> unit = fun () -> 3 
 ```
 
@@ -46,7 +46,7 @@ So in your FFI code, if you have a callback which is expected to be of arity zer
 
 Since we removed the trick, the curried runtime does not treat function of arity 0 and arity 1 in the same way, so if you have code like this
 
-```ocaml
+```
 let f : unit -> int = [%bs.raw {|function () {
     return 3
 }|}]
