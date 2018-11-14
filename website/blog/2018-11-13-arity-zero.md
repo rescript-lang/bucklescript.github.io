@@ -8,11 +8,17 @@ In the early days of BuckleScript, there is no built-in uncurried calling conven
 
 To work around this issue, before this release, we did a small codegen optimization, for a function of type `unit -> unit`, if its argument is not used, we remove its argument in the output.
 
-```
+```ocaml
 let f : unit -> unit = fun () -> 3 
 let f_used : unit -> unit = fun x -> Js.log x  
 ```
+```reason
+let f: unit => unit = () => 3;
+let f_used: unit => unit = x => Js.log(x);
+```
+
 Output JS prior to v4.0.7
+
 ```js
 function f (){
     return 3
@@ -32,8 +38,11 @@ we added native uncurried calling convention support later.
 
 Therefore, we generate JS code in a more consistent style in this release:
 
-```
+```ocaml
 let f : unit -> unit = fun () -> 3 
+```
+```reason
+let f: unit => unit = () => 3;
 ```
 
 ```js
@@ -46,26 +55,41 @@ So in your FFI code, if you have a callback which is expected to be of arity zer
 
 Since we removed the trick, the curried runtime does not treat function of arity 0 and arity 1 in the same way, so if you have code like this
 
-```
+```ocaml
 let f : unit -> int = [%bs.raw {|function () {
     return 3
 }|}]
 ```
+```reason
+let f: unit => int = [%bs.raw {|function () {
+  return 3
+}|}];
+```
 
 It is not correct any more, the fix would be 
 
-```
+```ocaml
 let f : unit -> unit = [%bs.raw{|function(param){
     return 3
 }|}]
 ```
+```reason
+let f: unit => int = [%bs.raw {|function(param) {
+  return 3
+}|}];
+```
 
 Or 
 
-```
+```ocaml
 let f : unit -> unit [@bs] = [%bs.raw{|function(){
     return 3
 }|}]
+```
+```reason
+let f: (. unit) => unit = [%bs.raw {|function() {
+  return 3
+}|}];
 ```
 
 FFI is a double edge sword, it is a must have to ship your product, yet it is tricky, and there may be some undefined behavior you rely on but don't recognize, it is encouarged to always test your FFI in the boundary.
