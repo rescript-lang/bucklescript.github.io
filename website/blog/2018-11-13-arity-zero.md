@@ -68,11 +68,13 @@ let f: unit => int = [%bs.raw {|function () {
 
 It is not correct any more, the fix would be 
 
+
 ```ocaml
-let f : unit -> unit = [%bs.raw{|function(param){
+let f : unit -> int = [%bs.raw{|function(param){
     return 3
 }|}]
 ```
+
 ```reason
 let f: unit => int = [%bs.raw {|function(param) {
   return 3
@@ -81,11 +83,13 @@ let f: unit => int = [%bs.raw {|function(param) {
 
 Or 
 
+
 ```ocaml
-let f : unit -> unit [@bs] = [%bs.raw{|function(){
+let f : unit -> int [@bs] = [%bs.raw{|function(){
     return 3
 }|}]
 ```
+
 ```reason
 let f: (. unit) => unit = [%bs.raw {|function() {
   return 3
