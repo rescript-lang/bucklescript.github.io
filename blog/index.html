@@ -40,8 +40,11 @@
         </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="posts"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2018/11/13/arity-zero">A change of undefined behavior in BuckleScript 4.0.7</a></h1><p class="post-meta">November 13, 2018</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p>In the latest BuckleScript release, we introduced a minor change in the codegen which broken some user libraries. Note this change only broke the code in the FFI boundary(the interop between JS).</p>
 <p>In the early days of BuckleScript, there is no built-in uncurried calling convention support, since OCaml is a curried language, which means every function has arity one, so there is no way to express that a function has arity zero, this makes some interop challenging. In the mocha unit test library, it expects its callback to be function of arity zero.</p>
 <p>To work around this issue, before this release, we did a small codegen optimization, for a function of type <code>unit -&gt; unit</code>, if its argument is not used, we remove its argument in the output.</p>
-<pre><code class="hljs">let f : unit -&gt; unit = <span class="hljs-function"><span class="hljs-keyword">fun</span> () <span class="hljs-title">-</span></span>&gt; <span class="hljs-number">3</span> 
-let f_used : unit -&gt; unit = <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">x</span></span> -&gt; Js.log x  
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> f : <span class="hljs-built_in">unit</span> -&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-keyword">fun</span> <span class="hljs-literal">()</span> -&gt; <span class="hljs-number">3</span> 
+<span class="hljs-keyword">let</span> f_used : <span class="hljs-built_in">unit</span> -&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-keyword">fun</span> x -&gt; <span class="hljs-type">Js</span>.log x  
+</code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> f: unit =&gt; unit = () =&gt; <span class="hljs-number">3</span>;
+<span class="hljs-keyword">let</span> f_used: unit =&gt; unit = x =&gt; <span class="hljs-module-identifier">Js</span>.log(x);
 </code></pre>
 <p>Output JS prior to v4.0.7</p>
 <pre><code class="hljs css language-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f</span> (<span class="hljs-params"></span>)</span>{
@@ -58,7 +61,9 @@ curried function application could only happen on the ocaml function.</p>
 <p>This trick is unintuitive, it makes code generated less predictable and it is not relevant any more, since
 we added native uncurried calling convention support later.</p>
 <p>Therefore, we generate JS code in a more consistent style in this release:</p>
-<pre><code class="hljs">let f : unit -&gt; unit = <span class="hljs-function"><span class="hljs-keyword">fun</span> () <span class="hljs-title">-</span></span>&gt; <span class="hljs-number">3</span> 
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> f : <span class="hljs-built_in">unit</span> -&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-keyword">fun</span> <span class="hljs-literal">()</span> -&gt; <span class="hljs-number">3</span> 
+</code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> f: unit =&gt; unit = () =&gt; <span class="hljs-number">3</span>;
 </code></pre>
 <pre><code class="hljs css language-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f</span> (<span class="hljs-params">param</span>)</span>{
     <span class="hljs-keyword">return</span> <span class="hljs-number">3</span>
@@ -66,19 +71,31 @@ we added native uncurried calling convention support later.</p>
 </code></pre>
 <p>So in your FFI code, if you have a callback which is expected to be of arity zero, use <code>unit -&gt; unit [@bs]</code> or <code>unit -&gt; unit [@bs.uncurry]</code>, it is 100% correct. Note our previous trick will only make <code>unit -&gt; unit</code> work most time, but it can not provide any guarantee.</p>
 <p>Since we removed the trick, the curried runtime does not treat function of arity 0 and arity 1 in the same way, so if you have code like this</p>
-<pre><code class="hljs">let f : <span class="hljs-type">unit</span> -&gt; int = [%bs.raw {|<span class="hljs-keyword">function</span> <span class="hljs-title"></span>() {
-    <span class="hljs-keyword">return</span> <span class="hljs-type">3</span>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> f : <span class="hljs-built_in">unit</span> -&gt; <span class="hljs-built_in">int</span> = [%bs.raw {|<span class="hljs-keyword">function</span> <span class="hljs-literal">()</span> {
+    return <span class="hljs-number">3</span>
 }|}]
+</code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> f: unit =&gt; int = <span class="hljs-attribute">[%bs.raw {|function () {
+  return 3
+}|}]</span>;
 </code></pre>
 <p>It is not correct any more, the fix would be</p>
-<pre><code class="hljs">let f : <span class="hljs-keyword">unit</span> -&gt; <span class="hljs-built_in">int</span> = [%bs.raw{|<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(param)</span></span>{
-    <span class="hljs-keyword">return</span> <span class="hljs-number">3</span>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> f : <span class="hljs-built_in">unit</span> -&gt; <span class="hljs-built_in">int</span> = [%bs.raw{|<span class="hljs-keyword">function</span>(param){
+    return <span class="hljs-number">3</span>
 }|}]
 </code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> f: unit =&gt; int = <span class="hljs-attribute">[%bs.raw {|function(param) {
+  return 3
+}|}]</span>;
+</code></pre>
 <p>Or</p>
-<pre><code class="hljs"><span class="hljs-keyword">let</span> f : unit <span class="hljs-operator">-&gt;</span> int <span class="hljs-attribute">[@bs]</span> = <span class="hljs-attribute">[%bs.raw{|function(){
-    return 3
-}|}]</span>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> f : <span class="hljs-built_in">unit</span> -&gt; <span class="hljs-built_in">int</span> [@bs] = [%bs.raw{|<span class="hljs-keyword">function</span><span class="hljs-literal">()</span>{
+    return <span class="hljs-number">3</span>
+}|}]
+</code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> f: (. unit) =&gt; unit = <span class="hljs-attribute">[%bs.raw {|function() {
+  return 3
+}|}]</span>;
 </code></pre>
 <p>FFI is a double edge sword, it is a must have to ship your product, yet it is tricky, and there may be some undefined behavior you rely on but don't recognize, it is encouarged to always test your FFI in the boundary.</p>
 </span></div></article></div><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2018/07/17/release-4-0-0">BuckleScript 4.0.0 (Part One)</a></h1><p class="post-meta">July 17, 2018</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p><code>bs-platform</code> 4.0.0 is released! It has some  nice features that we want to share with you, a more detailed list of changes is available <a href="https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#400">here</a></p>
