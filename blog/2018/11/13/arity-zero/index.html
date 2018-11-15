@@ -71,12 +71,12 @@ we added native uncurried calling convention support later.</p>
 }|}]
 </code></pre>
 <p>It is not correct any more, the fix would be</p>
-<pre><code class="hljs">let f : <span class="hljs-keyword">unit</span> -&gt; <span class="hljs-keyword">unit</span> = [%bs.raw{|<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(param)</span></span>{
+<pre><code class="hljs">let f : <span class="hljs-keyword">unit</span> -&gt; <span class="hljs-built_in">int</span> = [%bs.raw{|<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(param)</span></span>{
     <span class="hljs-keyword">return</span> <span class="hljs-number">3</span>
 }|}]
 </code></pre>
 <p>Or</p>
-<pre><code class="hljs"><span class="hljs-keyword">let</span> f : unit <span class="hljs-operator">-&gt;</span> unit <span class="hljs-attribute">[@bs]</span> = <span class="hljs-attribute">[%bs.raw{|function(){
+<pre><code class="hljs"><span class="hljs-keyword">let</span> f : unit <span class="hljs-operator">-&gt;</span> int <span class="hljs-attribute">[@bs]</span> = <span class="hljs-attribute">[%bs.raw{|function(){
     return 3
 }|}]</span>
 </code></pre>
