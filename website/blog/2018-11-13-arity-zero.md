@@ -9,11 +9,11 @@ In the early days of BuckleScript, there is no built-in uncurried calling conven
 To work around this issue, before this release, we did a small codegen optimization, for a function of type `unit -> unit`, if its argument is not used, we remove its argument in the output.
 
 ```ocaml
-let f : unit -> unit = fun () -> 3 
+let f : unit -> int = fun () -> 3 
 let f_used : unit -> unit = fun x -> Js.log x  
 ```
 ```reason
-let f: unit => unit = () => 3;
+let f: unit => int = () => 3;
 let f_used: unit => unit = x => Js.log(x);
 ```
 
@@ -39,10 +39,10 @@ we added native uncurried calling convention support later.
 Therefore, we generate JS code in a more consistent style in this release:
 
 ```ocaml
-let f : unit -> unit = fun () -> 3 
+let f : unit -> int = fun () -> 3 
 ```
 ```reason
-let f: unit => unit = () => 3;
+let f: unit => int = () => 3;
 ```
 
 ```js
@@ -91,7 +91,7 @@ let f : unit -> int [@bs] = [%bs.raw{|function(){
 ```
 
 ```reason
-let f: (. unit) => unit = [%bs.raw {|function() {
+let f: (. unit) => int = [%bs.raw {|function() {
   return 3
 }|}];
 ```
