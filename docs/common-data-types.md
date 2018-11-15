@@ -119,7 +119,9 @@ array | array
 tuple | array. `(3, 4)` -> `[3, 4]`
 bool | boolean
 Js.Nullable.t | `null`/`undefined`
-option | `None` -> `undefined`, `Some(a)` -> `a`
+option | `None` -> `undefined`
+option | `Some( Some .. Some (None))` -> internal representation
+option | `Some other` -> other
 special `bs.deriving abstract` record | object
 
 ### Non-shared
