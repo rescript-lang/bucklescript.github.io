@@ -106,6 +106,9 @@
 <tr><td>tuple</td><td>array. <code>(3, 4)</code> -&gt; <code>[3, 4]</code></td></tr>
 <tr><td>bool</td><td>boolean</td></tr>
 <tr><td>Js.Nullable.t</td><td><code>null</code>/<code>undefined</code></td></tr>
+<tr><td>option</td><td><code>None</code> -&gt; <code>undefined</code></td></tr>
+<tr><td>option</td><td><code>Some( Some .. Some (None))</code> -&gt; internal representation</td></tr>
+<tr><td>option</td><td><code>Some other</code> -&gt; other</td></tr>
 <tr><td>special <code>bs.deriving abstract</code> record</td><td>object</td></tr>
 </tbody>
 </table>
@@ -120,8 +123,7 @@
 <tr><td>char</td><td><code>'a'</code> -&gt; <code>97</code></td></tr>
 <tr><td>bytes</td><td>number array (we might encode it as buffer in NodeJS)</td></tr>
 <tr><td>record</td><td>array. <code>{x: 1; y: 2}</code> -&gt; <code>[1, 2]</code></td></tr>
-<tr><td>option</td><td><code>None</code> -&gt; <code>0</code>, <code>Some(a)</code> -&gt; <code>[a]</code></td></tr>
-<tr><td>list</td><td><code>[]</code> -&gt; <code>0</code>, <code>[x, y]</code> -&gt; <code>[x, y]</code>, <code>[1, 2, 3]</code> -&gt; <code>[ 1, [ 2, [ 3, 0 ] ] ]</code></td></tr>
+<tr><td>list</td><td><code>[]</code> -&gt; <code>0</code>, <code>[x, y]</code> -&gt; <code>[x, [y, 0]]</code>, <code>[1, 2, 3]</code> -&gt; <code>[ 1, [ 2, [ 3, 0 ] ] ]</code></td></tr>
 <tr><td>Variant</td><td>*</td></tr>
 <tr><td>Polymorphic variant</td><td>**</td></tr>
 <tr><td>exception</td><td>-</td></tr>
