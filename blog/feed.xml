@@ -4,7 +4,7 @@
         <title>BuckleScript Blog</title>
         <link>https://bucklescript.github.io/blog</link>
         <description>The best place to stay up-to-date with the latest BuckleScript news and events.</description>
-        <lastBuildDate>Tue, 13 Nov 2018 06:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 19 Nov 2018 06:00:00 GMT</lastBuildDate>
         <docs>http://blogs.law.harvard.edu/tech/rss</docs>
         <generator>Feed for Node.js</generator>
         <image>
@@ -13,6 +13,13 @@
             <link>https://bucklescript.github.io/blog</link>
         </image>
         <item>
+            <title><![CDATA[BuckleScript development plans for next half]]></title>
+            <link>https://bucklescript.github.io/blog/2018/11/19/next-half.html</link>
+            <guid>https://bucklescript.github.io/blog/2018/11/19/next-half.html</guid>
+            <pubDate>Mon, 19 Nov 2018 06:00:00 GMT</pubDate>
+            <description><![CDATA[<p>In this article we will explain what we are doing now and what we plan to improve in next half (Dec-May), we would also like to hear your feedback so that we can adjust accordingly.</p> <p>Keep in mind that the development team is a very small team, so we h...</p>]]></description>
+        </item>
+        <item>
             <title><![CDATA[A change of undefined behavior in BuckleScript 4.0.7]]></title>
             <link>https://bucklescript.github.io/blog/2018/11/13/arity-zero.html</link>
             <guid>https://bucklescript.github.io/blog/2018/11/13/arity-zero.html</guid>
@@ -20,18 +27,18 @@
             <description><![CDATA[<p>In the latest BuckleScript release, we introduced a minor change in the codegen which broken some user libraries. Note this change only broke the code in the FFI boundary(the interop between JS).</p> <p>In the early days of BuckleScript, there is no built-i...</p>]]></description>
         </item>
         <item>
-            <title><![CDATA[BuckleScript 4.0.0 (Part One)]]></title>
-            <link>https://bucklescript.github.io/blog/2018/07/17/release-4-0-0.html</link>
-            <guid>https://bucklescript.github.io/blog/2018/07/17/release-4-0-0.html</guid>
-            <pubDate>Tue, 17 Jul 2018 06:00:00 GMT</pubDate>
-            <description><![CDATA[<p><code>bs-platform</code> 4.0.0 is released! It has some nice features that we want to share with you, a more detailed list of changes is available <a href="https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#400">here</a></p> <p>In this post, I will talk about a new development workflow, all toolchains are self-contained in <code>bs-platform</code>, <a href="https://twitter.com/ccrisccris">C...</a></p>]]></description>
-        </item>
-        <item>
             <title><![CDATA[BuckleScript 4.0.0 (Part Two)]]></title>
             <link>https://bucklescript.github.io/blog/2018/07/17/release-4-0-0II.html</link>
             <guid>https://bucklescript.github.io/blog/2018/07/17/release-4-0-0II.html</guid>
             <pubDate>Tue, 17 Jul 2018 06:00:00 GMT</pubDate>
             <description><![CDATA[<p><code>bs-platform</code> 4.0.0 introduces a new runtime representation for optionals.</p> <p>While beforehand <code>None</code> was represented at runtime as <code>0</code> and <code>Some(&quot;hello&quot;)</code> as an array <code>[&quot;hello&quot;]</code>, the new representation tries to unbox optionals as much as pos...</p>]]></description>
+        </item>
+        <item>
+            <title><![CDATA[BuckleScript 4.0.0 (Part One)]]></title>
+            <link>https://bucklescript.github.io/blog/2018/07/17/release-4-0-0.html</link>
+            <guid>https://bucklescript.github.io/blog/2018/07/17/release-4-0-0.html</guid>
+            <pubDate>Tue, 17 Jul 2018 06:00:00 GMT</pubDate>
+            <description><![CDATA[<p><code>bs-platform</code> 4.0.0 is released! It has some nice features that we want to share with you, a more detailed list of changes is available <a href="https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#400">here</a></p> <p>In this post, I will talk about a new development workflow, all toolchains are self-contained in <code>bs-platform</code>, <a href="https://twitter.com/ccrisccris">C...</a></p>]]></description>
         </item>
         <item>
             <title><![CDATA[BuckleScript 3.1.4]]></title>
