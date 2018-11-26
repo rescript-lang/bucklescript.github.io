@@ -6,14 +6,16 @@ title: Miscellaneous
 
 As you might have guessed, most `bs.*` attributes can be used together. Here's an extreme example:
 
+Note that `bs.splice` was renamed to `bs.variadic` after version 4.08
+
 ```ocaml
-external draw: (_ [@bs.as "dog"]) -> int array -> unit = "draw" [@@bs.val] [@@bs.scope "global"] [@@bs.splice]
+external draw: (_ [@bs.as "dog"]) -> int array -> unit = "draw" [@@bs.val] [@@bs.scope "global"] [@@bs.variadic]
 
 let _ = draw [|1;2|]
 ```
 
 ```reason
-[@bs.val] [@bs.scope "global"] [@bs.splice]
+[@bs.val] [@bs.scope "global"] [@bs.variadic]
 external draw : ([@bs.as "dog"] _, array(int)) => unit = "draw";
 
 draw([|1, 2|]);
