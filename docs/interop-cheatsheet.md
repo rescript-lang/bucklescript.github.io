@@ -181,14 +181,14 @@ let () = [|1; 2; 3|]
 ->Js.log;
 ```
 
-### Variadic
+### Variadic (was bs.splice prior to version 4.08)
 
 ```ocaml
-external join : string array -> string = "" [@@bs.module "path"] [@@bs.splice]
+external join : string array -> string = "" [@@bs.module "path"] [@@bs.variadic]
 ```
 
 ```reason
-[@bs.module "path"] [@bs.splice]
+[@bs.module "path"] [@bs.variadic]
 external join : array(string) => string = "";
 ```
 

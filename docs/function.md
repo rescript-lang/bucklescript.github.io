@@ -89,15 +89,15 @@ Ever used `foo().bar().baz()` chaining ("fluent api") in JS OOP? We can model th
 
 ## Variadic Function Arguments
 
-You might have JS functions that take an arbitrary amount of arguments. BuckleScript supports modeling those, under the condition that the arbitrary arguments part is homogenous (aka of the same type). If so, add `bs.splice` to your `external`.
+You might have JS functions that take an arbitrary amount of arguments. BuckleScript supports modeling those, under the condition that the arbitrary arguments part is homogenous (aka of the same type). If so, add `bs.variadic` (was `bs.splice` prior to version 4.08) to your `external`.
 
 ```ocaml
-external join: string array -> string = "" [@@bs.module "path"] [@@bs.splice]
+external join: string array -> string = "" [@@bs.module "path"] [@@bs.variadic]
 let v = join [| "a"; "b"|]
 ```
 
 ```reason
-[@bs.module "path"] [@bs.splice] external join: array(string) => string = "";
+[@bs.module "path"] [@bs.variadic] external join: array(string) => string = "";
 let v = join([|"a", "b"|]);
 ```
 
