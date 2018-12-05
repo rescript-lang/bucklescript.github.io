@@ -2,11 +2,21 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://bucklescript.github.io/blog</id>
     <title>BuckleScript Blog</title>
-    <updated>2018-11-19T06:00:00Z</updated>
+    <updated>2018-12-05T06:00:00Z</updated>
     <generator>Feed for Node.js</generator>
     <link rel="alternate" href="https://bucklescript.github.io/blog"/>
     <subtitle>The best place to stay up-to-date with the latest BuckleScript news and events.</subtitle>
     <logo>https://bucklescript.github.io/img/logos/bucklescript.svg</logo>
+    <entry>
+        <title type="html"><![CDATA[BuckleScript 4.0.8 (Part One)]]></title>
+        <id>https://bucklescript.github.io/blog/2018/12/05/release-4-0-8.html</id>
+        <link href="https://bucklescript.github.io/blog/2018/12/05/release-4-0-8.html">
+        </link>
+        <updated>2018-12-05T06:00:00Z</updated>
+        <summary type="html"><![CDATA[<p>Today we made a new release 4.0.8 of <code>bs-platform</code>, a detailed list of changes is available <a href="https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#408">here</a></p> <p>Most user visible changes are bug fixes and small enhancement, while quite a few work is done for the upcoming fundamental improvement.</p> <p>In this article, we ...</p>]]></summary>
+        <author>
+        </author>
+    </entry>
     <entry>
         <title type="html"><![CDATA[BuckleScript development plans for next half]]></title>
         <id>https://bucklescript.github.io/blog/2018/11/19/next-half.html</id>
