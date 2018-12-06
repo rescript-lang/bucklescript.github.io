@@ -149,7 +149,7 @@ let name = bucklescript##info##author;
 
 Because object values are used often, Reason gives it a nicer sugar. `[%bs.obj {foo: 1}]` will format to `{"foo": 1}`.
 
-**Note**: there's no syntax sugar for creating an empty object in OCaml nor Reason (aka this doesn't work: `[@bs.obj {}]`. Please use `Js.Obj.empty()` for that purpose.
+**Note**: there's no syntax sugar for creating an empty object in OCaml nor Reason (aka this doesn't work: `[%bs.obj {}]`. Please use `Js.Obj.empty()` for that purpose.
 
 The created object will have an inferred type, no type declaration needed! The above example will infer as:
 
