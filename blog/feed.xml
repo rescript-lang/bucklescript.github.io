@@ -17,7 +17,7 @@
             <link>https://bucklescript.github.io/blog/2018/12/05/release-4-0-8.html</link>
             <guid>https://bucklescript.github.io/blog/2018/12/05/release-4-0-8.html</guid>
             <pubDate>Wed, 05 Dec 2018 06:00:00 GMT</pubDate>
-            <description><![CDATA[<p>Today we made a new release 4.0.8 of <code>bs-platform</code>, a detailed list of changes is available <a href="https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#408">here</a></p> <p>Most user visible changes are bug fixes and small enhancement, while quite a few work is done for the upcoming fundamental improvement.</p> <p>In this article, we ...</p>]]></description>
+            <description><![CDATA[<p>Today we released version 4.0.8 of <code>bs-platform</code>. A detailed list of changes is available <a href="https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#408">here</a>.</p> <p>Most user-facing changes are bug fixes and small enhancements, while quite a lot of work has been done behind the scenes towards the more fundamental improv...</p>]]></description>
         </item>
         <item>
             <title><![CDATA[BuckleScript development plans for next half]]></title>
