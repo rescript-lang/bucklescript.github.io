@@ -129,6 +129,8 @@ To ensure that folks don't accidentally curry a JavaScript method, we track ever
 
 ### Creation
 
+#### Literal
+
 You can use `[%bs.obj putAnOCamlRecordHere]` DSL to create a `Js.t` object:
 
 ```ocaml
@@ -147,7 +149,7 @@ let bucklescript = [%bs.obj {
 let name = bucklescript##info##author;
 ```
 
-Because object values are used often, Reason gives it a nicer sugar. `[%bs.obj {foo: 1}]` will format to `{"foo": 1}`.
+Because object values are used often, Reason gives it a nicer sugar: `{"foo": 1}`, which desugars to: `[%bs.obj {foo: 1}]`.
 
 **Note**: there's no syntax sugar for creating an empty object in OCaml nor Reason (aka this doesn't work: `[%bs.obj {}]`. Please use `Js.Obj.empty()` for that purpose.
 
@@ -174,3 +176,58 @@ let jane = {"age": "hi"};
 ```
 
 See what went wrong here? We've declared a `person` type, but `jane` is inferred as its own type, so `person` is ignored and no error happens! To give `jane` an explicit type, simply annotate it: `let jane: person = ...`. This will then error correctly.
+
+#### Function
+
+You can declare an external function that, when called, will evaluate to a `Js.t` object with fields corresponding to the function's parameter labels. This is very handy because you can make some of those labelled parameters _optional_ and if you don't pass them in, the output object _won't include_ the corresponding fields. Thus you can use it to dynamically create objects with the subset of fields you need at runtime.
+
+For example, suppose you need a JavaScript object like this:
+
+```js
+var homeRoute = {
+  method: "GET",
+  path: "/",
+  action: () => console.log("Home"),
+  // options: ...
+};
+```
+
+But only the first three fields are required; the `options` field is optional. You can declare the binding function like so:
+
+```ocaml
+external route :
+  _method:string ->
+  path:string ->
+  action:(string list -> unit) ->
+  ?options:< .. > Js.t ->
+  unit ->
+  _ = "" [@@bs.obj]
+```
+
+```reason
+[@bs.obj] external route: (
+  ~_method:string,
+  ~path:string,
+  ~action:(list(string) => unit),
+  ~options:Js.t({..})=?,
+  unit
+) => _ = "";
+```
+
+This function has four labelled parameters (the fourth one optional), one unlabelled parameter at the end (which we mandate for functions with [optional parameters](https://reasonml.github.io/docs/en/function.html#optional-labeled-arguments)), and one parameter (`_method`) that requires an underscore prefix to avoid confusion with the OCaml/Reason keyword `method`.
+
+Also of interest is the return type: `_`, which tells BuckleScript to automatically infer the full type of the `Js.t` object, sparing you the hassle of writing down the type manually!
+
+The function is called like so:
+
+```ocaml
+let homeRoute = route ~_method:"GET" ~path:"/" ~action:(fun _ -> Js.log "Home") ()
+```
+
+```reason
+let homeRoute = route(~_method="GET", ~path="/", ~action=(_ => Js.log("Home")), ());
+```
+
+This generates the desired JavaScript object–but you'll notice that the `options` parameter was left out. As expected, the generated object won't include the `options` field.
+
+**Note** that for more type-safety you'll probably want to [constrain](https://bucklescript.github.io/docs/en/function#constraint-arguments-better) the `_method` parameter type to only the acceptable values.
