@@ -2,11 +2,21 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://bucklescript.github.io/blog</id>
     <title>BuckleScript Blog</title>
-    <updated>2018-12-05T06:00:00Z</updated>
+    <updated>2019-01-07T06:00:00Z</updated>
     <generator>Feed for Node.js</generator>
     <link rel="alternate" href="https://bucklescript.github.io/blog"/>
     <subtitle>The best place to stay up-to-date with the latest BuckleScript news and events.</subtitle>
     <logo>https://bucklescript.github.io/img/logos/bucklescript.svg</logo>
+    <entry>
+        <title type="html"/>
+        <id>https://bucklescript.github.io/blog/2019/01/07/release-4-0-17.html</id>
+        <link href="https://bucklescript.github.io/blog/2019/01/07/release-4-0-17.html">
+        </link>
+        <updated>2019-01-07T06:00:00Z</updated>
+        <summary type="html"><![CDATA[<p><code>bs-platform</code> 4.0.17 is a major release.</p> <p>It improvded incremental compilation time significantly.</p> <p>A pictue is worth a thousand words, below is a large monorepo which contains 4096 modules, changing the root node which has more than 3000 dependents, it ...</p>]]></summary>
+        <author>
+        </author>
+    </entry>
     <entry>
         <title type="html"><![CDATA[BuckleScript 4.0.8 (Part One)]]></title>
         <id>https://bucklescript.github.io/blog/2018/12/05/release-4-0-8.html</id>
