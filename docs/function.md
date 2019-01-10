@@ -184,7 +184,7 @@ padLeft("Hello World", 4);
 padLeft("Hello World", "Message from BS: ");
 ```
 
-## Constraint Arguments Better
+## Constrain Arguments Better
 
 Consider the Node `fs.readFileSync`'s second argument. It can take a string, but really only a defined set: `"ascii"`, `"utf8"`, etc. You can still bind it as a string, but we can use poly variants + `bs.string` to ensure that our usage's more correct:
 
