@@ -32,6 +32,18 @@ The commands that are exposed are:
 - `bsc`, the raw compiler. Usually not used directly.
 - `bsrefmt`, the included [Reason](https://reasonml.github.io) parser & printer.
 
+## Weekly Alpha Releases
+
+To help us catch regressions, feel free to tests features in the next release, now:
+
+```sh
+yarn add --dev bs-platform@next
+```
+
+Similar commands as previous section for `npm` and/or global installation.
+
+Thank you for helping us!
+
 ## Alternatives (Power Users)
 
 ### Install From Source, Through NPM/Yarn
