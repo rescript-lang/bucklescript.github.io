@@ -42,6 +42,8 @@ yarn add --dev bs-platform@next
 
 Similar commands as previous section for `npm` and/or global installation.
 
+**Note**: weekly alpha releases only support \*nix platform (including macOS). Windows support is only available for beta releases (no set schedule currently).
+
 Thank you for helping us!
 
 ## Alternatives (Power Users)
