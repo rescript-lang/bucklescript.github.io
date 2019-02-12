@@ -252,6 +252,8 @@ external dirname: string -> string = "dirname" [@@bs.module "path"]
 
 ### Import Default
 
+It's important to note that you are not providing the module path to `bs.module`, but instead as the last argument of `external`.
+
 ```ocaml
 external leftPad: string -> int -> string = "./leftPad" [@@bs.module]
 ```
