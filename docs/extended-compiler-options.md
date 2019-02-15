@@ -40,7 +40,7 @@ BuckleScript supports two compilation modes: script mode and package mode. In pa
 
 The name of your project. It's recommended to use the same `name` than the one in `package.json`.
 
-## -bs-packge-output
+## -bs-package-output
 
 Configure the output module system. The format is `module_system:output/path/relative/to/package.json`.
 
