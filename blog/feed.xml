@@ -4,7 +4,7 @@
         <title>BuckleScript Blog</title>
         <link>https://bucklescript.github.io/blog</link>
         <description>The best place to stay up-to-date with the latest BuckleScript news and events.</description>
-        <lastBuildDate>Mon, 07 Jan 2019 06:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 01 Jan 1970 00:00:00 GMT</lastBuildDate>
         <docs>http://blogs.law.harvard.edu/tech/rss</docs>
         <generator>Feed for Node.js</generator>
         <image>
@@ -12,6 +12,13 @@
             <url>https://bucklescript.github.io/img/logos/bucklescript.svg</url>
             <link>https://bucklescript.github.io/blog</link>
         </image>
+        <item>
+            <title><![CDATA[First class bs.variadic  support in next release]]></title>
+            <link>https://bucklescript.github.io/blog/2019/03/1/feature-preview.html</link>
+            <guid>https://bucklescript.github.io/blog/2019/03/1/feature-preview.html</guid>
+            <pubDate>Thu, 01 Jan 1970 00:00:00 GMT</pubDate>
+            <description><![CDATA[<p>In previous releases, when an external is marked <code>bs.variadic</code> (was <code>bs.splice</code>), its tail arguments need to be applies statically, otherwise user will get a compile error.</p> <p>For example</p> <pre><code class="hljs"><span class="hljs-keyword">external</span> join : <span class="hljs-built_in">string</span> <span class="hljs-built_in">array</span> -&gt; <span class="hljs-built_in">string</span> = <span class="hljs-string">""</span> [@@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"path"</span>] [...</code></pre>]]></description>
+        </item>
         <item>
             <link>https://bucklescript.github.io/blog/2019/01/07/release-4-0-17.html</link>
             <guid>https://bucklescript.github.io/blog/2019/01/07/release-4-0-17.html</guid>
