@@ -8,12 +8,12 @@
     <subtitle>The best place to stay up-to-date with the latest BuckleScript news and events.</subtitle>
     <logo>https://bucklescript.github.io/img/logos/bucklescript.svg</logo>
     <entry>
-        <title type="html"><![CDATA[First class bs.variadic  support in next release]]></title>
+        <title type="html"><![CDATA[First-class `bs.variadic` Support in the Next Release]]></title>
         <id>https://bucklescript.github.io/blog/2019/03/1/feature-preview.html</id>
         <link href="https://bucklescript.github.io/blog/2019/03/1/feature-preview.html">
         </link>
         <updated>1970-01-01T00:00:00Z</updated>
-        <summary type="html"><![CDATA[<p>In previous releases, when an external is marked <code>bs.variadic</code> (was <code>bs.splice</code>), its tail arguments need to be applies statically, otherwise user will get a compile error.</p> <p>For example</p> <pre><code class="hljs"><span class="hljs-keyword">external</span> join : <span class="hljs-built_in">string</span> <span class="hljs-built_in">array</span> -&gt; <span class="hljs-built_in">string</span> = <span class="hljs-string">""</span> [@@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"path"</span>] [...</code></pre>]]></summary>
+        <summary type="html"><![CDATA[<p>In previous releases, when a <code>bs.variadic</code> external (previously called <code>bs.splice</code> prior to version <code>4.08</code>) is present, its tail arguments needed to be applied statically. In other words, the <code>external</code> marked with <code>bs.variadic</code>, when used, requires a <em>literal</em> ...</p>]]></summary>
         <author>
         </author>
     </entry>
