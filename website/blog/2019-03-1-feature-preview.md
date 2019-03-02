@@ -1,28 +1,36 @@
 ---
-title: First class bs.variadic  support in next release
+title: First-class `bs.variadic` Support in the Next Release
 ---
 
-In previous releases, when an external is marked `bs.variadic` (was `bs.splice`), its tail arguments need to be applies statically, otherwise user will get a compile error.
+In previous releases, when a `bs.variadic` external (previously called `bs.splice` prior to version `4.08`) is present, its tail arguments needed to be applied statically. In other words, the `external` marked with `bs.variadic`, when used, requires a _literal_ array:
 
-For example
+```ocaml
+external join : string array -> string = ""
+[@@bs.module "path"][@@bs.variadic]
 
-```
-external join : string array -> string = "" 
-[@@bs.module "path"]  [@@bs.variadic]
-
-let _ = join [| "a"; "b"|] (* ok *)
-let f b = join b (* compile error *)
+let _ = join [|"a"; "b"|] (* this is ok *)
+let f b = join b (* compiler error when you try to abstract `join` *)
 ```
 
-More importantly, such compile error is leaky in such cases
+```reason
+[@bs.module "path"][@bs.variadic]
+external join: array(string) => string = ""
 
+let _ = join([|"a", "b"|]) /* this is ok */
+let f = b => join(b) /* compiler error when you try to abstract `join` */
 ```
+
+More importantly, such compilation error was leaky in cases such as this one:
+
+```ocaml
 let f = join
 ```
 
-In next  release, we are going to lift such restriction to support it in all cases. 
+```reason
+let f = join
+```
 
-We are unclear how to support it in first class in the combination of `bs.new` and `bs.variadic`, so such external declaration will trigger a compile error.
+In the next release, we are going to lift such restriction. You'll be able to call an external marked with `bs.variadic` with an array reference, not just a literal array.
 
-Once we figure out how to support variadic arguments in `bs.new`, we can lift such restriction.
+Caveat: it's unclear how to support such first class `bs.variadic` call in conjunction with `bs.new`, so an external declaration that contains both will trigger a compilation error. We'll try to figure out this particular case in the future too.
 
