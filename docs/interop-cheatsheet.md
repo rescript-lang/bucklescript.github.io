@@ -291,3 +291,7 @@ external myShadyConversion : foo -> bar = "%identity"
 ```reason
 external myShadyConversion : foo => bar = "%identity";
 ```
+
+---
+
+You can find more examples for the various `bs.*` attributes [here](https://github.com/moroshko/bs-blabla).
