@@ -97,7 +97,7 @@ let coordinatesFromJs: {.. "x": int, "y": int} => coordinates;
 **Note**:
 
 - `coordinatesFromJs` uses an open object type that accepts more fields, just to be more permissive.
-- The converters are shallow. They don't recursively drill into the fields and convert them. This preserves the speed and simplicity of output while satisfying 80% of use-cases. File an issue if you'd like seeing recursive conversion happen though!
+- The converters are shallow. They don't recursively drill into the fields and convert them. This preserves the speed and simplicity of output while satisfying 80% of use-cases. If you'd like recursive conversion, upvote and subscribe to this issue: https://github.com/BuckleScript/bucklescript/issues/2294 (note: please don't leave 'I want this too!' comments, it spams all subscribers of the issue ;-)
 
 ### Usage
 
