@@ -1,0 +1,287 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Object · BuckleScript</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Javascript 物件有兩個目的:"/><meta name="docsearch:language" content="zh-TW"/><meta property="og:title" content="Object · BuckleScript"/><meta property="og:type" content="website"/><meta property="og:url" content="https://bucklescript.github.io/index.html"/><meta property="og:description" content="Javascript 物件有兩個目的:"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/logos/bucklescript.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://bucklescript.github.io/blog/atom.xml" title="BuckleScript Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://bucklescript.github.io/blog/feed.xml" title="BuckleScript Blog RSS Feed"/><script type="text/javascript" src="/js/toggleSyntaxButton.js"></script><script type="text/javascript" src="/js/pjax-api.min.js"></script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/zh-TW"><img class="logo" src="/img/logos/bucklescript.svg" alt="BuckleScript"/><h2 class="headerTitleWithLogo">BuckleScript</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/zh-TW/installation" target="_self">Docs</a></li><li class=""><a href="/docs/zh-TW/playground" target="_self">Try</a></li><li class="siteNavGroupActive"><a href="/docs/zh-TW/stdlib-overview" target="_self">API</a></li><li class=""><a href="/docs/zh-TW/community" target="_self">Community</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>繁體中文</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/ja/object">日本語</a></li><li><a href="/docs/en/object">English</a></li><li><a href="/docs/es-ES/object">Español</a></li><li><a href="/docs/fr/object">Français</a></li><li><a href="/docs/ko/object">한국어</a></li><li><a href="/docs/pt-BR/object">Português (Brasil)</a></li><li><a href="/docs/ru/object">Русский</a></li><li><a href="/docs/zh-CN/object">中文</a></li><li><a href="https://crowdin.com/project/bucklescript" target="_blank" rel="noreferrer noopener">協助翻譯</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/bucklescript/bucklescript" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Interop</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Intro</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-TW/what-why">What &amp; Why</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/installation">Installation</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/new-project">New Project</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/concepts-overview">Concepts Overview</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Interop</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-TW/interop-overview">Overview</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/interop-cheatsheet">Cheatsheet</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/embed-raw-javascript">Embed Raw JavaScript</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/common-data-types">Common Data Types</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/intro-to-external">Intro to External</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/bind-to-global-values">Bind to Global Values</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/null-undefined-option">Null, Undefined &amp; Option</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/zh-TW/object">Object</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/object-2">Object 2</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/class">Class</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/function">Function</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/import-export">Import &amp; Export</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/regular-expression">Regular Expression</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/exceptions">Exceptions</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/json">JSON</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/fast-pipe">Fast Pipe</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/generate-converters-accessors">Generate Converters &amp; Helpers</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/better-data-structures-printing-debug-mode">Better Data Structures Printing (Debug Mode)</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/nodejs-special-variables">NodeJS Special Variables</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/interop-misc">Miscellaneous</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/browser-support-polyfills">Browser Support &amp; Polyfills</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Build System</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-TW/build-overview">Overview</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/build-configuration">Configuration</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/automatic-interface-generation">Automatic Interface Generation</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/interop-with-js-build-systems">Interop with JS Build System</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/build-performance">Performance</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/build-advanced">Advanced</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Standard Library</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-TW/stdlib-overview">Overview</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Advanced</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-TW/conditional-compilation">Conditional Compilation</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/extended-compiler-options">Extended Compiler Options</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/use-existing-ocaml-libraries">Use Existing OCaml Libraries</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/difference-from-native-ocaml">Difference from Native OCaml</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/compiler-architecture-principles">Compiler Architecture &amp; Principles</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/comparison-to-jsoo">Comparison to Js_of_ocaml</a></li></ul></div></div></section></div><script>
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              const headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                if (event.target.tagName === 'A') {
+                  document.body.classList.remove('tocActive');
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docMainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/bucklescript/zh-TW" target="_blank" rel="noreferrer noopener">Translate</a><h1 class="postHeaderTitle">Object</h1></header><article><div><span><p>Javascript 物件有兩個目的:</p>
+<ul>
+<li>做為<strong>雜湊表</strong>(或&quot;字典&quot;)，索引 可以動態 增加/刪除，值擁有相同的型態</li>
+<li>做為<strong>record</strong>，欄位是固定的(雖然有時候是可選擇的)，值 可以擁有不同型態</li>
+</ul>
+<p>相應的，BuckleScript 和 Javascript Objects 也是一樣基於這兩個目的來使用物件</p>
+<h2><a class="anchor" aria-hidden="true" id="雜湊表模式"></a><a href="#雜湊表模式" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>雜湊表模式</h2>
+<p>最近 JS 終於支援正確的 Map，物件已可以使用在 map 實現，如果您使用 JS 物件方式如下:</p>
+<ul>
+<li>可能會或可能不 新增/刪除 任意鍵</li>
+<li>可能會或可能不會 用 動態/計算的 鍵訪問值</li>
+<li>值都是相同的類型</li>
+</ul>
+<p>然後使用我們的 <a href="https://bucklescript.github.io/bucklescript/api/Js.Dict.html"><code>Js.Dict</code></a>(&quot;字典&quot;) API 綁定 JS 物件! 在這個模式中，你可以使用所有的 JS 物件的 原生程式設計: 透過<code>Js.Dict.keys</code>取得所有的鍵，透過<code>Js.Dict.values</code>取得所有的值，等.</p>
+<h3><a class="anchor" aria-hidden="true" id="範例"></a><a href="#範例" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>範例</h3>
+<pre><code class="hljs css language-ocaml"><span class="hljs-comment">(* Create a JS object ourselves *)</span>
+<span class="hljs-keyword">let</span> myMap = <span class="hljs-type">Js</span>.<span class="hljs-type">Dict</span>.empty <span class="hljs-literal">()</span>
+<span class="hljs-keyword">let</span> <span class="hljs-literal">()</span> = <span class="hljs-type">Js</span>.<span class="hljs-type">Dict</span>.set myMap <span class="hljs-string">"Allison"</span> <span class="hljs-number">10</span>
+
+<span class="hljs-comment">(* Use an existing JS object *)</span>
+<span class="hljs-keyword">external</span> studentAges : <span class="hljs-built_in">int</span> <span class="hljs-type">Js</span>.<span class="hljs-type">Dict</span>.t = <span class="hljs-string">"student"</span> [@@bs.<span class="hljs-keyword">val</span>]
+<span class="hljs-keyword">let</span> <span class="hljs-literal">()</span> =
+  <span class="hljs-keyword">match</span> <span class="hljs-type">Js</span>.<span class="hljs-type">Dict</span>.get studentAges <span class="hljs-string">"Joe"</span> <span class="hljs-keyword">with</span>
+  | <span class="hljs-type">None</span> -&gt; <span class="hljs-type">Js</span>.log <span class="hljs-string">"Joe can't be found"</span>
+  | <span class="hljs-type">Some</span> age -&gt; <span class="hljs-type">Js</span>.log (<span class="hljs-string">"Joe is "</span> ^ (string_of_int age))
+</code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-comment">/* Create a JS object ourselves */</span>
+<span class="hljs-keyword">let</span> myMap = <span class="hljs-module-identifier">Js</span>.<span class="hljs-module-identifier">Dict</span>.empty();
+<span class="hljs-module-identifier">Js</span>.<span class="hljs-module-identifier">Dict</span>.set(myMap, <span class="hljs-string">"Allison"</span>, <span class="hljs-number">10</span>);
+
+<span class="hljs-comment">/* Use an existing JS object */</span>
+<span class="hljs-attribute">[@bs.val]</span> <span class="hljs-keyword">external</span> studentAges : <span class="hljs-module-identifier">Js</span>.<span class="hljs-module-identifier">Dict</span>.t(int) = <span class="hljs-string">"student"</span>;
+<span class="hljs-keyword">switch</span> (<span class="hljs-module-identifier">Js</span>.<span class="hljs-module-identifier">Dict</span>.get(studentAges, <span class="hljs-string">"Joe"</span>)) {
+| <span class="hljs-constructor">None</span> =&gt; <span class="hljs-module-identifier">Js</span>.log(<span class="hljs-string">"Joe can't be found"</span>)
+| <span class="hljs-constructor">Some</span>(age) =&gt; <span class="hljs-module-identifier">Js</span>.log(<span class="hljs-string">"Joe is "</span> <span class="hljs-operator">++</span> string_of_int(age))
+};
+</code></pre>
+<p>輸出</p>
+<pre><code class="hljs css language-js"><span class="hljs-keyword">var</span> myMap = { };
+myMap[<span class="hljs-string">"Allison"</span>] = <span class="hljs-number">10</span>;
+
+<span class="hljs-keyword">var</span> match = student[<span class="hljs-string">"Joe"</span>];
+<span class="hljs-keyword">if</span> (match !== <span class="hljs-literal">undefined</span>) {
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Joe is "</span> + <span class="hljs-built_in">String</span>(match));
+} <span class="hljs-keyword">else</span> {
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Joe can't be found"</span>);
+}
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="設計決策"></a><a href="#設計決策" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>設計決策</h3>
+<p>你可以看到一個事實就是<code>Js.Dict</code>基於 Js 物件 這裡整個 API 都沒有 使用到 BuckleScript 的 <code>external</code>，所以在編譯之後 API 會完全消失 在編譯後的結果的任何位置都不應存在 <code>Dict</code>。 十分便於將 JS 轉譯為 BuckleScript</p>
+<h2><a class="anchor" aria-hidden="true" id="record-mode"></a><a href="#record-mode" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Record Mode</h2>
+<p>如果你的 JS 物件:</p>
+<ul>
+<li>有一個已知的、固定的欄位集合</li>
+<li>可能或可能不包含不同類型的值</li>
+</ul>
+<p>在大多數其他語言 你會使用它就像 &quot;record&quot; 例如，思考一下<code>{&quot;John&quot;: 10, &quot;Allison&quot;: 20, &quot;Jimmy&quot;: 15}</code> 和 <code>{name: &quot;John&quot;, age: 10, job: &quot;CEO&quot;}</code> 這兩個範例的不同 前者是上述的&quot;雜湊表模式&quot; 後者會是&quot;紀錄模式&quot;，在BuckleScript 中會利用<code>bs.deriving abstract</code> 來定義結構</p>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">type</span> person = {
+  name: <span class="hljs-built_in">string</span>;
+  age: <span class="hljs-built_in">int</span>;
+  job: <span class="hljs-built_in">string</span>;
+} [@@bs.deriving abstract]
+
+<span class="hljs-keyword">external</span> john : person = <span class="hljs-string">"john"</span> [@@bs.<span class="hljs-keyword">val</span>]
+</code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.deriving abstract]</span>
+<span class="hljs-keyword">type</span> person = {
+  name: string,
+  age: int,
+  job: string,
+};
+
+<span class="hljs-attribute">[@bs.val]</span> <span class="hljs-keyword">external</span> john : person = <span class="hljs-string">"john"</span>;
+</code></pre>
+<p><strong>Note</strong> <code>person</code>的類型 <strong>不是</strong> 一種記錄類型 這是一個 類紀錄 的型態，有紀錄的語法和類型檢查機制 <code>bs.deriving abstract</code> 標註是轉為 &quot;抽象類型別&quot; (又名為您不知道實際值的形狀)</p>
+<h3><a class="anchor" aria-hidden="true" id="creation"></a><a href="#creation" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Creation</h3>
+<p>You don't have to bind to an existing <code>person</code> object from the JS side. You can also create such <code>person</code> JS object from BuckleScript's side.</p>
+<p>Since <code>bs.deriving abstract</code> turns the above <code>person</code> record into an abstract type, you can't directly create a person record as you would usually. This doesn't work: <code>{name: &quot;Joe&quot;, age: 20, job: &quot;teacher&quot;}</code>.</p>
+<p>Instead, you'd use the <strong>creation function</strong> of the same name as the record type, implicitly generated by the <code>bs.deriving abstract</code> annotation:</p>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> joe = person ~name:<span class="hljs-string">"Joe"</span> ~age:<span class="hljs-number">20</span> ~job:<span class="hljs-string">"teacher"</span>
+</code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> joe = person(~name=<span class="hljs-string">"Joe"</span>, ~age=<span class="hljs-number">20</span>, ~job=<span class="hljs-string">"teacher"</span>)
+</code></pre>
+<p>Output:</p>
+<pre><code class="hljs css language-js"><span class="hljs-keyword">var</span> joe = {
+  <span class="hljs-attr">name</span>: <span class="hljs-string">"Joe"</span>,
+  <span class="hljs-attr">age</span>: <span class="hljs-number">20</span>,
+  <span class="hljs-attr">job</span>: <span class="hljs-string">"teacher"</span>
+};
+</code></pre>
+<p>Look ma, no runtime cost!</p>
+<h4><a class="anchor" aria-hidden="true" id="rename-fields"></a><a href="#rename-fields" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Rename Fields</h4>
+<p>Sometimes you might be binding to a JS object with field names that are invalid in BuckleScript/Reason. Two examples would be <code>{type: &quot;foo&quot;}</code> (reserved keyword in BS/Reason) and <code>{&quot;aria-checked&quot;: true}</code>. Choose a valid field name then use <code>[@bs.as]</code> to circumvent this:</p>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">type</span> data = {
+  type_: <span class="hljs-built_in">string</span> [@bs.<span class="hljs-keyword">as</span> <span class="hljs-string">"type"</span>];
+  ariaLabel: <span class="hljs-built_in">string</span> [@bs.<span class="hljs-keyword">as</span> <span class="hljs-string">"aria-label"</span>];
+} [@@bs.deriving abstract]
+
+<span class="hljs-keyword">let</span> d = data ~type_:<span class="hljs-string">"message"</span> ~ariaLabel:<span class="hljs-string">"hello"</span>
+</code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.deriving abstract]</span>
+<span class="hljs-keyword">type</span> data = {
+  <span class="hljs-attribute">[@bs.as "type"]</span> type_: string,
+  <span class="hljs-attribute">[@bs.as "aria-label"]</span> ariaLabel: string,
+};
+
+<span class="hljs-keyword">let</span> d = data(~type_=<span class="hljs-string">"message"</span>, ~ariaLabel=<span class="hljs-string">"hello"</span>);
+</code></pre>
+<p>Output:</p>
+<pre><code class="hljs css language-js"><span class="hljs-keyword">var</span> d = {
+  <span class="hljs-attr">type</span>: <span class="hljs-string">"message"</span>,
+  <span class="hljs-string">"aria-label"</span>: <span class="hljs-string">"hello"</span>
+};
+</code></pre>
+<h4><a class="anchor" aria-hidden="true" id="optional-labels"></a><a href="#optional-labels" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Optional Labels</h4>
+<p>You can omit fields during the creation of the object:</p>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">type</span> person = {
+  name: <span class="hljs-built_in">string</span> [@bs.optional];
+  age: <span class="hljs-built_in">int</span>;
+  job: <span class="hljs-built_in">string</span>;
+} [@@bs.deriving abstract]
+
+<span class="hljs-keyword">let</span> joe = person ~age:<span class="hljs-number">20</span> ~job:<span class="hljs-string">"teacher"</span> <span class="hljs-literal">()</span>
+</code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.deriving abstract]</span>
+<span class="hljs-keyword">type</span> person = {
+  <span class="hljs-attribute">[@bs.optional]</span> name: string,
+  age: int,
+  job: string,
+};
+
+<span class="hljs-keyword">let</span> joe = person(~age=<span class="hljs-number">20</span>, ~job=<span class="hljs-string">"teacher"</span>, ());
+</code></pre>
+<p><strong>Note</strong> that the <code>[@bs.optional]</code> tag turned the <code>name</code> field optional. Merely typing <code>name</code> as <code>option(string)</code> wouldn't work.</p>
+<p><strong>Note</strong>: now that your creation function contains optional fields, we mandate an unlabeled <code>()</code> at the end to indicate that <a href="https://reasonml.github.io/docs/en/function.html#optional-labeled-arguments">you've finished applying the function</a>.</p>
+<h3><a class="anchor" aria-hidden="true" id="accessors"></a><a href="#accessors" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Accessors</h3>
+<p>Again, since <code>bs.deriving abstract</code> hides the actual record shape, you can't access a field using e.g. <code>joe.age</code>. We remediate this by generating getter and setters.</p>
+<h4><a class="anchor" aria-hidden="true" id="read"></a><a href="#read" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Read</h4>
+<p>One getter function is generated per <code>bs.deriving abstract</code> record type field. In the above example, you'd get 3 functions: <code>nameGet</code>, <code>ageGet</code>, <code>jobGet</code>. They take in a <code>person</code> value and return <code>string</code>, <code>int</code>, <code>string</code> respectively:</p>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> twenty = ageGet joe
+</code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> twenty = ageGet(joe)
+</code></pre>
+<p>Alternatively, you can use the <a href="/docs/zh-TW/fast-pipe">Fast Pipe</a> feature in a later section for a nicer-looking access syntax:</p>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> twenty = joe |. ageGet
+</code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> twenty = joe<span class="hljs-operator">-&gt;</span>ageGet
+</code></pre>
+<h4><a class="anchor" aria-hidden="true" id="write"></a><a href="#write" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Write</h4>
+<p>A <code>bs.deriving abstract</code> value is immutable by default. To mutate such value, you need to first mark one of the abstract record field as <code>mutable</code>, the same way you'd mark a normal record as mutable:</p>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">type</span> person = {
+  name: <span class="hljs-built_in">string</span>;
+  <span class="hljs-keyword">mutable</span> age: <span class="hljs-built_in">int</span>;
+  job: <span class="hljs-built_in">string</span>;
+} [@@bs.deriving abstract]
+</code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.deriving abstract]</span>
+<span class="hljs-keyword">type</span> person = {
+  name: string,
+  <span class="hljs-keyword">mutable</span> age: int,
+  job: string,
+};
+</code></pre>
+<p>Then, a setter of the name <code>ageSet</code> will be generated. Use it like so:</p>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> joe = person ~name:<span class="hljs-string">"Joe"</span> ~age:<span class="hljs-number">20</span> ~job:<span class="hljs-string">"teacher"</span>
+<span class="hljs-keyword">let</span> <span class="hljs-literal">()</span> = ageSet joe <span class="hljs-number">21</span>
+</code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> joe = person(~name=<span class="hljs-string">"Joe"</span>, ~age=<span class="hljs-number">20</span>, ~job=<span class="hljs-string">"teacher"</span>);
+ageSet(joe, <span class="hljs-number">21</span>);
+</code></pre>
+<p>Alternatively, with the fast pipe syntax:</p>
+<pre><code class="hljs css language-ocaml">joe |. ageSet <span class="hljs-number">21</span>
+</code></pre>
+<pre><code class="hljs css language-reason">joe<span class="hljs-operator">-&gt;</span>ageSet(<span class="hljs-number">21</span>)
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="methods"></a><a href="#methods" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Methods</h3>
+<p>You can attach arbitrary methods onto a type (<em>any</em> type, as a matter of fact. Not just <code>bs.deriving abstract</code> record types). See <a href="/docs/zh-TW/function#object-method">Object Method</a> in the function section later.</p>
+<h3><a class="anchor" aria-hidden="true" id="tips-tricks"></a><a href="#tips-tricks" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Tips &amp; Tricks</h3>
+<p>You can leverage <code>bs.deriving abstract</code> for finer-grained access control.</p>
+<h4><a class="anchor" aria-hidden="true" id="mutability"></a><a href="#mutability" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Mutability</h4>
+<p>You can mark a field as mutable in the implementation (<code>ml</code>/<code>re</code>) file, while <em>hiding</em> such mutability in the interface file:</p>
+<pre><code class="hljs css language-ocaml"><span class="hljs-comment">(* test.ml *)</span>
+<span class="hljs-keyword">type</span> cord = {
+  <span class="hljs-keyword">mutable</span> x: <span class="hljs-built_in">int</span> [@bs.optional];
+  y: <span class="hljs-built_in">int</span>;
+} [@@bs.deriving abstract]
+</code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-comment">/* test.re */</span>
+<span class="hljs-attribute">[@bs.deriving abstract]</span>
+<span class="hljs-keyword">type</span> cord = {
+  <span class="hljs-attribute">[@bs.optional]</span> <span class="hljs-keyword">mutable</span> x: int,
+  y: int,
+};
+</code></pre>
+<pre><code class="hljs css language-ocaml"><span class="hljs-comment">(* test.mli *)</span>
+<span class="hljs-keyword">type</span> cord = {
+  x: <span class="hljs-built_in">int</span> [@bs.optional];
+  y: <span class="hljs-built_in">int</span>;
+} [@@bs.deriving abstract]
+</code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-comment">/* test.rei */</span>
+<span class="hljs-attribute">[@bs.deriving abstract]</span>
+<span class="hljs-keyword">type</span> cord = {
+  <span class="hljs-attribute">[@bs.optional]</span> x: int,
+  y: int,
+};
+</code></pre>
+<p>Tada! Now you can mutate inside your own file as much as you want, and prevent others from doing so!</p>
+<h4><a class="anchor" aria-hidden="true" id="hide-the-creation-function"></a><a href="#hide-the-creation-function" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Hide the Creation Function</h4>
+<p>Mark the record as <code>private</code> to disable the creation function:</p>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">type</span> cord = <span class="hljs-keyword">private</span> {
+  x: <span class="hljs-built_in">int</span> [@bs.optional];
+  y: <span class="hljs-built_in">int</span>
+} [@@bs.deriving abstract]
+</code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.deriving abstract]</span>
+<span class="hljs-keyword">type</span> cord = <span class="hljs-keyword">pri</span> {
+  <span class="hljs-attribute">[@bs.optional]</span> x: int,
+  y: int,
+};
+</code></pre>
+<p>The accessors are still there, but you can no longer create such data structure. Great for binding to a JS object while preventing others from creating more such object!</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/zh-TW/null-undefined-option"><span class="arrow-prev">← </span><span>上一步</span></a><a class="docs-next button" href="/docs/zh-TW/object-2"><span>下一步</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav docOnPageNav"><ul class="toc-headings"><li><a href="#雜湊表模式">雜湊表模式</a><ul class="toc-headings"><li><a href="#範例">範例</a></li><li><a href="#設計決策">設計決策</a></li></ul></li><li><a href="#record-mode">Record Mode</a><ul class="toc-headings"><li><a href="#creation">Creation</a></li><li><a href="#accessors">Accessors</a></li><li><a href="#methods">Methods</a></li><li><a href="#tips-tricks">Tips &amp; Tricks</a></li></ul></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script>window.foo = new Pjax({
+          areas: [
+            // try to use the first query.
+            '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
+            // fallback
+            'body'
+          ],
+          link: '.docsNavContainer:not(.docsSliderActive) a',
+          update: {
+            script: false,
+          }
+        });
+        var languagesMenuItemCopy = document.getElementById("languages-menu");
+        languagesMenuItemCopy.addEventListener("click", function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          e.stopImmediatePropagation();
+        });</script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+              var search = docsearch({
+                
+                apiKey: '0fd97db83891aa20810559812d9e69ac',
+                indexName: 'bucklescript',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:zh-TW"]}
+              });
+            </script></body></html>
