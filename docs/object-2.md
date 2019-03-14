@@ -230,4 +230,4 @@ let homeRoute = route(~_method="GET", ~path="/", ~action=(_ => Js.log("Home")), 
 
 This generates the desired JavaScript object–but you'll notice that the `options` parameter was left out. As expected, the generated object won't include the `options` field.
 
-**Note** that for more type-safety you'll probably want to [constrain](https://bucklescript.github.io/docs/en/function#constraint-arguments-better) the `_method` parameter type to only the acceptable values.
+**Note** that for more type-safety you'll probably want to [constrain](https://bucklescript.github.io/docs/en/function#constrain-arguments-better) the `_method` parameter type to only the acceptable values.
