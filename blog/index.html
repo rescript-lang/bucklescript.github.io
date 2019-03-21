@@ -10,7 +10,7 @@
             languagesDropDown.className = "hide";
           }
         });
-      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/bucklescript/bucklescript" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul><li class="navListItem"><a class="navItem" href="/blog/2019/03/1/feature-preview">First-class `bs.variadic` Support in the Next Release</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/01/07/release-4-0-17"></a></li><li class="navListItem"><a class="navItem" href="/blog/2018/12/05/release-4-0-8">BuckleScript 4.0.8 (Part One)</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/11/19/next-half">BuckleScript development plans for next half</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/11/13/arity-zero">A change of undefined behavior in BuckleScript 4.0.7</a></li></ul></div></div></section></div><script>
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/bucklescript/bucklescript" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul><li class="navListItem"><a class="navItem" href="/blog/2019/03/21/release-5-0">bs-platform release v5</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/01/07/release-4-0-17"></a></li><li class="navListItem"><a class="navItem" href="/blog/2018/12/05/release-4-0-8">BuckleScript 4.0.8 (Part One)</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/11/19/next-half">BuckleScript development plans for next half</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/11/13/arity-zero">A change of undefined behavior in BuckleScript 4.0.7</a></li></ul></div></div></section></div><script>
             document.addEventListener('DOMContentLoaded', function() {
               createToggler('#navToggler', '#docsNav', 'docsSliderActive');
               createToggler('#tocToggler', 'body', 'tocActive');
@@ -37,26 +37,21 @@
                 };
               }
             });
-        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="posts"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2019/03/1/feature-preview">First-class `bs.variadic` Support in the Next Release</a></h1><p class="post-meta">March 1, 2019</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p>In previous releases, when a <code>bs.variadic</code> external (previously called <code>bs.splice</code> prior to version <code>4.08</code>) is present, its tail arguments needed to be applied statically. In other words, the <code>external</code> marked with <code>bs.variadic</code>, when used, requires a <em>literal</em> array:</p>
-<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> join : <span class="hljs-built_in">string</span> <span class="hljs-built_in">array</span> -&gt; <span class="hljs-built_in">string</span> = <span class="hljs-string">""</span>
-[@@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"path"</span>][@@bs.variadic]
+        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="posts"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2019/03/21/release-5-0">bs-platform release v5</a></h1><p class="post-meta">March 21, 2019</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p><code>bs-platform@5.0.0</code> is released! There are quite a few bug fixes in this release  and refmt is synced up, a detailed list of changes is available <a href="https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#500">here</a>.</p>
+<p>Several new features are introduced in this release:</p>
+<ul>
+<li><p>first class <code>bs.variadic</code> support, documented <a href="https://bucklescript.github.io/blog/2019/03/1/feature-preview">here</a></p></li>
+<li><p>Linux prebuilt, we prebuilt binaries for Windows, MacOS and Linux, this will help reduce your CI build time significantly. For extoic OSes, it will fall back to build from source</p></li>
+<li><p>bs.deriving light config. For people who prefer short names, we make it configurable</p></li>
+</ul>
+<pre><code class="hljs"><span class="hljs-keyword">type</span> t = {
+    x : int
+} <span class="hljs-attribute">[@@bs.deriving {abstract = light}]</span>
 
-<span class="hljs-keyword">let</span> _ = join [|<span class="hljs-string">"a"</span>; <span class="hljs-string">"b"</span>|] <span class="hljs-comment">(* this is ok *)</span>
-<span class="hljs-keyword">let</span> f b = join b <span class="hljs-comment">(* compiler error when you try to abstract `join` *)</span>
+<span class="hljs-keyword">let</span> f (obj : t) = obj |. x 
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.module "path"]</span><span class="hljs-attribute">[@bs.variadic]</span>
-<span class="hljs-keyword">external</span> join: array(string) =&gt; string = <span class="hljs-string">""</span>
-
-<span class="hljs-keyword">let</span> _ = join(<span class="hljs-literal">[|</span><span class="hljs-string">"a"</span>, <span class="hljs-string">"b"</span><span class="hljs-literal">|]</span>) <span class="hljs-comment">/* this is ok */</span>
-<span class="hljs-keyword">let</span> f = b =&gt; join(b) <span class="hljs-comment">/* compiler error when you try to abstract `join` */</span>
-</code></pre>
-<p>More importantly, such compilation error was leaky in cases such as this one:</p>
-<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> f = join
-</code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> f = join
-</code></pre>
-<p>In the next release, we are going to lift such restriction. You'll be able to call an external marked with <code>bs.variadic</code> with an array reference, not just a literal array.</p>
-<p>Caveat: it's unclear how to support such first class <code>bs.variadic</code> call in conjunction with <code>bs.new</code>, so an external declaration that contains both will trigger a compilation error. We'll try to figure out this particular case in the future too.</p>
+<p>This is the last major release which is targeting OCaml 4.02.3, in the future we will make major releases targeting OCaml 4.06.</p>
+<p>Happy Hacking!</p>
 </span></div></article></div><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2019/01/07/release-4-0-17"></a></h1><p class="post-meta">January 7, 2019</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p><code>bs-platform</code> 4.0.17 is a major release.</p>
 <p>It improved incremental compilation time significantly.</p>
 <p>A pictue is worth a thousand words, below is a large monorepo which contains 4096 modules, changing the root node which has more than 3000 dependents, it finished building within 400ms.</p>

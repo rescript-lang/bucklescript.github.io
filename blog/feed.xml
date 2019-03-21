@@ -4,7 +4,7 @@
         <title>BuckleScript Blog</title>
         <link>https://bucklescript.github.io/blog</link>
         <description>The best place to stay up-to-date with the latest BuckleScript news and events.</description>
-        <lastBuildDate>Thu, 01 Jan 1970 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 21 Mar 2019 06:00:00 GMT</lastBuildDate>
         <docs>http://blogs.law.harvard.edu/tech/rss</docs>
         <generator>Feed for Node.js</generator>
         <image>
@@ -13,11 +13,11 @@
             <link>https://bucklescript.github.io/blog</link>
         </image>
         <item>
-            <title><![CDATA[First-class `bs.variadic` Support in the Next Release]]></title>
-            <link>https://bucklescript.github.io/blog/2019/03/1/feature-preview.html</link>
-            <guid>https://bucklescript.github.io/blog/2019/03/1/feature-preview.html</guid>
-            <pubDate>Thu, 01 Jan 1970 00:00:00 GMT</pubDate>
-            <description><![CDATA[<p>In previous releases, when a <code>bs.variadic</code> external (previously called <code>bs.splice</code> prior to version <code>4.08</code>) is present, its tail arguments needed to be applied statically. In other words, the <code>external</code> marked with <code>bs.variadic</code>, when used, requires a <em>literal</em> ...</p>]]></description>
+            <title><![CDATA[bs-platform release v5]]></title>
+            <link>https://bucklescript.github.io/blog/2019/03/21/release-5-0.html</link>
+            <guid>https://bucklescript.github.io/blog/2019/03/21/release-5-0.html</guid>
+            <pubDate>Thu, 21 Mar 2019 06:00:00 GMT</pubDate>
+            <description><![CDATA[<p><code>bs-platform@5.0.0</code> is released! There are quite a few bug fixes in this release and refmt is synced up, a detailed list of changes is available <a href="https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#500">here</a>.</p> <p>Several new features are introduced in this release:</p> <ul> <li><p>first class <code>bs.variadic</code> support, documented <a href="https://bucklescript.github.io/blog/2019/03/1/feature-preview">her...</a></p></li></ul>]]></description>
         </item>
         <item>
             <link>https://bucklescript.github.io/blog/2019/01/07/release-4-0-17.html</link>
@@ -87,6 +87,13 @@
             <guid>https://bucklescript.github.io/blog/2018/03/13/a-small-step-for-bucklescript.html</guid>
             <pubDate>Tue, 13 Mar 2018 06:00:00 GMT</pubDate>
             <description><![CDATA[<p>...and a big one for the community!</p> <p>BuckleScript is a compiler, a set of type system enhancements, a build system and a great deal of JavaScript interoperability features rolled into one. From day one, its goal has been to provide a rock solid, light...</p>]]></description>
+        </item>
+        <item>
+            <title><![CDATA[First-class `bs.variadic` Support in the Next Release]]></title>
+            <link>https://bucklescript.github.io/blog/2019/03/1/feature-preview.html</link>
+            <guid>https://bucklescript.github.io/blog/2019/03/1/feature-preview.html</guid>
+            <pubDate>Thu, 01 Jan 1970 00:00:00 GMT</pubDate>
+            <description><![CDATA[<p>In previous releases, when a <code>bs.variadic</code> external (previously called <code>bs.splice</code> prior to version <code>4.08</code>) is present, its tail arguments needed to be applied statically. In other words, the <code>external</code> marked with <code>bs.variadic</code>, when used, requires a <em>literal</em> ...</p>]]></description>
         </item>
         <item>
             <title><![CDATA[New Documentation Site!]]></title>
