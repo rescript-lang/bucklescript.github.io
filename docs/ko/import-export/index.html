@@ -1,0 +1,141 @@
+<!DOCTYPE html><html lang="ko"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Import &amp; Export · BuckleScript</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="## Export"/><meta name="docsearch:language" content="ko"/><meta property="og:title" content="Import &amp; Export · BuckleScript"/><meta property="og:type" content="website"/><meta property="og:url" content="https://bucklescript.github.io/index.html"/><meta property="og:description" content="## Export"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/logos/bucklescript.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://bucklescript.github.io/blog/atom.xml" title="BuckleScript Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://bucklescript.github.io/blog/feed.xml" title="BuckleScript Blog RSS Feed"/><script type="text/javascript" src="/js/toggleSyntaxButton.js"></script><script type="text/javascript" src="/js/pjax-api.min.js"></script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/ko"><img class="logo" src="/img/logos/bucklescript.svg" alt="BuckleScript"/><h2 class="headerTitleWithLogo">BuckleScript</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/ko/installation" target="_self">Docs</a></li><li class=""><a href="/docs/ko/playground" target="_self">Try</a></li><li class="siteNavGroupActive"><a href="/docs/ko/stdlib-overview" target="_self">API</a></li><li class=""><a href="/docs/ko/community" target="_self">Community</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>한국어</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/ja/import-export">日本語</a></li><li><a href="/docs/en/import-export">English</a></li><li><a href="/docs/es-ES/import-export">Español</a></li><li><a href="/docs/fr/import-export">Français</a></li><li><a href="/docs/pt-BR/import-export">Português (Brasil)</a></li><li><a href="/docs/ru/import-export">Русский</a></li><li><a href="/docs/zh-CN/import-export">中文</a></li><li><a href="/docs/zh-TW/import-export">繁體中文</a></li><li><a href="https://crowdin.com/project/bucklescript" target="_blank" rel="noreferrer noopener">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/bucklescript/bucklescript" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Interop</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Intro</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ko/what-why">What &amp; Why</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/installation">Installation</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/new-project">New Project</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/concepts-overview">Concepts Overview</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Interop</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ko/interop-overview">Overview</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/interop-cheatsheet">Cheatsheet</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/embed-raw-javascript">Embed Raw JavaScript</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/common-data-types">Common Data Types</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/intro-to-external">Intro to External</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/bind-to-global-values">Bind to Global Values</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/null-undefined-option">Null, Undefined &amp; Option</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/object">Object</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/object-2">Object 2</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/class">Class</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/function">Function</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/ko/import-export">Import &amp; Export</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/regular-expression">Regular Expression</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/exceptions">Exceptions</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/json">JSON</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/fast-pipe">Fast Pipe</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/generate-converters-accessors">Generate Converters &amp; Helpers</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/better-data-structures-printing-debug-mode">Better Data Structures Printing (Debug Mode)</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/nodejs-special-variables">NodeJS Special Variables</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/interop-misc">Miscellaneous</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/browser-support-polyfills">Browser Support &amp; Polyfills</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Build System</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ko/build-overview">Overview</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/build-configuration">Configuration</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/automatic-interface-generation">Automatic Interface Generation</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/interop-with-js-build-systems">Interop with JS Build System</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/build-performance">Performance</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/build-advanced">Advanced</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Standard Library</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ko/stdlib-overview">Overview</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Advanced</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ko/conditional-compilation">Conditional Compilation</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/extended-compiler-options">Extended Compiler Options</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/use-existing-ocaml-libraries">Use Existing OCaml Libraries</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/difference-from-native-ocaml">Difference from Native OCaml</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/compiler-architecture-principles">Compiler Architecture &amp; Principles</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/comparison-to-jsoo">Comparison to Js_of_ocaml</a></li></ul></div></div></section></div><script>
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              const headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                if (event.target.tagName === 'A') {
+                  document.body.classList.remove('tocActive');
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docMainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/bucklescript/ko" target="_blank" rel="noreferrer noopener">Translate</a><h1 class="postHeaderTitle">Import &amp; Export</h1></header><article><div><span><h2><a class="anchor" aria-hidden="true" id="export"></a><a href="#export" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Export</h2>
+<p>BuckleScript allows compiling to:</p>
+<ul>
+<li>CommonJS (<code>require('myFile')</code>)</li>
+<li>ES6 modules (<code>import * from 'myFile'</code>)</li>
+<li>AMD (<code>define(['myFile'], ...)</code>)</li>
+</ul>
+<p>The output format is configurable in bsb, described in a later section. <!-- TODO: bsb link --></p>
+<p>By default, every <code>let</code> binding is exported. If their values are safe to use on the JS side, you can directly require the generated JS file and use them (see the JS file itself!).</p>
+<p>To only export a few selected <code>let</code>s, simply add an <a href="https://reasonml.github.io/docs/en/module.html#signatures">interface file</a> that hides some of the let bindings.</p>
+<h3><a class="anchor" aria-hidden="true" id="export-an-es6-default-value"></a><a href="#export-an-es6-default-value" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Export an ES6 default value</h3>
+<p>If your JS project is using ES6 modules, you're likely exporting &amp; importing some default values:</p>
+<pre><code class="hljs css language-js"><span class="hljs-comment">// student.js</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> name = <span class="hljs-string">"Al"</span>;
+</code></pre>
+<pre><code class="hljs css language-js"><span class="hljs-comment">// teacher.js</span>
+<span class="hljs-keyword">import</span> studentName <span class="hljs-keyword">from</span> <span class="hljs-string">'student.js'</span>;
+</code></pre>
+<p>Technically, since a BuckleScript file maps to a module, there's no such thing as &quot;default&quot; export, only named ones. However, we've made an exception to support default module when you do the following:</p>
+<pre><code class="hljs css language-ocaml"><span class="hljs-comment">(* FavoriteStudent.ml *)</span>
+<span class="hljs-keyword">let</span> default = <span class="hljs-string">"Bob"</span>
+</code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-comment">/* FavoriteStudent.ml */</span>
+<span class="hljs-keyword">let</span> default = <span class="hljs-string">"Bob"</span>
+</code></pre>
+<!-- TODO: playground link on the result -->
+<p>You can then require the default as normal JS side:</p>
+<pre><code class="hljs css language-js"><span class="hljs-comment">// teacher2.js</span>
+<span class="hljs-keyword">import</span> studentName <span class="hljs-keyword">from</span> <span class="hljs-string">'FavoriteStudent.js'</span>;
+</code></pre>
+<p><strong>Note</strong>: the above JS snippet <em>only</em> works if you're using that ES6 import/export syntax in JS. If you're still using <code>require</code>, you'd need to do:</p>
+<pre><code class="hljs css language-js"><span class="hljs-keyword">let</span> studentName = <span class="hljs-built_in">require</span>(<span class="hljs-string">'FavoriteStudent'</span>).default;
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="import"></a><a href="#import" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Import</h2>
+<p>Use <code>bs.module</code>. It's like a <code>bs.val</code> that accepts a string that's the module name or path.</p>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> dirname: <span class="hljs-built_in">string</span> -&gt; <span class="hljs-built_in">string</span> = <span class="hljs-string">"dirname"</span> [@@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"path"</span>]
+<span class="hljs-keyword">let</span> root = dirname <span class="hljs-string">"/User/chenglou"</span>
+</code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.module "path"]</span> <span class="hljs-keyword">external</span> dirname : string =&gt; string = <span class="hljs-string">"dirname"</span>;
+<span class="hljs-keyword">let</span> root = dirname(<span class="hljs-string">"/User/chenglou"</span>);
+</code></pre>
+<p>Output:</p>
+<pre><code class="hljs css language-js"><span class="hljs-keyword">var</span> Path = <span class="hljs-built_in">require</span>(<span class="hljs-string">"path"</span>);
+<span class="hljs-keyword">var</span> root = Path.dirname(<span class="hljs-string">"/User/chenglou"</span>);
+</code></pre>
+<p><strong>Note</strong>: the string inside <code>bs.module</code> can be anything: <code>&quot;./src/myJsFile&quot;</code>, <code>&quot;@myNpmNamespace/myLib&quot;</code>, etc.</p>
+<h3><a class="anchor" aria-hidden="true" id="import-a-default-value"></a><a href="#import-a-default-value" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Import a Default Value</h3>
+<p>By omitting the payload to <code>bs.module</code>, you bind to the whole JS module:</p>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> leftPad: <span class="hljs-built_in">string</span> -&gt; <span class="hljs-built_in">int</span> -&gt; <span class="hljs-built_in">string</span> = <span class="hljs-string">"./leftPad"</span> [@@bs.<span class="hljs-keyword">module</span>]
+<span class="hljs-keyword">let</span> paddedResult = leftPad <span class="hljs-string">"hi"</span> <span class="hljs-number">5</span>
+</code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.module]</span> <span class="hljs-keyword">external</span> leftPad : string =&gt; int =&gt; string = <span class="hljs-string">"./leftPad"</span>;
+<span class="hljs-keyword">let</span> paddedResult = leftPad(<span class="hljs-string">"hi"</span>, <span class="hljs-number">5</span>);
+</code></pre>
+<p>Output:</p>
+<pre><code class="hljs css language-js"><span class="hljs-keyword">var</span> LeftPad = <span class="hljs-built_in">require</span>(<span class="hljs-string">"./leftPad"</span>);
+<span class="hljs-keyword">var</span> paddedResult = LeftPad(<span class="hljs-string">"hi"</span>, <span class="hljs-number">5</span>);
+</code></pre>
+<h4><a class="anchor" aria-hidden="true" id="import-an-es6-default-value"></a><a href="#import-an-es6-default-value" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Import an ES6 Default Value</h4>
+<p>This is a recurring question, so we'll answer it here. <strong>If your JS project is using ES6</strong>, you're likely using Babel to compile it to regular JavaScript. Babel's ES6 default export actually exports the default value under the name <code>default</code>. You'd bind to it like this:</p>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> studentName: <span class="hljs-built_in">string</span> = <span class="hljs-string">"default"</span> [@@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"./student"</span>]
+<span class="hljs-keyword">let</span> _ = <span class="hljs-type">Js</span>.log studentName
+</code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.module "./student"]</span> <span class="hljs-keyword">external</span> studentName : string = <span class="hljs-string">"default"</span>;
+<span class="hljs-module-identifier">Js</span>.log(studentName);
+</code></pre>
+<p>Output:</p>
+<pre><code class="hljs css language-js"><span class="hljs-keyword">var</span> Student = <span class="hljs-built_in">require</span>(<span class="hljs-string">"./student"</span>);
+<span class="hljs-built_in">console</span>.log(Student.default);
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="tips-tricks"></a><a href="#tips-tricks" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Tips &amp; Tricks</h3>
+<p>When the name you're using on the BS side matches the name of the JS value, you can use the empty string shorthand:</p>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> dirname: <span class="hljs-built_in">string</span> -&gt; <span class="hljs-built_in">string</span> = <span class="hljs-string">""</span> [@@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"path"</span>]
+</code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.module "path"]</span> <span class="hljs-keyword">external</span> dirname : string =&gt; string = <span class="hljs-string">""</span>;
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/ko/function"><span class="arrow-prev">← </span><span>Previous</span></a><a class="docs-next button" href="/docs/ko/regular-expression"><span>Next</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav docOnPageNav"><ul class="toc-headings"><li><a href="#export">Export</a><ul class="toc-headings"><li><a href="#export-an-es6-default-value">Export an ES6 default value</a></li></ul></li><li><a href="#import">Import</a><ul class="toc-headings"><li><a href="#import-a-default-value">Import a Default Value</a></li><li><a href="#tips-tricks">Tips &amp; Tricks</a></li></ul></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script>window.foo = new Pjax({
+          areas: [
+            // try to use the first query.
+            '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
+            // fallback
+            'body'
+          ],
+          link: '.docsNavContainer:not(.docsSliderActive) a',
+          update: {
+            script: false,
+          }
+        });
+        var languagesMenuItemCopy = document.getElementById("languages-menu");
+        languagesMenuItemCopy.addEventListener("click", function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          e.stopImmediatePropagation();
+        });</script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+              var search = docsearch({
+                
+                apiKey: '0fd97db83891aa20810559812d9e69ac',
+                indexName: 'bucklescript',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:ko"]}
+              });
+            </script></body></html>
