@@ -172,7 +172,7 @@ john##say(<span class="hljs-string">"hey"</span>, <span class="hljs-string">"jud
   action:(<span class="hljs-built_in">string</span> <span class="hljs-built_in">list</span> -&gt; <span class="hljs-built_in">unit</span>) -&gt;
   ?options:&lt; .. &gt; <span class="hljs-type">Js</span>.t -&gt;
   <span class="hljs-built_in">unit</span> -&gt;
-  _ = <span class="hljs-string">""</span> [@@bs.obj]
+  _ = <span class="hljs-string">"route"</span> [@@bs.obj]
 </code></pre>
 <pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.obj]</span> <span class="hljs-keyword">external</span> route: (
   ~_method:string,
@@ -180,7 +180,7 @@ john##say(<span class="hljs-string">"hey"</span>, <span class="hljs-string">"jud
   ~action:(list(string) =&gt; unit),
   ~options:<span class="hljs-module-identifier">Js</span>.t({..})=?,
   unit
-) =&gt; _ = <span class="hljs-string">""</span>;
+) =&gt; _ = <span class="hljs-string">"route"</span>;
 </code></pre>
 <p>This function has four labelled parameters (the fourth one optional), one unlabelled parameter at the end (which we mandate for functions with <a href="https://reasonml.github.io/docs/en/function.html#optional-labeled-arguments">optional parameters</a>), and one parameter (<code>_method</code>) that requires an underscore prefix to avoid confusion with the OCaml/Reason keyword <code>method</code>.</p>
 <p>Also of interest is the return type: <code>_</code>, which tells BuckleScript to automatically infer the full type of the <code>Js.t</code> object, sparing you the hassle of writing down the type manually!</p>

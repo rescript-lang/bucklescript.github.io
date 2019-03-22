@@ -44,14 +44,14 @@
 <p>In the following weeks, we'll gradually outline the motivations, the design decisions and the future plans for Belt on this blog. However, new additions to the standard library aren't a small feat, and we can't possibly tackle all of them by ourselves. Your feedback as a community member will be very appreciated, and we <strong>will</strong> do our best to stay open to feedback, more so that we have ever done for the core compiler and build system. Belt's development will have more of an open process; we'll be monitoring the issue list closely for changes/features requests and tagging the them with Good First Task (contribution welcome). At the same time, we hope to clean up the repository's workflow a bit too, to ease future contributions.</p>
 <p>Thank you for your continued support, and here's to a brighter future for BuckleScript and Reason! Stay tuned for the first of several posts on Belt. See you soon!</p>
 </span></div></article></div><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2019/03/1/feature-preview">First-class `bs.variadic` Support in the Next Release</a></h1><p class="post-meta">March 1, 2019</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p>In previous releases, when a <code>bs.variadic</code> external (previously called <code>bs.splice</code> prior to version <code>4.08</code>) is present, its tail arguments needed to be applied statically. In other words, the <code>external</code> marked with <code>bs.variadic</code>, when used, requires a <em>literal</em> array:</p>
-<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> join : <span class="hljs-built_in">string</span> <span class="hljs-built_in">array</span> -&gt; <span class="hljs-built_in">string</span> = <span class="hljs-string">""</span>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> join : <span class="hljs-built_in">string</span> <span class="hljs-built_in">array</span> -&gt; <span class="hljs-built_in">string</span> = <span class="hljs-string">"join"</span>
 [@@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"path"</span>][@@bs.variadic]
 
 <span class="hljs-keyword">let</span> _ = join [|<span class="hljs-string">"a"</span>; <span class="hljs-string">"b"</span>|] <span class="hljs-comment">(* this is ok *)</span>
 <span class="hljs-keyword">let</span> f b = join b <span class="hljs-comment">(* compiler error when you try to abstract `join` *)</span>
 </code></pre>
 <pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.module "path"]</span><span class="hljs-attribute">[@bs.variadic]</span>
-<span class="hljs-keyword">external</span> join: array(string) =&gt; string = <span class="hljs-string">""</span>
+<span class="hljs-keyword">external</span> join: array(string) =&gt; string = <span class="hljs-string">"join"</span>
 
 <span class="hljs-keyword">let</span> _ = join(<span class="hljs-literal">[|</span><span class="hljs-string">"a"</span>, <span class="hljs-string">"b"</span><span class="hljs-literal">|]</span>) <span class="hljs-comment">/* this is ok */</span>
 <span class="hljs-keyword">let</span> f = b =&gt; join(b) <span class="hljs-comment">/* compiler error when you try to abstract `join` */</span>

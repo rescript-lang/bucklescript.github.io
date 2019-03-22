@@ -53,12 +53,12 @@ draw(<span class="hljs-number">10</span>, <span class="hljs-number">20</span>)
 draw(<span class="hljs-number">20</span>, <span class="hljs-number">20</span>, <span class="hljs-literal">true</span>)
 </code></pre>
 <p>It'd be nice if on the BS side, we can bind &amp; call <code>draw</code> while labeling things a bit:</p>
-<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> draw: x:<span class="hljs-built_in">int</span> -&gt; y:<span class="hljs-built_in">int</span> -&gt; ?border:<span class="hljs-built_in">bool</span> -&gt; <span class="hljs-built_in">unit</span> -&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">""</span> [@@bs.<span class="hljs-keyword">val</span>]
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> draw: x:<span class="hljs-built_in">int</span> -&gt; y:<span class="hljs-built_in">int</span> -&gt; ?border:<span class="hljs-built_in">bool</span> -&gt; <span class="hljs-built_in">unit</span> -&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">"draw"</span> [@@bs.<span class="hljs-keyword">val</span>]
 
 <span class="hljs-keyword">let</span> _ = draw ~x:<span class="hljs-number">10</span> ~y:<span class="hljs-number">20</span> ~border:<span class="hljs-literal">true</span> <span class="hljs-literal">()</span>
 <span class="hljs-keyword">let</span> _ = draw ~x:<span class="hljs-number">10</span> ~y:<span class="hljs-number">20</span> <span class="hljs-literal">()</span>
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.val]</span> <span class="hljs-keyword">external</span> draw: (~x: int, ~y: int, ~border: bool=?, unit) =&gt; unit = <span class="hljs-string">""</span>;
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.val]</span> <span class="hljs-keyword">external</span> draw: (~x: int, ~y: int, ~border: bool=?, unit) =&gt; unit = <span class="hljs-string">"draw"</span>;
 
 draw(~x=<span class="hljs-number">10</span>, ~y=<span class="hljs-number">20</span>, ~border=<span class="hljs-literal">true</span>, ());
 draw(~x=<span class="hljs-number">10</span>, ~y=<span class="hljs-number">20</span>, ());
@@ -91,10 +91,10 @@ draw(<span class="hljs-number">10</span>, <span class="hljs-number">20</span>, <
 <p>Ever used <code>foo().bar().baz()</code> chaining (&quot;fluent api&quot;) in JS OOP? We can model that in BuckleScript too, through the fast pipe operator described in the next section.</p>
 <h2><a class="anchor" aria-hidden="true" id="argumento-de-funcion-variadica"></a><a href="#argumento-de-funcion-variadica" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Argumento de Función Variádica</h2>
 <p>You might have JS functions that take an arbitrary amount of arguments. BuckleScript supports modeling those, under the condition that the arbitrary arguments part is homogenous (aka of the same type). If so, add <code>bs.variadic</code> (was <code>bs.splice</code> prior to version 4.08) to your <code>external</code>.</p>
-<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> join: <span class="hljs-built_in">string</span> <span class="hljs-built_in">array</span> -&gt; <span class="hljs-built_in">string</span> = <span class="hljs-string">""</span> [@@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"path"</span>] [@@bs.variadic]
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> join: <span class="hljs-built_in">string</span> <span class="hljs-built_in">array</span> -&gt; <span class="hljs-built_in">string</span> = <span class="hljs-string">"join"</span> [@@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"path"</span>] [@@bs.variadic]
 <span class="hljs-keyword">let</span> v = join [| <span class="hljs-string">"a"</span>; <span class="hljs-string">"b"</span>|]
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.module "path"]</span> <span class="hljs-attribute">[@bs.variadic]</span> <span class="hljs-keyword">external</span> join: array(string) =&gt; string = <span class="hljs-string">""</span>;
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.module "path"]</span> <span class="hljs-attribute">[@bs.variadic]</span> <span class="hljs-keyword">external</span> join: array(string) =&gt; string = <span class="hljs-string">"join"</span>;
 <span class="hljs-keyword">let</span> v = join(<span class="hljs-literal">[|</span><span class="hljs-string">"a"</span>, <span class="hljs-string">"b"</span><span class="hljs-literal">|]</span>);
 </code></pre>
 <p>Output:</p>
@@ -134,7 +134,7 @@ draw(<span class="hljs-number">10</span>, <span class="hljs-number">20</span>, <
       | <span class="hljs-type">`Int</span> <span class="hljs-keyword">of</span> <span class="hljs-built_in">int</span>
       ] [@bs.unwrap])
   -&gt; <span class="hljs-built_in">string</span>
-  = <span class="hljs-string">""</span> [@@bs.<span class="hljs-keyword">val</span>]
+  = <span class="hljs-string">"padLeft"</span> [@@bs.<span class="hljs-keyword">val</span>]
 
 <span class="hljs-keyword">let</span> _ = padLeft <span class="hljs-string">"Hello World"</span> (<span class="hljs-type">`Int</span> <span class="hljs-number">4</span>)
 <span class="hljs-keyword">let</span> _ = padLeft <span class="hljs-string">"Hello World"</span> (<span class="hljs-type">`Str</span> <span class="hljs-string">"Message from BS: "</span>)
@@ -146,7 +146,7 @@ draw(<span class="hljs-number">10</span>, <span class="hljs-number">20</span>, <
     | <span class="hljs-constructor">`Str</span>(string)
     | <span class="hljs-constructor">`Int</span>(int)
   <span class="hljs-literal">]</span>)
-  =&gt; string = <span class="hljs-string">""</span>;
+  =&gt; string = <span class="hljs-string">"padLeft"</span>;
 
 padLeft(<span class="hljs-string">"Hello World"</span>, <span class="hljs-constructor">`Int</span>(<span class="hljs-number">4</span>));
 padLeft(<span class="hljs-string">"Hello World"</span>, <span class="hljs-constructor">`Str</span>(<span class="hljs-string">"Message from BS: "</span>));
@@ -162,7 +162,7 @@ padLeft(<span class="hljs-string">"Hello World"</span>, <span class="hljs-string
   ([ `utf8
    | `useAscii [@bs.<span class="hljs-keyword">as</span> <span class="hljs-string">"ascii"</span>]
    ] [@bs.<span class="hljs-built_in">string</span>]) -&gt;
-  <span class="hljs-built_in">string</span> = <span class="hljs-string">""</span>
+  <span class="hljs-built_in">string</span> = <span class="hljs-string">"readFileSync"</span>
   [@@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"fs"</span>]
 
 <span class="hljs-keyword">let</span> _ = readFileSync ~name:<span class="hljs-string">"xx.txt"</span> `useAscii
@@ -174,7 +174,7 @@ padLeft(<span class="hljs-string">"Hello World"</span>, <span class="hljs-string
     | <span class="hljs-constructor">`utf8</span>
     | <span class="hljs-attribute">[@bs.as "ascii"]</span> <span class="hljs-constructor">`useAscii</span>
   <span class="hljs-literal">]</span>)
-  =&gt; string = <span class="hljs-string">""</span>;
+  =&gt; string = <span class="hljs-string">"fs"</span>;
 
 readFileSync(~name=<span class="hljs-string">"xx.txt"</span>, <span class="hljs-constructor">`useAscii</span>);
 </code></pre>
@@ -194,7 +194,7 @@ Fs.readFileSync(<span class="hljs-string">"xx.txt"</span>, <span class="hljs-str
    | `in_bin
    ]
    [@bs.<span class="hljs-built_in">int</span>]) -&gt; <span class="hljs-built_in">int</span> =
-  <span class="hljs-string">""</span> [@@bs.<span class="hljs-keyword">val</span>]
+  <span class="hljs-string">"test_int_type"</span> [@@bs.<span class="hljs-keyword">val</span>]
 
 <span class="hljs-keyword">let</span> _ = test_int_type `in_bin
 </code></pre>
@@ -205,7 +205,7 @@ Fs.readFileSync(<span class="hljs-string">"xx.txt"</span>, <span class="hljs-str
     | <span class="hljs-attribute">[@bs.as 20]</span> <span class="hljs-constructor">`on_open</span>
     | <span class="hljs-constructor">`in_bin</span>
   <span class="hljs-literal">]</span>)
-  =&gt; int = <span class="hljs-string">""</span>;
+  =&gt; int = <span class="hljs-string">"test_int_type"</span>;
 
 test_int_type(<span class="hljs-constructor">`in_bin</span>);
 </code></pre>
@@ -220,7 +220,7 @@ test_int_type(<span class="hljs-constructor">`in_bin</span>);
       |`close <span class="hljs-keyword">of</span> <span class="hljs-built_in">unit</span> -&gt; <span class="hljs-built_in">unit</span>
       | `line <span class="hljs-keyword">of</span> <span class="hljs-built_in">string</span> -&gt; <span class="hljs-built_in">unit</span>
       ] [@bs.<span class="hljs-built_in">string</span>])
-  -&gt; readline = <span class="hljs-string">""</span> [@@bs.send]
+  -&gt; readline = <span class="hljs-string">"on"</span> [@@bs.send]
 
 <span class="hljs-keyword">let</span> register rl =
   rl
@@ -234,7 +234,7 @@ test_int_type(<span class="hljs-constructor">`in_bin</span>);
     readline,
     <span class="hljs-attribute">[@bs.string]</span> <span class="hljs-literal">[</span> | <span class="hljs-constructor">`close</span>(unit =&gt; unit) | <span class="hljs-constructor">`line</span>(string =&gt; unit)<span class="hljs-literal">]</span>
   )
-  =&gt; readline = <span class="hljs-string">""</span>;
+  =&gt; readline = <span class="hljs-string">"on"</span>;
 
 <span class="hljs-keyword">let</span> register = rl =&gt;
   rl
@@ -346,10 +346,10 @@ test_int_type(<span class="hljs-constructor">`in_bin</span>);
 </ul>
 <!-- TODO: is this up-to-date info? -->
 <p>Then try <code>[@bs.uncurry]</code>:</p>
-<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> map: <span class="hljs-symbol">'a</span> <span class="hljs-built_in">array</span> -&gt; (<span class="hljs-symbol">'a</span> -&gt; <span class="hljs-symbol">'b</span> [@bs.uncurry]) -&gt; <span class="hljs-symbol">'b</span> <span class="hljs-built_in">array</span> = <span class="hljs-string">""</span> [@@bs.send]
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> map: <span class="hljs-symbol">'a</span> <span class="hljs-built_in">array</span> -&gt; (<span class="hljs-symbol">'a</span> -&gt; <span class="hljs-symbol">'b</span> [@bs.uncurry]) -&gt; <span class="hljs-symbol">'b</span> <span class="hljs-built_in">array</span> = <span class="hljs-string">"map"</span> [@@bs.send]
 <span class="hljs-keyword">let</span> _ = map [|<span class="hljs-number">1</span>; <span class="hljs-number">2</span>; <span class="hljs-number">3</span>|] (<span class="hljs-keyword">fun</span> x -&gt; x+ <span class="hljs-number">1</span>)
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> map: (array('a), <span class="hljs-attribute">[@bs.uncurry]</span> ('a =&gt; 'b)) =&gt; array('b) = <span class="hljs-string">""</span>;
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> map: (array('a), <span class="hljs-attribute">[@bs.uncurry]</span> ('a =&gt; 'b)) =&gt; array('b) = <span class="hljs-string">"map"</span>;
 map(<span class="hljs-literal">[|</span><span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span><span class="hljs-literal">|]</span>, x =&gt; x <span class="hljs-operator">+</span> <span class="hljs-number">1</span>);
 </code></pre>
 <h4><a class="anchor" aria-hidden="true" id="excepciones"></a><a href="#excepciones" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Excepciones</h4>
@@ -379,7 +379,7 @@ map(<span class="hljs-literal">[|</span><span class="hljs-number">1</span>, <spa
 </code></pre>
 <p>Here, <code>this</code> would point to <code>x</code> (actually, it depends on how <code>onload</code> is called, but we digress). It's not correct to declare <code>x.onload</code> of type <code>unit → unit [@bs]</code>. Instead, we introduced a special attribute, <code>bs.this</code>, which allows us to type <code>x</code> as so:</p>
 <pre><code class="hljs css language-ocaml"><span class="hljs-keyword">type</span> x
-<span class="hljs-keyword">external</span> x: x = <span class="hljs-string">""</span> [@@bs.<span class="hljs-keyword">val</span>]
+<span class="hljs-keyword">external</span> x: x = <span class="hljs-string">"x"</span> [@@bs.<span class="hljs-keyword">val</span>]
 <span class="hljs-keyword">external</span> set_onload: x -&gt; (x -&gt; <span class="hljs-built_in">int</span> -&gt; <span class="hljs-built_in">unit</span> [@bs.this]) -&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">"onload"</span> [@@bs.set]
 <span class="hljs-keyword">external</span> resp: x -&gt; <span class="hljs-built_in">int</span> = <span class="hljs-string">"response"</span> [@@bs.get]
 
@@ -389,7 +389,7 @@ map(<span class="hljs-literal">[|</span><span class="hljs-number">1</span>, <spa
   <span class="hljs-keyword">end</span>
 </code></pre>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> x;
-<span class="hljs-attribute">[@bs.val]</span> <span class="hljs-keyword">external</span> x: x = <span class="hljs-string">""</span>;
+<span class="hljs-attribute">[@bs.val]</span> <span class="hljs-keyword">external</span> x: x = <span class="hljs-string">"x"</span>;
 <span class="hljs-attribute">[@bs.set]</span> <span class="hljs-keyword">external</span> set_onload: (x, <span class="hljs-attribute">[@bs.this]</span> ((x, int) =&gt; unit)) =&gt; unit = <span class="hljs-string">"onload"</span>;
 <span class="hljs-attribute">[@bs.get]</span> <span class="hljs-keyword">external</span> resp: x =&gt; int = <span class="hljs-string">"response"</span>;
 

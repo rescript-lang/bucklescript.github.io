@@ -60,21 +60,21 @@
 asyncRequest().setWaitDuration(<span class="hljs-number">4000</span>).send();
 </code></pre>
 <p>假设我们不需要上面的链接行为, 我们需要通过前面章节介绍过的 <code>bs. send</code> 进行绑定。</p>
-<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> map : <span class="hljs-symbol">'a</span> <span class="hljs-built_in">array</span> -&gt; (<span class="hljs-symbol">'a</span> -&gt; <span class="hljs-symbol">'b</span>) -&gt; <span class="hljs-symbol">'b</span> <span class="hljs-built_in">array</span> = <span class="hljs-string">""</span> [@@bs.send]
-<span class="hljs-keyword">external</span> filter : <span class="hljs-symbol">'a</span> <span class="hljs-built_in">array</span> -&gt; (<span class="hljs-symbol">'a</span> -&gt; <span class="hljs-symbol">'b</span>) -&gt; <span class="hljs-symbol">'b</span> <span class="hljs-built_in">array</span> = <span class="hljs-string">""</span> [@@bs.send]
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> map : <span class="hljs-symbol">'a</span> <span class="hljs-built_in">array</span> -&gt; (<span class="hljs-symbol">'a</span> -&gt; <span class="hljs-symbol">'b</span>) -&gt; <span class="hljs-symbol">'b</span> <span class="hljs-built_in">array</span> = <span class="hljs-string">"map"</span> [@@bs.send]
+<span class="hljs-keyword">external</span> filter : <span class="hljs-symbol">'a</span> <span class="hljs-built_in">array</span> -&gt; (<span class="hljs-symbol">'a</span> -&gt; <span class="hljs-symbol">'b</span>) -&gt; <span class="hljs-symbol">'b</span> <span class="hljs-built_in">array</span> = <span class="hljs-string">"filter"</span> [@@bs.send]
 
 <span class="hljs-keyword">type</span> request
-<span class="hljs-keyword">external</span> asyncRequest: <span class="hljs-built_in">unit</span> -&gt; request = <span class="hljs-string">""</span>
-<span class="hljs-keyword">external</span> setWaitDuration: request -&gt; <span class="hljs-built_in">int</span> -&gt; request = <span class="hljs-string">""</span> [@@bs.send]
-<span class="hljs-keyword">external</span> send: request -&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">""</span> [@@bs.send]
+<span class="hljs-keyword">external</span> asyncRequest: <span class="hljs-built_in">unit</span> -&gt; request = <span class="hljs-string">"asyncRequest"</span>
+<span class="hljs-keyword">external</span> setWaitDuration: request -&gt; <span class="hljs-built_in">int</span> -&gt; request = <span class="hljs-string">"setWaitDuration"</span> [@@bs.send]
+<span class="hljs-keyword">external</span> send: request -&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">"send"</span> [@@bs.send]
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> map : (array('a), 'a =&gt; 'b) =&gt; array('b) = <span class="hljs-string">""</span>;
-<span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> filter : (array('a), 'a =&gt; 'b) =&gt; array('b) = <span class="hljs-string">""</span>;
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> map : (array('a), 'a =&gt; 'b) =&gt; array('b) = <span class="hljs-string">"map"</span>;
+<span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> filter : (array('a), 'a =&gt; 'b) =&gt; array('b) = <span class="hljs-string">"filter"</span>;
 
 <span class="hljs-keyword">type</span> request;
-<span class="hljs-keyword">external</span> asyncRequest: unit =&gt; request = <span class="hljs-string">""</span>;
-<span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> setWaitDuration: (request, int) =&gt; request = <span class="hljs-string">""</span>;
-<span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> send: request =&gt; unit = <span class="hljs-string">""</span>;
+<span class="hljs-keyword">external</span> asyncRequest: unit =&gt; request = <span class="hljs-string">"asyncRequest"</span>;
+<span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> setWaitDuration: (request, int) =&gt; request = <span class="hljs-string">"setWaitDuration"</span>;
+<span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> send: request =&gt; unit = <span class="hljs-string">"send"</span>;
 </code></pre>
 <p>你将这样使用：</p>
 <pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> result = filter (map [|<span class="hljs-number">1</span>; <span class="hljs-number">2</span>; <span class="hljs-number">3</span>|] (<span class="hljs-keyword">fun</span> a -&gt; a + <span class="hljs-number">1</span>)) (<span class="hljs-keyword">fun</span> a -&gt; a <span class="hljs-keyword">mod</span> <span class="hljs-number">2</span> = <span class="hljs-number">0</span>)
