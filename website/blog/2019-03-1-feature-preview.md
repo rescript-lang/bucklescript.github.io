@@ -5,7 +5,7 @@ title: First-class `bs.variadic` Support in the Next Release
 In previous releases, when a `bs.variadic` external (previously called `bs.splice` prior to version `4.08`) is present, its tail arguments needed to be applied statically. In other words, the `external` marked with `bs.variadic`, when used, requires a _literal_ array:
 
 ```ocaml
-external join : string array -> string = ""
+external join : string array -> string = "join"
 [@@bs.module "path"][@@bs.variadic]
 
 let _ = join [|"a"; "b"|] (* this is ok *)
@@ -14,7 +14,7 @@ let f b = join b (* compiler error when you try to abstract `join` *)
 
 ```reason
 [@bs.module "path"][@bs.variadic]
-external join: array(string) => string = ""
+external join: array(string) => string = "join"
 
 let _ = join([|"a", "b"|]) /* this is ok */
 let f = b => join(b) /* compiler error when you try to abstract `join` */

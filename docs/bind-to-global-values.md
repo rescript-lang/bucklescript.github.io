@@ -26,20 +26,6 @@ This binds to the JavaScript [`setTimeout`](https://developer.mozilla.org/en-US/
 - and an integer that specifies the duration before calling said function
 - returns a number that is the timeout's ID. This number might be big, so we're modeling it as a float rather than the 32-bit int
 
-## Tips & Tricks
-
-### Shorthand
-
-When the name you're using on the BS side matches the JS value you're modeling, you can use the empty string shorthand:
-
-```ocaml
-external clearTimeout : float -> unit = "" [@@bs.val]
-```
-
-```reason
-[@bs.val] external clearTimeout : float => unit = "";
-```
-
 ### Abstract Type
 
 **The above still isn't ideal**. See how `setTimeout` returns a `float` and `clearTimeout` accepts one. There's no guarantee that you're passing the float created by `setTimeout` into `clearTimeout`! For all we know, someone might pass it `Math.random()` into the latter.

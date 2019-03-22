@@ -160,8 +160,8 @@ type t;
 ### Object Method & Chaining
 
 ```ocaml
-external map : 'a array -> ('a -> 'b) -> 'b array = "" [@@bs.send]
-external filter : 'a array -> ('a -> 'b) -> 'b array = "" [@@bs.send]
+external map : 'a array -> ('a -> 'b) -> 'b array = "map" [@@bs.send]
+external filter : 'a array -> ('a -> 'b) -> 'b array = "filter" [@@bs.send]
 
 (* 2, 4 *)
 let () = [|1; 2; 3|]
@@ -171,8 +171,8 @@ let () = [|1; 2; 3|]
 ```
 
 ```reason
-[@bs.send] external map : (array('a), 'a => 'b) => array('b) = "";
-[@bs.send] external filter : (array('a), 'a => 'b) => array('b) = "";
+[@bs.send] external map : (array('a), 'a => 'b) => array('b) = "map";
+[@bs.send] external filter : (array('a), 'a => 'b) => array('b) = "filter";
 
 /* 2, 4 */
 [|1, 2, 3|]
@@ -184,12 +184,12 @@ let () = [|1; 2; 3|]
 ### Variadic (was bs.splice prior to version 4.08)
 
 ```ocaml
-external join : string array -> string = "" [@@bs.module "path"] [@@bs.variadic]
+external join : string array -> string = "join" [@@bs.module "path"] [@@bs.variadic]
 ```
 
 ```reason
 [@bs.module "path"] [@bs.variadic]
-external join : array(string) => string = "";
+external join : array(string) => string = "join";
 ```
 
 ### Polymorphic Function
@@ -211,7 +211,7 @@ external padLeft :
       | `Int of int
       ] [@bs.unwrap])
   -> string
-  = "" [@@bs.val]
+  = "padLeft" [@@bs.val]
 
 let _ = padLeft "Hello World" (`Int 4)
 ```
@@ -223,7 +223,7 @@ let _ = padLeft "Hello World" (`Int 4)
     | `Str(string)
     | `Int(int)
   ]
-) => string = "";
+) => string = "padLeft";
 
 padLeft("Hello World", `Int(4));
 ```

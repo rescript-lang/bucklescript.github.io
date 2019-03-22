@@ -43,23 +43,23 @@ asyncRequest().setWaitDuration(4000).send();
 Assuming we don't need the chaining behavior above, we'd bind to each case this using `bs.send` from the previous section:
 
 ```ocaml
-external map : 'a array -> ('a -> 'b) -> 'b array = "" [@@bs.send]
-external filter : 'a array -> ('a -> 'b) -> 'b array = "" [@@bs.send]
+external map : 'a array -> ('a -> 'b) -> 'b array = "map" [@@bs.send]
+external filter : 'a array -> ('a -> 'b) -> 'b array = "filter" [@@bs.send]
 
 type request
-external asyncRequest: unit -> request = ""
-external setWaitDuration: request -> int -> request = "" [@@bs.send]
-external send: request -> unit = "" [@@bs.send]
+external asyncRequest: unit -> request = "asyncRequest"
+external setWaitDuration: request -> int -> request = "setWaitDuration" [@@bs.send]
+external send: request -> unit = "send" [@@bs.send]
 ```
 
 ```reason
-[@bs.send] external map : (array('a), 'a => 'b) => array('b) = "";
-[@bs.send] external filter : (array('a), 'a => 'b) => array('b) = "";
+[@bs.send] external map : (array('a), 'a => 'b) => array('b) = "map";
+[@bs.send] external filter : (array('a), 'a => 'b) => array('b) = "filter";
 
 type request;
-external asyncRequest: unit => request = "";
-[@bs.send] external setWaitDuration: (request, int) => request = "";
-[@bs.send] external send: request => unit = "";
+external asyncRequest: unit => request = "asyncRequest";
+[@bs.send] external setWaitDuration: (request, int) => request = "setWaitDuration";
+[@bs.send] external send: request => unit = "send";
 ```
 
 You'd use them like this:

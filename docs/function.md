@@ -31,14 +31,14 @@ draw(20, 20, true)
 It'd be nice if on the BS side, we can bind & call `draw` while labeling things a bit:
 
 ```ocaml
-external draw: x:int -> y:int -> ?border:bool -> unit -> unit = "" [@@bs.val]
+external draw: x:int -> y:int -> ?border:bool -> unit -> unit = "draw" [@@bs.val]
 
 let _ = draw ~x:10 ~y:20 ~border:true ()
 let _ = draw ~x:10 ~y:20 ()
 ```
 
 ```reason
-[@bs.val] external draw: (~x: int, ~y: int, ~border: bool=?, unit) => unit = "";
+[@bs.val] external draw: (~x: int, ~y: int, ~border: bool=?, unit) => unit = "draw";
 
 draw(~x=10, ~y=20, ~border=true, ());
 draw(~x=10, ~y=20, ());
@@ -92,12 +92,12 @@ Ever used `foo().bar().baz()` chaining ("fluent api") in JS OOP? We can model th
 You might have JS functions that take an arbitrary amount of arguments. BuckleScript supports modeling those, under the condition that the arbitrary arguments part is homogenous (aka of the same type). If so, add `bs.variadic` (was `bs.splice` prior to version 4.08) to your `external`.
 
 ```ocaml
-external join: string array -> string = "" [@@bs.module "path"] [@@bs.variadic]
+external join: string array -> string = "join" [@@bs.module "path"] [@@bs.variadic]
 let v = join [| "a"; "b"|]
 ```
 
 ```reason
-[@bs.module "path"] [@bs.variadic] external join: array(string) => string = "";
+[@bs.module "path"] [@bs.variadic] external join: array(string) => string = "join";
 let v = join([|"a", "b"|]);
 ```
 
@@ -157,7 +157,7 @@ external padLeft:
       | `Int of int
       ] [@bs.unwrap])
   -> string
-  = "" [@@bs.val]
+  = "padLeft" [@@bs.val]
 
 let _ = padLeft "Hello World" (`Int 4)
 let _ = padLeft "Hello World" (`Str "Message from BS: ")
@@ -171,7 +171,7 @@ external padLeft: (
     | `Str(string)
     | `Int(int)
   ])
-  => string = "";
+  => string = "padLeft";
 
 padLeft("Hello World", `Int(4));
 padLeft("Hello World", `Str("Message from BS: "));
@@ -194,7 +194,7 @@ external readFileSync:
   ([ `utf8
    | `useAscii [@bs.as "ascii"]
    ] [@bs.string]) ->
-  string = ""
+  string = "readFileSync"
   [@@bs.module "fs"]
 
 let _ = readFileSync ~name:"xx.txt" `useAscii
@@ -208,7 +208,7 @@ external readFileSync: (
     | `utf8
     | [@bs.as "ascii"] `useAscii
   ])
-  => string = "";
+  => string = "fs";
 
 readFileSync(~name="xx.txt", `useAscii);
 ```
@@ -234,7 +234,7 @@ external test_int_type:
    | `in_bin
    ]
    [@bs.int]) -> int =
-  "" [@@bs.val]
+  "test_int_type" [@@bs.val]
 
 let _ = test_int_type `in_bin
 ```
@@ -247,7 +247,7 @@ external test_int_type: (
     | [@bs.as 20] `on_open
     | `in_bin
   ])
-  => int = "";
+  => int = "test_int_type";
 
 test_int_type(`in_bin);
 ```
@@ -267,7 +267,7 @@ external on:
       |`close of unit -> unit
       | `line of string -> unit
       ] [@bs.string])
-  -> readline = "" [@@bs.send]
+  -> readline = "on" [@@bs.send]
 
 let register rl =
   rl
@@ -283,7 +283,7 @@ external on: (
     readline,
     [@bs.string] [ | `close(unit => unit) | `line(string => unit)]
   )
-  => readline = "";
+  => readline = "on";
 
 let register = rl =>
   rl
@@ -449,12 +449,12 @@ The above solution is safe, guaranteed, and performant, but sometimes visually a
 Then try `[@bs.uncurry]`:
 
 ```ocaml
-external map: 'a array -> ('a -> 'b [@bs.uncurry]) -> 'b array = "" [@@bs.send]
+external map: 'a array -> ('a -> 'b [@bs.uncurry]) -> 'b array = "map" [@@bs.send]
 let _ = map [|1; 2; 3|] (fun x -> x+ 1)
 ```
 
 ```reason
-[@bs.send] external map: (array('a), [@bs.uncurry] ('a => 'b)) => array('b) = "";
+[@bs.send] external map: (array('a), [@bs.uncurry] ('a => 'b)) => array('b) = "map";
 map([|1, 2, 3|], x => x + 1);
 ```
 
@@ -509,7 +509,7 @@ Here, `this` would point to `x` (actually, it depends on how `onload` is called,
 
 ```ocaml
 type x
-external x: x = "" [@@bs.val]
+external x: x = "x" [@@bs.val]
 external set_onload: x -> (x -> int -> unit [@bs.this]) -> unit = "onload" [@@bs.set]
 external resp: x -> int = "response" [@@bs.get]
 
@@ -521,7 +521,7 @@ let _ =
 
 ```reason
 type x;
-[@bs.val] external x: x = "";
+[@bs.val] external x: x = "x";
 [@bs.set] external set_onload: (x, [@bs.this] ((x, int) => unit)) => unit = "onload";
 [@bs.get] external resp: x => int = "response";
 
