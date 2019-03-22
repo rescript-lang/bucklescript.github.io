@@ -250,6 +250,16 @@ external dirname: string -> string = "dirname" [@@bs.module "path"]
 [@bs.module "path"] external dirname : string => string = "dirname";
 ```
 
+### Import module.exports
+
+```ocaml
+external simpleFunction: string -> string = "simple-module-that-is-a-function" [@@bs.module]
+```
+
+```reason
+[@bs.module] external simpleFunction : string => string = "simple-module-that-is-a-function";
+```
+
 ### Import Default
 
 ```ocaml
