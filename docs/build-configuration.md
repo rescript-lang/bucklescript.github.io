@@ -18,6 +18,8 @@ We don't do folder-level namespacing for your own project; all your own file nam
 
 **Note**: the `bsconfig.json` `name` should be the same as the `package.json` `name`, to avoid confusing corner-cases. However, this means that you can't use a camelCased names such as `MyProject`, since `package.json` and npm forbid you to do so (some file systems are case-insensitive). To have the namespace/module as `MyProject`, write `"name": "my-project"`. Bsb will turn that into the camelCased name correctly.
 
+**Note on custom namespacing**: if for some reason, you need a namespace that is different from what your `name` will produce, you can directly send a string to the `namespace` option. For example, if your package is a binding named `bs-some-thing`, you can use `"namespace": "some-thing"` to get `SomeThing` namespace instead of `BsSomeThing`.
+
 ## sources
 
 Your source files need to be specified explicitly (we don't want to accidentally drill down into some unrelated directories). Examples:
