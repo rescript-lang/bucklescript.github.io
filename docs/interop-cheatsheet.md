@@ -262,6 +262,8 @@ external simpleFunction: string -> string = "simple-module-that-is-a-function" [
 
 ### Import Default
 
+It's important to note that you are not providing the module path to `bs.module`, but instead as the last argument of `external`.
+
 ```ocaml
 external leftPad: string -> int -> string = "./leftPad" [@@bs.module]
 ```
