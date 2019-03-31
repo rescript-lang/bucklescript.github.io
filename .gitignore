@@ -6,3 +6,4 @@ finalOutput/*.js
 /lib/bs/
 /lib/ocaml/
 *.log
+*~
