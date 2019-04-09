@@ -2,21 +2,11 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://bucklescript.github.io/blog</id>
     <title>BuckleScript Blog</title>
-    <updated>1970-01-01T00:00:00Z</updated>
+    <updated>2019-04-09T06:00:00Z</updated>
     <generator>Feed for Node.js</generator>
     <link rel="alternate" href="https://bucklescript.github.io/blog"/>
     <subtitle>The best place to stay up-to-date with the latest BuckleScript news and events.</subtitle>
     <logo>https://bucklescript.github.io/img/logos/bucklescript.svg</logo>
-    <entry>
-        <title type="html"><![CDATA[bs-platform release v6.0+dev]]></title>
-        <id>https://bucklescript.github.io/blog/2019/3/31/release-6-0.html</id>
-        <link href="https://bucklescript.github.io/blog/2019/3/31/release-6-0.html">
-        </link>
-        <updated>1970-01-01T00:00:00Z</updated>
-        <summary type="html"><![CDATA[<p><code>bs-platform@6.0.0-dev.1</code> is released, you can try it with <code>npm i -g bs-platform@next</code>! (if you have permission issues, try <code>sudo npm i --unsafe-perm -g bs-platform@next</code>)</p> <p>This is the first release that bucklescript compiler using OCaml 4.06.1 typechecker....</p>]]></summary>
-        <author>
-        </author>
-    </entry>
     <entry>
         <title type="html"><![CDATA[Release 5.0.1]]></title>
         <id>https://bucklescript.github.io/blog/2019/04/09/release-schedule.html</id>
@@ -24,6 +14,16 @@
         </link>
         <updated>2019-04-09T06:00:00Z</updated>
         <summary type="html"><![CDATA[<p><code>bs-platform@5.0.1</code> preview is available, try <code>npm i -g bs-platform@beta-4.02</code>! A detailed a list of changes is available <a href="https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#501">here</a></p> <p>Some notable new features in this release:</p> <ul> <li><p>react jsx v3 is available which means zero-cost for react-bindings (@rickyvetter wi...</p></li></ul>]]></summary>
+        <author>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[bs-platform release v6.0+dev]]></title>
+        <id>https://bucklescript.github.io/blog/2019/03/31/release-6-0.html</id>
+        <link href="https://bucklescript.github.io/blog/2019/03/31/release-6-0.html">
+        </link>
+        <updated>2019-03-31T06:00:00Z</updated>
+        <summary type="html"><![CDATA[<p><code>bs-platform@6.0.0-dev.1</code> is released, you can try it with <code>npm i -g bs-platform@next</code>! (if you have permission issues, try <code>sudo npm i --unsafe-perm -g bs-platform@next</code>)</p> <p>This is the first release that bucklescript compiler using OCaml 4.06.1 typechecker....</p>]]></summary>
         <author>
         </author>
     </entry>
