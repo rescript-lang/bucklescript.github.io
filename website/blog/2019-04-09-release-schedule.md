@@ -2,7 +2,7 @@
 title: Release 5.0.1
 ---
 
-`bs-platform@5.0.1` preview is available, try `npm i -g bs-platform@5.0.1-beta.1`! A detailed a list of changes is available [here](https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#501)
+`bs-platform@5.0.1` preview is available, try `npm i -g bs-platform@beta-4.02`! A detailed a list of changes is available [here](https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#501)
 
 Some notable new features in this release:
 
