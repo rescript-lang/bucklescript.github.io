@@ -13,7 +13,7 @@
         <link href="https://bucklescript.github.io/blog/2019/04/09/release-schedule.html">
         </link>
         <updated>2019-04-09T06:00:00Z</updated>
-        <summary type="html"><![CDATA[<p><code>bs-platform@5.0.1</code> preview is available, try <code>npm i -g bs-platform@beta-4.02</code>! A detailed a list of changes is available <a href="https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#501">here</a></p> <p>Some notable new features in this release:</p> <ul> <li><p>react jsx v3 is available which means zero-cost for react-bindings (@rickyvetter wi...</p></li></ul>]]></summary>
+        <summary type="html"><![CDATA[<p><code>bs-platform@5.0.1</code> preview is available, try <code>npm i -g bs-platform@5.0.1-beta.1</code>! A detailed a list of changes is available <a href="https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#501">here</a></p> <p>Some notable new features in this release:</p> <ul> <li><p>react jsx v3 is available which means zero-cost for react-bindings (@rickyvetter ...</p></li></ul>]]></summary>
         <author>
         </author>
     </entry>
