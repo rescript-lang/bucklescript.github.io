@@ -2,7 +2,7 @@
 title: Release 5.0.1
 ---
 
-`bs-platform@5.0.1` preview is available, try `npm i -g bs-platform@beta-4.02`! A detailed a list of changes is available [here](https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#501)
+`bs-platform@5.0.1` preview is available, try `npm i -g bs-platform@5.0.1-beta.1`! A detailed a list of changes is available [here](https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#501)
 
 Some notable new features in this release:
 
@@ -18,9 +18,9 @@ Some notable new features in this release:
     If user wants to write an interface, it has to carry the payload though:
     ```
     module Platform : sig
-        val ios : string [@@bs.inlne "ios"]
+        val ios : string [@@bs.inline "ios"]
     end = struct
-        let ios = "ios" [@@bs.inlne]
+        let ios = "ios" [@@bs.inline]
     end    
     ```
     It is a bit verbose for library authors, but this should be transparent to library users.
