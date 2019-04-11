@@ -21,12 +21,6 @@ const users = [
     pinned: true
   },
   {
-    caption: "WOW air",
-    image: "img/logos/wowair.svg",
-    infoLink: "https://wowair.com",
-    pinned: true
-  },
-  {
     caption: "BeOp",
     image: "img/logos/beop.svg",
     infoLink: "https://beop.io",
