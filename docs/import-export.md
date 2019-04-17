@@ -8,7 +8,6 @@ BuckleScript allows compiling to:
 
 - CommonJS (`require('myFile')`)
 - ES6 modules (`import * from 'myFile'`)
-- AMD (`define(['myFile'], ...)`)
 
 The output format is configurable in bsb, described in a later section.
 <!-- TODO: bsb link -->
