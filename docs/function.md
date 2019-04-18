@@ -85,7 +85,7 @@ In a `bs.send`, the object is always the first argument. Actual arguments of the
 
 ### Chaining
 
-Ever used `foo().bar().baz()` chaining ("fluent api") in JS OOP? We can model that in BuckleScript too, through the fast pipe operator described in the next section.
+Ever used `foo().bar().baz()` chaining ("fluent api") in JS OOP? We can model that in BuckleScript too, through the Pipe First operator described in the next section.
 
 ## Variadic Function Arguments
 

@@ -22,7 +22,7 @@
       "regular-expression",
       "exceptions",
       "json",
-      "fast-pipe",
+      "pipe-first",
       "generate-converters-accessors",
       "better-data-structures-printing-debug-mode",
       "nodejs-special-variables",

@@ -202,7 +202,7 @@ let twenty = ageGet joe
 let twenty = ageGet(joe)
 ```
 
-Alternatively, you can use the [Fast Pipe](fast-pipe.md) feature in a later section for a nicer-looking access syntax:
+Alternatively, you can use the [Pipe First](pipe-first.md) feature in a later section for a nicer-looking access syntax:
 
 ```ocaml
 let twenty = joe |. ageGet
@@ -245,7 +245,7 @@ let joe = person(~name="Joe", ~age=20, ~job="teacher");
 ageSet(joe, 21);
 ```
 
-Alternatively, with the fast pipe syntax:
+Alternatively, with the Pipe First syntax:
 
 ```ocaml
 joe |. ageSet 21
