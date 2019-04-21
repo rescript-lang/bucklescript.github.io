@@ -65,9 +65,6 @@
       "extended-compiler-options": {
         "title": "Extended Compiler Options"
       },
-      "fast-pipe": {
-        "title": "Fast Pipe"
-      },
       "function": {
         "title": "Function"
       },
@@ -115,6 +112,9 @@
       },
       "object": {
         "title": "Object"
+      },
+      "pipe-first": {
+        "title": "Pipe First"
       },
       "playground": {
         "title": "Playground"

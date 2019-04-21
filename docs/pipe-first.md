@@ -1,5 +1,5 @@
 ---
-title: Fast Pipe
+title: Pipe First
 ---
 
 BuckleScript has a special `|.` (or `->` for Reason) pipe syntax for dealing with various situations. This operator has many uses.
