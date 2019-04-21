@@ -1,0 +1,265 @@
+<!DOCTYPE html><html lang="ru"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Cheatsheet · BuckleScript</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="The next few sections will cover these in detail. Feel free to skip this one if nothing makes sense yet!"/><meta name="docsearch:language" content="ru"/><meta property="og:title" content="Cheatsheet · BuckleScript"/><meta property="og:type" content="website"/><meta property="og:url" content="https://bucklescript.github.io/index.html"/><meta property="og:description" content="The next few sections will cover these in detail. Feel free to skip this one if nothing makes sense yet!"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/logos/bucklescript.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://bucklescript.github.io/blog/atom.xml" title="BuckleScript Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://bucklescript.github.io/blog/feed.xml" title="BuckleScript Blog RSS Feed"/><script type="text/javascript" src="/js/toggleSyntaxButton.js"></script><script type="text/javascript" src="/js/pjax-api.min.js"></script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/ru"><img class="logo" src="/img/logos/bucklescript.svg" alt="BuckleScript"/><h2 class="headerTitleWithLogo">BuckleScript</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/ru/installation" target="_self">Docs</a></li><li class=""><a href="/docs/ru/playground" target="_self">Try</a></li><li class="siteNavGroupActive"><a href="/docs/ru/stdlib-overview" target="_self">API</a></li><li class=""><a href="/docs/ru/community" target="_self">Community</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>Русский</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/ja/interop-cheatsheet">日本語</a></li><li><a href="/docs/en/interop-cheatsheet">English</a></li><li><a href="/docs/es-ES/interop-cheatsheet">Español</a></li><li><a href="/docs/fr/interop-cheatsheet">Français</a></li><li><a href="/docs/ko/interop-cheatsheet">한국어</a></li><li><a href="/docs/pt-BR/interop-cheatsheet">Português (Brasil)</a></li><li><a href="/docs/zh-CN/interop-cheatsheet">中文</a></li><li><a href="/docs/zh-TW/interop-cheatsheet">繁體中文</a></li><li><a href="https://crowdin.com/project/bucklescript" target="_blank" rel="noreferrer noopener">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/bucklescript/bucklescript" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Interop</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Intro</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ru/what-why">What &amp; Why</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/installation">Installation</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/new-project">New Project</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/concepts-overview">Concepts Overview</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Interop</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ru/interop-overview">Overview</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/ru/interop-cheatsheet">Cheatsheet</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/embed-raw-javascript">Embed Raw JavaScript</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/common-data-types">Common Data Types</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/intro-to-external">Intro to External</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/bind-to-global-values">Bind to Global Values</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/null-undefined-option">Null, Undefined &amp; Option</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/object">Object</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/object-2">Object 2</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/class">Class</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/function">Function</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/import-export">Import &amp; Export</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/regular-expression">Regular Expression</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/exceptions">Exceptions</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/json">JSON</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/pipe-first">Pipe First</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/generate-converters-accessors">Generate Converters &amp; Helpers</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/better-data-structures-printing-debug-mode">Better Data Structures Printing (Debug Mode)</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/nodejs-special-variables">NodeJS Special Variables</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/interop-misc">Miscellaneous</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/browser-support-polyfills">Browser Support &amp; Polyfills</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Build System</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ru/build-overview">Overview</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/build-configuration">Configuration</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/automatic-interface-generation">Automatic Interface Generation</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/interop-with-js-build-systems">Interop with Other Build System</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/build-performance">Performance</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/build-advanced">Advanced</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Standard Library</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ru/stdlib-overview">Overview</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Advanced</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ru/conditional-compilation">Conditional Compilation</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/extended-compiler-options">Extended Compiler Options</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/use-existing-ocaml-libraries">Use Existing OCaml Libraries</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/difference-from-native-ocaml">Difference from Native OCaml</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/compiler-architecture-principles">Compiler Architecture &amp; Principles</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/comparison-to-jsoo">Comparison to Js_of_ocaml</a></li></ul></div></div></section></div><script>
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              const headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                if (event.target.tagName === 'A') {
+                  document.body.classList.remove('tocActive');
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docMainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/bucklescript/ru" target="_blank" rel="noreferrer noopener">Translate</a><h1 class="postHeaderTitle">Cheatsheet</h1></header><article><div><span><p>The next few sections will cover these in detail. Feel free to skip this one if nothing makes sense yet!</p>
+<h2><a class="anchor" aria-hidden="true" id="raw-js"></a><a href="#raw-js" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Raw JS</h2>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> add = [%raw <span class="hljs-string">"a + b"</span>]
+[%%raw <span class="hljs-string">"var a = 1"</span>]
+<span class="hljs-keyword">let</span> myFunction = [%raw <span class="hljs-keyword">fun</span> a b -&gt; <span class="hljs-string">"return a + b"</span>]
+</code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> add = <span class="hljs-attribute">[%raw "a + b"]</span>;
+<span class="hljs-attribute">[%%raw "var a = 1"]</span>;
+<span class="hljs-keyword">let</span> myFunction = <span class="hljs-attribute">[%raw (a, b) =&gt; "return a + b"]</span>;
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="string-unicode-interpolation"></a><a href="#string-unicode-interpolation" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>String Unicode &amp; Interpolation</h2>
+<pre><code class="hljs css language-ocaml"><span class="hljs-type">Js</span>.log {js|你好，
+世界|js}
+
+<span class="hljs-keyword">let</span> world = <span class="hljs-string">"world"</span>
+<span class="hljs-keyword">let</span> helloWorld = {j|hello, $world|j}
+</code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-module-identifier">Js</span>.log(<span class="hljs-string">{js|你好，
+世界|js}</span>);
+
+<span class="hljs-keyword">let</span> world = <span class="hljs-string">"world"</span>;
+<span class="hljs-keyword">let</span> helloWorld = <span class="hljs-string">{j|hello, $world|j}</span>;
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="global-value"></a><a href="#global-value" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Global Value</h2>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> setTimeout : (<span class="hljs-built_in">unit</span> -&gt; <span class="hljs-built_in">unit</span>) -&gt; <span class="hljs-built_in">int</span> -&gt; <span class="hljs-built_in">float</span> = <span class="hljs-string">"setTimeout"</span> [@@bs.<span class="hljs-keyword">val</span>]
+</code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.val]</span> <span class="hljs-keyword">external</span> setTimeout : (unit =&gt; unit, int) =&gt; float = <span class="hljs-string">"setTimeout"</span>;
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="global-module"></a><a href="#global-module" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Global Module</h2>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> random: <span class="hljs-built_in">unit</span> -&gt; <span class="hljs-built_in">float</span> = <span class="hljs-string">"random"</span> [@@bs.<span class="hljs-keyword">val</span>][@@bs.scope <span class="hljs-string">"Math"</span>]
+<span class="hljs-keyword">let</span> someNumber = random <span class="hljs-literal">()</span>
+
+<span class="hljs-keyword">external</span> length: <span class="hljs-built_in">int</span> = <span class="hljs-string">"length"</span> [@@bs.<span class="hljs-keyword">val</span>][@@bs.scope <span class="hljs-string">"window"</span>, <span class="hljs-string">"location"</span>, <span class="hljs-string">"ancestorOrigins"</span>]
+</code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.val]</span> <span class="hljs-attribute">[@bs.scope "Math"]</span> <span class="hljs-keyword">external</span> random : unit =&gt; float = <span class="hljs-string">"random"</span>;
+<span class="hljs-keyword">let</span> someNumber = random();
+
+<span class="hljs-attribute">[@bs.val]</span> <span class="hljs-attribute">[@bs.scope ("window", "location", "ancestorOrigins")]</span> <span class="hljs-keyword">external</span> length : int = <span class="hljs-string">"length"</span>;
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="nullable"></a><a href="#nullable" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Nullable</h2>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> a = <span class="hljs-type">Some</span> <span class="hljs-number">5</span> <span class="hljs-comment">(* compiles to 5 *)</span>
+<span class="hljs-keyword">let</span> b = <span class="hljs-type">None</span> <span class="hljs-comment">(* compiles to undefined *)</span>
+</code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> a = <span class="hljs-constructor">Some</span>(<span class="hljs-number">5</span>); <span class="hljs-comment">/* compiles to 5 */</span>
+<span class="hljs-keyword">let</span> b = <span class="hljs-constructor">None</span>; <span class="hljs-comment">/* compiles to undefined */</span>
+</code></pre>
+<p>Handling a value that can be <code>undefined</code> and <code>null</code>, by ditching the <code>option</code> type and using <code>Js.Nullable.t</code>:</p>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> jsNull = <span class="hljs-type">Js</span>.<span class="hljs-type">Nullable</span>.null
+<span class="hljs-keyword">let</span> jsUndefined = <span class="hljs-type">Js</span>.<span class="hljs-type">Nullable</span>.undefined
+
+<span class="hljs-keyword">let</span> result1: <span class="hljs-built_in">string</span> <span class="hljs-type">Js</span>.<span class="hljs-type">Nullable</span>.t = <span class="hljs-type">Js</span>.<span class="hljs-type">Nullable</span>.return <span class="hljs-string">"hello"</span>
+<span class="hljs-keyword">let</span> result2: <span class="hljs-built_in">int</span> <span class="hljs-type">Js</span>.<span class="hljs-type">Nullable</span>.t  = <span class="hljs-type">Js</span>.<span class="hljs-type">Nullable</span>.fromOption (<span class="hljs-type">Some</span> <span class="hljs-number">10</span>)
+<span class="hljs-keyword">let</span> result3: <span class="hljs-built_in">int</span> option  = <span class="hljs-type">Js</span>.<span class="hljs-type">Nullable</span>.toOption (<span class="hljs-type">Js</span>.<span class="hljs-type">Nullable</span>.return <span class="hljs-number">10</span>)
+</code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> jsNull = <span class="hljs-module-identifier">Js</span>.<span class="hljs-module-identifier">Nullable</span>.null;
+<span class="hljs-keyword">let</span> jsUndefined = <span class="hljs-module-identifier">Js</span>.<span class="hljs-module-identifier">Nullable</span>.undefined;
+
+<span class="hljs-keyword">let</span> result1: <span class="hljs-module-identifier">Js</span>.<span class="hljs-module-identifier">Nullable</span>.t(string) = <span class="hljs-module-identifier">Js</span>.<span class="hljs-module-identifier">Nullable</span>.return(<span class="hljs-string">"hello"</span>);
+<span class="hljs-keyword">let</span> result2: <span class="hljs-module-identifier">Js</span>.<span class="hljs-module-identifier">Nullable</span>.t(int) = <span class="hljs-module-identifier">Js</span>.<span class="hljs-module-identifier">Nullable</span>.fromOption(<span class="hljs-constructor">Some</span>(<span class="hljs-number">10</span>));
+<span class="hljs-keyword">let</span> result3: option(int) = <span class="hljs-module-identifier">Js</span>.<span class="hljs-module-identifier">Nullable</span>.toOption(<span class="hljs-module-identifier">Js</span>.<span class="hljs-module-identifier">Nullable</span>.return(<span class="hljs-number">10</span>));
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="object"></a><a href="#object" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Object</h2>
+<h3><a class="anchor" aria-hidden="true" id="hash-map-mode"></a><a href="#hash-map-mode" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Hash Map Mode</h3>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> myMap = <span class="hljs-type">Js</span>.<span class="hljs-type">Dict</span>.empty <span class="hljs-literal">()</span>
+<span class="hljs-keyword">let</span> _ = <span class="hljs-type">Js</span>.<span class="hljs-type">Dict</span>.set myMap <span class="hljs-string">"Allison"</span> <span class="hljs-number">10</span>
+</code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> myMap = <span class="hljs-module-identifier">Js</span>.<span class="hljs-module-identifier">Dict</span>.empty();
+<span class="hljs-module-identifier">Js</span>.<span class="hljs-module-identifier">Dict</span>.set(myMap, <span class="hljs-string">"Allison"</span>, <span class="hljs-number">10</span>);
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="record-mode"></a><a href="#record-mode" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Record Mode</h3>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">type</span> person = {
+  name: <span class="hljs-built_in">string</span> [@bs.optional];
+  age: <span class="hljs-built_in">int</span>;
+  <span class="hljs-keyword">mutable</span> job: <span class="hljs-built_in">string</span>;
+} [@@bs.deriving abstract]
+
+<span class="hljs-keyword">external</span> getNickname: person -&gt; <span class="hljs-built_in">string</span> = <span class="hljs-string">"getNickname"</span> [@@bs.send]
+
+<span class="hljs-keyword">external</span> john : person = <span class="hljs-string">"john"</span> [@@bs.<span class="hljs-keyword">val</span>]
+
+<span class="hljs-keyword">let</span> age = john |. ageGet
+<span class="hljs-keyword">let</span> <span class="hljs-literal">()</span> = john |. jobSet <span class="hljs-string">"Accountant"</span>
+<span class="hljs-keyword">let</span> nick = john |. getNickname
+</code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.deriving abstract]</span>
+<span class="hljs-keyword">type</span> person = {
+  <span class="hljs-attribute">[@bs.optional]</span> name: string,
+  age: int,
+  <span class="hljs-keyword">mutable</span> job: string,
+};
+
+<span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> getNickname : person =&gt; string = <span class="hljs-string">"getNickname"</span>;
+
+<span class="hljs-attribute">[@bs.val]</span> <span class="hljs-keyword">external</span> john : person = <span class="hljs-string">"john"</span>;
+
+<span class="hljs-keyword">let</span> age = john<span class="hljs-operator">-&gt;</span>ageGet;
+john<span class="hljs-operator">-&gt;</span>jobSet(<span class="hljs-string">"Accountant"</span>);
+<span class="hljs-keyword">let</span> nick = john<span class="hljs-operator">-&gt;</span>getNickname;
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="new-instance"></a><a href="#new-instance" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>New Instance</h3>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">type</span> t
+<span class="hljs-keyword">external</span> createDate : <span class="hljs-built_in">unit</span> -&gt; t = <span class="hljs-string">"Date"</span> [@@bs.<span class="hljs-keyword">new</span>]
+</code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> t;
+<span class="hljs-attribute">[@bs.new]</span> <span class="hljs-keyword">external</span> createDate : unit =&gt; t = <span class="hljs-string">"Date"</span>;
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="function"></a><a href="#function" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Function</h2>
+<h3><a class="anchor" aria-hidden="true" id="object-method-chaining"></a><a href="#object-method-chaining" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Object Method &amp; Chaining</h3>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> map : <span class="hljs-symbol">'a</span> <span class="hljs-built_in">array</span> -&gt; (<span class="hljs-symbol">'a</span> -&gt; <span class="hljs-symbol">'b</span>) -&gt; <span class="hljs-symbol">'b</span> <span class="hljs-built_in">array</span> = <span class="hljs-string">"map"</span> [@@bs.send]
+<span class="hljs-keyword">external</span> filter : <span class="hljs-symbol">'a</span> <span class="hljs-built_in">array</span> -&gt; (<span class="hljs-symbol">'a</span> -&gt; <span class="hljs-symbol">'b</span>) -&gt; <span class="hljs-symbol">'b</span> <span class="hljs-built_in">array</span> = <span class="hljs-string">"filter"</span> [@@bs.send]
+
+<span class="hljs-comment">(* 2, 4 *)</span>
+<span class="hljs-keyword">let</span> <span class="hljs-literal">()</span> = [|<span class="hljs-number">1</span>; <span class="hljs-number">2</span>; <span class="hljs-number">3</span>|]
+  |. map (<span class="hljs-keyword">fun</span> a -&gt; a + <span class="hljs-number">1</span>)
+  |. filter (<span class="hljs-keyword">fun</span> a -&gt; a <span class="hljs-keyword">mod</span> <span class="hljs-number">2</span> = <span class="hljs-number">0</span>)
+  |. <span class="hljs-type">Js</span>.log
+</code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> map : (array('a), 'a =&gt; 'b) =&gt; array('b) = <span class="hljs-string">"map"</span>;
+<span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> filter : (array('a), 'a =&gt; 'b) =&gt; array('b) = <span class="hljs-string">"filter"</span>;
+
+<span class="hljs-comment">/* 2, 4 */</span>
+<span class="hljs-literal">[|</span><span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span><span class="hljs-literal">|]</span>
+<span class="hljs-operator">-&gt;</span>map(a =&gt; a <span class="hljs-operator">+</span> <span class="hljs-number">1</span>)
+<span class="hljs-operator">-&gt;</span>filter(a =&gt; a mod <span class="hljs-number">2</span> <span class="hljs-operator">==</span> <span class="hljs-number">0</span>)
+<span class="hljs-operator">-&gt;</span><span class="hljs-module-identifier">Js</span>.log;
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="variadic-was-bssplice-prior-to-version-408"></a><a href="#variadic-was-bssplice-prior-to-version-408" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Variadic (was bs.splice prior to version 4.08)</h3>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> join : <span class="hljs-built_in">string</span> <span class="hljs-built_in">array</span> -&gt; <span class="hljs-built_in">string</span> = <span class="hljs-string">"join"</span> [@@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"path"</span>] [@@bs.variadic]
+</code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.module "path"]</span> <span class="hljs-attribute">[@bs.variadic]</span>
+<span class="hljs-keyword">external</span> join : array(string) =&gt; string = <span class="hljs-string">"join"</span>;
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="polymorphic-function"></a><a href="#polymorphic-function" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Polymorphic Function</h3>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> drawCat: <span class="hljs-built_in">unit</span> -&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">"draw"</span> [@@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"Drawing"</span>]
+<span class="hljs-keyword">external</span> drawDog: giveName:<span class="hljs-built_in">string</span> -&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">"draw"</span> [@@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"Drawing"</span>]
+</code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.module "Drawing"]</span> <span class="hljs-keyword">external</span> drawCat : unit =&gt; unit = <span class="hljs-string">"draw"</span>;
+<span class="hljs-attribute">[@bs.module "Drawing"]</span> <span class="hljs-keyword">external</span> drawDog : (~giveName: string) =&gt; unit = <span class="hljs-string">"draw"</span>;
+</code></pre>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> padLeft :
+  <span class="hljs-built_in">string</span>
+  -&gt; ([ <span class="hljs-type">`Str</span> <span class="hljs-keyword">of</span> <span class="hljs-built_in">string</span>
+      | <span class="hljs-type">`Int</span> <span class="hljs-keyword">of</span> <span class="hljs-built_in">int</span>
+      ] [@bs.unwrap])
+  -&gt; <span class="hljs-built_in">string</span>
+  = <span class="hljs-string">"padLeft"</span> [@@bs.<span class="hljs-keyword">val</span>]
+
+<span class="hljs-keyword">let</span> _ = padLeft <span class="hljs-string">"Hello World"</span> (<span class="hljs-type">`Int</span> <span class="hljs-number">4</span>)
+</code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.val]</span> <span class="hljs-keyword">external</span> padLeft : (
+  string,
+  <span class="hljs-attribute">[@bs.unwrap]</span> <span class="hljs-literal">[</span>
+    | <span class="hljs-constructor">`Str</span>(string)
+    | <span class="hljs-constructor">`Int</span>(int)
+  <span class="hljs-literal">]</span>
+) =&gt; string = <span class="hljs-string">"padLeft"</span>;
+
+padLeft(<span class="hljs-string">"Hello World"</span>, <span class="hljs-constructor">`Int</span>(<span class="hljs-number">4</span>));
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="curry-uncurry"></a><a href="#curry-uncurry" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Curry/Uncurry</h3>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> add = <span class="hljs-keyword">fun</span> [@bs] x y z -&gt; x + y + z
+<span class="hljs-keyword">let</span> six = (add <span class="hljs-number">1</span> <span class="hljs-number">2</span> <span class="hljs-number">3</span>) [@bs]
+</code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> add = <span class="hljs-attribute">[@bs]</span> ((x, y, z) =&gt; x <span class="hljs-operator">+</span> y <span class="hljs-operator">+</span> z);
+<span class="hljs-keyword">let</span> six = <span class="hljs-attribute">[@bs]</span> add(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>);
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="module"></a><a href="#module" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Module</h2>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> dirname: <span class="hljs-built_in">string</span> -&gt; <span class="hljs-built_in">string</span> = <span class="hljs-string">"dirname"</span> [@@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"path"</span>]
+</code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.module "path"]</span> <span class="hljs-keyword">external</span> dirname : string =&gt; string = <span class="hljs-string">"dirname"</span>;
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="import-moduleexports"></a><a href="#import-moduleexports" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Import module.exports</h3>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> simpleFunction: <span class="hljs-built_in">string</span> -&gt; <span class="hljs-built_in">string</span> = <span class="hljs-string">"simple-module-that-is-a-function"</span> [@@bs.<span class="hljs-keyword">module</span>]
+</code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.module]</span> <span class="hljs-keyword">external</span> simpleFunction : string =&gt; string = <span class="hljs-string">"simple-module-that-is-a-function"</span>;
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="import-default"></a><a href="#import-default" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Import Default</h3>
+<p>It's important to note that you are not providing the module path to <code>bs.module</code>, but instead as the last argument of <code>external</code>.</p>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> leftPad: <span class="hljs-built_in">string</span> -&gt; <span class="hljs-built_in">int</span> -&gt; <span class="hljs-built_in">string</span> = <span class="hljs-string">"./leftPad"</span> [@@bs.<span class="hljs-keyword">module</span>]
+</code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.module]</span> <span class="hljs-keyword">external</span> leftPad : (string, int) =&gt; string = <span class="hljs-string">"./leftPad"</span>;
+</code></pre>
+<p>Import ES6 default compiled from Babel:</p>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> studentName: <span class="hljs-built_in">string</span> = <span class="hljs-string">"default"</span> [@@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"./student"</span>]
+</code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.module "./student"]</span> <span class="hljs-keyword">external</span> studentName : string = <span class="hljs-string">"default"</span>;
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="export-es6-default"></a><a href="#export-es6-default" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Export ES6 default</h3>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> default = <span class="hljs-string">"Bob"</span>
+</code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> default = <span class="hljs-string">"Bob"</span>;
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="identity-external"></a><a href="#identity-external" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Identity External</h2>
+<p>Final escape hatch converter. Do not abuse.</p>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> myShadyConversion : foo -&gt; bar = <span class="hljs-string">"%identity"</span>
+</code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">external</span> myShadyConversion : foo =&gt; bar = <span class="hljs-string">"%identity"</span>;
+</code></pre>
+<hr>
+<p>You can find more examples for the various <code>bs.*</code> attributes <a href="https://github.com/moroshko/bs-blabla">here</a>.</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/ru/interop-overview"><span class="arrow-prev">← </span><span>Previous</span></a><a class="docs-next button" href="/docs/ru/embed-raw-javascript"><span>Next</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav docOnPageNav"><ul class="toc-headings"><li><a href="#raw-js">Raw JS</a></li><li><a href="#string-unicode-interpolation">String Unicode &amp; Interpolation</a></li><li><a href="#global-value">Global Value</a></li><li><a href="#global-module">Global Module</a></li><li><a href="#nullable">Nullable</a></li><li><a href="#object">Object</a><ul class="toc-headings"><li><a href="#hash-map-mode">Hash Map Mode</a></li><li><a href="#record-mode">Record Mode</a></li><li><a href="#new-instance">New Instance</a></li></ul></li><li><a href="#function">Function</a><ul class="toc-headings"><li><a href="#object-method-chaining">Object Method &amp; Chaining</a></li><li><a href="#variadic-was-bssplice-prior-to-version-408">Variadic (was bs.splice prior to version 4.08)</a></li><li><a href="#polymorphic-function">Polymorphic Function</a></li><li><a href="#curry-uncurry">Curry/Uncurry</a></li></ul></li><li><a href="#module">Module</a><ul class="toc-headings"><li><a href="#import-moduleexports">Import module.exports</a></li><li><a href="#import-default">Import Default</a></li><li><a href="#export-es6-default">Export ES6 default</a></li></ul></li><li><a href="#identity-external">Identity External</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script>window.foo = new Pjax({
+          areas: [
+            // try to use the first query.
+            '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
+            // fallback
+            'body'
+          ],
+          link: '.docsNavContainer:not(.docsSliderActive) a',
+          update: {
+            script: false,
+          }
+        });
+        var languagesMenuItemCopy = document.getElementById("languages-menu");
+        languagesMenuItemCopy.addEventListener("click", function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          e.stopImmediatePropagation();
+        });</script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+              var search = docsearch({
+                
+                apiKey: '0fd97db83891aa20810559812d9e69ac',
+                indexName: 'bucklescript',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:ru"]}
+              });
+            </script></body></html>
