@@ -4,7 +4,7 @@
         <title>BuckleScript Blog</title>
         <link>https://bucklescript.github.io/blog</link>
         <description>The best place to stay up-to-date with the latest BuckleScript news and events.</description>
-        <lastBuildDate>Tue, 09 Apr 2019 06:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 22 Apr 2019 06:00:00 GMT</lastBuildDate>
         <docs>http://blogs.law.harvard.edu/tech/rss</docs>
         <generator>Feed for Node.js</generator>
         <image>
@@ -12,6 +12,13 @@
             <url>https://bucklescript.github.io/img/logos/bucklescript.svg</url>
             <link>https://bucklescript.github.io/blog</link>
         </image>
+        <item>
+            <title><![CDATA[architecture changes in bs-platform v5.0.4 and v6.0.1]]></title>
+            <link>https://bucklescript.github.io/blog/2019/04/22/release-5-0-4.html</link>
+            <guid>https://bucklescript.github.io/blog/2019/04/22/release-5-0-4.html</guid>
+            <pubDate>Mon, 22 Apr 2019 06:00:00 GMT</pubDate>
+            <description><![CDATA[<p>We are going to make releases of bs-platform@5.0.4 and bs-platform@6.0.1, this release mostly contains bug fixes.</p> <p>At the same time, we are introducing an internal change which should be fine for average users.</p> <p>If you are tooling authors, here are som...</p>]]></description>
+        </item>
         <item>
             <title><![CDATA[Release 5.0.1]]></title>
             <link>https://bucklescript.github.io/blog/2019/04/09/release-schedule.html</link>

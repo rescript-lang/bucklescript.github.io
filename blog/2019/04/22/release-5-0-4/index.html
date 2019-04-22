@@ -1,0 +1,77 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>architecture changes in bs-platform v5.0.4 and v6.0.1 · BuckleScript</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="We are going to make releases of bs-platform@5.0.4 and bs-platform@6.0.1, this release mostly contains bug fixes."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="architecture changes in bs-platform v5.0.4 and v6.0.1 · BuckleScript"/><meta property="og:type" content="website"/><meta property="og:url" content="https://bucklescript.github.io/blog/2019/04/22/release-5-0-4"/><meta property="og:description" content="We are going to make releases of bs-platform@5.0.4 and bs-platform@6.0.1, this release mostly contains bug fixes."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/logos/bucklescript.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://bucklescript.github.io/blog/atom.xml" title="BuckleScript Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://bucklescript.github.io/blog/feed.xml" title="BuckleScript Blog RSS Feed"/><script type="text/javascript" src="/js/toggleSyntaxButton.js"></script><script type="text/javascript" src="/js/pjax-api.min.js"></script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/logos/bucklescript.svg" alt="BuckleScript"/><h2 class="headerTitleWithLogo">BuckleScript</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/en/installation" target="_self">Docs</a></li><li class=""><a href="/docs/en/playground" target="_self">Try</a></li><li class=""><a href="/docs/en/stdlib-overview" target="_self">API</a></li><li class=""><a href="/docs/en/community" target="_self">Community</a></li><li class="siteNavGroupActive"><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja">日本語</a></li><li><a href="/es-ES">Español</a></li><li><a href="/fr">Français</a></li><li><a href="/ko">한국어</a></li><li><a href="/pt-BR">Português (Brasil)</a></li><li><a href="/ru">Русский</a></li><li><a href="/zh-CN">中文</a></li><li><a href="/zh-TW">繁體中文</a></li><li><a href="https://crowdin.com/project/bucklescript" target="_blank" rel="noreferrer noopener">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/bucklescript/bucklescript" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul><li class="navListItem navListItemActive"><a class="navItem" href="/blog/2019/04/22/release-5-0-4">architecture changes in bs-platform v5.0.4 and v6.0.1</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/04/09/release-schedule">Release 5.0.1</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/03/31/release-6-0">bs-platform release v6.0+dev</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/03/21/release-5-0">bs-platform release v5</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/01/07/release-4-0-17"></a></li></ul></div></div></section></div><script>
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              const headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                if (event.target.tagName === 'A') {
+                  document.body.classList.remove('tocActive');
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="lonePost"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2019/04/22/release-5-0-4">architecture changes in bs-platform v5.0.4 and v6.0.1</a></h1><p class="post-meta">April 22, 2019</p><div class="authorBlock"></div></header><div><span><p>We are going to make releases of bs-platform@5.0.4 and bs-platform@6.0.1, this release mostly contains bug fixes.</p>
+<p>At the same time, we are introducing an internal change which should be fine for average users.</p>
+<p>If you are tooling authors, here are some details: previously we ship react_jsx ppx as a stand-alone binary, for example, reactjs_jsx_ppx_v2.exe, reactjs_jsx_ppx_v2.exe. Recently we start more close integration with <a href="https://reasonml.github.io">reason</a>, so it is absorbed into bsc.exe itself, we introduced a flag to have react-jsx on/off (note these are internal flags, not expected to be exposed to average users):</p>
+<pre><code class="hljs"><span class="hljs-keyword">bsc.exe </span>-<span class="hljs-keyword">bs-jsx </span><span class="hljs-number">2</span> <span class="hljs-comment"># turn on reactjs_jsx_ppx_v2</span>
+<span class="hljs-keyword">bsc.exe </span>-<span class="hljs-keyword">bs-jsx </span><span class="hljs-number">3</span> <span class="hljs-comment"># turn on reactjs_jsx_ppx_v3</span>
+</code></pre>
+<p>Like before, we also ship a stand alone bsppx.exe, it now absorbs reactjs_jsx_ppx as well.</p>
+<pre><code class="hljs"><span class="hljs-keyword">bsppx.exe </span>-<span class="hljs-keyword">bs-jsx </span><span class="hljs-number">2</span> <span class="hljs-comment"># turn on reactjs_jsx_ppx_v2</span>
+<span class="hljs-keyword">bsppx.exe </span>-<span class="hljs-keyword">bs-jsx </span><span class="hljs-number">3</span> <span class="hljs-comment"># turn on reactjs_jsx_ppx_v3</span>
+</code></pre>
+<p>The benefit of this change is that it help reduced the prebuilt binary size significantly and it also help shave 5~10ms per file compilation.</p>
+<p>Another minor change we added, is that we introduced an env variable <code>BS_VSCODE</code> to help error messages more adapted to VsCode, see <a href="https://bucklescript.github.io/docs/en/build-configuration#bs-vscode-error-output-adapted-for-vscode">here</a> for more details.</p>
+</span></div></div><div class="blogSocialSection"></div></div><div class="blog-recent"><a class="button" href="/blog">Recent Posts</a></div></div></div><nav class="onPageNav"></nav></div><span><script src="/js/redirectBlog.js"></script><script>window.foo = new Pjax({
+          areas: [
+            // try to use the first query.
+            '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
+            // fallback
+            'body'
+          ],
+          link: '.docsNavContainer:not(.docsSliderActive) a',
+          update: {
+            script: false,
+          }
+        });
+        var languagesMenuItemCopy = document.getElementById("languages-menu");
+        languagesMenuItemCopy.addEventListener("click", function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          e.stopImmediatePropagation();
+        });</script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+              var search = docsearch({
+                
+                apiKey: '0fd97db83891aa20810559812d9e69ac',
+                indexName: 'bucklescript',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:en"]}
+              });
+            </script></body></html>
