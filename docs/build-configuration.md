@@ -63,7 +63,9 @@ You can mark your directories as dev-only (for e.g. tests). These won't be built
 
 ## bs-dependencies, bs-dev-dependencies
 
-List of BuckleScript/Reason dependencies. Just like `package.json`'s dependencies, they'll be searched in `node_modules`.
+List of BuckleScript/Reason dependencies. Just like `package.json`'s dependencies, they'll be searched in `node_modules`. 
+
+Note that only sources marked with `"type":"dev"` will be able to resolve modules from `bs-dev-dependencies`.
 
 ## reason, refmt
 
