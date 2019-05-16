@@ -212,6 +212,31 @@ let twenty = joe |. ageGet
 let twenty = joe->ageGet
 ```
 
+If you prefer shorter names for the getter functions, [we also support a 'light' setting](https://bucklescript.github.io/blog/2019/03/21/release-5-0):
+
+```ocaml
+type person = {
+  name: string;
+  age: int;
+} [@@bs.deriving {abstract = light}]
+
+let joe = person ~name:"Joe" ~age:20 ()
+let joeName = name joe
+```
+
+```reason
+[@bs.deriving {abstract: light}]
+type person = {
+  name: string,
+  age: int,
+};
+
+let joe = person(~name="Joe", ~age=20, ());
+let joeName = name(joe);
+```
+
+The getter functions will now have the same names as the object fields themselves.
+
 #### Write
 
 A `bs.deriving abstract` value is immutable by default. To mutate such value, you need to first mark one of the abstract record field as `mutable`, the same way you'd mark a normal record as mutable:
