@@ -161,7 +161,7 @@ type t;
 
 ```ocaml
 external map : 'a array -> ('a -> 'b) -> 'b array = "map" [@@bs.send]
-external filter : 'a array -> ('a -> 'b) -> 'b array = "filter" [@@bs.send]
+external filter : 'a array -> ('a -> bool) -> 'a array = "filter" [@@bs.send]
 
 (* 2, 4 *)
 let () = [|1; 2; 3|]
