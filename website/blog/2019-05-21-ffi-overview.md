@@ -86,7 +86,7 @@ let () = setDate date 3.
 let d = getDate date
 ```
 
-Generated Js is as below:
+Generated Js is as below, as you can read, the binding itself is zero cost and serves as a formal documentation.
 
 ```js
 var date = new Date(10000);
