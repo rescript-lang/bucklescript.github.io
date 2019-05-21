@@ -73,5 +73,70 @@ If you are a developer busy shipping, the mechanism above would cover almost all
 
 We are going through such mechanism via a small example of binding to JS date, there are lots of advanced topics in the [documentation](https://bucklescript.github.io/docs/en/interop-overview), we are only talking about one of the mostly used method here.
 
-The key idea is to bind your JS object as an abstract data type and provide various methods over such abstract data type.
+The key idea is to bind your JS object as [an abstract data type](https://en.wikipedia.org/wiki/Abstract_data_type) where a data type is defined by its behavior from the point of view of a user  of the data instead of concrete representations.
+
+```ocaml
+type date
+external fromFloat : float -> date = "Date" [@@.new]
+external getDate : date -> float = "getDate" [@@bs.send]
+external setDate : date -> float -> unit = "setDate" [@@bs.send]
+
+let date = fromFloat 10000.
+let () = setDate date 3.
+let d = getDate date
+```
+
+Generated Js is as below:
+
+```js
+var date = new Date(10000);
+date.setDate(3);
+var d = date.getDate();
+```
+
+A typical workflow is that we create an abstract date type, create bindings for maker using `bs.new` and bind methods using `bs.send`.
+
+Thanks to the native support of abstract data type in OCaml, the interop is easy to reason about.
+
+Some advice of using such style:
+- Such type annotation is as polymorphic as you need, don't create polymorphic types when you don't need it.
+- Write a unit test for each external
+
+As a comparison, we can create the same binding using `raw`
+
+```ocaml
+type date
+let fromFloat : float -> date = fun%raw d -> {|return new Date(d)|}
+let getDate : date -> float = fun%raw d -> {|return d.getDate()|}
+let setDate : date -> float -> unit = fun%raw d v -> {|
+   d.setDate(v);
+   return 0; // ocaml representation of unit 
+|}
+
+let date = fromFloat 10000.
+let () = setDate date 3.
+let d = getDate date
+```
+
+The generated JS is as below and you can see the cost here:
+
+```js
+function fromFloat (d){return new Date(d)};
+
+function getDate (d){return d.getDate()};
+
+function setDate (d,v){
+   d.setDate(v);
+   return 0; // ocaml representation of unit 
+};
+
+var date = fromFloat(10000);
+
+setDate(date, 3);
+
+var d = getDate(date);
+```
+
+
+<!-- ,  and provide various methods over such abstract data type. -->
 
