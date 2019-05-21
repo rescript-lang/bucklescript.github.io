@@ -61,8 +61,17 @@ Insert raw JS code as a function has several advantages:
 - The compiler still has some knowledge about such function, arity, for example.
 
 Some advice of using such style:
-- Always annotate the raw function with explicit type annotation
-- Such type annotation is as polymorphic as you need, don't create polymorphic types when you don't need it
-- Write a test for such function
+- Always annotate the raw function with explicit type annotation.
+- Such type annotation is as polymorphic as you need, don't create polymorphic types when you don't need it.
+- Write a unit test for such function.
 
-Note that a nice thing about such mechanism is that no separate JS file is needed so no change to the build system is need in most cases, using such mechanism, BuckleScript users can already deal with most bindings
+Note that a nice thing about such mechanism is that no separate JS file is needed so no change to the build system is need in most cases, using such mechanism, BuckleScript users can already deal with most bindings.
+
+## Interop via attributes
+
+If you are a developer busy shipping, the mechanism above would cover almost all you need. A minor disadvange of such mechanism is that it comes with a cost, such raw function can not be inlined since it is JavaScript that BuckleScript compiler does not have a deep knowledge.
+
+We are going through such mechanism via a small example of binding to JS date, there are lots of advanced topics in the [documentation](https://bucklescript.github.io/docs/en/interop-overview), we are only talking about one of the mostly used method here.
+
+The key idea is to bind your JS object as an abstract data type and provide various methods over such abstract data type.
+
