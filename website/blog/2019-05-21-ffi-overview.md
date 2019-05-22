@@ -25,7 +25,7 @@ There are lots of trade-off when design such a FFI bridge between OCaml and Java
 
 BuckleScript allows users to insert raw JS using extension nodes directly, please refer to the [documentation](https://bucklescript.github.io/docs/en/embed-raw-javascript) for details. Here we only talk about one of the most used style, insert raw JS code as a function.
 
-```ocaml
+```
 let getSafe : int array -> int -> int = fun%raw a b -> {| 
 	if(b>=0 && b < a.length) {
     	return a [b]
@@ -75,7 +75,7 @@ We are going through such mechanism via a small example of binding to JS date, t
 
 The key idea is to bind your JS object as [an abstract data type](https://en.wikipedia.org/wiki/Abstract_data_type) where a data type is defined by its behavior from the point of view of a user  of the data instead of concrete representations.
 
-```ocaml
+```
 type date
 external fromFloat : float -> date = "Date" [@@bs.new]
 external getDate : date -> float = "getDate" [@@bs.send]
@@ -104,7 +104,7 @@ Some advice of using such style:
 
 As a comparison, we can create the same binding using `raw`
 
-```ocaml
+```
 type date
 let fromFloat : float -> date = fun%raw d -> {|return new Date(d)|}
 let getDate : date -> float = fun%raw d -> {|return d.getDate()|}
