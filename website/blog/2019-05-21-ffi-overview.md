@@ -4,8 +4,8 @@ title: A high level overview of BuckleScript interop with Javascript
 
 When user starts to use BuckleScript to develop applications on JS platform, they have to interop with various APIs provided by JS platform. 
 
-In theory, like [Elm](https://elm-lang.org/), bucklescript could ship a comperhensive library which contains what most people would like to use daily, but this is in particular 
-challenging given JS is running on so many platforms for example, [Electron](https://electronjs.org/), [Node](https://nodejs.org/) and Browser,  yet eatch platform is still evolving quickly. So we have to provide a mechanism to allow users to binding to native JS API quickly in the userland.
+In theory, like [Elm](https://elm-lang.org/), bucklescript could ship a comprehensive library which contains what most people would like to use daily, but this is in particular 
+challenging given JS is running on so many platforms for example, [Electron](https://electronjs.org/), [Node](https://nodejs.org/) and Browser,  yet each platform is still evolving quickly. So we have to provide a mechanism to allow users to bind to native JS API quickly in the userland.
 
 There are lots of trade-off when design such a FFI bridge between OCaml and JavaScript API, below we list a few key items which we think has an important impact on our design.
 
@@ -17,7 +17,7 @@ There are lots of trade-off when design such a FFI bridge between OCaml and Java
 
 - Bare metal efficiency should always be possible for experts in pure OCaml
 
-    Efficency is at the heart of BuckleScript's design philosophy, in terms of both compilation speed and runtime performance. There are also other strongly typed functional languages running on JS platform before we made BuckleScript, one thing in particular confused me is that in those languages, people have to write `native JS` to gain performance. Our goal is that when performance really matters, it is still possible for experts to write pure OCaml without digging into `native JS`, users don't have to make a choice between performance and type safety.
+    Efficiency is at the heart of BuckleScript's design philosophy, in terms of both compilation speed and runtime performance. There are also other strongly typed functional languages running on JS platform before we made BuckleScript, one thing in particular confused me is that in those languages, people have to write `native JS` to gain performance. Our goal is that when performance really matters, it is still possible for experts to write pure OCaml without digging into `native JS`, users don't have to make a choice between performance and type safety.
 
 
 
@@ -77,7 +77,7 @@ The key idea is to bind your JS object as [an abstract data type](https://en.wik
 
 ```ocaml
 type date
-external fromFloat : float -> date = "Date" [@@.new]
+external fromFloat : float -> date = "Date" [@@bs.new]
 external getDate : date -> float = "getDate" [@@bs.send]
 external setDate : date -> float -> unit = "setDate" [@@bs.send]
 
