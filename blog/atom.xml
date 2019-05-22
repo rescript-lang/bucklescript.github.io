@@ -2,11 +2,21 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://bucklescript.github.io/blog</id>
     <title>BuckleScript Blog</title>
-    <updated>2019-04-22T06:00:00Z</updated>
+    <updated>2019-05-21T06:00:00Z</updated>
     <generator>Feed for Node.js</generator>
     <link rel="alternate" href="https://bucklescript.github.io/blog"/>
     <subtitle>The best place to stay up-to-date with the latest BuckleScript news and events.</subtitle>
     <logo>https://bucklescript.github.io/img/logos/bucklescript.svg</logo>
+    <entry>
+        <title type="html"><![CDATA[A high level overview of BuckleScript interop with Javascript]]></title>
+        <id>https://bucklescript.github.io/blog/2019/05/21/ffi-overview.html</id>
+        <link href="https://bucklescript.github.io/blog/2019/05/21/ffi-overview.html">
+        </link>
+        <updated>2019-05-21T06:00:00Z</updated>
+        <summary type="html"><![CDATA[<p>When user starts to use BuckleScript to develop applications on JS platform, they have to interop with various APIs provided by JS platform.</p> <p>In theory, like <a href="https://elm-lang.org/">Elm</a>, bucklescript could ship a comprehensive library which contains what most people would li...</p>]]></summary>
+        <author>
+        </author>
+    </entry>
     <entry>
         <title type="html"><![CDATA[architecture changes in bs-platform v5.0.4 and v6.0.1]]></title>
         <id>https://bucklescript.github.io/blog/2019/04/22/release-5-0-4.html</id>

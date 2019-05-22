@@ -10,7 +10,7 @@
             languagesDropDown.className = "hide";
           }
         });
-      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/bucklescript/bucklescript" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul><li class="navListItem"><a class="navItem" href="/blog/2019/04/22/release-5-0-4">architecture changes in bs-platform v5.0.4 and v6.0.1</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/04/09/release-schedule">Release 5.0.1</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/03/31/release-6-0">bs-platform release v6.0+dev</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/03/21/release-5-0">bs-platform release v5</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/01/07/release-4-0-17"></a></li></ul></div></div></section></div><script>
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/bucklescript/bucklescript" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul><li class="navListItem"><a class="navItem" href="/blog/2019/05/21/ffi-overview">A high level overview of BuckleScript interop with Javascript</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/04/22/release-5-0-4">architecture changes in bs-platform v5.0.4 and v6.0.1</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/04/09/release-schedule">Release 5.0.1</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/03/31/release-6-0">bs-platform release v6.0+dev</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/03/21/release-5-0">bs-platform release v5</a></li></ul></div></div></section></div><script>
             document.addEventListener('DOMContentLoaded', function() {
               createToggler('#navToggler', '#docsNav', 'docsSliderActive');
               createToggler('#tocToggler', 'body', 'tocActive');
@@ -37,7 +37,112 @@
                 };
               }
             });
-        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="posts"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2019/04/22/release-5-0-4">architecture changes in bs-platform v5.0.4 and v6.0.1</a></h1><p class="post-meta">April 22, 2019</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p>We are going to make releases of bs-platform@5.0.4 and bs-platform@6.0.1, this release mostly contains bug fixes.</p>
+        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="posts"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2019/05/21/ffi-overview">A high level overview of BuckleScript interop with Javascript</a></h1><p class="post-meta">May 21, 2019</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p>When user starts to use BuckleScript to develop applications on JS platform, they have to interop with various APIs provided by JS platform.</p>
+<p>In theory, like <a href="https://elm-lang.org/">Elm</a>, bucklescript could ship a comprehensive library which contains what most people would like to use daily, but this is in particular
+challenging given JS is running on so many platforms for example, <a href="https://electronjs.org/">Electron</a>, <a href="https://nodejs.org/">Node</a> and Browser,  yet each platform is still evolving quickly. So we have to provide a mechanism to allow users to bind to native JS API quickly in the userland.</p>
+<p>There are lots of trade-off when design such a FFI bridge between OCaml and JavaScript API, below we list a few key items which we think has an important impact on our design.</p>
+<h2><a class="anchor" aria-hidden="true" id="interop-design-constraints"></a><a href="#interop-design-constraints" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Interop design constraints</h2>
+<ul>
+<li><p>BuckleScript is still OCaml</p>
+<p>We are not inventing a new language, in particular, we can not change the concrete syntax of OCaml. Luckily, OCaml introduced <a href="https://caml.inria.fr/pub/docs/manual-ocaml/extn.html#sec260">attributes</a> and <a href="https://caml.inria.fr/pub/docs/manual-ocaml/extn.html#sec262">extension nodes</a> since 4.02, which allows us to customize the language in a minor style. To be a good citizen in the OCaml community, all attributes introduced by BuckleScript are prefixed with <code>bs</code>.</p></li>
+<li><p>Bare metal efficiency should always be possible for experts in pure OCaml</p>
+<p>Efficiency is at the heart of BuckleScript's design philosophy, in terms of both compilation speed and runtime performance. There are also other strongly typed functional languages running on JS platform before we made BuckleScript, one thing in particular confused me is that in those languages, people have to write <code>native JS</code> to gain performance. Our goal is that when performance really matters, it is still possible for experts to write pure OCaml without digging into <code>native JS</code>, users don't have to make a choice between performance and type safety.</p></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="easy-interop-using-raw-js"></a><a href="#easy-interop-using-raw-js" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Easy interop using raw JS</h2>
+<p>BuckleScript allows users to insert raw JS using extension nodes directly, please refer to the <a href="https://bucklescript.github.io/docs/en/embed-raw-javascript">documentation</a> for details. Here we only talk about one of the most used style, insert raw JS code as a function.</p>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> getSafe : <span class="hljs-built_in">int</span> <span class="hljs-built_in">array</span> -&gt; <span class="hljs-built_in">int</span> -&gt; <span class="hljs-built_in">int</span> = <span class="hljs-keyword">fun</span>%raw a b -&gt; {| 
+    <span class="hljs-keyword">if</span>(b&gt;=<span class="hljs-number">0</span> &amp;&amp; b &lt; a.length) {
+        return a [b]
+     }
+     throw <span class="hljs-keyword">new</span> <span class="hljs-type">Error</span>(<span class="hljs-string">"out of range"</span>)
+  |} 
+
+<span class="hljs-keyword">let</span> v = getSafe [|<span class="hljs-number">1</span>;<span class="hljs-number">2</span>;<span class="hljs-number">3</span>|] (-<span class="hljs-number">1</span>)
+</code></pre>
+<p>Here the raw extension node asks user to list the parameters and function statement in raw JS syntax. The generated JS code is as below:</p>
+<pre><code class="hljs css language-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getSafe</span> (<span class="hljs-params">a,b</span>)</span>{ 
+    <span class="hljs-keyword">if</span>(b&gt;=<span class="hljs-number">0</span> &amp;&amp; b &lt; a.length) {
+        <span class="hljs-keyword">return</span> a [b]
+     }
+     <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">"out of range"</span>)
+  };
+
+<span class="hljs-keyword">var</span> v = getSafe(<span class="hljs-comment">/* array */</span>[
+      <span class="hljs-number">1</span>,
+      <span class="hljs-number">2</span>,
+      <span class="hljs-number">3</span>
+    ], <span class="hljs-number">-1</span>);
+
+</code></pre>
+<p>Insert raw JS code as a function has several advantages:</p>
+<ul>
+<li>It is relatively safe, no variable name polluting</li>
+<li>It is quite expressive since user can express everything inside the function body</li>
+<li>The compiler still has some knowledge about such function, arity, for example.</li>
+</ul>
+<p>Some advice of using such style:</p>
+<ul>
+<li>Always annotate the raw function with explicit type annotation.</li>
+<li>Such type annotation is as polymorphic as you need, don't create polymorphic types when you don't need it.</li>
+<li>Write a unit test for such function.</li>
+</ul>
+<p>Note that a nice thing about such mechanism is that no separate JS file is needed so no change to the build system is need in most cases, using such mechanism, BuckleScript users can already deal with most bindings.</p>
+<h2><a class="anchor" aria-hidden="true" id="interop-via-attributes"></a><a href="#interop-via-attributes" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Interop via attributes</h2>
+<p>If you are a developer busy shipping, the mechanism above would cover almost all you need. A minor disadvange of such mechanism is that it comes with a cost, such raw function can not be inlined since it is JavaScript that BuckleScript compiler does not have a deep knowledge.</p>
+<p>We are going through such mechanism via a small example of binding to JS date, there are lots of advanced topics in the <a href="https://bucklescript.github.io/docs/en/interop-overview">documentation</a>, we are only talking about one of the mostly used method here.</p>
+<p>The key idea is to bind your JS object as <a href="https://en.wikipedia.org/wiki/Abstract_data_type">an abstract data type</a> where a data type is defined by its behavior from the point of view of a user  of the data instead of concrete representations.</p>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">type</span> date
+<span class="hljs-keyword">external</span> fromFloat : <span class="hljs-built_in">float</span> -&gt; date = <span class="hljs-string">"Date"</span> [@@bs.<span class="hljs-keyword">new</span>]
+<span class="hljs-keyword">external</span> getDate : date -&gt; <span class="hljs-built_in">float</span> = <span class="hljs-string">"getDate"</span> [@@bs.send]
+<span class="hljs-keyword">external</span> setDate : date -&gt; <span class="hljs-built_in">float</span> -&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">"setDate"</span> [@@bs.send]
+
+<span class="hljs-keyword">let</span> date = fromFloat <span class="hljs-number">10000.</span>
+<span class="hljs-keyword">let</span> <span class="hljs-literal">()</span> = setDate date <span class="hljs-number">3.</span>
+<span class="hljs-keyword">let</span> d = getDate date
+</code></pre>
+<p>Generated Js is as below, as you can read, the binding itself is zero cost and serves as a formal documentation.</p>
+<pre><code class="hljs css language-js"><span class="hljs-keyword">var</span> date = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-number">10000</span>);
+date.setDate(<span class="hljs-number">3</span>);
+<span class="hljs-keyword">var</span> d = date.getDate();
+</code></pre>
+<p>A typical workflow is that we create an abstract date type, create bindings for maker using <code>bs.new</code> and bind methods using <code>bs.send</code>.</p>
+<p>Thanks to the native support of abstract data type in OCaml, the interop is easy to reason about.</p>
+<p>Some advice of using such style:</p>
+<ul>
+<li>Such type annotation is as polymorphic as you need, don't create polymorphic types when you don't need it.</li>
+<li>Write a unit test for each external</li>
+</ul>
+<p>As a comparison, we can create the same binding using <code>raw</code></p>
+<pre><code class="hljs css language-ocaml">type date
+let fromFloat : float -&gt; date = fun%raw d -&gt; {|return new Date(d)|}
+let getDate : date -&gt; float = fun%raw d -&gt; {|return d.getDate()|}
+let setDate : date -&gt; float -&gt; unit = fun%raw d v -&gt; {|
+   d.setDate(v);
+   return 0; // ocaml representation of unit 
+|}
+
+let date = fromFloat 10000.
+let () = setDate date 3.
+let d = getDate date
+</code></pre>
+<p>The generated JS is as below and you can see the cost here:</p>
+<pre><code class="hljs css language-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fromFloat</span> (<span class="hljs-params">d</span>)</span>{<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(d)};
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getDate</span> (<span class="hljs-params">d</span>)</span>{<span class="hljs-keyword">return</span> d.getDate()};
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setDate</span> (<span class="hljs-params">d,v</span>)</span>{
+   d.setDate(v);
+   <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>; <span class="hljs-comment">// ocaml representation of unit </span>
+};
+
+<span class="hljs-keyword">var</span> date = fromFloat(<span class="hljs-number">10000</span>);
+
+setDate(date, <span class="hljs-number">3</span>);
+
+<span class="hljs-keyword">var</span> d = getDate(date);
+</code></pre>
+<!-- ,  and provide various methods over such abstract data type. -->
+</span></div></article></div><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2019/04/22/release-5-0-4">architecture changes in bs-platform v5.0.4 and v6.0.1</a></h1><p class="post-meta">April 22, 2019</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p>We are going to make releases of bs-platform@5.0.4 and bs-platform@6.0.1, this release mostly contains bug fixes.</p>
 <p>At the same time, we are introducing an internal change which should be fine for average users.</p>
 <p>If you are tooling authors, here are some details: previously we ship react_jsx ppx as a stand-alone binary, for example, reactjs_jsx_ppx_v2.exe, reactjs_jsx_ppx_v2.exe. Recently we start more close integration with <a href="https://reasonml.github.io">reason</a>, so it is absorbed into bsc.exe itself, we introduced a flag to have react-jsx on/off (note these are internal flags, not expected to be exposed to average users):</p>
 <pre><code class="hljs"><span class="hljs-keyword">bsc.exe </span>-<span class="hljs-keyword">bs-jsx </span><span class="hljs-number">2</span> <span class="hljs-comment"># turn on reactjs_jsx_ppx_v2</span>
@@ -217,49 +322,6 @@ we added native uncurried calling convention support later.</p>
 So while the generic function <code>(x) =&gt; Some(x)</code> will generate code to check wheter <code>x</code> should be boxed, the more type-specific function <code>(x:int) =&gt; Some(x)</code> is just compiled as the identity function, as it's clear from the type that no boxing is required.</p>
 <p>For a high-level formalization of the boxing and unboxing operations, as well as the polymorphic comparison functions, see this <a href="https://gist.github.com/cristianoc/791aac26f94dbded0fc137d61f4bd2a8">gist</a>.</p>
 <p>One design choice was whether to represent <code>None</code> as <code>null</code> or as <code>undefined</code>. The choice of <code>undefined</code> was made because this allows a direct mapping for <a href="https://reasonml.github.io/docs/en/function#optional-labeled-arguments">optional labeled arguments</a>. As a consequence <code>null</code> is never boxed, so e.g. <code>Some(null)</code> is represented as <code>null</code>.</p>
-</span></div></article></div><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2018/07/17/release-4-0-0">BuckleScript 4.0.0 (Part One)</a></h1><p class="post-meta">July 17, 2018</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p><code>bs-platform</code> 4.0.0 is released! It has some  nice features that we want to share with you, a more detailed list of changes is available <a href="https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#400">here</a></p>
-<p>In this post, I will talk about a new development workflow, all toolchains are self-contained in <code>bs-platform</code>, <a href="https://twitter.com/ccrisccris">Cristiano</a> will talk about the new runtime encoding for optional.</p>
-<h1><a class="anchor" aria-hidden="true" id="a-simple-approach-to-accelerate-feedback-loop-in-a-reliable-way"></a><a href="#a-simple-approach-to-accelerate-feedback-loop-in-a-reliable-way" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>A simple approach to accelerate feedback loop in a reliable way</h1>
-<p>For mordern day-to-day development, developers expect that whenever files are changed, the build process is re-triggered automatically and browser reloaded instantly, this feedback loop should be quick enough to make developers not get distracted.</p>
-<p>What we have before this release is as below:</p>
-<ul>
-<li>Source file changes detected by bsb watch mode, rebuild</li>
-<li>Webpack noticed JS files modified, rebundle and update the browser state</li>
-</ul>
-<p>Both <code>bsb</code> and <code>webpack</code> has a watch mode, but they are architectured in fundamentally different ways that they achive different levels of reliability.</p>
-<p>In <code>bsb</code> watch mode, there is no long running memory-hungry process, so whenever a file changed, a fresh process is started very fast and dies quickly, our experiment shows that in practice, a long running bsb process can work for a week without going into bad state, and such feedback loop is still instant.</p>
-<p><code>Webpack</code> holds lots of objects in memory and running for a longtime, it results in less reliability and OOM from time to time.</p>
-<p>Another complexity introduced by a JS bundler is that it explodes users directory structure, for beginners trying to get started with bucklescript, installing such huge amount of directories is intimidating. In a slow network, this used to result in installation failure.</p>
-<p>We understand that existing JS bundler has a huge ecosystem and it is invaluable in production mode, but we are exploring whether we can provide similar or even more reliable development experience without introducing such complexity.</p>
-<p>Below is a new workflow we are exploring in this release:</p>
-<h1><a class="anchor" aria-hidden="true" id="nodejs-module-loader-in-browser"></a><a href="#nodejs-module-loader-in-browser" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>NodeJS module loader in browser</h1>
-<p>Instead of bundling the modules like normal bundlers, we provide a NodeJS module loader so that it simply reloads the module without bundling.</p>
-<p>Note ideally this can be achieved using ES6 module spec, however, it is not practical due to following reasons:</p>
-<ul>
-<li>Most dependencies are not strictly ES6 compilant, this is true even for libraries authored in ES6 style</li>
-</ul>
-<pre><code class="hljs css language-js"><span class="hljs-keyword">import</span> {createElement} form <span class="hljs-string">"react"</span> ; <span class="hljs-comment">// not es6 compliant</span>
-<span class="hljs-keyword">import</span> {createElement} <span class="hljs-keyword">from</span> <span class="hljs-string">"node_modules/react/index"</span> <span class="hljs-comment">// not es6 compilant</span>
-<span class="hljs-keyword">import</span> {createElement} <span class="hljs-keyword">from</span> <span class="hljs-string">"./node_modules/react/index.js"</span> <span class="hljs-comment">// correct es6 module</span>
-</code></pre>
-<ul>
-<li>ES6 modules does not allow an indirection, by introducing our own NodeJS module loader, we have an indirection and more meta-data about each module, so that we can do more reflection work in the future.</li>
-</ul>
-<p>Loading in clean state without packing seems to introduce some redundant work, but on the contratry, it is very fast, it used to load 200 modules under 150ms, even better, since there is no cached state in a long running process, it is much more reliable.</p>
-<h1><a class="anchor" aria-hidden="true" id="websocket-integration-with-bsb"></a><a href="#websocket-integration-with-bsb" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>WebSocket integration with bsb</h1>
-<p>We need a mechanism to communciate between browser and the build system so that whenever a rebuild finished, the browser get notified.</p>
-<p>Instead of introducing more dependencies, we implemented a minimal websocket interface so that whenever a rebuild finishes, the weboscket clients which subscribe the port will get notified.</p>
-<h1><a class="anchor" aria-hidden="true" id="to-conclude-and-try-it-out"></a><a href="#to-conclude-and-try-it-out" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>To conclude and try it out</h1>
-<p>So the proposed new work flow is as below: whenever a source file is changed, the bsb rebuild, if it build successfully, it will notify the browser to reload the NodeJS modules directly.</p>
-<p>All the devtools are provided by bs-platform, the good thing is that there is no long running memory-hungry process, so that we expect it will deliver a more reliable and consistent experience.</p>
-<p>You can try it out in <code>bs-platform@4.0.0</code></p>
-<pre><code class="hljs css language-sh">bsb -init <span class="hljs-built_in">test</span> -theme react-lite
-<span class="hljs-built_in">cd</span> <span class="hljs-built_in">test</span>
-npm install
-npm start 
-http-server <span class="hljs-comment"># start a http server</span>
-</code></pre>
-<p>open <code>localhost:port/index.html</code>, changes the reason source code and expect the browser show the changes.</p>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-next" href="/blog/page2/">Next →</a></div></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script>window.foo = new Pjax({
           areas: [
             // try to use the first query.

@@ -4,7 +4,7 @@
         <title>BuckleScript Blog</title>
         <link>https://bucklescript.github.io/blog</link>
         <description>The best place to stay up-to-date with the latest BuckleScript news and events.</description>
-        <lastBuildDate>Mon, 22 Apr 2019 06:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 21 May 2019 06:00:00 GMT</lastBuildDate>
         <docs>http://blogs.law.harvard.edu/tech/rss</docs>
         <generator>Feed for Node.js</generator>
         <image>
@@ -12,6 +12,13 @@
             <url>https://bucklescript.github.io/img/logos/bucklescript.svg</url>
             <link>https://bucklescript.github.io/blog</link>
         </image>
+        <item>
+            <title><![CDATA[A high level overview of BuckleScript interop with Javascript]]></title>
+            <link>https://bucklescript.github.io/blog/2019/05/21/ffi-overview.html</link>
+            <guid>https://bucklescript.github.io/blog/2019/05/21/ffi-overview.html</guid>
+            <pubDate>Tue, 21 May 2019 06:00:00 GMT</pubDate>
+            <description><![CDATA[<p>When user starts to use BuckleScript to develop applications on JS platform, they have to interop with various APIs provided by JS platform.</p> <p>In theory, like <a href="https://elm-lang.org/">Elm</a>, bucklescript could ship a comprehensive library which contains what most people would li...</p>]]></description>
+        </item>
         <item>
             <title><![CDATA[architecture changes in bs-platform v5.0.4 and v6.0.1]]></title>
             <link>https://bucklescript.github.io/blog/2019/04/22/release-5-0-4.html</link>
