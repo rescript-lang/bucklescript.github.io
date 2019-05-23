@@ -26,7 +26,7 @@ There are lots of trade-off when designing such a FFI bridge between OCaml and t
 
 BuckleScript allows users to insert raw JS using extension nodes directly. Please refer to the [documentation](https://bucklescript.github.io/docs/en/embed-raw-javascript) for details. Here we only talk about one of the most used styles: inserting raw JS code as a function.
 
-```
+```ocaml
 let getSafe : int array -> int -> int = fun%raw a b -> {| 
 	if (b>=0 && b < a.length) {
     	return a [b]
@@ -35,6 +35,18 @@ let getSafe : int array -> int -> int = fun%raw a b -> {|
   |} 
 
 let v = getSafe [|1;2;3|] (-1)
+```
+```reasonml
+let getSafe: (array(int), int) => int = [%raw
+  (a, b) => {|
+	if (b>=0 && b < a.length) {
+    	return a [b]
+     }
+     throw new Error("out of range")
+  |}
+];
+
+let v = [|1, 2, 3|]->getSafe(-1);
 ```
 
 Here the raw extension node asks the user to list the parameters and function statement in raw JS syntax. The generated JS code is as follows:
@@ -76,7 +88,7 @@ To demonstrate interop via attributes, we are going to show a small example of b
 
 The key idea is to bind your JS object as [an abstract data type](https://en.wikipedia.org/wiki/Abstract_data_type) where a data type is defined by its behavior from the point of view of a user of the data, instead of the data type’s concrete representations.
 
-```
+```ocaml
 type date
 external fromFloat : float -> date = "Date" [@@bs.new]
 external getDate : date -> float = "getDate" [@@bs.send]
@@ -85,6 +97,21 @@ external setDate : date -> float -> unit = "setDate" [@@bs.send]
 let date = fromFloat 10000.
 let () = setDate date 3.
 let d = getDate date
+```
+
+```reasonml
+type date;
+
+[@bs.new]
+external fromFloat : float => date = "Date" ;
+[@bs.send]
+external getDate : date => float = "getDate" ;
+[@bs.send]
+external setDate : date => float => unit = "setDate";
+
+let date = fromFloat (10000.0);
+date->setDate (3.0);
+let d = date -> getDate;
 ```
 
 The preceding code generates the following JS. As you can see, the binding itself is zero cost and serves as formal documentation.
@@ -105,7 +132,7 @@ Some advice when using this style:
 
 As a comparison, we can create the same binding using `raw`:
 
-```
+```ocaml
 type date
 let fromFloat : float -> date = fun%raw d -> {|return new Date(d)|}
 let getDate : date -> float = fun%raw d -> {|return d.getDate()|}
@@ -117,6 +144,23 @@ let setDate : date -> float -> unit = fun%raw d v -> {|
 let date = fromFloat 10000.
 let () = setDate date 3.
 let d = getDate date
+```
+
+```reasonml
+type date;
+let fromFloat: float => date = [%raw d => {|return new Date(d)|}];
+let getDate: date => float = [%raw d => {|return d.getDate()|}];
+let setDate: (date, float) => unit = [%raw
+  (d, v) => {|
+   d.setDate(v);
+   return 0; // ocaml representation of unit
+|}
+];
+
+let date = fromFloat(10000.);
+date->setDate( 3.);
+let d = date->getDate;
+
 ```
 
 The generated JS is as follows, and you can see the cost:
