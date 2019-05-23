@@ -63,7 +63,7 @@ Inserting raw JS code as a function has several advantages:
 
 Some advice about using this style:
 - Always annotate the raw function with explicit type annotation.
-- When annotating raw JS, you can use polymorphic types, but don’t create them when you don’t really need them.
+- When annotating raw JS, you can use polymorphic types, but don’t create them when you don’t really need them. In general, non polymoprhic type is safer and more efficient.
 - Write a unit test for the function.
 
 Note that a nice thing about this mechanism is that no separate JS file is needed, so no change to the build system is necessary in most cases. By using this mechanism, BuckleScript users can already deal with most bindings.
