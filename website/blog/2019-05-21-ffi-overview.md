@@ -2,32 +2,33 @@
 title: A high level overview of BuckleScript interop with Javascript
 ---
 
-When user starts to use BuckleScript to develop applications on JS platform, they have to interop with various APIs provided by JS platform. 
+When users start to use BuckleScript to develop applications on JS platform, they have to interop with various APIs provided by the JS platform. 
 
-In theory, like [Elm](https://elm-lang.org/), bucklescript could ship a comprehensive library which contains what most people would like to use daily, but this is in particular 
-challenging given JS is running on so many platforms for example, [Electron](https://electronjs.org/), [Node](https://nodejs.org/) and Browser,  yet each platform is still evolving quickly. So we have to provide a mechanism to allow users to bind to native JS API quickly in the userland.
+In theory, like [Elm](https://elm-lang.org/), BuckleScript could ship a comprehensive library which contains what most people would like to use daily.
+This, however, is particularly challenging, given that 
+JS is running on so many platforms for example, [Electron](https://electronjs.org/), [Node](https://nodejs.org/) and Browser, yet each platform is still evolving quickly. So we have to provide a mechanism to allow users to bind to the native JS API quickly in userland.
 
-There are lots of trade-off when design such a FFI bridge between OCaml and JavaScript API, below we list a few key items which we think has an important impact on our design.
+There are lots of trade-off when designing such a FFI bridge between OCaml and the JavaScript API. Below, we list a few key items which we think have an important impact on our design.
 
 ## Interop design constraints
 
 - BuckleScript is still OCaml
 
-    We are not inventing a new language, in particular, we can not change the concrete syntax of OCaml. Luckily, OCaml introduced [attributes](https://caml.inria.fr/pub/docs/manual-ocaml/extn.html#sec260) and [extension nodes](https://caml.inria.fr/pub/docs/manual-ocaml/extn.html#sec262) since 4.02, which allows us to customize the language in a minor style. To be a good citizen in the OCaml community, all attributes introduced by BuckleScript are prefixed with `bs`.
+    We are not inventing a new language. In particular, we can not change the concrete syntax of OCaml. Luckily, OCaml introduced [attributes](https://caml.inria.fr/pub/docs/manual-ocaml/extn.html#sec260) and [extension nodes](https://caml.inria.fr/pub/docs/manual-ocaml/extn.html#sec262) since 4.02, which allows us to customize the language to a minor extent. To be a good citizen in the OCaml community, all attributes introduced by BuckleScript are prefixed with `bs`.
 
 - Bare metal efficiency should always be possible for experts in pure OCaml
 
-    Efficiency is at the heart of BuckleScript's design philosophy, in terms of both compilation speed and runtime performance. There are also other strongly typed functional languages running on JS platform before we made BuckleScript, one thing in particular confused me is that in those languages, people have to write `native JS` to gain performance. Our goal is that when performance really matters, it is still possible for experts to write pure OCaml without digging into `native JS`, users don't have to make a choice between performance and type safety.
+    Efficiency is at the heart of BuckleScript's design philosophy, in terms of both compilation speed and runtime performance. While there were other strongly typed functional languages running on the JS platform before we made BuckleScript, one thing in particular that confused me was that in those languages, people have to write `native JS` to gain performance. Our goal is that when performance really matters, it is still possible for experts to write pure OCaml without digging into `native JS`, so users don't have to make a choice between performance and type safety.
 
 
 
 ## Easy interop using raw JS
 
-BuckleScript allows users to insert raw JS using extension nodes directly, please refer to the [documentation](https://bucklescript.github.io/docs/en/embed-raw-javascript) for details. Here we only talk about one of the most used style, insert raw JS code as a function.
+BuckleScript allows users to insert raw JS using extension nodes directly. Please refer to the [documentation](https://bucklescript.github.io/docs/en/embed-raw-javascript) for details. Here we only talk about one of the most used styles: inserting raw JS code as a function.
 
 ```
 let getSafe : int array -> int -> int = fun%raw a b -> {| 
-	if(b>=0 && b < a.length) {
+	if (b>=0 && b < a.length) {
     	return a [b]
      }
      throw new Error("out of range")
@@ -36,11 +37,11 @@ let getSafe : int array -> int -> int = fun%raw a b -> {|
 let v = getSafe [|1;2;3|] (-1)
 ```
 
-Here the raw extension node asks user to list the parameters and function statement in raw JS syntax. The generated JS code is as below:
+Here the raw extension node asks the user to list the parameters and function statement in raw JS syntax. The generated JS code is as follows:
 
 ```js
 function getSafe (a,b){ 
-	if(b>=0 && b < a.length) {
+	if (b>=0 && b < a.length) {
     	return a [b]
      }
      throw new Error("out of range")
@@ -54,26 +55,26 @@ var v = getSafe(/* array */[
 
 ```
 
-Insert raw JS code as a function has several advantages:
+Inserting raw JS code as a function has several advantages:
 
-- It is relatively safe, no variable name polluting 
-- It is quite expressive since user can express everything inside the function body
-- The compiler still has some knowledge about such function, arity, for example.
+- It is relatively safe; there is no variable name polluting.
+- It is quite expressive since the user can express everything inside the function body.
+- The compiler still has some knowledge about the function, for example, its arity.
 
-Some advice of using such style:
+Some advice about using this style:
 - Always annotate the raw function with explicit type annotation.
-- Such type annotation is as polymorphic as you need, don't create polymorphic types when you don't need it.
-- Write a unit test for such function.
+- When annotating raw JS, you can use polymorphic types, but don’t create them when you don’t really need them.
+- Write a unit test for the function.
 
-Note that a nice thing about such mechanism is that no separate JS file is needed so no change to the build system is need in most cases, using such mechanism, BuckleScript users can already deal with most bindings.
+Note that a nice thing about this mechanism is that no separate JS file is needed, so no change to the build system is necessary in most cases. By using this mechanism, BuckleScript users can already deal with most bindings.
 
 ## Interop via attributes
 
-If you are a developer busy shipping, the mechanism above would cover almost all you need. A minor disadvange of such mechanism is that it comes with a cost, such raw function can not be inlined since it is JavaScript that BuckleScript compiler does not have a deep knowledge.
+If you are a developer busy shipping, the mechanism above should cover almost everything you need. A minor disadvange of that mechanism is that it comes with a cost: a raw function can not be inlined since it is JavaScript, so the BuckleScript compiler does not have a deep knowledge about the function.
 
-We are going through such mechanism via a small example of binding to JS date, there are lots of advanced topics in the [documentation](https://bucklescript.github.io/docs/en/interop-overview), we are only talking about one of the mostly used method here.
+To demonstrate interop via attributes, we are going to show a small example of binding to JS `date`. There are lots of advanced topics in the [documentation](https://bucklescript.github.io/docs/en/interop-overview); here we are only talking about one of the most-used methods for interop.
 
-The key idea is to bind your JS object as [an abstract data type](https://en.wikipedia.org/wiki/Abstract_data_type) where a data type is defined by its behavior from the point of view of a user  of the data instead of concrete representations.
+The key idea is to bind your JS object as [an abstract data type](https://en.wikipedia.org/wiki/Abstract_data_type) where a data type is defined by its behavior from the point of view of a user of the data, instead of the data type’s concrete representations.
 
 ```
 type date
@@ -86,7 +87,7 @@ let () = setDate date 3.
 let d = getDate date
 ```
 
-Generated Js is as below, as you can read, the binding itself is zero cost and serves as a formal documentation.
+The preceding code generates the following JS. As you can see, the binding itself is zero cost and serves as formal documentation.
 
 ```js
 var date = new Date(10000);
@@ -94,15 +95,15 @@ date.setDate(3);
 var d = date.getDate();
 ```
 
-A typical workflow is that we create an abstract date type, create bindings for maker using `bs.new` and bind methods using `bs.send`.
+A typical workflow is that we create an abstract data type, create bindings for a “maker” using `bs.new`, and bind methods using `bs.send`.
 
-Thanks to the native support of abstract data type in OCaml, the interop is easy to reason about.
+Thanks to native support of abstract data types in OCaml, the interop is easy to reason about.
 
-Some advice of using such style:
-- Such type annotation is as polymorphic as you need, don't create polymorphic types when you don't need it.
-- Write a unit test for each external
+Some advice when using this style:
+- Again, you can use polymorphic types in your annotations, but don't create polymorphic types when you don't need them.
+- Write a unit test for each external.
 
-As a comparison, we can create the same binding using `raw`
+As a comparison, we can create the same binding using `raw`:
 
 ```
 type date
@@ -118,7 +119,7 @@ let () = setDate date 3.
 let d = getDate date
 ```
 
-The generated JS is as below and you can see the cost here:
+The generated JS is as follows, and you can see the cost:
 
 ```js
 function fromFloat (d){return new Date(d)};
