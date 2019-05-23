@@ -37,21 +37,22 @@
                 };
               }
             });
-        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="posts"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2019/05/21/ffi-overview">A high level overview of BuckleScript interop with Javascript</a></h1><p class="post-meta">May 21, 2019</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p>When user starts to use BuckleScript to develop applications on JS platform, they have to interop with various APIs provided by JS platform.</p>
-<p>In theory, like <a href="https://elm-lang.org/">Elm</a>, bucklescript could ship a comprehensive library which contains what most people would like to use daily, but this is in particular
-challenging given JS is running on so many platforms for example, <a href="https://electronjs.org/">Electron</a>, <a href="https://nodejs.org/">Node</a> and Browser,  yet each platform is still evolving quickly. So we have to provide a mechanism to allow users to bind to native JS API quickly in the userland.</p>
-<p>There are lots of trade-off when design such a FFI bridge between OCaml and JavaScript API, below we list a few key items which we think has an important impact on our design.</p>
+        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="posts"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2019/05/21/ffi-overview">A high level overview of BuckleScript interop with Javascript</a></h1><p class="post-meta">May 21, 2019</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p>When users start to use BuckleScript to develop applications on JS platform, they have to interop with various APIs provided by the JS platform.</p>
+<p>In theory, like <a href="https://elm-lang.org/">Elm</a>, BuckleScript could ship a comprehensive library which contains what most people would like to use daily.
+This, however, is particularly challenging, given that
+JS is running on so many platforms for example, <a href="https://electronjs.org/">Electron</a>, <a href="https://nodejs.org/">Node</a> and Browser, yet each platform is still evolving quickly. So we have to provide a mechanism to allow users to bind to the native JS API quickly in userland.</p>
+<p>There are lots of trade-off when designing such a FFI bridge between OCaml and the JavaScript API. Below, we list a few key items which we think have an important impact on our design.</p>
 <h2><a class="anchor" aria-hidden="true" id="interop-design-constraints"></a><a href="#interop-design-constraints" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Interop design constraints</h2>
 <ul>
 <li><p>BuckleScript is still OCaml</p>
-<p>We are not inventing a new language, in particular, we can not change the concrete syntax of OCaml. Luckily, OCaml introduced <a href="https://caml.inria.fr/pub/docs/manual-ocaml/extn.html#sec260">attributes</a> and <a href="https://caml.inria.fr/pub/docs/manual-ocaml/extn.html#sec262">extension nodes</a> since 4.02, which allows us to customize the language in a minor style. To be a good citizen in the OCaml community, all attributes introduced by BuckleScript are prefixed with <code>bs</code>.</p></li>
+<p>We are not inventing a new language. In particular, we can not change the concrete syntax of OCaml. Luckily, OCaml introduced <a href="https://caml.inria.fr/pub/docs/manual-ocaml/extn.html#sec260">attributes</a> and <a href="https://caml.inria.fr/pub/docs/manual-ocaml/extn.html#sec262">extension nodes</a> since 4.02, which allows us to customize the language to a minor extent. To be a good citizen in the OCaml community, all attributes introduced by BuckleScript are prefixed with <code>bs</code>.</p></li>
 <li><p>Bare metal efficiency should always be possible for experts in pure OCaml</p>
-<p>Efficiency is at the heart of BuckleScript's design philosophy, in terms of both compilation speed and runtime performance. There are also other strongly typed functional languages running on JS platform before we made BuckleScript, one thing in particular confused me is that in those languages, people have to write <code>native JS</code> to gain performance. Our goal is that when performance really matters, it is still possible for experts to write pure OCaml without digging into <code>native JS</code>, users don't have to make a choice between performance and type safety.</p></li>
+<p>Efficiency is at the heart of BuckleScript's design philosophy, in terms of both compilation speed and runtime performance. While there were other strongly typed functional languages running on the JS platform before we made BuckleScript, one thing in particular that confused me was that in those languages, people have to write <code>native JS</code> to gain performance. Our goal is that when performance really matters, it is still possible for experts to write pure OCaml without digging into <code>native JS</code>, so users don't have to make a choice between performance and type safety.</p></li>
 </ul>
 <h2><a class="anchor" aria-hidden="true" id="easy-interop-using-raw-js"></a><a href="#easy-interop-using-raw-js" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Easy interop using raw JS</h2>
-<p>BuckleScript allows users to insert raw JS using extension nodes directly, please refer to the <a href="https://bucklescript.github.io/docs/en/embed-raw-javascript">documentation</a> for details. Here we only talk about one of the most used style, insert raw JS code as a function.</p>
+<p>BuckleScript allows users to insert raw JS using extension nodes directly. Please refer to the <a href="https://bucklescript.github.io/docs/en/embed-raw-javascript">documentation</a> for details. Here we only talk about one of the most used styles: inserting raw JS code as a function.</p>
 <pre><code class="hljs"><span class="hljs-keyword">let</span> getSafe : <span class="hljs-built_in">int</span> <span class="hljs-built_in">array</span> -&gt; <span class="hljs-built_in">int</span> -&gt; <span class="hljs-built_in">int</span> = <span class="hljs-keyword">fun</span>%raw a b -&gt; {| 
-    <span class="hljs-keyword">if</span>(b&gt;=<span class="hljs-number">0</span> &amp;&amp; b &lt; a.length) {
+    <span class="hljs-keyword">if</span> (b&gt;=<span class="hljs-number">0</span> &amp;&amp; b &lt; a.length) {
         return a [b]
      }
      throw <span class="hljs-keyword">new</span> <span class="hljs-type">Error</span>(<span class="hljs-string">"out of range"</span>)
@@ -59,9 +60,9 @@ challenging given JS is running on so many platforms for example, <a href="https
 
 <span class="hljs-keyword">let</span> v = getSafe [|<span class="hljs-number">1</span>;<span class="hljs-number">2</span>;<span class="hljs-number">3</span>|] (-<span class="hljs-number">1</span>)
 </code></pre>
-<p>Here the raw extension node asks user to list the parameters and function statement in raw JS syntax. The generated JS code is as below:</p>
+<p>Here the raw extension node asks the user to list the parameters and function statement in raw JS syntax. The generated JS code is as follows:</p>
 <pre><code class="hljs css language-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getSafe</span> (<span class="hljs-params">a,b</span>)</span>{ 
-    <span class="hljs-keyword">if</span>(b&gt;=<span class="hljs-number">0</span> &amp;&amp; b &lt; a.length) {
+    <span class="hljs-keyword">if</span> (b&gt;=<span class="hljs-number">0</span> &amp;&amp; b &lt; a.length) {
         <span class="hljs-keyword">return</span> a [b]
      }
      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">"out of range"</span>)
@@ -74,23 +75,23 @@ challenging given JS is running on so many platforms for example, <a href="https
     ], <span class="hljs-number">-1</span>);
 
 </code></pre>
-<p>Insert raw JS code as a function has several advantages:</p>
+<p>Inserting raw JS code as a function has several advantages:</p>
 <ul>
-<li>It is relatively safe, no variable name polluting</li>
-<li>It is quite expressive since user can express everything inside the function body</li>
-<li>The compiler still has some knowledge about such function, arity, for example.</li>
+<li>It is relatively safe; there is no variable name polluting.</li>
+<li>It is quite expressive since the user can express everything inside the function body.</li>
+<li>The compiler still has some knowledge about the function, for example, its arity.</li>
 </ul>
-<p>Some advice of using such style:</p>
+<p>Some advice about using this style:</p>
 <ul>
 <li>Always annotate the raw function with explicit type annotation.</li>
-<li>Such type annotation is as polymorphic as you need, don't create polymorphic types when you don't need it.</li>
-<li>Write a unit test for such function.</li>
+<li>When annotating raw JS, you can use polymorphic types, but don’t create them when you don’t really need them. In general, non polymoprhic type is safer and more efficient.</li>
+<li>Write a unit test for the function.</li>
 </ul>
-<p>Note that a nice thing about such mechanism is that no separate JS file is needed so no change to the build system is need in most cases, using such mechanism, BuckleScript users can already deal with most bindings.</p>
+<p>Note that a nice thing about this mechanism is that no separate JS file is needed, so no change to the build system is necessary in most cases. By using this mechanism, BuckleScript users can already deal with most bindings.</p>
 <h2><a class="anchor" aria-hidden="true" id="interop-via-attributes"></a><a href="#interop-via-attributes" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Interop via attributes</h2>
-<p>If you are a developer busy shipping, the mechanism above would cover almost all you need. A minor disadvange of such mechanism is that it comes with a cost, such raw function can not be inlined since it is JavaScript that BuckleScript compiler does not have a deep knowledge.</p>
-<p>We are going through such mechanism via a small example of binding to JS date, there are lots of advanced topics in the <a href="https://bucklescript.github.io/docs/en/interop-overview">documentation</a>, we are only talking about one of the mostly used method here.</p>
-<p>The key idea is to bind your JS object as <a href="https://en.wikipedia.org/wiki/Abstract_data_type">an abstract data type</a> where a data type is defined by its behavior from the point of view of a user  of the data instead of concrete representations.</p>
+<p>If you are a developer busy shipping, the mechanism above should cover almost everything you need. A minor disadvange of that mechanism is that it comes with a cost: a raw function can not be inlined since it is JavaScript, so the BuckleScript compiler does not have a deep knowledge about the function.</p>
+<p>To demonstrate interop via attributes, we are going to show a small example of binding to JS <code>date</code>. There are lots of advanced topics in the <a href="https://bucklescript.github.io/docs/en/interop-overview">documentation</a>; here we are only talking about one of the most-used methods for interop.</p>
+<p>The key idea is to bind your JS object as <a href="https://en.wikipedia.org/wiki/Abstract_data_type">an abstract data type</a> where a data type is defined by its behavior from the point of view of a user of the data, instead of the data type’s concrete representations.</p>
 <pre><code class="hljs"><span class="hljs-built_in">type</span> <span class="hljs-built_in">date</span>
 <span class="hljs-keyword">external</span> fromFloat : float -&gt; <span class="hljs-built_in">date</span> = <span class="hljs-string">"Date"</span> [<span class="hljs-comment">@@</span>bs.<span class="hljs-keyword">new</span>]
 <span class="hljs-keyword">external</span> getDate : <span class="hljs-built_in">date</span> -&gt; float = <span class="hljs-string">"getDate"</span> [<span class="hljs-comment">@@</span>bs.send]
@@ -100,19 +101,19 @@ challenging given JS is running on so many platforms for example, <a href="https
 <span class="hljs-keyword">let</span> () = setDate <span class="hljs-built_in">date</span> <span class="hljs-number">3.</span>
 <span class="hljs-keyword">let</span> d = getDate <span class="hljs-built_in">date</span>
 </code></pre>
-<p>Generated Js is as below, as you can read, the binding itself is zero cost and serves as a formal documentation.</p>
+<p>The preceding code generates the following JS. As you can see, the binding itself is zero cost and serves as formal documentation.</p>
 <pre><code class="hljs css language-js"><span class="hljs-keyword">var</span> date = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-number">10000</span>);
 date.setDate(<span class="hljs-number">3</span>);
 <span class="hljs-keyword">var</span> d = date.getDate();
 </code></pre>
-<p>A typical workflow is that we create an abstract date type, create bindings for maker using <code>bs.new</code> and bind methods using <code>bs.send</code>.</p>
-<p>Thanks to the native support of abstract data type in OCaml, the interop is easy to reason about.</p>
-<p>Some advice of using such style:</p>
+<p>A typical workflow is that we create an abstract data type, create bindings for a “maker” using <code>bs.new</code>, and bind methods using <code>bs.send</code>.</p>
+<p>Thanks to native support of abstract data types in OCaml, the interop is easy to reason about.</p>
+<p>Some advice when using this style:</p>
 <ul>
-<li>Such type annotation is as polymorphic as you need, don't create polymorphic types when you don't need it.</li>
-<li>Write a unit test for each external</li>
+<li>Again, you can use polymorphic types in your annotations, but don't create polymorphic types when you don't need them.</li>
+<li>Write a unit test for each external.</li>
 </ul>
-<p>As a comparison, we can create the same binding using <code>raw</code></p>
+<p>As a comparison, we can create the same binding using <code>raw</code>:</p>
 <pre><code class="hljs"><span class="hljs-keyword">type</span> date
 let fromFloat : float -&gt; date = <span class="hljs-function"><span class="hljs-keyword">fun</span><span class="hljs-title">%</span></span>raw d -&gt; {|<span class="hljs-keyword">return</span> new Date(d)|}
 let getDate : date -&gt; float = <span class="hljs-function"><span class="hljs-keyword">fun</span><span class="hljs-title">%</span></span>raw d -&gt; {|<span class="hljs-keyword">return</span> d.getDate()|}
@@ -125,7 +126,7 @@ let date = fromFloat <span class="hljs-number">10000</span>.
 let () = setDate date <span class="hljs-number">3</span>.
 let d = getDate date
 </code></pre>
-<p>The generated JS is as below and you can see the cost here:</p>
+<p>The generated JS is as follows, and you can see the cost:</p>
 <pre><code class="hljs css language-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fromFloat</span> (<span class="hljs-params">d</span>)</span>{<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(d)};
 
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getDate</span> (<span class="hljs-params">d</span>)</span>{<span class="hljs-keyword">return</span> d.getDate()};

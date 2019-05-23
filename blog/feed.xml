@@ -17,7 +17,7 @@
             <link>https://bucklescript.github.io/blog/2019/05/21/ffi-overview.html</link>
             <guid>https://bucklescript.github.io/blog/2019/05/21/ffi-overview.html</guid>
             <pubDate>Tue, 21 May 2019 06:00:00 GMT</pubDate>
-            <description><![CDATA[<p>When user starts to use BuckleScript to develop applications on JS platform, they have to interop with various APIs provided by JS platform.</p> <p>In theory, like <a href="https://elm-lang.org/">Elm</a>, bucklescript could ship a comprehensive library which contains what most people would li...</p>]]></description>
+            <description><![CDATA[<p>When users start to use BuckleScript to develop applications on JS platform, they have to interop with various APIs provided by the JS platform.</p> <p>In theory, like <a href="https://elm-lang.org/">Elm</a>, BuckleScript could ship a comprehensive library which contains what most people woul...</p>]]></description>
         </item>
         <item>
             <title><![CDATA[architecture changes in bs-platform v5.0.4 and v6.0.1]]></title>
