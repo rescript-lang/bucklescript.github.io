@@ -201,7 +201,7 @@ external route :
   action:(string list -> unit) ->
   ?options:< .. > Js.t ->
   unit ->
-  _ = "route" [@@bs.obj]
+  _ = "" [@@bs.obj]
 ```
 
 ```reason
@@ -211,8 +211,10 @@ external route :
   ~action:(list(string) => unit),
   ~options:Js.t({..})=?,
   unit
-) => _ = "route";
+) => _ = "";
 ```
+
+**Note**: the ` = ""` part at the end is just a dummy placeholder, due to syntactic limitations. It serves no purpose currently.
 
 This function has four labelled parameters (the fourth one optional), one unlabelled parameter at the end (which we mandate for functions with [optional parameters](https://reasonml.github.io/docs/en/function.html#optional-labeled-arguments)), and one parameter (`_method`) that requires an underscore prefix to avoid confusion with the OCaml/Reason keyword `method`.
 
