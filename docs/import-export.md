@@ -121,15 +121,3 @@ Output:
 var Student = require("./student");
 console.log(Student.default);
 ```
-
-### Tips & Tricks
-
-When the name you're using on the BS side matches the name of the JS value, you can use the empty string shorthand:
-
-```ocaml
-external dirname: string -> string = "dirname" [@@bs.module "path"]
-```
-
-```reason
-[@bs.module "path"] external dirname : string => string = "dirname";
-```
