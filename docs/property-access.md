@@ -2,6 +2,28 @@
 title: Property access
 ---
 
+# Static property access
+
+Binding to Getter/Setter using `bs.get`, `bs.set`.
+
+This attribute helps get and set the property of a JavaScript object.
+
+```ocaml
+type textarea
+external set_name : textarea -> string -> unit = "name" [@@bs.set]
+external get_name : textarea -> string = "name" [@@bs.get]
+```
+
+```reasonml
+type textarea;
+[@bs.set] external set_name: (textarea, string) => unit = "name";
+[@bs.get] external get_name: textarea => string = "name";
+
+```
+
+
+# Dynamic property access
+
 Binding to dynamic property access/set using `bs.set_index`, `bs.get_index`
 
 Input:
