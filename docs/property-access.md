@@ -17,7 +17,7 @@ let _ =
   Js.log (get i32arr 0)
 ```
 
-```reason
+```reasonml
 type t;
 [@bs.new] external create: int => t = "Int32Array";
 [@bs.get_index] external get: (t, int) => int = "";
