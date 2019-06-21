@@ -19,7 +19,7 @@
       "class",
       "function",
       "property-access",
-      "return-value_wrapping",
+      "return-value-wrapping",
       "import-export",
       "regular-expression",
       "exceptions",
