@@ -18,6 +18,8 @@
       "object-2",
       "class",
       "function",
+      "property-access",
+      "return-value_wrapping",
       "import-export",
       "regular-expression",
       "exceptions",
