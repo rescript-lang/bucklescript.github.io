@@ -26,20 +26,20 @@ Button.defaultProps = {
 };
 const pre = "```";
 const codeExample =`${pre}ocaml
-let result = Js.(
+let result = 
   [|1; 2; 3; 4|]
-  |> Array.filter (fun x -> x > 2)
-  |> Array.mapi (fun x i -> x + i)
-  |> Array.reduce (fun x y -> x + y) 0
-)
+  |. Belt.Array.keep (fun x -> x > 2)
+  |. Belt.Array.mapWithIndex (fun x i -> x + i)
+  |. Belt.Array.reduce 0 (fun x y -> x + y) 
+  |. Js.log
 ${pre}`;
 const codeExampleReason =`${pre}reason
-let result = Js.(
+let result = 
   [|1, 2, 3, 4|]
-  |> Array.filter(x => x > 2)
-  |> Array.mapi((x, i) => x + i)
-  |> Array.reduce((x, y) => x + y, 0)
-)
+  -> Belt.Array.keep(x => x > 2)
+  -> Belt.Array.mapWithIndex((x, i) => x + i)
+  -> Belt.Array.reduce(0, (x, y) => x + y)
+  -> Js.log;
 ${pre}`;
 
 const quickStart = `${pre}bash
