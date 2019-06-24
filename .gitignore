@@ -7,3 +7,4 @@ finalOutput/*.js
 /lib/ocaml/
 *.log
 *~
+package-lock.json

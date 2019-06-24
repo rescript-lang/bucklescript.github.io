@@ -119,8 +119,14 @@
       "playground": {
         "title": "Playground"
       },
+      "property-access": {
+        "title": "Property access"
+      },
       "regular-expression": {
         "title": "Regular Expression"
+      },
+      "return-value-wrapping": {
+        "title": "Return value wrapping"
       },
       "roadmap": {
         "title": "Roadmap & Contribution"
