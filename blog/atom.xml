@@ -2,11 +2,21 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://bucklescript.github.io/blog</id>
     <title>BuckleScript Blog</title>
-    <updated>2019-05-21T06:00:00Z</updated>
+    <updated>2019-06-26T06:00:00Z</updated>
     <generator>Feed for Node.js</generator>
     <link rel="alternate" href="https://bucklescript.github.io/blog"/>
     <subtitle>The best place to stay up-to-date with the latest BuckleScript news and events.</subtitle>
     <logo>https://bucklescript.github.io/img/logos/bucklescript.svg</logo>
+    <entry>
+        <title type="html"/>
+        <id>https://bucklescript.github.io/blog/2019/06/26/release-5-0-5.html</id>
+        <link href="https://bucklescript.github.io/blog/2019/06/26/release-5-0-5.html">
+        </link>
+        <updated>2019-06-26T06:00:00Z</updated>
+        <summary type="html"><![CDATA[<p><code>bs-platform</code> 5.0.5 (for OCaml 4.02.3) and 6.0.2 (for OCaml 4.06.1) is released.</p> <p>A detailed list of changes is available <a href="https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#505">here</a></p> <p>It has some critical bug fixes that we suggest users to upgrade.</p> <p>Some feature enhancement is described as below:</p> <h2><a class="anchor" aria-hidden="true" id="user-land-c-stubs-polyfill"></a><a href="#user-land-c-stubs-polyfill" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"/></svg></a>User land C s...</h2>]]></summary>
+        <author>
+        </author>
+    </entry>
     <entry>
         <title type="html"><![CDATA[A high level overview of BuckleScript interop with Javascript]]></title>
         <id>https://bucklescript.github.io/blog/2019/05/21/ffi-overview.html</id>
@@ -118,6 +128,16 @@
         </author>
     </entry>
     <entry>
+        <title type="html"><![CDATA[First-class `bs.variadic` Support in the Next Release]]></title>
+        <id>https://bucklescript.github.io/blog/2019/03/1/feature-preview.html</id>
+        <link href="https://bucklescript.github.io/blog/2019/03/1/feature-preview.html">
+        </link>
+        <updated>1970-01-01T00:00:00Z</updated>
+        <summary type="html"><![CDATA[<p>In previous releases, when a <code>bs.variadic</code> external (previously called <code>bs.splice</code> prior to version <code>4.08</code>) is present, its tail arguments needed to be applied statically. In other words, the <code>external</code> marked with <code>bs.variadic</code>, when used, requires a <em>literal</em> ...</p>]]></summary>
+        <author>
+        </author>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[BuckleScript 3.1.4]]></title>
         <id>https://bucklescript.github.io/blog/2018/05/23/release-3-1-4.html</id>
         <link href="https://bucklescript.github.io/blog/2018/05/23/release-3-1-4.html">
@@ -134,16 +154,6 @@
         </link>
         <updated>2018-05-21T06:00:00Z</updated>
         <summary type="html"><![CDATA[<p>List of changes <a href="https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#310">here</a>! Highlights:</p> <h2><a class="anchor" aria-hidden="true" id="print-record-keys-and-variant-tags"></a><a href="#print-record-keys-and-variant-tags" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"/></svg></a>Print Record Keys and Variant Tags</h2> <p>A picture's worth a thousand words:</p> <table> <thead> <tr><th>Before</th><th>After</th></tr> </thead> <tbody> <tr> <td> <img src="/img/debugger-before.png" alt="debugger before"> </td> <td style="vertical-align: middle"> <img src="/img/debugger-after.png" alt="debugger after"> </td> </tr> </tbody> </table> <p>Please see <a href="/docs/en/better-data-structures-printing-debug-mode.html">Better Data Structures Printing (Debug Mode)</a> for usage.</p> <h2><a class="anchor" aria-hidden="true" id="even-better-bsderiving-abstract"></a><a href="#even-better-bsderiving-abstract" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewbox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"/></svg></a>Even Better <code>bs.deriving abstract</code></h2> <p>We've further polis...</p>]]></summary>
-        <author>
-        </author>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[First-class `bs.variadic` Support in the Next Release]]></title>
-        <id>https://bucklescript.github.io/blog/2019/03/1/feature-preview.html</id>
-        <link href="https://bucklescript.github.io/blog/2019/03/1/feature-preview.html">
-        </link>
-        <updated>1970-01-01T00:00:00Z</updated>
-        <summary type="html"><![CDATA[<p>In previous releases, when a <code>bs.variadic</code> external (previously called <code>bs.splice</code> prior to version <code>4.08</code>) is present, its tail arguments needed to be applied statically. In other words, the <code>external</code> marked with <code>bs.variadic</code>, when used, requires a <em>literal</em> ...</p>]]></summary>
         <author>
         </author>
     </entry>
