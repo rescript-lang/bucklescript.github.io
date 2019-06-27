@@ -8,7 +8,7 @@
     <subtitle>The best place to stay up-to-date with the latest BuckleScript news and events.</subtitle>
     <logo>https://bucklescript.github.io/img/logos/bucklescript.svg</logo>
     <entry>
-        <title type="html"/>
+        <title type="html"><![CDATA[Release 5.0.5 and 6.0.2]]></title>
         <id>https://bucklescript.github.io/blog/2019/06/26/release-5-0-5.html</id>
         <link href="https://bucklescript.github.io/blog/2019/06/26/release-5-0-5.html">
         </link>
