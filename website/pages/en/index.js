@@ -94,8 +94,12 @@ class HomeSplash extends React.Component {
             <div className="homeWrapperInner">
               <div className="homeTagLine">{siteConfig.tagline}</div>
               <div className="homeCodeSnippet">
-                <MarkdownBlock>{codeExampleReason}</MarkdownBlock>
-                <MarkdownBlock>{codeExample}</MarkdownBlock>
+                <div className="homeCodeSnippet-reason">
+                  <MarkdownBlock>{codeExampleReason}</MarkdownBlock>
+                </div>
+                <div className="homeCodeSnippet-ocaml">
+                  <MarkdownBlock>{codeExample}</MarkdownBlock>
+                </div>
               </div>
             </div>
 
