@@ -32,20 +32,6 @@ The commands that are exposed are:
 - `bsc`, the raw compiler. Usually not used directly.
 - `bsrefmt`, the included [Reason](https://reasonml.github.io) parser & printer.
 
-## Weekly Alpha Releases
-
-To help us catch regressions, feel free to tests features in the next release, now:
-
-```sh
-yarn add --dev bs-platform@next
-```
-
-Similar commands as previous section for `npm` and/or global installation.
-
-**Note**: weekly alpha releases only support \*nix platform (including macOS). Windows support is only available for beta releases (no set schedule currently).
-
-Thank you for helping us!
-
 ## Alternatives (Power Users)
 
 ### Install From Source, Through NPM/Yarn
@@ -60,30 +46,7 @@ npm install
 
 ### Install From Source, Without NPM/Yarn
 
-**Prerequisite**: the standard C toolchain (gcc, make).
-
-First, build the OCaml compiler:
-
-```sh
-git clone https://github.com/bucklescript/bucklescript
-cd bucklescript/vendor/ocaml
-./configure -prefix `pwd` # put your preferred directory
-make world.opt
-make install
-```
-
-The patched compiler is installed locally into `$(pwd)/bin`. To start using it temporarily, check if `ocamlc.opt` and `ocamlopt.opt` exist in `$(pwd)/bin,` and temporarily add the location to your `$(PATH)` (e.g. `PATH=$(pwd)/bin:$PATH`).
-
-Then, build BuckleScript itself:
-
-```sh
-cd ../../
-make world
-```
-
-At the end, you should have a binary called `bsc.exe` under `jscomp/bin` directory, which you can add to your `$PATH`. You can also set an environment variable pointing to the standard library, e.g. `BSC_LIB=/path/to/jscomp/stdlib`, for ease of use.
-
-**Warning:** the built compiler is not relocatable out of box, don’t move it around unless you know what you're doing!
+See this for details https://github.com/BuckleScript/bucklescript/blob/master/CONTRIBUTING.md#setup
 
 ## Troubleshooting
 
