@@ -10,7 +10,7 @@
             languagesDropDown.className = "hide";
           }
         });
-      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/bucklescript/bucklescript" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul class=""><li class="navListItem"><a class="navItem" href="/blog/2019/06/26/release-5-0-5">Release 5.0.5 and 6.0.2</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/05/21/ffi-overview">A high level overview of BuckleScript interop with Javascript</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/04/22/release-5-0-4">architecture changes in bs-platform v5.0.4 and v6.0.1</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/04/09/release-schedule">Release 5.0.1</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/03/31/release-6-0">bs-platform release v6.0+dev</a></li></ul></div></div></section></div><script>
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/bucklescript/bucklescript" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul class=""><li class="navListItem"><a class="navItem" href="/blog/2019/08/12/release-5-10-0">What&#x27;s new in release 5.1.0</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/06/26/release-5-0-5">Release 5.0.5 and 6.0.2</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/05/21/ffi-overview">A high level overview of BuckleScript interop with Javascript</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/04/22/release-5-0-4">architecture changes in bs-platform v5.0.4 and v6.0.1</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/04/09/release-schedule">Release 5.0.1</a></li></ul></div></div></section></div><script>
             var coll = document.getElementsByClassName('collapsible');
             var checkActiveCategory = true;
             for (var i = 0; i < coll.length; i++) {
@@ -66,7 +66,74 @@
                 };
               }
             });
-        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="posts"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2019/06/26/release-5-0-5">Release 5.0.5 and 6.0.2</a></h1><p class="post-meta">June 26, 2019</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p><code>bs-platform</code> 5.0.5 (for OCaml 4.02.3) and 6.0.2 (for OCaml 4.06.1) is released.</p>
+        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="posts"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2019/08/12/release-5-10-0">What&#x27;s new in release 5.1.0</a></h1><p class="post-meta">August 12, 2019</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p><code>bs-platform</code> 5.1.0 (for OCaml 4.02.3) and 6.1.0 (for OCaml 4.06.1) is ready for testing.</p>
+<p>You can install it via <code>npm i -g bs-platform@5.1.0-dev.6</code> (or <code>npm i -g bs-platform@6.1.0-dev.6</code>).</p>
+<p>A detailed list of changes is available <a href="https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#510">here</a></p>
+<p>Some feature enhancements are described as follows:</p>
+<h2><a class="anchor" aria-hidden="true" id="introducing-bsc-to-public"></a><a href="#introducing-bsc-to-public" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Introducing <code>bsc</code> to public</h2>
+<p><code>bsc</code> is the underlying compiler which is invoked by <code>bsb</code>. In this release we simplified it a bit so that it can be used directly by customers for simple tasks. It is available after you have <code>bs-platform</code> installed.</p>
+<p>Suppose you have a file called <code>test.re</code>:</p>
+<pre><code class="hljs"><span class="hljs-keyword">let</span> rec fib (n) = switch n {
+    | <span class="hljs-type">0</span> | <span class="hljs-type">1</span> =&gt; <span class="hljs-number">1</span>;
+    | <span class="hljs-type">n</span> =&gt; fib (n <span class="hljs-number">-1</span>) + fib(n<span class="hljs-number">-2</span>);
+};
+Js.log (fib (<span class="hljs-number">0</span>));
+</code></pre>
+<p>You can compile it directly via <code>bsc test.re</code>, producing the following output:</p>
+<pre><code class="hljs">bucklescript.github.io&gt;bsc test.re
+<span class="hljs-comment">// Generated by BUCKLESCRIPT, PLEASE EDIT WITH CARE</span>
+<span class="hljs-meta">'use strict'</span>;
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fib</span>(<span class="hljs-params">n</span>) </span>{
+  <span class="hljs-keyword">if</span> (n === <span class="hljs-number">0</span> || n === <span class="hljs-number">1</span>) {
+    <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+  } <span class="hljs-keyword">else</span> {
+    <span class="hljs-keyword">return</span> fib(n - <span class="hljs-number">1</span> | <span class="hljs-number">0</span>) + fib(n - <span class="hljs-number">2</span> | <span class="hljs-number">0</span>) | <span class="hljs-number">0</span>;
+  }
+}
+<span class="hljs-built_in">console</span>.log(fib(<span class="hljs-number">0</span>));
+exports.fib = fib;
+<span class="hljs-comment">/*  Not a pure module */</span>
+</code></pre>
+<p>You can also get the inferred signature directly via <code>bsc -i test.re</code></p>
+<pre><code class="hljs"><span class="hljs-keyword">let</span> fib: <span class="hljs-built_in">int</span> =&gt; <span class="hljs-built_in">int</span>;
+</code></pre>
+<p>Note: <code>bsc</code> supports vanilla OCaml syntax as well, this is only recommended for toying around, for serious development, <code>bsb</code> is recommended.</p>
+<h2><a class="anchor" aria-hidden="true" id="bstracing-to-visualize-build-profile"></a><a href="#bstracing-to-visualize-build-profile" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>bstracing</code> to visualize build profile</h2>
+<p>After you finish the build process, you can run <code>bstracing</code> directly. This generates a data file called <code>tracing_${hour}_${minute}_${second}.json</code> which can be loaded into chrome via <code>chrome://tracing</code>.</p>
+<p>Below is a profile image that shows the tracing graph for a large project:</p>
+<p><img src="/img/profile-1.png"></p>
+<p>And you can zoom-in to see more details:</p>
+<p><img src="/img/profile-2.png"></p>
+<h2><a class="anchor" aria-hidden="true" id="support-of-ppx-with-arguments"></a><a href="#support-of-ppx-with-arguments" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Support of ppx with arguments</h2>
+<p>We extended the schema to support ppx with arguments:</p>
+<pre><code class="hljs css language-js">        <span class="hljs-string">"ppx-specs"</span>: {
+            <span class="hljs-string">"type"</span>: <span class="hljs-string">"array"</span>,
+            <span class="hljs-string">"items"</span>: {
+                <span class="hljs-string">"oneOf"</span> : [
+                    {
+                        <span class="hljs-string">"type"</span>: <span class="hljs-string">"string"</span> <span class="hljs-comment">// single command</span>
+                    },
+                    {
+                        <span class="hljs-string">"type"</span> : <span class="hljs-string">"array"</span>, <span class="hljs-comment">// command with args</span>
+                        <span class="hljs-string">"items"</span>: {
+                            <span class="hljs-string">"type"</span> : <span class="hljs-string">"string"</span> 
+                        }
+                    }
+                ]
+            }
+        },
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="respect-node_path-when-resolving-dependent-modules"></a><a href="#respect-node_path-when-resolving-dependent-modules" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Respect NODE_PATH when resolving dependent modules</h2>
+<p>Previously, <code>bsb</code> was tied to npm package structures by searching <code>node_modules</code>. In this release, <code>bsb</code> also tries to search paths listed in <code>NODE_PATH</code> so that <code>bsb</code> is no longer tied to the npm or yarn package manager.</p>
+<h2><a class="anchor" aria-hidden="true" id="build-performance-improvement"></a><a href="#build-performance-improvement" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Build performance improvement</h2>
+<p>Yes, performance is increased with each release!</p>
+<p>Quite a lot of work was spent in house-keeping this release. We changed the internal data representation to a more compact format. Here is the result of using <code>bstracing</code> to show a comparison of clean building a large project around (2 * 5 * 5 * 5 * 5 = 1250 files):</p>
+<p>Version 5.0.6 (around 4.8s)</p>
+<p><img src="/img/profile-5.png"></p>
+<p>Version 5.1.0 (around 4.2s)</p>
+<p><img src="/img/profile-4.png"></p>
+<p>Happy hacking!</p>
+</span></div></article></div><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2019/06/26/release-5-0-5">Release 5.0.5 and 6.0.2</a></h1><p class="post-meta">June 26, 2019</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p><code>bs-platform</code> 5.0.5 (for OCaml 4.02.3) and 6.0.2 (for OCaml 4.06.1) is released.</p>
 <p>A detailed list of changes is available <a href="https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#505">here</a></p>
 <p>It has some critical bug fixes that we suggest users to upgrade.</p>
 <p>Some feature enhancement is described as below:</p>
@@ -359,67 +426,6 @@ We will update the contribution guide once it gets stable.</p>
 <p>Separate the compiler from stdlib may also help draw the contribution to the stdlib/belt library.</p>
 <h4><a class="anchor" aria-hidden="true" id="improving-the-usability-of-bsb"></a><a href="#improving-the-usability-of-bsb" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Improving the usability of bsb</h4>
 <p>Currently the bsb is restricted by the npm directory layout, the generated JS artifacts is also restricted by it, we will see if we can relocate the JS artifacts or provide more flexibility for users.</p>
-</span></div></article></div><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2018/11/13/arity-zero">A change of undefined behavior in BuckleScript 4.0.7</a></h1><p class="post-meta">November 13, 2018</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p>In the latest BuckleScript release, we introduced a minor change in the codegen which broken some user libraries. Note this change only broke the code in the FFI boundary(the interop between JS).</p>
-<p>In the early days of BuckleScript, there is no built-in uncurried calling convention support, since OCaml is a curried language, which means every function has arity one, so there is no way to express that a function has arity zero, this makes some interop challenging. In the mocha unit test library, it expects its callback to be function of arity zero.</p>
-<p>To work around this issue, before this release, we did a small codegen optimization, for a function of type <code>unit -&gt; unit</code>, if its argument is not used, we remove its argument in the output.</p>
-<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> f : <span class="hljs-built_in">unit</span> -&gt; <span class="hljs-built_in">int</span> = <span class="hljs-keyword">fun</span> <span class="hljs-literal">()</span> -&gt; <span class="hljs-number">3</span> 
-<span class="hljs-keyword">let</span> f_used : <span class="hljs-built_in">unit</span> -&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-keyword">fun</span> x -&gt; <span class="hljs-type">Js</span>.log x  
-</code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> f: unit =&gt; int = () =&gt; <span class="hljs-number">3</span>;
-<span class="hljs-keyword">let</span> f_used: unit =&gt; unit = x =&gt; <span class="hljs-module-identifier">Js</span>.log(x);
-</code></pre>
-<p>Output JS prior to v4.0.7</p>
-<pre><code class="hljs css language-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f</span> (<span class="hljs-params"></span>)</span>{
-    <span class="hljs-keyword">return</span> <span class="hljs-number">3</span>
-}
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f_used</span> (<span class="hljs-params">x</span>)</span>{
-    <span class="hljs-built_in">console</span>.log(x)
-}
-</code></pre>
-<p>To make this hack work, in the application side,
-for a curried function application, we treat the function
-of arity 0 and arity 1 in the same way, this still works since
-curried function application could only happen on the ocaml function.</p>
-<p>This trick is unintuitive, it makes code generated less predictable and it is not relevant any more, since
-we added native uncurried calling convention support later.</p>
-<p>Therefore, we generate JS code in a more consistent style in this release:</p>
-<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> f : <span class="hljs-built_in">unit</span> -&gt; <span class="hljs-built_in">int</span> = <span class="hljs-keyword">fun</span> <span class="hljs-literal">()</span> -&gt; <span class="hljs-number">3</span> 
-</code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> f: unit =&gt; int = () =&gt; <span class="hljs-number">3</span>;
-</code></pre>
-<pre><code class="hljs css language-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f</span> (<span class="hljs-params">param</span>)</span>{
-    <span class="hljs-keyword">return</span> <span class="hljs-number">3</span>
-}
-</code></pre>
-<p>So in your FFI code, if you have a callback which is expected to be of arity zero, use <code>unit -&gt; unit [@bs]</code> or <code>unit -&gt; unit [@bs.uncurry]</code>, it is 100% correct. Note our previous trick will only make <code>unit -&gt; unit</code> work most time, but it can not provide any guarantee.</p>
-<p>Since we removed the trick, the curried runtime does not treat function of arity 0 and arity 1 in the same way, so if you have code like this</p>
-<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> f : <span class="hljs-built_in">unit</span> -&gt; <span class="hljs-built_in">int</span> = [%bs.raw {|<span class="hljs-keyword">function</span> <span class="hljs-literal">()</span> {
-    return <span class="hljs-number">3</span>
-}|}]
-</code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> f: unit =&gt; int = <span class="hljs-attribute">[%bs.raw {|function () {
-  return 3
-}|}]</span>;
-</code></pre>
-<p>It is not correct any more, the fix would be</p>
-<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> f : <span class="hljs-built_in">unit</span> -&gt; <span class="hljs-built_in">int</span> = [%bs.raw{|<span class="hljs-keyword">function</span>(param){
-    return <span class="hljs-number">3</span>
-}|}]
-</code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> f: unit =&gt; int = <span class="hljs-attribute">[%bs.raw {|function(param) {
-  return 3
-}|}]</span>;
-</code></pre>
-<p>Or</p>
-<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> f : <span class="hljs-built_in">unit</span> -&gt; <span class="hljs-built_in">int</span> [@bs] = [%bs.raw{|<span class="hljs-keyword">function</span><span class="hljs-literal">()</span>{
-    return <span class="hljs-number">3</span>
-}|}]
-</code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> f: (. unit) =&gt; int = <span class="hljs-attribute">[%bs.raw {|function() {
-  return 3
-}|}]</span>;
-</code></pre>
-<p>FFI is a double edge sword, it is a must have to ship your product, yet it is tricky, and there may be some undefined behavior you rely on but don't recognize, it is encouarged to always test your FFI in the boundary.</p>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-next" href="/blog/page2/">Next →</a></div></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script>window.foo = new Pjax({
           areas: [
             // try to use the first query.

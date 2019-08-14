@@ -10,7 +10,7 @@
             languagesDropDown.className = "hide";
           }
         });
-      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/bucklescript/bucklescript" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul class=""><li class="navListItem"><a class="navItem" href="/blog/2019/06/26/release-5-0-5">Release 5.0.5 and 6.0.2</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/05/21/ffi-overview">A high level overview of BuckleScript interop with Javascript</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/04/22/release-5-0-4">architecture changes in bs-platform v5.0.4 and v6.0.1</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/04/09/release-schedule">Release 5.0.1</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/03/31/release-6-0">bs-platform release v6.0+dev</a></li></ul></div></div></section></div><script>
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/bucklescript/bucklescript" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul class=""><li class="navListItem"><a class="navItem" href="/blog/2019/08/12/release-5-10-0">What&#x27;s new in release 5.1.0</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/06/26/release-5-0-5">Release 5.0.5 and 6.0.2</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/05/21/ffi-overview">A high level overview of BuckleScript interop with Javascript</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/04/22/release-5-0-4">architecture changes in bs-platform v5.0.4 and v6.0.1</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/04/09/release-schedule">Release 5.0.1</a></li></ul></div></div></section></div><script>
             var coll = document.getElementsByClassName('collapsible');
             var checkActiveCategory = true;
             for (var i = 0; i < coll.length; i++) {
@@ -66,7 +66,68 @@
                 };
               }
             });
-        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="posts"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2018/07/17/release-4-0-0II">BuckleScript 4.0.0 (Part Two)</a></h1><p class="post-meta">July 17, 2018</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p><code>bs-platform</code> 4.0.0 introduces a new runtime representation for optionals.</p>
+        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="posts"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2018/11/13/arity-zero">A change of undefined behavior in BuckleScript 4.0.7</a></h1><p class="post-meta">November 13, 2018</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p>In the latest BuckleScript release, we introduced a minor change in the codegen which broken some user libraries. Note this change only broke the code in the FFI boundary(the interop between JS).</p>
+<p>In the early days of BuckleScript, there is no built-in uncurried calling convention support, since OCaml is a curried language, which means every function has arity one, so there is no way to express that a function has arity zero, this makes some interop challenging. In the mocha unit test library, it expects its callback to be function of arity zero.</p>
+<p>To work around this issue, before this release, we did a small codegen optimization, for a function of type <code>unit -&gt; unit</code>, if its argument is not used, we remove its argument in the output.</p>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> f : <span class="hljs-built_in">unit</span> -&gt; <span class="hljs-built_in">int</span> = <span class="hljs-keyword">fun</span> <span class="hljs-literal">()</span> -&gt; <span class="hljs-number">3</span> 
+<span class="hljs-keyword">let</span> f_used : <span class="hljs-built_in">unit</span> -&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-keyword">fun</span> x -&gt; <span class="hljs-type">Js</span>.log x  
+</code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> f: unit =&gt; int = () =&gt; <span class="hljs-number">3</span>;
+<span class="hljs-keyword">let</span> f_used: unit =&gt; unit = x =&gt; <span class="hljs-module-identifier">Js</span>.log(x);
+</code></pre>
+<p>Output JS prior to v4.0.7</p>
+<pre><code class="hljs css language-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f</span> (<span class="hljs-params"></span>)</span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-number">3</span>
+}
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f_used</span> (<span class="hljs-params">x</span>)</span>{
+    <span class="hljs-built_in">console</span>.log(x)
+}
+</code></pre>
+<p>To make this hack work, in the application side,
+for a curried function application, we treat the function
+of arity 0 and arity 1 in the same way, this still works since
+curried function application could only happen on the ocaml function.</p>
+<p>This trick is unintuitive, it makes code generated less predictable and it is not relevant any more, since
+we added native uncurried calling convention support later.</p>
+<p>Therefore, we generate JS code in a more consistent style in this release:</p>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> f : <span class="hljs-built_in">unit</span> -&gt; <span class="hljs-built_in">int</span> = <span class="hljs-keyword">fun</span> <span class="hljs-literal">()</span> -&gt; <span class="hljs-number">3</span> 
+</code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> f: unit =&gt; int = () =&gt; <span class="hljs-number">3</span>;
+</code></pre>
+<pre><code class="hljs css language-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f</span> (<span class="hljs-params">param</span>)</span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-number">3</span>
+}
+</code></pre>
+<p>So in your FFI code, if you have a callback which is expected to be of arity zero, use <code>unit -&gt; unit [@bs]</code> or <code>unit -&gt; unit [@bs.uncurry]</code>, it is 100% correct. Note our previous trick will only make <code>unit -&gt; unit</code> work most time, but it can not provide any guarantee.</p>
+<p>Since we removed the trick, the curried runtime does not treat function of arity 0 and arity 1 in the same way, so if you have code like this</p>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> f : <span class="hljs-built_in">unit</span> -&gt; <span class="hljs-built_in">int</span> = [%bs.raw {|<span class="hljs-keyword">function</span> <span class="hljs-literal">()</span> {
+    return <span class="hljs-number">3</span>
+}|}]
+</code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> f: unit =&gt; int = <span class="hljs-attribute">[%bs.raw {|function () {
+  return 3
+}|}]</span>;
+</code></pre>
+<p>It is not correct any more, the fix would be</p>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> f : <span class="hljs-built_in">unit</span> -&gt; <span class="hljs-built_in">int</span> = [%bs.raw{|<span class="hljs-keyword">function</span>(param){
+    return <span class="hljs-number">3</span>
+}|}]
+</code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> f: unit =&gt; int = <span class="hljs-attribute">[%bs.raw {|function(param) {
+  return 3
+}|}]</span>;
+</code></pre>
+<p>Or</p>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> f : <span class="hljs-built_in">unit</span> -&gt; <span class="hljs-built_in">int</span> [@bs] = [%bs.raw{|<span class="hljs-keyword">function</span><span class="hljs-literal">()</span>{
+    return <span class="hljs-number">3</span>
+}|}]
+</code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> f: (. unit) =&gt; int = <span class="hljs-attribute">[%bs.raw {|function() {
+  return 3
+}|}]</span>;
+</code></pre>
+<p>FFI is a double edge sword, it is a must have to ship your product, yet it is tricky, and there may be some undefined behavior you rely on but don't recognize, it is encouarged to always test your FFI in the boundary.</p>
+</span></div></article></div><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2018/07/17/release-4-0-0II">BuckleScript 4.0.0 (Part Two)</a></h1><p class="post-meta">July 17, 2018</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p><code>bs-platform</code> 4.0.0 introduces a new runtime representation for optionals.</p>
 <p>While beforehand <code>None</code> was represented at runtime as <code>0</code> and <code>Some(&quot;hello&quot;)</code> as an array <code>[&quot;hello&quot;]</code>, the new representation tries to unbox optionals as much as possible.</p>
 <p>Now <code>None</code> is represented as <code>undefined</code> and <code>Some(&quot;hello&quot;)</code> simply as <code>&quot;hello&quot;</code>.</p>
 <p>Generally speaking, <code>Some(v)</code> is represented as <code>v</code>, i.e. unboxed. The only exception is when <code>v</code> itself is <code>None</code> or <code>Some(...(Some(None))</code>, in which case a special boxed representation is used.</p>
@@ -210,19 +271,7 @@ http-server <span class="hljs-comment"># start a http server</span>
 <p>Enjoy and have a nice weekend!</p>
 </span></div></article></div><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2017/10/09/release-1-7-5">BuckleScript 1.7.5</a></h1><p class="post-meta">October 9, 2017</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p>Since BuckleScript has grown and developed its own community, it is moving to its own GitHub organization. This will allow the community to continue to grow and to set the future direction of the project.</p>
 <p>At the same time, we are truly thankful for the support of Bloomberg who allowed this amazing project to happen!</p>
-</span></div><div class="read-more"><a class="button" href="/blog/2017/10/09/release-1-7-5">Read More</a></div></article></div><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2017/10/08/release-1-7-4">BuckleScript 1.7.4</a></h1><p class="post-meta">October 8, 2017</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p>Full changes: <a href="https://github.com/bucklescript/bucklescript/blob/master/Changes.md#bucklescript-174may-24-2017">https://github.com/bucklescript/bucklescript/blob/master/Changes.md#bucklescript-174may-24-2017</a></p>
-<p>Main highlights:</p>
-<ol>
-<li>Create a BuckleScript project and build in a single line(works on all platforms with zero dependencies including Windows)</li>
-</ol>
-<pre><code class="hljs css language-sh">npm install -g bs-platform &amp;&amp; bsb -init hello &amp;&amp; <span class="hljs-built_in">cd</span> hello &amp;&amp; npm run build
-</code></pre>
-<p><a href="http://bucklescript.github.io/bucklescript/Manual.html#_using_existing_templates_since_1_7_4">http://bucklescript.github.io/bucklescript/Manual.html#_using_existing_templates_since_1_7_4</a></p>
-<ol start="2">
-<li>Adding several modules to Js namespace, including Option, Result, List and Vector.
-Note it is still work in progress, but these libraries are optimized for both performance and size, they can provide an even smaller code size than current case</li>
-</ol>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev" href="/blog/">← Prev</a><a class="docs-next" href="/blog/page3/">Next →</a></div></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script>window.foo = new Pjax({
+</span></div><div class="read-more"><a class="button" href="/blog/2017/10/09/release-1-7-5">Read More</a></div></article></div><div class="docs-prevnext"><a class="docs-prev" href="/blog/">← Prev</a><a class="docs-next" href="/blog/page3/">Next →</a></div></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script>window.foo = new Pjax({
           areas: [
             // try to use the first query.
             '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',

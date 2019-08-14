@@ -4,7 +4,7 @@
         <title>BuckleScript Blog</title>
         <link>https://bucklescript.github.io/blog</link>
         <description>The best place to stay up-to-date with the latest BuckleScript news and events.</description>
-        <lastBuildDate>Wed, 26 Jun 2019 06:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 12 Aug 2019 06:00:00 GMT</lastBuildDate>
         <docs>http://blogs.law.harvard.edu/tech/rss</docs>
         <generator>Feed for Node.js</generator>
         <image>
@@ -12,6 +12,13 @@
             <url>https://bucklescript.github.io/img/logos/bucklescript.svg</url>
             <link>https://bucklescript.github.io/blog</link>
         </image>
+        <item>
+            <title><![CDATA[What's new in release 5.1.0]]></title>
+            <link>https://bucklescript.github.io/blog/2019/08/12/release-5-10-0.html</link>
+            <guid>https://bucklescript.github.io/blog/2019/08/12/release-5-10-0.html</guid>
+            <pubDate>Mon, 12 Aug 2019 06:00:00 GMT</pubDate>
+            <description><![CDATA[<p><code>bs-platform</code> 5.1.0 (for OCaml 4.02.3) and 6.1.0 (for OCaml 4.06.1) is ready for testing.</p> <p>You can install it via <code>npm i -g bs-platform@5.1.0-dev.6</code> (or <code>npm i -g bs-platform@6.1.0-dev.6</code>).</p> <p>A detailed list of changes is available <a href="https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#510">here</a></p> <p>Some feature enhanceme...</p>]]></description>
+        </item>
         <item>
             <title><![CDATA[Release 5.0.5 and 6.0.2]]></title>
             <link>https://bucklescript.github.io/blog/2019/06/26/release-5-0-5.html</link>
