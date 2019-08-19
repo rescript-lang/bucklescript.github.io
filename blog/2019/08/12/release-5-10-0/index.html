@@ -67,7 +67,7 @@
               }
             });
         </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="lonePost"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2019/08/12/release-5-10-0">What&#x27;s new in release 5.1.0</a></h1><p class="post-meta">August 12, 2019</p><div class="authorBlock"></div></header><div><span><p><code>bs-platform</code> 5.1.0 (for OCaml 4.02.3) and 6.1.0 (for OCaml 4.06.1) is ready for testing.</p>
-<p>You can install it via <code>npm i -g bs-platform@5.1.0-dev.6</code> (or <code>npm i -g bs-platform@6.1.0-dev.6</code>).</p>
+<p>You can install it via <code>npm i -g bs-platform@5.1.0</code> (or <code>npm i -g bs-platform@6.1.0-dev.6</code>).</p>
 <p>A detailed list of changes is available <a href="https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#510">here</a></p>
 <p>Some feature enhancements are described as follows:</p>
 <h2><a class="anchor" aria-hidden="true" id="introducing-bsc-to-public"></a><a href="#introducing-bsc-to-public" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Introducing <code>bsc</code> to public</h2>
@@ -96,6 +96,10 @@ exports.fib = fib;
 </code></pre>
 <p>You can also get the inferred signature directly via <code>bsc -i test.re</code></p>
 <pre><code class="hljs"><span class="hljs-keyword">let</span> fib: <span class="hljs-built_in">int</span> =&gt; <span class="hljs-built_in">int</span>;
+</code></pre>
+<p>Or even better, you can do a one liner in bsc, via <code>-e</code> option.</p>
+<pre><code class="hljs">bucklescript&gt;bsc -i -e <span class="hljs-symbol">'let</span> id = x =&gt; x'
+<span class="hljs-keyword">let</span> id: <span class="hljs-symbol">'a</span> =&gt; <span class="hljs-symbol">'a</span>;
 </code></pre>
 <p>Note: <code>bsc</code> supports vanilla OCaml syntax as well, this is only recommended for toying around, for serious development, <code>bsb</code> is recommended.</p>
 <h2><a class="anchor" aria-hidden="true" id="bstracing-to-visualize-build-profile"></a><a href="#bstracing-to-visualize-build-profile" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>bstracing</code> to visualize build profile</h2>

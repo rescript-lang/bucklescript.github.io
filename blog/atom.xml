@@ -13,7 +13,7 @@
         <link href="https://bucklescript.github.io/blog/2019/08/12/release-5-10-0.html">
         </link>
         <updated>2019-08-12T06:00:00Z</updated>
-        <summary type="html"><![CDATA[<p><code>bs-platform</code> 5.1.0 (for OCaml 4.02.3) and 6.1.0 (for OCaml 4.06.1) is ready for testing.</p> <p>You can install it via <code>npm i -g bs-platform@5.1.0-dev.6</code> (or <code>npm i -g bs-platform@6.1.0-dev.6</code>).</p> <p>A detailed list of changes is available <a href="https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#510">here</a></p> <p>Some feature enhanceme...</p>]]></summary>
+        <summary type="html"><![CDATA[<p><code>bs-platform</code> 5.1.0 (for OCaml 4.02.3) and 6.1.0 (for OCaml 4.06.1) is ready for testing.</p> <p>You can install it via <code>npm i -g bs-platform@5.1.0</code> (or <code>npm i -g bs-platform@6.1.0-dev.6</code>).</p> <p>A detailed list of changes is available <a href="https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#510">here</a></p> <p>Some feature enhancements ar...</p>]]></summary>
         <author>
         </author>
     </entry>
