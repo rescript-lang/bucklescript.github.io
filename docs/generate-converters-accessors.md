@@ -61,6 +61,39 @@ This is useful:
 - When you're passing the accessor function as a higher-order function (which plain variant constructors aren't).
 - When you'd like the JS side to use these values & functions opaquely and pass you back a variant constructor (since JS has no such thing).
 
+## Generate first-class accessors for record types.
+
+Do you find yourself typing something like this a lot?
+
+```reason
+type pet = {
+  name: string,
+};
+
+let pets = [{name: "bob"}, {name: "bob2"}];
+pets
+  |> List.map(pet => pet.name)
+  |> String.concat("&")
+  |> Js.log;
+```
+
+This call to map: `List.map(pet => pet.name)` could be a bit more concise. Wouldn't it be nice if it looked like this instead: `List.map(name)`?
+
+If we use `@bs.deriving accessors` on the record constructor, we can do just that. The decorator will generate a function matching the name of each field in the record which takes the record type, and returns the field type:
+
+```reason
+[@bs.deriving accessors]
+type pet = {
+  name: string,
+};
+
+let pets = [{name: "bob"}, {name: "bob2"}];
+pets
+  |> List.map(name)
+  |> String.concat("&")
+  |> Js.log;
+```
+
 ## Convert Between `Js.t` Object and Record
 
 Use `jsConverter`.
