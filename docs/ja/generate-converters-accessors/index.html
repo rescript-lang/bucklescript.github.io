@@ -112,6 +112,31 @@ exports.cancel = cancel;
 <li>When you're passing the accessor function as a higher-order function (which plain variant constructors aren't).</li>
 <li>When you'd like the JS side to use these values &amp; functions opaquely and pass you back a variant constructor (since JS has no such thing).</li>
 </ul>
+<h2><a class="anchor" aria-hidden="true" id="generate-first-class-accessors-for-record-types"></a><a href="#generate-first-class-accessors-for-record-types" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Generate first-class accessors for record types.</h2>
+<p>Do you find yourself typing something like this a lot?</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> pet = {
+  name: string,
+};
+
+<span class="hljs-keyword">let</span> pets = <span class="hljs-literal">[</span>{name: <span class="hljs-string">"bob"</span>}, {name: <span class="hljs-string">"bob2"</span>}<span class="hljs-literal">]</span>;
+pets
+  <span class="hljs-operator">|&gt;</span> <span class="hljs-module-identifier">List</span>.map(pet =&gt; pet.name)
+  <span class="hljs-operator">|&gt;</span> <span class="hljs-module-identifier">String</span>.concat(<span class="hljs-string">"&amp;"</span>)
+  <span class="hljs-operator">|&gt;</span> <span class="hljs-module-identifier">Js</span>.log;
+</code></pre>
+<p>This call to map: <code>List.map(pet =&gt; pet.name)</code> could be a bit more concise. Wouldn't it be nice if it looked like this instead: <code>List.map(name)</code>?</p>
+<p>If we use <code>@bs.deriving accessors</code> on the record constructor, we can do just that. The decorator will generate a function matching the name of each field in the record which takes the record type, and returns the field type:</p>
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.deriving accessors]</span>
+<span class="hljs-keyword">type</span> pet = {
+  name: string,
+};
+
+<span class="hljs-keyword">let</span> pets = <span class="hljs-literal">[</span>{name: <span class="hljs-string">"bob"</span>}, {name: <span class="hljs-string">"bob2"</span>}<span class="hljs-literal">]</span>;
+pets
+  <span class="hljs-operator">|&gt;</span> <span class="hljs-module-identifier">List</span>.map(name)
+  <span class="hljs-operator">|&gt;</span> <span class="hljs-module-identifier">String</span>.concat(<span class="hljs-string">"&amp;"</span>)
+  <span class="hljs-operator">|&gt;</span> <span class="hljs-module-identifier">Js</span>.log;
+</code></pre>
 <h2><a class="anchor" aria-hidden="true" id="convert-between-jst-object-and-record"></a><a href="#convert-between-jst-object-and-record" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Convert Between <code>Js.t</code> Object and Record</h2>
 <p>Use <code>jsConverter</code>.</p>
 <pre><code class="hljs css language-ocaml"><span class="hljs-keyword">type</span> coordinates = {
@@ -322,7 +347,7 @@ exports.cancel = cancel;
 <span class="hljs-keyword">let</span> kiwiString = fruitToJs(<span class="hljs-constructor">`Kiwi</span>); <span class="hljs-comment">/* "miniCoconut" */</span>
 </code></pre>
 <p>Deriving converters with abstract type through <code>newType</code> also still works.</p>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/ja/pipe-first"><span class="arrow-prev">← </span><span>Pipe First</span></a><a class="docs-next button" href="/docs/ja/better-data-structures-printing-debug-mode"><span>より良いデータ構造の出力 (デバッグモード)</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#functions-plain-values-for-variant">Functions &amp; Plain Values for Variant</a><ul class="toc-headings"><li><a href="#usage">Usage</a></li></ul></li><li><a href="#convert-between-jst-object-and-record">Convert Between <code>Js.t</code> Object and Record</a><ul class="toc-headings"><li><a href="#usage-1">Usage</a></li><li><a href="#more-safety">More Safety</a></li></ul></li><li><a href="#convert-between-js-integer-enum-and-bs-variant">Convert between JS Integer Enum and BS Variant</a><ul class="toc-headings"><li><a href="#usage-3">Usage</a></li><li><a href="#more-safety-1">More Safety</a></li></ul></li><li><a href="#convert-between-js-string-enum-and-bs-polymorphic-variant">Convert between JS String Enum and BS Polymorphic Variant</a><ul class="toc-headings"><li><a href="#usage-5">Usage</a></li></ul></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script>window.foo = new Pjax({
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/ja/pipe-first"><span class="arrow-prev">← </span><span>Pipe First</span></a><a class="docs-next button" href="/docs/ja/better-data-structures-printing-debug-mode"><span>より良いデータ構造の出力 (デバッグモード)</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#functions-plain-values-for-variant">Functions &amp; Plain Values for Variant</a><ul class="toc-headings"><li><a href="#usage">Usage</a></li></ul></li><li><a href="#generate-first-class-accessors-for-record-types">Generate first-class accessors for record types.</a></li><li><a href="#convert-between-jst-object-and-record">Convert Between <code>Js.t</code> Object and Record</a><ul class="toc-headings"><li><a href="#usage-1">Usage</a></li><li><a href="#more-safety">More Safety</a></li></ul></li><li><a href="#convert-between-js-integer-enum-and-bs-variant">Convert between JS Integer Enum and BS Variant</a><ul class="toc-headings"><li><a href="#usage-3">Usage</a></li><li><a href="#more-safety-1">More Safety</a></li></ul></li><li><a href="#convert-between-js-string-enum-and-bs-polymorphic-variant">Convert between JS String Enum and BS Polymorphic Variant</a><ul class="toc-headings"><li><a href="#usage-5">Usage</a></li></ul></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script>window.foo = new Pjax({
           areas: [
             // try to use the first query.
             '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
