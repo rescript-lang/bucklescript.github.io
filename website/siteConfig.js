@@ -56,6 +56,12 @@ const users = [
     infoLink: "https://appier.com",
     pinned: true
   },
+  {
+    caption: "Astrolabe Diagnostics",
+    image: "img/logos/astrolabe.svg",
+    infoLink: "http://astrolabediagnostics.com",
+    pinned: true
+  },
 ];
 
 const examples = [
