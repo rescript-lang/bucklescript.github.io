@@ -50,10 +50,14 @@ switch (Js.Dict.get(studentAges, "Joe")) {
 Output:
 
 ```js
+var Js_dict = require("./stdlib/js_dict.js");
+
 var myMap = { };
+
 myMap["Allison"] = 10;
 
-var match = student["Joe"];
+var match = Js_dict.get(student, "Joe");
+
 if (match !== undefined) {
   console.log("Joe is " + String(match));
 } else {
@@ -63,7 +67,7 @@ if (match !== undefined) {
 
 ### Design Decisions
 
-You can see that under the hood, a `Js.Dict` is simply backed by a JS object. The entire API uses nothing but ordinary BuckleScript `external`s, so the whole API disappears after compilation. There should be no mention of `Dict` anywhere in the generated output. Very convenient when converting files over from JS to BuckleScript.
+You can see that under the hood, a `Js.Dict` is simply backed by a JS object. The entire API uses nothing but ordinary BuckleScript `external`s and wrappers, so the whole API mostly disappears after compilation. It is very convenient when converting files over from JS to BuckleScript.
 
 ## Record Mode
 
