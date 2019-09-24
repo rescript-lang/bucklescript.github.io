@@ -75,7 +75,7 @@
 <p>Suppose you have an OCaml module which relies on an C primitive as below:</p>
 <pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> ff : <span class="hljs-built_in">int</span> -&gt; <span class="hljs-built_in">int</span> -&gt; <span class="hljs-built_in">int</span> = <span class="hljs-string">"caml_fancy_add"</span> 
 </code></pre>
-<pre><code class="hljs css language-reasonml"><span class="hljs-keyword">external</span> ff : (<span class="hljs-built_in">int</span>,<span class="hljs-built_in">int</span>) =&gt; <span class="hljs-built_in">int</span> = <span class="hljs-string">"caml_fancy_add"</span> ;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">external</span> ff : (int,int) =&gt; int = <span class="hljs-string">"caml_fancy_add"</span> ;
 </code></pre>
 <p><code>caml_fancy_add</code> is a C function for native code, now we can provide this support in a js files, what user needs to do is adding <code>caml_fancy_add</code> to a global variable like this</p>
 <pre><code class="hljs css language-js"><span class="hljs-comment">/**
@@ -94,7 +94,7 @@
 <p>For example</p>
 <pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> f : <span class="hljs-built_in">int</span> -&gt; <span class="hljs-built_in">int</span> = <span class="hljs-string">""</span> [@@bs.<span class="hljs-keyword">val</span>]
 </code></pre>
-<pre><code class="hljs css language-reasonml">[<span class="hljs-meta">@bs</span>.val] <span class="hljs-keyword">external</span> f : <span class="hljs-built_in">int</span> =&gt; <span class="hljs-built_in">int</span> = <span class="hljs-string">""</span> 
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.val]</span> <span class="hljs-keyword">external</span> f : int =&gt; int = <span class="hljs-string">""</span> 
 </code></pre>
 <p>Here the JS function name is inferred as <code>f</code> which is the same as OCaml function name.</p>
 <p>Such ffi declaration is fragile to refactoring when changing names of f, it will also change the name of js function name which is probably not what user expected.</p>

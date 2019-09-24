@@ -75,9 +75,9 @@
 <span class="hljs-keyword">external</span> set_name : textarea -&gt; <span class="hljs-built_in">string</span> -&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">"name"</span> [@@bs.set]
 <span class="hljs-keyword">external</span> get_name : textarea -&gt; <span class="hljs-built_in">string</span> = <span class="hljs-string">"name"</span> [@@bs.get]
 </code></pre>
-<pre><code class="hljs css language-reasonml"><span class="hljs-keyword">type</span> textarea;
-[<span class="hljs-meta">@bs</span>.set] external set_name: <span class="hljs-function">(<span class="hljs-params">textarea, <span class="hljs-built_in">string</span></span>) =&gt;</span> unit = <span class="hljs-string">"name"</span>;
-[<span class="hljs-meta">@bs</span>.get] external get_name: <span class="hljs-function"><span class="hljs-params">textarea</span> =&gt;</span> <span class="hljs-built_in">string</span> = <span class="hljs-string">"name"</span>;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> textarea;
+<span class="hljs-attribute">[@bs.set]</span> <span class="hljs-keyword">external</span> set_name: (textarea, string) =&gt; unit = <span class="hljs-string">"name"</span>;
+<span class="hljs-attribute">[@bs.get]</span> <span class="hljs-keyword">external</span> get_name: textarea =&gt; string = <span class="hljs-string">"name"</span>;
 
 </code></pre>
 <h1><a class="anchor" aria-hidden="true" id="dynamic-property-access"></a><a href="#dynamic-property-access" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Dynamic property access</h1>
@@ -93,20 +93,20 @@
   set i32arr <span class="hljs-number">0</span> <span class="hljs-number">42</span>;
   <span class="hljs-type">Js</span>.log (get i32arr <span class="hljs-number">0</span>)
 </code></pre>
-<pre><code class="hljs css language-reasonml">type t;
-[<span class="hljs-meta">@bs</span>.<span class="hljs-keyword">new</span>] <span class="hljs-keyword">external</span> create: <span class="hljs-built_in">int</span> =&gt; t = <span class="hljs-string">"Int32Array"</span>;
-[<span class="hljs-meta">@bs</span>.get_index] <span class="hljs-keyword">external</span> <span class="hljs-keyword">get</span>: (t, <span class="hljs-built_in">int</span>) =&gt; <span class="hljs-built_in">int</span> = <span class="hljs-string">""</span>;
-[<span class="hljs-meta">@bs</span>.set_index] <span class="hljs-keyword">external</span> <span class="hljs-keyword">set</span>: (t, <span class="hljs-built_in">int</span>, <span class="hljs-built_in">int</span>) =&gt; unit = <span class="hljs-string">""</span>;
-let i32arr = create(<span class="hljs-number">3</span>);
-i32arr-&gt;<span class="hljs-keyword">set</span>(<span class="hljs-number">0</span>, <span class="hljs-number">42</span>);
-Js.log(i32arr-&gt;<span class="hljs-keyword">get</span>(<span class="hljs-number">0</span>));
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> t;
+<span class="hljs-attribute">[@bs.new]</span> <span class="hljs-keyword">external</span> create: int =&gt; t = <span class="hljs-string">"Int32Array"</span>;
+<span class="hljs-attribute">[@bs.get_index]</span> <span class="hljs-keyword">external</span> get: (t, int) =&gt; int = <span class="hljs-string">""</span>;
+<span class="hljs-attribute">[@bs.set_index]</span> <span class="hljs-keyword">external</span> set: (t, int, int) =&gt; unit = <span class="hljs-string">""</span>;
+<span class="hljs-keyword">let</span> i32arr = create(<span class="hljs-number">3</span>);
+i32arr<span class="hljs-operator">-&gt;</span>set(<span class="hljs-number">0</span>, <span class="hljs-number">42</span>);
+<span class="hljs-module-identifier">Js</span>.log(i32arr<span class="hljs-operator">-&gt;</span>get(<span class="hljs-number">0</span>));
 </code></pre>
 <p>Output:</p>
 <pre><code class="hljs css language-js"><span class="hljs-keyword">var</span> i32arr = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Int32Array</span>(<span class="hljs-number">3</span>);
 i32arr[<span class="hljs-number">0</span>] = <span class="hljs-number">42</span>;
 <span class="hljs-built_in">console</span>.log(i32arr[<span class="hljs-number">0</span>]);
 </code></pre>
-</span></div></article></div><div class="docLastUpdate"><em>Last updated on 2019-6-20</em></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/en/function"><span class="arrow-prev">← </span><span>Function</span></a><a class="docs-next button" href="/docs/en/return-value-wrapping"><span>Return value wrapping</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"></nav></div><span><script src="/js/redirectBlog.js"></script><script>window.foo = new Pjax({
+</span></div></article></div><div class="docLastUpdate"><em>Last updated on 2019-9-24</em></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/en/function"><span class="arrow-prev">← </span><span>Function</span></a><a class="docs-next button" href="/docs/en/return-value-wrapping"><span>Return value wrapping</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"></nav></div><span><script src="/js/redirectBlog.js"></script><script>window.foo = new Pjax({
           areas: [
             // try to use the first query.
             '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',

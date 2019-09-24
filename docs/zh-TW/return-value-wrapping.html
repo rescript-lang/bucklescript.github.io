@@ -75,7 +75,7 @@
 <li><p>More idiomatic OCaml code for users to consume the FFI.</p></li>
 </ul>
 <p>Below is a contrived core example:</p>
-<pre><code class="hljs css language-reasonml"><span class="hljs-keyword">type</span> element;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> element;
 <span class="hljs-keyword">type</span> dom;
 <span class="hljs-attribute">[@bs.send]</span> <span class="hljs-attribute">[@bs.return nullable]</span>
 <span class="hljs-keyword">external</span> getElementById: (dom, string) =&gt; option(element) = <span class="hljs-string">"getElementById"</span>;
