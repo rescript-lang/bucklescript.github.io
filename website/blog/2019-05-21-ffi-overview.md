@@ -36,7 +36,7 @@ let getSafe : int array -> int -> int = fun%raw a b -> {|
 
 let v = getSafe [|1;2;3|] (-1)
 ```
-```reasonml
+```reason
 let getSafe: (array(int), int) => int = [%raw
   (a, b) => {|
 	if (b>=0 && b < a.length) {
@@ -99,7 +99,7 @@ let () = setDate date 3.
 let d = getDate date
 ```
 
-```reasonml
+```reason
 type date;
 
 [@bs.new]
@@ -146,7 +146,7 @@ let () = setDate date 3.
 let d = getDate date
 ```
 
-```reasonml
+```reason
 type date;
 let fromFloat: float => date = [%raw d => {|return new Date(d)|}];
 let getDate: date => float = [%raw d => {|return d.getDate()|}];

@@ -14,7 +14,7 @@ external set_name : textarea -> string -> unit = "name" [@@bs.set]
 external get_name : textarea -> string = "name" [@@bs.get]
 ```
 
-```reasonml
+```reason
 type textarea;
 [@bs.set] external set_name: (textarea, string) => unit = "name";
 [@bs.get] external get_name: textarea => string = "name";
@@ -39,7 +39,7 @@ let _ =
   Js.log (get i32arr 0)
 ```
 
-```reasonml
+```reason
 type t;
 [@bs.new] external create: int => t = "Int32Array";
 [@bs.get_index] external get: (t, int) => int = "";

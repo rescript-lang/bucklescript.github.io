@@ -13,7 +13,7 @@ So we introduced auto coercion for return values to gain two benefits:
 
 Below is a contrived core example:
 
-```reasonml
+```reason
 type element;
 type dom;
 [@bs.send] [@bs.return nullable]
