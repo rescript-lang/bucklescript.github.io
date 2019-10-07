@@ -13,13 +13,14 @@
 <url> <loc>https://bucklescript.github.io/blog/2019/04/09/release-schedule</loc> <changefreq>weekly</changefreq> <priority>0.3</priority> </url>
 <url> <loc>https://bucklescript.github.io/blog/2019/03/31/release-6-0</loc> <changefreq>weekly</changefreq> <priority>0.3</priority> </url>
 <url> <loc>https://bucklescript.github.io/blog/2019/03/21/release-5-0</loc> <changefreq>weekly</changefreq> <priority>0.3</priority> </url>
+<url> <loc>https://bucklescript.github.io/blog/2019/01/11/scalable</loc> <changefreq>weekly</changefreq> <priority>0.3</priority> </url>
 <url> <loc>https://bucklescript.github.io/blog/2019/01/07/release-4-0-17</loc> <changefreq>weekly</changefreq> <priority>0.3</priority> </url>
 <url> <loc>https://bucklescript.github.io/blog/2018/12/05/release-4-0-8</loc> <changefreq>weekly</changefreq> <priority>0.3</priority> </url>
 <url> <loc>https://bucklescript.github.io/blog/2018/11/19/next-half</loc> <changefreq>weekly</changefreq> <priority>0.3</priority> </url>
 <url> <loc>https://bucklescript.github.io/blog/2018/11/13/arity-zero</loc> <changefreq>weekly</changefreq> <priority>0.3</priority> </url>
-<url> <loc>https://bucklescript.github.io/blog/2019/03/1/feature-preview</loc> <changefreq>weekly</changefreq> <priority>0.3</priority> </url>
-<url> <loc>https://bucklescript.github.io/blog/2018/07/17/release-4-0-0II</loc> <changefreq>weekly</changefreq> <priority>0.3</priority> </url>
 <url> <loc>https://bucklescript.github.io/blog/2018/07/17/release-4-0-0</loc> <changefreq>weekly</changefreq> <priority>0.3</priority> </url>
+<url> <loc>https://bucklescript.github.io/blog/2018/07/17/release-4-0-0II</loc> <changefreq>weekly</changefreq> <priority>0.3</priority> </url>
+<url> <loc>https://bucklescript.github.io/blog/2019/03/1/feature-preview</loc> <changefreq>weekly</changefreq> <priority>0.3</priority> </url>
 <url> <loc>https://bucklescript.github.io/blog/2018/05/23/release-3-1-4</loc> <changefreq>weekly</changefreq> <priority>0.3</priority> </url>
 <url> <loc>https://bucklescript.github.io/blog/2018/05/21/release-3-1-0</loc> <changefreq>weekly</changefreq> <priority>0.3</priority> </url>
 <url> <loc>https://bucklescript.github.io/blog/2018/04/16/release-3-0-0</loc> <changefreq>weekly</changefreq> <priority>0.3</priority> </url>

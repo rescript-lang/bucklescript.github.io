@@ -69,6 +69,13 @@
             <description><![CDATA[<p><code>bs-platform@5.0.0</code> is released! There are quite a few bug fixes in this release and refmt is synced up, a detailed list of changes is available <a href="https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#500">here</a>.</p> <p>Several new features are introduced in this release:</p> <ul> <li><p>first class <code>bs.variadic</code> support, documented <a href="https://bucklescript.github.io/blog/2019/03/1/feature-preview">her...</a></p></li></ul>]]></description>
         </item>
         <item>
+            <title><![CDATA[In search of lightning feedback loop in a large codebase]]></title>
+            <link>https://bucklescript.github.io/blog/2019/01/11/scalable.html</link>
+            <guid>https://bucklescript.github.io/blog/2019/01/11/scalable.html</guid>
+            <pubDate>Fri, 11 Jan 2019 06:00:00 GMT</pubDate>
+            <description><![CDATA[<p>As software developers, when we touch a codebase, we want the edit-compile cycle, to be as short as possible. Studies show that feedback loop less than 1s, or 100ms will prevent devleopers getting distracted.</p> <p>This seems to be possible in a small proj...</p>]]></description>
+        </item>
+        <item>
             <link>https://bucklescript.github.io/blog/2019/01/07/release-4-0-17.html</link>
             <guid>https://bucklescript.github.io/blog/2019/01/07/release-4-0-17.html</guid>
             <pubDate>Mon, 07 Jan 2019 06:00:00 GMT</pubDate>
@@ -96,11 +103,11 @@
             <description><![CDATA[<p>In the latest BuckleScript release, we introduced a minor change in the codegen which broken some user libraries. Note this change only broke the code in the FFI boundary(the interop between JS).</p> <p>In the early days of BuckleScript, there is no built-i...</p>]]></description>
         </item>
         <item>
-            <title><![CDATA[First-class `bs.variadic` Support in the Next Release]]></title>
-            <link>https://bucklescript.github.io/blog/2019/03/1/feature-preview.html</link>
-            <guid>https://bucklescript.github.io/blog/2019/03/1/feature-preview.html</guid>
-            <pubDate>Thu, 01 Jan 1970 00:00:00 GMT</pubDate>
-            <description><![CDATA[<p>In previous releases, when a <code>bs.variadic</code> external (previously called <code>bs.splice</code> prior to version <code>4.08</code>) is present, its tail arguments needed to be applied statically. In other words, the <code>external</code> marked with <code>bs.variadic</code>, when used, requires a <em>literal</em> ...</p>]]></description>
+            <title><![CDATA[BuckleScript 4.0.0 (Part One)]]></title>
+            <link>https://bucklescript.github.io/blog/2018/07/17/release-4-0-0.html</link>
+            <guid>https://bucklescript.github.io/blog/2018/07/17/release-4-0-0.html</guid>
+            <pubDate>Tue, 17 Jul 2018 06:00:00 GMT</pubDate>
+            <description><![CDATA[<p><code>bs-platform</code> 4.0.0 is released! It has some nice features that we want to share with you, a more detailed list of changes is available <a href="https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#400">here</a></p> <p>In this post, I will talk about a new development workflow, all toolchains are self-contained in <code>bs-platform</code>, <a href="https://twitter.com/ccrisccris">C...</a></p>]]></description>
         </item>
         <item>
             <title><![CDATA[BuckleScript 4.0.0 (Part Two)]]></title>
@@ -110,11 +117,11 @@
             <description><![CDATA[<p><code>bs-platform</code> 4.0.0 introduces a new runtime representation for optionals.</p> <p>While beforehand <code>None</code> was represented at runtime as <code>0</code> and <code>Some(&quot;hello&quot;)</code> as an array <code>[&quot;hello&quot;]</code>, the new representation tries to unbox optionals as much as pos...</p>]]></description>
         </item>
         <item>
-            <title><![CDATA[BuckleScript 4.0.0 (Part One)]]></title>
-            <link>https://bucklescript.github.io/blog/2018/07/17/release-4-0-0.html</link>
-            <guid>https://bucklescript.github.io/blog/2018/07/17/release-4-0-0.html</guid>
-            <pubDate>Tue, 17 Jul 2018 06:00:00 GMT</pubDate>
-            <description><![CDATA[<p><code>bs-platform</code> 4.0.0 is released! It has some nice features that we want to share with you, a more detailed list of changes is available <a href="https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#400">here</a></p> <p>In this post, I will talk about a new development workflow, all toolchains are self-contained in <code>bs-platform</code>, <a href="https://twitter.com/ccrisccris">C...</a></p>]]></description>
+            <title><![CDATA[First-class `bs.variadic` Support in the Next Release]]></title>
+            <link>https://bucklescript.github.io/blog/2019/03/1/feature-preview.html</link>
+            <guid>https://bucklescript.github.io/blog/2019/03/1/feature-preview.html</guid>
+            <pubDate>Thu, 01 Jan 1970 00:00:00 GMT</pubDate>
+            <description><![CDATA[<p>In previous releases, when a <code>bs.variadic</code> external (previously called <code>bs.splice</code> prior to version <code>4.08</code>) is present, its tail arguments needed to be applied statically. In other words, the <code>external</code> marked with <code>bs.variadic</code>, when used, requires a <em>literal</em> ...</p>]]></description>
         </item>
         <item>
             <title><![CDATA[BuckleScript 3.1.4]]></title>
