@@ -46,6 +46,10 @@ BuckleScript uses the same algorithm as native OCaml, but the output is differen
 
 Not supported yet.
 
+## Str Module
+
+[Not supported](https://github.com/BuckleScript/bucklescript/issues/879) as it is implemented in C, which is not portable to BuckleScript. Use the [`Js.String`](/bucklescript/api/Js.String.html) module instead which has bindings to the JavaScript [`String`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) class.
+
 ## Sys.argv, Sys.max_array_length, Sys.max_string_length
 
 Command line arguments are always empty. This might be fixed in the future. `Sys.max_array_length` and `Sys.max_string_length` will be the same as `max_int`, but it might be respected.
