@@ -62,6 +62,12 @@ const users = [
     infoLink: "http://astrolabediagnostics.com",
     pinned: true
   },
+  {
+    caption: "Auditless",
+    image: "img/logos/auditless.svg",
+    infoLink: "https://auditless.com",
+    pinned: true
+  },
 ];
 
 const examples = [
