@@ -10,7 +10,7 @@
             languagesDropDown.className = "hide";
           }
         });
-      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/bucklescript/bucklescript" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul class=""><li class="navListItem"><a class="navItem" href="/blog/2019/9/23/release-5-20-0">Release 5.2.0/6.2.0</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/10/16/another-encoding">Another way of encoding type identity</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/08/12/release-5-10-0">What&#x27;s new in release 5.1.0</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/06/26/release-5-0-5">Release 5.0.5 and 6.0.2</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/05/21/ffi-overview">A high level overview of BuckleScript interop with Javascript</a></li></ul></div></div></section></div><script>
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/bucklescript/bucklescript" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul class=""><li class="navListItem"><a class="navItem" href="/blog/2019/9/23/release-5-20-0">Release 5.2.0/6.2.0</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/08/12/release-5-10-0">What&#x27;s new in release 5.1.0</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/06/26/release-5-0-5">Release 5.0.5 and 6.0.2</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/05/21/ffi-overview">A high level overview of BuckleScript interop with Javascript</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/04/22/release-5-0-4">architecture changes in bs-platform v5.0.4 and v6.0.1</a></li></ul></div></div></section></div><script>
             var coll = document.getElementsByClassName('collapsible');
             var checkActiveCategory = true;
             for (var i = 0; i < coll.length; i++) {
@@ -95,136 +95,6 @@ in JS backend, this makes debugging particularly challenging for large complex p
 <p>In next release, we plan to <a href="https://reasonml.chat/t/ann-remove-deprecated-getters-in-deriving-abstract-after-5-2-0/1908">remove deprecated getters</a>.</p>
 <p>A detailed list of changes is available <a href="https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#520">here</a></p>
 <p>Happy hacking!</p>
-</span></div></article></div><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2019/10/16/another-encoding">Another way of encoding type identity</a></h1><p class="post-meta">October 16, 2019</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p>When we build some generic data structure, abstract over function is not enough. For example,  a type safe generic balanced AVL tree not only relies on the types of a comparison function, but also the identity of such function. Two balanced AVL trees which are initialized over same type of comparison function still can not be mixed.</p>
-<pre><code class="hljs"><span class="hljs-keyword">module</span> Eq<span class="hljs-number">1</span> = struct 
-    let <span class="hljs-keyword">eq</span> <span class="hljs-keyword">x</span>  y = <span class="hljs-keyword">x</span> = y
-<span class="hljs-keyword">end</span> 
-</code></pre>
-<pre><code class="hljs"><span class="hljs-keyword">module</span> Eq<span class="hljs-number">2</span> = struct 
-    let <span class="hljs-keyword">eq</span> <span class="hljs-keyword">x</span> y = <span class="hljs-keyword">x</span>*<span class="hljs-keyword">x</span> = y * y 
-<span class="hljs-keyword">end</span>
-</code></pre>
-<p>Take the two modules above for example, they have the same type, but we need a way to mark their identity so that data structures instantiated using them can not be mixed.</p>
-<p>A traditional natural way is using functor.</p>
-<pre><code class="hljs">module Make (Cmp : sig 
- <span class="hljs-built_in"> type </span>t 
-  val eq : t -&gt; t -&gt; bool
-end) = 
-(struct 
-  open Cmp
- <span class="hljs-built_in"> type </span>key = t
- <span class="hljs-built_in"> type </span>coll = key list 
-  let empty = []
-  let <span class="hljs-builtin-name">add</span>  (y : coll) (e : key) = 
-    <span class="hljs-keyword">if</span> List.exists (fun x -&gt; eq x e) y then
-      y
-    <span class="hljs-keyword">else</span>      
-      e::y
-end  : sig 
- <span class="hljs-built_in"> type </span>key = Cmp.t 
- <span class="hljs-built_in"> type </span>coll
-  val empty : coll
-  val <span class="hljs-builtin-name">add</span> : coll -&gt; key -&gt; coll
-end )
-
-module Ins1 = Make(struct
- <span class="hljs-built_in"> type </span>t = int 
-  let eq x y = x = y 
-end)
-module Ins2 = Make(struct
- <span class="hljs-built_in"> type </span>t = int 
-  let eq x y = x * x = y * y
-end)
-</code></pre>
-<p>By marking <code>coll</code> as abstract type, when such functor is initialized,<code>Ins1.coll</code> and <code>Ins2.coll</code> are no longer the same.</p>
-<pre><code class="hljs"><span class="hljs-keyword">let</span> v = <span class="hljs-literal">[</span><span class="hljs-module-identifier">Ins1</span>.empty; <span class="hljs-module-identifier">Ins2</span>.empty<span class="hljs-literal">]</span>
-</code></pre>
-<p>When mixing them together, we get a type error</p>
-<pre><code class="hljs">File <span class="hljs-string">"xx.ml"</span>, line 31, characters 21-31:
-Error: This expression has<span class="hljs-built_in"> type </span>Ins2.coll
-       but an expression was expected of<span class="hljs-built_in"> type </span>Ins1.coll
-</code></pre>
-<p>There are some issues with such encoding:</p>
-<p>From runtime point of view, <code>Ins1</code> is initialized during runtime, its implementation is a big closure, which means even if you only use on function in <code>Ins1</code> module, all functions will be linked in.</p>
-<p>From user point of view, people has to call <code>Ins1.add</code> and <code>Ins2.add</code> instead of calling <code>Ins.add</code>, this makes code less polymorphic.</p>
-<p>Below is another encoding, note it is quite sophiscated that is recommended for library authors</p>
-<pre><code class="hljs">
-<span class="hljs-keyword">module</span> <span class="hljs-type">Cmp</span> : <span class="hljs-keyword">sig</span> 
-  <span class="hljs-keyword">type</span> (<span class="hljs-symbol">'a</span>, <span class="hljs-symbol">'id</span>) cmp 
-  <span class="hljs-keyword">val</span> eq : (<span class="hljs-symbol">'a</span>,<span class="hljs-symbol">'id</span>) cmp -&gt; <span class="hljs-symbol">'a</span> -&gt; <span class="hljs-symbol">'a</span> -&gt; <span class="hljs-built_in">bool</span>
-  <span class="hljs-keyword">module</span> <span class="hljs-type">Make</span> : <span class="hljs-keyword">functor</span> ( <span class="hljs-type">M</span> : 
-                          <span class="hljs-keyword">sig</span> <span class="hljs-keyword">type</span> t 
-                            <span class="hljs-keyword">val</span> eq : t -&gt; t -&gt; <span class="hljs-built_in">bool</span> 
-                          <span class="hljs-keyword">end</span>
-                        ) -&gt; <span class="hljs-keyword">sig</span> 
-    <span class="hljs-keyword">type</span> identity
-    <span class="hljs-keyword">val</span> eq :  (<span class="hljs-type">M</span>.t, identity) cmp
-  <span class="hljs-keyword">end</span> 
-
-<span class="hljs-keyword">end</span> = <span class="hljs-keyword">struct</span> 
-  <span class="hljs-keyword">type</span> (<span class="hljs-symbol">'a</span>, <span class="hljs-symbol">'id</span>) cmp = <span class="hljs-symbol">'a</span> -&gt; <span class="hljs-symbol">'a</span> -&gt; <span class="hljs-built_in">bool</span>
-  <span class="hljs-keyword">module</span> <span class="hljs-type">Make</span> (<span class="hljs-type">M</span>: <span class="hljs-keyword">sig</span> 
-      <span class="hljs-keyword">type</span> t 
-      <span class="hljs-keyword">val</span> eq : t -&gt; t -&gt; <span class="hljs-built_in">bool</span>  
-    <span class="hljs-keyword">end</span>) = <span class="hljs-keyword">struct</span> 
-      <span class="hljs-keyword">type</span> identity
-      <span class="hljs-keyword">include</span> <span class="hljs-type">M</span>
-  <span class="hljs-keyword">end</span> 
-  <span class="hljs-keyword">let</span> eq cmp x y = cmp x y <span class="hljs-comment">(* This could be inlined by using externals *)</span>
-<span class="hljs-keyword">end</span> 
-
-<span class="hljs-keyword">open</span> <span class="hljs-type">Cmp</span> 
-
-<span class="hljs-keyword">module</span> <span class="hljs-type">Coll</span> : <span class="hljs-keyword">sig</span> 
-  <span class="hljs-keyword">type</span> (<span class="hljs-symbol">'k</span>, <span class="hljs-symbol">'id</span>) coll
-  <span class="hljs-keyword">val</span> empty : (<span class="hljs-symbol">'k</span>, <span class="hljs-symbol">'id</span>) cmp -&gt; (<span class="hljs-symbol">'k</span>,<span class="hljs-symbol">'id</span>) coll
-  <span class="hljs-keyword">val</span> add : (<span class="hljs-symbol">'k</span>, <span class="hljs-symbol">'id</span>) coll -&gt; <span class="hljs-symbol">'k</span> -&gt; (<span class="hljs-symbol">'k</span>,<span class="hljs-symbol">'id</span>) coll 
-<span class="hljs-keyword">end</span> = <span class="hljs-keyword">struct</span> 
-  <span class="hljs-keyword">type</span> (<span class="hljs-symbol">'k</span>, <span class="hljs-symbol">'id</span>) coll = {
-    eq :   (<span class="hljs-symbol">'k</span>,<span class="hljs-symbol">'id</span>) cmp;
-    data :  <span class="hljs-symbol">'k</span> <span class="hljs-built_in">list</span> 
-  }
-
-  <span class="hljs-keyword">let</span> empty (<span class="hljs-keyword">type</span> t) (<span class="hljs-keyword">type</span> identity) (eq : (t,identity) cmp) =
-    {
-      data = <span class="hljs-literal">[]</span>;
-      eq = eq 
-    }
-  <span class="hljs-keyword">let</span> add (x : (<span class="hljs-symbol">'k</span>,<span class="hljs-string">' id) coll) (y : '</span>k) =  
-    <span class="hljs-keyword">if</span> <span class="hljs-type">List</span>.exists (<span class="hljs-keyword">fun</span> a -&gt; <span class="hljs-type">Cmp</span>.eq x.eq a y) x.data <span class="hljs-keyword">then</span> x <span class="hljs-keyword">else</span> 
-      {
-        data = y:: x.data;
-
-        eq = x.eq 
-      }
-<span class="hljs-keyword">end</span> 
-
-</code></pre>
-<p>The key is the construction of Cmp modules, we create an abstract type <code>cmp</code> which is signed by a phantom type as identity.</p>
-<p>The usage is as below:</p>
-<pre><code class="hljs"><span class="hljs-keyword">module</span> <span class="hljs-module-identifier">S0</span> = <span class="hljs-module-identifier">Make</span> (struct 
-  <span class="hljs-keyword">type</span> t = int
-    <span class="hljs-keyword">let</span> eq x  y = x = y
-  end)
-
-<span class="hljs-keyword">module</span> <span class="hljs-module-identifier">S1</span> = <span class="hljs-module-identifier">Make</span> (struct 
-  <span class="hljs-keyword">type</span> t  = int
-    <span class="hljs-keyword">let</span> eq x y = x * x =  y * y 
-  end)
-
-<span class="hljs-keyword">let</span> v0 = <span class="hljs-module-identifier">Coll</span>.empty <span class="hljs-module-identifier">S0</span>.eq 
-<span class="hljs-keyword">let</span> v1 = <span class="hljs-module-identifier">Coll</span>.empty <span class="hljs-module-identifier">S1</span>.eq 
-
-<span class="hljs-keyword">let</span> a0 = <span class="hljs-module-identifier">Coll</span>.add v0 <span class="hljs-number">1</span> 
-<span class="hljs-keyword">let</span> a1 = <span class="hljs-module-identifier">Coll</span>.add v1 <span class="hljs-number">1</span> 
-</code></pre>
-<p>We can make use of first class modules to get rid of functors from end users.</p>
-<p>When we mix <code>a0</code> and <code>a1</code>, we will get a type error</p>
-<pre><code class="hljs">File <span class="hljs-string">"xx0.ml"</span>, line 71, characters 13-15:
-Error: This expression has<span class="hljs-built_in"> type </span>(int, S1.identity) Coll.coll
-       but an expression was expected of<span class="hljs-built_in"> type </span>(int, S0.identity) Coll.coll
-      <span class="hljs-built_in"> Type </span>S1.identity is <span class="hljs-keyword">not</span> compatible with<span class="hljs-built_in"> type </span>S0.identity 
-</code></pre>
 </span></div></article></div><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2019/08/12/release-5-10-0">What&#x27;s new in release 5.1.0</a></h1><p class="post-meta">August 12, 2019</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p><code>bs-platform</code> 5.1.0 (for OCaml 4.02.3) and 6.1.0 (for OCaml 4.06.1) is ready for testing.</p>
 <p>You can install it via <code>npm i -g bs-platform@5.1.0</code> (or <code>npm i -g bs-platform@6.1.0-dev.6</code>).</p>
 <p>A detailed list of changes is available <a href="https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#510">here</a></p>
@@ -664,6 +534,14 @@ ninja: <span class="hljs-constructor">Entering</span> directory <span class="hlj
 the cmj/cmi changes' propogation stops in the first level of dependency, indirect dependencies are not propagated any more since the intermediate representation stays stable after that. There are 9 more jobs to do compared with changing implementation but the latency only increased by 30ms, which means the scheduler does a good job in parallelism.</p>
 <p>The real world scenario may be a bit worse than our synthetic benchmark, since our syntethic benchmark only impose dependencies across implementation files, the dependencies across interface files are flat.</p>
 <p>To conclude, currently BuckleScript scales very well to projects with around 10k files, and with some work in improving the scheduler, we believe it is not too difficult to scale it to 100K files or even more. To reach such enormous scalability in a reliable way, we propose to have a long-lived scheduler and fast cold compiler. The language interface design and the design of the data structure for the implementation will make the longest rebuild propogation chain bounded by two in most cases.</p>
+</span></div></article></div><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2019/01/07/release-4-0-17"></a></h1><p class="post-meta">January 7, 2019</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p><code>bs-platform</code> 4.0.17 is a major release.</p>
+<p>It improved incremental compilation time significantly.</p>
+<p>A pictue is worth a thousand words, below is a large monorepo which contains 4096 modules, changing the root node which has more than 3000 dependents, it finished building within 400ms.</p>
+<p><img src="/img/incremental.png"></p>
+<p>We will write a dedicated article explaining how we achieve this incredible build performance.</p>
+<p>A detailed list of changes is available <a href="https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#4017">here</a></p>
+<p>Another quite important but not client facing change is that we renovated the internal build system, it will be much easier for contribution later on.
+We will update the contribution guide once it gets stable.</p>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-next" href="/blog/page2/">Next →</a></div></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script>window.foo = new Pjax({
           areas: [
             // try to use the first query.
