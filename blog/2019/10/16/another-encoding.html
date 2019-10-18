@@ -85,39 +85,76 @@
 <span class="hljs-keyword">end</span>
 </code></pre>
 <p>Take the two modules above for example, they have the same type, but we need a way to mark their identity so that data structures instantiated using them can not be mixed.</p>
-<p>A traditional way is using functor.</p>
-<pre><code class="hljs">module Make (Cmp : sig 
- <span class="hljs-built_in"> type </span>t 
-  val eq : t -&gt; t -&gt; bool
-end) = 
-(struct 
-  open Cmp
- <span class="hljs-built_in"> type </span>key = t
- <span class="hljs-built_in"> type </span>coll = key list 
-  let empty = []
-  let <span class="hljs-builtin-name">add</span>  (y : coll) (e : key) = 
-    <span class="hljs-keyword">if</span> List.exists (fun x -&gt; eq x e) y then
+<p>A traditional way is using functor:</p>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">module</span> <span class="hljs-type">Make</span> (<span class="hljs-type">Cmp</span> : <span class="hljs-keyword">sig</span> 
+  <span class="hljs-keyword">type</span> t 
+  <span class="hljs-keyword">val</span> eq : t -&gt; t -&gt; <span class="hljs-built_in">bool</span>
+<span class="hljs-keyword">end</span>) = 
+(<span class="hljs-keyword">struct</span> 
+  <span class="hljs-keyword">open</span> <span class="hljs-type">Cmp</span>
+  <span class="hljs-keyword">type</span> key = t
+  <span class="hljs-keyword">type</span> coll = key <span class="hljs-built_in">list</span> 
+  <span class="hljs-keyword">let</span> empty = <span class="hljs-literal">[]</span>
+  <span class="hljs-keyword">let</span> add  (y : coll) (e : key) = 
+    <span class="hljs-keyword">if</span> <span class="hljs-type">List</span>.exists (<span class="hljs-keyword">fun</span> x -&gt; eq x e) y <span class="hljs-keyword">then</span>
       y
     <span class="hljs-keyword">else</span>      
       e::y
-end  : sig 
- <span class="hljs-built_in"> type </span>key = Cmp.t 
- <span class="hljs-built_in"> type </span>coll
-  val empty : coll
-  val <span class="hljs-builtin-name">add</span> : coll -&gt; key -&gt; coll
-end )
+<span class="hljs-keyword">end</span>  : <span class="hljs-keyword">sig</span> 
+  <span class="hljs-keyword">type</span> key = <span class="hljs-type">Cmp</span>.t 
+  <span class="hljs-keyword">type</span> coll
+  <span class="hljs-keyword">val</span> empty : coll
+  <span class="hljs-keyword">val</span> add : coll -&gt; key -&gt; coll
+<span class="hljs-keyword">end</span> )
 
-module Ins1 = Make(struct
- <span class="hljs-built_in"> type </span>t = int 
-  let eq x y = x = y 
-end)
-module Ins2 = Make(struct
- <span class="hljs-built_in"> type </span>t = int 
-  let eq x y = x * x = y * y
-end)
+<span class="hljs-keyword">module</span> <span class="hljs-type">Ins1</span> = <span class="hljs-type">Make</span>(<span class="hljs-keyword">struct</span>
+  <span class="hljs-keyword">type</span> t = <span class="hljs-built_in">int</span> 
+  <span class="hljs-keyword">let</span> eq x y = x = y 
+<span class="hljs-keyword">end</span>)
+<span class="hljs-keyword">module</span> <span class="hljs-type">Ins2</span> = <span class="hljs-type">Make</span>(<span class="hljs-keyword">struct</span>
+  <span class="hljs-keyword">type</span> t = <span class="hljs-built_in">int</span> 
+  <span class="hljs-keyword">let</span> eq x y = x * x = y * y
+<span class="hljs-keyword">end</span>)
+</code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">module</span> <span class="hljs-module-identifier">Make</span> =
+       (<span class="hljs-module-identifier">Cmp</span>: {
+          <span class="hljs-keyword">type</span> t;
+          <span class="hljs-keyword">let</span> eq: (t, t) =&gt; bool;
+        })
+       : {
+         <span class="hljs-keyword">type</span> key = <span class="hljs-module-identifier">Cmp</span>.t;
+         <span class="hljs-keyword">type</span> coll;
+         <span class="hljs-keyword">let</span> empty: coll;
+         <span class="hljs-keyword">let</span> add: (coll, key) =&gt; coll;
+       } =&gt; {
+  <span class="hljs-keyword">open</span> <span class="hljs-module-identifier">Cmp</span>;
+  <span class="hljs-keyword">type</span> key = t;
+  <span class="hljs-keyword">type</span> coll = list(key);
+  <span class="hljs-keyword">let</span> empty = <span class="hljs-literal">[</span><span class="hljs-literal">]</span>;
+  <span class="hljs-keyword">let</span> add = (y: coll, e: key) =&gt;
+    <span class="hljs-keyword">if</span> (<span class="hljs-module-identifier">List</span>.exists(x =&gt; eq(x, e), y)) {
+      y;
+    } <span class="hljs-keyword">else</span> {
+      <span class="hljs-literal">[</span>e, <span class="hljs-operator">...</span>y<span class="hljs-literal">]</span>;
+    };
+};
+
+<span class="hljs-keyword">module</span> <span class="hljs-module-identifier">Ins1</span> =
+  <span class="hljs-module-identifier">Make</span>({
+    <span class="hljs-keyword">type</span> t = int;
+    <span class="hljs-keyword">let</span> eq = (x, y) =&gt; x <span class="hljs-operator">==</span> y;
+  });
+<span class="hljs-keyword">module</span> <span class="hljs-module-identifier">Ins2</span> =
+  <span class="hljs-module-identifier">Make</span>({
+    <span class="hljs-keyword">type</span> t = int;
+    <span class="hljs-keyword">let</span> eq = (x, y) =&gt; x <span class="hljs-operator">*</span> x <span class="hljs-operator">==</span> y <span class="hljs-operator">*</span> y;
+  });
+
 </code></pre>
 <p>By marking <code>coll</code> as abstract type, when such functor is initialized,<code>Ins1.coll</code> and <code>Ins2.coll</code> are no longer the same.</p>
-<pre><code class="hljs"><span class="hljs-keyword">let</span> v = <span class="hljs-literal">[</span><span class="hljs-module-identifier">Ins1</span>.empty; <span class="hljs-module-identifier">Ins2</span>.empty<span class="hljs-literal">]</span>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> v = [<span class="hljs-type">Ins1</span>.empty; <span class="hljs-type">Ins2</span>.empty]
+</code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> v = <span class="hljs-literal">[</span><span class="hljs-module-identifier">Ins1</span>.empty, <span class="hljs-module-identifier">Ins2</span>.empty<span class="hljs-literal">]</span>;
 </code></pre>
 <p>When mixing them together, we get a type error</p>
 <pre><code class="hljs">File <span class="hljs-built_in">..</span>., line 31, characters 21-31:
