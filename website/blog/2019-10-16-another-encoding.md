@@ -33,9 +33,9 @@ end
 
 Take the two modules above for example, they have the same type, but we need a way to mark their identity so that data structures instantiated using them can not be mixed.
 
-A traditional way is using functor.
+A traditional way is using functor:
 
-```
+```ocaml
 module Make (Cmp : sig 
   type t 
   val eq : t -> t -> bool
@@ -66,9 +66,50 @@ module Ins2 = Make(struct
   let eq x y = x * x = y * y
 end)
 ```
-By marking `coll` as abstract type, when such functor is initialized,`Ins1.coll` and `Ins2.coll` are no longer the same.
+
+```reason
+module Make =
+       (Cmp: {
+          type t;
+          let eq: (t, t) => bool;
+        })
+       : {
+         type key = Cmp.t;
+         type coll;
+         let empty: coll;
+         let add: (coll, key) => coll;
+       } => {
+  open Cmp;
+  type key = t;
+  type coll = list(key);
+  let empty = [];
+  let add = (y: coll, e: key) =>
+    if (List.exists(x => eq(x, e), y)) {
+      y;
+    } else {
+      [e, ...y];
+    };
+};
+
+module Ins1 =
+  Make({
+    type t = int;
+    let eq = (x, y) => x == y;
+  });
+module Ins2 =
+  Make({
+    type t = int;
+    let eq = (x, y) => x * x == y * y;
+  });
+
 ```
+By marking `coll` as abstract type, when such functor is initialized,`Ins1.coll` and `Ins2.coll` are no longer the same.
+
+```ocaml
 let v = [Ins1.empty; Ins2.empty]
+```
+```reason
+let v = [Ins1.empty, Ins2.empty];
 ```
 
 When mixing them together, we get a type error
