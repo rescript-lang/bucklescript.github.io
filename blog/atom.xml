@@ -18,6 +18,16 @@
         </author>
     </entry>
     <entry>
+        <title type="html"><![CDATA[Another way of encoding type identity for BuckleScript libraries without using big functor]]></title>
+        <id>https://bucklescript.github.io/blog/2019/10/16/another-encoding.html</id>
+        <link href="https://bucklescript.github.io/blog/2019/10/16/another-encoding.html">
+        </link>
+        <updated>2019-10-16T06:00:00Z</updated>
+        <summary type="html"><![CDATA[<p>Note this article is for library authors, it has something in depth which is not necessary for people who use BuckleScript at daily work.</p> <p>When we build some generic data structure, abstract over function is not enough. For example, a type safe generi...</p>]]></summary>
+        <author>
+        </author>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[What's new in release 5.1.0]]></title>
         <id>https://bucklescript.github.io/blog/2019/08/12/release-5-10-0.html</id>
         <link href="https://bucklescript.github.io/blog/2019/08/12/release-5-10-0.html">
@@ -138,16 +148,6 @@
         </author>
     </entry>
     <entry>
-        <title type="html"><![CDATA[BuckleScript 4.0.0 (Part One)]]></title>
-        <id>https://bucklescript.github.io/blog/2018/07/17/release-4-0-0.html</id>
-        <link href="https://bucklescript.github.io/blog/2018/07/17/release-4-0-0.html">
-        </link>
-        <updated>2018-07-17T06:00:00Z</updated>
-        <summary type="html"><![CDATA[<p><code>bs-platform</code> 4.0.0 is released! It has some nice features that we want to share with you, a more detailed list of changes is available <a href="https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#400">here</a></p> <p>In this post, I will talk about a new development workflow, all toolchains are self-contained in <code>bs-platform</code>, <a href="https://twitter.com/ccrisccris">C...</a></p>]]></summary>
-        <author>
-        </author>
-    </entry>
-    <entry>
         <title type="html"><![CDATA[BuckleScript 4.0.0 (Part Two)]]></title>
         <id>https://bucklescript.github.io/blog/2018/07/17/release-4-0-0II.html</id>
         <link href="https://bucklescript.github.io/blog/2018/07/17/release-4-0-0II.html">
@@ -164,6 +164,16 @@
         </link>
         <updated>1970-01-01T00:00:00Z</updated>
         <summary type="html"><![CDATA[<p>In previous releases, when a <code>bs.variadic</code> external (previously called <code>bs.splice</code> prior to version <code>4.08</code>) is present, its tail arguments needed to be applied statically. In other words, the <code>external</code> marked with <code>bs.variadic</code>, when used, requires a <em>literal</em> ...</p>]]></summary>
+        <author>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[BuckleScript 4.0.0 (Part One)]]></title>
+        <id>https://bucklescript.github.io/blog/2018/07/17/release-4-0-0.html</id>
+        <link href="https://bucklescript.github.io/blog/2018/07/17/release-4-0-0.html">
+        </link>
+        <updated>2018-07-17T06:00:00Z</updated>
+        <summary type="html"><![CDATA[<p><code>bs-platform</code> 4.0.0 is released! It has some nice features that we want to share with you, a more detailed list of changes is available <a href="https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#400">here</a></p> <p>In this post, I will talk about a new development workflow, all toolchains are self-contained in <code>bs-platform</code>, <a href="https://twitter.com/ccrisccris">C...</a></p>]]></summary>
         <author>
         </author>
     </entry>
