@@ -15,7 +15,7 @@ module Eq1 = {
 
 ```ocaml
 module Eq1 = struct 
-    let eq x  y = x = y
+  let eq x y = x = y
 end 
 ```
 
@@ -27,7 +27,7 @@ module Eq2 = {
 
 ```ocaml
 module Eq2 = struct 
-    let eq x y = x*x = y * y 
+  let eq x y = x * x = y * y 
 end
 ```
 
@@ -50,7 +50,7 @@ end) =
       y
     else      
       e::y
-end  : sig 
+end : sig 
   type key = Cmp.t 
   type coll
   val empty : coll
@@ -68,17 +68,16 @@ end)
 ```
 
 ```reason
-module Make =
-       (Cmp: {
-          type t;
-          let eq: (t, t) => bool;
-        })
-       : {
-         type key = Cmp.t;
-         type coll;
-         let empty: coll;
-         let add: (coll, key) => coll;
-       } => {
+module Make = (
+  Cmp: {
+    type t;
+    let eq: (t, t) => bool;
+  }) : {
+ type key = Cmp.t;
+ type coll;
+ let empty: coll;
+ let add: (coll, key) => coll;
+} => {
   open Cmp;
   type key = t;
   type coll = list(key);
@@ -91,17 +90,14 @@ module Make =
     };
 };
 
-module Ins1 =
-  Make({
-    type t = int;
-    let eq = (x, y) => x == y;
-  });
-module Ins2 =
-  Make({
-    type t = int;
-    let eq = (x, y) => x * x == y * y;
-  });
-
+module Ins1 = Make({
+  type t = int;
+  let eq = (x, y) => x == y;
+});
+module Ins2 = Make({
+  type t = int;
+  let eq = (x, y) => x * x == y * y;
+});
 ```
 By marking `coll` as abstract type, when such functor is initialized,`Ins1.coll` and `Ins2.coll` are no longer the same.
 
@@ -131,21 +127,23 @@ Now we introduce another encoding, note it is quite sophiscated that is recommen
 module Cmp: {
   type cmp('a, 'id);
   let eq: (cmp('a, 'id), 'a, 'a) => bool;
-  module Make:
-    (M: {
+  module Make: (
+    M: {
        type t;
        let eq: (t, t) => bool;
-     }) =>
-     {
-      type identity;
-      let eq: cmp(M.t, identity);
-    };
+     }
+  ) => {
+    type identity;
+    let eq: cmp(M.t, identity);
+  };
 } = {
   type cmp('a, 'id) = ('a, 'a) => bool;
-  module Make = (M: {
-                   type t;
-                   let eq: (t, t) => bool;
-                 }) => {
+  module Make = (
+    M: {
+     type t;
+     let eq: (t, t) => bool;
+    }
+  ) => {
     type identity;
     include M;
   };
@@ -174,27 +172,22 @@ module Coll: {
     } else {
       {
         data: [y, ...x.data],
-
         eq: x.eq,
       };
     };
 };
-
-
-
 ```
 
 
 ```ocaml
-
 module Cmp : sig 
   type ('a, 'id) cmp 
   val eq : ('a,'id) cmp -> 'a -> 'a -> bool
-  module Make : functor ( M : 
-                          sig type t 
-                            val eq : t -> t -> bool 
-                          end
-                        ) -> sig 
+  module Make : functor (M : 
+    sig type t 
+      val eq : t -> t -> bool 
+    end
+  ) -> sig 
     type identity
     val eq :  (M.t, identity) cmp
   end 
@@ -202,11 +195,11 @@ module Cmp : sig
 end = struct 
   type ('a, 'id) cmp = 'a -> 'a -> bool
   module Make (M: sig 
-      type t 
-      val eq : t -> t -> bool  
-    end) = struct 
-      type identity
-      include M
+    type t 
+    val eq : t -> t -> bool  
+  end) = struct 
+    type identity
+    include M
   end 
   let eq cmp x y = cmp x y (* This could be inlined by using externals *)
 end 
@@ -223,18 +216,17 @@ end = struct
     data :  'k list 
   }
 
-  let empty (type t) (type identity) (eq : (t,identity) cmp) =
-    {
-      data = [];
-      eq = eq 
-    }
-  let add (x : ('k,' id) coll) (y : 'k) =  
-    if List.exists (fun a -> Cmp.eq x.eq a y) x.data then x else 
-      {
-        data = y:: x.data;
+  let empty (type t) (type identity) (eq : (t,identity) cmp) = {
+    data = [];
+    eq = eq 
+  }
 
-        eq = x.eq 
-      }
+  let add (x : ('k,' id) coll) (y : 'k) =  
+    if List.exists (fun a -> Cmp.eq x.eq a y) x.data then x
+    else {
+      data = y:: x.data;
+      eq = x.eq 
+    }
 end 
 
 ```
@@ -246,12 +238,12 @@ The usage is as below:
 ```ocaml
 module S0 = Make (struct 
   type t = int
-    let eq x  y = x = y
+    let eq x y = x = y
   end)
 
 module S1 = Make (struct 
   type t  = int
-    let eq x y = x * x =  y * y 
+    let eq x y = x * x = y * y 
   end)
 
 let v0 = Coll.empty S0.eq 
@@ -261,25 +253,21 @@ let a0 = Coll.add v0 1
 let a1 = Coll.add v1 1 
 ```
 ```reason
-module S0 =
-  Make({
-    type t = int;
-    let eq = (x, y) => x == y;
-  });
+module S0 = Make({
+  type t = int;
+  let eq = (x, y) => x == y;
+});
 
-module S1 =
-  Make({
-    type t = int;
-    let eq = (x, y) => x * x == y * y;
-  });
+module S1 = Make({
+  type t = int;
+  let eq = (x, y) => x * x == y * y;
+});
 
 let v0 = Coll.empty(S0.eq);
 let v1 = Coll.empty(S1.eq);
 
 let a0 = Coll.add(v0, 1);
 let a1 = Coll.add(v1, 1);
-
-
 ```
 
 In practice, we can make use of first class modules to get rid of functors from end users, which is saved for readers.
@@ -292,7 +280,7 @@ Error: This expression has type (int, S1.identity) Coll.coll
        Type S1.identity is not compatible with type S0.identity 
 ```       
 
-As you read here, by using such encoding, the data structure is  more generalized from user point of view. The generated JS code is not in a big closure so that it can be dead code eliminated better.
+As you read here, by using such encoding, the data structure is more generalized from user point of view. The generated JS code is not in a big closure so that it can be dead code eliminated better.
 
 This style is extensively used in Belt encoding, we  encourage you to have a look at its implementation for better ideas.
 
