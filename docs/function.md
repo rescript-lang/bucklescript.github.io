@@ -55,6 +55,21 @@ We've compiled to the same function, but now the usage is much clearer on the BS
 
 **Note**: in this particular case, you need a unit, `()` after `border`, since `border` is an [optional argument at the last position](https://reasonml.github.io/docs/en/function.html#optional-labeled-arguments). Not having a unit to indicate you've finished applying the function would generate a warning.
 
+Note that you can change the order of labeled arguments on the Reason side and BuckleScript will ensure that they appear the right way in the JavaScript output:
+
+```reason
+[@bs.val] external draw: (~x: int, ~y: int, ~border: bool=?, unit) => unit = "draw";
+
+draw(~x=10, ~y=20, ());
+draw(~y=20, ~x=10, ());
+```
+
+Output:
+
+```js
+draw(10, 20, undefined);
+draw(10, 20, undefined);
+```
 ## Object Method
 
 Functions attached to a JS objects require a special way of binding to them, using `bs.send`:
