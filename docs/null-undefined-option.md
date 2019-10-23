@@ -178,6 +178,11 @@ let result = validate(personId);
 
 The `return` part "wraps" a string into a nullable string, to make the type system understand and track the fact that, as you pass this value around, it's not just a string, but a string that can be `null` or `undefined`.
 
+The `.t` in `Js.Nullable.t` is an OCaml convention.
+`Js.Nullable.t` denotes the primary data type that module `Js.Nullable` operates on.
+Most of the time, this `t` type is also usually an [abstract type](https://reasonml.github.io/docs/en/module#creation-1) i.e. you do not know (and should not have to know) the internal representation of `t`.
+However, in the case of `Js.Nullable.t('a)`, you can guess that it's something a long the line of `type Js.Nullable.t('a) = Js.Nullable.null | Js.Nullable.undefined | Some('a)`.
+
 #### Convert to/from `option`
 
 `Js.Nullable.fromOption` converts from a `option` to `Js.Nullable.t`. `Js.Nullable.toOption` does the opposite.
