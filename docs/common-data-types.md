@@ -180,3 +180,5 @@ type u = A(string) | B(int);
 `a /* 97 */
 `a(1, 2) /* [ 97, [1, 2] ] */
 ```
+
+BuckleScript compiles `unit` to `0` in some cases but don't worry about it because it's considered internal and subject to change.
