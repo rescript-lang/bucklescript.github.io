@@ -26,15 +26,15 @@ Button.defaultProps = {
 };
 const pre = "```";
 const codeExample =`${pre}ocaml
-let result = 
+let result =
   [|1; 2; 3; 4|]
   |. Belt.Array.keep (fun x -> x > 2)
   |. Belt.Array.mapWithIndex (fun x i -> x + i)
-  |. Belt.Array.reduce 0 (fun x y -> x + y) 
+  |. Belt.Array.reduce 0 (fun x y -> x + y)
   |. Js.log
 ${pre}`;
 const codeExampleReason =`${pre}reason
-let result = 
+let result =
   [|1, 2, 3, 4|]
   -> Belt.Array.keep(x => x > 2)
   -> Belt.Array.mapWithIndex((x, i) => x + i)
@@ -140,12 +140,12 @@ class Index extends React.Component {
                   content: "Simple, small and blazing fast build workflow. No more configuration debugging!",
                 },
                 {
-                  title: "The Whole JavaScript Ecosystem",
-                  content: "**Readable** JS output + comprehensive support for communicating with existing code.",
+                  title: "The Whole JS Ecosystem",
+                  content: "**Readable** output & comprehensive support for talking to existing JavaScript code.",
                 },
                 {
-                  title: "Solid, Stable & Cross-platform",
-                  content: "BuckleScript is backed by [OCaml](http://ocaml.org). Decades of **type system** research and compiler engineering.",
+                  title: "Solid, Stable & Performant",
+                  content: "Decades of **type system** research and compiler engineering. Tools you can rely on!",
                 },
               ]}
               layout="threeColumn"

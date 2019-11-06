@@ -134,6 +134,9 @@
       "stdlib-overview": {
         "title": "Overview"
       },
+      "try": {
+        "title": "Try"
+      },
       "use-existing-ocaml-libraries": {
         "title": "Use Existing OCaml Libraries"
       },
