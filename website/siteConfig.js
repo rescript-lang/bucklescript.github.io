@@ -87,7 +87,7 @@ let reasonHighlightJs = require('reason-highlightjs');
 
 const siteConfig = {
   title: "BuckleScript",
-  tagline: "Write safer and simpler code in OCaml & Reason, compile to JavaScript.",
+  tagline: "A faster, simpler and more robust take on JavaScript.",
   url: "https://bucklescript.github.io",
   editUrl: "https://github.com/bucklescript/bucklescript.github.io/tree/source/docs/",
   translationRecruitingLink: "https://crowdin.com/project/bucklescript",
@@ -133,7 +133,7 @@ const siteConfig = {
       facetFilters: ["lang:LANGUAGE"]
     }
   },
-  enableUpdateTime : true  
+  enableUpdateTime : true
 };
 
 module.exports = siteConfig;
