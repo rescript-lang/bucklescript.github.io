@@ -10,26 +10,26 @@
             languagesDropDown.className = "hide";
           }
         });
-      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/bucklescript/bucklescript" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div><div class="homeContainer"><div id="redirectBanner"><div>Hello! This particular page hash has moved to <a id="redirectLink"></a>. Please update the URLs to reflect it. Thanks!</div></div><div class="homeWrapperWrapper"><div class="wrapper homeWrapper"><div class="projectTitle">BuckleScript</div><div class="homeWrapperInner"><div class="homeTagLine">Write safer and simpler code in OCaml &amp; Reason, compile to JavaScript.</div><div class="homeCodeSnippet"><div class="homeCodeSnippet-reason"><div><span><pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> result = 
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/bucklescript/bucklescript" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div><div class="homeContainer"><div id="redirectBanner"><div>Hello! This particular page hash has moved to <a id="redirectLink"></a>. Please update the URLs to reflect it. Thanks!</div></div><div class="homeWrapperWrapper"><div class="wrapper homeWrapper"><div class="projectTitle">BuckleScript</div><div class="homeWrapperInner"><div class="homeTagLine">Write safer and simpler code in OCaml &amp; Reason, compile to JavaScript.</div><div class="homeCodeSnippet"><div class="homeCodeSnippet-reason"><div><span><pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> result =
   <span class="hljs-literal">[|</span><span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span><span class="hljs-literal">|]</span>
   <span class="hljs-operator">-&gt;</span> <span class="hljs-module-identifier">Belt</span>.<span class="hljs-module-identifier">Array</span>.keep(x =&gt; x &gt; <span class="hljs-number">2</span>)
   <span class="hljs-operator">-&gt;</span> <span class="hljs-module-identifier">Belt</span>.<span class="hljs-module-identifier">Array</span>.mapWithIndex((x, i) =&gt; x <span class="hljs-operator">+</span> i)
   <span class="hljs-operator">-&gt;</span> <span class="hljs-module-identifier">Belt</span>.<span class="hljs-module-identifier">Array</span>.reduce(<span class="hljs-number">0</span>, (x, y) =&gt; x <span class="hljs-operator">+</span> y)
   <span class="hljs-operator">-&gt;</span> <span class="hljs-module-identifier">Js</span>.log;
 </code></pre>
-</span></div></div><div class="homeCodeSnippet-ocaml"><div><span><pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> result = 
+</span></div></div><div class="homeCodeSnippet-ocaml"><div><span><pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> result =
   [|<span class="hljs-number">1</span>; <span class="hljs-number">2</span>; <span class="hljs-number">3</span>; <span class="hljs-number">4</span>|]
   |. <span class="hljs-type">Belt</span>.<span class="hljs-type">Array</span>.keep (<span class="hljs-keyword">fun</span> x -&gt; x &gt; <span class="hljs-number">2</span>)
   |. <span class="hljs-type">Belt</span>.<span class="hljs-type">Array</span>.mapWithIndex (<span class="hljs-keyword">fun</span> x i -&gt; x + i)
-  |. <span class="hljs-type">Belt</span>.<span class="hljs-type">Array</span>.reduce <span class="hljs-number">0</span> (<span class="hljs-keyword">fun</span> x y -&gt; x + y) 
+  |. <span class="hljs-type">Belt</span>.<span class="hljs-type">Array</span>.reduce <span class="hljs-number">0</span> (<span class="hljs-keyword">fun</span> x y -&gt; x + y)
   |. <span class="hljs-type">Js</span>.log
 </code></pre>
 </span></div></div></div></div><div class="section promoSection"><div class="promoRow"><div class="pluginRowBlock"><div class="pluginWrapper"><a class="button getStarted" href="/docs/fr/installation" target="_self">Commencer</a></div><div class="pluginWrapper"><a class="button " href="https://reasonml.github.io/docs/en/interop" target="_self">Tutorial</a></div></div></div></div></div></div></div><div class="mainContainer"><div class="container"><div class="wrapper"><div class="gridBlock"><div class="blockElement alignCenter threeByGridBlock"><div class="blockContent"><h2><div><span><p>Lean Developer Experience</p>
 </span></div></h2><div><span><p>Simple, small and blazing fast build workflow. No more configuration debugging!</p>
-</span></div></div></div><div class="blockElement alignCenter threeByGridBlock"><div class="blockContent"><h2><div><span><p>The Whole JavaScript Ecosystem</p>
-</span></div></h2><div><span><p><strong>Readable</strong> JS output + comprehensive support for communicating with existing code.</p>
-</span></div></div></div><div class="blockElement alignCenter threeByGridBlock"><div class="blockContent"><h2><div><span><p>Solid, Stable &amp; Cross-platform</p>
-</span></div></h2><div><span><p>BuckleScript is backed by <a href="http://ocaml.org">OCaml</a>. Decades of <strong>type system</strong> research and compiler engineering.</p>
+</span></div></div></div><div class="blockElement alignCenter threeByGridBlock"><div class="blockContent"><h2><div><span><p>The Whole JS Ecosystem</p>
+</span></div></h2><div><span><p><strong>Readable</strong> output &amp; comprehensive support for talking to existing JavaScript code.</p>
+</span></div></div></div><div class="blockElement alignCenter threeByGridBlock"><div class="blockContent"><h2><div><span><p>Solid, Stable &amp; Performant</p>
+</span></div></h2><div><span><p>Decades of <strong>type system</strong> research and compiler engineering. Tools you can rely on!</p>
 </span></div></div></div></div></div></div><div class="container quickStartAndExamples homeCodeSnippet lightBackground"><div class="wrapper"><div><h2>QuickStart</h2><div>BuckleScript seamlessly integrates with <a href="https://reasonml.github.io">Reason</a>.</div><div><span><pre><code class="hljs css language-bash">npm install -g bs-platform
 
 <span class="hljs-comment"># OCaml syntax</span>
