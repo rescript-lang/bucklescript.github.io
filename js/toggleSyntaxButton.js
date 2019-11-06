@@ -5,8 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   $toggleSyntaxButton.classList.add('button', 'toggleSyntaxButton')
   $toggleSyntaxButton.innerHTML = `
-    <span class="toggleSyntaxButton-reason">Reason</span>
-    <span class="toggleSyntaxButton-ocaml">OCaml</span>
+    <span class="toggleSyntaxButton-reason">Reason syntax</span>
+    <span class="toggleSyntaxButton-ocaml">OCaml syntax</span>
   `
   document.querySelector('.headerWrapper.wrapper > header > a').insertAdjacentElement('afterend', $toggleSyntaxButton);
 
