@@ -61,7 +61,10 @@ type person = Js.t({
 
 **From now on**, we'll call the BuckleScript interop object "`Js.t` object", to disambiguate it with normal object and JS object.
 
-Because object types are used often, Reason gives it a nicer sugar. `Js.t({. name: string})` will format to `{. "name": string}`.
+Because object types are used often, Reason gives it a nicer sugar.
+Writing `{. "name": string}` is syntactic sugar for `Js.t({. name: string})`.
+Note that the double quotes around the field name `name` are necessary.
+Without it, this expression becomes an OCaml object, which you probably don't want to if you're targeting JavaScript.
 
 ### Accessors
 
