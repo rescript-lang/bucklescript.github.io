@@ -68,16 +68,16 @@
             });
         </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="posts"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2019/10/16/another-encoding">Another way of encoding type identity for BuckleScript libraries without using big functor</a></h1><p class="post-meta">October 16, 2019</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p>Note this article is for library authors, it has something in depth which is not necessary for people who use BuckleScript at daily work.</p>
 <p>When we build some generic data structure, abstract over function is not enough. For example,  a type safe generic balanced AVL tree not only relies on the types of a comparison function, but also the identity of such function. Two balanced AVL trees which are initialized over same type of comparison function still can not be mixed.</p>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">module</span> <span class="hljs-module-identifier">Eq1</span> = {
-  <span class="hljs-keyword">let</span> eq = (x, y) =&gt; x <span class="hljs-operator">==</span> y;
+<pre><code class="hljs css language-reason">module Eq1 = {
+  let eq = (x, y) =&gt; x == y;
 };
 </code></pre>
 <pre><code class="hljs css language-ocaml"><span class="hljs-keyword">module</span> <span class="hljs-type">Eq1</span> = <span class="hljs-keyword">struct</span> 
   <span class="hljs-keyword">let</span> eq x y = x = y
 <span class="hljs-keyword">end</span> 
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">module</span> <span class="hljs-module-identifier">Eq2</span> = {
-  <span class="hljs-keyword">let</span> eq = (x, y) =&gt; x <span class="hljs-operator">==</span> y;
+<pre><code class="hljs css language-reason">module Eq2 = {
+  let eq = (x, y) =&gt; x == y;
 };
 </code></pre>
 <pre><code class="hljs css language-ocaml"><span class="hljs-keyword">module</span> <span class="hljs-type">Eq2</span> = <span class="hljs-keyword">struct</span> 
@@ -116,46 +116,46 @@
   <span class="hljs-keyword">let</span> eq x y = x * x = y * y
 <span class="hljs-keyword">end</span>)
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">module</span> <span class="hljs-module-identifier">Make</span> = (
-  <span class="hljs-module-identifier">Cmp</span>: {
-    <span class="hljs-keyword">type</span> t;
-    <span class="hljs-keyword">let</span> eq: (t, t) =&gt; bool;
+<pre><code class="hljs css language-reason">module Make = (
+  Cmp: {
+    type t;
+    let eq: (t, t) =&gt; bool;
   }) : {
- <span class="hljs-keyword">type</span> key = <span class="hljs-module-identifier">Cmp</span>.t;
- <span class="hljs-keyword">type</span> coll;
- <span class="hljs-keyword">let</span> empty: coll;
- <span class="hljs-keyword">let</span> add: (coll, key) =&gt; coll;
+ type key = Cmp.t;
+ type coll;
+ let empty: coll;
+ let add: (coll, key) =&gt; coll;
 } =&gt; {
-  <span class="hljs-keyword">open</span> <span class="hljs-module-identifier">Cmp</span>;
-  <span class="hljs-keyword">type</span> key = t;
-  <span class="hljs-keyword">type</span> coll = list(key);
-  <span class="hljs-keyword">let</span> empty = <span class="hljs-literal">[</span><span class="hljs-literal">]</span>;
-  <span class="hljs-keyword">let</span> add = (y: coll, e: key) =&gt;
-    <span class="hljs-keyword">if</span> (<span class="hljs-module-identifier">List</span>.exists(x =&gt; eq(x, e), y)) {
+  open Cmp;
+  type key = t;
+  type coll = list(key);
+  let empty = [];
+  let add = (y: coll, e: key) =&gt;
+    if (List.exists(x =&gt; eq(x, e), y)) {
       y;
-    } <span class="hljs-keyword">else</span> {
-      <span class="hljs-literal">[</span>e, <span class="hljs-operator">...</span>y<span class="hljs-literal">]</span>;
+    } else {
+      [e, ...y];
     };
 };
 
-<span class="hljs-keyword">module</span> <span class="hljs-module-identifier">Ins1</span> = <span class="hljs-module-identifier">Make</span>({
-  <span class="hljs-keyword">type</span> t = int;
-  <span class="hljs-keyword">let</span> eq = (x, y) =&gt; x <span class="hljs-operator">==</span> y;
+module Ins1 = Make({
+  type t = int;
+  let eq = (x, y) =&gt; x == y;
 });
-<span class="hljs-keyword">module</span> <span class="hljs-module-identifier">Ins2</span> = <span class="hljs-module-identifier">Make</span>({
-  <span class="hljs-keyword">type</span> t = int;
-  <span class="hljs-keyword">let</span> eq = (x, y) =&gt; x <span class="hljs-operator">*</span> x <span class="hljs-operator">==</span> y <span class="hljs-operator">*</span> y;
+module Ins2 = Make({
+  type t = int;
+  let eq = (x, y) =&gt; x * x == y * y;
 });
 </code></pre>
 <p>By marking <code>coll</code> as abstract type, when such functor is initialized,<code>Ins1.coll</code> and <code>Ins2.coll</code> are no longer the same.</p>
 <pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> v = [<span class="hljs-type">Ins1</span>.empty; <span class="hljs-type">Ins2</span>.empty]
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> v = <span class="hljs-literal">[</span><span class="hljs-module-identifier">Ins1</span>.empty, <span class="hljs-module-identifier">Ins2</span>.empty<span class="hljs-literal">]</span>;
+<pre><code class="hljs css language-reason">let v = [Ins1.empty, Ins2.empty];
 </code></pre>
 <p>When mixing them together, we get a type error</p>
-<pre><code class="hljs">File <span class="hljs-built_in">..</span>., line 31, characters 21-31:
-Error: This expression has<span class="hljs-built_in"> type </span>Ins2.coll
-       but an expression was expected of<span class="hljs-built_in"> type </span>Ins1.coll
+<pre><code class="hljs">File ..., line 31, characters 21-31:
+Error: This expression has type Ins2.coll
+       but an expression was expected of type Ins1.coll
 </code></pre>
 <p>There are some issues with such encoding:</p>
 <ul>
@@ -163,54 +163,54 @@ Error: This expression has<span class="hljs-built_in"> type </span>Ins2.coll
 <li><p>From user point of view, people has to call <code>Ins1.add</code> and <code>Ins2.add</code> instead of calling <code>Ins.add</code>, this makes code less polymorphic.</p></li>
 </ul>
 <p>Now we introduce another encoding, note it is quite sophiscated that is recommended only for library authors</p>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">module</span> <span class="hljs-module-identifier">Cmp</span>: {
-  <span class="hljs-keyword">type</span> cmp('a, 'id);
-  <span class="hljs-keyword">let</span> eq: (cmp('a, 'id), 'a, 'a) =&gt; bool;
-  <span class="hljs-keyword">module</span> <span class="hljs-module-identifier">Make</span>: (
-    <span class="hljs-constructor">M</span>: {
-       <span class="hljs-keyword">type</span> t;
-       <span class="hljs-keyword">let</span> eq: (t, t) =&gt; bool;
+<pre><code class="hljs css language-reason">module Cmp: {
+  type cmp('a, 'id);
+  let eq: (cmp('a, 'id), 'a, 'a) =&gt; bool;
+  module Make: (
+    M: {
+       type t;
+       let eq: (t, t) =&gt; bool;
      }
   ) =&gt; {
-    <span class="hljs-keyword">type</span> identity;
-    <span class="hljs-keyword">let</span> eq: cmp(<span class="hljs-module-identifier">M</span>.t, identity);
+    type identity;
+    let eq: cmp(M.t, identity);
   };
 } = {
-  <span class="hljs-keyword">type</span> cmp('a, 'id) = ('a, 'a) =&gt; bool;
-  <span class="hljs-keyword">module</span> <span class="hljs-module-identifier">Make</span> = (
-    <span class="hljs-module-identifier">M</span>: {
-     <span class="hljs-keyword">type</span> t;
-     <span class="hljs-keyword">let</span> eq: (t, t) =&gt; bool;
+  type cmp('a, 'id) = ('a, 'a) =&gt; bool;
+  module Make = (
+    M: {
+     type t;
+     let eq: (t, t) =&gt; bool;
     }
   ) =&gt; {
-    <span class="hljs-keyword">type</span> identity;
-    <span class="hljs-keyword">include</span> <span class="hljs-module-identifier">M</span>;
+    type identity;
+    include M;
   };
-  <span class="hljs-keyword">let</span> eq = (cmp, x, y) =&gt; cmp(x, y); <span class="hljs-comment">/* This could be inlined by using externals */</span>
+  let eq = (cmp, x, y) =&gt; cmp(x, y); /* This could be inlined by using externals */
 };
 
-<span class="hljs-keyword">open</span> <span class="hljs-module-identifier">Cmp</span>;
+open Cmp;
 
-<span class="hljs-keyword">module</span> <span class="hljs-module-identifier">Coll</span>: {
-  <span class="hljs-keyword">type</span> coll('k, 'id);
-  <span class="hljs-keyword">let</span> empty: cmp('k, 'id) =&gt; coll('k, 'id);
-  <span class="hljs-keyword">let</span> add: (coll('k, 'id), 'k) =&gt; coll('k, 'id);
+module Coll: {
+  type coll('k, 'id);
+  let empty: cmp('k, 'id) =&gt; coll('k, 'id);
+  let add: (coll('k, 'id), 'k) =&gt; coll('k, 'id);
 } = {
-  <span class="hljs-keyword">type</span> coll('k, 'id) = {
+  type coll('k, 'id) = {
     eq: cmp('k, 'id),
     data: list('k),
   };
 
-  <span class="hljs-keyword">let</span> empty = (<span class="hljs-keyword">type</span> t, <span class="hljs-keyword">type</span> identity, eq: cmp(t, identity)) =&gt; {
-    data: <span class="hljs-literal">[</span><span class="hljs-literal">]</span>,
+  let empty = (type t, type identity, eq: cmp(t, identity)) =&gt; {
+    data: [],
     eq,
   };
-  <span class="hljs-keyword">let</span> add = (x: coll('k, 'id), y: 'k) =&gt;
-    <span class="hljs-keyword">if</span> (<span class="hljs-module-identifier">List</span>.exists(a =&gt; <span class="hljs-module-identifier">Cmp</span>.eq(x.eq, a, y), x.data)) {
+  let add = (x: coll('k, 'id), y: 'k) =&gt;
+    if (List.exists(a =&gt; Cmp.eq(x.eq, a, y), x.data)) {
       x;
-    } <span class="hljs-keyword">else</span> {
+    } else {
       {
-        data: <span class="hljs-literal">[</span>y, <span class="hljs-operator">...</span>x.data<span class="hljs-literal">]</span>,
+        data: [y, ...x.data],
         eq: x.eq,
       };
     };
@@ -284,28 +284,28 @@ Error: This expression has<span class="hljs-built_in"> type </span>Ins2.coll
 <span class="hljs-keyword">let</span> a0 = <span class="hljs-type">Coll</span>.add v0 <span class="hljs-number">1</span> 
 <span class="hljs-keyword">let</span> a1 = <span class="hljs-type">Coll</span>.add v1 <span class="hljs-number">1</span> 
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">module</span> <span class="hljs-module-identifier">S0</span> = <span class="hljs-module-identifier">Make</span>({
-  <span class="hljs-keyword">type</span> t = int;
-  <span class="hljs-keyword">let</span> eq = (x, y) =&gt; x <span class="hljs-operator">==</span> y;
+<pre><code class="hljs css language-reason">module S0 = Make({
+  type t = int;
+  let eq = (x, y) =&gt; x == y;
 });
 
-<span class="hljs-keyword">module</span> <span class="hljs-module-identifier">S1</span> = <span class="hljs-module-identifier">Make</span>({
-  <span class="hljs-keyword">type</span> t = int;
-  <span class="hljs-keyword">let</span> eq = (x, y) =&gt; x <span class="hljs-operator">*</span> x <span class="hljs-operator">==</span> y <span class="hljs-operator">*</span> y;
+module S1 = Make({
+  type t = int;
+  let eq = (x, y) =&gt; x * x == y * y;
 });
 
-<span class="hljs-keyword">let</span> v0 = <span class="hljs-module-identifier">Coll</span>.empty(<span class="hljs-module-identifier">S0</span>.eq);
-<span class="hljs-keyword">let</span> v1 = <span class="hljs-module-identifier">Coll</span>.empty(<span class="hljs-module-identifier">S1</span>.eq);
+let v0 = Coll.empty(S0.eq);
+let v1 = Coll.empty(S1.eq);
 
-<span class="hljs-keyword">let</span> a0 = <span class="hljs-module-identifier">Coll</span>.add(v0, <span class="hljs-number">1</span>);
-<span class="hljs-keyword">let</span> a1 = <span class="hljs-module-identifier">Coll</span>.add(v1, <span class="hljs-number">1</span>);
+let a0 = Coll.add(v0, 1);
+let a1 = Coll.add(v1, 1);
 </code></pre>
 <p>In practice, we can make use of first class modules to get rid of functors from end users, which is saved for readers.</p>
 <p>When we mix <code>a0</code> and <code>a1</code>, we will get a type error</p>
-<pre><code class="hljs">File <span class="hljs-built_in">..</span>., line 71, characters 13-15:
-Error: This expression has<span class="hljs-built_in"> type </span>(int, S1.identity) Coll.coll
-       but an expression was expected of<span class="hljs-built_in"> type </span>(int, S0.identity) Coll.coll
-      <span class="hljs-built_in"> Type </span>S1.identity is <span class="hljs-keyword">not</span> compatible with<span class="hljs-built_in"> type </span>S0.identity 
+<pre><code class="hljs">File ..., line 71, characters 13-15:
+Error: This expression has type (int, S1.identity) Coll.coll
+       but an expression was expected of type (int, S0.identity) Coll.coll
+       Type S1.identity is not compatible with type S0.identity 
 </code></pre>
 <p>As you read here, by using such encoding, the data structure is more generalized from user point of view. The generated JS code is not in a big closure so that it can be dead code eliminated better.</p>
 <p>This style is extensively used in Belt encoding, we  encourage you to have a look at its implementation for better ideas.</p>
@@ -345,33 +345,33 @@ in JS backend, this makes debugging particularly challenging for large complex p
 <h2><a class="anchor" aria-hidden="true" id="introducing-bsc-to-public"></a><a href="#introducing-bsc-to-public" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Introducing <code>bsc</code> to public</h2>
 <p><code>bsc</code> is the underlying compiler which is invoked by <code>bsb</code>. In this release we simplified it a bit so that it can be used directly by customers for simple tasks. It is available after you have <code>bs-platform</code> installed.</p>
 <p>Suppose you have a file called <code>test.re</code>:</p>
-<pre><code class="hljs"><span class="hljs-keyword">let</span> rec fib (n) = switch n {
-    | <span class="hljs-type">0</span> | <span class="hljs-type">1</span> =&gt; <span class="hljs-number">1</span>;
-    | <span class="hljs-type">n</span> =&gt; fib (n <span class="hljs-number">-1</span>) + fib(n<span class="hljs-number">-2</span>);
+<pre><code class="hljs">let rec fib (n) = switch n {
+    | 0 | 1 =&gt; 1;
+    | n =&gt; fib (n -1) + fib(n-2);
 };
-Js.log (fib (<span class="hljs-number">0</span>));
+Js.log (fib (0));
 </code></pre>
 <p>You can compile it directly via <code>bsc test.re</code>, producing the following output:</p>
 <pre><code class="hljs">bucklescript.github.io&gt;bsc test.re
-<span class="hljs-comment">// Generated by BUCKLESCRIPT, PLEASE EDIT WITH CARE</span>
-<span class="hljs-meta">'use strict'</span>;
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fib</span>(<span class="hljs-params">n</span>) </span>{
-  <span class="hljs-keyword">if</span> (n === <span class="hljs-number">0</span> || n === <span class="hljs-number">1</span>) {
-    <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
-  } <span class="hljs-keyword">else</span> {
-    <span class="hljs-keyword">return</span> fib(n - <span class="hljs-number">1</span> | <span class="hljs-number">0</span>) + fib(n - <span class="hljs-number">2</span> | <span class="hljs-number">0</span>) | <span class="hljs-number">0</span>;
+// Generated by BUCKLESCRIPT, PLEASE EDIT WITH CARE
+'use strict';
+function fib(n) {
+  if (n === 0 || n === 1) {
+    return 1;
+  } else {
+    return fib(n - 1 | 0) + fib(n - 2 | 0) | 0;
   }
 }
-<span class="hljs-built_in">console</span>.log(fib(<span class="hljs-number">0</span>));
+console.log(fib(0));
 exports.fib = fib;
-<span class="hljs-comment">/*  Not a pure module */</span>
+/*  Not a pure module */
 </code></pre>
 <p>You can also get the inferred signature directly via <code>bsc -i test.re</code></p>
-<pre><code class="hljs"><span class="hljs-keyword">let</span> fib: <span class="hljs-built_in">int</span> =&gt; <span class="hljs-built_in">int</span>;
+<pre><code class="hljs">let fib: int =&gt; int;
 </code></pre>
 <p>Or even better, you can do a one liner in bsc, via <code>-e</code> option.</p>
-<pre><code class="hljs">bucklescript&gt;bsc -i -e <span class="hljs-symbol">'let</span> id = x =&gt; x'
-<span class="hljs-keyword">let</span> id: <span class="hljs-symbol">'a</span> =&gt; <span class="hljs-symbol">'a</span>;
+<pre><code class="hljs">bucklescript&gt;bsc -i -e 'let id = x =&gt; x'
+let id: 'a =&gt; 'a;
 </code></pre>
 <p>Note: <code>bsc</code> supports vanilla OCaml syntax as well, this is only recommended for toying around, for serious development, <code>bsb</code> is recommended.</p>
 <h2><a class="anchor" aria-hidden="true" id="bstracing-to-visualize-build-profile"></a><a href="#bstracing-to-visualize-build-profile" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>bstracing</code> to visualize build profile</h2>
@@ -418,7 +418,7 @@ exports.fib = fib;
 <p>Suppose you have an OCaml module which relies on an C primitive as below:</p>
 <pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> ff : <span class="hljs-built_in">int</span> -&gt; <span class="hljs-built_in">int</span> -&gt; <span class="hljs-built_in">int</span> = <span class="hljs-string">"caml_fancy_add"</span> 
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">external</span> ff : (int,int) =&gt; int = <span class="hljs-string">"caml_fancy_add"</span> ;
+<pre><code class="hljs css language-reason">external ff : (int,int) =&gt; int = &quot;caml_fancy_add&quot; ;
 </code></pre>
 <p><code>caml_fancy_add</code> is a C function for native code, now we can provide this support in a js files, what user needs to do is adding <code>caml_fancy_add</code> to a global variable like this</p>
 <pre><code class="hljs css language-js"><span class="hljs-comment">/**
@@ -437,7 +437,7 @@ exports.fib = fib;
 <p>For example</p>
 <pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> f : <span class="hljs-built_in">int</span> -&gt; <span class="hljs-built_in">int</span> = <span class="hljs-string">""</span> [@@bs.<span class="hljs-keyword">val</span>]
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.val]</span> <span class="hljs-keyword">external</span> f : int =&gt; int = <span class="hljs-string">""</span> 
+<pre><code class="hljs css language-reason">[@bs.val] external f : int =&gt; int = &quot;&quot; 
 </code></pre>
 <p>Here the JS function name is inferred as <code>f</code> which is the same as OCaml function name.</p>
 <p>Such ffi declaration is fragile to refactoring when changing names of f, it will also change the name of js function name which is probably not what user expected.</p>
@@ -470,16 +470,16 @@ JS is running on so many platforms for example, <a href="https://electronjs.org/
 
 <span class="hljs-keyword">let</span> v = getSafe [|<span class="hljs-number">1</span>;<span class="hljs-number">2</span>;<span class="hljs-number">3</span>|] (-<span class="hljs-number">1</span>)
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> getSafe: (array(int), int) =&gt; int = <span class="hljs-attribute">[%raw
+<pre><code class="hljs css language-reason">let getSafe: (array(int), int) =&gt; int = [%raw
   (a, b) =&gt; {|
     if (b&gt;=0 &amp;&amp; b &lt; a.length) {
-        return a [b]</span>
+        return a [b]
      }
-     throw <span class="hljs-keyword">new</span> <span class="hljs-constructor">Error</span>(<span class="hljs-string">"out of range"</span>)
+     throw new Error(&quot;out of range&quot;)
   |}
-<span class="hljs-literal">]</span>;
+];
 
-<span class="hljs-keyword">let</span> v = <span class="hljs-literal">[|</span><span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span><span class="hljs-literal">|]</span><span class="hljs-operator">-&gt;</span>getSafe<span class="hljs-number">(-1)</span>;
+let v = [|1, 2, 3|]-&gt;getSafe(-1);
 </code></pre>
 <p>Here the raw extension node asks the user to list the parameters and function statement in raw JS syntax. The generated JS code is as follows:</p>
 <pre><code class="hljs css language-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getSafe</span> (<span class="hljs-params">a,b</span>)</span>{ 
@@ -522,18 +522,18 @@ JS is running on so many platforms for example, <a href="https://electronjs.org/
 <span class="hljs-keyword">let</span> <span class="hljs-literal">()</span> = setDate date <span class="hljs-number">3.</span>
 <span class="hljs-keyword">let</span> d = getDate date
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> date;
+<pre><code class="hljs css language-reason">type date;
 
-<span class="hljs-attribute">[@bs.new]</span>
-<span class="hljs-keyword">external</span> fromFloat : float =&gt; date = <span class="hljs-string">"Date"</span> ;
-<span class="hljs-attribute">[@bs.send]</span>
-<span class="hljs-keyword">external</span> getDate : date =&gt; float = <span class="hljs-string">"getDate"</span> ;
-<span class="hljs-attribute">[@bs.send]</span>
-<span class="hljs-keyword">external</span> setDate : date =&gt; float =&gt; unit = <span class="hljs-string">"setDate"</span>;
+[@bs.new]
+external fromFloat : float =&gt; date = &quot;Date&quot; ;
+[@bs.send]
+external getDate : date =&gt; float = &quot;getDate&quot; ;
+[@bs.send]
+external setDate : date =&gt; float =&gt; unit = &quot;setDate&quot;;
 
-<span class="hljs-keyword">let</span> date = fromFloat (<span class="hljs-number">10000.0</span>);
-date<span class="hljs-operator">-&gt;</span>setDate (<span class="hljs-number">3.0</span>);
-<span class="hljs-keyword">let</span> d = date <span class="hljs-operator">-&gt;</span> getDate;
+let date = fromFloat (10000.0);
+date-&gt;setDate (3.0);
+let d = date -&gt; getDate;
 </code></pre>
 <p>The preceding code generates the following JS. As you can see, the binding itself is zero cost and serves as formal documentation.</p>
 <pre><code class="hljs css language-js"><span class="hljs-keyword">var</span> date = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-number">10000</span>);
@@ -560,19 +560,19 @@ let date = fromFloat 10000.
 let () = setDate date 3.
 let d = getDate date
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> date;
-<span class="hljs-keyword">let</span> fromFloat: float =&gt; date = <span class="hljs-attribute">[%raw d =&gt; {|return new Date(d)|}]</span>;
-<span class="hljs-keyword">let</span> getDate: date =&gt; float = <span class="hljs-attribute">[%raw d =&gt; {|return d.getDate()|}]</span>;
-<span class="hljs-keyword">let</span> setDate: (date, float) =&gt; unit = <span class="hljs-attribute">[%raw
+<pre><code class="hljs css language-reason">type date;
+let fromFloat: float =&gt; date = [%raw d =&gt; {|return new Date(d)|}];
+let getDate: date =&gt; float = [%raw d =&gt; {|return d.getDate()|}];
+let setDate: (date, float) =&gt; unit = [%raw
   (d, v) =&gt; {|
    d.setDate(v);
    return 0; // ocaml representation of unit
 |}
-]</span>;
+];
 
-<span class="hljs-keyword">let</span> date = fromFloat(<span class="hljs-number">10000.</span>);
-date<span class="hljs-operator">-&gt;</span>setDate( <span class="hljs-number">3.</span>);
-<span class="hljs-keyword">let</span> d = date<span class="hljs-operator">-&gt;</span>getDate;
+let date = fromFloat(10000.);
+date-&gt;setDate( 3.);
+let d = date-&gt;getDate;
 
 </code></pre>
 <p>The generated JS is as follows, and you can see the cost:</p>
@@ -595,12 +595,12 @@ setDate(date, <span class="hljs-number">3</span>);
 </span></div></article></div><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2019/04/22/release-5-0-4">architecture changes in bs-platform v5.0.4 and v6.0.1</a></h1><p class="post-meta">April 22, 2019</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p>We are going to make releases of bs-platform@5.0.4 and bs-platform@6.0.1, this release mostly contains bug fixes.</p>
 <p>At the same time, we are introducing an internal change which should be fine for average users.</p>
 <p>If you are tooling authors, here are some details: previously we ship react_jsx ppx as a stand-alone binary, for example, reactjs_jsx_ppx_v2.exe, reactjs_jsx_ppx_v2.exe. Recently we start more close integration with <a href="https://reasonml.github.io">reason</a>, so it is absorbed into bsc.exe itself, we introduced a flag to have react-jsx on/off (note these are internal flags, not expected to be exposed to average users):</p>
-<pre><code class="hljs"><span class="hljs-keyword">bsc.exe </span>-<span class="hljs-keyword">bs-jsx </span><span class="hljs-number">2</span> <span class="hljs-comment"># turn on reactjs_jsx_ppx_v2</span>
-<span class="hljs-keyword">bsc.exe </span>-<span class="hljs-keyword">bs-jsx </span><span class="hljs-number">3</span> <span class="hljs-comment"># turn on reactjs_jsx_ppx_v3</span>
+<pre><code class="hljs">bsc.exe -bs-jsx 2 # turn on reactjs_jsx_ppx_v2
+bsc.exe -bs-jsx 3 # turn on reactjs_jsx_ppx_v3
 </code></pre>
 <p>Like before, we also ship a stand alone bsppx.exe, it now absorbs reactjs_jsx_ppx as well.</p>
-<pre><code class="hljs"><span class="hljs-keyword">bsppx.exe </span>-<span class="hljs-keyword">bs-jsx </span><span class="hljs-number">2</span> <span class="hljs-comment"># turn on reactjs_jsx_ppx_v2</span>
-<span class="hljs-keyword">bsppx.exe </span>-<span class="hljs-keyword">bs-jsx </span><span class="hljs-number">3</span> <span class="hljs-comment"># turn on reactjs_jsx_ppx_v3</span>
+<pre><code class="hljs">bsppx.exe -bs-jsx 2 # turn on reactjs_jsx_ppx_v2
+bsppx.exe -bs-jsx 3 # turn on reactjs_jsx_ppx_v3
 </code></pre>
 <p>The benefit of this change is that it help reduced the prebuilt binary size significantly and it also help shave 5~10ms per file compilation.</p>
 <p>Another minor change we added, is that we introduced an env variable <code>BS_VSCODE</code> to help error messages more adapted to VsCode, see <a href="https://bucklescript.github.io/docs/en/build-configuration#bs-vscode-error-output-adapted-for-vscode">here</a> for more details.</p>
@@ -610,15 +610,15 @@ setDate(date, <span class="hljs-number">3</span>);
 <li><p>react jsx v3 is available which means zero-cost for react-bindings (@rickyvetter will talk about it in a separate post)</p></li>
 <li><p>bs.inline for library authors. Our compilers have a pretty good inlining heuristics by default, in this release, we allow some user input for some fine-tuned inlining behavior. Read this (<a href="https://github.com/BuckleScript/bucklescript/issues/3472">https://github.com/BuckleScript/bucklescript/issues/3472</a>) for more use cases.
 A typical usage is as below</p>
-<pre><code class="hljs"><span class="hljs-keyword">module</span> <span class="hljs-module-identifier">Platform</span> = struct
-    <span class="hljs-keyword">let</span> ios = <span class="hljs-string">"ios"</span> <span class="hljs-attribute">[@@bs.inline]</span>
+<pre><code class="hljs">module Platform = struct
+    let ios = &quot;ios&quot; [@@bs.inline]
 end    
 </code></pre>
 <p>If user wants to write an interface, it has to carry the payload though:</p>
-<pre><code class="hljs"><span class="hljs-keyword">module</span> <span class="hljs-module-identifier">Platform</span> : sig
-    <span class="hljs-keyword">val</span> ios : string <span class="hljs-attribute">[@@bs.inline "ios"]</span>
+<pre><code class="hljs">module Platform : sig
+    val ios : string [@@bs.inline &quot;ios&quot;]
 end = struct
-    <span class="hljs-keyword">let</span> ios = <span class="hljs-string">"ios"</span> <span class="hljs-attribute">[@@bs.inline]</span>
+    let ios = &quot;ios&quot; [@@bs.inline]
 end    
 </code></pre>
 <p>It is a bit verbose for library authors, but this should be transparent to library users.</p></li>
@@ -641,11 +641,11 @@ note we expect users to have some issues in experiment, feedback is welcome!</p>
 <li><p>we prebuilt binaries for Windows, MacOS and Linux, this will help reduce your CI build time significantly. For exotic OSes, it will fall back to build from source</p></li>
 <li><p>bs.deriving light config. For people who prefer short names, we make it configurable</p></li>
 </ul>
-<pre><code class="hljs"><span class="hljs-keyword">type</span> t = {
+<pre><code class="hljs">type t = {
     x : int
-} <span class="hljs-attribute">[@@bs.deriving {abstract = light}]</span>
+} [@@bs.deriving {abstract = light}]
 
-<span class="hljs-keyword">let</span> f (obj : t) = obj |. x 
+let f (obj : t) = obj |. x 
 </code></pre>
 <p>This is the last major release which is targeting OCaml 4.02.3, in the future we will make major releases targeting OCaml 4.06.</p>
 <p>Happy Hacking!</p>
@@ -662,15 +662,15 @@ note we expect users to have some issues in experiment, feedback is welcome!</p>
 <p>To reduce such latency in a single compiler's workload, we spent lots of time tweaking the performance of the compiler itself, for example, rewriting the hot path in C code, most BuckleScript compiler source code is written in an imperative C-style to avoid allocation.</p>
 <p>To have a general idea of how fast BuckleScript's compiler runs:</p>
 <pre><code class="hljs">test&gt;cat fib.ml
-<span class="hljs-keyword">let</span> rec fib = function
-  | <span class="hljs-type">0</span> | <span class="hljs-type">1</span> -&gt; <span class="hljs-number">1</span>
-  | <span class="hljs-type">n</span> -&gt; fib (n - <span class="hljs-number">1</span>) + fib (n - <span class="hljs-number">2</span>)
+let rec fib = function
+  | 0 | 1 -&gt; 1
+  | n -&gt; fib (n - 1) + fib (n - 2)
 </code></pre>
-<pre><code class="hljs">test&gt;time /usr/local/<span class="hljs-class"><span class="hljs-keyword">lib</span>/<span class="hljs-title">node_modules</span>/<span class="hljs-title">bs</span>-<span class="hljs-title">platform</span>/<span class="hljs-title">lib</span>/<span class="hljs-title">bsc</span>.<span class="hljs-title">exe</span> -<span class="hljs-title">bs</span>-<span class="hljs-title">cmi</span> -<span class="hljs-title">bs</span>-<span class="hljs-title">cmj</span> -<span class="hljs-title">c</span> <span class="hljs-title">fib</span>.<span class="hljs-title">ml</span></span>
+<pre><code class="hljs">test&gt;time /usr/local/lib/node_modules/bs-platform/lib/bsc.exe -bs-cmi -bs-cmj -c fib.ml
 
-real    <span class="hljs-number">0</span>m0.<span class="hljs-number">008</span>s
-user    <span class="hljs-number">0</span>m0.<span class="hljs-number">004</span>s
-sys     <span class="hljs-number">0</span>m0.<span class="hljs-number">003</span>s
+real    0m0.008s
+user    0m0.004s
+sys     0m0.003s
 </code></pre>
 <p>Having a compiler run fast with a cold start lays the groundwork so that it won't be the bottleneck in the whole process. This is because when the architecture decouple the compiler from the scheduler, the compiler will be invoked by the scheduler hunderds of thousands of times in a build cycle, the latency of the compiler in a single compilation unit will add up.</p>
 <h2><a class="anchor" aria-hidden="true" id="the-art-of-being-incremental"></a><a href="#the-art-of-being-incremental" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>The art of being incremental</h2>
@@ -683,7 +683,7 @@ depend on the last modified time of A, it depends on the intermediate output of 
 <p>Suppose the interface is not changed, whenever we touch the implementation file, BuckleScript designs the data structure of <code>.cmj</code> in a way that the content of <code>.cmj</code> is seldom changed. (Let's say its probability is 0.05 which is rare in cases when the arity of a function changed)</p>
 <p>If neither <code>.cmj</code> nor <code>.cmi</code>  gets changed, the scheduler would stop propagation.</p>
 <p>Suppose the <code>.cmj</code> file is still changed (P = 0.05), A's dependency B would get recompiled. Note <code>B.cmi</code> only depends on <code>A.cmi</code>, so it will not get compiled, only <code>B.cmj</code> will get recompiled, its chances that <code>B.cmj</code> gets changed will be even lower. In practice, the probabiity of the length of propagation chain is more than two is less than</p>
-<pre><code class="hljs"><span class="hljs-number">0.05</span> * <span class="hljs-number">0.05</span> = <span class="hljs-number">0.0025</span>
+<pre><code class="hljs">0.05 * 0.05 = 0.0025
 </code></pre>
 <p>This means when we are in an edit-build cycle, whenever A gets changed, it may have many direct dependencies, but the longest rebuild sequence will get settled in at most two compilation units. Suppose the scheduler schedule the tasks in parallel, the longest sequence is bound by two, which means the rebuild cycle is very close to compiling two compilation units.</p>
 <p>In implementation, we also generalized the idea of stopping propogation of .cmi changes, so whenever we are adding some comments in the interface file, it will
@@ -746,32 +746,32 @@ Having an in-memory scheduler will help reducing redundant work such as parsing 
 </tbody>
 </table>
 <p>The verbose build log for adding values on source of size <code>13122</code> is as below:</p>
-<pre><code class="hljs">test9&gt;ninja <span class="hljs-operator">-</span><span class="hljs-constructor">C</span> lib<span class="hljs-operator">/</span>bs <span class="hljs-operator">-</span>v
-ninja: <span class="hljs-constructor">Entering</span> directory <span class="hljs-constructor">`lib</span><span class="hljs-operator">/</span>bs'
-<span class="hljs-literal">[</span><span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">2</span><span class="hljs-literal">]</span> <span class="hljs-operator">/</span>usr<span class="hljs-operator">/</span>local<span class="hljs-operator">/</span>lib<span class="hljs-operator">/</span>node_modules<span class="hljs-operator">/</span>bs<span class="hljs-operator">-</span>platform<span class="hljs-operator">/</span>lib<span class="hljs-operator">/</span>bsc.exe    <span class="hljs-operator">-</span>w <span class="hljs-operator">-</span><span class="hljs-number">30</span><span class="hljs-operator">-</span><span class="hljs-number">40</span><span class="hljs-operator">+</span><span class="hljs-number">6</span><span class="hljs-operator">+</span><span class="hljs-number">7</span><span class="hljs-operator">+</span><span class="hljs-number">27</span><span class="hljs-operator">+</span><span class="hljs-number">32.</span>.<span class="hljs-number">39</span><span class="hljs-operator">+</span><span class="hljs-number">44</span><span class="hljs-operator">+</span><span class="hljs-number">45</span><span class="hljs-operator">+</span><span class="hljs-number">101</span> <span class="hljs-operator">-</span>nostdlib <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> '<span class="hljs-operator">/</span><span class="hljs-constructor">Users</span><span class="hljs-operator">/</span>hongbozhang<span class="hljs-operator">/</span>git<span class="hljs-operator">/</span>bsb<span class="hljs-operator">-</span>bench<span class="hljs-operator">/</span>test9<span class="hljs-operator">/</span>node_modules<span class="hljs-operator">/</span>bs<span class="hljs-operator">-</span>platform<span class="hljs-operator">/</span>lib<span class="hljs-operator">/</span>ocaml' <span class="hljs-operator">-</span>color always <span class="hljs-operator">-</span>c <span class="hljs-operator">-</span>o src<span class="hljs-operator">/</span>dir_1_1<span class="hljs-operator">/</span>m_1_1_1_1.mlast <span class="hljs-operator">-</span>bs<span class="hljs-operator">-</span>syntax<span class="hljs-operator">-</span>only <span class="hljs-operator">-</span>bs<span class="hljs-operator">-</span>binary<span class="hljs-operator">-</span>ast <span class="hljs-operator">/</span><span class="hljs-constructor">Users</span><span class="hljs-operator">/</span>hongbozhang<span class="hljs-operator">/</span>git<span class="hljs-operator">/</span>bsb<span class="hljs-operator">-</span>bench<span class="hljs-operator">/</span>test9<span class="hljs-operator">/</span>src<span class="hljs-operator">/</span>dir_1_1<span class="hljs-operator">/</span>m_1_1_1_1.ml
-<span class="hljs-literal">[</span><span class="hljs-number">2</span><span class="hljs-operator">/</span><span class="hljs-number">2</span><span class="hljs-literal">]</span> <span class="hljs-operator">/</span>usr<span class="hljs-operator">/</span>local<span class="hljs-operator">/</span>lib<span class="hljs-operator">/</span>node_modules<span class="hljs-operator">/</span>bs<span class="hljs-operator">-</span>platform<span class="hljs-operator">/</span>lib<span class="hljs-operator">/</span>bsb_helper.exe  <span class="hljs-operator">-</span>g <span class="hljs-number">0</span> <span class="hljs-operator">-</span><span class="hljs-constructor">MD</span> src<span class="hljs-operator">/</span>dir_1_1<span class="hljs-operator">/</span>m_1_1_1_1.mlast
-<span class="hljs-literal">[</span><span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">5905</span><span class="hljs-literal">]</span> <span class="hljs-operator">/</span>usr<span class="hljs-operator">/</span>local<span class="hljs-operator">/</span>lib<span class="hljs-operator">/</span>node_modules<span class="hljs-operator">/</span>bs<span class="hljs-operator">-</span>platform<span class="hljs-operator">/</span>lib<span class="hljs-operator">/</span>bsc.exe <span class="hljs-operator">-</span>bs<span class="hljs-operator">-</span>package<span class="hljs-operator">-</span>name test  <span class="hljs-operator">-</span>bs<span class="hljs-operator">-</span>package<span class="hljs-operator">-</span>output commonjs:lib<span class="hljs-operator">/</span>js<span class="hljs-operator">/</span>src<span class="hljs-operator">/</span>dir_1_1 <span class="hljs-operator">-</span>bs<span class="hljs-operator">-</span>assume<span class="hljs-operator">-</span>has<span class="hljs-operator">-</span>mli <span class="hljs-operator">-</span>bs<span class="hljs-operator">-</span>no<span class="hljs-operator">-</span>builtin<span class="hljs-operator">-</span>ppx<span class="hljs-operator">-</span>ml <span class="hljs-operator">-</span>bs<span class="hljs-operator">-</span>no<span class="hljs-operator">-</span>implicit<span class="hljs-operator">-</span><span class="hljs-keyword">include</span>   <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_4_6 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_4_1 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_4_8 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_6_5 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_6_2 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_8_3 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_8_4 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_2_3 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_2_4 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_6_3 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_4_9 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_6_4 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_4_7 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_2_5 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_2_2 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_8_5 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_8_2 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_9_9 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_3_7 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_1_3 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_9_7 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_3_9 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_1_4 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_7_6 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_7_1 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_5_5 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_7_8 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_5_2 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_3_8 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_9_6 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_1_5 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_9_1 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_1_2 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_3_6 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_9_8 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_3_1 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_5_3 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_5_4 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_7_9 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_7_7 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_8_7 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_2_9 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_8_9 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_2_7 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_4_2 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_6_8 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_4_5 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_6_1 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_6_6 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_2_1 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_2_6 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_8_8 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_8_1 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_2_8 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_8_6 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_6_7 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_6_9 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_4_4 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_4_3 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_7_2 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_7_5 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_5_8 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_5_1 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_5_6 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_1_9 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_3_4 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_3_3 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_9_4 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_1_7 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_9_3 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_5_7 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_7_4 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_5_9 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_7_3 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_9_2 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_1_1 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_9_5 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_1_6 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_3_2 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_1_8 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_3_5  <span class="hljs-operator">-</span>w <span class="hljs-operator">-</span><span class="hljs-number">30</span><span class="hljs-operator">-</span><span class="hljs-number">40</span><span class="hljs-operator">+</span><span class="hljs-number">6</span><span class="hljs-operator">+</span><span class="hljs-number">7</span><span class="hljs-operator">+</span><span class="hljs-number">27</span><span class="hljs-operator">+</span><span class="hljs-number">32.</span>.<span class="hljs-number">39</span><span class="hljs-operator">+</span><span class="hljs-number">44</span><span class="hljs-operator">+</span><span class="hljs-number">45</span><span class="hljs-operator">+</span><span class="hljs-number">101</span> <span class="hljs-operator">-</span>nostdlib <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> '<span class="hljs-operator">/</span><span class="hljs-constructor">Users</span><span class="hljs-operator">/</span>hongbozhang<span class="hljs-operator">/</span>git<span class="hljs-operator">/</span>bsb<span class="hljs-operator">-</span>bench<span class="hljs-operator">/</span>test9<span class="hljs-operator">/</span>node_modules<span class="hljs-operator">/</span>bs<span class="hljs-operator">-</span>platform<span class="hljs-operator">/</span>lib<span class="hljs-operator">/</span>ocaml' <span class="hljs-operator">-</span>color always <span class="hljs-operator">-</span>o src<span class="hljs-operator">/</span>dir_1_1<span class="hljs-operator">/</span>m_1_1_1_1.cmj <span class="hljs-operator">-</span>c  src<span class="hljs-operator">/</span>dir_1_1<span class="hljs-operator">/</span>m_1_1_1_1.mlast 
-<span class="hljs-constructor">File</span> <span class="hljs-string">"/Users/hongbozhang/git/bsb-bench/test9/src/dir_1_1/m_1_1_1_1.ml"</span>, line <span class="hljs-number">4</span>, characters <span class="hljs-number">4</span><span class="hljs-operator">-</span><span class="hljs-number">5</span>:
-<span class="hljs-constructor">Warning</span> <span class="hljs-number">32</span>: unused value a.
+<pre><code class="hljs">test9&gt;ninja -C lib/bs -v
+ninja: Entering directory `lib/bs'
+[1/2] /usr/local/lib/node_modules/bs-platform/lib/bsc.exe    -w -30-40+6+7+27+32..39+44+45+101 -nostdlib -I '/Users/hongbozhang/git/bsb-bench/test9/node_modules/bs-platform/lib/ocaml' -color always -c -o src/dir_1_1/m_1_1_1_1.mlast -bs-syntax-only -bs-binary-ast /Users/hongbozhang/git/bsb-bench/test9/src/dir_1_1/m_1_1_1_1.ml
+[2/2] /usr/local/lib/node_modules/bs-platform/lib/bsb_helper.exe  -g 0 -MD src/dir_1_1/m_1_1_1_1.mlast
+[1/5905] /usr/local/lib/node_modules/bs-platform/lib/bsc.exe -bs-package-name test  -bs-package-output commonjs:lib/js/src/dir_1_1 -bs-assume-has-mli -bs-no-builtin-ppx-ml -bs-no-implicit-include   -I src/dir_4_6 -I src/dir_4_1 -I src/dir_4_8 -I src/dir_6_5 -I src/dir_6_2 -I src/dir_8_3 -I src/dir_8_4 -I src/dir_2_3 -I src/dir_2_4 -I src/dir_6_3 -I src/dir_4_9 -I src/dir_6_4 -I src/dir_4_7 -I src/dir_2_5 -I src/dir_2_2 -I src/dir_8_5 -I src/dir_8_2 -I src/dir_9_9 -I src/dir_3_7 -I src/dir_1_3 -I src/dir_9_7 -I src/dir_3_9 -I src/dir_1_4 -I src/dir_7_6 -I src/dir_7_1 -I src/dir_5_5 -I src/dir_7_8 -I src/dir_5_2 -I src/dir_3_8 -I src/dir_9_6 -I src/dir_1_5 -I src/dir_9_1 -I src/dir_1_2 -I src/dir_3_6 -I src/dir_9_8 -I src/dir_3_1 -I src/dir_5_3 -I src/dir_5_4 -I src/dir_7_9 -I src/dir_7_7 -I src/dir_8_7 -I src/dir_2_9 -I src/dir_8_9 -I src/dir_2_7 -I src/dir_4_2 -I src/dir_6_8 -I src/dir_4_5 -I src/dir_6_1 -I src/dir_6_6 -I src/dir_2_1 -I src/dir_2_6 -I src/dir_8_8 -I src/dir_8_1 -I src/dir_2_8 -I src/dir_8_6 -I src/dir_6_7 -I src/dir_6_9 -I src/dir_4_4 -I src/dir_4_3 -I src/dir_7_2 -I src/dir_7_5 -I src/dir_5_8 -I src/dir_5_1 -I src/dir_5_6 -I src/dir_1_9 -I src/dir_3_4 -I src/dir_3_3 -I src/dir_9_4 -I src/dir_1_7 -I src/dir_9_3 -I src/dir_5_7 -I src/dir_7_4 -I src/dir_5_9 -I src/dir_7_3 -I src/dir_9_2 -I src/dir_1_1 -I src/dir_9_5 -I src/dir_1_6 -I src/dir_3_2 -I src/dir_1_8 -I src/dir_3_5  -w -30-40+6+7+27+32..39+44+45+101 -nostdlib -I '/Users/hongbozhang/git/bsb-bench/test9/node_modules/bs-platform/lib/ocaml' -color always -o src/dir_1_1/m_1_1_1_1.cmj -c  src/dir_1_1/m_1_1_1_1.mlast 
+File &quot;/Users/hongbozhang/git/bsb-bench/test9/src/dir_1_1/m_1_1_1_1.ml&quot;, line 4, characters 4-5:
+Warning 32: unused value a.
 
 </code></pre>
 <p>Ignoring the preprocess stage, We can see there are 5906 jobs scheduled but only one job is processed. This is because adding a single value does not change <code>m_1_1_1_1.cmj</code> so that the change of propogation is stopped immediately.</p>
 <p>The result is surprisingly good even if change the interface of root files, by looking at the verbose build log:</p>
-<pre><code class="hljs">test9&gt;ninja <span class="hljs-operator">-</span><span class="hljs-constructor">C</span> lib<span class="hljs-operator">/</span>bs <span class="hljs-operator">-</span>v
-ninja: <span class="hljs-constructor">Entering</span> directory <span class="hljs-constructor">`lib</span><span class="hljs-operator">/</span>bs'
-<span class="hljs-literal">[</span><span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">2</span><span class="hljs-literal">]</span> <span class="hljs-operator">/</span>usr<span class="hljs-operator">/</span>local<span class="hljs-operator">/</span>lib<span class="hljs-operator">/</span>node_modules<span class="hljs-operator">/</span>bs<span class="hljs-operator">-</span>platform<span class="hljs-operator">/</span>lib<span class="hljs-operator">/</span>bsc.exe    <span class="hljs-operator">-</span>w <span class="hljs-operator">-</span><span class="hljs-number">30</span><span class="hljs-operator">-</span><span class="hljs-number">40</span><span class="hljs-operator">+</span><span class="hljs-number">6</span><span class="hljs-operator">+</span><span class="hljs-number">7</span><span class="hljs-operator">+</span><span class="hljs-number">27</span><span class="hljs-operator">+</span><span class="hljs-number">32.</span>.<span class="hljs-number">39</span><span class="hljs-operator">+</span><span class="hljs-number">44</span><span class="hljs-operator">+</span><span class="hljs-number">45</span><span class="hljs-operator">+</span><span class="hljs-number">101</span> <span class="hljs-operator">-</span>nostdlib <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> '<span class="hljs-operator">/</span><span class="hljs-constructor">Users</span><span class="hljs-operator">/</span>hongbozhang<span class="hljs-operator">/</span>git<span class="hljs-operator">/</span>bsb<span class="hljs-operator">-</span>bench<span class="hljs-operator">/</span>test9<span class="hljs-operator">/</span>node_modules<span class="hljs-operator">/</span>bs<span class="hljs-operator">-</span>platform<span class="hljs-operator">/</span>lib<span class="hljs-operator">/</span>ocaml' <span class="hljs-operator">-</span>color always <span class="hljs-operator">-</span>c <span class="hljs-operator">-</span>o src<span class="hljs-operator">/</span>dir_1_1<span class="hljs-operator">/</span>m_1_1_1_1.mliast <span class="hljs-operator">-</span>bs<span class="hljs-operator">-</span>syntax<span class="hljs-operator">-</span>only <span class="hljs-operator">-</span>bs<span class="hljs-operator">-</span>binary<span class="hljs-operator">-</span>ast <span class="hljs-operator">/</span><span class="hljs-constructor">Users</span><span class="hljs-operator">/</span>hongbozhang<span class="hljs-operator">/</span>git<span class="hljs-operator">/</span>bsb<span class="hljs-operator">-</span>bench<span class="hljs-operator">/</span>test9<span class="hljs-operator">/</span>src<span class="hljs-operator">/</span>dir_1_1<span class="hljs-operator">/</span>m_1_1_1_1.mli
-<span class="hljs-literal">[</span><span class="hljs-number">2</span><span class="hljs-operator">/</span><span class="hljs-number">2</span><span class="hljs-literal">]</span> <span class="hljs-operator">/</span>usr<span class="hljs-operator">/</span>local<span class="hljs-operator">/</span>lib<span class="hljs-operator">/</span>node_modules<span class="hljs-operator">/</span>bs<span class="hljs-operator">-</span>platform<span class="hljs-operator">/</span>lib<span class="hljs-operator">/</span>bsb_helper.exe  <span class="hljs-operator">-</span>g <span class="hljs-number">0</span> <span class="hljs-operator">-</span><span class="hljs-constructor">MD</span> src<span class="hljs-operator">/</span>dir_1_1<span class="hljs-operator">/</span>m_1_1_1_1.mliast
-<span class="hljs-literal">[</span><span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">5906</span><span class="hljs-literal">]</span> <span class="hljs-operator">/</span>usr<span class="hljs-operator">/</span>local<span class="hljs-operator">/</span>lib<span class="hljs-operator">/</span>node_modules<span class="hljs-operator">/</span>bs<span class="hljs-operator">-</span>platform<span class="hljs-operator">/</span>lib<span class="hljs-operator">/</span>bsc.exe <span class="hljs-operator">-</span>bs<span class="hljs-operator">-</span>package<span class="hljs-operator">-</span>name test  <span class="hljs-operator">-</span>bs<span class="hljs-operator">-</span>package<span class="hljs-operator">-</span>output commonjs:lib<span class="hljs-operator">/</span>js<span class="hljs-operator">/</span>src<span class="hljs-operator">/</span>dir_1_1 <span class="hljs-operator">-</span>bs<span class="hljs-operator">-</span>no<span class="hljs-operator">-</span>builtin<span class="hljs-operator">-</span>ppx<span class="hljs-operator">-</span>mli <span class="hljs-operator">-</span>bs<span class="hljs-operator">-</span>no<span class="hljs-operator">-</span>implicit<span class="hljs-operator">-</span><span class="hljs-keyword">include</span>  <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_4_6 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_4_1 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_4_8 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_6_5 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_6_2 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_8_3 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_8_4 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_2_3 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_2_4 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_6_3 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_4_9 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_6_4 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_4_7 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_2_5 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_2_2 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_8_5 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_8_2 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_9_9 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_3_7 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_1_3 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_9_7 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_3_9 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_1_4 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_7_6 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_7_1 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_5_5 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_7_8 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_5_2 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_3_8 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_9_6 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_1_5 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_9_1 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_1_2 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_3_6 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_9_8 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_3_1 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_5_3 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_5_4 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_7_9 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_7_7 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_8_7 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_2_9 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_8_9 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_2_7 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_4_2 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_6_8 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_4_5 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_6_1 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_6_6 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_2_1 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_2_6 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_8_8 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_8_1 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_2_8 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_8_6 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_6_7 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_6_9 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_4_4 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_4_3 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_7_2 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_7_5 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_5_8 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_5_1 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_5_6 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_1_9 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_3_4 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_3_3 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_9_4 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_1_7 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_9_3 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_5_7 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_7_4 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_5_9 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_7_3 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_9_2 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_1_1 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_9_5 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_1_6 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_3_2 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_1_8 <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> src<span class="hljs-operator">/</span>dir_3_5  <span class="hljs-operator">-</span>w <span class="hljs-operator">-</span><span class="hljs-number">30</span><span class="hljs-operator">-</span><span class="hljs-number">40</span><span class="hljs-operator">+</span><span class="hljs-number">6</span><span class="hljs-operator">+</span><span class="hljs-number">7</span><span class="hljs-operator">+</span><span class="hljs-number">27</span><span class="hljs-operator">+</span><span class="hljs-number">32.</span>.<span class="hljs-number">39</span><span class="hljs-operator">+</span><span class="hljs-number">44</span><span class="hljs-operator">+</span><span class="hljs-number">45</span><span class="hljs-operator">+</span><span class="hljs-number">101</span> <span class="hljs-operator">-</span>nostdlib <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> '<span class="hljs-operator">/</span><span class="hljs-constructor">Users</span><span class="hljs-operator">/</span>hongbozhang<span class="hljs-operator">/</span>git<span class="hljs-operator">/</span>bsb<span class="hljs-operator">-</span>bench<span class="hljs-operator">/</span>test9<span class="hljs-operator">/</span>node_modules<span class="hljs-operator">/</span>bs<span class="hljs-operator">-</span>platform<span class="hljs-operator">/</span>lib<span class="hljs-operator">/</span>ocaml' <span class="hljs-operator">-</span>color always <span class="hljs-operator">-</span>o src<span class="hljs-operator">/</span>dir_1_1<span class="hljs-operator">/</span>m_1_1_1_1.cmi <span class="hljs-operator">-</span>c  src<span class="hljs-operator">/</span>dir_1_1<span class="hljs-operator">/</span>m_1_1_1_1.mliast
-<span class="hljs-literal">[</span><span class="hljs-number">2</span><span class="hljs-operator">/</span><span class="hljs-number">5906</span><span class="hljs-literal">]</span> <span class="hljs-operator">/</span>usr<span class="hljs-operator">/</span>local<span class="hljs-operator">/</span>lib<span class="hljs-operator">/</span>node_modules<span class="hljs-operator">/</span>bs<span class="hljs-operator">-</span>platform<span class="hljs-operator">/</span>lib<span class="hljs-operator">/</span>bsc.exe <span class="hljs-operator">-</span>bs<span class="hljs-operator">-</span>package<span class="hljs-operator">-</span>name test  <span class="hljs-operator">-</span>bs<span class="hljs-operator">-</span>package<span class="hljs-operator">-</span>output commonjs:lib<span class="hljs-operator">/</span>js<span class="hljs-operator">/</span>src<span class="hljs-operator">/</span>dir_1_1 <span class="hljs-operator">-</span>bs<span class="hljs-operator">-</span>assume<span class="hljs-operator">-</span>has<span class="hljs-operator">-</span>mli <span class="hljs-operator">-</span>bs<span class="hljs-operator">-</span>no<span class="hljs-operator">-</span>builtin<span class="hljs-operator">-</span>ppx<span class="hljs-operator">-</span>ml <span class="hljs-operator">-</span>bs<span class="hljs-operator">-</span>no<span class="hljs-operator">-</span>implicit<span class="hljs-operator">-</span><span class="hljs-keyword">include</span>   <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> <span class="hljs-operator">...</span>  <span class="hljs-operator">-</span>color always <span class="hljs-operator">-</span>o src<span class="hljs-operator">/</span>dir_1_1<span class="hljs-operator">/</span>m_1_1_1_1.cmj <span class="hljs-operator">-</span>c  src<span class="hljs-operator">/</span>dir_1_1<span class="hljs-operator">/</span>m_1_1_1_1.mlast 
-<span class="hljs-literal">[</span><span class="hljs-number">3</span><span class="hljs-operator">/</span><span class="hljs-number">5906</span><span class="hljs-literal">]</span> <span class="hljs-operator">/</span>usr<span class="hljs-operator">/</span>local<span class="hljs-operator">/</span>lib<span class="hljs-operator">/</span>node_modules<span class="hljs-operator">/</span>bs<span class="hljs-operator">-</span>platform<span class="hljs-operator">/</span>lib<span class="hljs-operator">/</span>bsc.exe <span class="hljs-operator">-</span>bs<span class="hljs-operator">-</span>package<span class="hljs-operator">-</span>name test  <span class="hljs-operator">-</span>bs<span class="hljs-operator">-</span>package<span class="hljs-operator">-</span>output commonjs:lib<span class="hljs-operator">/</span>js<span class="hljs-operator">/</span>src<span class="hljs-operator">/</span>dir_1_1 <span class="hljs-operator">-</span>bs<span class="hljs-operator">-</span>assume<span class="hljs-operator">-</span>has<span class="hljs-operator">-</span>mli <span class="hljs-operator">-</span>bs<span class="hljs-operator">-</span>no<span class="hljs-operator">-</span>builtin<span class="hljs-operator">-</span>ppx<span class="hljs-operator">-</span>ml <span class="hljs-operator">-</span>bs<span class="hljs-operator">-</span>no<span class="hljs-operator">-</span>implicit<span class="hljs-operator">-</span><span class="hljs-keyword">include</span>   <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> <span class="hljs-operator">...</span>  <span class="hljs-operator">-</span>w <span class="hljs-operator">-</span><span class="hljs-number">30</span><span class="hljs-operator">-</span><span class="hljs-number">40</span><span class="hljs-operator">+</span><span class="hljs-number">6</span><span class="hljs-operator">+</span><span class="hljs-number">7</span><span class="hljs-operator">+</span><span class="hljs-number">27</span><span class="hljs-operator">+</span><span class="hljs-number">32.</span>.<span class="hljs-number">39</span><span class="hljs-operator">+</span><span class="hljs-number">44</span><span class="hljs-operator">+</span><span class="hljs-number">45</span><span class="hljs-operator">+</span><span class="hljs-number">101</span> <span class="hljs-operator">-</span>nostdlib <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> '<span class="hljs-operator">/</span><span class="hljs-constructor">Users</span><span class="hljs-operator">/</span>hongbozhang<span class="hljs-operator">/</span>git<span class="hljs-operator">/</span>bsb<span class="hljs-operator">-</span>bench<span class="hljs-operator">/</span>test9<span class="hljs-operator">/</span>node_modules<span class="hljs-operator">/</span>bs<span class="hljs-operator">-</span>platform<span class="hljs-operator">/</span>lib<span class="hljs-operator">/</span>ocaml' <span class="hljs-operator">-</span>color always <span class="hljs-operator">-</span>o src<span class="hljs-operator">/</span>dir_1_1<span class="hljs-operator">/</span>m_1_1_2_2.cmj <span class="hljs-operator">-</span>c  src<span class="hljs-operator">/</span>dir_1_1<span class="hljs-operator">/</span>m_1_1_2_2.mlast 
-<span class="hljs-literal">[</span><span class="hljs-number">4</span><span class="hljs-operator">/</span><span class="hljs-number">5906</span><span class="hljs-literal">]</span> <span class="hljs-operator">/</span>usr<span class="hljs-operator">/</span>local<span class="hljs-operator">/</span>lib<span class="hljs-operator">/</span>node_modules<span class="hljs-operator">/</span>bs<span class="hljs-operator">-</span>platform<span class="hljs-operator">/</span>lib<span class="hljs-operator">/</span>bsc.exe <span class="hljs-operator">-</span>bs<span class="hljs-operator">-</span>package<span class="hljs-operator">-</span>name test  <span class="hljs-operator">-</span>bs<span class="hljs-operator">-</span>package<span class="hljs-operator">-</span>output commonjs:lib<span class="hljs-operator">/</span>js<span class="hljs-operator">/</span>src<span class="hljs-operator">/</span>dir_1_1 <span class="hljs-operator">-</span>bs<span class="hljs-operator">-</span>assume<span class="hljs-operator">-</span>has<span class="hljs-operator">-</span>mli <span class="hljs-operator">-</span>bs<span class="hljs-operator">-</span>no<span class="hljs-operator">-</span>builtin<span class="hljs-operator">-</span>ppx<span class="hljs-operator">-</span>ml <span class="hljs-operator">-</span>bs<span class="hljs-operator">-</span>no<span class="hljs-operator">-</span>implicit<span class="hljs-operator">-</span><span class="hljs-keyword">include</span>   <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> <span class="hljs-operator">...</span> <span class="hljs-operator">-</span>color always <span class="hljs-operator">-</span>o src<span class="hljs-operator">/</span>dir_1_1<span class="hljs-operator">/</span>m_1_1_2_1.cmj <span class="hljs-operator">-</span>c  src<span class="hljs-operator">/</span>dir_1_1<span class="hljs-operator">/</span>m_1_1_2_1.mlast 
-<span class="hljs-literal">[</span><span class="hljs-number">5</span><span class="hljs-operator">/</span><span class="hljs-number">5906</span><span class="hljs-literal">]</span> <span class="hljs-operator">/</span>usr<span class="hljs-operator">/</span>local<span class="hljs-operator">/</span>lib<span class="hljs-operator">/</span>node_modules<span class="hljs-operator">/</span>bs<span class="hljs-operator">-</span>platform<span class="hljs-operator">/</span>lib<span class="hljs-operator">/</span>bsc.exe <span class="hljs-operator">-</span>bs<span class="hljs-operator">-</span>package<span class="hljs-operator">-</span>name test  <span class="hljs-operator">-</span>bs<span class="hljs-operator">-</span>package<span class="hljs-operator">-</span>output commonjs:lib<span class="hljs-operator">/</span>js<span class="hljs-operator">/</span>src<span class="hljs-operator">/</span>dir_1_1 <span class="hljs-operator">-</span>bs<span class="hljs-operator">-</span>assume<span class="hljs-operator">-</span>has<span class="hljs-operator">-</span>mli <span class="hljs-operator">-</span>bs<span class="hljs-operator">-</span>no<span class="hljs-operator">-</span>builtin<span class="hljs-operator">-</span>ppx<span class="hljs-operator">-</span>ml <span class="hljs-operator">-</span>bs<span class="hljs-operator">-</span>no<span class="hljs-operator">-</span>implicit<span class="hljs-operator">-</span><span class="hljs-keyword">include</span>   <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> <span class="hljs-operator">...</span> <span class="hljs-operator">-</span>color always <span class="hljs-operator">-</span>o src<span class="hljs-operator">/</span>dir_1_1<span class="hljs-operator">/</span>m_1_1_2_3.cmj <span class="hljs-operator">-</span>c  src<span class="hljs-operator">/</span>dir_1_1<span class="hljs-operator">/</span>m_1_1_2_3.mlast 
-<span class="hljs-literal">[</span><span class="hljs-number">6</span><span class="hljs-operator">/</span><span class="hljs-number">5906</span><span class="hljs-literal">]</span> <span class="hljs-operator">/</span>usr<span class="hljs-operator">/</span>local<span class="hljs-operator">/</span>lib<span class="hljs-operator">/</span>node_modules<span class="hljs-operator">/</span>bs<span class="hljs-operator">-</span>platform<span class="hljs-operator">/</span>lib<span class="hljs-operator">/</span>bsc.exe <span class="hljs-operator">-</span>bs<span class="hljs-operator">-</span>package<span class="hljs-operator">-</span>name test  <span class="hljs-operator">-</span>bs<span class="hljs-operator">-</span>package<span class="hljs-operator">-</span>output commonjs:lib<span class="hljs-operator">/</span>js<span class="hljs-operator">/</span>src<span class="hljs-operator">/</span>dir_1_1 <span class="hljs-operator">-</span>bs<span class="hljs-operator">-</span>assume<span class="hljs-operator">-</span>has<span class="hljs-operator">-</span>mli <span class="hljs-operator">-</span>bs<span class="hljs-operator">-</span>no<span class="hljs-operator">-</span>builtin<span class="hljs-operator">-</span>ppx<span class="hljs-operator">-</span>ml <span class="hljs-operator">-</span>bs<span class="hljs-operator">-</span>no<span class="hljs-operator">-</span>implicit<span class="hljs-operator">-</span><span class="hljs-keyword">include</span>   <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> <span class="hljs-operator">...</span> <span class="hljs-operator">-</span>color always <span class="hljs-operator">-</span>o src<span class="hljs-operator">/</span>dir_1_1<span class="hljs-operator">/</span>m_1_1_2_9.cmj <span class="hljs-operator">-</span>c  src<span class="hljs-operator">/</span>dir_1_1<span class="hljs-operator">/</span>m_1_1_2_9.mlast 
-<span class="hljs-literal">[</span><span class="hljs-number">7</span><span class="hljs-operator">/</span><span class="hljs-number">5906</span><span class="hljs-literal">]</span> <span class="hljs-operator">/</span>usr<span class="hljs-operator">/</span>local<span class="hljs-operator">/</span>lib<span class="hljs-operator">/</span>node_modules<span class="hljs-operator">/</span>bs<span class="hljs-operator">-</span>platform<span class="hljs-operator">/</span>lib<span class="hljs-operator">/</span>bsc.exe <span class="hljs-operator">-</span>bs<span class="hljs-operator">-</span>package<span class="hljs-operator">-</span>name test  <span class="hljs-operator">-</span>bs<span class="hljs-operator">-</span>package<span class="hljs-operator">-</span>output commonjs:lib<span class="hljs-operator">/</span>js<span class="hljs-operator">/</span>src<span class="hljs-operator">/</span>dir_1_1 <span class="hljs-operator">-</span>bs<span class="hljs-operator">-</span>assume<span class="hljs-operator">-</span>has<span class="hljs-operator">-</span>mli <span class="hljs-operator">-</span>bs<span class="hljs-operator">-</span>no<span class="hljs-operator">-</span>builtin<span class="hljs-operator">-</span>ppx<span class="hljs-operator">-</span>ml <span class="hljs-operator">-</span>bs<span class="hljs-operator">-</span>no<span class="hljs-operator">-</span>implicit<span class="hljs-operator">-</span><span class="hljs-keyword">include</span>   <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> <span class="hljs-operator">...</span> <span class="hljs-operator">-</span>color always <span class="hljs-operator">-</span>o src<span class="hljs-operator">/</span>dir_1_1<span class="hljs-operator">/</span>m_1_1_2_4.cmj <span class="hljs-operator">-</span>c  src<span class="hljs-operator">/</span>dir_1_1<span class="hljs-operator">/</span>m_1_1_2_4.mlast 
-<span class="hljs-literal">[</span><span class="hljs-number">8</span><span class="hljs-operator">/</span><span class="hljs-number">5906</span><span class="hljs-literal">]</span> <span class="hljs-operator">/</span>usr<span class="hljs-operator">/</span>local<span class="hljs-operator">/</span>lib<span class="hljs-operator">/</span>node_modules<span class="hljs-operator">/</span>bs<span class="hljs-operator">-</span>platform<span class="hljs-operator">/</span>lib<span class="hljs-operator">/</span>bsc.exe <span class="hljs-operator">-</span>bs<span class="hljs-operator">-</span>package<span class="hljs-operator">-</span>name test  <span class="hljs-operator">-</span>bs<span class="hljs-operator">-</span>package<span class="hljs-operator">-</span>output commonjs:lib<span class="hljs-operator">/</span>js<span class="hljs-operator">/</span>src<span class="hljs-operator">/</span>dir_1_1 <span class="hljs-operator">-</span>bs<span class="hljs-operator">-</span>assume<span class="hljs-operator">-</span>has<span class="hljs-operator">-</span>mli <span class="hljs-operator">-</span>bs<span class="hljs-operator">-</span>no<span class="hljs-operator">-</span>builtin<span class="hljs-operator">-</span>ppx<span class="hljs-operator">-</span>ml <span class="hljs-operator">-</span>bs<span class="hljs-operator">-</span>no<span class="hljs-operator">-</span>implicit<span class="hljs-operator">-</span><span class="hljs-keyword">include</span>   <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> <span class="hljs-operator">...</span> <span class="hljs-operator">-</span>color always <span class="hljs-operator">-</span>o src<span class="hljs-operator">/</span>dir_1_1<span class="hljs-operator">/</span>m_1_1_2_5.cmj <span class="hljs-operator">-</span>c  src<span class="hljs-operator">/</span>dir_1_1<span class="hljs-operator">/</span>m_1_1_2_5.mlast 
-<span class="hljs-literal">[</span><span class="hljs-number">9</span><span class="hljs-operator">/</span><span class="hljs-number">5906</span><span class="hljs-literal">]</span> <span class="hljs-operator">/</span>usr<span class="hljs-operator">/</span>local<span class="hljs-operator">/</span>lib<span class="hljs-operator">/</span>node_modules<span class="hljs-operator">/</span>bs<span class="hljs-operator">-</span>platform<span class="hljs-operator">/</span>lib<span class="hljs-operator">/</span>bsc.exe <span class="hljs-operator">-</span>bs<span class="hljs-operator">-</span>package<span class="hljs-operator">-</span>name test  <span class="hljs-operator">-</span>bs<span class="hljs-operator">-</span>package<span class="hljs-operator">-</span>output commonjs:lib<span class="hljs-operator">/</span>js<span class="hljs-operator">/</span>src<span class="hljs-operator">/</span>dir_1_1 <span class="hljs-operator">-</span>bs<span class="hljs-operator">-</span>assume<span class="hljs-operator">-</span>has<span class="hljs-operator">-</span>mli <span class="hljs-operator">-</span>bs<span class="hljs-operator">-</span>no<span class="hljs-operator">-</span>builtin<span class="hljs-operator">-</span>ppx<span class="hljs-operator">-</span>ml <span class="hljs-operator">-</span>bs<span class="hljs-operator">-</span>no<span class="hljs-operator">-</span>implicit<span class="hljs-operator">-</span><span class="hljs-keyword">include</span>   <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> <span class="hljs-operator">...</span> <span class="hljs-operator">-</span>color always <span class="hljs-operator">-</span>o src<span class="hljs-operator">/</span>dir_1_1<span class="hljs-operator">/</span>m_1_1_2_6.cmj <span class="hljs-operator">-</span>c  src<span class="hljs-operator">/</span>dir_1_1<span class="hljs-operator">/</span>m_1_1_2_6.mlast 
-<span class="hljs-literal">[</span><span class="hljs-number">10</span><span class="hljs-operator">/</span><span class="hljs-number">5906</span><span class="hljs-literal">]</span> <span class="hljs-operator">/</span>usr<span class="hljs-operator">/</span>local<span class="hljs-operator">/</span>lib<span class="hljs-operator">/</span>node_modules<span class="hljs-operator">/</span>bs<span class="hljs-operator">-</span>platform<span class="hljs-operator">/</span>lib<span class="hljs-operator">/</span>bsc.exe <span class="hljs-operator">-</span>bs<span class="hljs-operator">-</span>package<span class="hljs-operator">-</span>name test  <span class="hljs-operator">-</span>bs<span class="hljs-operator">-</span>package<span class="hljs-operator">-</span>output commonjs:lib<span class="hljs-operator">/</span>js<span class="hljs-operator">/</span>src<span class="hljs-operator">/</span>dir_1_1 <span class="hljs-operator">-</span>bs<span class="hljs-operator">-</span>assume<span class="hljs-operator">-</span>has<span class="hljs-operator">-</span>mli <span class="hljs-operator">-</span>bs<span class="hljs-operator">-</span>no<span class="hljs-operator">-</span>builtin<span class="hljs-operator">-</span>ppx<span class="hljs-operator">-</span>ml <span class="hljs-operator">-</span>bs<span class="hljs-operator">-</span>no<span class="hljs-operator">-</span>implicit<span class="hljs-operator">-</span><span class="hljs-keyword">include</span>   <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> <span class="hljs-operator">...</span> <span class="hljs-operator">-</span>color always <span class="hljs-operator">-</span>o src<span class="hljs-operator">/</span>dir_1_1<span class="hljs-operator">/</span>m_1_1_2_7.cmj <span class="hljs-operator">-</span>c  src<span class="hljs-operator">/</span>dir_1_1<span class="hljs-operator">/</span>m_1_1_2_7.mlast 
-<span class="hljs-literal">[</span><span class="hljs-number">11</span><span class="hljs-operator">/</span><span class="hljs-number">5906</span><span class="hljs-literal">]</span> <span class="hljs-operator">/</span>usr<span class="hljs-operator">/</span>local<span class="hljs-operator">/</span>lib<span class="hljs-operator">/</span>node_modules<span class="hljs-operator">/</span>bs<span class="hljs-operator">-</span>platform<span class="hljs-operator">/</span>lib<span class="hljs-operator">/</span>bsc.exe <span class="hljs-operator">-</span>bs<span class="hljs-operator">-</span>package<span class="hljs-operator">-</span>name test  <span class="hljs-operator">-</span>bs<span class="hljs-operator">-</span>package<span class="hljs-operator">-</span>output commonjs:lib<span class="hljs-operator">/</span>js<span class="hljs-operator">/</span>src<span class="hljs-operator">/</span>dir_1_1 <span class="hljs-operator">-</span>bs<span class="hljs-operator">-</span>assume<span class="hljs-operator">-</span>has<span class="hljs-operator">-</span>mli <span class="hljs-operator">-</span>bs<span class="hljs-operator">-</span>no<span class="hljs-operator">-</span>builtin<span class="hljs-operator">-</span>ppx<span class="hljs-operator">-</span>ml <span class="hljs-operator">-</span>bs<span class="hljs-operator">-</span>no<span class="hljs-operator">-</span>implicit<span class="hljs-operator">-</span><span class="hljs-keyword">include</span>   <span class="hljs-operator">-</span><span class="hljs-constructor">I</span> <span class="hljs-operator">...</span> <span class="hljs-operator">-</span>color always <span class="hljs-operator">-</span>o src<span class="hljs-operator">/</span>dir_1_1<span class="hljs-operator">/</span>m_1_1_2_8.cmj <span class="hljs-operator">-</span>c  src<span class="hljs-operator">/</span>dir_1_1<span class="hljs-operator">/</span>m_1_1_2_8.mlast
+<pre><code class="hljs">test9&gt;ninja -C lib/bs -v
+ninja: Entering directory `lib/bs'
+[1/2] /usr/local/lib/node_modules/bs-platform/lib/bsc.exe    -w -30-40+6+7+27+32..39+44+45+101 -nostdlib -I '/Users/hongbozhang/git/bsb-bench/test9/node_modules/bs-platform/lib/ocaml' -color always -c -o src/dir_1_1/m_1_1_1_1.mliast -bs-syntax-only -bs-binary-ast /Users/hongbozhang/git/bsb-bench/test9/src/dir_1_1/m_1_1_1_1.mli
+[2/2] /usr/local/lib/node_modules/bs-platform/lib/bsb_helper.exe  -g 0 -MD src/dir_1_1/m_1_1_1_1.mliast
+[1/5906] /usr/local/lib/node_modules/bs-platform/lib/bsc.exe -bs-package-name test  -bs-package-output commonjs:lib/js/src/dir_1_1 -bs-no-builtin-ppx-mli -bs-no-implicit-include  -I src/dir_4_6 -I src/dir_4_1 -I src/dir_4_8 -I src/dir_6_5 -I src/dir_6_2 -I src/dir_8_3 -I src/dir_8_4 -I src/dir_2_3 -I src/dir_2_4 -I src/dir_6_3 -I src/dir_4_9 -I src/dir_6_4 -I src/dir_4_7 -I src/dir_2_5 -I src/dir_2_2 -I src/dir_8_5 -I src/dir_8_2 -I src/dir_9_9 -I src/dir_3_7 -I src/dir_1_3 -I src/dir_9_7 -I src/dir_3_9 -I src/dir_1_4 -I src/dir_7_6 -I src/dir_7_1 -I src/dir_5_5 -I src/dir_7_8 -I src/dir_5_2 -I src/dir_3_8 -I src/dir_9_6 -I src/dir_1_5 -I src/dir_9_1 -I src/dir_1_2 -I src/dir_3_6 -I src/dir_9_8 -I src/dir_3_1 -I src/dir_5_3 -I src/dir_5_4 -I src/dir_7_9 -I src/dir_7_7 -I src/dir_8_7 -I src/dir_2_9 -I src/dir_8_9 -I src/dir_2_7 -I src/dir_4_2 -I src/dir_6_8 -I src/dir_4_5 -I src/dir_6_1 -I src/dir_6_6 -I src/dir_2_1 -I src/dir_2_6 -I src/dir_8_8 -I src/dir_8_1 -I src/dir_2_8 -I src/dir_8_6 -I src/dir_6_7 -I src/dir_6_9 -I src/dir_4_4 -I src/dir_4_3 -I src/dir_7_2 -I src/dir_7_5 -I src/dir_5_8 -I src/dir_5_1 -I src/dir_5_6 -I src/dir_1_9 -I src/dir_3_4 -I src/dir_3_3 -I src/dir_9_4 -I src/dir_1_7 -I src/dir_9_3 -I src/dir_5_7 -I src/dir_7_4 -I src/dir_5_9 -I src/dir_7_3 -I src/dir_9_2 -I src/dir_1_1 -I src/dir_9_5 -I src/dir_1_6 -I src/dir_3_2 -I src/dir_1_8 -I src/dir_3_5  -w -30-40+6+7+27+32..39+44+45+101 -nostdlib -I '/Users/hongbozhang/git/bsb-bench/test9/node_modules/bs-platform/lib/ocaml' -color always -o src/dir_1_1/m_1_1_1_1.cmi -c  src/dir_1_1/m_1_1_1_1.mliast
+[2/5906] /usr/local/lib/node_modules/bs-platform/lib/bsc.exe -bs-package-name test  -bs-package-output commonjs:lib/js/src/dir_1_1 -bs-assume-has-mli -bs-no-builtin-ppx-ml -bs-no-implicit-include   -I ...  -color always -o src/dir_1_1/m_1_1_1_1.cmj -c  src/dir_1_1/m_1_1_1_1.mlast 
+[3/5906] /usr/local/lib/node_modules/bs-platform/lib/bsc.exe -bs-package-name test  -bs-package-output commonjs:lib/js/src/dir_1_1 -bs-assume-has-mli -bs-no-builtin-ppx-ml -bs-no-implicit-include   -I ...  -w -30-40+6+7+27+32..39+44+45+101 -nostdlib -I '/Users/hongbozhang/git/bsb-bench/test9/node_modules/bs-platform/lib/ocaml' -color always -o src/dir_1_1/m_1_1_2_2.cmj -c  src/dir_1_1/m_1_1_2_2.mlast 
+[4/5906] /usr/local/lib/node_modules/bs-platform/lib/bsc.exe -bs-package-name test  -bs-package-output commonjs:lib/js/src/dir_1_1 -bs-assume-has-mli -bs-no-builtin-ppx-ml -bs-no-implicit-include   -I ... -color always -o src/dir_1_1/m_1_1_2_1.cmj -c  src/dir_1_1/m_1_1_2_1.mlast 
+[5/5906] /usr/local/lib/node_modules/bs-platform/lib/bsc.exe -bs-package-name test  -bs-package-output commonjs:lib/js/src/dir_1_1 -bs-assume-has-mli -bs-no-builtin-ppx-ml -bs-no-implicit-include   -I ... -color always -o src/dir_1_1/m_1_1_2_3.cmj -c  src/dir_1_1/m_1_1_2_3.mlast 
+[6/5906] /usr/local/lib/node_modules/bs-platform/lib/bsc.exe -bs-package-name test  -bs-package-output commonjs:lib/js/src/dir_1_1 -bs-assume-has-mli -bs-no-builtin-ppx-ml -bs-no-implicit-include   -I ... -color always -o src/dir_1_1/m_1_1_2_9.cmj -c  src/dir_1_1/m_1_1_2_9.mlast 
+[7/5906] /usr/local/lib/node_modules/bs-platform/lib/bsc.exe -bs-package-name test  -bs-package-output commonjs:lib/js/src/dir_1_1 -bs-assume-has-mli -bs-no-builtin-ppx-ml -bs-no-implicit-include   -I ... -color always -o src/dir_1_1/m_1_1_2_4.cmj -c  src/dir_1_1/m_1_1_2_4.mlast 
+[8/5906] /usr/local/lib/node_modules/bs-platform/lib/bsc.exe -bs-package-name test  -bs-package-output commonjs:lib/js/src/dir_1_1 -bs-assume-has-mli -bs-no-builtin-ppx-ml -bs-no-implicit-include   -I ... -color always -o src/dir_1_1/m_1_1_2_5.cmj -c  src/dir_1_1/m_1_1_2_5.mlast 
+[9/5906] /usr/local/lib/node_modules/bs-platform/lib/bsc.exe -bs-package-name test  -bs-package-output commonjs:lib/js/src/dir_1_1 -bs-assume-has-mli -bs-no-builtin-ppx-ml -bs-no-implicit-include   -I ... -color always -o src/dir_1_1/m_1_1_2_6.cmj -c  src/dir_1_1/m_1_1_2_6.mlast 
+[10/5906] /usr/local/lib/node_modules/bs-platform/lib/bsc.exe -bs-package-name test  -bs-package-output commonjs:lib/js/src/dir_1_1 -bs-assume-has-mli -bs-no-builtin-ppx-ml -bs-no-implicit-include   -I ... -color always -o src/dir_1_1/m_1_1_2_7.cmj -c  src/dir_1_1/m_1_1_2_7.mlast 
+[11/5906] /usr/local/lib/node_modules/bs-platform/lib/bsc.exe -bs-package-name test  -bs-package-output commonjs:lib/js/src/dir_1_1 -bs-assume-has-mli -bs-no-builtin-ppx-ml -bs-no-implicit-include   -I ... -color always -o src/dir_1_1/m_1_1_2_8.cmj -c  src/dir_1_1/m_1_1_2_8.mlast
 </code></pre>
 <p>The log means that there are 5906 jobs to be scheduled but only 11 jobs processed. This is because there only 9 direct dependencies,
 the cmj/cmi changes' propogation stops in the first level of dependency, indirect dependencies are not propagated any more since the intermediate representation stays stable after that. There are 9 more jobs to do compared with changing implementation but the latency only increased by 30ms, which means the scheduler does a good job in parallelism.</p>

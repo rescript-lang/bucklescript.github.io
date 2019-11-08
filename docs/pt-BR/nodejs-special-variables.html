@@ -75,10 +75,10 @@
 <span class="hljs-keyword">let</span> _module : <span class="hljs-type">Node</span>.node_module option = [%bs.node _module]
 <span class="hljs-keyword">let</span> require : <span class="hljs-type">Node</span>.node_require option = [%bs.node require]
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> dirname: option(string) = <span class="hljs-attribute">[%bs.node __dirname]</span>;
-<span class="hljs-keyword">let</span> filename: option(string) = <span class="hljs-attribute">[%bs.node __filename]</span>;
-<span class="hljs-keyword">let</span> _module: option(<span class="hljs-module-identifier">Node</span>.node_module) = <span class="hljs-attribute">[%bs.node _module]</span>;
-<span class="hljs-keyword">let</span> require: option(<span class="hljs-module-identifier">Node</span>.node_require) = <span class="hljs-attribute">[%bs.node require]</span>;
+<pre><code class="hljs css language-reason">let dirname: option(string) = [%bs.node __dirname];
+let filename: option(string) = [%bs.node __filename];
+let _module: option(Node.node_module) = [%bs.node _module];
+let require: option(Node.node_require) = [%bs.node require];
 </code></pre>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/pt-BR/better-data-structures-printing-debug-mode"><span class="arrow-prev">← </span><span>Better Data Structures Printing (Debug Mode)</span></a><a class="docs-next button" href="/docs/pt-BR/interop-misc"><span>Miscellaneous</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"></nav></div><span><script src="/js/redirectBlog.js"></script><script>window.foo = new Pjax({
           areas: [

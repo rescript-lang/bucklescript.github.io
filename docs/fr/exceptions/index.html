@@ -78,13 +78,13 @@
   | <span class="hljs-type">Some</span> message -&gt; <span class="hljs-type">Js</span>.log {j|<span class="hljs-type">Error</span>: $message|j}
   | <span class="hljs-type">None</span> -&gt; <span class="hljs-type">Js</span>.log <span class="hljs-string">"An unknown error occurred"</span>
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">try</span> (
-  <span class="hljs-module-identifier">Js</span>.<span class="hljs-module-identifier">Exn</span>.raiseError(<span class="hljs-string">"oops!"</span>)
+<pre><code class="hljs css language-reason">try (
+  Js.Exn.raiseError(&quot;oops!&quot;)
 ) {
-| <span class="hljs-module-identifier">Js</span>.<span class="hljs-module-identifier">Exn</span>.<span class="hljs-constructor">Error</span>(e) =&gt;
-  <span class="hljs-keyword">switch</span> (<span class="hljs-module-identifier">Js</span>.<span class="hljs-module-identifier">Exn</span>.message(e)) {
-  | <span class="hljs-constructor">Some</span>(message) =&gt; <span class="hljs-module-identifier">Js</span>.log(<span class="hljs-string">{j|Error: $message|j}</span>)
-  | <span class="hljs-constructor">None</span> =&gt; <span class="hljs-module-identifier">Js</span>.log(<span class="hljs-string">"An unknown error occurred"</span>)
+| Js.Exn.Error(e) =&gt;
+  switch (Js.Exn.message(e)) {
+  | Some(message) =&gt; Js.log({j|Error: $message|j})
+  | None =&gt; Js.log(&quot;An unknown error occurred&quot;)
   }
 };
 </code></pre>
@@ -105,24 +105,24 @@
       | <span class="hljs-type">None</span> -&gt; raise <span class="hljs-type">UnhandledPromise</span>
   )
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">exception</span> <span class="hljs-constructor">UnhandledPromise</span>;
+<pre><code class="hljs css language-reason">exception UnhandledPromise;
 
-<span class="hljs-keyword">let</span> handlePromiseFailure =
-  <span class="hljs-attribute">[@bs.open]</span>
+let handlePromiseFailure =
+  [@bs.open]
   (
-    <span class="hljs-keyword">fun</span>
-    | <span class="hljs-constructor">Not_found</span> =&gt; {
-        <span class="hljs-module-identifier">Js</span>.log(<span class="hljs-string">"Not found"</span>);
-        <span class="hljs-module-identifier">Js</span>.<span class="hljs-module-identifier">Promise</span>.resolve()
+    fun
+    | Not_found =&gt; {
+        Js.log(&quot;Not found&quot;);
+        Js.Promise.resolve()
       }
   );
 
-<span class="hljs-module-identifier">Js</span>.<span class="hljs-module-identifier">Promise</span>.reject(<span class="hljs-constructor">Not_found</span>)
-  <span class="hljs-operator">|&gt;</span> <span class="hljs-module-identifier">Js</span>.<span class="hljs-module-identifier">Promise</span>.<span class="hljs-keyword">catch</span>(
+Js.Promise.reject(Not_found)
+  |&gt; Js.Promise.catch(
      (error) =&gt;
-       <span class="hljs-keyword">switch</span> (handlePromiseFailure(error)) {
-       | <span class="hljs-constructor">Some</span>(x) =&gt; x
-       | <span class="hljs-constructor">None</span> =&gt; <span class="hljs-keyword">raise</span>(<span class="hljs-constructor">UnhandledPromise</span>)
+       switch (handlePromiseFailure(error)) {
+       | Some(x) =&gt; x
+       | None =&gt; raise(UnhandledPromise)
        }
    );
 </code></pre>

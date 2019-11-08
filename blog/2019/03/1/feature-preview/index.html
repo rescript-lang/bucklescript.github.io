@@ -73,16 +73,16 @@
 <span class="hljs-keyword">let</span> _ = join [|<span class="hljs-string">"a"</span>; <span class="hljs-string">"b"</span>|] <span class="hljs-comment">(* this is ok *)</span>
 <span class="hljs-keyword">let</span> f b = join b <span class="hljs-comment">(* compiler error when you try to abstract `join` *)</span>
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.module "path"]</span><span class="hljs-attribute">[@bs.variadic]</span>
-<span class="hljs-keyword">external</span> join: array(string) =&gt; string = <span class="hljs-string">"join"</span>
+<pre><code class="hljs css language-reason">[@bs.module &quot;path&quot;][@bs.variadic]
+external join: array(string) =&gt; string = &quot;join&quot;
 
-<span class="hljs-keyword">let</span> _ = join(<span class="hljs-literal">[|</span><span class="hljs-string">"a"</span>, <span class="hljs-string">"b"</span><span class="hljs-literal">|]</span>) <span class="hljs-comment">/* this is ok */</span>
-<span class="hljs-keyword">let</span> f = b =&gt; join(b) <span class="hljs-comment">/* compiler error when you try to abstract `join` */</span>
+let _ = join([|&quot;a&quot;, &quot;b&quot;|]) /* this is ok */
+let f = b =&gt; join(b) /* compiler error when you try to abstract `join` */
 </code></pre>
 <p>More importantly, such compilation error was leaky in cases such as this one:</p>
 <pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> f = join
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> f = join
+<pre><code class="hljs css language-reason">let f = join
 </code></pre>
 <p>In the next release, we are going to lift such restriction. You'll be able to call an external marked with <code>bs.variadic</code> with an array reference, not just a literal array.</p>
 <p>Caveat: it's unclear how to support such first class <code>bs.variadic</code> call in conjunction with <code>bs.new</code>, so an external declaration that contains both will trigger a compilation error. We'll try to figure out this particular case in the future too.</p>

@@ -75,8 +75,8 @@
 <pre><code class="ocaml">external setTimeout : (unit -> unit) -> int -> float = "setTimeout" [@@bs.val]
 external clearTimeout : float -> unit = "clearTimeout" [@@bs.val]
 `</pre> 
-<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.val]</span> <span class="hljs-keyword">external</span> setTimeout : (unit =&gt; unit, int) =&gt; float = <span class="hljs-string">"setTimeout"</span>;
-<span class="hljs-attribute">[@bs.val]</span> <span class="hljs-keyword">external</span> clearTimeout : float =&gt; unit = <span class="hljs-string">"clearTimeout"</span>;
+<pre><code class="hljs css language-reason">[@bs.val] external setTimeout : (unit =&gt; unit, int) =&gt; float = &quot;setTimeout&quot;;
+[@bs.val] external clearTimeout : float =&gt; unit = &quot;clearTimeout&quot;;
 </code></pre>
 <p>这将绑定 JavaScript 的 <a href="https://developer.mozilla.org/en-US/docs/Web/API/WindowOrworkerGlobalScope/setTimeout"><code>setTimeout</code></a> 方法以及相关的 <code>clearTimeout</code> 方法. 类型注解 <code>external</code> 明确了 <code>setTimeout</code>:</p>
 <ul>
@@ -91,9 +91,9 @@ external clearTimeout : float -> unit = "clearTimeout" [@@bs.val]
 <span class="hljs-keyword">external</span> setTimeout : (<span class="hljs-built_in">unit</span> -&gt; <span class="hljs-built_in">unit</span>) -&gt; <span class="hljs-built_in">int</span> -&gt; timerId = <span class="hljs-string">"setTimeout"</span> [@@bs.<span class="hljs-keyword">val</span>]
 <span class="hljs-keyword">external</span> clearTimeout : timerId -&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">"clearTimeout"</span> [@@bs.<span class="hljs-keyword">val</span>]
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> timerId;
-<span class="hljs-attribute">[@bs.val]</span> <span class="hljs-keyword">external</span> setTimeout : (unit =&gt; unit, int) =&gt; timerId = <span class="hljs-string">"setTimeout"</span>;
-<span class="hljs-attribute">[@bs.val]</span> <span class="hljs-keyword">external</span> clearTimeout : timerId =&gt; unit = <span class="hljs-string">"clearTimeout"</span>;
+<pre><code class="hljs css language-reason">type timerId;
+[@bs.val] external setTimeout : (unit =&gt; unit, int) =&gt; timerId = &quot;setTimeout&quot;;
+[@bs.val] external clearTimeout : timerId =&gt; unit = &quot;clearTimeout&quot;;
 </code></pre>
 <p>Clearly, <code>timerId</code> is a type that can only be created by <code>setTimeout</code>! Now we've guaranteed that <code>clearTimeout</code> <em>will</em> be passed a valid ID. Whether it's a number under the hood is now a mere implementation detail.</p>
 <p>Inspect the output <a href="https://reasonml.github.io/en/try.html?reason=C4TwDgpgBMCWC2EBOBJAJgbgFAG0ACARgM4B0AbgIYA2AulBAB7DIB21UREwAKghAPYBXYFABcUABSCWsEQF4AfFGmyANFFgtgASiiKYfVGj1QARJx58hwU9nzFy1Oo2ZI2VKAGMqECkl6I1mIGiEZ6SiryZt6+-lbCtlhYPiKwxnIcXAECwhISuvoAUqRU-ADmEqYAFhBUpaba6gCMAAwt2thYMX7Z1hJpHUA">here</a>. It's as clean as hand-written JS code, except you know it comes from correctly typed BuckleScript. If these kind of features are all you use from BuckleScript, you'd already have derived values from them!</p>
@@ -103,13 +103,13 @@ external clearTimeout : float -> unit = "clearTimeout" [@@bs.val]
 <pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> random: <span class="hljs-built_in">unit</span> -&gt; <span class="hljs-built_in">float</span> = <span class="hljs-string">"random"</span> [@@bs.<span class="hljs-keyword">val</span>][@@bs.scope <span class="hljs-string">"Math"</span>]
 <span class="hljs-keyword">let</span> someNumber = random <span class="hljs-literal">()</span>
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.scope "Math"]</span> <span class="hljs-attribute">[@bs.val]</span> <span class="hljs-keyword">external</span> random : unit =&gt; float = <span class="hljs-string">"random"</span>;
-<span class="hljs-keyword">let</span> someNumber = random();
+<pre><code class="hljs css language-reason">[@bs.scope &quot;Math&quot;] [@bs.val] external random : unit =&gt; float = &quot;random&quot;;
+let someNumber = random();
 </code></pre>
 <p>you can bind to an arbitrarily deep object by passing a tuple to <code>bs.scope</code>:</p>
 <pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> length: <span class="hljs-built_in">int</span> = <span class="hljs-string">"length"</span> [@@bs.<span class="hljs-keyword">val</span>][@@bs.scope <span class="hljs-string">"window"</span>, <span class="hljs-string">"location"</span>, <span class="hljs-string">"ancestorOrigins"</span>]
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.val]</span> <span class="hljs-attribute">[@bs.scope ("window", "location", "ancestorOrigins")]</span> <span class="hljs-keyword">external</span> length : int = <span class="hljs-string">"length"</span>;
+<pre><code class="hljs css language-reason">[@bs.val] [@bs.scope (&quot;window&quot;, &quot;location&quot;, &quot;ancestorOrigins&quot;)] external length : int = &quot;length&quot;;
 </code></pre>
 <p>This binds to <code>window.location.ancestorOrigins.length</code>.</p>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/zh-CN/intro-to-external"><span class="arrow-prev">← </span><span>Intro to External</span></a><a class="docs-next button" href="/docs/zh-CN/null-undefined-option"><span>Null, Undefined &amp; Option</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#global-modules">Global Modules</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script>window.foo = new Pjax({

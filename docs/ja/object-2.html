@@ -85,7 +85,7 @@
   job: <span class="hljs-built_in">string</span>
 &gt;
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> person = {
+<pre><code class="hljs css language-reason">type person = {
   .
   name: string,
   age: int,
@@ -103,14 +103,14 @@
 
 <span class="hljs-keyword">external</span> john : person = <span class="hljs-string">"john"</span> [@@bs.<span class="hljs-keyword">val</span>]
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> person = <span class="hljs-module-identifier">Js</span>.t({
+<pre><code class="hljs css language-reason">type person = Js.t({
   .
   name: string,
   age: int,
   job: string
 });
 
-<span class="hljs-attribute">[@bs.val]</span> <span class="hljs-keyword">external</span> john : person = <span class="hljs-string">"john"</span>;
+[@bs.val] external john : person = &quot;john&quot;;
 </code></pre>
 <p><strong>From now on</strong>, we'll call the BuckleScript interop object &quot;<code>Js.t</code> object&quot;, to disambiguate it with normal object and JS object.</p>
 <p>Because object types are used often, Reason gives it a nicer sugar. <code>Js.t({. name: string})</code> will format to <code>{. &quot;name&quot;: string}</code>.</p>
@@ -124,10 +124,10 @@
 
 <span class="hljs-keyword">let</span> _ = john##age #= <span class="hljs-number">99</span>
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> person = {. <span class="hljs-attribute">[@bs.set]</span> <span class="hljs-string">"age"</span>: int};
-<span class="hljs-attribute">[@bs.val]</span> <span class="hljs-keyword">external</span> john : person = <span class="hljs-string">"john"</span>;
+<pre><code class="hljs css language-reason">type person = {. [@bs.set] &quot;age&quot;: int};
+[@bs.val] external john : person = &quot;john&quot;;
 
-john##age #= <span class="hljs-number">99</span>;
+john##age #= 99;
 </code></pre>
 <p><strong>Note</strong>: you can't use dynamic/computed keys in this paradigm.</p>
 <h4><a class="anchor" aria-hidden="true" id="call"></a><a href="#call" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Call</h4>
@@ -137,10 +137,10 @@ john##age #= <span class="hljs-number">99</span>;
 
 <span class="hljs-keyword">let</span> _ = john##say <span class="hljs-string">"hey"</span> <span class="hljs-string">"jude"</span>
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> person = {. <span class="hljs-attribute">[@bs.meth]</span> <span class="hljs-string">"say"</span>: (string, string) =&gt; unit};
-<span class="hljs-attribute">[@bs.val]</span> <span class="hljs-keyword">external</span> john : person = <span class="hljs-string">"john"</span>;
+<pre><code class="hljs css language-reason">type person = {. [@bs.meth] &quot;say&quot;: (string, string) =&gt; unit};
+[@bs.val] external john : person = &quot;john&quot;;
 
-john##say(<span class="hljs-string">"hey"</span>, <span class="hljs-string">"jude"</span>);
+john##say(&quot;hey&quot;, &quot;jude&quot;);
 </code></pre>
 <p><strong>Why <code>[bs.meth]</code></strong>? Why not just call it directly? A JS object might carry around a reference to <code>this</code>, and infamously, what <code>this</code> points to can change. OCaml/BuckleScript functions are curried by default; this means that if you intentionally curry <code>say</code>, by the time you fully apply it, the <code>this</code> context could be wrong:</p>
 <pre><code class="hljs css language-ocaml"><span class="hljs-comment">(* wrong *)</span>
@@ -149,11 +149,11 @@ john##say(<span class="hljs-string">"hey"</span>, <span class="hljs-string">"jud
 <span class="hljs-keyword">let</span> jude = talkTo <span class="hljs-string">"jude"</span>
 <span class="hljs-keyword">let</span> paul = talkTo <span class="hljs-string">"paul"</span>
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-comment">/* wrong */</span>
-<span class="hljs-keyword">let</span> talkTo = john##say(<span class="hljs-string">"hey"</span>);
+<pre><code class="hljs css language-reason">/* wrong */
+let talkTo = john##say(&quot;hey&quot;);
 
-<span class="hljs-keyword">let</span> jude = talkTo(<span class="hljs-string">"jude"</span>);
-<span class="hljs-keyword">let</span> paul = talkTo(<span class="hljs-string">"paul"</span>);
+let jude = talkTo(&quot;jude&quot;);
+let paul = talkTo(&quot;paul&quot;);
 </code></pre>
 <p>To ensure that folks don't accidentally curry a JavaScript method, we track every method call using <code>##</code> to make sure it's fully applied <em>immediately</em>. Under the hood, we effectively turn a function-looking call into a special <code>bs.meth</code> call (it only <em>looks</em> like a function). Annotating the type definition of <code>say</code> with <code>bs.meth</code> completes this check.</p>
 <h3><a class="anchor" aria-hidden="true" id="creation"></a><a href="#creation" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Creation</h3>
@@ -165,25 +165,25 @@ john##say(<span class="hljs-string">"hey"</span>, <span class="hljs-string">"jud
 
 <span class="hljs-keyword">let</span> name = bucklescript##info##author
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> bucklescript = <span class="hljs-attribute">[%bs.obj {
-  info: {author: "Bob"}
-}]</span>;
+<pre><code class="hljs css language-reason">let bucklescript = [%bs.obj {
+  info: {author: &quot;Bob&quot;}
+}];
 
-<span class="hljs-keyword">let</span> name = bucklescript##info##author;
+let name = bucklescript##info##author;
 </code></pre>
 <p>Because object values are used often, Reason gives it a nicer sugar: <code>{&quot;foo&quot;: 1}</code>, which desugars to: <code>[%bs.obj {foo: 1}]</code>.</p>
 <p><strong>Note</strong>: there's no syntax sugar for creating an empty object in OCaml nor Reason (aka this doesn't work: <code>[%bs.obj {}]</code>. Please use <code>Js.Obj.empty()</code> for that purpose.</p>
 <p>The created object will have an inferred type, no type declaration needed! The above example will infer as:</p>
 <pre><code class="hljs css language-ocaml">&lt; info: &lt; author: <span class="hljs-built_in">string</span> &gt; <span class="hljs-type">Js</span>.t &gt; <span class="hljs-type">Js</span>.t
 </code></pre>
-<pre><code class="hljs css language-reason">{. <span class="hljs-string">"info"</span>: {. <span class="hljs-string">"author"</span>: string}}
+<pre><code class="hljs css language-reason">{. &quot;info&quot;: {. &quot;author&quot;: string}}
 </code></pre>
 <p><strong>Note</strong>: since the value has its type inferred, <strong>don't</strong> accidentally do this:</p>
 <pre><code class="hljs css language-ocaml"><span class="hljs-keyword">type</span> person = &lt;age: <span class="hljs-built_in">int</span>&gt; <span class="hljs-type">Js</span>.t
 <span class="hljs-keyword">let</span> jane = [%bs.obj {age = <span class="hljs-string">"hi"</span>}]
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> person = {. <span class="hljs-string">"age"</span>: int};
-<span class="hljs-keyword">let</span> jane = {<span class="hljs-string">"age"</span>: <span class="hljs-string">"hi"</span>};
+<pre><code class="hljs css language-reason">type person = {. &quot;age&quot;: int};
+let jane = {&quot;age&quot;: &quot;hi&quot;};
 </code></pre>
 <p>See what went wrong here? We've declared a <code>person</code> type, but <code>jane</code> is inferred as its own type, so <code>person</code> is ignored and no error happens! To give <code>jane</code> an explicit type, simply annotate it: <code>let jane: person = ...</code>. This will then error correctly.</p>
 <h4><a class="anchor" aria-hidden="true" id="function"></a><a href="#function" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Function</h4>
@@ -205,13 +205,13 @@ john##say(<span class="hljs-string">"hey"</span>, <span class="hljs-string">"jud
   <span class="hljs-built_in">unit</span> -&gt;
   _ = <span class="hljs-string">""</span> [@@bs.obj]
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.obj]</span> <span class="hljs-keyword">external</span> route: (
+<pre><code class="hljs css language-reason">[@bs.obj] external route: (
   ~_method:string,
   ~path:string,
   ~action:(list(string) =&gt; unit),
-  ~options:<span class="hljs-module-identifier">Js</span>.t({..})=?,
+  ~options:Js.t({..})=?,
   unit
-) =&gt; _ = <span class="hljs-string">""</span>;
+) =&gt; _ = &quot;&quot;;
 </code></pre>
 <p><strong>Note</strong>: the <code>= &quot;&quot;</code> part at the end is just a dummy placeholder, due to syntactic limitations. It serves no purpose currently.</p>
 <p>This function has four labelled parameters (the fourth one optional), one unlabelled parameter at the end (which we mandate for functions with <a href="https://reasonml.github.io/docs/en/function.html#optional-labeled-arguments">optional parameters</a>), and one parameter (<code>_method</code>) that requires an underscore prefix to avoid confusion with the OCaml/Reason keyword <code>method</code>.</p>
@@ -219,7 +219,7 @@ john##say(<span class="hljs-string">"hey"</span>, <span class="hljs-string">"jud
 <p>The function is called like so:</p>
 <pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> homeRoute = route ~_method:<span class="hljs-string">"GET"</span> ~path:<span class="hljs-string">"/"</span> ~action:(<span class="hljs-keyword">fun</span> _ -&gt; <span class="hljs-type">Js</span>.log <span class="hljs-string">"Home"</span>) <span class="hljs-literal">()</span>
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> homeRoute = route(~_method=<span class="hljs-string">"GET"</span>, ~path=<span class="hljs-string">"/"</span>, ~action=(_ =&gt; <span class="hljs-module-identifier">Js</span>.log(<span class="hljs-string">"Home"</span>)), ());
+<pre><code class="hljs css language-reason">let homeRoute = route(~_method=&quot;GET&quot;, ~path=&quot;/&quot;, ~action=(_ =&gt; Js.log(&quot;Home&quot;)), ());
 </code></pre>
 <p>This generates the desired JavaScript object–but you'll notice that the <code>options</code> parameter was left out. As expected, the generated object won't include the <code>options</code> field.</p>
 <p><strong>Note</strong> that for more type-safety you'll probably want to <a href="https://bucklescript.github.io/docs/en/function#constrain-arguments-better">constrain</a> the <code>_method</code> parameter type to only the acceptable values.</p>

@@ -72,8 +72,8 @@
 <pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> f : <span class="hljs-built_in">unit</span> -&gt; <span class="hljs-built_in">int</span> = <span class="hljs-keyword">fun</span> <span class="hljs-literal">()</span> -&gt; <span class="hljs-number">3</span> 
 <span class="hljs-keyword">let</span> f_used : <span class="hljs-built_in">unit</span> -&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-keyword">fun</span> x -&gt; <span class="hljs-type">Js</span>.log x  
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> f: unit =&gt; int = () =&gt; <span class="hljs-number">3</span>;
-<span class="hljs-keyword">let</span> f_used: unit =&gt; unit = x =&gt; <span class="hljs-module-identifier">Js</span>.log(x);
+<pre><code class="hljs css language-reason">let f: unit =&gt; int = () =&gt; 3;
+let f_used: unit =&gt; unit = x =&gt; Js.log(x);
 </code></pre>
 <p>Output JS prior to v4.0.7</p>
 <pre><code class="hljs css language-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f</span> (<span class="hljs-params"></span>)</span>{
@@ -92,7 +92,7 @@ we added native uncurried calling convention support later.</p>
 <p>Therefore, we generate JS code in a more consistent style in this release:</p>
 <pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> f : <span class="hljs-built_in">unit</span> -&gt; <span class="hljs-built_in">int</span> = <span class="hljs-keyword">fun</span> <span class="hljs-literal">()</span> -&gt; <span class="hljs-number">3</span> 
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> f: unit =&gt; int = () =&gt; <span class="hljs-number">3</span>;
+<pre><code class="hljs css language-reason">let f: unit =&gt; int = () =&gt; 3;
 </code></pre>
 <pre><code class="hljs css language-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f</span> (<span class="hljs-params">param</span>)</span>{
     <span class="hljs-keyword">return</span> <span class="hljs-number">3</span>
@@ -104,27 +104,27 @@ we added native uncurried calling convention support later.</p>
     return <span class="hljs-number">3</span>
 }|}]
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> f: unit =&gt; int = <span class="hljs-attribute">[%bs.raw {|function () {
+<pre><code class="hljs css language-reason">let f: unit =&gt; int = [%bs.raw {|function () {
   return 3
-}|}]</span>;
+}|}];
 </code></pre>
 <p>It is not correct any more, the fix would be</p>
 <pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> f : <span class="hljs-built_in">unit</span> -&gt; <span class="hljs-built_in">int</span> = [%bs.raw{|<span class="hljs-keyword">function</span>(param){
     return <span class="hljs-number">3</span>
 }|}]
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> f: unit =&gt; int = <span class="hljs-attribute">[%bs.raw {|function(param) {
+<pre><code class="hljs css language-reason">let f: unit =&gt; int = [%bs.raw {|function(param) {
   return 3
-}|}]</span>;
+}|}];
 </code></pre>
 <p>Or</p>
 <pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> f : <span class="hljs-built_in">unit</span> -&gt; <span class="hljs-built_in">int</span> [@bs] = [%bs.raw{|<span class="hljs-keyword">function</span><span class="hljs-literal">()</span>{
     return <span class="hljs-number">3</span>
 }|}]
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> f: (. unit) =&gt; int = <span class="hljs-attribute">[%bs.raw {|function() {
+<pre><code class="hljs css language-reason">let f: (. unit) =&gt; int = [%bs.raw {|function() {
   return 3
-}|}]</span>;
+}|}];
 </code></pre>
 <p>FFI is a double edge sword, it is a must have to ship your product, yet it is tricky, and there may be some undefined behavior you rely on but don't recognize, it is encouarged to always test your FFI in the boundary.</p>
 </span></div></div><div class="blogSocialSection"></div></div><div class="blog-recent"><a class="button" href="/blog">Recent Posts</a></div></div></div><nav class="onPageNav"></nav></div><span><script src="/js/redirectBlog.js"></script><script>window.foo = new Pjax({

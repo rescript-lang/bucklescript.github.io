@@ -76,17 +76,17 @@
 <p>In particular, one <a href="https://github.com/BuckleScript/bucklescript/issues/2772">issue</a> we want to address is to make the BuckleScript toolchain lightweight. We will continue to implement the BuckleScript runtime by using BuckleScript itself, but we want to get rid of dependencies like <a href="https://github.com/BuckleScript/bucklescript/issues/3164">the support for exceptions</a>. In the end, installation will no longer involve building the runtime: BuckleScript will simply be a bunch of generated JS files, so the complexity of the build system will not impact users at all. This is quite important given that we are committed to supporting Windows.</p>
 <p>In the future, we will therefore be able to distribute the runtime as a normal JS library, and the BuckleScript user will only need the binary compiler and a small set of JS files. They will be able to use stdlib, Belt or anything else.</p>
 <p>To get rid of such dependencies between stdlib and the runtime, we are going to introduce a breaking change in the future. In hindsight, our support for catching JS exceptions exposed the concrete representation of the exception encoding, in particular:</p>
-<pre><code class="hljs"><span class="hljs-keyword">match</span> ... <span class="hljs-keyword">with</span> 
-| <span class="hljs-type">OCamlException</span> <span class="hljs-built_in">exn</span> -&gt; ..
-| <span class="hljs-type">Js</span>.<span class="hljs-type">Exn</span>.<span class="hljs-type">Error</span> e -&gt; ...
+<pre><code class="hljs">match ... with 
+| OCamlException exn -&gt; ..
+| Js.Exn.Error e -&gt; ...
 </code></pre>
 <p>In this release, we introduced a function to avoid exposing such exception constructors:</p>
-<pre><code class="hljs"><span class="hljs-keyword">match</span> ... <span class="hljs-keyword">with</span> 
-| <span class="hljs-type">OCamlException</span> <span class="hljs-built_in">exn</span> -&gt; ...
+<pre><code class="hljs">match ... with 
+| OCamlException exn -&gt; ...
 | e -&gt; 
-    <span class="hljs-keyword">match</span> <span class="hljs-type">Js</span>.asJsExn e <span class="hljs-keyword">with</span> 
-    | <span class="hljs-type">Some</span> jserror -&gt; ..
-    | <span class="hljs-type">None</span> -&gt; ...
+    match Js.asJsExn e with 
+    | Some jserror -&gt; ..
+    | None -&gt; ...
 </code></pre>
 <p>We encourage you to make such changes yourself to future-proof your codebases.</p>
 <p>Oh and by the way, one side effect of this refactoring of the BuckleScript runtime is that the compilation does not require reading of the generated <code>.cm*</code> files, which means faster compilation :)</p>

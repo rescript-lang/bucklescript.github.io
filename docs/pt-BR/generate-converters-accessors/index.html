@@ -77,11 +77,11 @@
   | <span class="hljs-type">Cancel</span>
   [@@bs.deriving accessors]
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.deriving accessors]</span>
-<span class="hljs-keyword">type</span> action =
-  | <span class="hljs-constructor">Click</span>
-  | <span class="hljs-constructor">Submit</span>(string)
-  | <span class="hljs-constructor">Cancel</span>;
+<pre><code class="hljs css language-reason">[@bs.deriving accessors]
+type action =
+  | Click
+  | Submit(string)
+  | Cancel;
 </code></pre>
 <p>Variants constructors with payloads generate functions, payload-less constructors generate plain integers. <strong>Note</strong>:</p>
 <ul>
@@ -105,7 +105,7 @@ exports.cancel = cancel;
 <h3><a class="anchor" aria-hidden="true" id="usage"></a><a href="#usage" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Usage</h3>
 <pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> s = submit <span class="hljs-string">"hello"</span> <span class="hljs-comment">(* gives Submit "hello" *)</span>
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> s = submit(<span class="hljs-string">"hello"</span>); <span class="hljs-comment">/* gives Submit("hello") */</span>
+<pre><code class="hljs css language-reason">let s = submit(&quot;hello&quot;); /* gives Submit(&quot;hello&quot;) */
 </code></pre>
 <p>This is useful:</p>
 <ul>
@@ -114,28 +114,28 @@ exports.cancel = cancel;
 </ul>
 <h2><a class="anchor" aria-hidden="true" id="generate-first-class-accessors-for-record-types"></a><a href="#generate-first-class-accessors-for-record-types" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Generate first-class accessors for record types.</h2>
 <p>Do you find yourself typing something like this a lot?</p>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> pet = {
+<pre><code class="hljs css language-reason">type pet = {
   name: string,
 };
 
-<span class="hljs-keyword">let</span> pets = <span class="hljs-literal">[</span>{name: <span class="hljs-string">"bob"</span>}, {name: <span class="hljs-string">"bob2"</span>}<span class="hljs-literal">]</span>;
+let pets = [{name: &quot;bob&quot;}, {name: &quot;bob2&quot;}];
 pets
-  <span class="hljs-operator">|&gt;</span> <span class="hljs-module-identifier">List</span>.map(pet =&gt; pet.name)
-  <span class="hljs-operator">|&gt;</span> <span class="hljs-module-identifier">String</span>.concat(<span class="hljs-string">"&amp;"</span>)
-  <span class="hljs-operator">|&gt;</span> <span class="hljs-module-identifier">Js</span>.log;
+  |&gt; List.map(pet =&gt; pet.name)
+  |&gt; String.concat(&quot;&amp;&quot;)
+  |&gt; Js.log;
 </code></pre>
 <p>This call to map: <code>List.map(pet =&gt; pet.name)</code> could be a bit more concise. Wouldn't it be nice if it looked like this instead: <code>List.map(name)</code>?</p>
 <p>If we use <code>@bs.deriving accessors</code> on the record constructor, we can do just that. The decorator will generate a function matching the name of each field in the record which takes the record type, and returns the field type:</p>
-<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.deriving accessors]</span>
-<span class="hljs-keyword">type</span> pet = {
+<pre><code class="hljs css language-reason">[@bs.deriving accessors]
+type pet = {
   name: string,
 };
 
-<span class="hljs-keyword">let</span> pets = <span class="hljs-literal">[</span>{name: <span class="hljs-string">"bob"</span>}, {name: <span class="hljs-string">"bob2"</span>}<span class="hljs-literal">]</span>;
+let pets = [{name: &quot;bob&quot;}, {name: &quot;bob2&quot;}];
 pets
-  <span class="hljs-operator">|&gt;</span> <span class="hljs-module-identifier">List</span>.map(name)
-  <span class="hljs-operator">|&gt;</span> <span class="hljs-module-identifier">String</span>.concat(<span class="hljs-string">"&amp;"</span>)
-  <span class="hljs-operator">|&gt;</span> <span class="hljs-module-identifier">Js</span>.log;
+  |&gt; List.map(name)
+  |&gt; String.concat(&quot;&amp;&quot;)
+  |&gt; Js.log;
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="convert-between-jst-object-and-record"></a><a href="#convert-between-jst-object-and-record" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Convert Between <code>Js.t</code> Object and Record</h2>
 <p>Use <code>jsConverter</code>.</p>
@@ -144,8 +144,8 @@ pets
   y : <span class="hljs-built_in">int</span>
 } [@@bs.deriving jsConverter]
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.deriving jsConverter]</span>
-<span class="hljs-keyword">type</span> coordinates = {
+<pre><code class="hljs css language-reason">[@bs.deriving jsConverter]
+type coordinates = {
   x: int,
   y: int
 };
@@ -155,9 +155,9 @@ pets
 
 <span class="hljs-keyword">val</span> coordinatesFromJs : &lt; x: <span class="hljs-built_in">int</span> ; y : <span class="hljs-built_in">int</span> ; .. &gt; <span class="hljs-type">Js</span>.t -&gt; coordinates
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> coordinatesToJs: coordinates =&gt; {. <span class="hljs-string">"x"</span>: int, <span class="hljs-string">"y"</span>: int};
+<pre><code class="hljs css language-reason">let coordinatesToJs: coordinates =&gt; {. &quot;x&quot;: int, &quot;y&quot;: int};
 
-<span class="hljs-keyword">let</span> coordinatesFromJs: {.. <span class="hljs-string">"x"</span>: int, <span class="hljs-string">"y"</span>: int} =&gt; coordinates;
+let coordinatesFromJs: {.. &quot;x&quot;: int, &quot;y&quot;: int} =&gt; coordinates;
 </code></pre>
 <p><strong>Note</strong>:</p>
 <ul>
@@ -168,12 +168,12 @@ pets
 <p>This exports a <code>jsCoordinates</code> JS object (not a record!) for JS files to use:</p>
 <pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> jsCoordinates = coordinatesToJs {x = <span class="hljs-number">1</span>; y = <span class="hljs-number">2</span>}
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> jsCoordinates = coordinatesToJs({x: <span class="hljs-number">1</span>, y: <span class="hljs-number">2</span>});
+<pre><code class="hljs css language-reason">let jsCoordinates = coordinatesToJs({x: 1, y: 2});
 </code></pre>
 <p>This binds to a <code>jsCoordinates</code> record (not a JS object!) that exists on the JS side, presumably created by JS calling the function <code>coordinatesFromJs</code>:</p>
 <pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> jsCoordinates: coordinates = <span class="hljs-string">"jsCoordinates"</span> [@@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"myGame"</span>]
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.module "myGame"]</span> <span class="hljs-keyword">external</span> jsCoordinates : coordinates = <span class="hljs-string">"jsCoordinates"</span>;
+<pre><code class="hljs css language-reason">[@bs.module &quot;myGame&quot;] external jsCoordinates : coordinates = &quot;jsCoordinates&quot;;
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="more-safety"></a><a href="#more-safety" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>More Safety</h3>
 <p>The above generated functions use <code>Js.t</code> object types. You can also hide this implementation detail by making the object type <strong>abstract</strong> by passing the <code>newType</code> option to the <code>jsConverter</code> plugin:</p>
@@ -182,8 +182,8 @@ pets
   y : <span class="hljs-built_in">int</span>
 } [@@bs.deriving {jsConverter = newType}]
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.deriving {jsConverter: newType}]</span>
-<span class="hljs-keyword">type</span> coordinates = {
+<pre><code class="hljs css language-reason">[@bs.deriving {jsConverter: newType}]
+type coordinates = {
   x: int,
   y: int
 };
@@ -193,9 +193,9 @@ pets
 
 <span class="hljs-keyword">val</span> coordinatesFromJs : abs_coordinates -&gt; coordinates
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> coordinatesToJs: coordinates =&gt; abs_coordinates;
+<pre><code class="hljs css language-reason">let coordinatesToJs: coordinates =&gt; abs_coordinates;
 
-<span class="hljs-keyword">let</span> coordinatesFromJs: abs_coordinates =&gt; coordinates;
+let coordinatesFromJs: abs_coordinates =&gt; coordinates;
 </code></pre>
 <h4><a class="anchor" aria-hidden="true" id="usage-2"></a><a href="#usage-2" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Usage</h4>
 <p>Using <code>newType</code>, you've now prevented consumers from inadvertently doing the following:</p>
@@ -207,13 +207,13 @@ pets
 
 <span class="hljs-keyword">let</span> x = jsCoords##x <span class="hljs-comment">(* disallowed! Don't access the object's internal details *)</span>
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> myCoordinates = {
-  x: <span class="hljs-number">10</span>,
-  y: <span class="hljs-number">20</span>
+<pre><code class="hljs css language-reason">let myCoordinates = {
+  x: 10,
+  y: 20
 };
-<span class="hljs-keyword">let</span> jsCoords = coordinatesToJs(myCoordinates);
+let jsCoords = coordinatesToJs(myCoordinates);
 
-<span class="hljs-keyword">let</span> x = jsCoords##x; <span class="hljs-comment">/* disallowed! Don't access the object's internal details */</span>
+let x = jsCoords##x; /* disallowed! Don't access the object's internal details */
 </code></pre>
 <p>Same generated output. Isn't it great that types prevent invalid accesses you'd otherwise have to encode at runtime?</p>
 <h2><a class="anchor" aria-hidden="true" id="convert-between-js-integer-enum-and-bs-variant"></a><a href="#convert-between-js-integer-enum-and-bs-variant" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Convert between JS Integer Enum and BS Variant</h2>
@@ -225,21 +225,21 @@ pets
   | <span class="hljs-type">Watermelon</span>
   [@@bs.deriving jsConverter]
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.deriving jsConverter]</span>
-<span class="hljs-keyword">type</span> fruit =
-  | <span class="hljs-constructor">Apple</span>
-  | <span class="hljs-constructor">Orange</span>
-  | <span class="hljs-constructor">Kiwi</span>
-  | <span class="hljs-constructor">Watermelon</span>;
+<pre><code class="hljs css language-reason">[@bs.deriving jsConverter]
+type fruit =
+  | Apple
+  | Orange
+  | Kiwi
+  | Watermelon;
 </code></pre>
 <p>This option causes <code>jsConverter</code> to, again, generate functions of the following types:</p>
 <pre><code class="hljs css language-ocaml"><span class="hljs-keyword">val</span> fruitToJs : fruit -&gt; <span class="hljs-built_in">int</span>
 
 <span class="hljs-keyword">val</span> fruitFromJs : <span class="hljs-built_in">int</span> -&gt; fruit option
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> fruitToJs: fruit =&gt; int;
+<pre><code class="hljs css language-reason">let fruitToJs: fruit =&gt; int;
 
-<span class="hljs-keyword">let</span> fruitFromJs: int =&gt; option(fruit);
+let fruitFromJs: int =&gt; option(fruit);
 </code></pre>
 <p>For <code>fruitToJs</code>, each fruit variant constructor would map into an integer, starting at 0, in the order they're declared.</p>
 <p>For <code>fruitFromJs</code>, the return value is an <code>option</code>, because not every int maps to a constructor.</p>
@@ -258,18 +258,18 @@ pets
 | <span class="hljs-type">Some</span> <span class="hljs-type">Kiwi</span> -&gt; <span class="hljs-type">Js</span>.log <span class="hljs-string">"this is Kiwi"</span>
 | _ -&gt; <span class="hljs-type">Js</span>.log <span class="hljs-string">"received something wrong from the JS side"</span>
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.deriving jsConverter]</span>
-<span class="hljs-keyword">type</span> fruit =
-  | <span class="hljs-constructor">Apple</span>
-  | <span class="hljs-attribute">[@bs.as 10]</span> <span class="hljs-constructor">Orange</span>
-  | <span class="hljs-attribute">[@bs.as 100]</span> <span class="hljs-constructor">Kiwi</span>
-  | <span class="hljs-constructor">Watermelon</span>;
+<pre><code class="hljs css language-reason">[@bs.deriving jsConverter]
+type fruit =
+  | Apple
+  | [@bs.as 10] Orange
+  | [@bs.as 100] Kiwi
+  | Watermelon;
 
-<span class="hljs-keyword">let</span> zero = fruitToJs(<span class="hljs-constructor">Apple</span>); <span class="hljs-comment">/* 0 */</span>
+let zero = fruitToJs(Apple); /* 0 */
 
-<span class="hljs-keyword">switch</span> (fruitFromJs(<span class="hljs-number">100</span>)) {
-| <span class="hljs-constructor">Some</span>(<span class="hljs-constructor">Kiwi</span>) =&gt; <span class="hljs-module-identifier">Js</span>.log(<span class="hljs-string">"this is Kiwi"</span>)
-| _ =&gt; <span class="hljs-module-identifier">Js</span>.log(<span class="hljs-string">"received something wrong from the JS side"</span>)
+switch (fruitFromJs(100)) {
+| Some(Kiwi) =&gt; Js.log(&quot;this is Kiwi&quot;)
+| _ =&gt; Js.log(&quot;received something wrong from the JS side&quot;)
 };
 </code></pre>
 <p><strong>Note</strong>: by using <code>bs.as</code> here, all subsequent number encoding changes. <code>Apple</code> is still <code>0</code>, <code>Orange</code> is <code>10</code>, <code>Kiwi</code> is <code>100</code> and <code>Watermelon</code> is <strong><code>101</code></strong>!</p>
@@ -281,20 +281,20 @@ pets
   | <span class="hljs-type">Watermelon</span>
   [@@bs.deriving {jsConverter = newType}]
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.deriving {jsConverter: newType}]</span>
-<span class="hljs-keyword">type</span> fruit =
-  | <span class="hljs-constructor">Apple</span>
-  | <span class="hljs-attribute">[@bs.as 100]</span> <span class="hljs-constructor">Kiwi</span>
-  | <span class="hljs-constructor">Watermelon</span>;
+<pre><code class="hljs css language-reason">[@bs.deriving {jsConverter: newType}]
+type fruit =
+  | Apple
+  | [@bs.as 100] Kiwi
+  | Watermelon;
 </code></pre>
 <p>This option causes <code>jsConverter</code> to generate functions of the following types:</p>
 <pre><code class="hljs css language-ocaml"><span class="hljs-keyword">val</span> fruitToJs : fruit -&gt; abs_fruit
 
 <span class="hljs-keyword">val</span> fruitFromJs : abs_fruit -&gt; fruit
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> fruitToJs: fruit =&gt; abs_fruit;
+<pre><code class="hljs css language-reason">let fruitToJs: fruit =&gt; abs_fruit;
 
-<span class="hljs-keyword">let</span> fruitFromJs: abs_fruit =&gt; fruit;
+let fruitFromJs: abs_fruit =&gt; fruit;
 </code></pre>
 <p>For <code>fruitFromJs</code>, the return value, unlike the previous non-abstract type case, doesn't contain an <code>option</code>, because there's no way a bad value can be passed into it; the only creator of <code>abs_fruit</code> values is <code>fruitToJs</code>!</p>
 <h4><a class="anchor" aria-hidden="true" id="usage-4"></a><a href="#usage-4" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Usage</h4>
@@ -311,18 +311,18 @@ pets
 
 <span class="hljs-keyword">let</span> error = fruitFromJs <span class="hljs-number">100</span> <span class="hljs-comment">(* nope, can't take a random int *)</span>
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.deriving {jsConverter: newType}]</span>
-<span class="hljs-keyword">type</span> fruit =
-  | <span class="hljs-constructor">Apple</span>
-  | <span class="hljs-attribute">[@bs.as 100]</span> <span class="hljs-constructor">Kiwi</span>
-  | <span class="hljs-constructor">Watermelon</span>;
+<pre><code class="hljs css language-reason">[@bs.deriving {jsConverter: newType}]
+type fruit =
+  | Apple
+  | [@bs.as 100] Kiwi
+  | Watermelon;
 
-<span class="hljs-keyword">let</span> opaqueValue = fruitToJs(<span class="hljs-constructor">Apple</span>);
+let opaqueValue = fruitToJs(Apple);
 
-<span class="hljs-attribute">[@bs.module "myJSFruits"]</span> <span class="hljs-keyword">external</span> jsKiwi : abs_fruit = <span class="hljs-string">"iSwearThisIsAKiwi"</span>;
-<span class="hljs-keyword">let</span> kiwi = fruitFromJs(jsKiwi);
+[@bs.module &quot;myJSFruits&quot;] external jsKiwi : abs_fruit = &quot;iSwearThisIsAKiwi&quot;;
+let kiwi = fruitFromJs(jsKiwi);
 
-<span class="hljs-keyword">let</span> error = fruitFromJs(<span class="hljs-number">100</span>); <span class="hljs-comment">/* nope, can't take a random int */</span>
+let error = fruitFromJs(100); /* nope, can't take a random int */
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="convert-between-js-string-enum-and-bs-polymorphic-variant"></a><a href="#convert-between-js-string-enum-and-bs-polymorphic-variant" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Convert between JS String Enum and BS Polymorphic Variant</h2>
 <p>Similar to previous section, except polymorphic variants are converted to <code>string</code> instead of <code>int</code>.</p>
@@ -336,15 +336,15 @@ pets
 <span class="hljs-keyword">let</span> appleString = fruitToJs <span class="hljs-type">`Apple</span> <span class="hljs-comment">(* "Apple" *)</span>
 <span class="hljs-keyword">let</span> kiwiString = fruitToJs <span class="hljs-type">`Kiwi</span> <span class="hljs-comment">(* "miniCoconut" *)</span>
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.deriving jsConverter]</span>
-<span class="hljs-keyword">type</span> fruit = <span class="hljs-literal">[</span>
-  | <span class="hljs-constructor">`Apple</span>
-  | <span class="hljs-attribute">[@bs.as "miniCoconut"]</span> <span class="hljs-constructor">`Kiwi</span>
-  | <span class="hljs-constructor">`Watermelon</span>
-<span class="hljs-literal">]</span>;
+<pre><code class="hljs css language-reason">[@bs.deriving jsConverter]
+type fruit = [
+  | `Apple
+  | [@bs.as &quot;miniCoconut&quot;] `Kiwi
+  | `Watermelon
+];
 
-<span class="hljs-keyword">let</span> appleString = fruitToJs(<span class="hljs-constructor">`Apple</span>); <span class="hljs-comment">/* "Apple" */</span>
-<span class="hljs-keyword">let</span> kiwiString = fruitToJs(<span class="hljs-constructor">`Kiwi</span>); <span class="hljs-comment">/* "miniCoconut" */</span>
+let appleString = fruitToJs(`Apple); /* &quot;Apple&quot; */
+let kiwiString = fruitToJs(`Kiwi); /* &quot;miniCoconut&quot; */
 </code></pre>
 <p>Deriving converters with abstract type through <code>newType</code> also still works.</p>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/pt-BR/pipe-first"><span class="arrow-prev">← </span><span>Pipe First</span></a><a class="docs-next button" href="/docs/pt-BR/better-data-structures-printing-debug-mode"><span>Better Data Structures Printing (Debug Mode)</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#functions-plain-values-for-variant">Functions &amp; Plain Values for Variant</a><ul class="toc-headings"><li><a href="#usage">Usage</a></li></ul></li><li><a href="#generate-first-class-accessors-for-record-types">Generate first-class accessors for record types.</a></li><li><a href="#convert-between-jst-object-and-record">Convert Between <code>Js.t</code> Object and Record</a><ul class="toc-headings"><li><a href="#usage-1">Usage</a></li><li><a href="#more-safety">More Safety</a></li></ul></li><li><a href="#convert-between-js-integer-enum-and-bs-variant">Convert between JS Integer Enum and BS Variant</a><ul class="toc-headings"><li><a href="#usage-3">Usage</a></li><li><a href="#more-safety-1">More Safety</a></li></ul></li><li><a href="#convert-between-js-string-enum-and-bs-polymorphic-variant">Convert between JS String Enum and BS Polymorphic Variant</a><ul class="toc-headings"><li><a href="#usage-5">Usage</a></li></ul></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script>window.foo = new Pjax({

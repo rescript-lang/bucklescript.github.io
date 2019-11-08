@@ -183,7 +183,7 @@
         <link href="https://bucklescript.github.io/blog/2018/05/23/release-3-1-4.html">
         </link>
         <updated>2018-05-23T06:00:00Z</updated>
-        <summary type="html"><![CDATA[<p>Hey again! The release two days ago removed the deprecated Js Boolean APIs (no longer needed since we compile OCaml booleans to JS boolean since <code>3.0.0</code>). But folks have voiced that the removal was too hasty, as some of their dependencies still haven't ...</p>]]></summary>
+        <summary type="html"><![CDATA[<p>Hey again! The release two days ago removed the deprecated Js Boolean APIs (no longer needed since we compile OCaml booleans to JS boolean since <code>3.0.0</code>). But folks have voiced that the removal was too hasty, as some of their dependencies still haven't...</p>]]></summary>
         <author>
         </author>
     </entry>

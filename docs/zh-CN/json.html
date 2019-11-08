@@ -79,14 +79,14 @@
 <span class="hljs-keyword">let</span> result = parseIntoMyData <span class="hljs-string">"{\"name\": \"Luke\"}"</span>
 <span class="hljs-keyword">let</span> n = result |. name
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.deriving abstract]</span>
-<span class="hljs-keyword">type</span> data = {name: string};
+<pre><code class="hljs css language-reason">[@bs.deriving abstract]
+type data = {name: string};
 
-<span class="hljs-attribute">[@bs.scope "JSON"]</span> <span class="hljs-attribute">[@bs.val]</span>
-<span class="hljs-keyword">external</span> parseIntoMyData : string =&gt; data = <span class="hljs-string">"parse"</span>;
+[@bs.scope &quot;JSON&quot;] [@bs.val]
+external parseIntoMyData : string =&gt; data = &quot;parse&quot;;
 
-<span class="hljs-keyword">let</span> result = parseIntoMyData(<span class="hljs-string">"{\"name\": \"Luke\"}"</span>);
-<span class="hljs-keyword">let</span> n = nameGet(result);
+let result = parseIntoMyData(&quot;{\&quot;name\&quot;: \&quot;Luke\&quot;}&quot;);
+let n = nameGet(result);
 </code></pre>
 <p>输出：</p>
 <pre><code class="hljs css language-js"><span class="hljs-keyword">var</span> result = <span class="hljs-built_in">JSON</span>.parse(<span class="hljs-string">"{\"name\": \"Luke\"}"</span>);

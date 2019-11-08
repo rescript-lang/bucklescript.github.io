@@ -73,11 +73,11 @@
 <li><p>we prebuilt binaries for Windows, MacOS and Linux, this will help reduce your CI build time significantly. For exotic OSes, it will fall back to build from source</p></li>
 <li><p>bs.deriving light config. For people who prefer short names, we make it configurable</p></li>
 </ul>
-<pre><code class="hljs"><span class="hljs-keyword">type</span> t = {
+<pre><code class="hljs">type t = {
     x : int
-} <span class="hljs-attribute">[@@bs.deriving {abstract = light}]</span>
+} [@@bs.deriving {abstract = light}]
 
-<span class="hljs-keyword">let</span> f (obj : t) = obj |. x 
+let f (obj : t) = obj |. x 
 </code></pre>
 <p>This is the last major release which is targeting OCaml 4.02.3, in the future we will make major releases targeting OCaml 4.06.</p>
 <p>Happy Hacking!</p>
