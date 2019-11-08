@@ -226,7 +226,7 @@ let joe = person(~age=20, ~job=&quot;teacher&quot;, ());
   age: <span class="hljs-built_in">int</span>;
 } [@@bs.deriving {abstract = light}]
 
-<span class="hljs-keyword">let</span> joe = person ~name:<span class="hljs-string">"Joe"</span> ~age:<span class="hljs-number">20</span> <span class="hljs-literal">()</span>
+<span class="hljs-keyword">let</span> joe = person ~name:<span class="hljs-string">"Joe"</span> ~age:<span class="hljs-number">20</span>
 <span class="hljs-keyword">let</span> joeName = name joe
 </code></pre>
 <pre><code class="hljs css language-reason">[@bs.deriving {abstract: light}]
@@ -235,7 +235,7 @@ type person = {
   age: int,
 };
 
-let joe = person(~name=&quot;Joe&quot;, ~age=20, ());
+let joe = person(~name=&quot;Joe&quot;, ~age=20);
 let joeName = name(joe);
 </code></pre>
 <p>The getter functions will now have the same names as the object fields themselves.</p>
