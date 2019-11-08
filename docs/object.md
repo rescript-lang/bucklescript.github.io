@@ -224,7 +224,7 @@ type person = {
   age: int;
 } [@@bs.deriving {abstract = light}]
 
-let joe = person ~name:"Joe" ~age:20 ()
+let joe = person ~name:"Joe" ~age:20
 let joeName = name joe
 ```
 
@@ -235,7 +235,7 @@ type person = {
   age: int,
 };
 
-let joe = person(~name="Joe", ~age=20, ());
+let joe = person(~name="Joe", ~age=20);
 let joeName = name(joe);
 ```
 
