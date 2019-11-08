@@ -12,7 +12,7 @@
     "url": "git+https://github.com/bucklescript/bucklescript.github.io.git"
   },
   "dependencies": {
-    "docusaurus": "1.11.0"
+    "docusaurus": "^1.14.0"
   },
   "devDependencies": {
     "pjax-api": "^3.23.0",
