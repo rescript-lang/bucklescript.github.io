@@ -3,7 +3,7 @@
   "localized-strings": {
     "next": "Next",
     "previous": "Previous",
-    "tagline": "Write safer and simpler code in OCaml & Reason, compile to JavaScript.",
+    "tagline": "A faster, simpler and more robust take on JavaScript.",
     "docs": {
       "automatic-interface-generation": {
         "title": "Automatic Interface Generation"
