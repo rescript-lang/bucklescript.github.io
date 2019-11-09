@@ -73,10 +73,10 @@
 
 <span class="hljs-keyword">let</span> date = createDate <span class="hljs-literal">()</span>
 </code></pre>
-<pre><code class="hljs css language-reason">type t;
-[@bs.new] external createDate : unit =&gt; t = &quot;Date&quot;;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> t;
+<span class="hljs-attribute">[@bs.new]</span> <span class="hljs-keyword">external</span> createDate : unit =&gt; t = <span class="hljs-string">"Date"</span>;
 
-let date = createDate();
+<span class="hljs-keyword">let</span> date = createDate();
 </code></pre>
 <p>Output:</p>
 <pre><code class="hljs css language-js"><span class="hljs-keyword">var</span> date = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>();
@@ -86,9 +86,9 @@ let date = createDate();
 <span class="hljs-keyword">external</span> book : <span class="hljs-built_in">unit</span> -&gt; t = <span class="hljs-string">"Book"</span> [@@bs.<span class="hljs-keyword">new</span>] [@@bs.<span class="hljs-keyword">module</span>]
 <span class="hljs-keyword">let</span> bookInstance = book <span class="hljs-literal">()</span>
 </code></pre>
-<pre><code class="hljs css language-reason">type t;
-[@bs.new] [@bs.module] external book : unit =&gt; t = &quot;Book&quot;;
-let bookInstance = book();
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> t;
+<span class="hljs-attribute">[@bs.new]</span> <span class="hljs-attribute">[@bs.module]</span> <span class="hljs-keyword">external</span> book : unit =&gt; t = <span class="hljs-string">"Book"</span>;
+<span class="hljs-keyword">let</span> bookInstance = book();
 </code></pre>
 <p>Output:</p>
 <pre><code class="hljs css language-js"><span class="hljs-keyword">var</span> Book = <span class="hljs-built_in">require</span>(<span class="hljs-string">"Book"</span>);
@@ -105,15 +105,15 @@ let bookInstance = book();
 
 <span class="hljs-keyword">type</span> rect = _rect <span class="hljs-type">Js</span>.t
 </code></pre>
-<pre><code class="hljs css language-reason">class type _rect =
-  [@bs]
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">class</span> <span class="hljs-keyword">type</span> _rect =
+  <span class="hljs-attribute">[@bs]</span>
   {
-    [@bs.set] pub height: int;
-    [@bs.set] pub width: int;
-    pub draw: unit =&gt; unit
+    <span class="hljs-attribute">[@bs.set]</span> <span class="hljs-keyword">pub</span> height: int;
+    <span class="hljs-attribute">[@bs.set]</span> <span class="hljs-keyword">pub</span> width: int;
+    <span class="hljs-keyword">pub</span> draw: unit =&gt; unit
   };
 
-type rect = Js.t(_rect);
+<span class="hljs-keyword">type</span> rect = <span class="hljs-module-identifier">Js</span>.t(_rect);
 </code></pre>
 <p>For <code>Js.t</code> classes, methods with arrow types are treated as real methods (automatically annotated with <code>[@bs.meth]</code>) while methods with non-arrow types are treated as properties. Adding <code>bs.set</code> to those methods will make them mutable, which enables you to set them using <code>#=</code> later. Dropping the <code>bs.set</code> attribute makes the method/property immutable. Basically like the object section's features.</p>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/zh-CN/object-2"><span class="arrow-prev">← </span><span>Object 2</span></a><a class="docs-next button" href="/docs/zh-CN/function"><span>Function</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#new"><code>new</code></a></li><li><a href="#bind-to-js-classes">Bind to JS Classes</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script>window.foo = new Pjax({

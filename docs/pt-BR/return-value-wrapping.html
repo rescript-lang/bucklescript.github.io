@@ -73,18 +73,18 @@
 <li><p>More idiomatic OCaml code for users to consume the FFI.</p></li>
 </ul>
 <p>Below is a contrived core example:</p>
-<pre><code class="hljs css language-reason">type element;
-type dom;
-[@bs.send] [@bs.return nullable]
-external getElementById: (dom, string) =&gt; option(element) = &quot;getElementById&quot;;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> element;
+<span class="hljs-keyword">type</span> dom;
+<span class="hljs-attribute">[@bs.send]</span> <span class="hljs-attribute">[@bs.return nullable]</span>
+<span class="hljs-keyword">external</span> getElementById: (dom, string) =&gt; option(element) = <span class="hljs-string">"getElementById"</span>;
 
-let test = dom =&gt; {
-  let elem = dom-&gt;(getElementById(&quot;haha&quot;));
-  switch (elem) {
-  | None =&gt; 1
-  | Some(ui) =&gt;
-    Js.log(ui);
-    2;
+<span class="hljs-keyword">let</span> test = dom =&gt; {
+  <span class="hljs-keyword">let</span> elem = dom<span class="hljs-operator">-&gt;</span>(getElementById(<span class="hljs-string">"haha"</span>));
+  <span class="hljs-keyword">switch</span> (elem) {
+  | <span class="hljs-constructor">None</span> =&gt; <span class="hljs-number">1</span>
+  | <span class="hljs-constructor">Some</span>(ui) =&gt;
+    <span class="hljs-module-identifier">Js</span>.log(ui);
+    <span class="hljs-number">2</span>;
   };
 };
 </code></pre>
@@ -101,28 +101,28 @@ let test = dom =&gt; {
 </code></pre>
 <p><code>return nullable</code> attribute will automatically convert null and undefined to <code>option</code></p>
 <pre><code class="hljs css language-reason">
-    Output:
-    ```js
-    function test(dom) {
-      var elem = dom.getElementById(&quot;haha&quot;);
-      if (elem == null) {
-        return 1;
-      } else {
+    <span class="hljs-constructor">Output</span>:
+    ``<span class="hljs-constructor">`js</span>
+    <span class="hljs-keyword">function</span> test(dom) {
+      var elem = dom.getElementById(<span class="hljs-string">"haha"</span>);
+      <span class="hljs-keyword">if</span> (elem <span class="hljs-operator">==</span> null) {
+        return <span class="hljs-number">1</span>;
+      } <span class="hljs-keyword">else</span> {
         console.log(elem);
-        return 2;
+        return <span class="hljs-number">2</span>;
       }
     }
     
 
-Currently 4 directives are supported: `null_to_opt`, `undefined_to_opt`, `nullable`(introduced in @1.9.0) and `identity`. `null_undefined_to_opt` works the same as `nullable`, but it is deprecated, `nullable` is encouraged
+<span class="hljs-constructor">Currently</span> <span class="hljs-number">4</span> directives are supported: <span class="hljs-constructor">`null_to_opt</span>`, <span class="hljs-constructor">`undefined_to_opt</span>`, <span class="hljs-constructor">`nullable</span>`(introduced <span class="hljs-keyword">in</span> @<span class="hljs-number">1.9</span>.<span class="hljs-number">0</span>) <span class="hljs-keyword">and</span> <span class="hljs-constructor">`identity</span>`. <span class="hljs-constructor">`null_undefined_to_opt</span>` works the same <span class="hljs-keyword">as</span> <span class="hljs-constructor">`nullable</span>`, but it is deprecated, <span class="hljs-constructor">`nullable</span>` is encouraged
 
-`null_to_opt`, `undefined_to_opt` and `nullable` will *semantically* convert a nullable value to `option` which is a boxed value, but the compiler will do smart optimizations to *remove such boxing overhead* when the returned value is destructed in the same routine.
+<span class="hljs-constructor">`null_to_opt</span>`, <span class="hljs-constructor">`undefined_to_opt</span>` <span class="hljs-keyword">and</span> <span class="hljs-constructor">`nullable</span>` will <span class="hljs-operator">*</span>semantically<span class="hljs-operator">*</span> convert a nullable value <span class="hljs-keyword">to</span> <span class="hljs-constructor">`option</span>` which is a boxed value, but the compiler will <span class="hljs-keyword">do</span> smart optimizations <span class="hljs-keyword">to</span> <span class="hljs-operator">*</span>remove such boxing overhead<span class="hljs-operator">*</span> when the returned value is destructed <span class="hljs-keyword">in</span> the same routine.
 
-The three directives above require users to write literally `_ option`. It is in theory not necessary, but it is required to reduce user errors.
+<span class="hljs-constructor">The</span> three directives above require users <span class="hljs-keyword">to</span> write literally `_ option`. <span class="hljs-constructor">It</span> is <span class="hljs-keyword">in</span> theory not necessary, but it is required <span class="hljs-keyword">to</span> reduce user errors.
 
-When the return type is `unit`: the compiler will append its return value with an OCaml `unit` literal to make sure it does return `unit`. Its main purpose is to make the user consume FFI in idiomatic OCaml code, the cost is *very very small* and the compiler will do smart optimizations to remove it when the returned value is not used (mostly likely).
+<span class="hljs-constructor">When</span> the return <span class="hljs-keyword">type</span> is <span class="hljs-constructor">`unit</span>`: the compiler will append its return value with an <span class="hljs-constructor">OCaml</span> <span class="hljs-constructor">`unit</span>` literal <span class="hljs-keyword">to</span> make sure it does return <span class="hljs-constructor">`unit</span>`. <span class="hljs-constructor">Its</span> main purpose is <span class="hljs-keyword">to</span> make the user consume <span class="hljs-constructor">FFI</span> <span class="hljs-keyword">in</span> idiomatic <span class="hljs-constructor">OCaml</span> code, the cost is <span class="hljs-operator">*</span>very very small<span class="hljs-operator">*</span> <span class="hljs-keyword">and</span> the compiler will <span class="hljs-keyword">do</span> smart optimizations <span class="hljs-keyword">to</span> remove it when the returned value is not used (mostly likely).
 
-`identity` will make sure that compiler will do nothing about the returned value. It is rarely used, but introduced here for debugging purpose.</code></pre>
+<span class="hljs-constructor">`identity</span>` will make sure that compiler will <span class="hljs-keyword">do</span> nothing about the returned value. <span class="hljs-constructor">It</span> is rarely used, but introduced here <span class="hljs-keyword">for</span> debugging purpose.</code></pre>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/pt-BR/property-access"><span class="arrow-prev">← </span><span>Property access</span></a><a class="docs-next button" href="/docs/pt-BR/import-export"><span>Import &amp; Export</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"></nav></div><span><script src="/js/redirectBlog.js"></script><script>window.foo = new Pjax({
           areas: [
             // try to use the first query.

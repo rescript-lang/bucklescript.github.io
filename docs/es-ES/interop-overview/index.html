@@ -77,7 +77,7 @@
 <p>La mayoría estructura de datos en BuckleScript <strong>se mapean limpiamente a JS</strong>. Por ejemplo, una cadena BS es una cadena JS. Un arreglo BS es un arreglo JS. El siguiente código BS:</p>
 <pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> messages = [| <span class="hljs-string">"hola"</span>; <span class="hljs-string">"mundo"</span>; <span class="hljs-string">"como"</span>; <span class="hljs-string">"estás"</span>; <span class="hljs-string">"hoy"</span> |]
 </code></pre>
-<pre><code class="hljs css language-reason">let messages = [| &quot;hola&quot;; &quot;mundo&quot;; &quot;como&quot;; &quot;estás&quot;; &quot;hoy&quot;|];
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> messages = <span class="hljs-literal">[|</span> <span class="hljs-string">"hola"</span>; <span class="hljs-string">"mundo"</span>; <span class="hljs-string">"como"</span>; <span class="hljs-string">"estás"</span>; <span class="hljs-string">"hoy"</span><span class="hljs-literal">|]</span>;
 </code></pre>
 <p>Roughly compiles to the JS code:</p>
 <pre><code class="hljs css language-js"><span class="hljs-keyword">var</span> messages = [| <span class="hljs-string">"hola"</span>; <span class="hljs-string">"mundo"</span>; <span class="hljs-string">"como"</span>; <span class="hljs-string">"estás"</span>; <span class="hljs-string">"hoy"</span>]

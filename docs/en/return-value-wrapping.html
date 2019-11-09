@@ -74,18 +74,18 @@
 <li><p>More idiomatic OCaml code for users to consume the FFI.</p></li>
 </ul>
 <p>Below is a contrived core example:</p>
-<pre><code class="hljs css language-reason">type element;
-type dom;
-[@bs.send] [@bs.return nullable]
-external getElementById: (dom, string) =&gt; option(element) = &quot;getElementById&quot;;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> element;
+<span class="hljs-keyword">type</span> dom;
+<span class="hljs-attribute">[@bs.send]</span> <span class="hljs-attribute">[@bs.return nullable]</span>
+<span class="hljs-keyword">external</span> getElementById: (dom, string) =&gt; option(element) = <span class="hljs-string">"getElementById"</span>;
 
-let test = dom =&gt; {
-  let elem = dom-&gt;(getElementById(&quot;haha&quot;));
-  switch (elem) {
-  | None =&gt; 1
-  | Some(ui) =&gt;
-    Js.log(ui);
-    2;
+<span class="hljs-keyword">let</span> test = dom =&gt; {
+  <span class="hljs-keyword">let</span> elem = dom<span class="hljs-operator">-&gt;</span>(getElementById(<span class="hljs-string">"haha"</span>));
+  <span class="hljs-keyword">switch</span> (elem) {
+  | <span class="hljs-constructor">None</span> =&gt; <span class="hljs-number">1</span>
+  | <span class="hljs-constructor">Some</span>(ui) =&gt;
+    <span class="hljs-module-identifier">Js</span>.log(ui);
+    <span class="hljs-number">2</span>;
   };
 };
 </code></pre>

@@ -89,16 +89,16 @@ JS is running on so many platforms for example, <a href="https://electronjs.org/
 
 <span class="hljs-keyword">let</span> v = getSafe [|<span class="hljs-number">1</span>;<span class="hljs-number">2</span>;<span class="hljs-number">3</span>|] (-<span class="hljs-number">1</span>)
 </code></pre>
-<pre><code class="hljs css language-reason">let getSafe: (array(int), int) =&gt; int = [%raw
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> getSafe: (array(int), int) =&gt; int = <span class="hljs-attribute">[%raw
   (a, b) =&gt; {|
     if (b&gt;=0 &amp;&amp; b &lt; a.length) {
-        return a [b]
+        return a [b]</span>
      }
-     throw new Error(&quot;out of range&quot;)
+     throw <span class="hljs-keyword">new</span> <span class="hljs-constructor">Error</span>(<span class="hljs-string">"out of range"</span>)
   |}
-];
+<span class="hljs-literal">]</span>;
 
-let v = [|1, 2, 3|]-&gt;getSafe(-1);
+<span class="hljs-keyword">let</span> v = <span class="hljs-literal">[|</span><span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span><span class="hljs-literal">|]</span><span class="hljs-operator">-&gt;</span>getSafe<span class="hljs-number">(-1)</span>;
 </code></pre>
 <p>Here the raw extension node asks the user to list the parameters and function statement in raw JS syntax. The generated JS code is as follows:</p>
 <pre><code class="hljs css language-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getSafe</span> (<span class="hljs-params">a,b</span>)</span>{ 
@@ -141,18 +141,18 @@ let v = [|1, 2, 3|]-&gt;getSafe(-1);
 <span class="hljs-keyword">let</span> <span class="hljs-literal">()</span> = setDate date <span class="hljs-number">3.</span>
 <span class="hljs-keyword">let</span> d = getDate date
 </code></pre>
-<pre><code class="hljs css language-reason">type date;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> date;
 
-[@bs.new]
-external fromFloat : float =&gt; date = &quot;Date&quot; ;
-[@bs.send]
-external getDate : date =&gt; float = &quot;getDate&quot; ;
-[@bs.send]
-external setDate : date =&gt; float =&gt; unit = &quot;setDate&quot;;
+<span class="hljs-attribute">[@bs.new]</span>
+<span class="hljs-keyword">external</span> fromFloat : float =&gt; date = <span class="hljs-string">"Date"</span> ;
+<span class="hljs-attribute">[@bs.send]</span>
+<span class="hljs-keyword">external</span> getDate : date =&gt; float = <span class="hljs-string">"getDate"</span> ;
+<span class="hljs-attribute">[@bs.send]</span>
+<span class="hljs-keyword">external</span> setDate : date =&gt; float =&gt; unit = <span class="hljs-string">"setDate"</span>;
 
-let date = fromFloat (10000.0);
-date-&gt;setDate (3.0);
-let d = date -&gt; getDate;
+<span class="hljs-keyword">let</span> date = fromFloat (<span class="hljs-number">10000.0</span>);
+date<span class="hljs-operator">-&gt;</span>setDate (<span class="hljs-number">3.0</span>);
+<span class="hljs-keyword">let</span> d = date <span class="hljs-operator">-&gt;</span> getDate;
 </code></pre>
 <p>The preceding code generates the following JS. As you can see, the binding itself is zero cost and serves as formal documentation.</p>
 <pre><code class="hljs css language-js"><span class="hljs-keyword">var</span> date = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-number">10000</span>);
@@ -179,19 +179,19 @@ let date = fromFloat 10000.
 let () = setDate date 3.
 let d = getDate date
 </code></pre>
-<pre><code class="hljs css language-reason">type date;
-let fromFloat: float =&gt; date = [%raw d =&gt; {|return new Date(d)|}];
-let getDate: date =&gt; float = [%raw d =&gt; {|return d.getDate()|}];
-let setDate: (date, float) =&gt; unit = [%raw
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> date;
+<span class="hljs-keyword">let</span> fromFloat: float =&gt; date = <span class="hljs-attribute">[%raw d =&gt; {|return new Date(d)|}]</span>;
+<span class="hljs-keyword">let</span> getDate: date =&gt; float = <span class="hljs-attribute">[%raw d =&gt; {|return d.getDate()|}]</span>;
+<span class="hljs-keyword">let</span> setDate: (date, float) =&gt; unit = <span class="hljs-attribute">[%raw
   (d, v) =&gt; {|
    d.setDate(v);
    return 0; // ocaml representation of unit
 |}
-];
+]</span>;
 
-let date = fromFloat(10000.);
-date-&gt;setDate( 3.);
-let d = date-&gt;getDate;
+<span class="hljs-keyword">let</span> date = fromFloat(<span class="hljs-number">10000.</span>);
+date<span class="hljs-operator">-&gt;</span>setDate( <span class="hljs-number">3.</span>);
+<span class="hljs-keyword">let</span> d = date<span class="hljs-operator">-&gt;</span>getDate;
 
 </code></pre>
 <p>The generated JS is as follows, and you can see the cost:</p>

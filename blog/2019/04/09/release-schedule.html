@@ -72,15 +72,15 @@
 <li><p>react jsx v3 is available which means zero-cost for react-bindings (@rickyvetter will talk about it in a separate post)</p></li>
 <li><p>bs.inline for library authors. Our compilers have a pretty good inlining heuristics by default, in this release, we allow some user input for some fine-tuned inlining behavior. Read this (<a href="https://github.com/BuckleScript/bucklescript/issues/3472">https://github.com/BuckleScript/bucklescript/issues/3472</a>) for more use cases.
 A typical usage is as below</p>
-<pre><code class="hljs">module Platform = struct
-    let ios = &quot;ios&quot; [@@bs.inline]
+<pre><code class="hljs"><span class="hljs-keyword">module</span> <span class="hljs-module-identifier">Platform</span> = struct
+    <span class="hljs-keyword">let</span> ios = <span class="hljs-string">"ios"</span> <span class="hljs-attribute">[@@bs.inline]</span>
 end    
 </code></pre>
 <p>If user wants to write an interface, it has to carry the payload though:</p>
-<pre><code class="hljs">module Platform : sig
-    val ios : string [@@bs.inline &quot;ios&quot;]
+<pre><code class="hljs"><span class="hljs-keyword">module</span> <span class="hljs-module-identifier">Platform</span> : sig
+    <span class="hljs-keyword">val</span> ios : string <span class="hljs-attribute">[@@bs.inline "ios"]</span>
 end = struct
-    let ios = &quot;ios&quot; [@@bs.inline]
+    <span class="hljs-keyword">let</span> ios = <span class="hljs-string">"ios"</span> <span class="hljs-attribute">[@@bs.inline]</span>
 end    
 </code></pre>
 <p>It is a bit verbose for library authors, but this should be transparent to library users.</p></li>

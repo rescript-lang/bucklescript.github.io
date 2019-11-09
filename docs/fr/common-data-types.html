@@ -77,7 +77,7 @@
 <p>OCaml string is an immutable byte sequence. If the user types some unicode:</p>
 <pre><code class="hljs css language-ocaml"><span class="hljs-type">Js</span>.log <span class="hljs-string">"你好"</span>
 </code></pre>
-<pre><code class="hljs css language-reason">Js.log(&quot;你好&quot;)
+<pre><code class="hljs css language-reason"><span class="hljs-module-identifier">Js</span>.log(<span class="hljs-string">"你好"</span>)
 </code></pre>
 <p>It'll compile to the following JS:</p>
 <pre><code class="hljs css language-js"><span class="hljs-built_in">console</span>.log(<span class="hljs-string">"\xe4\xbd\xa0\xe5\xa5\xbd"</span>);
@@ -86,8 +86,8 @@
 <pre><code class="hljs css language-ocaml"><span class="hljs-type">Js</span>.log {js|你好，
 世界|js}
 </code></pre>
-<pre><code class="hljs css language-reason">Js.log({js|你好，
-世界|js})
+<pre><code class="hljs css language-reason"><span class="hljs-module-identifier">Js</span>.log(<span class="hljs-string">{js|你好，
+世界|js}</span>)
 </code></pre>
 <p>This'll correctly output:</p>
 <pre><code class="hljs css language-js"><span class="hljs-built_in">console</span>.log(<span class="hljs-string">"你好，\n世界"</span>);
@@ -97,8 +97,8 @@
 <pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> world = {j|世界|j}
 <span class="hljs-keyword">let</span> helloWorld = {j|你好，$world|j}
 </code></pre>
-<pre><code class="hljs css language-reason">let world = {j|世界|j};
-let helloWorld = {j|你好，$world|j};
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> world = <span class="hljs-string">{j|世界|j}</span>;
+<span class="hljs-keyword">let</span> helloWorld = <span class="hljs-string">{j|你好，$world|j}</span>;
 </code></pre>
 <p>You can surround the variable in parentheses too: <code>{j|你好，$(world)|j}</code>.</p>
 <h3><a class="anchor" aria-hidden="true" id="float"></a><a href="#float" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Float</h3>
@@ -165,25 +165,25 @@ let helloWorld = {j|你好，$world|j};
 <span class="hljs-comment">(* Leaf -&gt; 0 *)</span>
 <span class="hljs-comment">(* Node a b c -&gt; [a, b, c] *)</span>
 </code></pre>
-<pre><code class="hljs css language-reason">type tree = Leaf | Node(int, tree, tree);
-/* Leaf -&gt; 0 */
-/* Node a b c -&gt; [a, b, c] */
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> tree = <span class="hljs-constructor">Leaf</span> | <span class="hljs-constructor">Node</span>(int, tree, tree);
+<span class="hljs-comment">/* Leaf -&gt; 0 */</span>
+<span class="hljs-comment">/* Node a b c -&gt; [a, b, c] */</span>
 </code></pre>
 <p>Variants with more than one non-nullary constructor:</p>
 <pre><code class="hljs css language-ocaml"><span class="hljs-keyword">type</span> u = <span class="hljs-type">A</span> <span class="hljs-keyword">of</span> <span class="hljs-built_in">string</span> | <span class="hljs-type">B</span> <span class="hljs-keyword">of</span> <span class="hljs-built_in">int</span>
 <span class="hljs-comment">(* A a -&gt; [a].tag = 0 -- tag 0 assignment is optional *)</span>
 <span class="hljs-comment">(* B b -&gt; [b].tag = 1 *)</span>
 </code></pre>
-<pre><code class="hljs css language-reason">type u = A(string) | B(int);
-/* A(a) -&gt; [a].tag = 0 -- tag 0 assignment is optional */
-/* B(b) -&gt; [b].tag = 1 */
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> u = <span class="hljs-constructor">A</span>(string) | <span class="hljs-constructor">B</span>(int);
+<span class="hljs-comment">/* A(a) -&gt; [a].tag = 0 -- tag 0 assignment is optional */</span>
+<span class="hljs-comment">/* B(b) -&gt; [b].tag = 1 */</span>
 </code></pre>
 <p>** Polymorphic Variant:</p>
 <pre><code class="hljs css language-ocaml">`a <span class="hljs-comment">(* 97 *)</span>
 `a (<span class="hljs-number">1</span>, <span class="hljs-number">2</span>) <span class="hljs-comment">(* [ 97, [1, 2] ] *)</span>
 </code></pre>
-<pre><code class="hljs css language-reason">`a /* 97 */
-`a(1, 2) /* [ 97, [1, 2] ] */
+<pre><code class="hljs css language-reason"><span class="hljs-constructor">`a</span> <span class="hljs-comment">/* 97 */</span>
+<span class="hljs-constructor">`a</span>(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>) <span class="hljs-comment">/* [ 97, [1, 2] ] */</span>
 </code></pre>
 <p>BuckleScript compiles <code>unit</code> to <code>0</code> in some cases but don't worry about it because it's considered internal and subject to change.</p>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/fr/embed-raw-javascript"><span class="arrow-prev">← </span><span class="function-name-prevnext">Embed Raw JavaScript</span></a><a class="docs-next button" href="/docs/fr/intro-to-external"><span>Intro to External</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#shared-data-types">Shared Data Types</a><ul class="toc-headings"><li><a href="#string">String</a></li><li><a href="#float">Float</a></li><li><a href="#int">Int</a></li><li><a href="#array">Array</a></li><li><a href="#tuple">Tuple</a></li><li><a href="#bool">Bool</a></li></ul></li><li><a href="#non-shared-data-types">Non-shared Data Types</a><ul class="toc-headings"><li><a href="#design-decisions">Design Decisions</a></li></ul></li><li><a href="#cheat-sheet">Cheat Sheet</a><ul class="toc-headings"><li><a href="#shared">Shared</a></li><li><a href="#non-shared">Non-shared</a></li></ul></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script>window.foo = new Pjax({

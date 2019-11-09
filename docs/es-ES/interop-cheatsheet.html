@@ -72,9 +72,9 @@
 [%%raw <span class="hljs-string">"var a = 1"</span>]
 <span class="hljs-keyword">let</span> myFunction = [%raw <span class="hljs-keyword">fun</span> a b -&gt; <span class="hljs-string">"return a + b"</span>]
 </code></pre>
-<pre><code class="hljs css language-reason">let add = [%raw &quot;a + b&quot;];
-[%%raw &quot;var a = 1&quot;];
-let myFunction = [%raw (a, b) =&gt; &quot;return a + b&quot;];
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> add = <span class="hljs-attribute">[%raw "a + b"]</span>;
+<span class="hljs-attribute">[%%raw "var a = 1"]</span>;
+<span class="hljs-keyword">let</span> myFunction = <span class="hljs-attribute">[%raw (a, b) =&gt; "return a + b"]</span>;
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="cadena-unicode-interpolacion"></a><a href="#cadena-unicode-interpolacion" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Cadena Unicode &amp; Interpolación</h2>
 <pre><code class="hljs css language-ocaml"><span class="hljs-type">Js</span>.log {js|你好，
@@ -83,16 +83,16 @@ let myFunction = [%raw (a, b) =&gt; &quot;return a + b&quot;];
 <span class="hljs-keyword">let</span> world = <span class="hljs-string">"world"</span>
 <span class="hljs-keyword">let</span> helloWorld = {j|hello, $world|j}
 </code></pre>
-<pre><code class="hljs css language-reason">Js.log({js|你好，
-世界|js});
+<pre><code class="hljs css language-reason"><span class="hljs-module-identifier">Js</span>.log(<span class="hljs-string">{js|你好，
+世界|js}</span>);
 
-let world = &quot;world&quot;;
-let helloWorld = {j|hello, $world|j};
+<span class="hljs-keyword">let</span> world = <span class="hljs-string">"world"</span>;
+<span class="hljs-keyword">let</span> helloWorld = <span class="hljs-string">{j|hello, $world|j}</span>;
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="global-value"></a><a href="#global-value" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Global Value</h2>
 <pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> setTimeout : (<span class="hljs-built_in">unit</span> -&gt; <span class="hljs-built_in">unit</span>) -&gt; <span class="hljs-built_in">int</span> -&gt; <span class="hljs-built_in">float</span> = <span class="hljs-string">"setTimeout"</span> [@@bs.<span class="hljs-keyword">val</span>]
 </code></pre>
-<pre><code class="hljs css language-reason">[@bs.val] external setTimeout : (unit =&gt; unit, int) =&gt; float = &quot;setTimeout&quot;;
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.val]</span> <span class="hljs-keyword">external</span> setTimeout : (unit =&gt; unit, int) =&gt; float = <span class="hljs-string">"setTimeout"</span>;
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="global-module"></a><a href="#global-module" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Global Module</h2>
 <pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> random: <span class="hljs-built_in">unit</span> -&gt; <span class="hljs-built_in">float</span> = <span class="hljs-string">"random"</span> [@@bs.<span class="hljs-keyword">val</span>][@@bs.scope <span class="hljs-string">"Math"</span>]
@@ -100,17 +100,17 @@ let helloWorld = {j|hello, $world|j};
 
 <span class="hljs-keyword">external</span> length: <span class="hljs-built_in">int</span> = <span class="hljs-string">"length"</span> [@@bs.<span class="hljs-keyword">val</span>][@@bs.scope <span class="hljs-string">"window"</span>, <span class="hljs-string">"location"</span>, <span class="hljs-string">"ancestorOrigins"</span>]
 </code></pre>
-<pre><code class="hljs css language-reason">[@bs.val] [@bs.scope &quot;Math&quot;] external random : unit =&gt; float = &quot;random&quot;;
-let someNumber = random();
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.val]</span> <span class="hljs-attribute">[@bs.scope "Math"]</span> <span class="hljs-keyword">external</span> random : unit =&gt; float = <span class="hljs-string">"random"</span>;
+<span class="hljs-keyword">let</span> someNumber = random();
 
-[@bs.val] [@bs.scope (&quot;window&quot;, &quot;location&quot;, &quot;ancestorOrigins&quot;)] external length : int = &quot;length&quot;;
+<span class="hljs-attribute">[@bs.val]</span> <span class="hljs-attribute">[@bs.scope ("window", "location", "ancestorOrigins")]</span> <span class="hljs-keyword">external</span> length : int = <span class="hljs-string">"length"</span>;
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="nullable"></a><a href="#nullable" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Nullable</h2>
 <pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> a = <span class="hljs-type">Some</span> <span class="hljs-number">5</span> <span class="hljs-comment">(* compiles to 5 *)</span>
 <span class="hljs-keyword">let</span> b = <span class="hljs-type">None</span> <span class="hljs-comment">(* compiles to undefined *)</span>
 </code></pre>
-<pre><code class="hljs css language-reason">let a = Some(5); /* compiles to 5 */
-let b = None; /* compiles to undefined */
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> a = <span class="hljs-constructor">Some</span>(<span class="hljs-number">5</span>); <span class="hljs-comment">/* compiles to 5 */</span>
+<span class="hljs-keyword">let</span> b = <span class="hljs-constructor">None</span>; <span class="hljs-comment">/* compiles to undefined */</span>
 </code></pre>
 <p>Handling a value that can be <code>undefined</code> and <code>null</code>, by ditching the <code>option</code> type and using <code>Js.Nullable.t</code>:</p>
 <pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> jsNull = <span class="hljs-type">Js</span>.<span class="hljs-type">Nullable</span>.null
@@ -120,20 +120,20 @@ let b = None; /* compiles to undefined */
 <span class="hljs-keyword">let</span> result2: <span class="hljs-built_in">int</span> <span class="hljs-type">Js</span>.<span class="hljs-type">Nullable</span>.t  = <span class="hljs-type">Js</span>.<span class="hljs-type">Nullable</span>.fromOption (<span class="hljs-type">Some</span> <span class="hljs-number">10</span>)
 <span class="hljs-keyword">let</span> result3: <span class="hljs-built_in">int</span> option  = <span class="hljs-type">Js</span>.<span class="hljs-type">Nullable</span>.toOption (<span class="hljs-type">Js</span>.<span class="hljs-type">Nullable</span>.return <span class="hljs-number">10</span>)
 </code></pre>
-<pre><code class="hljs css language-reason">let jsNull = Js.Nullable.null;
-let jsUndefined = Js.Nullable.undefined;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> jsNull = <span class="hljs-module-identifier">Js</span>.<span class="hljs-module-identifier">Nullable</span>.null;
+<span class="hljs-keyword">let</span> jsUndefined = <span class="hljs-module-identifier">Js</span>.<span class="hljs-module-identifier">Nullable</span>.undefined;
 
-let result1: Js.Nullable.t(string) = Js.Nullable.return(&quot;hello&quot;);
-let result2: Js.Nullable.t(int) = Js.Nullable.fromOption(Some(10));
-let result3: option(int) = Js.Nullable.toOption(Js.Nullable.return(10));
+<span class="hljs-keyword">let</span> result1: <span class="hljs-module-identifier">Js</span>.<span class="hljs-module-identifier">Nullable</span>.t(string) = <span class="hljs-module-identifier">Js</span>.<span class="hljs-module-identifier">Nullable</span>.return(<span class="hljs-string">"hello"</span>);
+<span class="hljs-keyword">let</span> result2: <span class="hljs-module-identifier">Js</span>.<span class="hljs-module-identifier">Nullable</span>.t(int) = <span class="hljs-module-identifier">Js</span>.<span class="hljs-module-identifier">Nullable</span>.fromOption(<span class="hljs-constructor">Some</span>(<span class="hljs-number">10</span>));
+<span class="hljs-keyword">let</span> result3: option(int) = <span class="hljs-module-identifier">Js</span>.<span class="hljs-module-identifier">Nullable</span>.toOption(<span class="hljs-module-identifier">Js</span>.<span class="hljs-module-identifier">Nullable</span>.return(<span class="hljs-number">10</span>));
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="object"></a><a href="#object" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Object</h2>
 <h3><a class="anchor" aria-hidden="true" id="hash-map-mode"></a><a href="#hash-map-mode" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Hash Map Mode</h3>
 <pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> myMap = <span class="hljs-type">Js</span>.<span class="hljs-type">Dict</span>.empty <span class="hljs-literal">()</span>
 <span class="hljs-keyword">let</span> _ = <span class="hljs-type">Js</span>.<span class="hljs-type">Dict</span>.set myMap <span class="hljs-string">"Allison"</span> <span class="hljs-number">10</span>
 </code></pre>
-<pre><code class="hljs css language-reason">let myMap = Js.Dict.empty();
-Js.Dict.set(myMap, &quot;Allison&quot;, 10);
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> myMap = <span class="hljs-module-identifier">Js</span>.<span class="hljs-module-identifier">Dict</span>.empty();
+<span class="hljs-module-identifier">Js</span>.<span class="hljs-module-identifier">Dict</span>.set(myMap, <span class="hljs-string">"Allison"</span>, <span class="hljs-number">10</span>);
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="record-mode"></a><a href="#record-mode" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Record Mode</h3>
 <pre><code class="hljs css language-ocaml"><span class="hljs-keyword">type</span> person = {
@@ -150,27 +150,27 @@ Js.Dict.set(myMap, &quot;Allison&quot;, 10);
 <span class="hljs-keyword">let</span> <span class="hljs-literal">()</span> = john |. jobSet <span class="hljs-string">"Accountant"</span>
 <span class="hljs-keyword">let</span> nick = john |. getNickname
 </code></pre>
-<pre><code class="hljs css language-reason">[@bs.deriving abstract]
-type person = {
-  [@bs.optional] name: string,
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.deriving abstract]</span>
+<span class="hljs-keyword">type</span> person = {
+  <span class="hljs-attribute">[@bs.optional]</span> name: string,
   age: int,
-  mutable job: string,
+  <span class="hljs-keyword">mutable</span> job: string,
 };
 
-[@bs.send] external getNickname : person =&gt; string = &quot;getNickname&quot;;
+<span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> getNickname : person =&gt; string = <span class="hljs-string">"getNickname"</span>;
 
-[@bs.val] external john : person = &quot;john&quot;;
+<span class="hljs-attribute">[@bs.val]</span> <span class="hljs-keyword">external</span> john : person = <span class="hljs-string">"john"</span>;
 
-let age = john-&gt;ageGet;
-john-&gt;jobSet(&quot;Accountant&quot;);
-let nick = john-&gt;getNickname;
+<span class="hljs-keyword">let</span> age = john<span class="hljs-operator">-&gt;</span>ageGet;
+john<span class="hljs-operator">-&gt;</span>jobSet(<span class="hljs-string">"Accountant"</span>);
+<span class="hljs-keyword">let</span> nick = john<span class="hljs-operator">-&gt;</span>getNickname;
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="new-instance"></a><a href="#new-instance" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>New Instance</h3>
 <pre><code class="hljs css language-ocaml"><span class="hljs-keyword">type</span> t
 <span class="hljs-keyword">external</span> createDate : <span class="hljs-built_in">unit</span> -&gt; t = <span class="hljs-string">"Date"</span> [@@bs.<span class="hljs-keyword">new</span>]
 </code></pre>
-<pre><code class="hljs css language-reason">type t;
-[@bs.new] external createDate : unit =&gt; t = &quot;Date&quot;;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> t;
+<span class="hljs-attribute">[@bs.new]</span> <span class="hljs-keyword">external</span> createDate : unit =&gt; t = <span class="hljs-string">"Date"</span>;
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="function"></a><a href="#function" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Function</h2>
 <h3><a class="anchor" aria-hidden="true" id="object-method-chaining"></a><a href="#object-method-chaining" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Object Method &amp; Chaining</h3>
@@ -183,27 +183,27 @@ let nick = john-&gt;getNickname;
   |. filter (<span class="hljs-keyword">fun</span> a -&gt; a <span class="hljs-keyword">mod</span> <span class="hljs-number">2</span> = <span class="hljs-number">0</span>)
   |. <span class="hljs-type">Js</span>.log
 </code></pre>
-<pre><code class="hljs css language-reason">[@bs.send] external map : (array('a), 'a =&gt; 'b) =&gt; array('b) = &quot;map&quot;;
-[@bs.send] external filter : (array('a), 'a =&gt; 'b) =&gt; array('b) = &quot;filter&quot;;
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> map : (array('a), 'a =&gt; 'b) =&gt; array('b) = <span class="hljs-string">"map"</span>;
+<span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> filter : (array('a), 'a =&gt; 'b) =&gt; array('b) = <span class="hljs-string">"filter"</span>;
 
-/* 2, 4 */
-[|1, 2, 3|]
--&gt;map(a =&gt; a + 1)
--&gt;filter(a =&gt; a mod 2 == 0)
--&gt;Js.log;
+<span class="hljs-comment">/* 2, 4 */</span>
+<span class="hljs-literal">[|</span><span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span><span class="hljs-literal">|]</span>
+<span class="hljs-operator">-&gt;</span>map(a =&gt; a <span class="hljs-operator">+</span> <span class="hljs-number">1</span>)
+<span class="hljs-operator">-&gt;</span>filter(a =&gt; a mod <span class="hljs-number">2</span> <span class="hljs-operator">==</span> <span class="hljs-number">0</span>)
+<span class="hljs-operator">-&gt;</span><span class="hljs-module-identifier">Js</span>.log;
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="variadic-was-bssplice-prior-to-version-408"></a><a href="#variadic-was-bssplice-prior-to-version-408" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Variadic (was bs.splice prior to version 4.08)</h3>
 <pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> join : <span class="hljs-built_in">string</span> <span class="hljs-built_in">array</span> -&gt; <span class="hljs-built_in">string</span> = <span class="hljs-string">"join"</span> [@@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"path"</span>] [@@bs.variadic]
 </code></pre>
-<pre><code class="hljs css language-reason">[@bs.module &quot;path&quot;] [@bs.variadic]
-external join : array(string) =&gt; string = &quot;join&quot;;
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.module "path"]</span> <span class="hljs-attribute">[@bs.variadic]</span>
+<span class="hljs-keyword">external</span> join : array(string) =&gt; string = <span class="hljs-string">"join"</span>;
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="polymorphic-function"></a><a href="#polymorphic-function" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Polymorphic Function</h3>
 <pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> drawCat: <span class="hljs-built_in">unit</span> -&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">"draw"</span> [@@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"Drawing"</span>]
 <span class="hljs-keyword">external</span> drawDog: giveName:<span class="hljs-built_in">string</span> -&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">"draw"</span> [@@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"Drawing"</span>]
 </code></pre>
-<pre><code class="hljs css language-reason">[@bs.module &quot;Drawing&quot;] external drawCat : unit =&gt; unit = &quot;draw&quot;;
-[@bs.module &quot;Drawing&quot;] external drawDog : (~giveName: string) =&gt; unit = &quot;draw&quot;;
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.module "Drawing"]</span> <span class="hljs-keyword">external</span> drawCat : unit =&gt; unit = <span class="hljs-string">"draw"</span>;
+<span class="hljs-attribute">[@bs.module "Drawing"]</span> <span class="hljs-keyword">external</span> drawDog : (~giveName: string) =&gt; unit = <span class="hljs-string">"draw"</span>;
 </code></pre>
 <pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> padLeft :
   <span class="hljs-built_in">string</span>
@@ -215,54 +215,54 @@ external join : array(string) =&gt; string = &quot;join&quot;;
 
 <span class="hljs-keyword">let</span> _ = padLeft <span class="hljs-string">"Hello World"</span> (<span class="hljs-type">`Int</span> <span class="hljs-number">4</span>)
 </code></pre>
-<pre><code class="hljs css language-reason">[@bs.val] external padLeft : (
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.val]</span> <span class="hljs-keyword">external</span> padLeft : (
   string,
-  [@bs.unwrap] [
-    | `Str(string)
-    | `Int(int)
-  ]
-) =&gt; string = &quot;padLeft&quot;;
+  <span class="hljs-attribute">[@bs.unwrap]</span> <span class="hljs-literal">[</span>
+    | <span class="hljs-constructor">`Str</span>(string)
+    | <span class="hljs-constructor">`Int</span>(int)
+  <span class="hljs-literal">]</span>
+) =&gt; string = <span class="hljs-string">"padLeft"</span>;
 
-padLeft(&quot;Hello World&quot;, `Int(4));
+padLeft(<span class="hljs-string">"Hello World"</span>, <span class="hljs-constructor">`Int</span>(<span class="hljs-number">4</span>));
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="curry-uncurry"></a><a href="#curry-uncurry" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Curry/Uncurry</h3>
 <pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> add = <span class="hljs-keyword">fun</span> [@bs] x y z -&gt; x + y + z
 <span class="hljs-keyword">let</span> six = (add <span class="hljs-number">1</span> <span class="hljs-number">2</span> <span class="hljs-number">3</span>) [@bs]
 </code></pre>
-<pre><code class="hljs css language-reason">let add = [@bs] ((x, y, z) =&gt; x + y + z);
-let six = [@bs] add(1, 2, 3);
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> add = <span class="hljs-attribute">[@bs]</span> ((x, y, z) =&gt; x <span class="hljs-operator">+</span> y <span class="hljs-operator">+</span> z);
+<span class="hljs-keyword">let</span> six = <span class="hljs-attribute">[@bs]</span> add(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>);
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="module"></a><a href="#module" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Module</h2>
 <pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> dirname: <span class="hljs-built_in">string</span> -&gt; <span class="hljs-built_in">string</span> = <span class="hljs-string">"dirname"</span> [@@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"path"</span>]
 </code></pre>
-<pre><code class="hljs css language-reason">[@bs.module &quot;path&quot;] external dirname : string =&gt; string = &quot;dirname&quot;;
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.module "path"]</span> <span class="hljs-keyword">external</span> dirname : string =&gt; string = <span class="hljs-string">"dirname"</span>;
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="import-moduleexports"></a><a href="#import-moduleexports" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Import module.exports</h3>
 <pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> simpleFunction: <span class="hljs-built_in">string</span> -&gt; <span class="hljs-built_in">string</span> = <span class="hljs-string">"simple-module-that-is-a-function"</span> [@@bs.<span class="hljs-keyword">module</span>]
 </code></pre>
-<pre><code class="hljs css language-reason">[@bs.module] external simpleFunction : string =&gt; string = &quot;simple-module-that-is-a-function&quot;;
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.module]</span> <span class="hljs-keyword">external</span> simpleFunction : string =&gt; string = <span class="hljs-string">"simple-module-that-is-a-function"</span>;
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="import-default"></a><a href="#import-default" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Import Default</h3>
 <p>It's important to note that you are not providing the module path to <code>bs.module</code>, but instead as the last argument of <code>external</code>.</p>
 <pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> leftPad: <span class="hljs-built_in">string</span> -&gt; <span class="hljs-built_in">int</span> -&gt; <span class="hljs-built_in">string</span> = <span class="hljs-string">"./leftPad"</span> [@@bs.<span class="hljs-keyword">module</span>]
 </code></pre>
-<pre><code class="hljs css language-reason">[@bs.module] external leftPad : (string, int) =&gt; string = &quot;./leftPad&quot;;
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.module]</span> <span class="hljs-keyword">external</span> leftPad : (string, int) =&gt; string = <span class="hljs-string">"./leftPad"</span>;
 </code></pre>
 <p>Import ES6 default compiled from Babel:</p>
 <pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> studentName: <span class="hljs-built_in">string</span> = <span class="hljs-string">"default"</span> [@@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"./student"</span>]
 </code></pre>
-<pre><code class="hljs css language-reason">[@bs.module &quot;./student&quot;] external studentName : string = &quot;default&quot;;
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.module "./student"]</span> <span class="hljs-keyword">external</span> studentName : string = <span class="hljs-string">"default"</span>;
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="export-es6-default"></a><a href="#export-es6-default" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Export ES6 default</h3>
 <pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> default = <span class="hljs-string">"Bob"</span>
 </code></pre>
-<pre><code class="hljs css language-reason">let default = &quot;Bob&quot;;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> default = <span class="hljs-string">"Bob"</span>;
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="identity-external"></a><a href="#identity-external" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Identity External</h2>
 <p>Final escape hatch converter. Do not abuse.</p>
 <pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> myShadyConversion : foo -&gt; bar = <span class="hljs-string">"%identity"</span>
 </code></pre>
-<pre><code class="hljs css language-reason">external myShadyConversion : foo =&gt; bar = &quot;%identity&quot;;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">external</span> myShadyConversion : foo =&gt; bar = <span class="hljs-string">"%identity"</span>;
 </code></pre>
 <hr>
 <p>You can find more examples for the various <code>bs.*</code> attributes <a href="https://github.com/moroshko/bs-blabla">here</a>.</p>

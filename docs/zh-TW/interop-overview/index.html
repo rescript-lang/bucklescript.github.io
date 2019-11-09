@@ -77,7 +77,7 @@
 <p>主要在 BuckleScript 內的資料結狗<strong>乾淨地對應到 JS</strong>。例如，BS 字串就是 JS 字串。BS 陣列就是 JS 陣列。下列 BS 程式碼：</p>
 <pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> messages = [| <span class="hljs-string">"hello"</span>; <span class="hljs-string">"world"</span>; <span class="hljs-string">"how"</span>; <span class="hljs-string">"are"</span>; <span class="hljs-string">"you"</span> |]
 </code></pre>
-<pre><code class="hljs css language-reason">let messages = [|&quot;hello&quot;, &quot;world&quot;, &quot;how&quot;, &quot;are&quot;, &quot;you&quot;|];
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> messages = <span class="hljs-literal">[|</span><span class="hljs-string">"hello"</span>, <span class="hljs-string">"world"</span>, <span class="hljs-string">"how"</span>, <span class="hljs-string">"are"</span>, <span class="hljs-string">"you"</span><span class="hljs-literal">|]</span>;
 </code></pre>
 <p>粗略地編譯成 JS 程式碼：</p>
 <pre><code class="hljs css language-js"><span class="hljs-keyword">var</span> messages = [<span class="hljs-string">"hello"</span>, <span class="hljs-string">"world"</span>, <span class="hljs-string">"how"</span>, <span class="hljs-string">"are"</span>, <span class="hljs-string">"you"</span>]

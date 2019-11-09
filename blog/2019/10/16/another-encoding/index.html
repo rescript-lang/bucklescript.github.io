@@ -68,16 +68,16 @@
             });
         </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="lonePost"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2019/10/16/another-encoding">Another way of encoding type identity for BuckleScript libraries without using big functor</a></h1><p class="post-meta">October 16, 2019</p><div class="authorBlock"></div></header><div><span><p>Note this article is for library authors, it has something in depth which is not necessary for people who use BuckleScript at daily work.</p>
 <p>When we build some generic data structure, abstract over function is not enough. For example,  a type safe generic balanced AVL tree not only relies on the types of a comparison function, but also the identity of such function. Two balanced AVL trees which are initialized over same type of comparison function still can not be mixed.</p>
-<pre><code class="hljs css language-reason">module Eq1 = {
-  let eq = (x, y) =&gt; x == y;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">module</span> <span class="hljs-module-identifier">Eq1</span> = {
+  <span class="hljs-keyword">let</span> eq = (x, y) =&gt; x <span class="hljs-operator">==</span> y;
 };
 </code></pre>
 <pre><code class="hljs css language-ocaml"><span class="hljs-keyword">module</span> <span class="hljs-type">Eq1</span> = <span class="hljs-keyword">struct</span> 
   <span class="hljs-keyword">let</span> eq x y = x = y
 <span class="hljs-keyword">end</span> 
 </code></pre>
-<pre><code class="hljs css language-reason">module Eq2 = {
-  let eq = (x, y) =&gt; x == y;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">module</span> <span class="hljs-module-identifier">Eq2</span> = {
+  <span class="hljs-keyword">let</span> eq = (x, y) =&gt; x <span class="hljs-operator">==</span> y;
 };
 </code></pre>
 <pre><code class="hljs css language-ocaml"><span class="hljs-keyword">module</span> <span class="hljs-type">Eq2</span> = <span class="hljs-keyword">struct</span> 
@@ -116,46 +116,46 @@
   <span class="hljs-keyword">let</span> eq x y = x * x = y * y
 <span class="hljs-keyword">end</span>)
 </code></pre>
-<pre><code class="hljs css language-reason">module Make = (
-  Cmp: {
-    type t;
-    let eq: (t, t) =&gt; bool;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">module</span> <span class="hljs-module-identifier">Make</span> = (
+  <span class="hljs-module-identifier">Cmp</span>: {
+    <span class="hljs-keyword">type</span> t;
+    <span class="hljs-keyword">let</span> eq: (t, t) =&gt; bool;
   }) : {
- type key = Cmp.t;
- type coll;
- let empty: coll;
- let add: (coll, key) =&gt; coll;
+ <span class="hljs-keyword">type</span> key = <span class="hljs-module-identifier">Cmp</span>.t;
+ <span class="hljs-keyword">type</span> coll;
+ <span class="hljs-keyword">let</span> empty: coll;
+ <span class="hljs-keyword">let</span> add: (coll, key) =&gt; coll;
 } =&gt; {
-  open Cmp;
-  type key = t;
-  type coll = list(key);
-  let empty = [];
-  let add = (y: coll, e: key) =&gt;
-    if (List.exists(x =&gt; eq(x, e), y)) {
+  <span class="hljs-keyword">open</span> <span class="hljs-module-identifier">Cmp</span>;
+  <span class="hljs-keyword">type</span> key = t;
+  <span class="hljs-keyword">type</span> coll = list(key);
+  <span class="hljs-keyword">let</span> empty = <span class="hljs-literal">[</span><span class="hljs-literal">]</span>;
+  <span class="hljs-keyword">let</span> add = (y: coll, e: key) =&gt;
+    <span class="hljs-keyword">if</span> (<span class="hljs-module-identifier">List</span>.exists(x =&gt; eq(x, e), y)) {
       y;
-    } else {
-      [e, ...y];
+    } <span class="hljs-keyword">else</span> {
+      <span class="hljs-literal">[</span>e, <span class="hljs-operator">...</span>y<span class="hljs-literal">]</span>;
     };
 };
 
-module Ins1 = Make({
-  type t = int;
-  let eq = (x, y) =&gt; x == y;
+<span class="hljs-keyword">module</span> <span class="hljs-module-identifier">Ins1</span> = <span class="hljs-module-identifier">Make</span>({
+  <span class="hljs-keyword">type</span> t = int;
+  <span class="hljs-keyword">let</span> eq = (x, y) =&gt; x <span class="hljs-operator">==</span> y;
 });
-module Ins2 = Make({
-  type t = int;
-  let eq = (x, y) =&gt; x * x == y * y;
+<span class="hljs-keyword">module</span> <span class="hljs-module-identifier">Ins2</span> = <span class="hljs-module-identifier">Make</span>({
+  <span class="hljs-keyword">type</span> t = int;
+  <span class="hljs-keyword">let</span> eq = (x, y) =&gt; x <span class="hljs-operator">*</span> x <span class="hljs-operator">==</span> y <span class="hljs-operator">*</span> y;
 });
 </code></pre>
 <p>By marking <code>coll</code> as abstract type, when such functor is initialized,<code>Ins1.coll</code> and <code>Ins2.coll</code> are no longer the same.</p>
 <pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> v = [<span class="hljs-type">Ins1</span>.empty; <span class="hljs-type">Ins2</span>.empty]
 </code></pre>
-<pre><code class="hljs css language-reason">let v = [Ins1.empty, Ins2.empty];
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> v = <span class="hljs-literal">[</span><span class="hljs-module-identifier">Ins1</span>.empty, <span class="hljs-module-identifier">Ins2</span>.empty<span class="hljs-literal">]</span>;
 </code></pre>
 <p>When mixing them together, we get a type error</p>
-<pre><code class="hljs">File ..., line 31, characters 21-31:
-Error: This expression has type Ins2.coll
-       but an expression was expected of type Ins1.coll
+<pre><code class="hljs">File <span class="hljs-built_in">..</span>., line 31, characters 21-31:
+Error: This expression has<span class="hljs-built_in"> type </span>Ins2.coll
+       but an expression was expected of<span class="hljs-built_in"> type </span>Ins1.coll
 </code></pre>
 <p>There are some issues with such encoding:</p>
 <ul>
@@ -163,54 +163,54 @@ Error: This expression has type Ins2.coll
 <li><p>From user point of view, people has to call <code>Ins1.add</code> and <code>Ins2.add</code> instead of calling <code>Ins.add</code>, this makes code less polymorphic.</p></li>
 </ul>
 <p>Now we introduce another encoding, note it is quite sophiscated that is recommended only for library authors</p>
-<pre><code class="hljs css language-reason">module Cmp: {
-  type cmp('a, 'id);
-  let eq: (cmp('a, 'id), 'a, 'a) =&gt; bool;
-  module Make: (
-    M: {
-       type t;
-       let eq: (t, t) =&gt; bool;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">module</span> <span class="hljs-module-identifier">Cmp</span>: {
+  <span class="hljs-keyword">type</span> cmp('a, 'id);
+  <span class="hljs-keyword">let</span> eq: (cmp('a, 'id), 'a, 'a) =&gt; bool;
+  <span class="hljs-keyword">module</span> <span class="hljs-module-identifier">Make</span>: (
+    <span class="hljs-constructor">M</span>: {
+       <span class="hljs-keyword">type</span> t;
+       <span class="hljs-keyword">let</span> eq: (t, t) =&gt; bool;
      }
   ) =&gt; {
-    type identity;
-    let eq: cmp(M.t, identity);
+    <span class="hljs-keyword">type</span> identity;
+    <span class="hljs-keyword">let</span> eq: cmp(<span class="hljs-module-identifier">M</span>.t, identity);
   };
 } = {
-  type cmp('a, 'id) = ('a, 'a) =&gt; bool;
-  module Make = (
-    M: {
-     type t;
-     let eq: (t, t) =&gt; bool;
+  <span class="hljs-keyword">type</span> cmp('a, 'id) = ('a, 'a) =&gt; bool;
+  <span class="hljs-keyword">module</span> <span class="hljs-module-identifier">Make</span> = (
+    <span class="hljs-module-identifier">M</span>: {
+     <span class="hljs-keyword">type</span> t;
+     <span class="hljs-keyword">let</span> eq: (t, t) =&gt; bool;
     }
   ) =&gt; {
-    type identity;
-    include M;
+    <span class="hljs-keyword">type</span> identity;
+    <span class="hljs-keyword">include</span> <span class="hljs-module-identifier">M</span>;
   };
-  let eq = (cmp, x, y) =&gt; cmp(x, y); /* This could be inlined by using externals */
+  <span class="hljs-keyword">let</span> eq = (cmp, x, y) =&gt; cmp(x, y); <span class="hljs-comment">/* This could be inlined by using externals */</span>
 };
 
-open Cmp;
+<span class="hljs-keyword">open</span> <span class="hljs-module-identifier">Cmp</span>;
 
-module Coll: {
-  type coll('k, 'id);
-  let empty: cmp('k, 'id) =&gt; coll('k, 'id);
-  let add: (coll('k, 'id), 'k) =&gt; coll('k, 'id);
+<span class="hljs-keyword">module</span> <span class="hljs-module-identifier">Coll</span>: {
+  <span class="hljs-keyword">type</span> coll('k, 'id);
+  <span class="hljs-keyword">let</span> empty: cmp('k, 'id) =&gt; coll('k, 'id);
+  <span class="hljs-keyword">let</span> add: (coll('k, 'id), 'k) =&gt; coll('k, 'id);
 } = {
-  type coll('k, 'id) = {
+  <span class="hljs-keyword">type</span> coll('k, 'id) = {
     eq: cmp('k, 'id),
     data: list('k),
   };
 
-  let empty = (type t, type identity, eq: cmp(t, identity)) =&gt; {
-    data: [],
+  <span class="hljs-keyword">let</span> empty = (<span class="hljs-keyword">type</span> t, <span class="hljs-keyword">type</span> identity, eq: cmp(t, identity)) =&gt; {
+    data: <span class="hljs-literal">[</span><span class="hljs-literal">]</span>,
     eq,
   };
-  let add = (x: coll('k, 'id), y: 'k) =&gt;
-    if (List.exists(a =&gt; Cmp.eq(x.eq, a, y), x.data)) {
+  <span class="hljs-keyword">let</span> add = (x: coll('k, 'id), y: 'k) =&gt;
+    <span class="hljs-keyword">if</span> (<span class="hljs-module-identifier">List</span>.exists(a =&gt; <span class="hljs-module-identifier">Cmp</span>.eq(x.eq, a, y), x.data)) {
       x;
-    } else {
+    } <span class="hljs-keyword">else</span> {
       {
-        data: [y, ...x.data],
+        data: <span class="hljs-literal">[</span>y, <span class="hljs-operator">...</span>x.data<span class="hljs-literal">]</span>,
         eq: x.eq,
       };
     };
@@ -284,28 +284,28 @@ module Coll: {
 <span class="hljs-keyword">let</span> a0 = <span class="hljs-type">Coll</span>.add v0 <span class="hljs-number">1</span> 
 <span class="hljs-keyword">let</span> a1 = <span class="hljs-type">Coll</span>.add v1 <span class="hljs-number">1</span> 
 </code></pre>
-<pre><code class="hljs css language-reason">module S0 = Make({
-  type t = int;
-  let eq = (x, y) =&gt; x == y;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">module</span> <span class="hljs-module-identifier">S0</span> = <span class="hljs-module-identifier">Make</span>({
+  <span class="hljs-keyword">type</span> t = int;
+  <span class="hljs-keyword">let</span> eq = (x, y) =&gt; x <span class="hljs-operator">==</span> y;
 });
 
-module S1 = Make({
-  type t = int;
-  let eq = (x, y) =&gt; x * x == y * y;
+<span class="hljs-keyword">module</span> <span class="hljs-module-identifier">S1</span> = <span class="hljs-module-identifier">Make</span>({
+  <span class="hljs-keyword">type</span> t = int;
+  <span class="hljs-keyword">let</span> eq = (x, y) =&gt; x <span class="hljs-operator">*</span> x <span class="hljs-operator">==</span> y <span class="hljs-operator">*</span> y;
 });
 
-let v0 = Coll.empty(S0.eq);
-let v1 = Coll.empty(S1.eq);
+<span class="hljs-keyword">let</span> v0 = <span class="hljs-module-identifier">Coll</span>.empty(<span class="hljs-module-identifier">S0</span>.eq);
+<span class="hljs-keyword">let</span> v1 = <span class="hljs-module-identifier">Coll</span>.empty(<span class="hljs-module-identifier">S1</span>.eq);
 
-let a0 = Coll.add(v0, 1);
-let a1 = Coll.add(v1, 1);
+<span class="hljs-keyword">let</span> a0 = <span class="hljs-module-identifier">Coll</span>.add(v0, <span class="hljs-number">1</span>);
+<span class="hljs-keyword">let</span> a1 = <span class="hljs-module-identifier">Coll</span>.add(v1, <span class="hljs-number">1</span>);
 </code></pre>
 <p>In practice, we can make use of first class modules to get rid of functors from end users, which is saved for readers.</p>
 <p>When we mix <code>a0</code> and <code>a1</code>, we will get a type error</p>
-<pre><code class="hljs">File ..., line 71, characters 13-15:
-Error: This expression has type (int, S1.identity) Coll.coll
-       but an expression was expected of type (int, S0.identity) Coll.coll
-       Type S1.identity is not compatible with type S0.identity 
+<pre><code class="hljs">File <span class="hljs-built_in">..</span>., line 71, characters 13-15:
+Error: This expression has<span class="hljs-built_in"> type </span>(int, S1.identity) Coll.coll
+       but an expression was expected of<span class="hljs-built_in"> type </span>(int, S0.identity) Coll.coll
+      <span class="hljs-built_in"> Type </span>S1.identity is <span class="hljs-keyword">not</span> compatible with<span class="hljs-built_in"> type </span>S0.identity 
 </code></pre>
 <p>As you read here, by using such encoding, the data structure is more generalized from user point of view. The generated JS code is not in a big closure so that it can be dead code eliminated better.</p>
 <p>This style is extensively used in Belt encoding, we  encourage you to have a look at its implementation for better ideas.</p>

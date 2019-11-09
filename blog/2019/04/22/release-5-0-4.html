@@ -69,12 +69,12 @@
         </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="lonePost"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2019/04/22/release-5-0-4">architecture changes in bs-platform v5.0.4 and v6.0.1</a></h1><p class="post-meta">April 22, 2019</p><div class="authorBlock"></div></header><div><span><p>We are going to make releases of bs-platform@5.0.4 and bs-platform@6.0.1, this release mostly contains bug fixes.</p>
 <p>At the same time, we are introducing an internal change which should be fine for average users.</p>
 <p>If you are tooling authors, here are some details: previously we ship react_jsx ppx as a stand-alone binary, for example, reactjs_jsx_ppx_v2.exe, reactjs_jsx_ppx_v2.exe. Recently we start more close integration with <a href="https://reasonml.github.io">reason</a>, so it is absorbed into bsc.exe itself, we introduced a flag to have react-jsx on/off (note these are internal flags, not expected to be exposed to average users):</p>
-<pre><code class="hljs">bsc.exe -bs-jsx 2 # turn on reactjs_jsx_ppx_v2
-bsc.exe -bs-jsx 3 # turn on reactjs_jsx_ppx_v3
+<pre><code class="hljs"><span class="hljs-keyword">bsc.exe </span>-<span class="hljs-keyword">bs-jsx </span><span class="hljs-number">2</span> <span class="hljs-comment"># turn on reactjs_jsx_ppx_v2</span>
+<span class="hljs-keyword">bsc.exe </span>-<span class="hljs-keyword">bs-jsx </span><span class="hljs-number">3</span> <span class="hljs-comment"># turn on reactjs_jsx_ppx_v3</span>
 </code></pre>
 <p>Like before, we also ship a stand alone bsppx.exe, it now absorbs reactjs_jsx_ppx as well.</p>
-<pre><code class="hljs">bsppx.exe -bs-jsx 2 # turn on reactjs_jsx_ppx_v2
-bsppx.exe -bs-jsx 3 # turn on reactjs_jsx_ppx_v3
+<pre><code class="hljs"><span class="hljs-keyword">bsppx.exe </span>-<span class="hljs-keyword">bs-jsx </span><span class="hljs-number">2</span> <span class="hljs-comment"># turn on reactjs_jsx_ppx_v2</span>
+<span class="hljs-keyword">bsppx.exe </span>-<span class="hljs-keyword">bs-jsx </span><span class="hljs-number">3</span> <span class="hljs-comment"># turn on reactjs_jsx_ppx_v3</span>
 </code></pre>
 <p>The benefit of this change is that it help reduced the prebuilt binary size significantly and it also help shave 5~10ms per file compilation.</p>
 <p>Another minor change we added, is that we introduced an env variable <code>BS_VSCODE</code> to help error messages more adapted to VsCode, see <a href="https://bucklescript.github.io/docs/en/build-configuration#bs-vscode-error-output-adapted-for-vscode">here</a> for more details.</p>
