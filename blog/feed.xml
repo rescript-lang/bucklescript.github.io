@@ -4,7 +4,7 @@
         <title>BuckleScript Blog</title>
         <link>https://bucklescript.github.io/blog</link>
         <description>The best place to stay up-to-date with the latest BuckleScript news and events.</description>
-        <lastBuildDate>Wed, 16 Oct 2019 06:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 18 Nov 2019 06:00:00 GMT</lastBuildDate>
         <docs>http://blogs.law.harvard.edu/tech/rss</docs>
         <generator>Feed for Node.js</generator>
         <image>
@@ -12,6 +12,13 @@
             <url>https://bucklescript.github.io/img/logos/bucklescript.svg</url>
             <link>https://bucklescript.github.io/blog</link>
         </image>
+        <item>
+            <title><![CDATA[What's new in release 7]]></title>
+            <link>https://bucklescript.github.io/blog/2019/11/18/whats-new-in-7.html</link>
+            <guid>https://bucklescript.github.io/blog/2019/11/18/whats-new-in-7.html</guid>
+            <pubDate>Mon, 18 Nov 2019 06:00:00 GMT</pubDate>
+            <description><![CDATA[<p>The new major version of BuckleScript is coming -<a href="https://github.com/BuckleScript/bucklescript/pull/3968">7.0.0-dev.1</a> released for testing!</p> <p>We are maintaining <code>5.*</code> and <code>6.*</code> for OCaml <code>4.02</code> and <code>4.06</code> for a while, since this release we are moving forward and focusing on release 7.* (for OCaml 4.06).</p> <p>This is a ma...</p>]]></description>
+        </item>
         <item>
             <title><![CDATA[Another way of encoding type identity for BuckleScript libraries without using big functor]]></title>
             <link>https://bucklescript.github.io/blog/2019/10/16/another-encoding.html</link>

@@ -10,7 +10,7 @@
             languagesDropDown.className = "hide";
           }
         });
-      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/bucklescript/bucklescript" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul class=""><li class="navListItem"><a class="navItem" href="/blog/2019/10/16/another-encoding">Another way of encoding type identity for BuckleScript libraries without using big functor</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/09/23/release-5-20-0">Release 5.2.0/6.2.0</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/08/12/release-5-10-0">What&#x27;s new in release 5.1.0</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/06/26/release-5-0-5">Release 5.0.5 and 6.0.2</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/05/21/ffi-overview">A high level overview of BuckleScript interop with Javascript</a></li></ul></div></div></section></div><script>
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/bucklescript/bucklescript" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul class=""><li class="navListItem"><a class="navItem" href="/blog/2019/11/18/whats-new-in-7">What&#x27;s new in release 7</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/10/16/another-encoding">Another way of encoding type identity for BuckleScript libraries without using big functor</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/09/23/release-5-20-0">Release 5.2.0/6.2.0</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/08/12/release-5-10-0">What&#x27;s new in release 5.1.0</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/06/26/release-5-0-5">Release 5.0.5 and 6.0.2</a></li></ul></div></div></section></div><script>
             var coll = document.getElementsByClassName('collapsible');
             var checkActiveCategory = true;
             for (var i = 0; i < coll.length; i++) {
@@ -66,7 +66,26 @@
                 };
               }
             });
-        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="posts"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2018/03/13/a-small-step-for-bucklescript">A Small Step for BuckleScript...</a></h1><p class="post-meta">March 13, 2018</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p>...and a big one for the community!</p>
+        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="posts"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2018/04/16/release-3-0-0">BuckleScript 3.0</a></h1><p class="post-meta">April 16, 2018</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p><code>bs-platform</code> 3.0.0 is released! Go get it. This is a great release.</p>
+<p>Highlighted features:</p>
+<ul>
+<li><strong>OCaml/Reason boolean are finally compiled as JS boolean</strong>! Due to historical limitations, OCaml <code>true</code>/<code>false</code> was compiled to <code>1</code>/<code>0</code> in JS. This caused quite a bit of confusion for newcomers. It now compiles to JS <code>true</code>/<code>false</code>. Special thanks to <a href="https://twitter.com/ccrisccris">Cristiano</a> for all the hard work.</li>
+<li>New <a href="/docs/en/generate-converters-accessors.html#abstract-type">object type feature</a>. This is an experimental and potentially much better way to bind to JS objects that potentially obsoletes the need for a few other APIs. Please see the linked docs and help us test it!</li>
+<li><code>raw</code> now accepts a function declaration with an unsafe string body: <code>let f = [%raw (a, b) =&gt; &quot;return a + b&quot;]</code> (OCaml syntax: <code>let f = [%raw fun a b -&gt; &quot;return a + b&quot;]</code>). This makes embedding escape-hatch raw JS code even easier for the compiler to optimize for speed and readability, as you've indicated that the raw code block is a function, with specific numbers of arguments.</li>
+</ul>
+<p>The usual changelog is <a href="https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#300">here</a>.</p>
+<p>We've been working on the BuckleScript compiler for almost four years now; meanwhile, the OCaml type checker itself has already been engineered for almost three decades. After all this of work, we believe that BuckleScript has reached a stable and reliable stage.</p>
+<p>Below is a list of to-dos that we will work on in the future. Suggestions welcome!</p>
+<ul>
+<li>Upgrade the OCaml version. OCaml is quite a stable language; there are not too many changes between BuckleScript's OCaml version and latest stable one. Nonetheless, it's good to keep up with the OCaml ecosystem.</li>
+<li>A uniform representation for local modules/global modules. Currently local modules are compiled to array, while global modules are compiled to ES6/CommonJS/AMD modules (the cost of local modules is low though, thanks to aggressive inlining).</li>
+<li>Continue improving <a href="https://bucklescript.github.io/bucklescript/api/Belt.html">Belt</a>. Some initial nice numbers <a href="https://github.com/bobzhang/belt-simple-bench">here</a>.</li>
+<li>Enhance FFI to allow creation of idiomatic, type safe JS classes.</li>
+<li>Introduce a debug mode to enhance the printing of OCaml data structures.</li>
+<li>Performance. The compiler performance and generation of more performant and readable code is always our top concern.</li>
+</ul>
+<p>Thank you for all the support so far!</p>
+</span></div></article></div><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2018/03/13/a-small-step-for-bucklescript">A Small Step for BuckleScript...</a></h1><p class="post-meta">March 13, 2018</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p>...and a big one for the community!</p>
 <p>BuckleScript is a compiler, a set of type system enhancements, a build system and a great deal of JavaScript interoperability features rolled into one. From day one, its goal has been to provide a rock solid, lightweight and performant stack for the community. So far, we'd like to think that we've done a great job.</p>
 <p>Alas, such a centralized effort can only scale so much. We'll continue to polish the foundation, tweak features and respond to demands, but BuckleScript's ready to tackle bigger challenges alongside our sister project, Reason. This is where <strong>you</strong>, the community, comes in.</p>
 <p>This week, we're opening up a new suite of additions to the standard library, named <strong>Belt</strong>. Belt has been in closed beta for a while now; some of you might have heard of it or even used it. Now, the time's ripe to open it up to the broader public.</p>
@@ -138,20 +157,6 @@ module resolution
 &quot;amdjs-globa&quot; is similar to &quot;es6-global&quot;</p>
 <p>The es6 module is in perfect combination with rollup as a bundler, see this link
 about how good the dead code elimination is <a href="https://twitter.com/bobzhang1988/status/827562467148623875">https://twitter.com/bobzhang1988/status/827562467148623875</a></p>
-</span></div></article></div><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2017/10/02/release-1-4-2">BuckleScript 1.4.2</a></h1><p class="post-meta">October 2, 2017</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p>BuckleScript 1.4.2 release comes with quite a few enhancement.</p>
-<p>Most notable features:</p>
-<ol>
-<li>The build system is ready to handle multiple npm packages, and its module system can be
-overriden by the end user. For example, if the library A(end user) depends library B and library C,
-we only need tell the build system that A needs goog module system, then B, C will be built using
-goog module system too.</li>
-</ol>
-<p>There are quite lots of enhancements to the build system, we strongly recommend users to re-read
-the documentation <a href="http://bucklescript.github.io/bucklescript/Manual.html#_build_system_support">http://bucklescript.github.io/bucklescript/Manual.html#_build_system_support</a></p>
-<ol start="2">
-<li><p><a href="http://bucklescript.github.io/bucklescript/Manual.html#_fixed_arguments">FFI add a new feature</a></p></li>
-<li><p><a href="https://github.com/bucklescript/bucklescript/issues/1072">FFI can handle <code>bs.obj</code> and <code>bs.string</code> combination</a></p></li>
-</ol>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev" href="/blog/page2/">← Prev</a><a class="docs-next" href="/blog/page4/">Next →</a></div></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script>window.foo = new Pjax({
           areas: [
             // try to use the first query.

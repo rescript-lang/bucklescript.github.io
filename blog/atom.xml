@@ -2,11 +2,21 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://bucklescript.github.io/blog</id>
     <title>BuckleScript Blog</title>
-    <updated>2019-10-16T06:00:00Z</updated>
+    <updated>2019-11-18T06:00:00Z</updated>
     <generator>Feed for Node.js</generator>
     <link rel="alternate" href="https://bucklescript.github.io/blog"/>
     <subtitle>The best place to stay up-to-date with the latest BuckleScript news and events.</subtitle>
     <logo>https://bucklescript.github.io/img/logos/bucklescript.svg</logo>
+    <entry>
+        <title type="html"><![CDATA[What's new in release 7]]></title>
+        <id>https://bucklescript.github.io/blog/2019/11/18/whats-new-in-7.html</id>
+        <link href="https://bucklescript.github.io/blog/2019/11/18/whats-new-in-7.html">
+        </link>
+        <updated>2019-11-18T06:00:00Z</updated>
+        <summary type="html"><![CDATA[<p>The new major version of BuckleScript is coming -<a href="https://github.com/BuckleScript/bucklescript/pull/3968">7.0.0-dev.1</a> released for testing!</p> <p>We are maintaining <code>5.*</code> and <code>6.*</code> for OCaml <code>4.02</code> and <code>4.06</code> for a while, since this release we are moving forward and focusing on release 7.* (for OCaml 4.06).</p> <p>This is a ma...</p>]]></summary>
+        <author>
+        </author>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Another way of encoding type identity for BuckleScript libraries without using big functor]]></title>
         <id>https://bucklescript.github.io/blog/2019/10/16/another-encoding.html</id>
