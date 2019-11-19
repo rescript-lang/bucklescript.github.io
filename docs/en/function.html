@@ -399,8 +399,8 @@ map(<span class="hljs-literal">[|</span><span class="hljs-number">1</span>, <spa
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> id: (. 'a) =&gt; 'a = (. v) =&gt; v;
 </code></pre>
 <p>You’ll get this cryptic error message:</p>
-<pre><code class="hljs"><span class="hljs-attribute">Error</span>: The type of this expression, (<span class="hljs-string">'_a -&gt; '</span>_a [<span class="hljs-variable">@bs</span>]),
-       contains type variables that cannot be generalized
+<pre><code class="hljs">Error: The<span class="hljs-built_in"> type </span>of this expression, (<span class="hljs-string">'_a -&gt; '</span>_a [@bs]),
+       contains<span class="hljs-built_in"> type </span>variables that cannot be generalized
 </code></pre>
 <p>The issue here isn’t that the function is polymorphic. You can use polymorphic uncurried functions as inline callbacks, but you can’t export them (and <code>let</code>s are exposed by default unless you hide it with an interface file). The issue here is a combination of the uncurried call, polymorphism and exporting the function. It’s an unfortunate limitation of how OCaml’s type system incorporates side-effects, and how BS handles uncurrying.</p>
 <p>The simplest solution is in most cases to just not export it, by adding an interface to the module. Alternatively, if you really need to export it, you can do so in its curried form, and then wrap it in an uncurried lambda at the call site. E.g.:</p>
