@@ -27,7 +27,7 @@ type t = {
 
 let obj = {x: 3, y: 2, z: 2};
 
-let obj2 = {...obj, y: 2};
+let obj2 = {...obj, y: 4};
 ```
 ```ocaml
 type t = {
@@ -38,13 +38,13 @@ type t = {
 
 let obj = { x = 3 ; y = 2; z = 2}
 
-let obj2 = { obj with y = 2}
+let obj2 = { obj with y = 4}
 ```
 
 ```js
 var obj2 = {
   x: 3,
-  y: 2,
+  y: 4,
   z: 2
 };
 
