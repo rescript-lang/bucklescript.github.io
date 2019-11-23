@@ -73,7 +73,7 @@ Note that only sources marked with `"type":"dev"` will be able to resolve module
 
 ```json
 {
-  "reason": {"react-jsx": 2},
+  "reason": {"react-jsx": 3},
   "refmt": 3
 }
 ```
