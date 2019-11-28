@@ -10,7 +10,7 @@
             languagesDropDown.className = "hide";
           }
         });
-      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/bucklescript/bucklescript" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul class=""><li class="navListItem"><a class="navItem" href="/blog/2019/11/18/whats-new-in-7">What&#x27;s new in release 7</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/10/16/another-encoding">Another way of encoding type identity for BuckleScript libraries without using big functor</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/09/23/release-5-20-0">Release 5.2.0/6.2.0</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/08/12/release-5-10-0">What&#x27;s new in release 5.1.0</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/06/26/release-5-0-5">Release 5.0.5 and 6.0.2</a></li></ul></div></div></section></div><script>
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/bucklescript/bucklescript" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul class=""><li class="navListItem"><a class="navItem" href="/blog/2019/12/27/whats-new-in-7-cont">What&#x27;s new in release 7 (cont)</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/11/18/whats-new-in-7">What&#x27;s new in release 7</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/10/16/another-encoding">Another way of encoding type identity for BuckleScript libraries without using big functor</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/09/23/release-5-20-0">Release 5.2.0/6.2.0</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/08/12/release-5-10-0">What&#x27;s new in release 5.1.0</a></li></ul></div></div></section></div><script>
             var coll = document.getElementsByClassName('collapsible');
             var checkActiveCategory = true;
             for (var i = 0; i < coll.length; i++) {
@@ -66,7 +66,43 @@
                 };
               }
             });
-        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="posts"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2019/11/18/whats-new-in-7">What&#x27;s new in release 7</a></h1><p class="post-meta">November 18, 2019</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p>The new major version of BuckleScript is coming -<a href="https://github.com/BuckleScript/bucklescript/pull/3968">7.0.0-dev.1</a> released for testing!</p>
+        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="posts"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2019/12/27/whats-new-in-7-cont">What&#x27;s new in release 7 (cont)</a></h1><p class="post-meta">December 27, 2019</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p>The second dev release <a href="https://github.com/BuckleScript/bucklescript/pull/3995">7.0.0-dev.2</a> is released for testing!</p>
+<p>As we mentioned in the <a href="https://bucklescript.github.io/blog/2019/11/18/whats-new-in-7">previous post</a>, we compile records into js objects in this release. This makes the generated code more idiomatic, however, this is not enough to write idiomatic bindings to manipulate arbitrary js objects, since the key of js objects can be arbitrary which is not expressible in ReasonML syntax, so we support user level customization now, which makes idiomatic bindings really easy.</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> entry = {
+  <span class="hljs-attribute">[@bs.as "EXACT_MAPPING_TO_JS_LABEL"]</span>
+  x: int,
+  <span class="hljs-attribute">[@bs.as "EXACT_2"]</span>
+  y: int,
+  z: obj,
+}
+<span class="hljs-keyword">and</span> obj = {
+  <span class="hljs-attribute">[@bs.as "hello"]</span>
+  hi: int,
+};
+
+<span class="hljs-keyword">let</span> f4 = ({x, y, z: {hi}}) =&gt; (x <span class="hljs-operator">+</span> y <span class="hljs-operator">+</span> hi) <span class="hljs-operator">*</span> <span class="hljs-number">2</span>;
+
+</code></pre>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">type</span> entry  = {
+  x : <span class="hljs-built_in">int</span>  ; [@bs.<span class="hljs-keyword">as</span> <span class="hljs-string">"EXACT_MAPPING_TO_JS_LABEL"</span>]
+  y : <span class="hljs-built_in">int</span> ; [@bs.<span class="hljs-keyword">as</span> <span class="hljs-string">"EXACT_2"</span>]
+  z : obj
+} 
+<span class="hljs-keyword">and</span> obj = {
+  hi : <span class="hljs-built_in">int</span> ; [@bs.<span class="hljs-keyword">as</span> <span class="hljs-string">"hello"</span>]  
+}    
+
+<span class="hljs-keyword">let</span> f4  { x; y; z = {hi }} = 
+  (x + y + hi) * <span class="hljs-number">2</span>
+</code></pre>
+<pre><code class="hljs css language-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f4</span>(<span class="hljs-params">param</span>) </span>{
+  <span class="hljs-keyword">return</span> (((param.EXACT_MAPPING_TO_JS_LABEL + param.EXACT_2 | <span class="hljs-number">0</span>) + param.z.hello | <span class="hljs-number">0</span>) &lt;&lt; <span class="hljs-number">1</span>);
+}
+</code></pre>
+<p>As you can see, you can manipulate js objects using Reason pattern match syntax, the generated
+code is highly efficient, more importantly, bindings to JS will be significantly simplifie.</p>
+<p>Happy Hacking.</p>
+</span></div></article></div><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2019/11/18/whats-new-in-7">What&#x27;s new in release 7</a></h1><p class="post-meta">November 18, 2019</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p>The new major version of BuckleScript is coming -<a href="https://github.com/BuckleScript/bucklescript/pull/3968">7.0.0-dev.1</a> released for testing!</p>
 <p>We are maintaining <code>5.*</code> and <code>6.*</code> for OCaml <code>4.02</code> and <code>4.06</code> for a while, since this release we are moving forward and focusing on release 7.* (for OCaml 4.06).</p>
 <p>This is a major release comes with lots of nice features listed <a href="https://github.com/BuckleScript/bucklescript/blob/master/Changes.md">here</a>.</p>
 <p>We talk about some highlights here</p>
@@ -679,21 +715,6 @@ end
 <p>It also means that most language features from OCaml will trickle down automatically.</p>
 <p>It is not yet ready for production but we recommend you to try it (esp, new OCaml features between 4.02.3 and 4.06.1),
 note we expect users to have some issues in experiment, feedback is welcome!</p>
-</span></div></article></div><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2019/03/21/release-5-0">bs-platform release v5</a></h1><p class="post-meta">March 21, 2019</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p><code>bs-platform@5.0.0</code> is released! There are quite a few bug fixes in this release  and refmt is synced up, a detailed list of changes is available <a href="https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#500">here</a>.</p>
-<p>Several new features are introduced in this release:</p>
-<ul>
-<li><p>first class <code>bs.variadic</code> support, documented <a href="https://bucklescript.github.io/blog/2019/03/1/feature-preview">here</a></p></li>
-<li><p>we prebuilt binaries for Windows, MacOS and Linux, this will help reduce your CI build time significantly. For exotic OSes, it will fall back to build from source</p></li>
-<li><p>bs.deriving light config. For people who prefer short names, we make it configurable</p></li>
-</ul>
-<pre><code class="hljs"><span class="hljs-keyword">type</span> t = {
-    x : int
-} <span class="hljs-attribute">[@@bs.deriving {abstract = light}]</span>
-
-<span class="hljs-keyword">let</span> f (obj : t) = obj |. x 
-</code></pre>
-<p>This is the last major release which is targeting OCaml 4.02.3, in the future we will make major releases targeting OCaml 4.06.</p>
-<p>Happy Hacking!</p>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-next" href="/blog/page2/">Next →</a></div></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script>window.foo = new Pjax({
           areas: [
             // try to use the first query.

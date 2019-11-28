@@ -10,7 +10,7 @@
             languagesDropDown.className = "hide";
           }
         });
-      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/bucklescript/bucklescript" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul class=""><li class="navListItem"><a class="navItem" href="/blog/2019/11/18/whats-new-in-7">What&#x27;s new in release 7</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/10/16/another-encoding">Another way of encoding type identity for BuckleScript libraries without using big functor</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/09/23/release-5-20-0">Release 5.2.0/6.2.0</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/08/12/release-5-10-0">What&#x27;s new in release 5.1.0</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/06/26/release-5-0-5">Release 5.0.5 and 6.0.2</a></li></ul></div></div></section></div><script>
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/bucklescript/bucklescript" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul class=""><li class="navListItem"><a class="navItem" href="/blog/2019/12/27/whats-new-in-7-cont">What&#x27;s new in release 7 (cont)</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/11/18/whats-new-in-7">What&#x27;s new in release 7</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/10/16/another-encoding">Another way of encoding type identity for BuckleScript libraries without using big functor</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/09/23/release-5-20-0">Release 5.2.0/6.2.0</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/08/12/release-5-10-0">What&#x27;s new in release 5.1.0</a></li></ul></div></div></section></div><script>
             var coll = document.getElementsByClassName('collapsible');
             var checkActiveCategory = true;
             for (var i = 0; i < coll.length; i++) {
@@ -66,7 +66,22 @@
                 };
               }
             });
-        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="posts"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2019/01/11/scalable">In search of lightning feedback loop in a large codebase</a></h1><p class="post-meta">January 11, 2019</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p>As software developers, when we touch a codebase, we want the edit-compile cycle, to be as short as possible. Studies show that feedback loop less than 1s, or 100ms will prevent devleopers getting distracted.</p>
+        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="posts"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2019/03/21/release-5-0">bs-platform release v5</a></h1><p class="post-meta">March 21, 2019</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p><code>bs-platform@5.0.0</code> is released! There are quite a few bug fixes in this release  and refmt is synced up, a detailed list of changes is available <a href="https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#500">here</a>.</p>
+<p>Several new features are introduced in this release:</p>
+<ul>
+<li><p>first class <code>bs.variadic</code> support, documented <a href="https://bucklescript.github.io/blog/2019/03/1/feature-preview">here</a></p></li>
+<li><p>we prebuilt binaries for Windows, MacOS and Linux, this will help reduce your CI build time significantly. For exotic OSes, it will fall back to build from source</p></li>
+<li><p>bs.deriving light config. For people who prefer short names, we make it configurable</p></li>
+</ul>
+<pre><code class="hljs"><span class="hljs-keyword">type</span> t = {
+    x : int
+} <span class="hljs-attribute">[@@bs.deriving {abstract = light}]</span>
+
+<span class="hljs-keyword">let</span> f (obj : t) = obj |. x 
+</code></pre>
+<p>This is the last major release which is targeting OCaml 4.02.3, in the future we will make major releases targeting OCaml 4.06.</p>
+<p>Happy Hacking!</p>
+</span></div></article></div><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2019/01/11/scalable">In search of lightning feedback loop in a large codebase</a></h1><p class="post-meta">January 11, 2019</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p>As software developers, when we touch a codebase, we want the edit-compile cycle, to be as short as possible. Studies show that feedback loop less than 1s, or 100ms will prevent devleopers getting distracted.</p>
 <p>This seems to be possible in a small project, but as project grows to 10k files, or even more,
 100k files in a large company like Google, Facebook, this seems to be extremely challenging.</p>
 <p>In this article, we are talking about how BuckleScript - it supports both OCaml and ReasonML syntax - is trying to solve this issue.</p>
@@ -247,6 +262,26 @@ We will update the contribution guide once it gets stable.</p>
 <p>Separate the compiler from stdlib may also help draw the contribution to the stdlib/belt library.</p>
 <h4><a class="anchor" aria-hidden="true" id="improving-the-usability-of-bsb"></a><a href="#improving-the-usability-of-bsb" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Improving the usability of bsb</h4>
 <p>Currently the bsb is restricted by the npm directory layout, the generated JS artifacts is also restricted by it, we will see if we can relocate the JS artifacts or provide more flexibility for users.</p>
+</span></div></article></div><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2019/03/1/feature-preview">First-class `bs.variadic` Support in the Next Release</a></h1><p class="post-meta">March 1, 2019</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p>In previous releases, when a <code>bs.variadic</code> external (previously called <code>bs.splice</code> prior to version <code>4.08</code>) is present, its tail arguments needed to be applied statically. In other words, the <code>external</code> marked with <code>bs.variadic</code>, when used, requires a <em>literal</em> array:</p>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> join : <span class="hljs-built_in">string</span> <span class="hljs-built_in">array</span> -&gt; <span class="hljs-built_in">string</span> = <span class="hljs-string">"join"</span>
+[@@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"path"</span>][@@bs.variadic]
+
+<span class="hljs-keyword">let</span> _ = join [|<span class="hljs-string">"a"</span>; <span class="hljs-string">"b"</span>|] <span class="hljs-comment">(* this is ok *)</span>
+<span class="hljs-keyword">let</span> f b = join b <span class="hljs-comment">(* compiler error when you try to abstract `join` *)</span>
+</code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.module "path"]</span><span class="hljs-attribute">[@bs.variadic]</span>
+<span class="hljs-keyword">external</span> join: array(string) =&gt; string = <span class="hljs-string">"join"</span>
+
+<span class="hljs-keyword">let</span> _ = join(<span class="hljs-literal">[|</span><span class="hljs-string">"a"</span>, <span class="hljs-string">"b"</span><span class="hljs-literal">|]</span>) <span class="hljs-comment">/* this is ok */</span>
+<span class="hljs-keyword">let</span> f = b =&gt; join(b) <span class="hljs-comment">/* compiler error when you try to abstract `join` */</span>
+</code></pre>
+<p>More importantly, such compilation error was leaky in cases such as this one:</p>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> f = join
+</code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> f = join
+</code></pre>
+<p>In the next release, we are going to lift such restriction. You'll be able to call an external marked with <code>bs.variadic</code> with an array reference, not just a literal array.</p>
+<p>Caveat: it's unclear how to support such first class <code>bs.variadic</code> call in conjunction with <code>bs.new</code>, so an external declaration that contains both will trigger a compilation error. We'll try to figure out this particular case in the future too.</p>
 </span></div></article></div><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2018/11/13/arity-zero">A change of undefined behavior in BuckleScript 4.0.7</a></h1><p class="post-meta">November 13, 2018</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p>In the latest BuckleScript release, we introduced a minor change in the codegen which broken some user libraries. Note this change only broke the code in the FFI boundary(the interop between JS).</p>
 <p>In the early days of BuckleScript, there is no built-in uncurried calling convention support, since OCaml is a curried language, which means every function has arity one, so there is no way to express that a function has arity zero, this makes some interop challenging. In the mocha unit test library, it expects its callback to be function of arity zero.</p>
 <p>To work around this issue, before this release, we did a small codegen optimization, for a function of type <code>unit -&gt; unit</code>, if its argument is not used, we remove its argument in the output.</p>
@@ -317,26 +352,6 @@ we added native uncurried calling convention support later.</p>
 So while the generic function <code>(x) =&gt; Some(x)</code> will generate code to check wheter <code>x</code> should be boxed, the more type-specific function <code>(x:int) =&gt; Some(x)</code> is just compiled as the identity function, as it's clear from the type that no boxing is required.</p>
 <p>For a high-level formalization of the boxing and unboxing operations, as well as the polymorphic comparison functions, see this <a href="https://gist.github.com/cristianoc/791aac26f94dbded0fc137d61f4bd2a8">gist</a>.</p>
 <p>One design choice was whether to represent <code>None</code> as <code>null</code> or as <code>undefined</code>. The choice of <code>undefined</code> was made because this allows a direct mapping for <a href="https://reasonml.github.io/docs/en/function#optional-labeled-arguments">optional labeled arguments</a>. As a consequence <code>null</code> is never boxed, so e.g. <code>Some(null)</code> is represented as <code>null</code>.</p>
-</span></div></article></div><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2019/03/1/feature-preview">First-class `bs.variadic` Support in the Next Release</a></h1><p class="post-meta">March 1, 2019</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p>In previous releases, when a <code>bs.variadic</code> external (previously called <code>bs.splice</code> prior to version <code>4.08</code>) is present, its tail arguments needed to be applied statically. In other words, the <code>external</code> marked with <code>bs.variadic</code>, when used, requires a <em>literal</em> array:</p>
-<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> join : <span class="hljs-built_in">string</span> <span class="hljs-built_in">array</span> -&gt; <span class="hljs-built_in">string</span> = <span class="hljs-string">"join"</span>
-[@@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"path"</span>][@@bs.variadic]
-
-<span class="hljs-keyword">let</span> _ = join [|<span class="hljs-string">"a"</span>; <span class="hljs-string">"b"</span>|] <span class="hljs-comment">(* this is ok *)</span>
-<span class="hljs-keyword">let</span> f b = join b <span class="hljs-comment">(* compiler error when you try to abstract `join` *)</span>
-</code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.module "path"]</span><span class="hljs-attribute">[@bs.variadic]</span>
-<span class="hljs-keyword">external</span> join: array(string) =&gt; string = <span class="hljs-string">"join"</span>
-
-<span class="hljs-keyword">let</span> _ = join(<span class="hljs-literal">[|</span><span class="hljs-string">"a"</span>, <span class="hljs-string">"b"</span><span class="hljs-literal">|]</span>) <span class="hljs-comment">/* this is ok */</span>
-<span class="hljs-keyword">let</span> f = b =&gt; join(b) <span class="hljs-comment">/* compiler error when you try to abstract `join` */</span>
-</code></pre>
-<p>More importantly, such compilation error was leaky in cases such as this one:</p>
-<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> f = join
-</code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> f = join
-</code></pre>
-<p>In the next release, we are going to lift such restriction. You'll be able to call an external marked with <code>bs.variadic</code> with an array reference, not just a literal array.</p>
-<p>Caveat: it's unclear how to support such first class <code>bs.variadic</code> call in conjunction with <code>bs.new</code>, so an external declaration that contains both will trigger a compilation error. We'll try to figure out this particular case in the future too.</p>
 </span></div></article></div><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2018/07/17/release-4-0-0">BuckleScript 4.0.0 (Part One)</a></h1><p class="post-meta">July 17, 2018</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p><code>bs-platform</code> 4.0.0 is released! It has some  nice features that we want to share with you, a more detailed list of changes is available <a href="https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#400">here</a></p>
 <p>In this post, I will talk about a new development workflow, all toolchains are self-contained in <code>bs-platform</code>, <a href="https://twitter.com/ccrisccris">Cristiano</a> will talk about the new runtime encoding for optional.</p>
 <h1><a class="anchor" aria-hidden="true" id="a-simple-approach-to-accelerate-feedback-loop-in-a-reliable-way"></a><a href="#a-simple-approach-to-accelerate-feedback-loop-in-a-reliable-way" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>A simple approach to accelerate feedback loop in a reliable way</h1>
@@ -383,38 +398,6 @@ http-server <span class="hljs-comment"># start a http server</span>
 </span></div></article></div><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2018/05/23/release-3-1-4">BuckleScript 3.1.4</a></h1><p class="post-meta">May 23, 2018</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p>Hey again! The release two days ago removed the deprecated Js Boolean APIs (no longer needed since we compile OCaml booleans to JS boolean since <code>3.0.0</code>). But folks have voiced that the removal was too hasty, as some of their dependencies still haven't upgraded to <code>3.0.0</code> and thus still needed the deprecated APIs.</p>
 <p>We try to be diligent with our releases; hopefully this didn't churn too many people. To remediate the situation, <strong>we're putting those calls back for this version</strong>. Finger crossed that you don't have to wait on too many dependencies!</p>
 <p>Sorry for the small churn, and thanks for all your feedback!</p>
-</span></div></article></div><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2018/05/21/release-3-1-0">BuckleScript 3.1</a></h1><p class="post-meta">May 21, 2018</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p>List of changes <a href="https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#310">here</a>! Highlights:</p>
-<h2><a class="anchor" aria-hidden="true" id="print-record-keys-and-variant-tags"></a><a href="#print-record-keys-and-variant-tags" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Print Record Keys and Variant Tags</h2>
-<p>A picture's worth a thousand words:</p>
-<table>
-  <thead> <tr><th>Before</th><th>After</th></tr> </thead>
-  <tbody>
-    <tr>
-      <td>
-        <img src="/img/debugger-before.png" alt="debugger before">
-      </td>
-      <td style="vertical-align: middle">
-        <img src="/img/debugger-after.png" alt="debugger after">
-      </td>
-    </tr>
-  </tbody>
-</table>
-<p>Please see <a href="/docs/en/better-data-structures-printing-debug-mode.html">Better Data Structures Printing (Debug Mode)</a> for usage.</p>
-<h2><a class="anchor" aria-hidden="true" id="even-better-bsderiving-abstract"></a><a href="#even-better-bsderiving-abstract" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Even Better <code>bs.deriving abstract</code></h2>
-<p>We've further polished our new way of binding to JS objects. The record fields of a <code>bs.deriving abstract</code> can now accept functions.</p>
-<h2><a class="anchor" aria-hidden="true" id="pipe-first-improvement"></a><a href="#pipe-first-improvement" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Pipe First Improvement</h2>
-<p><a href="/docs/en/pipe-first.html">Pipe First</a> now supports piping into variant tags!</p>
-<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> result = name |. preprocess |. <span class="hljs-type">Some</span>
-</code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> result = name |. preprocess |. <span class="hljs-constructor">Some</span>
-</code></pre>
-<p>We turn this into:</p>
-<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> result = <span class="hljs-type">Some</span>(preprocess(name))
-</code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> result = <span class="hljs-constructor">Some</span>(preprocess(name))
-</code></pre>
-<h2><a class="anchor" aria-hidden="true" id="jsboolean-is-gone"></a><a href="#jsboolean-is-gone" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Js.Boolean Is Gone</h2>
-<p>Since BuckleScript 3.0, OCaml <code>bool</code> now compile to JS <code>boolean</code>. It was deprecated (all the boolean conversion functions became no-ops, with warnings during build), and now completely removed. No more need for the converter functions!</p>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev" href="/blog/">← Prev</a><a class="docs-next" href="/blog/page3/">Next →</a></div></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script>window.foo = new Pjax({
           areas: [
             // try to use the first query.

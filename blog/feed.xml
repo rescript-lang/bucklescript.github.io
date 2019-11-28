@@ -4,7 +4,7 @@
         <title>BuckleScript Blog</title>
         <link>https://bucklescript.github.io/blog</link>
         <description>The best place to stay up-to-date with the latest BuckleScript news and events.</description>
-        <lastBuildDate>Mon, 18 Nov 2019 06:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Fri, 27 Dec 2019 06:00:00 GMT</lastBuildDate>
         <docs>http://blogs.law.harvard.edu/tech/rss</docs>
         <generator>Feed for Node.js</generator>
         <image>
@@ -12,6 +12,13 @@
             <url>https://bucklescript.github.io/img/logos/bucklescript.svg</url>
             <link>https://bucklescript.github.io/blog</link>
         </image>
+        <item>
+            <title><![CDATA[What's new in release 7 (cont)]]></title>
+            <link>https://bucklescript.github.io/blog/2019/12/27/whats-new-in-7-cont.html</link>
+            <guid>https://bucklescript.github.io/blog/2019/12/27/whats-new-in-7-cont.html</guid>
+            <pubDate>Fri, 27 Dec 2019 06:00:00 GMT</pubDate>
+            <description><![CDATA[<p>The second dev release <a href="https://github.com/BuckleScript/bucklescript/pull/3995">7.0.0-dev.2</a> is released for testing!</p> <p>As we mentioned in the <a href="https://bucklescript.github.io/blog/2019/11/18/whats-new-in-7">previous post</a>, we compile records into js objects in this release. This makes the generated code more idiomatic, however, this is not enough to write idiomatic binding...</p>]]></description>
+        </item>
         <item>
             <title><![CDATA[What's new in release 7]]></title>
             <link>https://bucklescript.github.io/blog/2019/11/18/whats-new-in-7.html</link>
@@ -110,6 +117,13 @@
             <description><![CDATA[<p>In this article we will explain what we are doing now and what we plan to improve in next half (Dec-May), we would also like to hear your feedback so that we can adjust accordingly.</p> <p>Keep in mind that the development team is a very small team, so we h...</p>]]></description>
         </item>
         <item>
+            <title><![CDATA[First-class `bs.variadic` Support in the Next Release]]></title>
+            <link>https://bucklescript.github.io/blog/2019/03/1/feature-preview.html</link>
+            <guid>https://bucklescript.github.io/blog/2019/03/1/feature-preview.html</guid>
+            <pubDate>Thu, 01 Jan 1970 00:00:00 GMT</pubDate>
+            <description><![CDATA[<p>In previous releases, when a <code>bs.variadic</code> external (previously called <code>bs.splice</code> prior to version <code>4.08</code>) is present, its tail arguments needed to be applied statically. In other words, the <code>external</code> marked with <code>bs.variadic</code>, when used, requires a <em>literal</em> ...</p>]]></description>
+        </item>
+        <item>
             <title><![CDATA[A change of undefined behavior in BuckleScript 4.0.7]]></title>
             <link>https://bucklescript.github.io/blog/2018/11/13/arity-zero.html</link>
             <guid>https://bucklescript.github.io/blog/2018/11/13/arity-zero.html</guid>
@@ -122,13 +136,6 @@
             <guid>https://bucklescript.github.io/blog/2018/07/17/release-4-0-0II.html</guid>
             <pubDate>Tue, 17 Jul 2018 06:00:00 GMT</pubDate>
             <description><![CDATA[<p><code>bs-platform</code> 4.0.0 introduces a new runtime representation for optionals.</p> <p>While beforehand <code>None</code> was represented at runtime as <code>0</code> and <code>Some(&quot;hello&quot;)</code> as an array <code>[&quot;hello&quot;]</code>, the new representation tries to unbox optionals as much as pos...</p>]]></description>
-        </item>
-        <item>
-            <title><![CDATA[First-class `bs.variadic` Support in the Next Release]]></title>
-            <link>https://bucklescript.github.io/blog/2019/03/1/feature-preview.html</link>
-            <guid>https://bucklescript.github.io/blog/2019/03/1/feature-preview.html</guid>
-            <pubDate>Thu, 01 Jan 1970 00:00:00 GMT</pubDate>
-            <description><![CDATA[<p>In previous releases, when a <code>bs.variadic</code> external (previously called <code>bs.splice</code> prior to version <code>4.08</code>) is present, its tail arguments needed to be applied statically. In other words, the <code>external</code> marked with <code>bs.variadic</code>, when used, requires a <em>literal</em> ...</p>]]></description>
         </item>
         <item>
             <title><![CDATA[BuckleScript 4.0.0 (Part One)]]></title>
