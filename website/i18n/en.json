@@ -137,8 +137,8 @@
       "try": {
         "title": "Try"
       },
-      "upgrade-to-v6-and-above": {
-        "title": "Upgrade Guide to v6 and above"
+      "upgrade-to-v6-and-v7": {
+        "title": "Upgrade Guide to v6 and v7"
       },
       "use-existing-ocaml-libraries": {
         "title": "Use Existing OCaml Libraries"

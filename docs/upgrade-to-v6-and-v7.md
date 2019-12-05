@@ -1,62 +1,65 @@
 ---
-title: Upgrade Guide to v6 and above
+title: Upgrade Guide to v6 and v7
 ---
 
-If you have been using BuckleScript for the last couple of years, you'll
-probably have noticed that upgrading to the newest version was always seamless
-and without any breaking changes or performance loss. The BuckleScript team puts
-a lot of effort in making sure that users can upgrade as soon as possible
-without any changes in their workflow.
+If you have been using BuckleScript for the last couple of years, you probably
+noticed that upgrading to the newest version has always been a seamless
+experience without any breaking changes or performance loss. That's because the
+BuckleScript team puts a lot of effort in making sure that users can upgrade as
+soon as possible without any changes in their workflow.
 
-With some major underlying changes in BuckleScript v6 and above, upgrading will still
-be quite easy, but will involve a few more installation steps (depending on your project setup).
+That said, this time with the v6 and v7 releases, some fundamental changes
+happened, which means that upgrades will involve a few more installation steps
+than usual (depending on your project setup). Luckily, the upgrade should still
+be straight forward and easy to do.
 
 This guide will give you some more insights on what has changed, and later give
-you concrete instructions to upgrade your BuckleScript project.
+you concrete instructions on how to upgrade your BuckleScript projects.
 
 ## A Quick Look under the Hood
 
-BuckleScript changed the underlying OCaml version from `4.02.3` (BS v5) to
-`4.06`. Usually this shouldn't have any impact on existing codebases, unless
-they are using PPXes or other meta programming binaries. PPXes rely on the the
-data representation of the OCaml / Reason syntax, so if you are using a tool
-such as `graphql_ppx` (which has usually been compiled natively with a `4.02.3`
-OCaml version) you will get a compatibility error when used with BuckleScript
-v6.
+BuckleScript v6 and v7 changed the underlying OCaml version from `4.02.3` (BS
+v5) to `4.06.1`. Usually this shouldn't impact any existing codebases, unless
+they are using PPXes or other meta programming binaries. Simply explained, PPXes
+rely on the data representation of the OCaml / Reason syntax, so if you are
+using a tool such as `graphql_ppx` (which has usually been compiled natively
+with a `4.02.3` OCaml version) you will get a compatibility error when used with
+BuckleScript v6 / v7.
 
-Luckily during the transition phase between v5 and v6 (which has been running
-for several months), the community has been [coordinating
+Luckily during the transition phase between v5 and v6 (which has been an ongoing
+process for for several months), the community has been [coordinating
 efforts](https://github.com/BuckleScript/bucklescript/issues/3914) to upgrade
-and release commonly used tools to `4.06` compatible compile artifacts. You will
+and release commonly used tools to BS v6 / v7 compatible compile artifacts. You will
 find all installation instructions in this guide as well.
 
 ### BS Version Overview / Features
 
-- *BS 5.x and below*: OCaml 4.02.3
-- *BS 6.x and above*: OCaml 4.06.1
+- *BS 5.x and below*: based on OCaml 4.02.3
+- *BS 6.x and above*: based on OCaml 4.06.1
     - Adds [`Inline
       Records`](https://caml.inria.fr/pub/docs/manual-ocaml/manual040.html)
       support (introduced with `4.03`)
-- *BS 7.x and above*: OCaml 4.06.1 (dropped 4.02.3 support)
+- *BS 7.x and above*: based on OCaml 4.06.1 (stops 4.02.3 support)
     - Adds the `Records-as-Objects` feature, which makes BS compile record type
       values into JS objects instead of nested arrays (see blog [post 1](/blog/2019/11/18/whats-new-in-7)
       and [post 2](/blog/2019/12/27/whats-new-in-7-cont))
     - Ships with `refmt` version `3.5.1` with greatly improved syntax error messages (codename `reerror`)
 
-The biggest upside of upgrading to `4.06` is that we will finally be
-deprecating OCaml `4.02.3`, which will make maintenance way easier (lots of
-build infra code will be dropped). Also the OCaml community will greatly benefit
-from this change, since a lot of OCaml libraries still support a minimum version
-of `4.02.3` just for BuckleScript compatibility.
+The biggest upside of upgrading to BS v6 and v7 is that we will finally be able
+to deprecate  underlying OCaml `4.02.3` code, which will make maintenance way
+easier (lots of code / processes can be removed and simplified). Also the OCaml
+community will greatly benefit from this change, since a lot of OCaml libraries
+still have to support a minimum OCaml version of `4.02.3` just for BuckleScript
+<= v5 compatibility.
 
-> We recommend to upgrade to v7 as soon as possible (v6 only if there are any
-unlikely blocking issues). Your Reason code will still work as expected, you'll
-only need to upgrade your native tools to make everything behave correctly
+> We recommend upgrading to BS v7 as soon as possible (v6 only if there are any
+> unlikely blocking issues). Your Reason code will still work as expected, you'll
+> only need to upgrade your native tools to make everything behave correctly.
 
 Please support us moving forward and help us by providing bug reports in case
 you have any issues.
 
-## How to upgrade
+## How to upgrade to v6 and v7
 
 ### Dependencies
 
@@ -67,7 +70,7 @@ know in this issue](https://github.com/BuckleScript/bucklescript/issues/3914).
 
 - **Upgrade your bs-platform dependency:**
     - `npm install bs-platform@7 --dev`
-- **Upgrade your required PPXes:**
+- **Upgrade any PPX dependencies you're using:**
   - [`graphql_ppx`](https://github.com/mhallin/graphql_ppx) ->
     [`graphql_ppx_re`](https://github.com/baransu/graphql_ppx_re):
     - Remove the [deprecated `graphql_ppx` (by
