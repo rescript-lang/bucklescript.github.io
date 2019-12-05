@@ -13,7 +13,7 @@
         <link href="https://bucklescript.github.io/blog/2019/12/27/whats-new-in-7-cont.html">
         </link>
         <updated>2019-12-27T06:00:00Z</updated>
-        <summary type="html"><![CDATA[<p>The second dev release <a href="https://github.com/BuckleScript/bucklescript/pull/3995">7.0.0-dev.2</a> is released for testing!</p> <p>As we mentioned in the <a href="https://bucklescript.github.io/blog/2019/11/18/whats-new-in-7">previous post</a>, we compile records into js objects in this release. This makes the generated code more idiomatic, however, this is not enough to write idiomatic binding...</p>]]></summary>
+        <summary type="html"><![CDATA[<p>[EDIT pre Dec. 27th: yes, we know the dateline is wrong :-) the actual publish date of this post is November 28th, but we're not changing the dateline because that would break the published URL of the post.]</p> <p>The second dev release <a href="https://github.com/BuckleScript/bucklescript/pull/3995">7.0.0-dev.2</a> is rele...</p>]]></summary>
         <author>
         </author>
     </entry>
