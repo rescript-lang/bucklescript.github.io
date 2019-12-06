@@ -92,7 +92,7 @@ know in this issue](https://github.com/BuckleScript/bucklescript/issues/3914).
     - Update your `ppx-flags`: `"ppx-flags": ["bs-let/ppx"]`
   - [`bs-emotion-ppx`](https://github.com/ahrefs/bs-emotion):
     - `npm install bs-emotion-ppx@1 --save-dev`
-    - Update your `ppx-flags`: `"ppx-flags": ["bs-emotion-ppx"]`
+    - Update your `ppx-flags`: `"ppx-flags": ["@ahrefs/bs-emotion-ppx/bin/bs-emotion-ppx"]`
   - [`bs-log`](https://github.com/MinimaHQ/bs-log)
     - Currently WIP and [not done
       yet](https://github.com/MinimaHQ/bs-log/issues/10)
