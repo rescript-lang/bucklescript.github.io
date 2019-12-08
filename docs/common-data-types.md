@@ -88,13 +88,21 @@ OCaml tuples are compiled to JS arrays. Convenient when you're interop-ing with 
 
 Since BuckleScript 3, OCaml/Reason bool now compile to JS boolean.
 
+## Records
+
+Since BuckleScript v7, OCaml/Reason records map directly to JS objects. If records contain any Non-Shared data types (like variants), then these values must be transformed separately and cannot be directly used in JS.
+
 ## Non-shared Data Types
 
-Record, variant (including `option` and `list`), object and others can be exported as well, but you should **not** rely on their internal representation on the JS side. Aka, don't grab a BS list and start manipulating its structure on the JS side.
+Variants (including `option` and `list`), BuckleScript objects and others can be exported as well, but you should **not** rely on their internal representation on the JS side. Aka, don't grab a BS list and start manipulating its structure on the JS side.
 
-However, for record and variant, we provide [generation of converters and accessors](generate-converters-accessors.md). Once you convert e.g. a record to a JS object, you can naturally use them on the JS side.
+However, for BuckleScript related data types, we provide [generation of converters and accessors](generate-converters-accessors.md). Once you convert e.g. variants to a string, you can naturally use them on the JS side.
 
-For list, use `Array.of_list` and `Array.to_list` in the [Array](https://reasonml.github.io/api/Array.html) module. `option` will be treated later on.
+For list, use `Array.of_list` and `Array.to_list` in the [Array](https://reasonml.github.io/api/Array.html) module. `option` will be highlighted shortly later on and also has [its dedicated section](/docs/en/null-undefined-option) as well.
+
+For a seamless JS / TypeScript / Flow integration experience, you might
+want to use [genType](https://github.com/cristianoc/gentype) instead of doing
+convertion by hand.
 
 ### Design Decisions
 
@@ -122,6 +130,7 @@ Js.Nullable.t | `null`/`undefined`
 option | `None` -> `undefined`
 option | `Some( Some .. Some (None))` -> internal representation
 option | `Some other` -> other
+record | object. `{x: 1; y: 2}` -> `{x: 1, y: 2}`
 special `bs.deriving abstract` record | object
 
 ### Non-shared
@@ -133,7 +142,6 @@ OCaml/BS/Reason Type | JavaScript Value
 int64 | array. [high, low]. high is signed, low unsigned
 char | `'a'` -> `97`
 bytes | number array (we might encode it as buffer in NodeJS)
-record | array. `{x: 1; y: 2}` -> `[1, 2]`
 list | `[]` -> `0`, `[x, y]` -> `[x, [y, 0]]`, `[1, 2, 3]` -> `[ 1, [ 2, [ 3, 0 ] ] ]`
 Variant | \*
 Polymorphic variant | \*\*

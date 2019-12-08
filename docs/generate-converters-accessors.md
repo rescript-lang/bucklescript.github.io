@@ -96,6 +96,10 @@ pets
 
 ## Convert Between `Js.t` Object and Record
 
+> **Note:** In BuckleScript >= v7 [records are already compiled to JS
+> objects](/docs/en/object#records-as-objects). `jsConverter` is therefore
+> obsolete and will generate a no-op function for compatibility instead.
+
 Use `jsConverter`.
 
 ```ocaml

@@ -69,14 +69,132 @@ if (match !== undefined) {
 
 You can see that under the hood, a `Js.Dict` is simply backed by a JS object. The entire API uses nothing but ordinary BuckleScript `external`s and wrappers, so the whole API mostly disappears after compilation. It is very convenient when converting files over from JS to BuckleScript.
 
-## Record Mode
+## Records as Objects
+
+> **Note:** Requires BuckleScript >= v7
+
+In BuckleScript, records are directly compiled into JS objects with the same shape (same attribute names).
+As long as your record doesn't contain any BS specific data structures (variants, lists), it will almost always
+compile to idiomatic JS (this includes nested records etc.): 
+
+```reason
+type pet =
+  | Dog
+  | Cat;
+
+type bloodGroup =
+  | A
+  | B;
+
+type person = {
+  name: string,
+  friends: array(string),
+  pet: option(pet),
+  age: int,
+  /* let's pretend our JS expects a null here */
+  bloodGroup: Js.Nullable.t(bloodGroup), 
+};
+
+let john = {
+  name: "John",
+  pet: None,
+  friends: [|"Anna", "Brad", "Shin"|],
+  age: 20,
+  bloodGroup: Js.Nullable.null,
+};
+```
+
+will be compiled into:
+
+```js
+var john_friends = /* array */[
+  "Anna",
+  "Brad",
+  "Shin"
+];
+
+var john_bloodGroup = null;
+
+var john = {
+  name: "John",
+  friends: john_friends,
+  pet: undefined,
+  age: 20,
+  bloodGroup: john_bloodGroup
+};
+
+```
+
+**Please note:**
+- You will still be required to transform variants and lists, so for seamless
+  interop, make sure to only use [common data
+  types](/docs/en/common-data-types), such as array, string, int, float, etc.
+  Alternatively you can use [genType](https://github.com/cristianoc/genType) to
+  do automatic convertions between JS <-> BuckleScript values as well.
+- `None` (`option`) values are converted to `undefined`, so if your JS code
+  distincts between `null` and `undefined`, use `Js.Nullable.t` instead
+
+
+### Rename fields - [bs.as]
+
+There are often situations where specific record attributes need to have a different name than then resulting JS object.
+The most prominent example would include names like `type`, which are often used for "Action" based patterns in JS, but cannot
+be expressed in BuckleScript, since `type` is a keyword.
+
+To work around that, you can use the `[@bs.as]` attribute to change the target name within the resulting JS object:
+
+```reason
+type action = {
+  [@bs.as "type"] _type: string,
+};
+
+let action = { _type: "ADD_USER" };
+```
+
+will be compiled to:
+
+```js
+var action = {
+  type: "ADD_USER"
+};
+```
+
+### Mutable fields
+
+You can also use the `mutable` keyword to do your side-effectual work:
+
+```reason
+type person = {
+  mutable name: string
+};
+
+let p = {name: "Franz"};
+p.name = "Sabine";
+```
+
+which will translate cleanly to:
+
+```js
+var p = {
+  name: "Franz"
+};
+
+p.name = "Sabine";
+
+```
+
+
+## Abstract Record Mode
+
+> **Note**: For BuckleScript >= v7, we recommend using the plain [Record as Objects](#records-as-objects) mechanic. 
+> This feature might still be useful for certain scenarios, but the ergonomics might be worse 
 
 If your JS object:
 
 - has a known, fixed set of fields
 - might or might not contain values of different types
 
-Then you're really using it like a "record" in most other languages. For example, think of the difference of use-case and intent between the object `{"John": 10, "Allison": 20, "Jimmy": 15}` and `{name: "John", age: 10, job: "CEO"}`. The former case would be the aforementioned "hash map mode". The latter would be "record mode", which in BuckleScript is modeled with the `bs.deriving abstract` feature:
+Then you're really using it like a "record" in most other languages. For example, think of the difference of use-case and intent between the object `{"John": 10, "Allison": 20, "Jimmy": 15}` and `{name: "John", age: 10, job: "CEO"}`. The former case would be the aforementioned "hash map mode". The latter would be "abstract record mode", which in BuckleScript is modeled with the `bs.deriving abstract` feature:
 
 ```ocaml
 type person = {
@@ -352,3 +470,56 @@ type cord = pri {
 ```
 
 The accessors are still there, but you can no longer create such data structure. Great for binding to a JS object while preventing others from creating more such object!
+
+#### Use submodules to prevent naming collisions and binding shadowing
+
+Oftentimes you will have multiple abstract types with similar attributes. Since
+BuckleScript will expand all abstract getter, setter and creation functions in the
+same scope where the type is defined, you will eventually run into value shadowing problems.
+
+**For example:**
+
+```reason
+[@bs.deriving abstract]
+type person = {name: string};
+
+[@bs.deriving abstract]
+type cat = {
+  name: string,
+  isLazy: bool,
+};
+
+let person = person(~name="Alice");
+
+/* Error: This expression has type person but an expression was expected
+   of type cat */
+person->nameGet();
+```
+
+To get around this issue, you can use modules to group a type with its related
+functions and later use them via local open statements:
+
+```reason
+module Person = {
+  [@bs.deriving abstract]
+  type t = {name: string};
+};
+
+module Cat = {
+  [@bs.deriving abstract]
+  type t = {
+    name: string,
+    isLazy: bool,
+  };
+};
+
+let person = Person.t(~name="Alice");
+let cat = Cat.t(~name="Snowball", ~isLazy=true);
+
+/* We can use each nameGet function separately now */
+let shoutPersonName = Person.(person->nameGet->Js.String.toUpperCase);
+
+/* Note how we use a local open Cat.([some expression]) to 
+   get access to Cat's nameGet function */
+let whisperCatName = Cat.(cat->nameGet->Js.String.toLowerCase);
+```

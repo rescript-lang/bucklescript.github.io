@@ -96,6 +96,21 @@ let result3: option(int) = Js.Nullable.toOption(Js.Nullable.return(10));
 
 ## Object
 
+### Records as Objects
+
+Since BuckleScript 7 (preferred for JS object interop)
+
+```reason
+type action = {
+  [@bs.as "type"] _type: string,
+  username: string
+};
+
+[@bs.module "actions/addUser.js"] external createAddUser: string => action = "addUser";
+
+let myAction = createAddUser("reason");
+```
+
 ### Hash Map Mode
 
 ```ocaml
@@ -108,7 +123,7 @@ let myMap = Js.Dict.empty();
 Js.Dict.set(myMap, "Allison", 10);
 ```
 
-### Record Mode
+### Abstract Record Mode
 
 ```ocaml
 type person = {
