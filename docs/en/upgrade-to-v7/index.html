@@ -158,7 +158,8 @@ mhallin)</a>: <code>npm remove graphql_ppx</code></li>
 </ul></li>
 <li><a href="https://github.com/ahrefs/bs-emotion"><code>bs-emotion-ppx</code></a>:
 <ul>
-<li>Currently running in internal beta, check the repo for updates</li>
+<li><code>npm install bs-emotion-ppx@1 --save-dev</code></li>
+<li>Update your <code>ppx-flags</code>: <code>&quot;ppx-flags&quot;: [&quot;@ahrefs/bs-emotion-ppx/bin/bs-emotion-ppx&quot;]</code></li>
 </ul></li>
 <li><a href="https://github.com/MinimaHQ/bs-log"><code>bs-log</code></a>
 <ul>
@@ -257,7 +258,7 @@ existing codebases.</p>
 either check the BuckleScript <a href="https://github.com/bucklescript/bucklescript/issues">issue
 tracker</a>, or drop us a
 message in <a href="https://discord.gg/reasonml">Discord</a>.</p>
-</span></div></article></div><div class="docLastUpdate"><em>Last updated on 2019-12-4</em></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/en/concepts-overview"><span class="arrow-prev">← </span><span>Concepts Overview</span></a><a class="docs-next button" href="/docs/en/interop-overview"><span>Overview</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#a-quick-look-under-the-hood">A Quick Look under the Hood</a><ul class="toc-headings"><li><a href="#bs-version-overview-features">BS Version Overview / Features</a></li></ul></li><li><a href="#how-to-upgrade-to-v7">How to upgrade to v7</a><ul class="toc-headings"><li><a href="#dependencies">Dependencies</a></li><li><a href="#editor-extensions">Editor extensions</a></li></ul></li><li><a href="#how-to-upgrade-ppxes-for-tool-maintainers">How to upgrade PPXes (for tool maintainers)</a><ul class="toc-headings"><li><a href="#step-1-upgrade-build-dependencies">Step 1: Upgrade build dependencies</a></li><li><a href="#step-2-release-artifacts-and-add-a-proper-note-in-the-readme">Step 2: Release artifacts and add a proper Note in the README</a></li></ul></li><li><a href="#conclusion">Conclusion</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script>window.foo = new Pjax({
+</span></div></article></div><div class="docLastUpdate"><em>Last updated on 2019-12-6</em></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/en/concepts-overview"><span class="arrow-prev">← </span><span>Concepts Overview</span></a><a class="docs-next button" href="/docs/en/interop-overview"><span>Overview</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#a-quick-look-under-the-hood">A Quick Look under the Hood</a><ul class="toc-headings"><li><a href="#bs-version-overview-features">BS Version Overview / Features</a></li></ul></li><li><a href="#how-to-upgrade-to-v7">How to upgrade to v7</a><ul class="toc-headings"><li><a href="#dependencies">Dependencies</a></li><li><a href="#editor-extensions">Editor extensions</a></li></ul></li><li><a href="#how-to-upgrade-ppxes-for-tool-maintainers">How to upgrade PPXes (for tool maintainers)</a><ul class="toc-headings"><li><a href="#step-1-upgrade-build-dependencies">Step 1: Upgrade build dependencies</a></li><li><a href="#step-2-release-artifacts-and-add-a-proper-note-in-the-readme">Step 2: Release artifacts and add a proper Note in the README</a></li></ul></li><li><a href="#conclusion">Conclusion</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script>window.foo = new Pjax({
           areas: [
             // try to use the first query.
             '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
