@@ -102,7 +102,7 @@ Since BuckleScript 7 (preferred for JS object interop)
 
 ```reason
 type action = {
-  [@bs.as "type"] _type: string,
+  [@bs.as "type"] type_: string,
   username: string
 };
 
