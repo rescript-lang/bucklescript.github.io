@@ -10,7 +10,7 @@
             languagesDropDown.className = "hide";
           }
         });
-      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/bucklescript/bucklescript" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul class=""><li class="navListItem"><a class="navItem" href="/blog/2019/12/27/whats-new-in-7-cont">What&#x27;s new in release 7 (cont)</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/11/18/whats-new-in-7">What&#x27;s new in release 7</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/10/16/another-encoding">Another way of encoding type identity for BuckleScript libraries without using big functor</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/09/23/release-5-20-0">Release 5.2.0/6.2.0</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/08/12/release-5-10-0">What&#x27;s new in release 5.1.0</a></li></ul></div></div></section></div><script>
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/bucklescript/bucklescript" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul class=""><li class="navListItem"><a class="navItem" href="/blog/2019/12/27/whats-new-in-7-cont">What&#x27;s new in release 7 (cont)</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/12/20/release-7-02">BuckleScript holiday release!</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/11/18/whats-new-in-7">What&#x27;s new in release 7</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/10/16/another-encoding">Another way of encoding type identity for BuckleScript libraries without using big functor</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/09/23/release-5-20-0">Release 5.2.0/6.2.0</a></li></ul></div></div></section></div><script>
             var coll = document.getElementsByClassName('collapsible');
             var checkActiveCategory = true;
             for (var i = 0; i < coll.length; i++) {
@@ -103,6 +103,73 @@
 <p>As you can see, you can manipulate js objects using Reason pattern match syntax, the generated
 code is highly efficient, more importantly, bindings to JS will be significantly simplifie.</p>
 <p>Happy Hacking.</p>
+</span></div></article></div><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2019/12/20/release-7-02">BuckleScript holiday release!</a></h1><p class="post-meta">December 20, 2019</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p><a href="https://github.com/BuckleScript/bucklescript/pull/4062">bs-platform@7.0.2-dev.1</a> is released for testing!</p>
+<p>Try it via</p>
+<pre><code class="hljs"><span class="hljs-selector-tag">npm</span> <span class="hljs-selector-tag">i</span> <span class="hljs-selector-tag">-g</span> <span class="hljs-selector-tag">bs-platform</span>@<span class="hljs-keyword">7</span>.<span class="hljs-keyword">0</span>.<span class="hljs-keyword">2</span>-<span class="hljs-keyword">dev</span>.<span class="hljs-keyword">1</span>
+</code></pre>
+<p>This release contains several bug fixes for <a href="https://github.com/facebook/reason">refmt</a>(updated from 3.5.1 to 3.5.4). We also spent quite some time improving the compiler performance. For example, we optimized our specialized hash based data structures, which means that we can expect a 5% better build time performance. We would like to collect more benchmark data, so we are happy for any feedback / benchmarks from our community!</p>
+<p>A highlighting feature is that we added Generalized Unboxed Support (so called [@unboxed] annotations). Here's a short definition from the official OCaml Manual:</p>
+<blockquote>
+<p>unboxed can be used on a type definition if the type is a single-field record or a concrete type with a single constructor that has a single argument. It tells the compiler to optimize the representation of the type by removing the block that represents the record or the constructor (i.e. a value of this type is physically equal to its argument). In the case of GADTs, an additional restriction applies: the argument must not be an existential variable, represented by an existential type variable, or an abstract type constructor applied to an existential type variable.</p>
+</blockquote>
+<p><strong>Note</strong>: The restrictions for GADTs does apply to OCaml's native compilation, but not to BuckleScript's JavaScript compilation, so we will get the maximum value with less confusing error messages!</p>
+<p>The exciting thing about this feature is that we will now have more ways of expressing our programs in our typical type safe records and variants without sacrificing on runtime performance (&quot;zero cost interop&quot;).</p>
+<p>The best way to understand this feature is by looking at the following examples:</p>
+<p><strong>Unboxed variants:</strong></p>
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@unboxed]</span>
+<span class="hljs-keyword">type</span> t = <span class="hljs-constructor">A</span>(int);
+<span class="hljs-keyword">let</span> x = <span class="hljs-constructor">A</span>(<span class="hljs-number">3</span>);
+</code></pre>
+<p>will translate to following JS:</p>
+<pre><code class="hljs css language-js"><span class="hljs-keyword">var</span> x = <span class="hljs-number">3</span>;
+</code></pre>
+<p>As you can see, we are &quot;unboxing&quot; the <code>int</code> value from the internal variant representation, so the variant will get completely invisible to the runtime. Great for e.g. mapping to stringly typed JavaScript enums!</p>
+<p><strong>Unboxed Records (1 field only)</strong></p>
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@unboxed]</span>
+<span class="hljs-keyword">type</span> t2 = {f: string};
+<span class="hljs-keyword">let</span> x = {f: <span class="hljs-string">"foo"</span>};
+</code></pre>
+<p>will translate to following JS:</p>
+<pre><code class="hljs css language-js"><span class="hljs-keyword">var</span> x = <span class="hljs-string">"foo"</span>;
+</code></pre>
+<p>The same principle as with variants. Now a lot of people will probably ask: &quot;Why would I ever want a 1 field record?&quot;. There are multiple reasons, one of them would be a <code>ref</code> type, which is just a syntax sugar for a <code>{ contents: 'a}</code> record.</p>
+<p>Another use case is for expressing high rank polymorphism without cost:</p>
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@unboxed]</span>
+<span class="hljs-keyword">type</span> r = {f: 'a. 'a =&gt; 'a};
+<span class="hljs-keyword">let</span> map_pair = (r, (p1, p2)) =&gt; (r.f(p1), r.f(p2));
+</code></pre>
+<p><strong>Note:</strong> <code>'a. 'a =&gt; 'a</code> describes a polymorphic function interface, where <code>'a</code> can be called with many different types (e.g. <code>f(1)</code> and <code>f(&quot;hi&quot;)</code>). The compiler will not try to lock <code>'a</code> for the first type it sees (e.g. the <code>int</code>) on the first call site. The parameter <code>'a</code> is therefore polymorphic!</p>
+<p>By <code>unboxing</code> those records with one polymorphic function,  we will get rid of <a href="https://github.com/BuckleScript/bucklescript/issues/4058">value restriction for our existing encoding of uncurried function</a>, this will be a major feature!</p>
+<p><strong>Unboxed GADTs:</strong></p>
+<p>Since GADTs are lesser known in Reason syntax, we also added some OCaml snippet to get a better idea of how the example data structure is defined.</p>
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@unboxed]</span>
+<span class="hljs-keyword">type</span> t = 
+  | <span class="hljs-constructor">Any</span> ('a) : t; 
+
+<span class="hljs-keyword">let</span> array = <span class="hljs-literal">[|</span><span class="hljs-constructor">Any</span>(<span class="hljs-number">3</span>), <span class="hljs-constructor">Any</span>(<span class="hljs-string">"a"</span>)<span class="hljs-literal">|]</span>;
+</code></pre>
+<pre><code class="hljs css language-ocaml"><span class="hljs-comment">(* OCaml *)</span>
+<span class="hljs-keyword">type</span> t = 
+  | <span class="hljs-type">Any</span> : <span class="hljs-symbol">'a</span> -&gt; t
+[@@unboxed]
+
+<span class="hljs-keyword">let</span> <span class="hljs-built_in">array</span> = [|<span class="hljs-type">Any</span> <span class="hljs-number">3</span>; <span class="hljs-type">Any</span> <span class="hljs-string">"a"</span>|]
+</code></pre>
+<p>The examples above will translate to following JS:</p>
+<pre><code class="hljs css language-js"><span class="hljs-keyword">var</span> hi = [ <span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-string">"x"</span>];
+</code></pre>
+<p>As you can already tell, this feature will give us way better possibilities to do interop with polymorphic array representations in JavaScript (without losing any type safetiness!).</p>
+<p>As a more concrete use-case, this will give users the possibility to define types such as <code>int_or_string</code>.</p>
+<p><strong>Note:</strong> Even if this GADT <code>t</code> contains an ADT <code>Any</code>, it doesn't mean that it's the same as <code>any</code> in TypeScript. An <code>Any</code> value is constrained to a certain contract (<code>'a -&gt; t</code>), the array <code>[|Any(3), Any(&quot;a&quot;)|]</code> is inferred as a <code>array(t)</code>. When users try to use <code>Any</code> values, they need to unpack them, process the value inside, and repack them again. Pretty neat, right?</p>
+<h3><a class="anchor" aria-hidden="true" id="conclusion"></a><a href="#conclusion" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Conclusion</h3>
+<p>This release will introduce the <code>[@unbox]</code> annotation to give us better ways to do zero cost interop with variants, records, higher kinded polymorphic functions, and GADTs. Under the hood improvements will give us better performance as well!</p>
+<p>We are really excited about these changes, and we hope so are you. Please check out our newest <code>bs-platform@7.0.2-dev.1</code> release and let us know if you find any issues!</p>
+<p>A detailed list of changes is available here: <a href="https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#702">https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#702</a></p>
+<p>Happy hacking!</p>
+<h3><a class="anchor" aria-hidden="true" id="appendix"></a><a href="#appendix" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Appendix</h3>
+<p><strong>A sophiscated explanation on why <code>unboxed</code> lifts some OCaml's type system limitations</strong></p>
+<pre><code class="hljs css language-text">structural types (objects, classes, polymorphic variants, functions, etc) in OCaml are regular types, ocaml always do the expansion when dealing with such types, there is some limitations for such structural types, for example, non regular definitions are not allowed. Non structural types (variants, records) does not have such limitations, with `unboxed`, we can use non structural types as an indirection without changing its runtime representations.
+</code></pre>
 </span></div></article></div><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2019/11/18/whats-new-in-7">What&#x27;s new in release 7</a></h1><p class="post-meta">November 18, 2019</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p>The new major version of BuckleScript is coming -<a href="https://github.com/BuckleScript/bucklescript/pull/3968">7.0.0-dev.1</a> released for testing!</p>
 <p>We are maintaining <code>5.*</code> and <code>6.*</code> for OCaml <code>4.02</code> and <code>4.06</code> for a while, since this release we are moving forward and focusing on release 7.* (for OCaml 4.06).</p>
 <p>This is a major release comes with lots of nice features listed <a href="https://github.com/BuckleScript/bucklescript/blob/master/Changes.md">here</a>.</p>
@@ -710,12 +777,6 @@ end
 <p>The corresponding versions for <code>bs-platform</code> would be 5.(targeting 4.02 OCaml) and 6. (targeting 4.06).</p>
 <p><code>5.*</code> is recommended for production usage, bug fix is prioritized (tagged as <code>beta-4.02</code> for pre-rleases)</p>
 <p><code>6.*</code> is expected to have some issues but encouraged to experiment until we make an official announcement it is great for production. (tagged as <code>beta-4.06</code> for pre-releases)</p>
-</span></div></article></div><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2019/03/31/release-6-0">bs-platform release v6.0+dev</a></h1><p class="post-meta">March 31, 2019</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p><code>bs-platform@6.0.0-dev.1</code> is released, you can try it with <code>npm i -g bs-platform@next</code>!
-(if you have permission issues, try <code>sudo npm i --unsafe-perm -g bs-platform@next</code>)</p>
-<p>This is the first release that bucklescript compiler using OCaml 4.06.1 typechecker.</p>
-<p>It also means that most language features from OCaml will trickle down automatically.</p>
-<p>It is not yet ready for production but we recommend you to try it (esp, new OCaml features between 4.02.3 and 4.06.1),
-note we expect users to have some issues in experiment, feedback is welcome!</p>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-next" href="/blog/page2/">Next →</a></div></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script>window.foo = new Pjax({
           areas: [
             // try to use the first query.

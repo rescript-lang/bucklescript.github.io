@@ -18,6 +18,16 @@
         </author>
     </entry>
     <entry>
+        <title type="html"><![CDATA[BuckleScript holiday release!]]></title>
+        <id>https://bucklescript.github.io/blog/2019/12/20/release-7-02.html</id>
+        <link href="https://bucklescript.github.io/blog/2019/12/20/release-7-02.html">
+        </link>
+        <updated>2019-12-20T06:00:00Z</updated>
+        <summary type="html"><![CDATA[<p><a href="https://github.com/BuckleScript/bucklescript/pull/4062">bs-platform@7.0.2-dev.1</a> is released for testing!</p> <p>Try it via</p> <pre><code class="hljs"><span class="hljs-selector-tag">npm</span> <span class="hljs-selector-tag">i</span> <span class="hljs-selector-tag">-g</span> <span class="hljs-selector-tag">bs-platform</span>@<span class="hljs-keyword">7</span>.<span class="hljs-keyword">0</span>.<span class="hljs-keyword">2</span>-<span class="hljs-keyword">dev</span>.<span class="hljs-keyword">1</span> </code></pre> <p>This release contains several bug fixes for <a href="https://github.com/facebook/reason">refmt</a>(updated from 3.5.1 to 3.5.4). We also spent quite some time improving the compiler performance. For exampl...</p>]]></summary>
+        <author>
+        </author>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[What's new in release 7]]></title>
         <id>https://bucklescript.github.io/blog/2019/11/18/whats-new-in-7.html</id>
         <link href="https://bucklescript.github.io/blog/2019/11/18/whats-new-in-7.html">
