@@ -12,10 +12,10 @@ Following [the last post](https://bucklescript.github.io/blog/2019/12/20/release
 ```ocaml
 type t = 
     | Any : 'a  -> t 
-[@@@unboxed]    
-let a (v : a) = Any a 
-let b (v : b) = Any b 
-let c (v : c) = Any c
+[@@unboxed]    
+let a (v : a) = Any v
+let b (v : b) = Any v
+let c (v : c) = Any v
 ```
 
 Note due to the `unboxed` attribute, `Any a` shares the same runtime representation as `a`, however, we need to make sure that user can only construct values of type `a`, `b` , or `c` into type `t`, by making use of the module system, we can achieve this:
@@ -29,10 +29,10 @@ module A_b_c : sig
 end= struct 
 type t = 
     | Any : 'a  -> t 
-[@@@unboxed]    
-let a (v : a) = Any a 
-let b (v : b) = Any b 
-let c (v : c) = Any c
+[@@unboxed]    
+let a (v : a) = Any v
+let b (v : b) = Any v
+let c (v : c) = Any v
 end
 ```
 
@@ -97,4 +97,3 @@ Here we suppose `a` is of js class type `A`, we use `instanceof` to test it. Not
 
 
 To conclude: thanks to `unboxed` attributes and the module language, we introduce a systematic way to convert values from `union types` (untagged union types) to `algebraic data types`(tagged union types), such conversion relies on the user level knowledge and has to be reviewed carefully. For some cases where `classify` is not needed, it can be done in a complete type safe way.
-
