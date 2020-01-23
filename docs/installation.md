@@ -50,6 +50,12 @@ See this for details https://github.com/BuckleScript/bucklescript/blob/master/CO
 
 ## Troubleshooting
 
+### spawnSync ENOENT error
+
+If you get an error that looks like `Error: spawnSync /node_modules/bs-platform/lib/bsb.exe ENOENT` it might be caused if 
+you have npm postinstall scripts disabled. In that case, re-enable scripts with `npm config set ignore-scripts false` and re-install `bs-platform`
+
+
 ### Permission denied errors
 
 Under some conditions, the global installation of `bs-platform` will result in npm errors, typically indicating `Error: EACCES: permission denied`. Here are some methods for resolving this problem.
