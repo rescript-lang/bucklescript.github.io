@@ -61,7 +61,7 @@ end = struct
         | String of string
     let number (v : float) = Any v 
     let string (v : string) = Any v     
-    let classify (A v : t) : case = 
+    let classify (Any v : t) : case = 
         if Js.typeof v = "number" then Number (Obj.magic v  : float)
         else String (Obj.magic v : string)
 end
@@ -86,7 +86,7 @@ end = struct
         | A of a 
         | B of b 
     let a (v : a) = Any v 
-    let b = (v : b) = Any b 
+    let b = (v : b) = Any v
     let classify ( A v : t)  = 
         if [%raw{|function (a) { return  a instanceof globalThis.A}|}] v then A (Obj.magic v : a)
         else B (Obj.magic b)
