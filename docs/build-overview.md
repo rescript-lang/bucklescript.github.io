@@ -38,6 +38,11 @@ Add `-w` to keep the built-in watcher running. Any new file change will be picke
 
 **Note 2**: The watcher clears the screen with each rebuild. To suppress this, set the environment variable BS_WATCHNOCLEAR to some truthy value: `BS_WATCHNOCLEAR=1 npm start`
 
+**Note 3**: If you are developing across multiple devices, you may find the `-ws` configuration useful in order to have live-reloading across the network. Possible configurations are:
+- `bsb -make-world -w -ws _` (default)
+- `bsb -make-world -w -ws 0.0.0.0:9999`
+- `bsb -make-world -w -ws 5000`
+
 **To build only yourself**, use `bsb -make`.
 
 `bsb -help` to see all the available options.
