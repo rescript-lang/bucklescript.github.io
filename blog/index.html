@@ -112,7 +112,7 @@ code is highly efficient, more importantly, bindings to JS will be significantly
 <blockquote>
 <p>unboxed can be used on a type definition if the type is a single-field record or a concrete type with a single constructor that has a single argument. It tells the compiler to optimize the representation of the type by removing the block that represents the record or the constructor (i.e. a value of this type is physically equal to its argument). In the case of GADTs, an additional restriction applies: the argument must not be an existential variable, represented by an existential type variable, or an abstract type constructor applied to an existential type variable.</p>
 </blockquote>
-<p><strong>Note</strong>: The restrictions for GADTs does apply to OCaml's native compilation, but not to BuckleScript's JavaScript compilation, so we will get the maximum value with less confusing error messages!</p>
+<p><strong>Note</strong>: The beforementioned restriction about GADTs only applies to OCaml's native compiler, not to BuckleScript's JavaScript compilation. So we will get the maximum value with less confusing error messages!</p>
 <p>The exciting thing about this feature is that we will now have more ways of expressing our programs in our typical type safe records and variants without sacrificing on runtime performance (&quot;zero cost interop&quot;).</p>
 <p>The best way to understand this feature is by looking at the following examples:</p>
 <p><strong>Unboxed variants:</strong></p>
@@ -156,7 +156,7 @@ code is highly efficient, more importantly, bindings to JS will be significantly
 <span class="hljs-keyword">let</span> <span class="hljs-built_in">array</span> = [|<span class="hljs-type">Any</span> <span class="hljs-number">3</span>; <span class="hljs-type">Any</span> <span class="hljs-string">"a"</span>|]
 </code></pre>
 <p>The examples above will translate to following JS:</p>
-<pre><code class="hljs css language-js"><span class="hljs-keyword">var</span> array = [ <span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-string">"x"</span>];
+<pre><code class="hljs css language-js"><span class="hljs-keyword">var</span> array = [ <span class="hljs-number">3</span>, <span class="hljs-string">"a"</span>];
 </code></pre>
 <p>As you can already tell, this feature will give us way better possibilities to do interop with polymorphic array representations in JavaScript (without losing any type safetiness!).</p>
 <p>As a more concrete use-case, this will give users the possibility to define types such as <code>int_or_string</code>.</p>
@@ -168,8 +168,14 @@ code is highly efficient, more importantly, bindings to JS will be significantly
 <p>Happy hacking!</p>
 <h3><a class="anchor" aria-hidden="true" id="appendix"></a><a href="#appendix" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Appendix</h3>
 <p><strong>A sophiscated explanation on why <code>unboxed</code> lifts some OCaml's type system limitations</strong></p>
-<pre><code class="hljs css language-text">structural types (objects, classes, polymorphic variants, functions, etc) in OCaml are regular types, ocaml always do the expansion when dealing with such types, there is some limitations for such structural types, for example, non regular definitions are not allowed. Non structural types (variants, records) does not have such limitations, with `unboxed`, we can use non structural types as an indirection without changing its runtime representations.
-</code></pre>
+<blockquote>
+<p>structural types (objects, classes, polymorphic variants, functions, etc) in
+OCaml are regular types, ocaml always do the expansion when dealing with such
+types, there is some limitations for such structural types, for example, non
+regular definitions are not allowed. Non structural types (variants, records)
+does not have such limitations, with <code>unboxed</code>, we can use non structural
+types as an indirection without changing its runtime representations.</p>
+</blockquote>
 </span></div></article></div><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2019/11/18/whats-new-in-7">What&#x27;s new in release 7</a></h1><p class="post-meta">November 18, 2019</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p>The new major version of BuckleScript is coming -<a href="https://github.com/BuckleScript/bucklescript/pull/3968">7.0.0-dev.1</a> released for testing!</p>
 <p>We are maintaining <code>5.*</code> and <code>6.*</code> for OCaml <code>4.02</code> and <code>4.06</code> for a while, since this release we are moving forward and focusing on release 7.* (for OCaml 4.06).</p>
 <p>This is a major release comes with lots of nice features listed <a href="https://github.com/BuckleScript/bucklescript/blob/master/Changes.md">here</a>.</p>
