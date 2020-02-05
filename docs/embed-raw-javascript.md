@@ -42,24 +42,6 @@ let f = [%raw "function() {return 1}"]
 let f = [%raw "function() {return 1}"];
 ```
 
-You can also pass a function declaration with a string body in `raw`:
-
-```ocaml
-let f: (int -> int -> int) = [%raw fun a b -> "{return a + b}"]
-```
-
-```reason
-let f: (int, int) => int = [%raw (a, b) => "{return a + b}"];
-```
-
-Output:
-
-```js
-var f = function (a,b){{return a + b}};
-```
-
-If you _have_ to use `raw` in the first place, then prefer this format when you're passing a function. This allows the compiler to understand that it's a function, to see the number of arguments it has, to detect some side-effects and to generate better JS code. Also note that while the function's type annotation (`(int -> int -> int)` in the preceding OCaml example) is not strictly required, it gives the compiler a better chance to understand your raw JavaScript, and you may get a compiler warning without it.
-
 <!-- TODO: add explaination about extension syntax  -->
 <!-- TODO: add reason counter part -->
 

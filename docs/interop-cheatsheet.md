@@ -9,13 +9,11 @@ The next few sections will cover these in detail. Feel free to skip this one if 
 ```ocaml
 let add = [%raw "a + b"]
 [%%raw "var a = 1"]
-let myFunction = [%raw fun a b -> "return a + b"]
 ```
 
 ```reason
 let add = [%raw "a + b"];
 [%%raw "var a = 1"];
-let myFunction = [%raw (a, b) => "return a + b"];
 ```
 
 ## String Unicode & Interpolation
