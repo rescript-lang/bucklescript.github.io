@@ -95,15 +95,6 @@ let _ = Js.log (add 1 2)
 
 <span class="hljs-keyword">let</span> f = <span class="hljs-attribute">[%raw "function() {return 1}"]</span>;
 </code></pre>
-<p>You can also pass a function declaration with a string body in <code>raw</code>:</p>
-<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> f: (<span class="hljs-built_in">int</span> -&gt; <span class="hljs-built_in">int</span> -&gt; <span class="hljs-built_in">int</span>) = [%raw <span class="hljs-keyword">fun</span> a b -&gt; <span class="hljs-string">"{return a + b}"</span>]
-</code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> f: (int, int) =&gt; int = <span class="hljs-attribute">[%raw (a, b) =&gt; "{return a + b}"]</span>;
-</code></pre>
-<p>Output:</p>
-<pre><code class="hljs css language-js"><span class="hljs-keyword">var</span> f = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">a,b</span>)</span>{{<span class="hljs-keyword">return</span> a + b}};
-</code></pre>
-<p>If you <em>have</em> to use <code>raw</code> in the first place, then prefer this format when you're passing a function. This allows the compiler to understand that it's a function, to see the number of arguments it has, to detect some side-effects and to generate better JS code. Also note that while the function's type annotation (<code>(int -&gt; int -&gt; int)</code> in the preceding OCaml example) is not strictly required, it gives the compiler a better chance to understand your raw JavaScript, and you may get a compiler warning without it.</p>
 <!-- TODO: add explaination about extension syntax  -->
 <!-- TODO: add reason counter part -->
 <h2><a class="anchor" aria-hidden="true" id="debugger"></a><a href="#debugger" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Debugger</h2>
@@ -172,7 +163,7 @@ let _ = Js.log (add 1 2)
 </ul>
 <p>At the end, we get a fully safe, converted Reason BuckleScript file whose JS output is clean enough that we can confidently assert that no new bug has been introduced during the conversion process.</p>
 <p>We have a small guide on this iteration <a href="https://reasonml.github.io/docs/en/interop.html">here</a>. Feel free to peruse it later.</p>
-</span></div></article></div><div class="docLastUpdate"><em>Last updated on 2018-6-5</em></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/en/interop-cheatsheet"><span class="arrow-prev">← </span><span>Cheatsheet</span></a><a class="docs-next button" href="/docs/en/common-data-types"><span>Common Data Types</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#debugger">Debugger</a></li><li><a href="#detect-global-variables">Detect Global Variables</a></li><li><a href="#tips-amp-tricks">Tips &amp; Tricks</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script>window.foo = new Pjax({
+</span></div></article></div><div class="docLastUpdate"><em>Last updated on 2020-2-5</em></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/en/interop-cheatsheet"><span class="arrow-prev">← </span><span>Cheatsheet</span></a><a class="docs-next button" href="/docs/en/common-data-types"><span>Common Data Types</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#debugger">Debugger</a></li><li><a href="#detect-global-variables">Detect Global Variables</a></li><li><a href="#tips-amp-tricks">Tips &amp; Tricks</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script>window.foo = new Pjax({
           areas: [
             // try to use the first query.
             '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
