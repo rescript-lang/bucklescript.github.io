@@ -10,7 +10,7 @@
             languagesDropDown.className = "hide";
           }
         });
-      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/bucklescript/bucklescript" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul class=""><li class="navListItem"><a class="navItem" href="/blog/2019/12/27/whats-new-in-7-cont">What&#x27;s new in release 7 (cont)</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/12/20/release-7-02">BuckleScript holiday release!</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/11/18/whats-new-in-7">What&#x27;s new in release 7</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/10/16/another-encoding">Another way of encoding type identity for BuckleScript libraries without using big functor</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/09/23/release-5-20-0">Release 5.2.0/6.2.0</a></li></ul></div></div></section></div><script>
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/bucklescript/bucklescript" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul class=""><li class="navListItem"><a class="navItem" href="/blog/2020/02/04/release-7-1-0">bs-platform release 7.1.0</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/12/27/whats-new-in-7-cont">What&#x27;s new in release 7 (cont)</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/12/20/release-7-02">BuckleScript holiday release!</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/11/18/whats-new-in-7">What&#x27;s new in release 7</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/10/16/another-encoding">Another way of encoding type identity for BuckleScript libraries without using big functor</a></li></ul></div></div></section></div><script>
             var coll = document.getElementsByClassName('collapsible');
             var checkActiveCategory = true;
             for (var i = 0; i < coll.length; i++) {
@@ -66,7 +66,65 @@
                 };
               }
             });
-        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="posts"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2019/12/27/whats-new-in-7-cont">What&#x27;s new in release 7 (cont)</a></h1><p class="post-meta">December 27, 2019</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p>[EDIT pre Dec. 27th: yes, we know the dateline is wrong :-) the actual publish date of this post is November 28th, but we're not changing the dateline because that would break the published URL of the post.]</p>
+        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="posts"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2020/02/04/release-7-1-0">bs-platform release 7.1.0</a></h1><p class="post-meta">February 4, 2020</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p><code>bs-platform@7.1.0</code> is a major release, you can try it with <code>npm i -g bs-platform</code>!
+(if you have permission issues, try <code>sudo npm i --unsafe-perm -g bs-platform</code>)</p>
+<p>It was called 7.0.2 but bumped into 7.1.0 due to a soundness fix (a breaking change) as below:</p>
+<p>Previously, the empty array <code>[||]</code> is polymorphic, this happens to be true, since in native the array is not resizable, so that user cannot do anything with it. But in JS, we introduced a binding <code>push</code> which can change the size of an array dynamically. In this case, empty array cannot be polymorphic any more.</p>
+<p>Removing <code>push</code> is possible but it makes array in JS context less useful. To fix this issue while keeping <code>push</code>, we make <code>[||]</code> weakly typed so that its type inference is deferred until the first time it is used. If it is never used across the module, it has to be annotated with a concrete type, otherwise, the type checker will complain.</p>
+<p>Several highlighted features are listed as below:</p>
+<h2><a class="anchor" aria-hidden="true" id="raw-javascript-parsing-checking"></a><a href="#raw-javascript-parsing-checking" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Raw JavaScript parsing/checking</h2>
+<p>BuckleScript allows user to embed raw JavaScript code as an escape hatch, it used to treat such piece of code as a black box.</p>
+<p>In this release we vendor a JavaScript parser (thanks to <a href="https://github.com/facebook/flow">flowtype</a>) for syntax checking and simple semantics analysis over <code>raw</code>, it is on-going work, but is already useful now.</p>
+<p>First, we report syntax errors properly for <code>raw</code> now.</p>
+<p>Second, for simple semantics analysis we can tell whether the code inside raw is a function or not and the arity of raw function:</p>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> f = [%raw <span class="hljs-string">"function(x){return x}"</span>]
+</code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> f = <span class="hljs-attribute">[%raw "function(x){return x}"]</span>;
+</code></pre>
+<p>Now we know <code>f</code> is a function declaration with no side effect, it can be removed by the dead code analyser if not used. We also know its arity so that when it's called we know whether it's fully applied or not.</p>
+<p>Because of such info can be derived from <code>raw</code> directly, the special <code>raw</code> form we introduced as below is no longer needed:</p>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> f = <span class="hljs-keyword">fun</span>%raw x -&gt; {|x|}
+</code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> f = <span class="hljs-attribute">[%raw x =&gt; {|x|}]</span>;
+</code></pre>
+<p>To make FFI simpler, the special form will be discouraged.</p>
+<p>We also employ such knowledge on JS literals, regex checking, we will exploit more in this direction.</p>
+<h2><a class="anchor" aria-hidden="true" id="unboxed-types"></a><a href="#unboxed-types" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>unboxed types</h2>
+<p>One major feature introduced in this release is <strong>unboxed types</strong> which is blogged <a href="https://bucklescript.github.io/blog/2019/12/20/release-7-02">here</a>.</p>
+<h2><a class="anchor" aria-hidden="true" id="uniform-warning-system"></a><a href="#uniform-warning-system" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>uniform warning system</h2>
+<p>Previously warnings are reported in two ways:
+the OCaml compiler style : <code>-w +10</code> ;
+ad-hoc warnings introduced by flags <code>-bs-warn-unimplemented-external</code>.</p>
+<p>This unneeded complexity is due to the fact OCaml's own warning system can only handle warnings in the type checking pass so that warnings in parsing, code generation are not handled properly.</p>
+<p>In this release, we make such integration more reliable so that warnings after parsing are handled in the same way, for example, the warning attribute below can also turn off  BuckleScript warnings now.</p>
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@warning "-101"]</span>; <span class="hljs-operator">/</span><span class="hljs-operator">/</span> file<span class="hljs-operator">-</span>level config
+</code></pre>
+<p>Based on such effort, we move all BuckleScript warnings into OCaml style warnings to reduce user level complexity.</p>
+<p>The introduced warnings are listed here (via <code>bsc -warn-help</code>):</p>
+<pre><code class="hljs"><span class="hljs-symbol">101 </span>BuckleScript warning: Unused bs attributes
+<span class="hljs-symbol">102 </span>BuckleScript warning: polymorphic comparison introduced (maybe unsafe)
+<span class="hljs-symbol">103 </span>BuckleScript warning: about fragile FFI definitions
+<span class="hljs-symbol">104 </span>BuckleScript warning: bs.deriving warning with customized message 
+<span class="hljs-symbol">105 </span>BuckleScript warning: the external <span class="hljs-keyword">name</span> is inferred from <span class="hljs-keyword">val</span> <span class="hljs-keyword">name</span> is unsafe from refactoring when changing value <span class="hljs-keyword">name</span>
+<span class="hljs-symbol">106 </span>BuckleScript warning: Unimplemented primitive used:
+<span class="hljs-symbol">107 </span>BuckleScript warning: Integer literal exceeds the range of representable integers of type <span class="hljs-keyword">int</span>
+<span class="hljs-symbol">108 </span>BuckleScript warning: Uninterpreted delimiters (<span class="hljs-keyword">for</span> unicode)
+</code></pre>
+<p>We also recommend users to turn on warnerror and only disable warnings for some specific files.</p>
+<h2><a class="anchor" aria-hidden="true" id="reason-parser-upgrade"></a><a href="#reason-parser-upgrade" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Reason parser upgrade</h2>
+<p>In this release, we upgrade <code>refmt</code>(the reason parser) to 3.6.0, a notable feature is that the external name can be omitted now:</p>
+<pre><code class="hljs"><span class="hljs-attribute">[@bs.obj]</span>
+<span class="hljs-keyword">external</span> f : (~x:int)=&gt;_; 
+<span class="hljs-module-identifier">Js</span>.log(f(~x=<span class="hljs-number">2</span>));
+</code></pre>
+<p>It produce such JS code as below:</p>
+<pre><code class="hljs css language-js"><span class="hljs-built_in">console</span>.log({
+      <span class="hljs-attr">x</span>: <span class="hljs-number">2</span>
+    });
+
+</code></pre>
+<p>A full list of changes are available here: <a href="https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#702">https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#702</a></p>
+</span></div></article></div><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2019/12/27/whats-new-in-7-cont">What&#x27;s new in release 7 (cont)</a></h1><p class="post-meta">December 27, 2019</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p>[EDIT pre Dec. 27th: yes, we know the dateline is wrong :-) the actual publish date of this post is November 28th, but we're not changing the dateline because that would break the published URL of the post.]</p>
 <p>The second dev release <a href="https://github.com/BuckleScript/bucklescript/pull/3995">7.0.0-dev.2</a> is released for testing!</p>
 <p>As we mentioned in the <a href="https://bucklescript.github.io/blog/2019/11/18/whats-new-in-7">previous post</a>, we compile records into js objects in this release. This makes the generated code more idiomatic, however, this is not enough to write idiomatic bindings to manipulate arbitrary js objects, since the key of js objects can be arbitrary which is not expressible in ReasonML syntax, so we support user level customization now, which makes idiomatic bindings really easy.</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> entry = {
@@ -759,30 +817,6 @@ setDate(date, <span class="hljs-number">3</span>);
 </code></pre>
 <p>The benefit of this change is that it help reduced the prebuilt binary size significantly and it also help shave 5~10ms per file compilation.</p>
 <p>Another minor change we added, is that we introduced an env variable <code>BS_VSCODE</code> to help error messages more adapted to VsCode, see <a href="https://bucklescript.github.io/docs/en/build-configuration#bs-vscode-error-output-adapted-for-vscode">here</a> for more details.</p>
-</span></div></article></div><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2019/04/09/release-schedule">Release 5.0.1</a></h1><p class="post-meta">April 9, 2019</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p><code>bs-platform@5.0.1</code> preview is available, try <code>npm i -g bs-platform@beta-4.02</code>! A detailed a list of changes is available <a href="https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#501">here</a></p>
-<p>Some notable new features in this release:</p>
-<ul>
-<li><p>react jsx v3 is available which means zero-cost for react-bindings (@rickyvetter will talk about it in a separate post)</p></li>
-<li><p>bs.inline for library authors. Our compilers have a pretty good inlining heuristics by default, in this release, we allow some user input for some fine-tuned inlining behavior. Read this (<a href="https://github.com/BuckleScript/bucklescript/issues/3472">https://github.com/BuckleScript/bucklescript/issues/3472</a>) for more use cases.
-A typical usage is as below</p>
-<pre><code class="hljs"><span class="hljs-keyword">module</span> <span class="hljs-module-identifier">Platform</span> = struct
-    <span class="hljs-keyword">let</span> ios = <span class="hljs-string">"ios"</span> <span class="hljs-attribute">[@@bs.inline]</span>
-end    
-</code></pre>
-<p>If user wants to write an interface, it has to carry the payload though:</p>
-<pre><code class="hljs"><span class="hljs-keyword">module</span> <span class="hljs-module-identifier">Platform</span> : sig
-    <span class="hljs-keyword">val</span> ios : string <span class="hljs-attribute">[@@bs.inline "ios"]</span>
-end = struct
-    <span class="hljs-keyword">let</span> ios = <span class="hljs-string">"ios"</span> <span class="hljs-attribute">[@@bs.inline]</span>
-end    
-</code></pre>
-<p>It is a bit verbose for library authors, but this should be transparent to library users.</p></li>
-</ul>
-<p>We are also actively working on a new offical release targeted to OCaml 4.06 for the forthcoming <a href="https://www.reason-conf.com/">reason-conf</a>, below is proposed release schedule:</p>
-<p>We are going to support OCaml 4.06 and 4.02 at the same time for a while.</p>
-<p>The corresponding versions for <code>bs-platform</code> would be 5.(targeting 4.02 OCaml) and 6. (targeting 4.06).</p>
-<p><code>5.*</code> is recommended for production usage, bug fix is prioritized (tagged as <code>beta-4.02</code> for pre-rleases)</p>
-<p><code>6.*</code> is expected to have some issues but encouraged to experiment until we make an official announcement it is great for production. (tagged as <code>beta-4.06</code> for pre-releases)</p>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-next" href="/blog/page2/">Next →</a></div></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script>window.foo = new Pjax({
           areas: [
             // try to use the first query.
