@@ -17,7 +17,7 @@
             <link>https://bucklescript.github.io/blog/2020/02/04/release-7-1-0.html</link>
             <guid>https://bucklescript.github.io/blog/2020/02/04/release-7-1-0.html</guid>
             <pubDate>Tue, 04 Feb 2020 06:00:00 GMT</pubDate>
-            <description><![CDATA[<p><code>bs-platform@7.1.0</code> is a major release, you can try it with <code>npm i -g bs-platform</code>! (if you have permission issues, try <code>sudo npm i --unsafe-perm -g bs-platform</code>)</p> <p>It was called 7.0.2 but bumped into 7.1.0 due to a soundness fix (a breaking change) as below...</p>]]></description>
+            <description><![CDATA[<p><code>bs-platform@7.1.0</code> is a major release. You can try it with <code>npm i -g bs-platform</code>! (If you have permission issues, try <code>sudo npm i --unsafe-perm -g bs-platform</code>)</p> <p>It was called 7.0.2 but bumped into 7.1.0 due to a soundness fix (a breaking change) as follo...</p>]]></description>
         </item>
         <item>
             <title><![CDATA[What's new in release 7 (cont)]]></title>
