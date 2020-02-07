@@ -7,7 +7,7 @@ title: Union types in BuckleScript
 describes a value that can be one of several types. In JS, it is common to use the vertical bar (|) to separate each type, so `number | string | boolean`  is the type of a value that can be a number, a string, or a boolean.
 
 
-Following [the last post](https://bucklescript.github.io/blog/2019/12/20/release-7-02) since `7.0.2-dev.1` using the unboxed attribute, we can introduce such types as below:
+Following [the last post](https://bucklescript.github.io/blog/2019/12/20/release-7-02) since `7.1.0` using the unboxed attribute, we can introduce such types as below:
 
 ```ocaml
 type t = 
