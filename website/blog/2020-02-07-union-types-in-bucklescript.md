@@ -4,10 +4,10 @@ title: Union types in BuckleScript
 
 [Union types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#union-types)
 
-describes a value that can be one of several types. In JS, it is common to use the vertical bar (|) to separate each type, so `number | string | boolean`  is the type of a value that can be a number, a string, or a boolean.
+Union types describe a value that can be one of several types. In JS, it is common to use the vertical bar (|) to separate each type, so `number | string | boolean`  is the type of a value that can be a number, a string, or a boolean.
 
 
-Following [the last post](https://bucklescript.github.io/blog/2019/12/20/release-7-02) since `7.1.0` using the unboxed attribute, we can introduce such types as below:
+Following [the last post](https://bucklescript.github.io/blog/2019/12/20/release-7-02) since the introduction of unboxed attributes in `7.1.0`, we can create such types as follows:
 
 ```ocaml
 type t = 
@@ -25,7 +25,7 @@ let a = (v: a) => Any(v);
 let b = (v: b) => Any(v);
 let c = (v: c) => Any(v);
 ```
-Note due to the `unboxed` attribute, `Any a` shares the same runtime representation as `a`, however, we need to make sure that user can only construct values of type `a`, `b` , or `c` into type `t`, by making use of the module system, we can achieve this:
+Note: due to the `unboxed` attribute, `Any a` shares the same runtime representation as `a`; however, we need to make sure that user can only construct values of type `a`, `b` , or `c` into type `t`. By making use of the module system, we can achieve this:
 
 ```ocaml
 module A_b_c : sig 
@@ -59,7 +59,7 @@ module A_b_c: {
 };
 ```
 <!-- Union types are useful for modeling situations when values can overlap in the types they can take on.  -->
-What happens when we need to know specifically whether we have a value of type `a`? This is a case by case issue, it depends on whether in the runtime encoding of `a`, `b` or `c` has some intersections. For some primitive types, it is easy enough to use `Js.typeof` to tell the difference between, e.g, `number` and `string`. 
+What happens when we need to know specifically whether we have a value of type `a`? This is a case by case issue; it depends on whether there are some intersections in the runtime encoding of `a`, `b` or `c`. For some primitive types, it is easy enough to use `Js.typeof` to tell the difference between, e.g, `number` and `string`. 
 
 Like [type guards in typescript](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-guards-and-differentiating-types), we have to trust the user knowledge to differentiate between union types. However, such user level knowledge is isolated in a single module so that we can reason about its correctness locally.
 
@@ -114,7 +114,7 @@ module Number_or_string: {
     };
 };
 ```
-Note here we use `Obj.magic` to do an unsafe type cast which relies on `Js.typeof`, in practice, people may use `instanceof`, below is an imaginative example:
+Note that here we use `Obj.magic` to do an unsafe type cast which relies on `Js.typeof`. In practice, people may use `instanceof`; the following is an imaginary example:
 
 ```ocaml
 module A_or_b : sig 
@@ -165,7 +165,7 @@ module A_or_b: {
     };
 };
 ```
-Here we suppose `a` is of js class type `A`, we use `instanceof` to test it. Note we use some `unsafe` code locally, but as long as such code is carefully reviewed, it has  a safe boundary in the module level.
+Here we suppose `a` is of JS class type `A`, and we use `instanceof` to test it. Note we use some `unsafe` code locally, but as long as such code is carefully reviewed, it has a safe boundary at the module level.
 
 
-To conclude: thanks to `unboxed` attributes and the module language, we introduce a systematic way to convert values from `union types` (untagged union types) to `algebraic data types`(tagged union types), such conversion relies on the user level knowledge and has to be reviewed carefully. For some cases where `classify` is not needed, it can be done in a complete type safe way.
+To conclude: thanks to `unboxed` attributes and the module language, we introduce a systematic way to convert values from `union types` (untagged union types) to `algebraic data types` (tagged union types). This sort of conversion relies on user level knowledge and has to be reviewed carefully. For some cases where `classify` is not needed, it can be done in a completely type safe way.
