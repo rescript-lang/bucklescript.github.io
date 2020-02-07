@@ -13,7 +13,7 @@
         <link href="https://bucklescript.github.io/blog/2020/02/07/union-types-in-bucklescript.html">
         </link>
         <updated>2020-02-07T06:00:00Z</updated>
-        <summary type="html"><![CDATA[<p><a href="https://www.typescriptlang.org/docs/handbook/advanced-types.html#union-types">Union types</a></p> <p>describes a value that can be one of several types. In JS, it is common to use the vertical bar (|) to separate each type, so <code>number | string | boolean</code> is the type of a value that can be a number, a string, or a boolean.</p> <p>Following <a href="https://bucklescript.github.io/blog/2019/12/20/release-7-02">the las...</a></p>]]></summary>
+        <summary type="html"><![CDATA[<p><a href="https://www.typescriptlang.org/docs/handbook/advanced-types.html#union-types">Union types</a></p> <p>Union types describe a value that can be one of several types. In JS, it is common to use the vertical bar (|) to separate each type, so <code>number | string | boolean</code> is the type of a value that can be a number, a string, or a boolean.</p> <p>Follow...</p>]]></summary>
         <author>
         </author>
     </entry>
