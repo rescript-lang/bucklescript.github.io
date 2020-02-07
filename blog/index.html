@@ -97,8 +97,7 @@
 <li>The OCaml compiler style: <code>-w +10</code></li>
 <li>Ad-hoc warnings introduced by flags <code>-bs-warn-unimplemented-external</code></li>
 </ul>
-<p>This unneeded complexity is due to the fact OCaml's own warning system can only handle warnings in the type checking pass, so warnings in parsing and code generation are not handled properly.</p>
-<p>In this release, we make such integration more reliable so that warnings after parsing are handled in the same way. For example, the warning attribute below can now also turn off BuckleScript warnings.</p>
+<p>In this release, we  make such integration so that BuckleScript warnings are handled in the same way as OCaml's own warnings, for example, the warning attribute below can also turn off  BuckleScript warnings now.</p>
 <pre><code class="hljs css language-reason"><span class="hljs-attribute">[@warning "-101"]</span>; <span class="hljs-operator">/</span><span class="hljs-operator">/</span> file<span class="hljs-operator">-</span>level config
 </code></pre>
 <p>Based on this effort, we have changed all BuckleScript warnings into OCaml style warnings to reduce user-level complexity.</p>
