@@ -4,7 +4,7 @@
         <title>BuckleScript Blog</title>
         <link>https://bucklescript.github.io/blog</link>
         <description>The best place to stay up-to-date with the latest BuckleScript news and events.</description>
-        <lastBuildDate>Tue, 04 Feb 2020 06:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Fri, 07 Feb 2020 06:00:00 GMT</lastBuildDate>
         <docs>http://blogs.law.harvard.edu/tech/rss</docs>
         <generator>Feed for Node.js</generator>
         <image>
@@ -12,6 +12,13 @@
             <url>https://bucklescript.github.io/img/logos/bucklescript.svg</url>
             <link>https://bucklescript.github.io/blog</link>
         </image>
+        <item>
+            <title><![CDATA[Union types in BuckleScript]]></title>
+            <link>https://bucklescript.github.io/blog/2020/02/07/union-types-in-bucklescript.html</link>
+            <guid>https://bucklescript.github.io/blog/2020/02/07/union-types-in-bucklescript.html</guid>
+            <pubDate>Fri, 07 Feb 2020 06:00:00 GMT</pubDate>
+            <description><![CDATA[<p><a href="https://www.typescriptlang.org/docs/handbook/advanced-types.html#union-types">Union types</a></p> <p>describes a value that can be one of several types. In JS, it is common to use the vertical bar (|) to separate each type, so <code>number | string | boolean</code> is the type of a value that can be a number, a string, or a boolean.</p> <p>Following <a href="https://bucklescript.github.io/blog/2019/12/20/release-7-02">the las...</a></p>]]></description>
+        </item>
         <item>
             <title><![CDATA[bs-platform release 7.1.0]]></title>
             <link>https://bucklescript.github.io/blog/2020/02/04/release-7-1-0.html</link>

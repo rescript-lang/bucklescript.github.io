@@ -1,0 +1,252 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Union types in BuckleScript · BuckleScript</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="[Union types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#union-types)"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Union types in BuckleScript · BuckleScript"/><meta property="og:type" content="website"/><meta property="og:url" content="https://bucklescript.github.io/blog/2020/02/07/union-types-in-bucklescript"/><meta property="og:description" content="[Union types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#union-types)"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/logos/bucklescript.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://bucklescript.github.io/blog/atom.xml" title="BuckleScript Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://bucklescript.github.io/blog/feed.xml" title="BuckleScript Blog RSS Feed"/><script type="text/javascript" src="/js/toggleSyntaxButton.js"></script><script type="text/javascript" src="/js/pjax-api.min.js"></script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/logos/bucklescript.svg" alt="BuckleScript"/><h2 class="headerTitleWithLogo">BuckleScript</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/en/installation" target="_self">Docs</a></li><li class=""><a href="/docs/en/playground" target="_self">Try</a></li><li class=""><a href="/docs/en/stdlib-overview" target="_self">API</a></li><li class=""><a href="/docs/en/community" target="_self">Community</a></li><li class="siteNavGroupActive"><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja">日本語</a></li><li><a href="/es-ES">Español</a></li><li><a href="/fr">Français</a></li><li><a href="/ko">한국어</a></li><li><a href="/pt-BR">Português (Brasil)</a></li><li><a href="/ru">Русский</a></li><li><a href="/zh-CN">中文</a></li><li><a href="/zh-TW">繁體中文</a></li><li><a href="https://crowdin.com/project/bucklescript" target="_blank" rel="noreferrer noopener">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/bucklescript/bucklescript" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul class=""><li class="navListItem navListItemActive"><a class="navItem" href="/blog/2020/02/07/union-types-in-bucklescript">Union types in BuckleScript</a></li><li class="navListItem"><a class="navItem" href="/blog/2020/02/04/release-7-1-0">bs-platform release 7.1.0</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/12/27/whats-new-in-7-cont">What&#x27;s new in release 7 (cont)</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/12/20/release-7-02">BuckleScript holiday release!</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/11/18/whats-new-in-7">What&#x27;s new in release 7</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="lonePost"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2020/02/07/union-types-in-bucklescript">Union types in BuckleScript</a></h1><p class="post-meta">February 7, 2020</p><div class="authorBlock"></div></header><div><span><p><a href="https://www.typescriptlang.org/docs/handbook/advanced-types.html#union-types">Union types</a></p>
+<p>describes a value that can be one of several types. In JS, it is common to use the vertical bar (|) to separate each type, so <code>number | string | boolean</code>  is the type of a value that can be a number, a string, or a boolean.</p>
+<p>Following <a href="https://bucklescript.github.io/blog/2019/12/20/release-7-02">the last post</a> since <code>7.1.0</code> using the unboxed attribute, we can introduce such types as below:</p>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">type</span> t = 
+    | <span class="hljs-type">Any</span> : <span class="hljs-symbol">'a</span>  -&gt; t 
+[@@unboxed]    
+<span class="hljs-keyword">let</span> a (v : a) = <span class="hljs-type">Any</span> v
+<span class="hljs-keyword">let</span> b (v : b) = <span class="hljs-type">Any</span> v
+<span class="hljs-keyword">let</span> c (v : c) = <span class="hljs-type">Any</span> v
+</code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@unboxed]</span>
+<span class="hljs-keyword">type</span> t =
+  | <span class="hljs-constructor">Any</span>('a): t;
+<span class="hljs-keyword">let</span> a = (v: a) =&gt; <span class="hljs-constructor">Any</span>(v);
+<span class="hljs-keyword">let</span> b = (v: b) =&gt; <span class="hljs-constructor">Any</span>(v);
+<span class="hljs-keyword">let</span> c = (v: c) =&gt; <span class="hljs-constructor">Any</span>(v);
+</code></pre>
+<p>Note due to the <code>unboxed</code> attribute, <code>Any a</code> shares the same runtime representation as <code>a</code>, however, we need to make sure that user can only construct values of type <code>a</code>, <code>b</code> , or <code>c</code> into type <code>t</code>, by making use of the module system, we can achieve this:</p>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">module</span> <span class="hljs-type">A_b_c</span> : <span class="hljs-keyword">sig</span> 
+  <span class="hljs-keyword">type</span> t 
+  <span class="hljs-keyword">val</span> a : a -&gt; t 
+  <span class="hljs-keyword">val</span> b : b -&gt; t 
+  <span class="hljs-keyword">val</span> c : c -&gt; t   
+<span class="hljs-keyword">end</span>= <span class="hljs-keyword">struct</span> 
+<span class="hljs-keyword">type</span> t = 
+    | <span class="hljs-type">Any</span> : <span class="hljs-symbol">'a</span>  -&gt; t 
+[@@unboxed]    
+<span class="hljs-keyword">let</span> a (v : a) = <span class="hljs-type">Any</span> v
+<span class="hljs-keyword">let</span> b (v : b) = <span class="hljs-type">Any</span> v
+<span class="hljs-keyword">let</span> c (v : c) = <span class="hljs-type">Any</span> v
+<span class="hljs-keyword">end</span>
+</code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">module</span> <span class="hljs-module-identifier">A_b_c</span>: {
+  <span class="hljs-keyword">type</span> t;
+  <span class="hljs-keyword">let</span> a: a =&gt; t;
+  <span class="hljs-keyword">let</span> b: b =&gt; t;
+  <span class="hljs-keyword">let</span> c: c =&gt; t;
+} = {
+  <span class="hljs-attribute">[@unboxed]</span>
+  <span class="hljs-keyword">type</span> t =
+    | <span class="hljs-constructor">Any</span>('a): t;  
+  <span class="hljs-keyword">let</span> a = (v: a) =&gt; <span class="hljs-constructor">Any</span>(v);
+  <span class="hljs-keyword">let</span> b = (v: b) =&gt; <span class="hljs-constructor">Any</span>(v);
+  <span class="hljs-keyword">let</span> c = (v: c) =&gt; <span class="hljs-constructor">Any</span>(v);
+};
+</code></pre>
+<!-- Union types are useful for modeling situations when values can overlap in the types they can take on.  -->
+What happens when we need to know specifically whether we have a value of type `a`? This is a case by case issue, it depends on whether in the runtime encoding of `a`, `b` or `c` has some intersections. For some primitive types, it is easy enough to use `Js.typeof` to tell the difference between, e.g, `number` and `string`. 
+<p>Like <a href="https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-guards-and-differentiating-types">type guards in typescript</a>, we have to trust the user knowledge to differentiate between union types. However, such user level knowledge is isolated in a single module so that we can reason about its correctness locally.</p>
+<p>Let's have a simple example, <code>number_or_string</code> first:</p>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">module</span> <span class="hljs-type">Number_or_string</span> : <span class="hljs-keyword">sig</span> 
+    <span class="hljs-keyword">type</span> t 
+    <span class="hljs-keyword">type</span> case = 
+        | <span class="hljs-type">Number</span> <span class="hljs-keyword">of</span> <span class="hljs-built_in">float</span> 
+        | <span class="hljs-type">String</span> <span class="hljs-keyword">of</span> <span class="hljs-built_in">string</span>
+    <span class="hljs-keyword">val</span> number : <span class="hljs-built_in">float</span> -&gt; t 
+    <span class="hljs-keyword">val</span> <span class="hljs-built_in">string</span> : <span class="hljs-built_in">string</span> -&gt; t 
+    <span class="hljs-keyword">val</span> classify : t -&gt; case             
+<span class="hljs-keyword">end</span> = <span class="hljs-keyword">struct</span> 
+    <span class="hljs-keyword">type</span> t = 
+        | <span class="hljs-type">Any</span> : <span class="hljs-symbol">'a</span> -&gt; t 
+    [@@unboxed]     
+    <span class="hljs-keyword">type</span> case = 
+        | <span class="hljs-type">Number</span> <span class="hljs-keyword">of</span> <span class="hljs-built_in">float</span> 
+        | <span class="hljs-type">String</span> <span class="hljs-keyword">of</span> <span class="hljs-built_in">string</span>
+    <span class="hljs-keyword">let</span> number (v : <span class="hljs-built_in">float</span>) = <span class="hljs-type">Any</span> v 
+    <span class="hljs-keyword">let</span> <span class="hljs-built_in">string</span> (v : <span class="hljs-built_in">string</span>) = <span class="hljs-type">Any</span> v     
+    <span class="hljs-keyword">let</span> classify (<span class="hljs-type">Any</span> v : t) : case = 
+        <span class="hljs-keyword">if</span> <span class="hljs-type">Js</span>.typeof v = <span class="hljs-string">"number"</span> <span class="hljs-keyword">then</span> <span class="hljs-type">Number</span> (<span class="hljs-type">Obj</span>.magic v  : <span class="hljs-built_in">float</span>)
+        <span class="hljs-keyword">else</span> <span class="hljs-type">String</span> (<span class="hljs-type">Obj</span>.magic v : <span class="hljs-built_in">string</span>)
+<span class="hljs-keyword">end</span>
+</code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">module</span> <span class="hljs-module-identifier">Number_or_string</span>: {
+  <span class="hljs-keyword">type</span> t;
+  <span class="hljs-keyword">type</span> case =
+    | <span class="hljs-constructor">Number</span>(float)
+    | <span class="hljs-constructor">String</span>(string);
+  <span class="hljs-keyword">let</span> number: float =&gt; t;
+  <span class="hljs-keyword">let</span> string: string =&gt; t;
+  <span class="hljs-keyword">let</span> classify: t =&gt; case;
+} = {
+  <span class="hljs-attribute">[@unboxed]</span>
+  <span class="hljs-keyword">type</span> t =
+    | <span class="hljs-constructor">Any</span>('a): t;
+  <span class="hljs-keyword">type</span> case =
+    | <span class="hljs-constructor">Number</span>(float)
+    | <span class="hljs-constructor">String</span>(string);
+  <span class="hljs-keyword">let</span> number = (v: float) =&gt; <span class="hljs-constructor">Any</span>(v);
+  <span class="hljs-keyword">let</span> string = (v: string) =&gt; <span class="hljs-constructor">Any</span>(v);
+  <span class="hljs-keyword">let</span> classify = (<span class="hljs-constructor">Any</span>(v): t): case =&gt;
+    <span class="hljs-keyword">if</span> (<span class="hljs-module-identifier">Js</span>.typeof(v) <span class="hljs-operator">==</span> <span class="hljs-string">"number"</span>) {
+      <span class="hljs-constructor">Number</span>(<span class="hljs-module-identifier">Obj</span>.magic(v): float);
+    } <span class="hljs-keyword">else</span> {
+      <span class="hljs-constructor">String</span>(<span class="hljs-module-identifier">Obj</span>.magic(v): string);
+    };
+};
+</code></pre>
+<p>Note here we use <code>Obj.magic</code> to do an unsafe type cast which relies on <code>Js.typeof</code>, in practice, people may use <code>instanceof</code>, below is an imaginative example:</p>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">module</span> <span class="hljs-type">A_or_b</span> : <span class="hljs-keyword">sig</span> 
+    <span class="hljs-keyword">type</span> t 
+    <span class="hljs-keyword">val</span> a : a -&gt; t 
+    <span class="hljs-keyword">val</span> b : b -&gt; t 
+    <span class="hljs-keyword">type</span> case = 
+        | <span class="hljs-type">A</span> <span class="hljs-keyword">of</span> a 
+        | <span class="hljs-type">B</span> <span class="hljs-keyword">of</span> b 
+    <span class="hljs-keyword">val</span> classify : t -&gt; case
+<span class="hljs-keyword">end</span> = <span class="hljs-keyword">struct</span>
+    <span class="hljs-keyword">type</span> t = 
+        | <span class="hljs-type">Any</span> : <span class="hljs-symbol">'a</span> -&gt; t
+    [@@unboxed]   
+    <span class="hljs-keyword">type</span> case = 
+        | <span class="hljs-type">A</span> <span class="hljs-keyword">of</span> a 
+        | <span class="hljs-type">B</span> <span class="hljs-keyword">of</span> b 
+    <span class="hljs-keyword">let</span> a (v : a) = <span class="hljs-type">Any</span> v 
+    <span class="hljs-keyword">let</span> b = (v : b) = <span class="hljs-type">Any</span> v
+    <span class="hljs-keyword">let</span> classify ( <span class="hljs-type">Any</span> v : t)  = 
+        <span class="hljs-keyword">if</span> [%raw{|<span class="hljs-keyword">function</span> (a) { return  a instanceof globalThis.<span class="hljs-type">A</span>}|}] v <span class="hljs-keyword">then</span> <span class="hljs-type">A</span> (<span class="hljs-type">Obj</span>.magic v : a)
+        <span class="hljs-keyword">else</span> <span class="hljs-type">B</span> (<span class="hljs-type">Obj</span>.magic b)
+<span class="hljs-keyword">end</span>
+</code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">module</span> <span class="hljs-module-identifier">A_or_b</span>: {
+  <span class="hljs-keyword">type</span> t;
+  <span class="hljs-keyword">let</span> a: a =&gt; t;
+  <span class="hljs-keyword">let</span> b: b =&gt; t;
+  <span class="hljs-keyword">type</span> case =
+    | <span class="hljs-constructor">A</span>(a)
+    | <span class="hljs-constructor">B</span>(b);
+  <span class="hljs-keyword">let</span> classify: t =&gt; case;
+} = {
+  <span class="hljs-attribute">[@unboxed]</span>
+  <span class="hljs-keyword">type</span> t =
+    | <span class="hljs-constructor">Any</span>('a): t;
+  <span class="hljs-keyword">type</span> case =
+    | <span class="hljs-constructor">A</span>(a)
+    | <span class="hljs-constructor">B</span>(b);
+  <span class="hljs-keyword">let</span> a = (v: a) =&gt; <span class="hljs-constructor">Any</span>(v);
+  <span class="hljs-keyword">let</span> b = (v: b) <span class="hljs-operator">==</span> <span class="hljs-constructor">Any</span>(v);
+  <span class="hljs-keyword">let</span> classify = (<span class="hljs-constructor">Any</span> (v): t) =&gt;
+    <span class="hljs-keyword">if</span> (<span class="hljs-attribute">[%raw {|function (a) { return  a instanceof globalThis.A}|}]</span>(v)) {
+      <span class="hljs-constructor">A</span>(<span class="hljs-module-identifier">Obj</span>.magic(v): a);
+    } <span class="hljs-keyword">else</span> {
+      <span class="hljs-constructor">B</span>(<span class="hljs-module-identifier">Obj</span>.magic(b));
+    };
+};
+</code></pre>
+<p>Here we suppose <code>a</code> is of js class type <code>A</code>, we use <code>instanceof</code> to test it. Note we use some <code>unsafe</code> code locally, but as long as such code is carefully reviewed, it has  a safe boundary in the module level.</p>
+<p>To conclude: thanks to <code>unboxed</code> attributes and the module language, we introduce a systematic way to convert values from <code>union types</code> (untagged union types) to <code>algebraic data types</code>(tagged union types), such conversion relies on the user level knowledge and has to be reviewed carefully. For some cases where <code>classify</code> is not needed, it can be done in a complete type safe way.</p>
+</span></div></div><div class="blogSocialSection"></div></div><div class="blog-recent"><a class="button" href="/blog">Recent Posts</a></div></div></div><nav class="onPageNav"></nav></div><span><script src="/js/redirectBlog.js"></script><script>window.foo = new Pjax({
+          areas: [
+            // try to use the first query.
+            '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
+            // fallback
+            'body'
+          ],
+          link: '.docsNavContainer:not(.docsSliderActive) a',
+          update: {
+            script: false,
+          }
+        });
+        var languagesMenuItemCopy = document.getElementById("languages-menu");
+        languagesMenuItemCopy.addEventListener("click", function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          e.stopImmediatePropagation();
+        });</script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '0fd97db83891aa20810559812d9e69ac',
+                indexName: 'bucklescript',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:en"]}
+              });
+            </script></body></html>
