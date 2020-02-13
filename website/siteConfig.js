@@ -68,6 +68,12 @@ const users = [
     infoLink: "https://auditless.com",
     pinned: true
   },
+  {
+    caption: "Tradie Training",
+    image: "img/logos/tradie.png",
+    infoLink: "https://tt.edu.au",
+    pinned: true
+  }
 ];
 
 const examples = [
