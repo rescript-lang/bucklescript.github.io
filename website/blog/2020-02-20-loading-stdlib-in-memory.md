@@ -37,7 +37,7 @@ So whenever the compiler tries to load a module from stdlib, it will consult a l
 
 - Easy separation between compiler and JS artifacts
 
-    Compiler is just one relocatable file, this makes the sepration between compiler and generated Js artifacts easier. The remaining work is mostly design a convention between compiler and stdlib version schemes
+    The compiler is just one relocatable file, this makes the separation between the compiler and generated JS artifacts easier. The remaining work is mostly design a convention between compiler and stdlib version schemes.
 
 - Yes, better compile performance
 
