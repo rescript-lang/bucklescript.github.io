@@ -41,7 +41,7 @@ So whenever the compiler tries to load a module from stdlib, it will consult a l
 
 - Yes, better compile performance
 
-    A large set of files are not loading from file system instead of memory now!
+    A large set of files are not loaded from the file system but rather from memory now!
 
 - Fast installation and reinstallation.
 
