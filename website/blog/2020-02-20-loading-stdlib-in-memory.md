@@ -12,7 +12,7 @@ You can try it via `npm i bs-platform@7.2.0-dev.3`
 
 When a compiler compiles a module `test.ml`, the module `Test` will import some modules from stdlib. This is inevitable since even basic operators in BuckleScript, take `(+)` for example is defined in Pervasives module which is part of the stdlib. 
 
-Traditionally, the compiler will consult `Pervasives.cmi` which is a binary artifact describing the interface of Pervasives module and `Pervasives.cmj` which is a binary artifact describing the implementation of Pervasives module. `Pervasives.cm[ij]` and other modules in stdlib is shipped together with the compiler. 
+Traditionally, the compiler will consult `Pervasives.cmi` which is a binary artifact describing the interface of Pervasives module and `Pervasives.cmj` which is a binary artifact describing the implementation of Pervasives module. `Pervasives.cm[ij]` and other modules in stdlib are shipped together with the compiler. 
 
 
 This traditional mode has some consequences:
