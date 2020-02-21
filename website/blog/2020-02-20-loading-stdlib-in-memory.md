@@ -24,7 +24,7 @@ This traditional mode has some consequences:
 
 In this release, we solve the problem by embedding the binary artifacts into the compiler directly and load it on demand. 
 
-To make it possible, we try to make the binary data platform platform agnostic and as compact as possible to avoid size bloating. The entrance of loading cmi/cmj has to be adapted to this new way.
+To make it possible, we try to make the binary data platform agnostic and as compact as possible to avoid size bloating. The entrance of loading cmi/cmj has to be adapted to this new way.
 
 So whenever the compiler tries to load a module from stdlib, it will consult a lazy data-structure in the compiler itself instead of consulting external file system.
 
