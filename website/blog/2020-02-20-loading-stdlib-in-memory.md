@@ -19,7 +19,7 @@ This traditional mode has some consequences:
 
 - The compiler is not stand-alone and relocatable, even if we have the compiler prebuilt for different platforms, we still have to compile stdlib post-installation. `postinstall` is supported by npm, but it has [various](https://github.com/BuckleScript/bucklescript/issues/3213) [issues](https://github.com/BuckleScript/bucklescript/issues/2799) [against](https://github.com/BuckleScript/bucklescript/issues/3254) yarn
 
-- It's hard to split compiler from generated stdlib js artifacts. When a BuckleScript user deploys apps depending on BuckleScript, in theory, it only needs deploy those generated JS artifacts, the native binary is not needed in production. However, they are still needed since they are bundled together. Allowing easy delivery of compiled code is one of the most desired [feature request](https://github.com/BuckleScript/bucklescript/issues/2772) by the community.
+- It's hard to split compiler from generated stdlib js artifacts. When a BuckleScript user deploys apps depending on BuckleScript, in theory, it only needs to deploy those generated JS artifacts, the native binary is not needed in production. However, they are still needed since they are bundled together. Allowing easy delivery of compiled code is one of the most desired [feature request](https://github.com/BuckleScript/bucklescript/issues/2772) by the community.
 
 
 In this release, we solve the problem by embedding the binary artifacts into the compiler directly and load it on demand. 
