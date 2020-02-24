@@ -1,0 +1,156 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Loading stdlib from memory · BuckleScript</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="## Loading stdlib from memory"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Loading stdlib from memory · BuckleScript"/><meta property="og:type" content="website"/><meta property="og:url" content="https://bucklescript.github.io/blog/2020/02/20/loading-stdlib-in-memory"/><meta property="og:description" content="## Loading stdlib from memory"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/logos/bucklescript.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://bucklescript.github.io/blog/atom.xml" title="BuckleScript Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://bucklescript.github.io/blog/feed.xml" title="BuckleScript Blog RSS Feed"/><script type="text/javascript" src="/js/toggleSyntaxButton.js"></script><script type="text/javascript" src="/js/pjax-api.min.js"></script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/logos/bucklescript.svg" alt="BuckleScript"/><h2 class="headerTitleWithLogo">BuckleScript</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/en/installation" target="_self">Docs</a></li><li class=""><a href="/docs/en/playground" target="_self">Try</a></li><li class=""><a href="/docs/en/stdlib-overview" target="_self">API</a></li><li class=""><a href="/docs/en/community" target="_self">Community</a></li><li class="siteNavGroupActive"><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja">日本語</a></li><li><a href="/es-ES">Español</a></li><li><a href="/fr">Français</a></li><li><a href="/ko">한국어</a></li><li><a href="/pt-BR">Português (Brasil)</a></li><li><a href="/ru">Русский</a></li><li><a href="/zh-CN">中文</a></li><li><a href="/zh-TW">繁體中文</a></li><li><a href="https://crowdin.com/project/bucklescript" target="_blank" rel="noreferrer noopener">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/bucklescript/bucklescript" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul class=""><li class="navListItem navListItemActive"><a class="navItem" href="/blog/2020/02/20/loading-stdlib-in-memory">Loading stdlib from memory</a></li><li class="navListItem"><a class="navItem" href="/blog/2020/02/07/union-types-in-bucklescript">Union types in BuckleScript</a></li><li class="navListItem"><a class="navItem" href="/blog/2020/02/04/release-7-1-0">bs-platform release 7.1.0</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/12/27/whats-new-in-7-cont">What&#x27;s new in release 7 (cont)</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/12/20/release-7-02">BuckleScript holiday release!</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="lonePost"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2020/02/20/loading-stdlib-in-memory">Loading stdlib from memory</a></h1><p class="post-meta">February 20, 2020</p><div class="authorBlock"></div></header><div><span><h2><a class="anchor" aria-hidden="true" id="loading-stdlib-from-memory"></a><a href="#loading-stdlib-from-memory" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Loading stdlib from memory</h2>
+<p>In next release, we are going to load stdlib from memory instead of from external file systems, which will make the BuckleScript toolchain more accessible and performant.</p>
+<p>You can try it via <code>npm i bs-platform@7.2.0-dev.4</code></p>
+<h2><a class="anchor" aria-hidden="true" id="how-does-it-work"></a><a href="#how-does-it-work" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>How does it work</h2>
+<p>When a compiler compiles a module <code>test.ml</code>, the module <code>Test</code> will import some modules from stdlib. This is inevitable since even basic operators in BuckleScript, take <code>(+)</code> for example is defined in Pervasives module which is part of the stdlib.</p>
+<p>Traditionally, the compiler will consult <code>Pervasives.cmi</code> which is a binary artifact describing the interface of Pervasives module and <code>Pervasives.cmj</code> which is a binary artifact describing the implementation of Pervasives module. <code>Pervasives.cm[ij]</code> and other modules in stdlib are shipped together with the compiler.</p>
+<p>This traditional mode has some consequences:</p>
+<ul>
+<li><p>The compiler is not stand-alone and relocatable, even if we have the compiler prebuilt for different platforms, we still have to compile stdlib post-installation. <code>postinstall</code> is supported by npm, but it has <a href="https://github.com/BuckleScript/bucklescript/issues/3213">various</a> <a href="https://github.com/BuckleScript/bucklescript/issues/2799">issues</a> <a href="https://github.com/BuckleScript/bucklescript/issues/3254">against</a> yarn</p></li>
+<li><p>It's hard to split compiler from generated stdlib js artifacts. When a BuckleScript user deploys apps depending on BuckleScript, in theory, it only needs to deploy those generated JS artifacts, the native binary is not needed in production. However, they are still needed since they are bundled together. Allowing easy delivery of compiled code is one of the most desired <a href="https://github.com/BuckleScript/bucklescript/issues/2772">feature request</a> by the community.</p></li>
+</ul>
+<p>In this release, we solve the problem by embedding the binary artifacts into the compiler directly and load it on demand.</p>
+<p>To make it possible, we try to make the binary data platform agnostic and as compact as possible to avoid size bloating. The entrance of loading cmi/cmj has to be adapted to this new way.</p>
+<p>So whenever the compiler tries to load a module from stdlib, it will consult a lazy data-structure in the compiler itself instead of consulting external file system.</p>
+<h2><a class="anchor" aria-hidden="true" id="whats-the-benefit"></a><a href="#whats-the-benefit" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>What's the benefit?</h2>
+<ul>
+<li><p>More accessiblity.</p>
+<p>Package installation is just downloading for prebuilt platforms. In the future, we can make it installable from system package manager as well. The subtle interaction with <a href="https://github.com/BuckleScript/bucklescript/issues/2799">yarn reinstall</a> is also solved once for all.</p></li>
+</ul>
+<ul>
+<li><p>Easy separation between compiler and JS artifacts</p>
+<p>The compiler is just one relocatable file, this makes the separation between the compiler and generated JS artifacts easier. The remaining work is mostly to design a convention between compiler and stdlib version schemes.</p></li>
+<li><p>Yes, better compile performance</p>
+<p>A large set of files are not loaded from the file system but rather from memory now!</p></li>
+<li><p>Fast installation and reinstallation.</p>
+<p>Depending on your network speed, the installation is reduced from 15s to 3s. Reinstallation is almost a no-op now.</p></li>
+</ul>
+<!-- TODO: collect data points later -->
+<ul>
+<li><p>JS playground is easier to build</p>
+<p>We translate the compiler into JS so that developers can play with it in the browser.  To make this happen, we used to fake the IO system, this not needed any more since no IO happens when compiling a single file to string.</p></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="some-internal-changes"></a><a href="#some-internal-changes" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Some internal changes</h2>
+<p>To make this happen, the layout of binaries are changed to the below structure, it is <strong>not recommended</strong> for users to depend on the layout, but <a href="https://github.com/BuckleScript/bucklescript/pull/4170#issuecomment-586959464">it happens</a>, the new layout is as below</p>
+<pre><code class="hljs">
+|<span class="hljs-string">-- bsb // node wrapper of bsb.exe
+</span>|<span class="hljs-string">-- bsc // node wrapper of bsc.exe
+</span>|
+|<span class="hljs-string">-- win32
+</span>|<span class="hljs-string">     </span>|<span class="hljs-string">-- bsb.exe
+</span>|<span class="hljs-string">     </span>|<span class="hljs-string">-- bsc.exe 
+</span>|
+|<span class="hljs-string">---darwin
+</span>|<span class="hljs-string">     </span>|<span class="hljs-string">-- bsb.exe
+</span>|<span class="hljs-string">     </span>|<span class="hljs-string">-- bsc.exe
+</span>|
+|<span class="hljs-string">---linux
+</span>|<span class="hljs-string">     </span>|<span class="hljs-string">-- bsb.exe
+</span>|<span class="hljs-string">     </span>|<span class="hljs-string">-- bsc.exe
+
+</span></code></pre>
+</span></div></div><div class="blogSocialSection"></div></div><div class="blog-recent"><a class="button" href="/blog">Recent Posts</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#loading-stdlib-from-memory">Loading stdlib from memory</a></li><li><a href="#how-does-it-work">How does it work</a></li><li><a href="#whats-the-benefit">What's the benefit?</a></li><li><a href="#some-internal-changes">Some internal changes</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script>window.foo = new Pjax({
+          areas: [
+            // try to use the first query.
+            '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
+            // fallback
+            'body'
+          ],
+          link: '.docsNavContainer:not(.docsSliderActive) a',
+          update: {
+            script: false,
+          }
+        });
+        var languagesMenuItemCopy = document.getElementById("languages-menu");
+        languagesMenuItemCopy.addEventListener("click", function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          e.stopImmediatePropagation();
+        });</script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '0fd97db83891aa20810559812d9e69ac',
+                indexName: 'bucklescript',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:en"]}
+              });
+            </script></body></html>

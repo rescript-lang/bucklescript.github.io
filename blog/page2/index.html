@@ -10,7 +10,7 @@
             languagesDropDown.className = "hide";
           }
         });
-      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/bucklescript/bucklescript" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul class=""><li class="navListItem"><a class="navItem" href="/blog/2020/02/07/union-types-in-bucklescript">Union types in BuckleScript</a></li><li class="navListItem"><a class="navItem" href="/blog/2020/02/04/release-7-1-0">bs-platform release 7.1.0</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/12/27/whats-new-in-7-cont">What&#x27;s new in release 7 (cont)</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/12/20/release-7-02">BuckleScript holiday release!</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/11/18/whats-new-in-7">What&#x27;s new in release 7</a></li></ul></div></div></section></div><script>
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/bucklescript/bucklescript" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul class=""><li class="navListItem"><a class="navItem" href="/blog/2020/02/20/loading-stdlib-in-memory">Loading stdlib from memory</a></li><li class="navListItem"><a class="navItem" href="/blog/2020/02/07/union-types-in-bucklescript">Union types in BuckleScript</a></li><li class="navListItem"><a class="navItem" href="/blog/2020/02/04/release-7-1-0">bs-platform release 7.1.0</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/12/27/whats-new-in-7-cont">What&#x27;s new in release 7 (cont)</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/12/20/release-7-02">BuckleScript holiday release!</a></li></ul></div></div></section></div><script>
             var coll = document.getElementsByClassName('collapsible');
             var checkActiveCategory = true;
             for (var i = 0; i < coll.length; i++) {
@@ -66,7 +66,152 @@
                 };
               }
             });
-        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="posts"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2019/04/22/release-5-0-4">architecture changes in bs-platform v5.0.4 and v6.0.1</a></h1><p class="post-meta">April 22, 2019</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p>We are going to make releases of bs-platform@5.0.4 and bs-platform@6.0.1, this release mostly contains bug fixes.</p>
+        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="posts"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2019/05/21/ffi-overview">A high level overview of BuckleScript interop with Javascript</a></h1><p class="post-meta">May 21, 2019</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p>When users start to use BuckleScript to develop applications on JS platform, they have to interop with various APIs provided by the JS platform.</p>
+<p>In theory, like <a href="https://elm-lang.org/">Elm</a>, BuckleScript could ship a comprehensive library which contains what most people would like to use daily.
+This, however, is particularly challenging, given that
+JS is running on so many platforms for example, <a href="https://electronjs.org/">Electron</a>, <a href="https://nodejs.org/">Node</a> and Browser, yet each platform is still evolving quickly. So we have to provide a mechanism to allow users to bind to the native JS API quickly in userland.</p>
+<p>There are lots of trade-off when designing such a FFI bridge between OCaml and the JavaScript API. Below, we list a few key items which we think have an important impact on our design.</p>
+<h2><a class="anchor" aria-hidden="true" id="interop-design-constraints"></a><a href="#interop-design-constraints" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Interop design constraints</h2>
+<ul>
+<li><p>BuckleScript is still OCaml</p>
+<p>We are not inventing a new language. In particular, we can not change the concrete syntax of OCaml. Luckily, OCaml introduced <a href="https://caml.inria.fr/pub/docs/manual-ocaml/extn.html#sec260">attributes</a> and <a href="https://caml.inria.fr/pub/docs/manual-ocaml/extn.html#sec262">extension nodes</a> since 4.02, which allows us to customize the language to a minor extent. To be a good citizen in the OCaml community, all attributes introduced by BuckleScript are prefixed with <code>bs</code>.</p></li>
+<li><p>Bare metal efficiency should always be possible for experts in pure OCaml</p>
+<p>Efficiency is at the heart of BuckleScript's design philosophy, in terms of both compilation speed and runtime performance. While there were other strongly typed functional languages running on the JS platform before we made BuckleScript, one thing in particular that confused me was that in those languages, people have to write <code>native JS</code> to gain performance. Our goal is that when performance really matters, it is still possible for experts to write pure OCaml without digging into <code>native JS</code>, so users don't have to make a choice between performance and type safety.</p></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="easy-interop-using-raw-js"></a><a href="#easy-interop-using-raw-js" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Easy interop using raw JS</h2>
+<p>BuckleScript allows users to insert raw JS using extension nodes directly. Please refer to the <a href="https://bucklescript.github.io/docs/en/embed-raw-javascript">documentation</a> for details. Here we only talk about one of the most used styles: inserting raw JS code as a function.</p>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> getSafe : <span class="hljs-built_in">int</span> <span class="hljs-built_in">array</span> -&gt; <span class="hljs-built_in">int</span> -&gt; <span class="hljs-built_in">int</span> = <span class="hljs-keyword">fun</span>%raw a b -&gt; {| 
+    <span class="hljs-keyword">if</span> (b&gt;=<span class="hljs-number">0</span> &amp;&amp; b &lt; a.length) {
+        return a [b]
+     }
+     throw <span class="hljs-keyword">new</span> <span class="hljs-type">Error</span>(<span class="hljs-string">"out of range"</span>)
+  |} 
+
+<span class="hljs-keyword">let</span> v = getSafe [|<span class="hljs-number">1</span>;<span class="hljs-number">2</span>;<span class="hljs-number">3</span>|] (-<span class="hljs-number">1</span>)
+</code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> getSafe: (array(int), int) =&gt; int = <span class="hljs-attribute">[%raw
+  (a, b) =&gt; {|
+    if (b&gt;=0 &amp;&amp; b &lt; a.length) {
+        return a [b]</span>
+     }
+     throw <span class="hljs-keyword">new</span> <span class="hljs-constructor">Error</span>(<span class="hljs-string">"out of range"</span>)
+  |}
+<span class="hljs-literal">]</span>;
+
+<span class="hljs-keyword">let</span> v = <span class="hljs-literal">[|</span><span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span><span class="hljs-literal">|]</span><span class="hljs-operator">-&gt;</span>getSafe<span class="hljs-number">(-1)</span>;
+</code></pre>
+<p>Here the raw extension node asks the user to list the parameters and function statement in raw JS syntax. The generated JS code is as follows:</p>
+<pre><code class="hljs css language-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getSafe</span> (<span class="hljs-params">a,b</span>)</span>{ 
+    <span class="hljs-keyword">if</span> (b&gt;=<span class="hljs-number">0</span> &amp;&amp; b &lt; a.length) {
+        <span class="hljs-keyword">return</span> a [b]
+     }
+     <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">"out of range"</span>)
+  };
+
+<span class="hljs-keyword">var</span> v = getSafe(<span class="hljs-comment">/* array */</span>[
+      <span class="hljs-number">1</span>,
+      <span class="hljs-number">2</span>,
+      <span class="hljs-number">3</span>
+    ], <span class="hljs-number">-1</span>);
+
+</code></pre>
+<p>Inserting raw JS code as a function has several advantages:</p>
+<ul>
+<li>It is relatively safe; there is no variable name polluting.</li>
+<li>It is quite expressive since the user can express everything inside the function body.</li>
+<li>The compiler still has some knowledge about the function, for example, its arity.</li>
+</ul>
+<p>Some advice about using this style:</p>
+<ul>
+<li>Always annotate the raw function with explicit type annotation.</li>
+<li>When annotating raw JS, you can use polymorphic types, but don’t create them when you don’t really need them. In general, non polymoprhic type is safer and more efficient.</li>
+<li>Write a unit test for the function.</li>
+</ul>
+<p>Note that a nice thing about this mechanism is that no separate JS file is needed, so no change to the build system is necessary in most cases. By using this mechanism, BuckleScript users can already deal with most bindings.</p>
+<h2><a class="anchor" aria-hidden="true" id="interop-via-attributes"></a><a href="#interop-via-attributes" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Interop via attributes</h2>
+<p>If you are a developer busy shipping, the mechanism above should cover almost everything you need. A minor disadvange of that mechanism is that it comes with a cost: a raw function can not be inlined since it is JavaScript, so the BuckleScript compiler does not have a deep knowledge about the function.</p>
+<p>To demonstrate interop via attributes, we are going to show a small example of binding to JS <code>date</code>. There are lots of advanced topics in the <a href="https://bucklescript.github.io/docs/en/interop-overview">documentation</a>; here we are only talking about one of the most-used methods for interop.</p>
+<p>The key idea is to bind your JS object as <a href="https://en.wikipedia.org/wiki/Abstract_data_type">an abstract data type</a> where a data type is defined by its behavior from the point of view of a user of the data, instead of the data type’s concrete representations.</p>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">type</span> date
+<span class="hljs-keyword">external</span> fromFloat : <span class="hljs-built_in">float</span> -&gt; date = <span class="hljs-string">"Date"</span> [@@bs.<span class="hljs-keyword">new</span>]
+<span class="hljs-keyword">external</span> getDate : date -&gt; <span class="hljs-built_in">float</span> = <span class="hljs-string">"getDate"</span> [@@bs.send]
+<span class="hljs-keyword">external</span> setDate : date -&gt; <span class="hljs-built_in">float</span> -&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">"setDate"</span> [@@bs.send]
+
+<span class="hljs-keyword">let</span> date = fromFloat <span class="hljs-number">10000.</span>
+<span class="hljs-keyword">let</span> <span class="hljs-literal">()</span> = setDate date <span class="hljs-number">3.</span>
+<span class="hljs-keyword">let</span> d = getDate date
+</code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> date;
+
+<span class="hljs-attribute">[@bs.new]</span>
+<span class="hljs-keyword">external</span> fromFloat : float =&gt; date = <span class="hljs-string">"Date"</span> ;
+<span class="hljs-attribute">[@bs.send]</span>
+<span class="hljs-keyword">external</span> getDate : date =&gt; float = <span class="hljs-string">"getDate"</span> ;
+<span class="hljs-attribute">[@bs.send]</span>
+<span class="hljs-keyword">external</span> setDate : date =&gt; float =&gt; unit = <span class="hljs-string">"setDate"</span>;
+
+<span class="hljs-keyword">let</span> date = fromFloat (<span class="hljs-number">10000.0</span>);
+date<span class="hljs-operator">-&gt;</span>setDate (<span class="hljs-number">3.0</span>);
+<span class="hljs-keyword">let</span> d = date <span class="hljs-operator">-&gt;</span> getDate;
+</code></pre>
+<p>The preceding code generates the following JS. As you can see, the binding itself is zero cost and serves as formal documentation.</p>
+<pre><code class="hljs css language-js"><span class="hljs-keyword">var</span> date = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-number">10000</span>);
+date.setDate(<span class="hljs-number">3</span>);
+<span class="hljs-keyword">var</span> d = date.getDate();
+</code></pre>
+<p>A typical workflow is that we create an abstract data type, create bindings for a “maker” using <code>bs.new</code>, and bind methods using <code>bs.send</code>.</p>
+<p>Thanks to native support of abstract data types in OCaml, the interop is easy to reason about.</p>
+<p>Some advice when using this style:</p>
+<ul>
+<li>Again, you can use polymorphic types in your annotations, but don't create polymorphic types when you don't need them.</li>
+<li>Write a unit test for each external.</li>
+</ul>
+<p>As a comparison, we can create the same binding using <code>raw</code>:</p>
+<pre><code class="hljs css language-ocaml">type date
+let fromFloat : float -&gt; date = fun%raw d -&gt; {|return new Date(d)|}
+let getDate : date -&gt; float = fun%raw d -&gt; {|return d.getDate()|}
+let setDate : date -&gt; float -&gt; unit = fun%raw d v -&gt; {|
+   d.setDate(v);
+   return 0; // ocaml representation of unit 
+|}
+
+let date = fromFloat 10000.
+let () = setDate date 3.
+let d = getDate date
+</code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> date;
+<span class="hljs-keyword">let</span> fromFloat: float =&gt; date = <span class="hljs-attribute">[%raw d =&gt; {|return new Date(d)|}]</span>;
+<span class="hljs-keyword">let</span> getDate: date =&gt; float = <span class="hljs-attribute">[%raw d =&gt; {|return d.getDate()|}]</span>;
+<span class="hljs-keyword">let</span> setDate: (date, float) =&gt; unit = <span class="hljs-attribute">[%raw
+  (d, v) =&gt; {|
+   d.setDate(v);
+   return 0; // ocaml representation of unit
+|}
+]</span>;
+
+<span class="hljs-keyword">let</span> date = fromFloat(<span class="hljs-number">10000.</span>);
+date<span class="hljs-operator">-&gt;</span>setDate( <span class="hljs-number">3.</span>);
+<span class="hljs-keyword">let</span> d = date<span class="hljs-operator">-&gt;</span>getDate;
+
+</code></pre>
+<p>The generated JS is as follows, and you can see the cost:</p>
+<pre><code class="hljs css language-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fromFloat</span> (<span class="hljs-params">d</span>)</span>{<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(d)};
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getDate</span> (<span class="hljs-params">d</span>)</span>{<span class="hljs-keyword">return</span> d.getDate()};
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setDate</span> (<span class="hljs-params">d,v</span>)</span>{
+   d.setDate(v);
+   <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>; <span class="hljs-comment">// ocaml representation of unit </span>
+};
+
+<span class="hljs-keyword">var</span> date = fromFloat(<span class="hljs-number">10000</span>);
+
+setDate(date, <span class="hljs-number">3</span>);
+
+<span class="hljs-keyword">var</span> d = getDate(date);
+</code></pre>
+<!-- ,  and provide various methods over such abstract data type. -->
+</span></div></article></div><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2019/04/22/release-5-0-4">architecture changes in bs-platform v5.0.4 and v6.0.1</a></h1><p class="post-meta">April 22, 2019</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p>We are going to make releases of bs-platform@5.0.4 and bs-platform@6.0.1, this release mostly contains bug fixes.</p>
 <p>At the same time, we are introducing an internal change which should be fine for average users.</p>
 <p>If you are tooling authors, here are some details: previously we ship react_jsx ppx as a stand-alone binary, for example, reactjs_jsx_ppx_v2.exe, reactjs_jsx_ppx_v2.exe. Recently we start more close integration with <a href="https://reasonml.github.io">reason</a>, so it is absorbed into bsc.exe itself, we introduced a flag to have react-jsx on/off (note these are internal flags, not expected to be exposed to average users):</p>
 <pre><code class="hljs"><span class="hljs-keyword">bsc.exe </span>-<span class="hljs-keyword">bs-jsx </span><span class="hljs-number">2</span> <span class="hljs-comment"># turn on reactjs_jsx_ppx_v2</span>
@@ -259,6 +404,26 @@ the cmj/cmi changes' propogation stops in the first level of dependency, indirec
 <p>A detailed list of changes is available <a href="https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#4017">here</a></p>
 <p>Another quite important but not client facing change is that we renovated the internal build system, it will be much easier for contribution later on.
 We will update the contribution guide once it gets stable.</p>
+</span></div></article></div><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2019/03/1/feature-preview">First-class `bs.variadic` Support in the Next Release</a></h1><p class="post-meta">March 1, 2019</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p>In previous releases, when a <code>bs.variadic</code> external (previously called <code>bs.splice</code> prior to version <code>4.08</code>) is present, its tail arguments needed to be applied statically. In other words, the <code>external</code> marked with <code>bs.variadic</code>, when used, requires a <em>literal</em> array:</p>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> join : <span class="hljs-built_in">string</span> <span class="hljs-built_in">array</span> -&gt; <span class="hljs-built_in">string</span> = <span class="hljs-string">"join"</span>
+[@@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"path"</span>][@@bs.variadic]
+
+<span class="hljs-keyword">let</span> _ = join [|<span class="hljs-string">"a"</span>; <span class="hljs-string">"b"</span>|] <span class="hljs-comment">(* this is ok *)</span>
+<span class="hljs-keyword">let</span> f b = join b <span class="hljs-comment">(* compiler error when you try to abstract `join` *)</span>
+</code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.module "path"]</span><span class="hljs-attribute">[@bs.variadic]</span>
+<span class="hljs-keyword">external</span> join: array(string) =&gt; string = <span class="hljs-string">"join"</span>
+
+<span class="hljs-keyword">let</span> _ = join(<span class="hljs-literal">[|</span><span class="hljs-string">"a"</span>, <span class="hljs-string">"b"</span><span class="hljs-literal">|]</span>) <span class="hljs-comment">/* this is ok */</span>
+<span class="hljs-keyword">let</span> f = b =&gt; join(b) <span class="hljs-comment">/* compiler error when you try to abstract `join` */</span>
+</code></pre>
+<p>More importantly, such compilation error was leaky in cases such as this one:</p>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> f = join
+</code></pre>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> f = join
+</code></pre>
+<p>In the next release, we are going to lift such restriction. You'll be able to call an external marked with <code>bs.variadic</code> with an array reference, not just a literal array.</p>
+<p>Caveat: it's unclear how to support such first class <code>bs.variadic</code> call in conjunction with <code>bs.new</code>, so an external declaration that contains both will trigger a compilation error. We'll try to figure out this particular case in the future too.</p>
 </span></div></article></div><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2018/12/05/release-4-0-8">BuckleScript 4.0.8 (Part One)</a></h1><p class="post-meta">December 5, 2018</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p>Today we released version 4.0.8 of <code>bs-platform</code>. A detailed list of changes is available <a href="https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#408">here</a>.</p>
 <p>Most user-facing changes are bug fixes and small enhancements, while quite a lot of work has been done behind the scenes towards the more fundamental improvements coming down the line. This blog post refers to the BuckleScript runtime and some of the work we are doing to improve it.</p>
 <p>The design goal of BuckleScript is to make the runtime as small as possible. This runtime is divided into two parts: the C shims, and the fundamental language feature support.</p>
@@ -304,87 +469,6 @@ We will update the contribution guide once it gets stable.</p>
 <p>Separate the compiler from stdlib may also help draw the contribution to the stdlib/belt library.</p>
 <h4><a class="anchor" aria-hidden="true" id="improving-the-usability-of-bsb"></a><a href="#improving-the-usability-of-bsb" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Improving the usability of bsb</h4>
 <p>Currently the bsb is restricted by the npm directory layout, the generated JS artifacts is also restricted by it, we will see if we can relocate the JS artifacts or provide more flexibility for users.</p>
-</span></div></article></div><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2019/03/1/feature-preview">First-class `bs.variadic` Support in the Next Release</a></h1><p class="post-meta">March 1, 2019</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p>In previous releases, when a <code>bs.variadic</code> external (previously called <code>bs.splice</code> prior to version <code>4.08</code>) is present, its tail arguments needed to be applied statically. In other words, the <code>external</code> marked with <code>bs.variadic</code>, when used, requires a <em>literal</em> array:</p>
-<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> join : <span class="hljs-built_in">string</span> <span class="hljs-built_in">array</span> -&gt; <span class="hljs-built_in">string</span> = <span class="hljs-string">"join"</span>
-[@@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"path"</span>][@@bs.variadic]
-
-<span class="hljs-keyword">let</span> _ = join [|<span class="hljs-string">"a"</span>; <span class="hljs-string">"b"</span>|] <span class="hljs-comment">(* this is ok *)</span>
-<span class="hljs-keyword">let</span> f b = join b <span class="hljs-comment">(* compiler error when you try to abstract `join` *)</span>
-</code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.module "path"]</span><span class="hljs-attribute">[@bs.variadic]</span>
-<span class="hljs-keyword">external</span> join: array(string) =&gt; string = <span class="hljs-string">"join"</span>
-
-<span class="hljs-keyword">let</span> _ = join(<span class="hljs-literal">[|</span><span class="hljs-string">"a"</span>, <span class="hljs-string">"b"</span><span class="hljs-literal">|]</span>) <span class="hljs-comment">/* this is ok */</span>
-<span class="hljs-keyword">let</span> f = b =&gt; join(b) <span class="hljs-comment">/* compiler error when you try to abstract `join` */</span>
-</code></pre>
-<p>More importantly, such compilation error was leaky in cases such as this one:</p>
-<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> f = join
-</code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> f = join
-</code></pre>
-<p>In the next release, we are going to lift such restriction. You'll be able to call an external marked with <code>bs.variadic</code> with an array reference, not just a literal array.</p>
-<p>Caveat: it's unclear how to support such first class <code>bs.variadic</code> call in conjunction with <code>bs.new</code>, so an external declaration that contains both will trigger a compilation error. We'll try to figure out this particular case in the future too.</p>
-</span></div></article></div><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2018/11/13/arity-zero">A change of undefined behavior in BuckleScript 4.0.7</a></h1><p class="post-meta">November 13, 2018</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p>In the latest BuckleScript release, we introduced a minor change in the codegen which broken some user libraries. Note this change only broke the code in the FFI boundary(the interop between JS).</p>
-<p>In the early days of BuckleScript, there is no built-in uncurried calling convention support, since OCaml is a curried language, which means every function has arity one, so there is no way to express that a function has arity zero, this makes some interop challenging. In the mocha unit test library, it expects its callback to be function of arity zero.</p>
-<p>To work around this issue, before this release, we did a small codegen optimization, for a function of type <code>unit -&gt; unit</code>, if its argument is not used, we remove its argument in the output.</p>
-<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> f : <span class="hljs-built_in">unit</span> -&gt; <span class="hljs-built_in">int</span> = <span class="hljs-keyword">fun</span> <span class="hljs-literal">()</span> -&gt; <span class="hljs-number">3</span> 
-<span class="hljs-keyword">let</span> f_used : <span class="hljs-built_in">unit</span> -&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-keyword">fun</span> x -&gt; <span class="hljs-type">Js</span>.log x  
-</code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> f: unit =&gt; int = () =&gt; <span class="hljs-number">3</span>;
-<span class="hljs-keyword">let</span> f_used: unit =&gt; unit = x =&gt; <span class="hljs-module-identifier">Js</span>.log(x);
-</code></pre>
-<p>Output JS prior to v4.0.7</p>
-<pre><code class="hljs css language-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f</span> (<span class="hljs-params"></span>)</span>{
-    <span class="hljs-keyword">return</span> <span class="hljs-number">3</span>
-}
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f_used</span> (<span class="hljs-params">x</span>)</span>{
-    <span class="hljs-built_in">console</span>.log(x)
-}
-</code></pre>
-<p>To make this hack work, in the application side,
-for a curried function application, we treat the function
-of arity 0 and arity 1 in the same way, this still works since
-curried function application could only happen on the ocaml function.</p>
-<p>This trick is unintuitive, it makes code generated less predictable and it is not relevant any more, since
-we added native uncurried calling convention support later.</p>
-<p>Therefore, we generate JS code in a more consistent style in this release:</p>
-<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> f : <span class="hljs-built_in">unit</span> -&gt; <span class="hljs-built_in">int</span> = <span class="hljs-keyword">fun</span> <span class="hljs-literal">()</span> -&gt; <span class="hljs-number">3</span> 
-</code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> f: unit =&gt; int = () =&gt; <span class="hljs-number">3</span>;
-</code></pre>
-<pre><code class="hljs css language-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f</span> (<span class="hljs-params">param</span>)</span>{
-    <span class="hljs-keyword">return</span> <span class="hljs-number">3</span>
-}
-</code></pre>
-<p>So in your FFI code, if you have a callback which is expected to be of arity zero, use <code>unit -&gt; unit [@bs]</code> or <code>unit -&gt; unit [@bs.uncurry]</code>, it is 100% correct. Note our previous trick will only make <code>unit -&gt; unit</code> work most time, but it can not provide any guarantee.</p>
-<p>Since we removed the trick, the curried runtime does not treat function of arity 0 and arity 1 in the same way, so if you have code like this</p>
-<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> f : <span class="hljs-built_in">unit</span> -&gt; <span class="hljs-built_in">int</span> = [%bs.raw {|<span class="hljs-keyword">function</span> <span class="hljs-literal">()</span> {
-    return <span class="hljs-number">3</span>
-}|}]
-</code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> f: unit =&gt; int = <span class="hljs-attribute">[%bs.raw {|function () {
-  return 3
-}|}]</span>;
-</code></pre>
-<p>It is not correct any more, the fix would be</p>
-<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> f : <span class="hljs-built_in">unit</span> -&gt; <span class="hljs-built_in">int</span> = [%bs.raw{|<span class="hljs-keyword">function</span>(param){
-    return <span class="hljs-number">3</span>
-}|}]
-</code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> f: unit =&gt; int = <span class="hljs-attribute">[%bs.raw {|function(param) {
-  return 3
-}|}]</span>;
-</code></pre>
-<p>Or</p>
-<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> f : <span class="hljs-built_in">unit</span> -&gt; <span class="hljs-built_in">int</span> [@bs] = [%bs.raw{|<span class="hljs-keyword">function</span><span class="hljs-literal">()</span>{
-    return <span class="hljs-number">3</span>
-}|}]
-</code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> f: (. unit) =&gt; int = <span class="hljs-attribute">[%bs.raw {|function() {
-  return 3
-}|}]</span>;
-</code></pre>
-<p>FFI is a double edge sword, it is a must have to ship your product, yet it is tricky, and there may be some undefined behavior you rely on but don't recognize, it is encouarged to always test your FFI in the boundary.</p>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev" href="/blog/">← Prev</a><a class="docs-next" href="/blog/page3/">Next →</a></div></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script>window.foo = new Pjax({
           areas: [
             // try to use the first query.
