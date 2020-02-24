@@ -6,7 +6,7 @@ title: Loading stdlib from memory
 
 In next release, we are going to load stdlib from memory instead of from external file systems, which will make the BuckleScript toolchain more accessible and performant.
 
-You can try it via `npm i bs-platform@7.2.0-dev.3`
+You can try it via `npm i bs-platform@7.2.0-dev.4`
 
 ## How does it work
 
