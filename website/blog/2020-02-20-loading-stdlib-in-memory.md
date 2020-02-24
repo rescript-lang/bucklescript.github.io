@@ -4,13 +4,14 @@ title: Loading stdlib from memory
 
 ## Loading stdlib from memory
 
-In next release, we are going to load stdlib from memory instead of from external file systems, which will make the BuckleScript toolchain more accessible and performant.
+<!-- Do you mean "external files" instead of "external file system"? In Linux world, a file system is means something like EXT4 or btrfs -->
+In the next release, we are going to load stdlib from memory instead of from external files, which will make the BuckleScript toolchain more accessible and performant.
 
 You can try it via `npm i bs-platform@7.2.0-dev.4`
 
 ## How does it work
 
-When a compiler compiles a module `test.ml`, the module `Test` will import some modules from stdlib. This is inevitable since even basic operators in BuckleScript, for example `(+)`, are defined in the Pervasives module, which is part of the stdlib. 
+When the compiler compiles a module `test.ml`, the module `Test` will import some modules from stdlib. This is inevitable since even basic operators in BuckleScript, for example `(+)`, are defined in the Pervasives module, which is part of the stdlib. 
 
 Traditionally, the compiler will consult `Pervasives.cmi`, which is a binary artifact describing the interface of the Pervasives module and `Pervasives.cmj`, which is a binary artifact describing the implementation of the Pervasives module. `Pervasives.cm[ij]` and other modules in stdlib are shipped together with the compiler. 
 
@@ -27,7 +28,6 @@ In this release, we solve the problem by embedding the binary artifacts into the
 
 To make this possible, we try to make the binary data platform agnostic and as compact as possible to avoid size bloating. The entrance of loading cmi/cmj has to be adapted to this new way.
 
-<!-- Do you mean "external files" instead of "external file system"? In Linux world, a file system is means something like EXT4 or btrfs -->
 So whenever the compiler tries to load a module from stdlib, it will consult a lazy data structure in the compiler itself instead of consulting an external file system.
 
 ## What's the benefit?
