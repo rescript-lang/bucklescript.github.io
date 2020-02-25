@@ -67,39 +67,45 @@
               }
             });
         </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="lonePost"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2020/02/20/loading-stdlib-in-memory">Loading stdlib from memory</a></h1><p class="post-meta">February 20, 2020</p><div class="authorBlock"></div></header><div><span><h2><a class="anchor" aria-hidden="true" id="loading-stdlib-from-memory"></a><a href="#loading-stdlib-from-memory" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Loading stdlib from memory</h2>
-<p>In next release, we are going to load stdlib from memory instead of from external file systems, which will make the BuckleScript toolchain more accessible and performant.</p>
+<!-- Do you mean "external files" instead of "external file system"? In Linux world, a file system is means something like EXT4 or btrfs -->
+In the next release, we are going to load stdlib from memory instead of from external files, which will make the BuckleScript toolchain more accessible and performant.
 <p>You can try it via <code>npm i bs-platform@7.2.0-dev.4</code></p>
 <h2><a class="anchor" aria-hidden="true" id="how-does-it-work"></a><a href="#how-does-it-work" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>How does it work</h2>
-<p>When a compiler compiles a module <code>test.ml</code>, the module <code>Test</code> will import some modules from stdlib. This is inevitable since even basic operators in BuckleScript, take <code>(+)</code> for example is defined in Pervasives module which is part of the stdlib.</p>
-<p>Traditionally, the compiler will consult <code>Pervasives.cmi</code> which is a binary artifact describing the interface of Pervasives module and <code>Pervasives.cmj</code> which is a binary artifact describing the implementation of Pervasives module. <code>Pervasives.cm[ij]</code> and other modules in stdlib are shipped together with the compiler.</p>
+<p>When the compiler compiles a module <code>test.ml</code>, the module <code>Test</code> will import some modules from stdlib. This is inevitable since even basic operators in BuckleScript, for example <code>(+)</code>, are defined in the Pervasives module, which is part of the stdlib.</p>
+<p>Traditionally, the compiler will consult <code>Pervasives.cmi</code>, which is a binary artifact describing the interface of the Pervasives module and <code>Pervasives.cmj</code>, which is a binary artifact describing the implementation of the Pervasives module. <code>Pervasives.cm[ij]</code> and other modules in stdlib are shipped together with the compiler.</p>
 <p>This traditional mode has some consequences:</p>
 <ul>
-<li><p>The compiler is not stand-alone and relocatable, even if we have the compiler prebuilt for different platforms, we still have to compile stdlib post-installation. <code>postinstall</code> is supported by npm, but it has <a href="https://github.com/BuckleScript/bucklescript/issues/3213">various</a> <a href="https://github.com/BuckleScript/bucklescript/issues/2799">issues</a> <a href="https://github.com/BuckleScript/bucklescript/issues/3254">against</a> yarn</p></li>
-<li><p>It's hard to split compiler from generated stdlib js artifacts. When a BuckleScript user deploys apps depending on BuckleScript, in theory, it only needs to deploy those generated JS artifacts, the native binary is not needed in production. However, they are still needed since they are bundled together. Allowing easy delivery of compiled code is one of the most desired <a href="https://github.com/BuckleScript/bucklescript/issues/2772">feature request</a> by the community.</p></li>
+<li>The compiler is not stand-alone and relocatable. Even if we have the compiler prebuilt for different platforms, we still have to compile stdlib post-installation. <code>postinstall</code> is supported by npm, but it has <a href="https://github.com/BuckleScript/bucklescript/issues/3213">various</a> <a href="https://github.com/BuckleScript/bucklescript/issues/2799">issues</a> <a href="https://github.com/BuckleScript/bucklescript/issues/3254">against</a> yarn.</li>
 </ul>
-<p>In this release, we solve the problem by embedding the binary artifacts into the compiler directly and load it on demand.</p>
-<p>To make it possible, we try to make the binary data platform agnostic and as compact as possible to avoid size bloating. The entrance of loading cmi/cmj has to be adapted to this new way.</p>
-<p>So whenever the compiler tries to load a module from stdlib, it will consult a lazy data-structure in the compiler itself instead of consulting external file system.</p>
+<!-- I made my best guess as to what you mean by "they" in "However, they are still needed" (and tried to eliminate the repetition of the word "needed" -->
+- It's hard to split the compiler from the generated stdlib JS artifacts. When a BuckleScript user deploys apps depending on BuckleScript, in theory, the app only needs to deploy those generated JS artifacts; the native binary is not needed in production. However, the artifacts are still loaded since they are bundled together. Allowing easy delivery of compiled code is one of the community’s most desired [feature requests](https://github.com/BuckleScript/bucklescript/issues/2772).
+<p>In this release, we solve the problem by embedding the binary artifacts into the compiler directly and loading it on demand.</p>
+<p>To make this possible, we try to make the binary data platform agnostic and as compact as possible to avoid size bloating. The entrance of loading cmi/cmj has to be adapted to this new way.</p>
+<p>So whenever the compiler tries to load a module from stdlib, it will consult a lazy data structure in the compiler itself instead of consulting an external file system.</p>
 <h2><a class="anchor" aria-hidden="true" id="whats-the-benefit"></a><a href="#whats-the-benefit" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>What's the benefit?</h2>
 <ul>
 <li><p>More accessiblity.</p>
-<p>Package installation is just downloading for prebuilt platforms. In the future, we can make it installable from system package manager as well. The subtle interaction with <a href="https://github.com/BuckleScript/bucklescript/issues/2799">yarn reinstall</a> is also solved once for all.</p></li>
+  <!-- In the phrase "we can make it installable", what does "it" refer to? -->
+  Package installation now becomes downloading for prebuilt platforms. In the future, we can make it installable from a system package manager as well. The subtle interaction with [yarn reinstall](https://github.com/BuckleScript/bucklescript/issues/2799) is also solved once and for all.
+</li>
 </ul>
 <ul>
 <li><p>Easy separation between compiler and JS artifacts</p>
-<p>The compiler is just one relocatable file, this makes the separation between the compiler and generated JS artifacts easier. The remaining work is mostly to design a convention between compiler and stdlib version schemes.</p></li>
+<p><!-- instead of "between compiler and stdlib version schemes", perhaps say "for aligning compiler and stdlib version schemes" -->
+The compiler is just one relocatable file. This makes the separation between the compiler and generated JS artifacts easier. The remaining work is mostly to design a convention between compiler and stdlib version schemes.</p></li>
 <li><p>Yes, better compile performance</p>
-<p>A large set of files are not loaded from the file system but rather from memory now!</p></li>
+<p>A large set of files is not loaded from the file system but rather from memory now!</p></li>
 <li><p>Fast installation and reinstallation.</p>
-<p>Depending on your network speed, the installation is reduced from 15s to 3s. Reinstallation is almost a no-op now.</p></li>
+<p>Depending on your network speed, the installation is reduced from 15 seconds to 3 seconds. Reinstallation is almost a no-op now.</p></li>
 </ul>
 <!-- TODO: collect data points later -->
 <ul>
 <li><p>JS playground is easier to build</p>
-<p>We translate the compiler into JS so that developers can play with it in the browser.  To make this happen, we used to fake the IO system, this not needed any more since no IO happens when compiling a single file to string.</p></li>
+<p><!-- I'm not sure what you mean by "compiling a single file to a string" -->
+We translate the compiler into JS so that developers can play with it in the browser.  To make this happen, we used to fake the IO system; this not needed any more since no IO happens when compiling a single file to a string.</p></li>
 </ul>
 <h2><a class="anchor" aria-hidden="true" id="some-internal-changes"></a><a href="#some-internal-changes" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Some internal changes</h2>
-<p>To make this happen, the layout of binaries are changed to the below structure, it is <strong>not recommended</strong> for users to depend on the layout, but <a href="https://github.com/BuckleScript/bucklescript/pull/4170#issuecomment-586959464">it happens</a>, the new layout is as below</p>
+<p>To make this happen, the layout of binaries has been changed to the following structure. It is <strong>not recommended</strong> that users depend on the layout, but <a href="https://github.com/BuckleScript/bucklescript/pull/4170#issuecomment-586959464">it happens</a>. Here is the new layout:</p>
 <pre><code class="hljs">
 |<span class="hljs-string">-- bsb // node wrapper of bsb.exe
 </span>|<span class="hljs-string">-- bsc // node wrapper of bsc.exe
