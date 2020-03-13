@@ -4,7 +4,7 @@
         <title>BuckleScript Blog</title>
         <link>https://bucklescript.github.io/blog</link>
         <description>The best place to stay up-to-date with the latest BuckleScript news and events.</description>
-        <lastBuildDate>Thu, 20 Feb 2020 06:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 12 Mar 2020 06:00:00 GMT</lastBuildDate>
         <docs>http://blogs.law.harvard.edu/tech/rss</docs>
         <generator>Feed for Node.js</generator>
         <image>
@@ -12,6 +12,13 @@
             <url>https://bucklescript.github.io/img/logos/bucklescript.svg</url>
             <link>https://bucklescript.github.io/blog</link>
         </image>
+        <item>
+            <title><![CDATA[Announcing bs-platform  7.2]]></title>
+            <link>https://bucklescript.github.io/blog/2020/03/12/release-7-2.html</link>
+            <guid>https://bucklescript.github.io/blog/2020/03/12/release-7-2.html</guid>
+            <pubDate>Thu, 12 Mar 2020 06:00:00 GMT</pubDate>
+            <description><![CDATA[<p>Today we are proud to release <code>bs-platform 7.2</code>!</p> <p>For those unfamiliar with bs-platform, it is the platform for compiling <a href="https://reasonml.github.io/">ReasonML</a> and <a href="https://ocaml.org/">OCaml</a> to fast and readable JavaScript.</p> <p>You can try it with <code>npm i bs-platform</code>!</p> <p>This is a major release with some highli...</p>]]></description>
+        </item>
         <item>
             <title><![CDATA[Loading stdlib from memory]]></title>
             <link>https://bucklescript.github.io/blog/2020/02/20/loading-stdlib-in-memory.html</link>

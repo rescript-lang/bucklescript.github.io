@@ -10,7 +10,7 @@
             languagesDropDown.className = "hide";
           }
         });
-      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/bucklescript/bucklescript" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul class=""><li class="navListItem"><a class="navItem" href="/blog/2020/02/20/loading-stdlib-in-memory">Loading stdlib from memory</a></li><li class="navListItem"><a class="navItem" href="/blog/2020/02/07/union-types-in-bucklescript">Union types in BuckleScript</a></li><li class="navListItem"><a class="navItem" href="/blog/2020/02/04/release-7-1-0">bs-platform release 7.1.0</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/12/27/whats-new-in-7-cont">What&#x27;s new in release 7 (cont)</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/12/20/release-7-02">BuckleScript holiday release!</a></li></ul></div></div></section></div><script>
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/bucklescript/bucklescript" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul class=""><li class="navListItem"><a class="navItem" href="/blog/2020/03/12/release-7-2">Announcing bs-platform  7.2</a></li><li class="navListItem"><a class="navItem" href="/blog/2020/02/20/loading-stdlib-in-memory">Loading stdlib from memory</a></li><li class="navListItem"><a class="navItem" href="/blog/2020/02/07/union-types-in-bucklescript">Union types in BuckleScript</a></li><li class="navListItem"><a class="navItem" href="/blog/2020/02/04/release-7-1-0">bs-platform release 7.1.0</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/12/27/whats-new-in-7-cont">What&#x27;s new in release 7 (cont)</a></li></ul></div></div></section></div><script>
             var coll = document.getElementsByClassName('collapsible');
             var checkActiveCategory = true;
             for (var i = 0; i < coll.length; i++) {
@@ -66,7 +66,61 @@
                 };
               }
             });
-        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="posts"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2020/02/20/loading-stdlib-in-memory">Loading stdlib from memory</a></h1><p class="post-meta">February 20, 2020</p><div class="authorBlock"></div></header><article class="post-content"><div><span><h2><a class="anchor" aria-hidden="true" id="loading-stdlib-from-memory"></a><a href="#loading-stdlib-from-memory" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Loading stdlib from memory</h2>
+        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="posts"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2020/03/12/release-7-2">Announcing bs-platform  7.2</a></h1><p class="post-meta">March 12, 2020</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p>Today we are proud to release <code>bs-platform 7.2</code>!</p>
+<p>For those unfamiliar with bs-platform, it is the platform for compiling <a href="https://reasonml.github.io/">ReasonML</a> and <a href="https://ocaml.org/">OCaml</a> to fast and readable JavaScript.</p>
+<p>You can try it with <code>npm i bs-platform</code>!</p>
+<p>This is a major release with some highlighted features as below:</p>
+<h2><a class="anchor" aria-hidden="true" id="in-memory-loading-stdlib"></a><a href="#in-memory-loading-stdlib" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>In memory loading stdlib</h2>
+<p>Since this release, the binary artifacts generated by the stdlib are loaded from memory instead of an external file systems, which means much faster compilation and installation.</p>
+<p>Previously we recommended installing <code>bs-platform</code> globally to save on installation time.</p>
+<p>However, with this release the installation is so fast that  we recommend installing it locally instead - per project - instead, as there's no additional cost, and it provides better isolation. You can use it with a nice tool called <a href="https://www.npmjs.com/package/npx">npx</a>.</p>
+<p>The installation is also compatible with <code>--ignore-scripts</code> for major platforms (see <a href="https://youtu.be/okrB3aJtUaw?t=921">Richard Feldman's talk</a> on the security implications), and is more stable with <a href="https://github.com/yarnpkg/yarn">yarn</a></p>
+<h2><a class="anchor" aria-hidden="true" id="let-private"></a><a href="#let-private" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>let %private</h2>
+<p>In OCaml's module system, everything is public by default, the only way to hide some values is by providing a separate signature to list public fields and their types:</p>
+<pre><code class="hljs css language-reasonml"><span class="hljs-keyword">module</span> A : { <span class="hljs-keyword">let</span> b : <span class="hljs-built_in">int</span>} = {
+    <span class="hljs-keyword">let</span> a = <span class="hljs-number">3</span> ;
+    <span class="hljs-keyword">let</span> b = <span class="hljs-number">4</span> ; 
+}
+</code></pre>
+<p><code>let</code> <code>%private</code> gives you an option to mark private fields directly</p>
+<pre><code class="hljs css language-reasonml"><span class="hljs-keyword">module</span> A  = {
+    <span class="hljs-keyword">let</span>%<span class="hljs-keyword">private</span> a  = <span class="hljs-number">3</span>;
+    <span class="hljs-keyword">let</span> b  = <span class="hljs-number">4</span>;
+}
+</code></pre>
+<p><code>let%private</code> also applies to file level modules, so in some cases, user does not need to provide a separate interface file just to hide some particular values.</p>
+<p>Note interface files are still recommended as a general best practice since they give you better separate compilation units and also they're better for documentation. Still, <code>let%private</code> is useful in the following scenarios:</p>
+<ul>
+<li><p>Code generators. Some code generators want to hide some values but it is sometimes very hard or time consuming for code generators to synthesize the types for public fields.</p></li>
+<li><p>Quick prototyping. During prototyping, we still want to hide some values, but the interface file is not stable yet, <code>let%private</code> provide you such convenience.</p></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="int64-performance-optimization"></a><a href="#int64-performance-optimization" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Int64 performance optimization</h2>
+<p>We received feedback from some users that various Int64 operations became bottlenecks in their code performance, in particular <code>Int64.to_string</code>.</p>
+<p>We responded to this, and after some hard work - but <em>without</em> changing the underlying representation - our <code>Int64.to_string</code> is even faster than <code>bigint</code> for common inputs.</p>
+<p>A micro-benchmark for comparison:</p>
+<pre><code class="hljs"><span class="hljs-string">running</span> <span class="hljs-string">on</span> <span class="hljs-number">7.1</span>
+<span class="hljs-attr">Int64.to_string:</span> <span class="hljs-number">367.</span><span class="hljs-string">788ms</span> <span class="hljs-comment"># super positive number </span>
+<span class="hljs-attr">Int64.to_string:</span> <span class="hljs-number">140.</span><span class="hljs-string">451ms</span> <span class="hljs-comment"># median number</span>
+<span class="hljs-attr">Int64.to_string:</span> <span class="hljs-number">375.</span><span class="hljs-string">471ms</span> <span class="hljs-comment"># super negative number</span>
+
+<span class="hljs-string">bigint</span>
+<span class="hljs-attr">Int64.to_string:</span> <span class="hljs-number">25.</span><span class="hljs-string">151ms</span>
+<span class="hljs-attr">Int64.to_string:</span> <span class="hljs-number">12.</span><span class="hljs-string">278ms</span>
+<span class="hljs-attr">Int64.to_string:</span> <span class="hljs-number">21.</span><span class="hljs-string">011ms</span>
+
+<span class="hljs-string">latest</span>
+<span class="hljs-attr">Int64.to_string:</span> <span class="hljs-number">43.</span><span class="hljs-string">228ms</span>
+<span class="hljs-attr">Int64.to_string:</span> <span class="hljs-number">5.</span><span class="hljs-string">764ms</span>
+<span class="hljs-attr">Int64.to_string:</span> <span class="hljs-number">43.</span><span class="hljs-string">270ms</span>
+</code></pre>
+<p>We also apply such optimizations to other Int64 operations.</p>
+<p>Note that Int64 is implemented in OCaml itself without any raw JavaScript. This is case compelling hints that our optimizing compiler not only provides expressivity and type-safe guarantees, but also empowers users to write maintainable, <em>efficient</em> code.</p>
+<h2><a class="anchor" aria-hidden="true" id="file-level-compilation-flags"></a><a href="#file-level-compilation-flags" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>File level compilation flags</h2>
+<p>In this release, we also provide a handy flag to allow users to override some configurations at the file level.</p>
+<pre><code class="hljs css language-reasonml"><span class="hljs-literal">[@<span class="hljs-identifier">bs</span>.<span class="hljs-identifier">config</span> {<span class="hljs-identifier">flags</span>: [|"-<span class="hljs-identifier">w</span>", "<span class="hljs-identifier">a</span>", "-<span class="hljs-identifier">bs</span>-<span class="hljs-identifier">no</span>-<span class="hljs-identifier">bin</span>-<span class="hljs-identifier">annot</span>"|]</span>}]; <span class="hljs-comment">// toplevel attributes</span>
+</code></pre>
+<p>A full list of changes is available here: <a href="https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#72">https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#72</a></p>
+</span></div></article></div><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2020/02/20/loading-stdlib-in-memory">Loading stdlib from memory</a></h1><p class="post-meta">February 20, 2020</p><div class="authorBlock"></div></header><article class="post-content"><div><span><h2><a class="anchor" aria-hidden="true" id="loading-stdlib-from-memory"></a><a href="#loading-stdlib-from-memory" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Loading stdlib from memory</h2>
 <!-- Do you mean "external files" instead of "external file system"? In Linux world, a file system is means something like EXT4 or btrfs -->
 In the next release, we are going to load stdlib from memory instead of from external files, which will make the BuckleScript toolchain more accessible and performant.
 <p>You can try it via <code>npm i bs-platform@7.2.0-dev.4</code></p>
@@ -815,44 +869,6 @@ exports.fib = fib;
 <p><img src="/img/profile-5.png"></p>
 <p>Version 5.1.0 (around 4.2s)</p>
 <p><img src="/img/profile-4.png"></p>
-<p>Happy hacking!</p>
-</span></div></article></div><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2019/06/26/release-5-0-5">Release 5.0.5 and 6.0.2</a></h1><p class="post-meta">June 26, 2019</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p><code>bs-platform</code> 5.0.5 (for OCaml 4.02.3) and 6.0.2 (for OCaml 4.06.1) is released.</p>
-<p>A detailed list of changes is available <a href="https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#505">here</a></p>
-<p>It has some critical bug fixes that we suggest users to upgrade.</p>
-<p>Some feature enhancement is described as below:</p>
-<h2><a class="anchor" aria-hidden="true" id="user-land-c-stubs-polyfill"></a><a href="#user-land-c-stubs-polyfill" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>User land C stubs polyfill</h2>
-<p>Previously, for existing OCaml libraries which rely on some C primitives, it has to be patched in source level. In this release, user can provide such support independently without patching the source code.</p>
-<p>Suppose you have an OCaml module which relies on an C primitive as below:</p>
-<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> ff : <span class="hljs-built_in">int</span> -&gt; <span class="hljs-built_in">int</span> -&gt; <span class="hljs-built_in">int</span> = <span class="hljs-string">"caml_fancy_add"</span> 
-</code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">external</span> ff : (int,int) =&gt; int = <span class="hljs-string">"caml_fancy_add"</span> ;
-</code></pre>
-<p><code>caml_fancy_add</code> is a C function for native code, now we can provide this support in a js files, what user needs to do is adding <code>caml_fancy_add</code> to a global variable like this</p>
-<pre><code class="hljs css language-js"><span class="hljs-comment">/**
- * @param {int} x 
- * @param {int} y
- * @returns {int}
- * 
- */</span>
-<span class="hljs-built_in">require</span>(<span class="hljs-string">'bs-platform/lib/js/caml_external_polyfill.js'</span>).register(<span class="hljs-string">'caml_fancy_add'</span>,<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">x,y</span>)</span>{
-  <span class="hljs-keyword">return</span> + ((<span class="hljs-string">""</span>+x ) + (<span class="hljs-string">""</span>+y))
-})
-</code></pre>
-<p>Note this is an experimental feature that we don't suggest users to use it extensively, it is provided as an escape hatch. We are also expecting feedback to see how we could improve it, so there might be some backward incompatible changes.</p>
-<h2><a class="anchor" aria-hidden="true" id="a-new-warning-number-105"></a><a href="#a-new-warning-number-105" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>A new warning number 105</h2>
-<p>Previously, there are some scenarios that the Js function name is inferred during the interop.</p>
-<p>For example</p>
-<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> f : <span class="hljs-built_in">int</span> -&gt; <span class="hljs-built_in">int</span> = <span class="hljs-string">""</span> [@@bs.<span class="hljs-keyword">val</span>]
-</code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.val]</span> <span class="hljs-keyword">external</span> f : int =&gt; int = <span class="hljs-string">""</span> 
-</code></pre>
-<p>Here the JS function name is inferred as <code>f</code> which is the same as OCaml function name.</p>
-<p>Such ffi declaration is fragile to refactoring when changing names of f, it will also change the name of js function name which is probably not what user expected.</p>
-<p>105 warning number is to help warn against this case (turned on by default).</p>
-<h2><a class="anchor" aria-hidden="true" id="simplified-debugger-mode"></a><a href="#simplified-debugger-mode" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Simplified debugger mode</h2>
-<p>Previously, user has to add <code>-bs-g</code> flag to <code>bsc-flags</code> in <code>bsconfig.json</code> and add one line code to the main module. Such code change is no longer needed, only the flag is needed.</p>
-<h2><a class="anchor" aria-hidden="true" id="build-performance-improvement"></a><a href="#build-performance-improvement" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Build performance improvement</h2>
-<p>We improved the build performance and simplified the design of the build significantly in this release, we will have a separate post about it.</p>
 <p>Happy hacking!</p>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-next" href="/blog/page2/">Next →</a></div></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script>window.foo = new Pjax({
           areas: [
