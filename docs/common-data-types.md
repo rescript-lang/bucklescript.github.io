@@ -54,7 +54,7 @@ console.log("你好，\n世界");
 
 #### Interpolation
 
-For convenience, we also expose another special tag quoted string annotation, `j`, which supports the equivalent of JS' string interpolation:
+For convenience, we also expose another special tag quoted string annotation, `j`, which supports the equivalent of JS' string interpolation, but for variables only (not arbitrary expressions):
 
 ```ocaml
 let world = {j|世界|j}
