@@ -101,12 +101,12 @@ In conjunction with `-bs-eval`: the first block is the output of `-dparsetree`, 
 
 `-bs-eval` doesn't create intermediate file. Useful for learning or troubleshooting.
 
-## -bs-no-builtin-ppx-ml, -bs-no-builtin-ppx-mli
+## -bs-no-builtin-ppx
 
 If you don't use any BS-specific annotations, you can explicitly turn it off. Another use-case is to use `-ppx` explicitly as below:
 
 ```sh
-bsc -c -ppx bsppx.exe -bs-no-builtin-ppx-ml c.ml
+bsc -c -ppx bsppx.exe -bs-no-builtin-ppx c.ml
 ```
 
 ## -bs-no-version-header
