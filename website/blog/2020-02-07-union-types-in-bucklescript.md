@@ -156,7 +156,7 @@ module A_or_b: {
     | A(a)
     | B(b);
   let a = (v: a) => Any(v);
-  let b = (v: b) == Any(v);
+  let b = (v: b) => Any(v);
   let classify = (Any (v): t) =>
     if ([%raw {|function (a) { return  a instanceof globalThis.A}|}](v)) {
       A(Obj.magic(v): a);
