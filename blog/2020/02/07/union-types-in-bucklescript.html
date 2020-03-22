@@ -202,7 +202,7 @@ What happens when we need to know specifically whether we have a value of type `
     | <span class="hljs-constructor">A</span>(a)
     | <span class="hljs-constructor">B</span>(b);
   <span class="hljs-keyword">let</span> a = (v: a) =&gt; <span class="hljs-constructor">Any</span>(v);
-  <span class="hljs-keyword">let</span> b = (v: b) <span class="hljs-operator">==</span> <span class="hljs-constructor">Any</span>(v);
+  <span class="hljs-keyword">let</span> b = (v: b) =&gt; <span class="hljs-constructor">Any</span>(v);
   <span class="hljs-keyword">let</span> classify = (<span class="hljs-constructor">Any</span> (v): t) =&gt;
     <span class="hljs-keyword">if</span> (<span class="hljs-attribute">[%raw {|function (a) { return  a instanceof globalThis.A}|}]</span>(v)) {
       <span class="hljs-constructor">A</span>(<span class="hljs-module-identifier">Obj</span>.magic(v): a);
