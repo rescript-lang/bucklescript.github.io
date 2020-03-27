@@ -2,11 +2,21 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://bucklescript.github.io/blog</id>
     <title>BuckleScript Blog</title>
-    <updated>2020-03-12T06:00:00Z</updated>
+    <updated>2020-03-26T06:00:00Z</updated>
     <generator>Feed for Node.js</generator>
     <link rel="alternate" href="https://bucklescript.github.io/blog"/>
     <subtitle>The best place to stay up-to-date with the latest BuckleScript news and events.</subtitle>
     <logo>https://bucklescript.github.io/img/logos/bucklescript.svg</logo>
+    <entry>
+        <title type="html"><![CDATA[Generalized uncurry support in BuckleScript 7.3]]></title>
+        <id>https://bucklescript.github.io/blog/2020/03/26/generalize-uncurry.html</id>
+        <link href="https://bucklescript.github.io/blog/2020/03/26/generalize-uncurry.html">
+        </link>
+        <updated>2020-03-26T06:00:00Z</updated>
+        <summary type="html"><![CDATA[<p><a href="https://github.com/facebook/reason">ReasonML</a> is a <a href="https://en.wikipedia.org/wiki/Currying">curried</a> language, while Js is an uncurried language. When compiling ReasonML into Js, there's lots of headache due to the semantics mismatch.</p> <p>After several years of reasearch and development, we reach an ideal situation in next release:...</p>]]></summary>
+        <author>
+        </author>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Announcing bs-platform  7.2]]></title>
         <id>https://bucklescript.github.io/blog/2020/03/12/release-7-2.html</id>

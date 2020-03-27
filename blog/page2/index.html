@@ -10,7 +10,7 @@
             languagesDropDown.className = "hide";
           }
         });
-      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/bucklescript/bucklescript" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul class=""><li class="navListItem"><a class="navItem" href="/blog/2020/03/12/release-7-2">Announcing bs-platform  7.2</a></li><li class="navListItem"><a class="navItem" href="/blog/2020/02/20/loading-stdlib-in-memory">Loading stdlib from memory</a></li><li class="navListItem"><a class="navItem" href="/blog/2020/02/07/union-types-in-bucklescript">Union types in BuckleScript</a></li><li class="navListItem"><a class="navItem" href="/blog/2020/02/04/release-7-1-0">bs-platform release 7.1.0</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/12/27/whats-new-in-7-cont">What&#x27;s new in release 7 (cont)</a></li></ul></div></div></section></div><script>
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/bucklescript/bucklescript" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul class=""><li class="navListItem"><a class="navItem" href="/blog/2020/03/26/generalize-uncurry">Generalized uncurry support in BuckleScript 7.3</a></li><li class="navListItem"><a class="navItem" href="/blog/2020/03/12/release-7-2">Announcing bs-platform  7.2</a></li><li class="navListItem"><a class="navItem" href="/blog/2020/02/20/loading-stdlib-in-memory">Loading stdlib from memory</a></li><li class="navListItem"><a class="navItem" href="/blog/2020/02/07/union-types-in-bucklescript">Union types in BuckleScript</a></li><li class="navListItem"><a class="navItem" href="/blog/2020/02/04/release-7-1-0">bs-platform release 7.1.0</a></li></ul></div></div></section></div><script>
             var coll = document.getElementsByClassName('collapsible');
             var checkActiveCategory = true;
             for (var i = 0; i < coll.length; i++) {
@@ -66,7 +66,78 @@
                 };
               }
             });
-        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="posts"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2019/06/26/release-5-0-5">Release 5.0.5 and 6.0.2</a></h1><p class="post-meta">June 26, 2019</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p><code>bs-platform</code> 5.0.5 (for OCaml 4.02.3) and 6.0.2 (for OCaml 4.06.1) is released.</p>
+        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="posts"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2019/08/12/release-5-10-0">What&#x27;s new in release 5.1.0</a></h1><p class="post-meta">August 12, 2019</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p><code>bs-platform</code> 5.1.0 (for OCaml 4.02.3) and 6.1.0 (for OCaml 4.06.1) is ready for testing.</p>
+<p>You can install it via <code>npm i -g bs-platform@5.1.0</code> (or <code>npm i -g bs-platform@6.1.0-dev.6</code>).</p>
+<p>A detailed list of changes is available <a href="https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#510">here</a></p>
+<p>Some feature enhancements are described as follows:</p>
+<h2><a class="anchor" aria-hidden="true" id="introducing-bsc-to-public"></a><a href="#introducing-bsc-to-public" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Introducing <code>bsc</code> to public</h2>
+<p><code>bsc</code> is the underlying compiler which is invoked by <code>bsb</code>. In this release we simplified it a bit so that it can be used directly by customers for simple tasks. It is available after you have <code>bs-platform</code> installed.</p>
+<p>Suppose you have a file called <code>test.re</code>:</p>
+<pre><code class="hljs">let rec fib (n) = <span class="hljs-keyword">switch</span> n {
+    | <span class="hljs-number">0</span> | <span class="hljs-number">1</span> =&gt; <span class="hljs-number">1</span>;
+    | n =&gt; fib (n <span class="hljs-number">-1</span>) + fib(n<span class="hljs-number">-2</span>);
+};
+Js.log (fib (<span class="hljs-number">0</span>));
+</code></pre>
+<p>You can compile it directly via <code>bsc test.re</code>, producing the following output:</p>
+<pre><code class="hljs">bucklescript.github.io&gt;bsc test.re
+<span class="hljs-comment">// Generated by BUCKLESCRIPT, PLEASE EDIT WITH CARE</span>
+<span class="hljs-meta">'use strict'</span>;
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fib</span>(<span class="hljs-params">n</span>) </span>{
+  <span class="hljs-keyword">if</span> (n === <span class="hljs-number">0</span> || n === <span class="hljs-number">1</span>) {
+    <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+  } <span class="hljs-keyword">else</span> {
+    <span class="hljs-keyword">return</span> fib(n - <span class="hljs-number">1</span> | <span class="hljs-number">0</span>) + fib(n - <span class="hljs-number">2</span> | <span class="hljs-number">0</span>) | <span class="hljs-number">0</span>;
+  }
+}
+<span class="hljs-built_in">console</span>.log(fib(<span class="hljs-number">0</span>));
+exports.fib = fib;
+<span class="hljs-comment">/*  Not a pure module */</span>
+</code></pre>
+<p>You can also get the inferred signature directly via <code>bsc -i test.re</code></p>
+<pre><code class="hljs"><span class="hljs-keyword">let</span> fib: <span class="hljs-built_in">int</span> =&gt; <span class="hljs-built_in">int</span>;
+</code></pre>
+<p>Or even better, you can do a one liner in bsc, via <code>-e</code> option.</p>
+<pre><code class="hljs">bucklescript&gt;bsc -i -e <span class="hljs-symbol">'let</span> id = x =&gt; x'
+<span class="hljs-keyword">let</span> id: <span class="hljs-symbol">'a</span> =&gt; <span class="hljs-symbol">'a</span>;
+</code></pre>
+<p>Note: <code>bsc</code> supports vanilla OCaml syntax as well, this is only recommended for toying around, for serious development, <code>bsb</code> is recommended.</p>
+<h2><a class="anchor" aria-hidden="true" id="bstracing-to-visualize-build-profile"></a><a href="#bstracing-to-visualize-build-profile" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>bstracing</code> to visualize build profile</h2>
+<p>After you finish the build process, you can run <code>bstracing</code> directly. This generates a data file called <code>tracing_${hour}_${minute}_${second}.json</code> which can be loaded into chrome via <code>chrome://tracing</code>.</p>
+<p>Below is a profile image that shows the tracing graph for a large project:</p>
+<p><img src="/img/profile-1.png"></p>
+<p>And you can zoom-in to see more details:</p>
+<p><img src="/img/profile-2.png"></p>
+<h2><a class="anchor" aria-hidden="true" id="support-of-ppx-with-arguments"></a><a href="#support-of-ppx-with-arguments" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Support of ppx with arguments</h2>
+<p>We extended the schema to support ppx with arguments:</p>
+<pre><code class="hljs css language-js">        <span class="hljs-string">"ppx-specs"</span>: {
+            <span class="hljs-string">"type"</span>: <span class="hljs-string">"array"</span>,
+            <span class="hljs-string">"items"</span>: {
+                <span class="hljs-string">"oneOf"</span> : [
+                    {
+                        <span class="hljs-string">"type"</span>: <span class="hljs-string">"string"</span> <span class="hljs-comment">// single command</span>
+                    },
+                    {
+                        <span class="hljs-string">"type"</span> : <span class="hljs-string">"array"</span>, <span class="hljs-comment">// command with args</span>
+                        <span class="hljs-string">"items"</span>: {
+                            <span class="hljs-string">"type"</span> : <span class="hljs-string">"string"</span> 
+                        }
+                    }
+                ]
+            }
+        },
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="respect-node_path-when-resolving-dependent-modules"></a><a href="#respect-node_path-when-resolving-dependent-modules" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Respect NODE_PATH when resolving dependent modules</h2>
+<p>Previously, <code>bsb</code> was tied to npm package structures by searching <code>node_modules</code>. In this release, <code>bsb</code> also tries to search paths listed in <code>NODE_PATH</code> so that <code>bsb</code> is no longer tied to the npm or yarn package manager.</p>
+<h2><a class="anchor" aria-hidden="true" id="build-performance-improvement"></a><a href="#build-performance-improvement" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Build performance improvement</h2>
+<p>Yes, performance is increased with each release!</p>
+<p>Quite a lot of work was spent in house-keeping this release. We changed the internal data representation to a more compact format. Here is the result of using <code>bstracing</code> to show a comparison of clean building a large project around (2 * 5 * 5 * 5 * 5 = 1250 files):</p>
+<p>Version 5.0.6 (around 4.8s)</p>
+<p><img src="/img/profile-5.png"></p>
+<p>Version 5.1.0 (around 4.2s)</p>
+<p><img src="/img/profile-4.png"></p>
+<p>Happy hacking!</p>
+</span></div></article></div><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2019/06/26/release-5-0-5">Release 5.0.5 and 6.0.2</a></h1><p class="post-meta">June 26, 2019</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p><code>bs-platform</code> 5.0.5 (for OCaml 4.02.3) and 6.0.2 (for OCaml 4.06.1) is released.</p>
 <p>A detailed list of changes is available <a href="https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#505">here</a></p>
 <p>It has some critical bug fixes that we suggest users to upgrade.</p>
 <p>Some feature enhancement is described as below:</p>
@@ -462,30 +533,6 @@ We will update the contribution guide once it gets stable.</p>
 </code></pre>
 <p>In the next release, we are going to lift such restriction. You'll be able to call an external marked with <code>bs.variadic</code> with an array reference, not just a literal array.</p>
 <p>Caveat: it's unclear how to support such first class <code>bs.variadic</code> call in conjunction with <code>bs.new</code>, so an external declaration that contains both will trigger a compilation error. We'll try to figure out this particular case in the future too.</p>
-</span></div></article></div><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2018/12/05/release-4-0-8">BuckleScript 4.0.8 (Part One)</a></h1><p class="post-meta">December 5, 2018</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p>Today we released version 4.0.8 of <code>bs-platform</code>. A detailed list of changes is available <a href="https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#408">here</a>.</p>
-<p>Most user-facing changes are bug fixes and small enhancements, while quite a lot of work has been done behind the scenes towards the more fundamental improvements coming down the line. This blog post refers to the BuckleScript runtime and some of the work we are doing to improve it.</p>
-<p>The design goal of BuckleScript is to make the runtime as small as possible. This runtime is divided into two parts: the C shims, and the fundamental language feature support.</p>
-<p>The C shims are not a strict runtime requirement: in the native backend, the functions are implemented in C, but in BuckleScript this isn't necessary. We can either implement the C shims in a polyfill style or we can just implement them in OCaml and compile via BuckleScript. Recently, we have been shifting more and more work from the runtime to the normal OCaml stdlib by patching it with conditional compilation. The benefit is obvious – they are just normal functions which do not need special compiler support – but the downside is that we might need to make more patches to the libraries which use C functions, but considering the more challenging part of maintaining the patches to the compiler, we think such overhead is worthwhile.</p>
-<p>If we ignore the C shims, the BuckleScript runtime is very small, and it is pretty easy for experienced BuckleScript programmers to write runtime-free code which generates standalone JS code. Such code could include supporting curried calling conventions, encoding of OCaml ADT, etc.</p>
-<p>The BuckleScript runtime is written in BuckleScript itself. The benefit of this is that it is much more maintainable than implementing in JS itself, and it is easier to keep some invariants when crossing the boundary between the runtime and the stdlib. For example, we don't need to worry about the consistency of the runtime encoding of <code>type tuple</code> in BuckleScript, since the runtime is also implemented in BuckleScript itself, and we get three output modules for free thanks to this &quot;dogfooding&quot;.</p>
-<p>However, this makes the build system pretty complicated and fragile, and the dependencies between each module are mostly hard coded. Even worse, this introduces a hard dependency between the normal libraries and the runtime binary artifacts.</p>
-<p>In particular, one <a href="https://github.com/BuckleScript/bucklescript/issues/2772">issue</a> we want to address is to make the BuckleScript toolchain lightweight. We will continue to implement the BuckleScript runtime by using BuckleScript itself, but we want to get rid of dependencies like <a href="https://github.com/BuckleScript/bucklescript/issues/3164">the support for exceptions</a>. In the end, installation will no longer involve building the runtime: BuckleScript will simply be a bunch of generated JS files, so the complexity of the build system will not impact users at all. This is quite important given that we are committed to supporting Windows.</p>
-<p>In the future, we will therefore be able to distribute the runtime as a normal JS library, and the BuckleScript user will only need the binary compiler and a small set of JS files. They will be able to use stdlib, Belt or anything else.</p>
-<p>To get rid of such dependencies between stdlib and the runtime, we are going to introduce a breaking change in the future. In hindsight, our support for catching JS exceptions exposed the concrete representation of the exception encoding, in particular:</p>
-<pre><code class="hljs"><span class="hljs-keyword">match</span> ... <span class="hljs-keyword">with</span> 
-| <span class="hljs-type">OCamlException</span> <span class="hljs-built_in">exn</span> -&gt; ..
-| <span class="hljs-type">Js</span>.<span class="hljs-type">Exn</span>.<span class="hljs-type">Error</span> e -&gt; ...
-</code></pre>
-<p>In this release, we introduced a function to avoid exposing such exception constructors:</p>
-<pre><code class="hljs"><span class="hljs-keyword">match</span> ... <span class="hljs-keyword">with</span> 
-| <span class="hljs-type">OCamlException</span> <span class="hljs-built_in">exn</span> -&gt; ...
-| e -&gt; 
-    <span class="hljs-keyword">match</span> <span class="hljs-type">Js</span>.asJsExn e <span class="hljs-keyword">with</span> 
-    | <span class="hljs-type">Some</span> jserror -&gt; ..
-    | <span class="hljs-type">None</span> -&gt; ...
-</code></pre>
-<p>We encourage you to make such changes yourself to future-proof your codebases.</p>
-<p>Oh and by the way, one side effect of this refactoring of the BuckleScript runtime is that the compilation does not require reading of the generated <code>.cm*</code> files, which means faster compilation :)</p>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev" href="/blog/">← Prev</a><a class="docs-next" href="/blog/page3/">Next →</a></div></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script>window.foo = new Pjax({
           areas: [
             // try to use the first query.

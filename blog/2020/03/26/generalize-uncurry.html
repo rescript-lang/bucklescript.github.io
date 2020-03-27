@@ -1,0 +1,186 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Generalized uncurry support in BuckleScript 7.3 · BuckleScript</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="[ReasonML](https://github.com/facebook/reason) is a [curried](https://en.wikipedia.org/wiki/Currying) language, while Js is an uncurried language. When compiling ReasonML into Js, there&#x27;s lots of headache due to the semantics mismatch. "/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Generalized uncurry support in BuckleScript 7.3 · BuckleScript"/><meta property="og:type" content="website"/><meta property="og:url" content="https://bucklescript.github.io/blog/2020/03/26/generalize-uncurry"/><meta property="og:description" content="[ReasonML](https://github.com/facebook/reason) is a [curried](https://en.wikipedia.org/wiki/Currying) language, while Js is an uncurried language. When compiling ReasonML into Js, there&#x27;s lots of headache due to the semantics mismatch. "/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/logos/bucklescript.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://bucklescript.github.io/blog/atom.xml" title="BuckleScript Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://bucklescript.github.io/blog/feed.xml" title="BuckleScript Blog RSS Feed"/><script type="text/javascript" src="/js/toggleSyntaxButton.js"></script><script type="text/javascript" src="/js/pjax-api.min.js"></script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/logos/bucklescript.svg" alt="BuckleScript"/><h2 class="headerTitleWithLogo">BuckleScript</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/en/installation" target="_self">Docs</a></li><li class=""><a href="/docs/en/playground" target="_self">Try</a></li><li class=""><a href="/docs/en/stdlib-overview" target="_self">API</a></li><li class=""><a href="/docs/en/community" target="_self">Community</a></li><li class="siteNavGroupActive"><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja">日本語</a></li><li><a href="/es-ES">Español</a></li><li><a href="/fr">Français</a></li><li><a href="/ko">한국어</a></li><li><a href="/pt-BR">Português (Brasil)</a></li><li><a href="/ru">Русский</a></li><li><a href="/zh-CN">中文</a></li><li><a href="/zh-TW">繁體中文</a></li><li><a href="https://crowdin.com/project/bucklescript" target="_blank" rel="noreferrer noopener">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/bucklescript/bucklescript" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul class=""><li class="navListItem navListItemActive"><a class="navItem" href="/blog/2020/03/26/generalize-uncurry">Generalized uncurry support in BuckleScript 7.3</a></li><li class="navListItem"><a class="navItem" href="/blog/2020/03/12/release-7-2">Announcing bs-platform  7.2</a></li><li class="navListItem"><a class="navItem" href="/blog/2020/02/20/loading-stdlib-in-memory">Loading stdlib from memory</a></li><li class="navListItem"><a class="navItem" href="/blog/2020/02/07/union-types-in-bucklescript">Union types in BuckleScript</a></li><li class="navListItem"><a class="navItem" href="/blog/2020/02/04/release-7-1-0">bs-platform release 7.1.0</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="lonePost"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2020/03/26/generalize-uncurry">Generalized uncurry support in BuckleScript 7.3</a></h1><p class="post-meta">March 26, 2020</p><div class="authorBlock"></div></header><div><span><p><a href="https://github.com/facebook/reason">ReasonML</a> is a <a href="https://en.wikipedia.org/wiki/Currying">curried</a> language, while Js is an uncurried language. When compiling ReasonML into Js, there's lots of headache due to the semantics mismatch.</p>
+<p>After several years of reasearch and development, we reach an ideal situation in next release: adding a lightweight uncurried calling convention to ReasonML.</p>
+<h2><a class="anchor" aria-hidden="true" id="why-we-need-native-uncurried-calling-convention"></a><a href="#why-we-need-native-uncurried-calling-convention" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Why we need native uncurried calling convention</h2>
+<ul>
+<li>Curried call is inherently slower than uncurried call.</li>
+</ul>
+<p>A native implementation of curried call like <a href="https://www.purescript.org/">purescript</a> does will generate very slow code:</p>
+<pre><code class="hljs css language-js"><span class="hljs-keyword">let</span> curriedFunction = <span class="hljs-function"><span class="hljs-params">x</span> =&gt;</span> <span class="hljs-function"><span class="hljs-params">y</span> =&gt;</span> <span class="hljs-function"><span class="hljs-params">z</span> =&gt;</span> x + y +z ;
+<span class="hljs-keyword">let</span> curriedApply = curriedFunction(<span class="hljs-number">1</span>)(<span class="hljs-number">2</span>)(<span class="hljs-number">3</span>); <span class="hljs-comment">// memory allocation triggered</span>
+</code></pre>
+<p>BuckleScript does tons of optimizations and very aggressive arity inference so that the curried function is actually compiled into multiple-arity function, and when the application is supplied with the exact arguments -- which is true in most cases, it is applied like normal functions.</p>
+<p>However, such optimization does not apply to high order functions:</p>
+<pre><code class="hljs css language-reasonml"><span class="hljs-keyword">let</span> highOrder =<span class="hljs-function"> (<span class="hljs-params">f</span>,<span class="hljs-params">a</span>,<span class="hljs-params">b</span>)=&gt;</span> f (a, b) 
+<span class="hljs-comment">// can not infer the arity of `f` since we know</span>
+<span class="hljs-comment">// nothing about the arity of `f`, unless</span>
+<span class="hljs-comment">// we do the whole program optimization</span>
+</code></pre>
+<p>In cases where arity infer does not help, the arity guessing has to be delayed into runtime.</p>
+<ul>
+<li>Bindings to JS world</li>
+</ul>
+<p>When we create bindings for high order functions in the JS world, we would like to have native uncurried functions which behave the same as JS world -- no semantics mismatch.</p>
+<h2><a class="anchor" aria-hidden="true" id="generalized-uncurried-calling-convention-in-this-releases"></a><a href="#generalized-uncurried-calling-convention-in-this-releases" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Generalized uncurried calling convention in this releases</h2>
+<p>Prior to release 7.3, we had introduced uncurried calling convention, however, it has serious limitations -- uncurried functions can not be polymorphic, it does not support labels, the error
+message leaks the underlying encoding -- now all those limitations are gone!</p>
+<p>Previously</p>
+<p><img src="/img/poly-error.png"></p>
+<p><img src="/img/label-error.png"></p>
+<p><img src="/img/recursive-error.png" ></p>
+<p>The error messages above are cryptic and hard to understand. And the limitation of not supporting recursive functions make uncurried support pretty weak.</p>
+<p>Now those limitations are all gone, you can have polymoprhic uncurried recursive functions and it support labels.</p>
+<p><img src="/img/uncurry-label.png"></p>
+<p><img src="/img/recursive.png"></p>
+<p>The error message is  also enhanced significantly</p>
+<ul>
+<li>When uncurried functon is used in curried</li>
+</ul>
+<pre><code class="hljs css language-reasonml"><span class="hljs-keyword">let</span> add =<span class="hljs-function"> (. <span class="hljs-params">x</span>, <span class="hljs-params">y</span> ) =&gt;</span> x + y;
+
+<span class="hljs-keyword">let</span> u = add (<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)
+</code></pre>
+<p>The old error message:</p>
+<pre><code class="hljs">Error: This expression has<span class="hljs-built_in"> type </span>(. int, int) =&gt; int
+       This is <span class="hljs-keyword">not</span> a function; it cannot be applied.
+</code></pre>
+<p>The new error message</p>
+<pre><code class="hljs"><span class="hljs-keyword">Error: </span>This function has uncurried type, it needs to be applied in ucurried style
+</code></pre>
+<ul>
+<li>When curried function is used in uncurried context</li>
+</ul>
+<pre><code class="hljs css language-reasonml">
+<span class="hljs-keyword">let</span> add =<span class="hljs-function"> ( <span class="hljs-params">x</span>, <span class="hljs-params">y</span> ) =&gt;</span> x + y;
+
+<span class="hljs-keyword">let</span> u = add (.<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)
+</code></pre>
+<p>The old error message:</p>
+<pre><code class="hljs">Error: This expression has<span class="hljs-built_in"> type </span>(int, int) =&gt; int
+       but an expression was expected of<span class="hljs-built_in"> type </span>(. <span class="hljs-string">'a, '</span>b) =&gt; <span class="hljs-string">'c
+</span></code></pre>
+<p>The new error message:</p>
+<pre><code class="hljs"><span class="hljs-keyword">Error: </span>This function is a curried function where an uncurried function is expected
+</code></pre>
+<ul>
+<li>When arity mismatch</li>
+</ul>
+<pre><code class="hljs css language-reasonml"><span class="hljs-keyword">let</span> add =<span class="hljs-function"> (. <span class="hljs-params">x</span>, <span class="hljs-params">y</span> ) =&gt;</span> x + y;
+
+<span class="hljs-keyword">let</span> u = add (.<span class="hljs-number">1</span>, <span class="hljs-number">2</span>,<span class="hljs-number">3</span>)
+</code></pre>
+<p>The old message:</p>
+<pre><code class="hljs">Error: This expression has<span class="hljs-built_in"> type </span>(. int, int) =&gt; int
+       but an expression was expected of<span class="hljs-built_in"> type </span>(. <span class="hljs-string">'a, '</span>b, <span class="hljs-string">'c) =&gt; '</span>d
+       These two variant types have <span class="hljs-literal">no</span> intersection
+</code></pre>
+<p>The new message:</p>
+<pre><code class="hljs"><span class="hljs-keyword">Error: </span>This function has arity2 but was expected arity3
+</code></pre>
+<p>Note the generalized uncurry support also applies to objects, so that you can use <code>obj##meth (~label1=a,~label2=b)</code>.</p>
+<p>The only thing where uncurried call  is not supported is optional arguments, if users are mostly targeting JS runtime, we suggest you can try uncurry by default and would like to hear your feedback!</p>
+<p>You can already test it today by <code>npm install bs-platform@7.3.0-dev.1</code> (Windows support will be coming soon).</p>
+</span></div></div><div class="blogSocialSection"></div></div><div class="blog-recent"><a class="button" href="/blog">Recent Posts</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#why-we-need-native-uncurried-calling-convention">Why we need native uncurried calling convention</a></li><li><a href="#generalized-uncurried-calling-convention-in-this-releases">Generalized uncurried calling convention in this releases</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script>window.foo = new Pjax({
+          areas: [
+            // try to use the first query.
+            '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
+            // fallback
+            'body'
+          ],
+          link: '.docsNavContainer:not(.docsSliderActive) a',
+          update: {
+            script: false,
+          }
+        });
+        var languagesMenuItemCopy = document.getElementById("languages-menu");
+        languagesMenuItemCopy.addEventListener("click", function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          e.stopImmediatePropagation();
+        });</script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '0fd97db83891aa20810559812d9e69ac',
+                indexName: 'bucklescript',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:en"]}
+              });
+            </script></body></html>

@@ -10,7 +10,7 @@
             languagesDropDown.className = "hide";
           }
         });
-      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/bucklescript/bucklescript" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul class=""><li class="navListItem"><a class="navItem" href="/blog/2020/03/12/release-7-2">Announcing bs-platform  7.2</a></li><li class="navListItem"><a class="navItem" href="/blog/2020/02/20/loading-stdlib-in-memory">Loading stdlib from memory</a></li><li class="navListItem"><a class="navItem" href="/blog/2020/02/07/union-types-in-bucklescript">Union types in BuckleScript</a></li><li class="navListItem"><a class="navItem" href="/blog/2020/02/04/release-7-1-0">bs-platform release 7.1.0</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/12/27/whats-new-in-7-cont">What&#x27;s new in release 7 (cont)</a></li></ul></div></div></section></div><script>
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/bucklescript/bucklescript" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul class=""><li class="navListItem"><a class="navItem" href="/blog/2020/03/26/generalize-uncurry">Generalized uncurry support in BuckleScript 7.3</a></li><li class="navListItem"><a class="navItem" href="/blog/2020/03/12/release-7-2">Announcing bs-platform  7.2</a></li><li class="navListItem"><a class="navItem" href="/blog/2020/02/20/loading-stdlib-in-memory">Loading stdlib from memory</a></li><li class="navListItem"><a class="navItem" href="/blog/2020/02/07/union-types-in-bucklescript">Union types in BuckleScript</a></li><li class="navListItem"><a class="navItem" href="/blog/2020/02/04/release-7-1-0">bs-platform release 7.1.0</a></li></ul></div></div></section></div><script>
             var coll = document.getElementsByClassName('collapsible');
             var checkActiveCategory = true;
             for (var i = 0; i < coll.length; i++) {
@@ -66,7 +66,88 @@
                 };
               }
             });
-        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="posts"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2020/03/12/release-7-2">Announcing bs-platform  7.2</a></h1><p class="post-meta">March 12, 2020</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p>Today we are proud to release <code>bs-platform 7.2</code>!</p>
+        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="posts"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2020/03/26/generalize-uncurry">Generalized uncurry support in BuckleScript 7.3</a></h1><p class="post-meta">March 26, 2020</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p><a href="https://github.com/facebook/reason">ReasonML</a> is a <a href="https://en.wikipedia.org/wiki/Currying">curried</a> language, while Js is an uncurried language. When compiling ReasonML into Js, there's lots of headache due to the semantics mismatch.</p>
+<p>After several years of reasearch and development, we reach an ideal situation in next release: adding a lightweight uncurried calling convention to ReasonML.</p>
+<h2><a class="anchor" aria-hidden="true" id="why-we-need-native-uncurried-calling-convention"></a><a href="#why-we-need-native-uncurried-calling-convention" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Why we need native uncurried calling convention</h2>
+<ul>
+<li>Curried call is inherently slower than uncurried call.</li>
+</ul>
+<p>A native implementation of curried call like <a href="https://www.purescript.org/">purescript</a> does will generate very slow code:</p>
+<pre><code class="hljs css language-js"><span class="hljs-keyword">let</span> curriedFunction = <span class="hljs-function"><span class="hljs-params">x</span> =&gt;</span> <span class="hljs-function"><span class="hljs-params">y</span> =&gt;</span> <span class="hljs-function"><span class="hljs-params">z</span> =&gt;</span> x + y +z ;
+<span class="hljs-keyword">let</span> curriedApply = curriedFunction(<span class="hljs-number">1</span>)(<span class="hljs-number">2</span>)(<span class="hljs-number">3</span>); <span class="hljs-comment">// memory allocation triggered</span>
+</code></pre>
+<p>BuckleScript does tons of optimizations and very aggressive arity inference so that the curried function is actually compiled into multiple-arity function, and when the application is supplied with the exact arguments -- which is true in most cases, it is applied like normal functions.</p>
+<p>However, such optimization does not apply to high order functions:</p>
+<pre><code class="hljs css language-reasonml"><span class="hljs-keyword">let</span> highOrder =<span class="hljs-function"> (<span class="hljs-params">f</span>,<span class="hljs-params">a</span>,<span class="hljs-params">b</span>)=&gt;</span> f (a, b) 
+<span class="hljs-comment">// can not infer the arity of `f` since we know</span>
+<span class="hljs-comment">// nothing about the arity of `f`, unless</span>
+<span class="hljs-comment">// we do the whole program optimization</span>
+</code></pre>
+<p>In cases where arity infer does not help, the arity guessing has to be delayed into runtime.</p>
+<ul>
+<li>Bindings to JS world</li>
+</ul>
+<p>When we create bindings for high order functions in the JS world, we would like to have native uncurried functions which behave the same as JS world -- no semantics mismatch.</p>
+<h2><a class="anchor" aria-hidden="true" id="generalized-uncurried-calling-convention-in-this-releases"></a><a href="#generalized-uncurried-calling-convention-in-this-releases" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Generalized uncurried calling convention in this releases</h2>
+<p>Prior to release 7.3, we had introduced uncurried calling convention, however, it has serious limitations -- uncurried functions can not be polymorphic, it does not support labels, the error
+message leaks the underlying encoding -- now all those limitations are gone!</p>
+<p>Previously</p>
+<p><img src="/img/poly-error.png"></p>
+<p><img src="/img/label-error.png"></p>
+<p><img src="/img/recursive-error.png" ></p>
+<p>The error messages above are cryptic and hard to understand. And the limitation of not supporting recursive functions make uncurried support pretty weak.</p>
+<p>Now those limitations are all gone, you can have polymoprhic uncurried recursive functions and it support labels.</p>
+<p><img src="/img/uncurry-label.png"></p>
+<p><img src="/img/recursive.png"></p>
+<p>The error message is  also enhanced significantly</p>
+<ul>
+<li>When uncurried functon is used in curried</li>
+</ul>
+<pre><code class="hljs css language-reasonml"><span class="hljs-keyword">let</span> add =<span class="hljs-function"> (. <span class="hljs-params">x</span>, <span class="hljs-params">y</span> ) =&gt;</span> x + y;
+
+<span class="hljs-keyword">let</span> u = add (<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)
+</code></pre>
+<p>The old error message:</p>
+<pre><code class="hljs">Error: This expression has<span class="hljs-built_in"> type </span>(. int, int) =&gt; int
+       This is <span class="hljs-keyword">not</span> a function; it cannot be applied.
+</code></pre>
+<p>The new error message</p>
+<pre><code class="hljs"><span class="hljs-keyword">Error: </span>This function has uncurried type, it needs to be applied in ucurried style
+</code></pre>
+<ul>
+<li>When curried function is used in uncurried context</li>
+</ul>
+<pre><code class="hljs css language-reasonml">
+<span class="hljs-keyword">let</span> add =<span class="hljs-function"> ( <span class="hljs-params">x</span>, <span class="hljs-params">y</span> ) =&gt;</span> x + y;
+
+<span class="hljs-keyword">let</span> u = add (.<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)
+</code></pre>
+<p>The old error message:</p>
+<pre><code class="hljs">Error: This expression has<span class="hljs-built_in"> type </span>(int, int) =&gt; int
+       but an expression was expected of<span class="hljs-built_in"> type </span>(. <span class="hljs-string">'a, '</span>b) =&gt; <span class="hljs-string">'c
+</span></code></pre>
+<p>The new error message:</p>
+<pre><code class="hljs"><span class="hljs-keyword">Error: </span>This function is a curried function where an uncurried function is expected
+</code></pre>
+<ul>
+<li>When arity mismatch</li>
+</ul>
+<pre><code class="hljs css language-reasonml"><span class="hljs-keyword">let</span> add =<span class="hljs-function"> (. <span class="hljs-params">x</span>, <span class="hljs-params">y</span> ) =&gt;</span> x + y;
+
+<span class="hljs-keyword">let</span> u = add (.<span class="hljs-number">1</span>, <span class="hljs-number">2</span>,<span class="hljs-number">3</span>)
+</code></pre>
+<p>The old message:</p>
+<pre><code class="hljs">Error: This expression has<span class="hljs-built_in"> type </span>(. int, int) =&gt; int
+       but an expression was expected of<span class="hljs-built_in"> type </span>(. <span class="hljs-string">'a, '</span>b, <span class="hljs-string">'c) =&gt; '</span>d
+       These two variant types have <span class="hljs-literal">no</span> intersection
+</code></pre>
+<p>The new message:</p>
+<pre><code class="hljs"><span class="hljs-keyword">Error: </span>This function has arity2 but was expected arity3
+</code></pre>
+<p>Note the generalized uncurry support also applies to objects, so that you can use <code>obj##meth (~label1=a,~label2=b)</code>.</p>
+<p>The only thing where uncurried call  is not supported is optional arguments, if users are mostly targeting JS runtime, we suggest you can try uncurry by default and would like to hear your feedback!</p>
+<p>You can already test it today by <code>npm install bs-platform@7.3.0-dev.1</code> (Windows support will be coming soon).</p>
+</span></div></article></div><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2020/03/12/release-7-2">Announcing bs-platform  7.2</a></h1><p class="post-meta">March 12, 2020</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p>Today we are proud to release <code>bs-platform 7.2</code>!</p>
 <p>For those unfamiliar with bs-platform, it is the platform for compiling <a href="https://reasonml.github.io/">ReasonML</a> and <a href="https://ocaml.org/">OCaml</a> to fast and readable JavaScript.</p>
 <p>You can try it with <code>npm i bs-platform</code>!</p>
 <p>This is a major release with some highlighted features as below:</p>
@@ -800,77 +881,6 @@ in JS backend, this makes debugging particularly challenging for large complex p
 <h1><a class="anchor" aria-hidden="true" id="upcoming-breaking-changes"></a><a href="#upcoming-breaking-changes" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Upcoming breaking changes</h1>
 <p>In next release, we plan to <a href="https://reasonml.chat/t/ann-remove-deprecated-getters-in-deriving-abstract-after-5-2-0/1908">remove deprecated getters</a>.</p>
 <p>A detailed list of changes is available <a href="https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#520">here</a></p>
-<p>Happy hacking!</p>
-</span></div></article></div><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2019/08/12/release-5-10-0">What&#x27;s new in release 5.1.0</a></h1><p class="post-meta">August 12, 2019</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p><code>bs-platform</code> 5.1.0 (for OCaml 4.02.3) and 6.1.0 (for OCaml 4.06.1) is ready for testing.</p>
-<p>You can install it via <code>npm i -g bs-platform@5.1.0</code> (or <code>npm i -g bs-platform@6.1.0-dev.6</code>).</p>
-<p>A detailed list of changes is available <a href="https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#510">here</a></p>
-<p>Some feature enhancements are described as follows:</p>
-<h2><a class="anchor" aria-hidden="true" id="introducing-bsc-to-public"></a><a href="#introducing-bsc-to-public" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Introducing <code>bsc</code> to public</h2>
-<p><code>bsc</code> is the underlying compiler which is invoked by <code>bsb</code>. In this release we simplified it a bit so that it can be used directly by customers for simple tasks. It is available after you have <code>bs-platform</code> installed.</p>
-<p>Suppose you have a file called <code>test.re</code>:</p>
-<pre><code class="hljs">let rec fib (n) = <span class="hljs-keyword">switch</span> n {
-    | <span class="hljs-number">0</span> | <span class="hljs-number">1</span> =&gt; <span class="hljs-number">1</span>;
-    | n =&gt; fib (n <span class="hljs-number">-1</span>) + fib(n<span class="hljs-number">-2</span>);
-};
-Js.log (fib (<span class="hljs-number">0</span>));
-</code></pre>
-<p>You can compile it directly via <code>bsc test.re</code>, producing the following output:</p>
-<pre><code class="hljs">bucklescript.github.io&gt;bsc test.re
-<span class="hljs-comment">// Generated by BUCKLESCRIPT, PLEASE EDIT WITH CARE</span>
-<span class="hljs-meta">'use strict'</span>;
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fib</span>(<span class="hljs-params">n</span>) </span>{
-  <span class="hljs-keyword">if</span> (n === <span class="hljs-number">0</span> || n === <span class="hljs-number">1</span>) {
-    <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
-  } <span class="hljs-keyword">else</span> {
-    <span class="hljs-keyword">return</span> fib(n - <span class="hljs-number">1</span> | <span class="hljs-number">0</span>) + fib(n - <span class="hljs-number">2</span> | <span class="hljs-number">0</span>) | <span class="hljs-number">0</span>;
-  }
-}
-<span class="hljs-built_in">console</span>.log(fib(<span class="hljs-number">0</span>));
-exports.fib = fib;
-<span class="hljs-comment">/*  Not a pure module */</span>
-</code></pre>
-<p>You can also get the inferred signature directly via <code>bsc -i test.re</code></p>
-<pre><code class="hljs"><span class="hljs-keyword">let</span> fib: <span class="hljs-built_in">int</span> =&gt; <span class="hljs-built_in">int</span>;
-</code></pre>
-<p>Or even better, you can do a one liner in bsc, via <code>-e</code> option.</p>
-<pre><code class="hljs">bucklescript&gt;bsc -i -e <span class="hljs-symbol">'let</span> id = x =&gt; x'
-<span class="hljs-keyword">let</span> id: <span class="hljs-symbol">'a</span> =&gt; <span class="hljs-symbol">'a</span>;
-</code></pre>
-<p>Note: <code>bsc</code> supports vanilla OCaml syntax as well, this is only recommended for toying around, for serious development, <code>bsb</code> is recommended.</p>
-<h2><a class="anchor" aria-hidden="true" id="bstracing-to-visualize-build-profile"></a><a href="#bstracing-to-visualize-build-profile" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>bstracing</code> to visualize build profile</h2>
-<p>After you finish the build process, you can run <code>bstracing</code> directly. This generates a data file called <code>tracing_${hour}_${minute}_${second}.json</code> which can be loaded into chrome via <code>chrome://tracing</code>.</p>
-<p>Below is a profile image that shows the tracing graph for a large project:</p>
-<p><img src="/img/profile-1.png"></p>
-<p>And you can zoom-in to see more details:</p>
-<p><img src="/img/profile-2.png"></p>
-<h2><a class="anchor" aria-hidden="true" id="support-of-ppx-with-arguments"></a><a href="#support-of-ppx-with-arguments" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Support of ppx with arguments</h2>
-<p>We extended the schema to support ppx with arguments:</p>
-<pre><code class="hljs css language-js">        <span class="hljs-string">"ppx-specs"</span>: {
-            <span class="hljs-string">"type"</span>: <span class="hljs-string">"array"</span>,
-            <span class="hljs-string">"items"</span>: {
-                <span class="hljs-string">"oneOf"</span> : [
-                    {
-                        <span class="hljs-string">"type"</span>: <span class="hljs-string">"string"</span> <span class="hljs-comment">// single command</span>
-                    },
-                    {
-                        <span class="hljs-string">"type"</span> : <span class="hljs-string">"array"</span>, <span class="hljs-comment">// command with args</span>
-                        <span class="hljs-string">"items"</span>: {
-                            <span class="hljs-string">"type"</span> : <span class="hljs-string">"string"</span> 
-                        }
-                    }
-                ]
-            }
-        },
-</code></pre>
-<h2><a class="anchor" aria-hidden="true" id="respect-node_path-when-resolving-dependent-modules"></a><a href="#respect-node_path-when-resolving-dependent-modules" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Respect NODE_PATH when resolving dependent modules</h2>
-<p>Previously, <code>bsb</code> was tied to npm package structures by searching <code>node_modules</code>. In this release, <code>bsb</code> also tries to search paths listed in <code>NODE_PATH</code> so that <code>bsb</code> is no longer tied to the npm or yarn package manager.</p>
-<h2><a class="anchor" aria-hidden="true" id="build-performance-improvement"></a><a href="#build-performance-improvement" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Build performance improvement</h2>
-<p>Yes, performance is increased with each release!</p>
-<p>Quite a lot of work was spent in house-keeping this release. We changed the internal data representation to a more compact format. Here is the result of using <code>bstracing</code> to show a comparison of clean building a large project around (2 * 5 * 5 * 5 * 5 = 1250 files):</p>
-<p>Version 5.0.6 (around 4.8s)</p>
-<p><img src="/img/profile-5.png"></p>
-<p>Version 5.1.0 (around 4.2s)</p>
-<p><img src="/img/profile-4.png"></p>
 <p>Happy hacking!</p>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-next" href="/blog/page2/">Next →</a></div></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script>window.foo = new Pjax({
           areas: [
