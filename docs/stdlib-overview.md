@@ -7,7 +7,7 @@ BuckleScript is mostly just OCaml, so they share the same standard library:
 * [OCaml syntax standard library documentation](https://caml.inria.fr/pub/docs/manual-ocaml-4.02/stdlib.html).
 * [Reason syntax standard library documentation](https://reasonml.github.io/api/index.html).
 
-**Note** that BuckleScript is currently at OCaml v4.02.3. We will upgrade to a newer OCaml later on.
+**Note** that BuckleScript is currently at OCaml v4.06.1. We will upgrade to a newer OCaml later on.
 
 In addition, we provide a few extra modules:
 
