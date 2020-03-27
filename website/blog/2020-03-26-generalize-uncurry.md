@@ -18,7 +18,7 @@ let curriedFunction = x => y => z => x + y +z ;
 let curriedApply = curriedFunction(1)(2)(3); // memory allocation triggered
 ```
 
-BuckleScript does tons of optimizations and very aggressive arity inference so that the curried function is actually compiled into multiple-arity function, and when the application is supplied with the exact arguments -- which is the most case, it is applied like normal functions.
+BuckleScript does tons of optimizations and very aggressive arity inference so that the curried function is actually compiled into multiple-arity function, and when the application is supplied with the exact arguments -- which is true in most cases, it is applied like normal functions.
 
 However, such optimization does not apply to high order functions:
 
@@ -48,10 +48,15 @@ Previously
 
 <img src="/img/label-error.png">
 
-The error messages above are cryptic and hard to understand, now they are all gone, you can have polymoprhic uncurried functions and it support labels.
+<img src="/img/recursive-error.png" >
+
+The error messages above are cryptic and hard to understand. And the limitation of not supporting recursive functions make uncurried support pretty weak. 
+
+Now those limitations are all gone, you can have polymoprhic uncurried recursive functions and it support labels.
 
 <img src="/img/uncurry-label.png">
 
+<img src="/img/recursive.png">
 
 The error message is  also enhanced significantly
 
