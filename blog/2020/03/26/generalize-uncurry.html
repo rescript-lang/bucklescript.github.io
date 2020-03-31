@@ -67,39 +67,39 @@
               }
             });
         </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="lonePost"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2020/03/26/generalize-uncurry">Generalized uncurry support in BuckleScript 7.3</a></h1><p class="post-meta">March 26, 2020</p><div class="authorBlock"></div></header><div><span><p><a href="https://github.com/facebook/reason">ReasonML</a> is a <a href="https://en.wikipedia.org/wiki/Currying">curried</a> language, while Js is an uncurried language. When compiling ReasonML into Js, there's lots of headache due to the semantics mismatch.</p>
-<p>After several years of reasearch and development, we reach an ideal situation in next release: adding a lightweight uncurried calling convention to ReasonML.</p>
+<p>After several years of research and development, we reach an ideal situation in the next release: adding a lightweight uncurried calling convention to ReasonML.</p>
 <h2><a class="anchor" aria-hidden="true" id="why-we-need-native-uncurried-calling-convention"></a><a href="#why-we-need-native-uncurried-calling-convention" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Why we need native uncurried calling convention</h2>
 <ul>
-<li><p>Curried call is inherently slower than uncurried call.</p>
+<li><p>The curried call is inherently slower than the uncurried call.</p>
 <p>A native implementation of curried call like <a href="https://www.purescript.org/">purescript</a> does will generate very slow code:</p>
 <pre><code class="hljs css language-js"><span class="hljs-keyword">let</span> curriedFunction = <span class="hljs-function"><span class="hljs-params">x</span> =&gt;</span> <span class="hljs-function"><span class="hljs-params">y</span> =&gt;</span> <span class="hljs-function"><span class="hljs-params">z</span> =&gt;</span> x + y +z ;
 <span class="hljs-keyword">let</span> curriedApply = curriedFunction(<span class="hljs-number">1</span>)(<span class="hljs-number">2</span>)(<span class="hljs-number">3</span>); <span class="hljs-comment">// memory allocation triggered</span>
 </code></pre>
-<p>BuckleScript does tons of optimizations and very aggressive arity inference so that the curried function is actually compiled into multiple-arity function, and when the application is supplied with the exact arguments -- which is true in most cases, it is applied like normal functions.</p>
+<p>BuckleScript does tons of optimizations and very aggressive arity inference so that the curried function is compiled into a multiple-arity function, and when the application is supplied with the exact arguments -- which is true in most cases, it is applied like normal functions.</p>
 <p>However, such optimization does not apply to high order functions:</p>
 <pre><code class="hljs css language-reasonml"><span class="hljs-keyword">let</span> highOrder =<span class="hljs-function"> (<span class="hljs-params">f</span>,<span class="hljs-params">a</span>,<span class="hljs-params">b</span>)=&gt;</span> f (a, b) 
 <span class="hljs-comment">// can not infer the arity of `f` since we know</span>
 <span class="hljs-comment">// nothing about the arity of `f`, unless</span>
 <span class="hljs-comment">// we do the whole program optimization</span>
 </code></pre>
-<p>In cases where arity infer does not help, the arity guessing has to be delayed into runtime.</p></li>
+<p>In cases where arity inference does not help, the arity guessing has to be delayed into the runtime.</p></li>
 <li><p>Bindings to JS world</p>
 <p>When we create bindings for high order functions in the JS world, we would like to have native uncurried functions which behave the same as JS world -- no semantics mismatch.</p></li>
 </ul>
 <h2><a class="anchor" aria-hidden="true" id="generalized-uncurried-calling-convention-in-this-release"></a><a href="#generalized-uncurried-calling-convention-in-this-release" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Generalized uncurried calling convention in this release</h2>
-<p>Prior to release 7.3, we had introduced uncurried calling convention, however, it has serious limitations -- uncurried functions can not be polymorphic, it does not support labels, the error
+<p>Before release 7.3, we had introduced uncurried calling convention, however, it has serious limitations -- uncurried functions can not be polymorphic, it does not support labels, the error
 message leaks the underlying encoding -- now all those limitations are gone!</p>
 <p>Previously</p>
 <p><img src="/img/poly-error.png"></p>
 <p><img src="/img/label-error.png"></p>
 <p><img src="/img/recursive-error.png" ></p>
 <p>The error messages above are cryptic and hard to understand. And the limitation of not supporting recursive functions make uncurried support pretty weak.</p>
-<p>Now those limitations are all gone, you can have polymoprhic uncurried recursive functions and it support labels.</p>
+<p>Now those limitations are all gone, you can have polymorphic uncurried recursive functions and it support labels.</p>
 <p><img src="/img/uncurry-label.png"></p>
 <p><img src="/img/recursive.png"></p>
 <p>The error message is  also enhanced significantly</p>
 <ul>
-<li><p>When uncurried functon is used in curried</p>
+<li><p>When the uncurried function is used in curried</p>
 <pre><code class="hljs css language-reasonml"><span class="hljs-keyword">let</span> add =<span class="hljs-function"> (. <span class="hljs-params">x</span>, <span class="hljs-params">y</span> ) =&gt;</span> x + y;
 
 <span class="hljs-keyword">let</span> u = add (<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)
@@ -111,7 +111,7 @@ message leaks the underlying encoding -- now all those limitations are gone!</p>
 <p>The new error message</p>
 <pre><code class="hljs"><span class="hljs-keyword">Error: </span>This function has uncurried type, it needs to be applied in ucurried style
 </code></pre></li>
-<li><p>When curried function is used in uncurried context</p>
+<li><p>When the curried function is used in the uncurried context</p>
 <pre><code class="hljs css language-reasonml">
 <span class="hljs-keyword">let</span> add =<span class="hljs-function"> ( <span class="hljs-params">x</span>, <span class="hljs-params">y</span> ) =&gt;</span> x + y;
 
@@ -139,7 +139,7 @@ message leaks the underlying encoding -- now all those limitations are gone!</p>
 </code></pre></li>
 </ul>
 <p>Note the generalized uncurry support also applies to objects, so that you can use <code>obj##meth (~label1=a,~label2=b)</code>.</p>
-<p>The only thing where uncurried call  is not supported is optional arguments, if users are mostly targeting JS runtime, we suggest you can try uncurry by default and would like to hear your feedback!</p>
+<p>The only thing where the uncurried call is not supported is optional arguments, if users are mostly targeting JS runtime, we suggest you can try uncurry by default and would like to hear your feedback!</p>
 <p>You can already test it today by <code>npm install bs-platform@7.3.0-dev.1</code> (Windows support will be coming soon).</p>
 </span></div></div><div class="blogSocialSection"></div></div><div class="blog-recent"><a class="button" href="/blog">Recent Posts</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#why-we-need-native-uncurried-calling-convention">Why we need native uncurried calling convention</a></li><li><a href="#generalized-uncurried-calling-convention-in-this-release">Generalized uncurried calling convention in this release</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script>window.foo = new Pjax({
           areas: [

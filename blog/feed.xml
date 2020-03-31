@@ -17,7 +17,7 @@
             <link>https://bucklescript.github.io/blog/2020/03/26/generalize-uncurry.html</link>
             <guid>https://bucklescript.github.io/blog/2020/03/26/generalize-uncurry.html</guid>
             <pubDate>Thu, 26 Mar 2020 06:00:00 GMT</pubDate>
-            <description><![CDATA[<p><a href="https://github.com/facebook/reason">ReasonML</a> is a <a href="https://en.wikipedia.org/wiki/Currying">curried</a> language, while Js is an uncurried language. When compiling ReasonML into Js, there's lots of headache due to the semantics mismatch.</p> <p>After several years of reasearch and development, we reach an ideal situation in next release:...</p>]]></description>
+            <description><![CDATA[<p><a href="https://github.com/facebook/reason">ReasonML</a> is a <a href="https://en.wikipedia.org/wiki/Currying">curried</a> language, while Js is an uncurried language. When compiling ReasonML into Js, there's lots of headache due to the semantics mismatch.</p> <p>After several years of research and development, we reach an ideal situation in the next relea...</p>]]></description>
         </item>
         <item>
             <title><![CDATA[Announcing bs-platform  7.2]]></title>
