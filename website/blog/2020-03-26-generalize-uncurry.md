@@ -5,11 +5,11 @@ title: Generalized uncurry support in BuckleScript 7.3
 
 [ReasonML](https://github.com/facebook/reason) is a [curried](https://en.wikipedia.org/wiki/Currying) language, while Js is an uncurried language. When compiling ReasonML into Js, there's lots of headache due to the semantics mismatch. 
 
-After several years of reasearch and development, we reach an ideal situation in next release: adding a lightweight uncurried calling convention to ReasonML.
+After several years of research and development, we reach an ideal situation in the next release: adding a lightweight uncurried calling convention to ReasonML.
 
 ## Why we need native uncurried calling convention
 
-- Curried call is inherently slower than uncurried call.
+- The curried call is inherently slower than the uncurried call.
 
     A native implementation of curried call like [purescript](https://www.purescript.org/) does will generate very slow code:
 
@@ -18,7 +18,7 @@ After several years of reasearch and development, we reach an ideal situation in
     let curriedApply = curriedFunction(1)(2)(3); // memory allocation triggered
     ```
 
-    BuckleScript does tons of optimizations and very aggressive arity inference so that the curried function is actually compiled into multiple-arity function, and when the application is supplied with the exact arguments -- which is true in most cases, it is applied like normal functions.
+    BuckleScript does tons of optimizations and very aggressive arity inference so that the curried function is compiled into a multiple-arity function, and when the application is supplied with the exact arguments -- which is true in most cases, it is applied like normal functions.
 
     However, such optimization does not apply to high order functions:
 
@@ -29,7 +29,7 @@ After several years of reasearch and development, we reach an ideal situation in
     // we do the whole program optimization
     ```
 
-    In cases where arity infer does not help, the arity guessing has to be delayed into runtime.
+    In cases where arity inference does not help, the arity guessing has to be delayed into the runtime.
 
 - Bindings to JS world
 
@@ -38,7 +38,7 @@ After several years of reasearch and development, we reach an ideal situation in
 
 ## Generalized uncurried calling convention in this release
 
-Prior to release 7.3, we had introduced uncurried calling convention, however, it has serious limitations -- uncurried functions can not be polymorphic, it does not support labels, the error 
+Before release 7.3, we had introduced uncurried calling convention, however, it has serious limitations -- uncurried functions can not be polymorphic, it does not support labels, the error 
 message leaks the underlying encoding -- now all those limitations are gone!
 
 Previously 
@@ -52,7 +52,7 @@ Previously
 
 The error messages above are cryptic and hard to understand. And the limitation of not supporting recursive functions make uncurried support pretty weak. 
 
-Now those limitations are all gone, you can have polymoprhic uncurried recursive functions and it support labels.
+Now those limitations are all gone, you can have polymorphic uncurried recursive functions and it support labels.
 
 <img src="/img/uncurry-label.png">
 
@@ -60,7 +60,7 @@ Now those limitations are all gone, you can have polymoprhic uncurried recursive
 
 The error message is  also enhanced significantly
 
-- When uncurried functon is used in curried
+- When the uncurried function is used in curried
 
     ```reasonml
     let add = (. x, y ) => x + y;
@@ -79,7 +79,7 @@ The error message is  also enhanced significantly
     ```
     Error: This function has uncurried type, it needs to be applied in ucurried style
     ```
-- When curried function is used in uncurried context
+- When the curried function is used in the uncurried context
 
     ```reasonml
 
@@ -121,7 +121,7 @@ The error message is  also enhanced significantly
 
 Note the generalized uncurry support also applies to objects, so that you can use `obj##meth (~label1=a,~label2=b)`.
 
-The only thing where uncurried call  is not supported is optional arguments, if users are mostly targeting JS runtime, we suggest you can try uncurry by default and would like to hear your feedback!
+The only thing where the uncurried call is not supported is optional arguments, if users are mostly targeting JS runtime, we suggest you can try uncurry by default and would like to hear your feedback!
 
 You can already test it today by `npm install bs-platform@7.3.0-dev.1` (Windows support will be coming soon).
 
