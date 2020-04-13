@@ -4,7 +4,7 @@
         <title>BuckleScript Blog</title>
         <link>https://bucklescript.github.io/blog</link>
         <description>The best place to stay up-to-date with the latest BuckleScript news and events.</description>
-        <lastBuildDate>Thu, 26 Mar 2020 06:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 13 Apr 2020 06:00:00 GMT</lastBuildDate>
         <docs>http://blogs.law.harvard.edu/tech/rss</docs>
         <generator>Feed for Node.js</generator>
         <image>
@@ -12,6 +12,13 @@
             <url>https://bucklescript.github.io/img/logos/bucklescript.svg</url>
             <link>https://bucklescript.github.io/blog</link>
         </image>
+        <item>
+            <title><![CDATA[What's new in release 7.3]]></title>
+            <link>https://bucklescript.github.io/blog/2020/04/13/release-7-3.html</link>
+            <guid>https://bucklescript.github.io/blog/2020/04/13/release-7-3.html</guid>
+            <pubDate>Mon, 13 Apr 2020 06:00:00 GMT</pubDate>
+            <description><![CDATA[<p><code>bs-platform@7.3</code> is available for testing, you can try it with <code>npm install bs-platform@7.3.0</code>.</p> <p>For those unfamiliar with bs-platform, it is the platform for compiling <a href="https://reasonml.github.io/">ReasonML</a> and <a href="https://ocaml.org/">OCaml</a> to fast and readable JavaScript.</p> <p>This is a major release with some...</p>]]></description>
+        </item>
         <item>
             <title><![CDATA[Generalized uncurry support in BuckleScript 7.3]]></title>
             <link>https://bucklescript.github.io/blog/2020/03/26/generalize-uncurry.html</link>

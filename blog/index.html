@@ -10,7 +10,7 @@
             languagesDropDown.className = "hide";
           }
         });
-      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/bucklescript/bucklescript" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul class=""><li class="navListItem"><a class="navItem" href="/blog/2020/03/26/generalize-uncurry">Generalized uncurry support in BuckleScript 7.3</a></li><li class="navListItem"><a class="navItem" href="/blog/2020/03/12/release-7-2">Announcing bs-platform  7.2</a></li><li class="navListItem"><a class="navItem" href="/blog/2020/02/20/loading-stdlib-in-memory">Loading stdlib from memory</a></li><li class="navListItem"><a class="navItem" href="/blog/2020/02/07/union-types-in-bucklescript">Union types in BuckleScript</a></li><li class="navListItem"><a class="navItem" href="/blog/2020/02/04/release-7-1-0">bs-platform release 7.1.0</a></li></ul></div></div></section></div><script>
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/bucklescript/bucklescript" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul class=""><li class="navListItem"><a class="navItem" href="/blog/2020/04/13/release-7-3">What&#x27;s new in release 7.3</a></li><li class="navListItem"><a class="navItem" href="/blog/2020/03/26/generalize-uncurry">Generalized uncurry support in BuckleScript 7.3</a></li><li class="navListItem"><a class="navItem" href="/blog/2020/03/12/release-7-2">Announcing bs-platform  7.2</a></li><li class="navListItem"><a class="navItem" href="/blog/2020/02/20/loading-stdlib-in-memory">Loading stdlib from memory</a></li><li class="navListItem"><a class="navItem" href="/blog/2020/02/07/union-types-in-bucklescript">Union types in BuckleScript</a></li></ul></div></div></section></div><script>
             var coll = document.getElementsByClassName('collapsible');
             var checkActiveCategory = true;
             for (var i = 0; i < coll.length; i++) {
@@ -66,7 +66,155 @@
                 };
               }
             });
-        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="posts"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2020/03/26/generalize-uncurry">Generalized uncurry support in BuckleScript 7.3</a></h1><p class="post-meta">March 26, 2020</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p><a href="https://github.com/facebook/reason">ReasonML</a> is a <a href="https://en.wikipedia.org/wiki/Currying">curried</a> language, while Js is an uncurried language. When compiling ReasonML into Js, there's lots of headache due to the semantics mismatch.</p>
+        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="posts"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2020/04/13/release-7-3">What&#x27;s new in release 7.3</a></h1><p class="post-meta">April 13, 2020</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p><code>bs-platform@7.3</code> is available for testing, you can try it with <code>npm install bs-platform@7.3.0</code>.</p>
+<p>For those unfamiliar with bs-platform, it is the platform for compiling <a href="https://reasonml.github.io/">ReasonML</a> and <a href="https://ocaml.org/">OCaml</a> to fast and readable JavaScript.</p>
+<p>This is a major release with some highlighted features as below:</p>
+<h2><a class="anchor" aria-hidden="true" id="generalized-uncurry-calling-convention-support"></a><a href="#generalized-uncurry-calling-convention-support" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Generalized uncurry calling convention support</h2>
+<p>You can use an uncurried function as conveniently as a curried one now, this is an exciting change that we wrote a <a href="https://bucklescript.github.io/blog/2020/03/26/generalize-uncurry">separate post</a> for details.</p>
+<p>For uncurried support, we also fixed a long standing <a href="https://github.com/BuckleScript/bucklescript/issues/4274">issue</a> so that type inference follows naturally using the new encoding.</p>
+<pre><code class="hljs css language-reasonml">bar 
+ -&gt; <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Belt</span>.</span><span class="hljs-module"><span class="hljs-identifier">Array</span>.</span></span>map<span class="hljs-constructor">U((.<span class="hljs-params">b</span>)</span>=&gt;b.foo <span class="hljs-comment">/*no type annotation needed */</span>)
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="unit-value-is-compiled-into-undefined"></a><a href="#unit-value-is-compiled-into-undefined" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>unit</code> value is compiled into <code>undefined</code></h2>
+<p>In ReasonML, when a function does not return any meaningful value, it returns a value that is <code>()</code> of type <code>unit</code>. In native backend, the dummy value <code>()</code> is compiled into a const zero. We used to inherit this in JS backend as well. However, this is a semantics mismatch since in JS, if the function does not return anything, it defaults to <code>undefined</code>. In this release, we make it more consistent with JS: compiling <code>()</code> into <code>undefined</code>. Since in JS, <code>return undefined</code> can be ignored in tail position, this leads to some other nice enhancement.</p>
+<pre><code class="hljs css language-reasonml"><span class="hljs-keyword">let</span> log =<span class="hljs-function"> <span class="hljs-params">x</span> =&gt;</span> <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Js</span>.</span></span>log(x)
+</code></pre>
+<p>The generated code used to be</p>
+<pre><code class="hljs css language-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">log</span>(<span class="hljs-params">x</span>)</span>{
+    <span class="hljs-built_in">console</span>.log(x);
+    <span class="hljs-keyword">return</span> <span class="hljs-comment">/* () */</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<p>It's now</p>
+<pre><code class="hljs css language-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">log</span>(<span class="hljs-params">x</span>)</span>{
+    <span class="hljs-built_in">console</span>.log(x)
+}
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="various-improvements-in-code-generation"></a><a href="#various-improvements-in-code-generation" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Various improvements in code generation</h2>
+<p>We have increased the readability of the generated code in several common places, we believe that we reached <em>an important milestone</em> that if you write code using features that have counterparts in JS, the generated code is readable. This is not a small achievement given that quite a lot of the compiler code base is shared between native backend and JS backend.</p>
+<p>There are some features that are not available in JS, for example, complex pattern matches, the readability of those pieces of generated code will continue being improved.</p>
+<p>Take several enhancement below as  examples:</p>
+<ul>
+<li>meaningful pattern match variable names</li>
+</ul>
+<pre><code class="hljs css language-reasonml"><span class="hljs-keyword">let</span> popUndefined =<span class="hljs-function"> <span class="hljs-params">s</span> =&gt;</span>
+  switch (s.root) {
+  <span class="hljs-pattern-match">| <span class="hljs-constructor">None</span> =&gt;</span> <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Js</span>.</span></span>undefined
+  <span class="hljs-pattern-match">| <span class="hljs-constructor">Some(<span class="hljs-params">x</span>)</span> =&gt;</span>
+    s.root = x.tail;
+    <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Js</span>.</span><span class="hljs-module"><span class="hljs-identifier">Undefined</span>.</span></span>return(x.head);
+  };
+</code></pre>
+<pre><code class="hljs css language-diff">function popUndefined(s) {
+<span class="hljs-deletion">-  var match = s.root;</span>
+<span class="hljs-deletion">-  if (match !== null) {</span>
+<span class="hljs-deletion">-    s.root = match.tail;</span>
+<span class="hljs-deletion">-    return match.head;</span>
+<span class="hljs-addition">+  var x = s.root;</span>
+<span class="hljs-addition">+  if (x !== undefined) {</span>
+<span class="hljs-addition">+    s.root = x.tail;</span>
+<span class="hljs-addition">+    return x.head;</span>
+   }
+   
+ }
+</code></pre>
+<p>When pattern match against a compounded expression, the compiler used to use a temporary name <code>match</code>, now we employ better heuristics to generate meaningful names for such temporary variables.</p>
+<ul>
+<li>Eliminate intermediate variable names when inlining</li>
+</ul>
+<pre><code class="hljs css language-diff"> function everyU(arr, b) {
+   var len = arr.length;
+<span class="hljs-deletion">-  var arr$1 = arr;</span>
+   var _i = 0;
+<span class="hljs-deletion">-  var b$1 = b;</span>
+<span class="hljs-deletion">-  var len$1 = len;</span>
+   while(true) {
+     var i = _i;
+<span class="hljs-deletion">-    if (i === len$1) {</span>
+<span class="hljs-addition">+    if (i === len) {</span>
+       return true;
+<span class="hljs-deletion">-    } else if (b$1(arr$1[i])) {</span>
+<span class="hljs-deletion">-      _i = i + 1 | 0;</span>
+<span class="hljs-deletion">-      continue ;</span>
+<span class="hljs-deletion">-    } else {</span>
+<span class="hljs-addition">+    }</span>
+<span class="hljs-addition">+    if (!b(arr[i])) {</span>
+       return false;
+     }
+<span class="hljs-addition">+    _i = i + 1 | 0;</span>
+<span class="hljs-addition">+    continue ;</span>
+   };
+ }
+</code></pre>
+<p>The above diff is the generated code for <code>Belt.Array.everyU</code>, the intermediate variables were introduced when inlining an auxiliary function, such duplication were removed in this release.</p>
+<ul>
+<li>Flatten if/else branch making use of JS's <code>early return</code> idiom</li>
+</ul>
+<p>Take the same diff from above, you will notice that the second <code>else</code> following <code>if(..) continue</code> is removed.</p>
+<p>Below are similar diffs benefiting from such enhancement:</p>
+<pre><code class="hljs css language-diff"> function has(h, key) {
+@@ -133,21 +123,18 @@ function has(h, key) {
+   var nid = Caml_hash_primitive.caml_hash_final_mix(Caml_hash_primitive.caml_hash_mix_string(0, key)) &amp; (h_buckets.length - 1 | 0);
+   var bucket = h_buckets[nid];
+   if (bucket !== undefined) {
+<span class="hljs-deletion">-    var key$1 = key;</span>
+     var _cell = bucket;
+     while(true) {
+       var cell = _cell;
+<span class="hljs-deletion">-      if (cell.key === key$1) {</span>
+<span class="hljs-addition">+      if (cell.key === key) {</span>
+         return true;
+<span class="hljs-deletion">-      } else {</span>
+<span class="hljs-deletion">-        var match = cell.next;</span>
+<span class="hljs-deletion">-        if (match !== undefined) {</span>
+<span class="hljs-deletion">-          _cell = match;</span>
+<span class="hljs-deletion">-          continue ;</span>
+<span class="hljs-deletion">-        } else {</span>
+<span class="hljs-deletion">-          return false;</span>
+<span class="hljs-deletion">-        }</span>
+       }
+<span class="hljs-addition">+      var nextCell = cell.next;</span>
+<span class="hljs-addition">+      if (nextCell === undefined) {</span>
+<span class="hljs-addition">+        return false;</span>
+<span class="hljs-addition">+      }</span>
+<span class="hljs-addition">+      _cell = nextCell;</span>
+<span class="hljs-addition">+      continue ;</span>
+     };
+   } else {
+     return false;
+@@ -155,17 +142,17 @@ function has(h, key) {
+ }
+</code></pre>
+<pre><code class="hljs css language-diff"><span class="hljs-comment">--- a/lib/js/belt_List.js</span>
+<span class="hljs-comment">+++ b/lib/js/belt_List.js</span>
+@@ -15,9 +15,8 @@ function head(x) {
+ function headExn(x) {
+   if (x) {
+     return x[0];
+<span class="hljs-deletion">-  } else {</span>
+<span class="hljs-deletion">-    throw new Error("headExn");</span>
+   }
+<span class="hljs-addition">+  throw new Error("headExn");</span>
+ }
+ 
+</code></pre>
+<ul>
+<li>For loop minor-enhancement</li>
+</ul>
+<pre><code class="hljs css language-diff"> function shuffleInPlace(xs) {
+   var len = xs.length;
+<span class="hljs-deletion">-  for(var i = 0 ,i_finish = len - 1 | 0; i &lt;= i_finish; ++i){</span>
+<span class="hljs-addition">+  for(var i = 0; i &lt; len; ++i){</span>
+     swapUnsafe(xs, i, Js_math.random_int(i, len));
+   }
+<span class="hljs-deletion">-  return /* () */0;</span>
+<span class="hljs-addition">+  </span>
+ }
+</code></pre>
+<p>Reason's <code>for .. in</code> only provide closed interval iterating, so it is quite common to write
+<code>for (i in 0 to Array.length(x) - 1) { .. }</code>, we did the tweaking above to make the generated code more readable.</p>
+<p>A full list of changes is available here: <a href="https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#73">https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#73</a></p>
+</span></div></article></div><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2020/03/26/generalize-uncurry">Generalized uncurry support in BuckleScript 7.3</a></h1><p class="post-meta">March 26, 2020</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p><a href="https://github.com/facebook/reason">ReasonML</a> is a <a href="https://en.wikipedia.org/wiki/Currying">curried</a> language, while Js is an uncurried language. When compiling ReasonML into Js, there's lots of headache due to the semantics mismatch.</p>
 <p>After several years of research and development, we reach an ideal situation in the next release: adding a lightweight uncurried calling convention to ReasonML.</p>
 <h2><a class="anchor" aria-hidden="true" id="why-we-need-native-uncurried-calling-convention"></a><a href="#why-we-need-native-uncurried-calling-convention" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Why we need native uncurried calling convention</h2>
 <ul>
@@ -847,35 +995,6 @@ Error: This expression has<span class="hljs-built_in"> type </span>(int, S1.iden
 </code></pre>
 <p>As you read here, by using such encoding, the data structure is more generalized from user point of view. The generated JS code is not in a big closure so that it can be dead code eliminated better.</p>
 <p>This style is extensively used in Belt encoding, we  encourage you to have a look at its implementation for better ideas.</p>
-</span></div></article></div><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2019/09/23/release-5-20-0">Release 5.2.0/6.2.0</a></h1><p class="post-meta">September 23, 2019</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p><code>bs-platform</code> 5.2.0/6.2.0 is released, it contains several major enhancement that we would like to share with you.</p>
-<p>You can install it via <code>npm i -g bs-platform@5.2.0</code></p>
-<h1><a class="anchor" aria-hidden="true" id="local-module-compiled-into-object"></a><a href="#local-module-compiled-into-object" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Local module compiled into object</h1>
-<p>OCaml has an <a href="https://people.mpi-sws.org/~dreyer/thesis/old/thesis050405.pdf">advanced module system</a> for people to structure large scale applications, it supports first class module and higher-order module system which is unique compared to other ML-like languages such as F# and Haskell.</p>
-<p>In previous versions, BuckleScript compiled local modules into a JS array whereby global modules (module produced by a file)were transformed into JS objects.</p>
-<p>When a local module is compiled into a JS array, the field name is stripped away, which makes debugging and JS interop difficult. To make the debugging experience better, we instrumented the array with field names in debug mode, this mitigated the debugging issue, but still present challenges for JS interop.</p>
-<p>In this release, the compiler generates uniform representation for global module and local module -- idiomatic JS object, this makes OCaml's module system more valuable to JS target.</p>
-<p>Below is an image showing the diff in this release</p>
-<p><img src="/img/functor.png"></p>
-<p>As you can see, the <code>id</code> module changed from an array into an JS object.</p>
-<h1><a class="anchor" aria-hidden="true" id="pattern-match-code-generation-with-annotations"></a><a href="#pattern-match-code-generation-with-annotations" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Pattern match code generation with annotations</h1>
-<p>BuckleScript aims to generate readable code.</p>
-<p>OCaml has a sophiscated pattern match compiler, it generates well optimized code, however, for complex pattern matching, the constructor name is lost on native backend, this is also one of the very few case where we generate magic number
-in JS backend, this makes debugging particularly challenging for large complex pattern match.</p>
-<p>In this release, we made such information available to JS backend so that we annotate the generated JS code with its names.</p>
-<p>Below is an image showing the diff in this release</p>
-<p><img src="/img/pattern-match.png"></p>
-<p>In the future, we will explore if we can produce such annotation in the runtime without losing efficiency.</p>
-<h1><a class="anchor" aria-hidden="true" id="code-generation-improvement-in-various-places"></a><a href="#code-generation-improvement-in-various-places" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Code generation improvement in various places</h1>
-<p>We care about the generated code quality, and will always keep improving it regardless how good it is.</p>
-<p>In this release, we improved the code generation in quite a lot of places including lazy evaluation, if branches and pattern match.</p>
-<p>In particular, we added a data-flow pass to eliminate non-necessary staticfail case.</p>
-<p><img src="/img/staticfail.png"></p>
-<h1><a class="anchor" aria-hidden="true" id="important-bug-fixes"></a><a href="#important-bug-fixes" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Important bug fixes</h1>
-<p>This release also comes with a couple of important bug fixes, in particular, #3805 the stale build issue and #3823 the interaction with reason langauge service.</p>
-<h1><a class="anchor" aria-hidden="true" id="upcoming-breaking-changes"></a><a href="#upcoming-breaking-changes" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Upcoming breaking changes</h1>
-<p>In next release, we plan to <a href="https://reasonml.chat/t/ann-remove-deprecated-getters-in-deriving-abstract-after-5-2-0/1908">remove deprecated getters</a>.</p>
-<p>A detailed list of changes is available <a href="https://github.com/BuckleScript/bucklescript/blob/master/Changes.md#520">here</a></p>
-<p>Happy hacking!</p>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-next" href="/blog/page2/">Next →</a></div></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script>window.foo = new Pjax({
           areas: [
             // try to use the first query.
