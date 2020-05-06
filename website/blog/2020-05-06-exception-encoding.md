@@ -8,7 +8,7 @@ In the master branch of our compiler, we made some significant improvement in ex
 
 In the native backend, the stacktrace handling mechanism is different from JS. In JS VM, the stacktrace is collected immediately when an Error object is thrown, while in native, such data is not attached to the exception object at all, stacktrace collecting in native is highly coupled with runtime support. 
 
-So, to preserve a clear stacktrace we need change the encoding of the exception in ReasonML to better fit JS use case, this is part of our on-going work to choose optimal encoding for all ReasonML data types.
+So, to preserve a clear stacktrace we need change the encoding of the exception in ReasonML to better fit JS use case, this is part of our on-going work to choose the optimal encoding for all ReasonML data types.
 
 ## What's the classical ReasonML exception encoding?
 
@@ -51,12 +51,12 @@ raise (A {x : 1 , y : "x"})
 throw {RE_EXN_ID: "A/uuid", x : 1 , y : "x", Error : new Error ()}
 ```
 
-Here the compiler attached a stacktrace here, it is much simpiler since now we compile exception value into an object instead of an array.
+Here the compiler attached a stacktrace here, it is much simpler since now we compile exception value into an object instead of an array.
 
 
 ## Caveat
 
-Don't rely on the key name of `RE_EXN_ID`, it is an implementation detail which you should not rely on and it is subject to be changed into an symbol in the future.
+Don't rely on the key name of `RE_EXN_ID`, it is an implementation detail which you should not rely on and it is subject to be changed into a symbol in the future.
 
 ## Bonus
 
