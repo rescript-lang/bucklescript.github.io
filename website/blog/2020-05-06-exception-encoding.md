@@ -53,6 +53,19 @@ throw {RE_EXN_ID: "A/uuid", x : 1 , y : "x", Error : new Error ()}
 
 Here the compiler attached a stacktrace here, it is much simpler since now we compile exception value into an object instead of an array.
 
+## What's the story of JS interop
+
+Note that in JS world, user can throw anything, it is even valid to `throw undefined`. When ReasonML tries to catch the exception, the compiler behind the scene will convert an arbitrary exception to a ReasonML exception: if it is already ReasonML exception, the conversion is a nop, if it is not, it will be wrapped as `Js.Exn.Error obj`.
+
+```reasonml
+try ( ... ) {
+| Not_found => ..  // catch  reasonml exception 1 
+| Invalid_argument =>  // catch  reasonml exception 2
+| Js.Exn.Error (obj) => ... // catch js exception
+}
+```
+
+`obj` is of an opaque type to maintain type soundness.
 
 ## Caveat
 
