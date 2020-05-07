@@ -5,6 +5,49 @@ title: A story of exception encoding in BuckleScript
 We just recently made some significant improvements with our new exception encoding and we find it so exciting that we want to highlight the changes and explain a little bit how exceptions work when compiling to JS.
 
 The new encoding allows us to provide proper, clear stacktrace information whenever a Reason/OCaml exception is thrown. This is particularly important when you have some code running in production that needs to collect those stacktrace for diagnostics.
+
+What's the difference? 
+
+```reasonml
+exception My_exception { x : int};
+
+let loop = () => {
+ for (i in 0 to 100) {
+   if (i == 10) {
+     raise (My_exception { x : i})
+   };
+ };
+};
+loop ();
+```
+When running such piece of code in production, the old behavior is 
+
+```
+exn_demo$node src/exn_demo.bs.js 
+
+/Users/hongbozhang/git/exn_demo/src/exn_demo.bs.js:11
+      throw [
+      ^
+[ [ 'Exn_demo.My_exception', 1, tag: 248 ], 10 ]
+```
+
+With our improvement, it is now:
+```
+bucklescript$node jscomp/test/exn_demo.js
+
+/Users/hongbozhang/git/bucklescript/jscomp/test/exn_demo.js:10
+      throw {
+      ^
+{
+  RE_EXN_ID: 'Exn_demo.My_exception/1',
+  x: 10,
+  Error: Error
+      at loop (/Users/hongbozhang/git/bucklescript/jscomp/test/exn_demo.js:13:20)
+      at Object.<anonymous> (/Users/hongbozhang/git/bucklescript/jscomp/test/exn_demo.js:21:1)
+      at ...
+}
+```
+
  
 Now let's get into the details how we changed things up!
 
@@ -55,16 +98,19 @@ What will happen when you raise an exception?
 raise (A {x : 1 , y : "x"})
 ````
 
+It generates following JS:
 
 ```js
 throw {RE_EXN_ID: "A/uuid", x : 1 , y : "x", Error : new Error ()}
 ```
 
-You can see in the compiled output that we can now attach the stacktrace very easily, since every exception is now an object instead of an array. Really cool!
+You can see in the compiled output that we can now attach the stacktrace very easily since every exception is now an object instead of an array. Really cool!
+
+Note the stacktrace is only attached when you raise an exception is, it's untouched when you pass exception objects along. 
 
 ## What's the story of JS interop
 
-Note that in JS world, user can throw anything, it is even valid to `throw undefined`. When ReasonML tries to catch the exception, the compiler behind the scene will convert an arbitrary exception to a ReasonML exception: if it is already ReasonML exception, the conversion is a nop, if it is not, it will be wrapped as `Js.Exn.Error obj`.
+Note that in JS world, users can throw anything, it is even valid to `throw undefined`. When ReasonML tries to catch the exception, the compiler behind the scene will convert an arbitrary exception to a ReasonML exception: if it is already ReasonML exception, the conversion is a nop, if it is not, it will be wrapped as `Js.Exn.Error obj`.
 
 ```reasonml
 try ( ... ) {
@@ -78,7 +124,9 @@ try ( ... ) {
 
 ## Caveat
 
-Please note that it's not allowed to rely on the key name of `RE_EXN_ID`. It's an implementation detail which will probably be changed into a symbol in the future.
+- Please note that it's not allowed to rely on the key name of `RE_EXN_ID`. It's an implementation detail which will probably be changed into a symbol in the future.
+
+- Don't over-use exeptions, remember exception should only be used in exceptional cases like division by zero.
 
 ## Bonus
 
