@@ -56,7 +56,7 @@ That's basically it! Furthermore in this post, we want to give you some insights
 
 Whenever you are using a Reason / OCaml exception (a so called "native exception"), you are actually using a data structure which is not the same as a JS runtime exception. That means that each exception representation invokes a different stacktrace handling mechanism:
 
-In JS, the stacktrace is collected immediately when an Error object is thrown, while in native Reason / OCaml, such data is not attached to the exception object at all (you can't just access `e.stack` to retrieve the stacktrace). This is because collecting the stacktrace in a native environment highly depends on the runtime support (e.g. if a flag was provided to attach the stacktrace data).
+In JS, the stacktrace is collected immediately when an Error object is created / thrown, while in native Reason / OCaml, such data is not attached to the exception object at all (you can't just access `e.stack` to retrieve the stacktrace). This is because collecting the stacktrace in a native environment highly depends on the runtime support (e.g. if a flag was provided to attach the stacktrace data).
 
 Our goal was to provide a way to get the same stacktrace for native exceptions as you would with JS exceptions. This is all part of our on-going work to plan and implement the optimal encoding for all the different ReasonML data types for the JS runtime (just like with our previous changes to the `bool`, `unit` and `records` representation as well).
 
