@@ -76,6 +76,6 @@ Please note that it's not allowed to rely on the key name of `RE_EXN_ID`. It's a
 
 ## Bonus
 
-With such nice encoding, a hidden feature called [extensible variant](https://caml.inria.fr/pub/docs/manual-ocaml/extensiblevariants.html) is much more useful. exception in ReasonML is a special instance of extensible variant, they share the same encoding.
+With our nice new exception encoding, a hidden feature called [extensible variant](https://caml.inria.fr/pub/docs/manual-ocaml/extensiblevariants.html) is now way more useful. This  is because a native exception in ReasonML is actually a special instance of an extensible variant. They share the same encoding, so both benefit from the new changes!
 
 Happy hacking and we would like your feedback!
