@@ -14,7 +14,7 @@ So, to preserve a clear stacktrace we need change the encoding of the exception 
 
 ## What's the classical ReasonML exception encoding?
 
-In ReasonML, exception is structured data, take the two exception definitions below, for example
+In ReasonML, an exception is basically structured data. Let's have a look at the two exception definitions below:
 
 ```reasonml
 exception A of { x : int , y : string}
