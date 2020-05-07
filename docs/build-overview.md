@@ -49,7 +49,7 @@ Add `-w` to keep the built-in watcher running. Any new file change will be picke
 
 ## Artifacts Cleaning
 
-If you ever get into a stable build for edge-case reasons, use:
+If you ever get into an unstable build for edge-case reasons, use:
 
 ```sh
 bsb -clean-world
