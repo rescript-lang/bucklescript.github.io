@@ -32,7 +32,9 @@ exception B
 The identity block is an array of 2 slots. The first slot is a string like "B", while the second slot is a unique integer. 
 In more detail, the native array will also have a magic tag 248 attached which is not relevant for our purposes though.
 
-Previously we more or less faithfully do the similar encoding in BuckleScript compiler, but it is no longer case,  now it is much simplified, take two exception values below for example
+## What's the new exception encoding?
+
+We had to simplify and unify the encoding for the different exception cases to make it possible to compile exceptions into an object instead of an array. Let's take a look at the two exception values below for example:
 
 ```reasonml
 A ({ x : 1, y : "x"}
