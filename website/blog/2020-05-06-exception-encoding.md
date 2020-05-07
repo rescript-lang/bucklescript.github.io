@@ -54,7 +54,7 @@ raise (A {x : 1 , y : "x"})
 throw {RE_EXN_ID: "A/uuid", x : 1 , y : "x", Error : new Error ()}
 ```
 
-Here the compiler attached a stacktrace here, it is much simpler since now we compile exception value into an object instead of an array.
+You can see in the compiled output that we can now attach the stacktrace very easily, since every exception is now an object instead of an array. Really cool!
 
 ## What's the story of JS interop
 
