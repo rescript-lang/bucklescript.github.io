@@ -6,7 +6,9 @@ In the master branch of our compiler, we made some significant improvement in ex
 
 ## Why it is tricky to preserve stack-traces in ReasonML exceptions
 
-In the native backend, the stacktrace handling mechanism is different from JS. In JS VM, the stacktrace is collected immediately when an Error object is thrown, while in native, such data is not attached to the exception object at all, stacktrace collecting in native is highly coupled with runtime support. 
+Whenever you are using a Reason / OCaml exception (a so called "native exception"), you are actually using a data structure which is not the same as a JS runtime exception. That means that each exception representation invoke different stacktrace handling mechanisms:
+
+In JS, the stacktrace is collected immediately when an Error object is thrown, while in native Reason / OCaml, such data is not attached to the exception object at all (you can't just access `e.stack` to retrieve the stacktrace). This is because collecting the stacktrace in a native environment highly depends on the runtime support (e.g. if a flag was provided to attach the stacktrace data).
 
 So, to preserve a clear stacktrace we need change the encoding of the exception in ReasonML to better fit JS use case, this is part of our on-going work to choose the optimal encoding for all ReasonML data types.
 
