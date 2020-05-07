@@ -41,13 +41,13 @@ A ({ x : 1, y : "x"}
 B
 ```
 
-It will be compiled into
+The two values will be compiled into
 
 ```js
 {RE_EXN_ID : "A/uuid", x : 1, y : "x" }
 {RE_EXN_ID : "B/uuid"}
 ```
-exceptions with or without payload share the same encoding.
+As you can see, all exceptions (no matter with or without payload) share the same encoding.
 
 What will happen when you raise an exception?
 
