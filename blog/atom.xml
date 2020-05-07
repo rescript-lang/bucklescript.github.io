@@ -2,11 +2,21 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://bucklescript.github.io/blog</id>
     <title>BuckleScript Blog</title>
-    <updated>2020-04-13T06:00:00Z</updated>
+    <updated>2020-05-06T06:00:00Z</updated>
     <generator>Feed for Node.js</generator>
     <link rel="alternate" href="https://bucklescript.github.io/blog"/>
     <subtitle>The best place to stay up-to-date with the latest BuckleScript news and events.</subtitle>
     <logo>https://bucklescript.github.io/img/logos/bucklescript.svg</logo>
+    <entry>
+        <title type="html"><![CDATA[A story of exception encoding in BuckleScript]]></title>
+        <id>https://bucklescript.github.io/blog/2020/05/06/exception-encoding.html</id>
+        <link href="https://bucklescript.github.io/blog/2020/05/06/exception-encoding.html">
+        </link>
+        <updated>2020-05-06T06:00:00Z</updated>
+        <summary type="html"><![CDATA[<p>We just recently made some significant improvements with our new exception encoding and we find it so exciting that we want to highlight the changes and explain a little bit how exceptions work when compiling to JS.</p> <p>The new encoding allows us to prov...</p>]]></summary>
+        <author>
+        </author>
+    </entry>
     <entry>
         <title type="html"><![CDATA[What's new in release 7.3]]></title>
         <id>https://bucklescript.github.io/blog/2020/04/13/release-7-3.html</id>
@@ -188,6 +198,16 @@
         </author>
     </entry>
     <entry>
+        <title type="html"><![CDATA[First-class `bs.variadic` Support in the Next Release]]></title>
+        <id>https://bucklescript.github.io/blog/2019/03/1/feature-preview.html</id>
+        <link href="https://bucklescript.github.io/blog/2019/03/1/feature-preview.html">
+        </link>
+        <updated>1970-01-01T00:00:00Z</updated>
+        <summary type="html"><![CDATA[<p>In previous releases, when a <code>bs.variadic</code> external (previously called <code>bs.splice</code> prior to version <code>4.08</code>) is present, its tail arguments needed to be applied statically. In other words, the <code>external</code> marked with <code>bs.variadic</code>, when used, requires a <em>literal</em> ...</p>]]></summary>
+        <author>
+        </author>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[In search of lightning feedback loop in a large codebase]]></title>
         <id>https://bucklescript.github.io/blog/2019/01/11/scalable.html</id>
         <link href="https://bucklescript.github.io/blog/2019/01/11/scalable.html">
@@ -204,16 +224,6 @@
         </link>
         <updated>2019-01-07T06:00:00Z</updated>
         <summary type="html"><![CDATA[<p><code>bs-platform</code> 4.0.17 is a major release.</p> <p>It improved incremental compilation time significantly.</p> <p>A pictue is worth a thousand words, below is a large monorepo which contains 4096 modules, changing the root node which has more than 3000 dependents, it f...</p>]]></summary>
-        <author>
-        </author>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[First-class `bs.variadic` Support in the Next Release]]></title>
-        <id>https://bucklescript.github.io/blog/2019/03/1/feature-preview.html</id>
-        <link href="https://bucklescript.github.io/blog/2019/03/1/feature-preview.html">
-        </link>
-        <updated>1970-01-01T00:00:00Z</updated>
-        <summary type="html"><![CDATA[<p>In previous releases, when a <code>bs.variadic</code> external (previously called <code>bs.splice</code> prior to version <code>4.08</code>) is present, its tail arguments needed to be applied statically. In other words, the <code>external</code> marked with <code>bs.variadic</code>, when used, requires a <em>literal</em> ...</p>]]></summary>
         <author>
         </author>
     </entry>
