@@ -107,7 +107,7 @@ throw {RE_EXN_ID: "A/uuid", x : 1 , y : "x", Error : new Error ()}
 
 The output above shows that we are now able to attach the stacktrace as an `Error` attribute very easily, since every exception is now an object instead of an array. Really cool!
 
-It's important to note that a stacktrace will only be attached *when you raise an exception*. That means that you'll only be able to access stacktrace information as soon as an error has been thrown, and it won't be attached right away when you instantiate an exception value (in contrary to JS'es `new Error()` behavior).
+It's important to note that a stacktrace will only be attached *when you raise an exception*. In other words, the stacktrace will not be attached just by creating an exception (which is different to JS'es `new Error()` behavior).
 
 ## What does that mean for JS interop?
 
