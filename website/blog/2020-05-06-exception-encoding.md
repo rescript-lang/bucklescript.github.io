@@ -25,7 +25,8 @@ exception B
 
 `exception B` is just the identity block.
 
-The identity block is an array of 2 slots whose first slot is a string like "B", while the second slot is a unique integer, such array in native also has a magic tag 248 for other purposes.
+The identity block is an array of 2 slots. The first slot is a string like "B", while the second slot is a unique integer. 
+In more detail, the native array will also have a magic tag 248 attached which is not relevant for our purposes though.
 
 Previously we more or less faithfully do the similar encoding in BuckleScript compiler, but it is no longer case,  now it is much simplified, take two exception values below for example
 
