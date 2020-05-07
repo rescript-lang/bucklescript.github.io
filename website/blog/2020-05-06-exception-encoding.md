@@ -21,7 +21,7 @@ exception A of { x : int , y : string}
 exception B
 ```
 
-`exception A` is encoded as an array of 3 slots, the first slot is a block by itself called identity block, while the second slot is for field x and the third slot for field y.
+`exception A` is encoded as an array of 3 slots. The first slot is a block by itself (called an *identity block*), while the second slot is for field x and the third slot for field y.
 
 `exception B` is just the identity block.
 
