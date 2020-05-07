@@ -2,7 +2,11 @@
 title: A story of exception encoding in BuckleScript
 ---
 
-In the master branch of our compiler, we made some significant improvement in exception encoding: it gives all ReasonML/OCaml exceptions a clear stack-trace when it is thrown. This is particular important when you have some code running in production so that collect those stacktrace for diagnostics.
+We just recently made some significant improvements with our new exception encoding and we find it so exciting that we want to highlight the changes and explain a little bit how exceptions work when compiling to JS.
+
+The new encoding allows us to provide proper, clear stacktrace information whenever a Reason/OCaml exception is thrown. This is particularly important when you have some code running in production that needs to collect those stacktrace for diagnostics.
+ 
+Now let's get into the details how we changed things up!
 
 ## Why it is tricky to preserve stack-traces in ReasonML exceptions
 
