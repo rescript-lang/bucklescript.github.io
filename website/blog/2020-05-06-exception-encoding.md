@@ -72,7 +72,7 @@ try ( ... ) {
 
 ## Caveat
 
-Don't rely on the key name of `RE_EXN_ID`, it is an implementation detail which you should not rely on and it is subject to be changed into a symbol in the future.
+Please note that it's not allowed to rely on the key name of `RE_EXN_ID`. It's an implementation detail which will probably be changed into a symbol in the future.
 
 ## Bonus
 
