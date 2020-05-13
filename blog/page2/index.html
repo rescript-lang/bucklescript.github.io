@@ -10,7 +10,7 @@
             languagesDropDown.className = "hide";
           }
         });
-      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/bucklescript/bucklescript" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul class=""><li class="navListItem"><a class="navItem" href="/blog/2020/05/06/exception-encoding">A story of exception encoding in BuckleScript</a></li><li class="navListItem"><a class="navItem" href="/blog/2020/04/13/release-7-3">What&#x27;s new in release 7.3</a></li><li class="navListItem"><a class="navItem" href="/blog/2020/03/26/generalize-uncurry">Generalized uncurry support in BuckleScript 7.3</a></li><li class="navListItem"><a class="navItem" href="/blog/2020/03/12/release-7-2">Announcing bs-platform  7.2</a></li><li class="navListItem"><a class="navItem" href="/blog/2020/02/20/loading-stdlib-in-memory">Loading stdlib from memory</a></li></ul></div></div></section></div><script>
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/bucklescript/bucklescript" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul class=""><li class="navListItem"><a class="navItem" href="/blog/2020/05/13/lazy-encoding">Enhanced lazy encoding in BuckleScript</a></li><li class="navListItem"><a class="navItem" href="/blog/2020/05/06/exception-encoding">A story of exception encoding in BuckleScript</a></li><li class="navListItem"><a class="navItem" href="/blog/2020/04/13/release-7-3">What&#x27;s new in release 7.3</a></li><li class="navListItem"><a class="navItem" href="/blog/2020/03/26/generalize-uncurry">Generalized uncurry support in BuckleScript 7.3</a></li><li class="navListItem"><a class="navItem" href="/blog/2020/03/12/release-7-2">Announcing bs-platform  7.2</a></li></ul></div></div></section></div><script>
             var coll = document.getElementsByClassName('collapsible');
             var checkActiveCategory = true;
             for (var i = 0; i < coll.length; i++) {
@@ -66,7 +66,52 @@
                 };
               }
             });
-        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="posts"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2019/10/16/another-encoding">Another way of encoding type identity for BuckleScript libraries without using big functor</a></h1><p class="post-meta">October 16, 2019</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p>Note this article is for library authors, it has something in depth which is not necessary for people who use BuckleScript at daily work.</p>
+        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="posts"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2019/11/18/whats-new-in-7">What&#x27;s new in release 7</a></h1><p class="post-meta">November 18, 2019</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p>The new major version of BuckleScript is coming -<a href="https://github.com/BuckleScript/bucklescript/pull/3968">7.0.0-dev.1</a> released for testing!</p>
+<p>We are maintaining <code>5.*</code> and <code>6.*</code> for OCaml <code>4.02</code> and <code>4.06</code> for a while, since this release we are moving forward and focusing on release 7.* (for OCaml 4.06).</p>
+<p>This is a major release comes with lots of nice features listed <a href="https://github.com/BuckleScript/bucklescript/blob/master/Changes.md">here</a>.</p>
+<p>We talk about some highlights here</p>
+<ul>
+<li><p>refmt upgraded to latest, it comes with better error message</p></li>
+<li><p>OCaml Records compiled into JS objects</p></li>
+</ul>
+<p>This is one of the most desired features, it is finally landed.</p>
+<p>See the generated code below for excitement!</p>
+<pre><code class="hljs css language-reasonml"><span class="hljs-keyword">type</span> t = {
+  x: <span class="hljs-built_in">int</span>,
+  y: <span class="hljs-built_in">int</span>,
+  z: <span class="hljs-built_in">int</span>,
+};
+
+<span class="hljs-keyword">let</span> obj = {x: <span class="hljs-number">3</span>, y: <span class="hljs-number">2</span>, z: <span class="hljs-number">2</span>};
+
+<span class="hljs-keyword">let</span> obj2 = {...obj, y: <span class="hljs-number">4</span>};
+</code></pre>
+<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">type</span> t = {
+  x : <span class="hljs-built_in">int</span>;
+  y : <span class="hljs-built_in">int</span>;
+  z : <span class="hljs-built_in">int</span> 
+}
+
+<span class="hljs-keyword">let</span> obj = { x = <span class="hljs-number">3</span> ; y = <span class="hljs-number">2</span>; z = <span class="hljs-number">2</span>}
+
+<span class="hljs-keyword">let</span> obj2 = { obj <span class="hljs-keyword">with</span> y = <span class="hljs-number">4</span>}
+</code></pre>
+<pre><code class="hljs css language-js"><span class="hljs-keyword">var</span> obj2 = {
+  <span class="hljs-attr">x</span>: <span class="hljs-number">3</span>,
+  <span class="hljs-attr">y</span>: <span class="hljs-number">4</span>,
+  <span class="hljs-attr">z</span>: <span class="hljs-number">2</span>
+};
+
+<span class="hljs-keyword">var</span> obj = {
+  <span class="hljs-attr">x</span>: <span class="hljs-number">3</span>,
+  <span class="hljs-attr">y</span>: <span class="hljs-number">2</span>,
+  <span class="hljs-attr">z</span>: <span class="hljs-number">2</span>
+};
+</code></pre>
+<p>This new change makes record much more useful and its interaction with <code>private</code> type; unboxed option type will make interop with JS much nicer!</p>
+<p>As always, we continue improving our optimizer in various <a href="https://github.com/BuckleScript/bucklescript/pull/3966/files?file-filters%5B%5D=.js">commits</a>, we belive that not only a better language but also an implementation of high quality is key to push typed functional programming into industry.</p>
+<p>Happy hacking!</p>
+</span></div></article></div><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2019/10/16/another-encoding">Another way of encoding type identity for BuckleScript libraries without using big functor</a></h1><p class="post-meta">October 16, 2019</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p>Note this article is for library authors, it has something in depth which is not necessary for people who use BuckleScript at daily work.</p>
 <p>When we build some generic data structure, abstract over function is not enough. For example,  a type safe generic balanced AVL tree not only relies on the types of a comparison function, but also the identity of such function. Two balanced AVL trees which are initialized over same type of comparison function still can not be mixed.</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">module</span> <span class="hljs-module-identifier">Eq1</span> = {
   <span class="hljs-keyword">let</span> eq = (x, y) =&gt; x <span class="hljs-operator">==</span> y;
@@ -649,26 +694,6 @@ note we expect users to have some issues in experiment, feedback is welcome!</p>
 </code></pre>
 <p>This is the last major release which is targeting OCaml 4.02.3, in the future we will make major releases targeting OCaml 4.06.</p>
 <p>Happy Hacking!</p>
-</span></div></article></div><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2019/03/1/feature-preview">First-class `bs.variadic` Support in the Next Release</a></h1><p class="post-meta">March 1, 2019</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p>In previous releases, when a <code>bs.variadic</code> external (previously called <code>bs.splice</code> prior to version <code>4.08</code>) is present, its tail arguments needed to be applied statically. In other words, the <code>external</code> marked with <code>bs.variadic</code>, when used, requires a <em>literal</em> array:</p>
-<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">external</span> join : <span class="hljs-built_in">string</span> <span class="hljs-built_in">array</span> -&gt; <span class="hljs-built_in">string</span> = <span class="hljs-string">"join"</span>
-[@@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"path"</span>][@@bs.variadic]
-
-<span class="hljs-keyword">let</span> _ = join [|<span class="hljs-string">"a"</span>; <span class="hljs-string">"b"</span>|] <span class="hljs-comment">(* this is ok *)</span>
-<span class="hljs-keyword">let</span> f b = join b <span class="hljs-comment">(* compiler error when you try to abstract `join` *)</span>
-</code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.module "path"]</span><span class="hljs-attribute">[@bs.variadic]</span>
-<span class="hljs-keyword">external</span> join: array(string) =&gt; string = <span class="hljs-string">"join"</span>
-
-<span class="hljs-keyword">let</span> _ = join(<span class="hljs-literal">[|</span><span class="hljs-string">"a"</span>, <span class="hljs-string">"b"</span><span class="hljs-literal">|]</span>) <span class="hljs-comment">/* this is ok */</span>
-<span class="hljs-keyword">let</span> f = b =&gt; join(b) <span class="hljs-comment">/* compiler error when you try to abstract `join` */</span>
-</code></pre>
-<p>More importantly, such compilation error was leaky in cases such as this one:</p>
-<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> f = join
-</code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> f = join
-</code></pre>
-<p>In the next release, we are going to lift such restriction. You'll be able to call an external marked with <code>bs.variadic</code> with an array reference, not just a literal array.</p>
-<p>Caveat: it's unclear how to support such first class <code>bs.variadic</code> call in conjunction with <code>bs.new</code>, so an external declaration that contains both will trigger a compilation error. We'll try to figure out this particular case in the future too.</p>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev" href="/blog/">← Prev</a><a class="docs-next" href="/blog/page3/">Next →</a></div></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script>window.foo = new Pjax({
           areas: [
             // try to use the first query.

@@ -10,7 +10,7 @@
             languagesDropDown.className = "hide";
           }
         });
-      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/bucklescript/bucklescript" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul class=""><li class="navListItem"><a class="navItem" href="/blog/2020/05/06/exception-encoding">A story of exception encoding in BuckleScript</a></li><li class="navListItem"><a class="navItem" href="/blog/2020/04/13/release-7-3">What&#x27;s new in release 7.3</a></li><li class="navListItem"><a class="navItem" href="/blog/2020/03/26/generalize-uncurry">Generalized uncurry support in BuckleScript 7.3</a></li><li class="navListItem"><a class="navItem" href="/blog/2020/03/12/release-7-2">Announcing bs-platform  7.2</a></li><li class="navListItem"><a class="navItem" href="/blog/2020/02/20/loading-stdlib-in-memory">Loading stdlib from memory</a></li></ul></div></div></section></div><script>
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/bucklescript/bucklescript" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul class=""><li class="navListItem"><a class="navItem" href="/blog/2020/05/13/lazy-encoding">Enhanced lazy encoding in BuckleScript</a></li><li class="navListItem"><a class="navItem" href="/blog/2020/05/06/exception-encoding">A story of exception encoding in BuckleScript</a></li><li class="navListItem"><a class="navItem" href="/blog/2020/04/13/release-7-3">What&#x27;s new in release 7.3</a></li><li class="navListItem"><a class="navItem" href="/blog/2020/03/26/generalize-uncurry">Generalized uncurry support in BuckleScript 7.3</a></li><li class="navListItem"><a class="navItem" href="/blog/2020/03/12/release-7-2">Announcing bs-platform  7.2</a></li></ul></div></div></section></div><script>
             var coll = document.getElementsByClassName('collapsible');
             var checkActiveCategory = true;
             for (var i = 0; i < coll.length; i++) {
@@ -66,7 +66,91 @@
                 };
               }
             });
-        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="posts"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2020/05/06/exception-encoding">A story of exception encoding in BuckleScript</a></h1><p class="post-meta">May 6, 2020</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p>We just recently made some significant improvements with our new exception encoding and we find it so exciting that we want to highlight the changes and explain a little bit how exceptions work when compiling to JS.</p>
+        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="posts"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2020/05/13/lazy-encoding">Enhanced lazy encoding in BuckleScript</a></h1><p class="post-meta">May 13, 2020</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p>Recently we made some significant improvements with our new encoding for lazy values and we find it so exciting that we want to highlight the changes. The new encoding generates very idiomatic JS output like hand-written ones.</p>
+<h1><a class="anchor" aria-hidden="true" id="whats-the-difference"></a><a href="#whats-the-difference" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>What's the difference?</h1>
+<p>Take this code snippet for example:</p>
+<pre><code class="hljs css language-reasonml"><span class="hljs-keyword">let</span> lazy1 = <span class="hljs-keyword">lazy</span> {
+    <span class="hljs-string">"Hello, lazy"</span> -&gt; <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Js</span>.</span></span>log;
+     <span class="hljs-number">1</span>
+}; <span class="hljs-comment">// create a lazy value</span>
+
+<span class="hljs-keyword">let</span> lazy2 = <span class="hljs-keyword">lazy</span> <span class="hljs-number">3</span> ; <span class="hljs-comment">// artifical lazy values for demo purpose</span>
+
+<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Js</span>.</span></span>log2 (lazy1, lazy2); <span class="hljs-comment">// logging the lazy values</span>
+
+<span class="hljs-keyword">let</span> (<span class="hljs-keyword">lazy</span> la, <span class="hljs-keyword">lazy</span> lb) = (lazy1, lazy2); <span class="hljs-comment">// pattern match to force it evaluated</span>
+
+<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Js</span>.</span></span>log2 (la, lb); <span class="hljs-comment">// logging forced values</span>
+</code></pre>
+<p>Running this code in node, the output is as below:</p>
+<pre><code class="hljs css language-bash">lazy_demo<span class="hljs-variable">$node</span> src/lazy_demo.bs.js 
+[ [Function], tag: 246 ] 3 <span class="hljs-comment"># logging the output of two lazy blocks</span>
+Hello, lazy
+1 3
+</code></pre>
+<p>With the new encoding, the output is as below:</p>
+<pre><code class="hljs css language-bash">bucklescript<span class="hljs-variable">$node</span> jscomp/<span class="hljs-built_in">test</span>/lazy_demo.js 
+{ RE_LAZY: <span class="hljs-string">'todo'</span>, value: [Function: value] } <span class="hljs-comment"># logging block one</span>
+{ RE_LAZY: <span class="hljs-string">'done'</span>, value: 3 } <span class="hljs-comment"># logging block two</span>
+Hello, lazy
+1 3
+</code></pre>
+<p>As you can see, with the new encoding, no magic tags like 246  appear, and the lazy status is clearly marked via <code>RE_LAZY: 'todo'</code> or <code>RE_LAZY: 'done'</code>.</p>
+<p>More than that, the generated code quality is also improved, in the old mode, the generated JS code is like this:</p>
+<pre><code class="hljs css language-js"><span class="hljs-keyword">var</span> lazy1 = Caml_obj.caml_lazy_make((<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">param</span>) </span>{
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Hello, lazy"</span>);
+        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+      }));
+
+<span class="hljs-built_in">console</span>.log(lazy1, <span class="hljs-number">3</span>);
+
+<span class="hljs-keyword">var</span> la = CamlinternalLazy.force(lazy1);
+
+<span class="hljs-keyword">var</span> lb = CamlinternalLazy.force(<span class="hljs-number">3</span>);
+
+<span class="hljs-built_in">console</span>.log(la, lb);
+
+<span class="hljs-keyword">var</span> lazy2 = <span class="hljs-number">3</span>;
+</code></pre>
+<p>In the new mode, it is much simplified:</p>
+<pre><code class="hljs css language-js"><span class="hljs-keyword">var</span> lazy1 = {
+  <span class="hljs-attr">RE_LAZY</span>: <span class="hljs-string">"todo"</span>,
+  <span class="hljs-attr">value</span>: (<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{ <span class="hljs-comment">// internal function is using uncurried function for performance</span>
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Hello, lazy"</span>);
+      <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+    })
+};
+
+<span class="hljs-keyword">var</span> lazy2 = {
+  <span class="hljs-attr">RE_LAZY</span>: <span class="hljs-string">"done"</span>,
+  <span class="hljs-attr">value</span>: <span class="hljs-number">3</span>
+};
+
+<span class="hljs-built_in">console</span>.log(lazy1, lazy2);
+
+<span class="hljs-keyword">var</span> la = CamlinternalLazy.force(lazy1);
+
+<span class="hljs-keyword">var</span> lb = CamlinternalLazy.force(lazy2);
+
+<span class="hljs-built_in">console</span>.log(la, lb);
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="what-changes-do-we-make"></a><a href="#what-changes-do-we-make" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>What changes do we make?</h2>
+<p>In native, the encoding of lazy values is rather complicated:</p>
+<ul>
+<li>It is an array, which is not friendly for debugging in JS context.</li>
+<li>It has some special tags which is not meaningful, for example, magic number 246,  in JS context.</li>
+<li>It tries to unbox lazy values with the help of native GC, however, such complexity does not pay off in JS since JSVM does not expose its GC semantics.</li>
+</ul>
+<p>So in the master, our encoding scheme is much simplified to take advantage of JS as much as possible:</p>
+<ul>
+<li><p>The encoding is uniform, it is always an object of two key value pairs, one is <code>RE_LAZY</code> to mark its status,
+the other is either a closure or an evaluated value.</p></li>
+<li><p>The compiler optimization still kicks in at compile time: if it knows such lazy value is already evaluated or does not need to be evaluated, it will promote its status to be 'done'. However, unboxing is not happening unlike native. This makes sense since the most interesting unboxing scenarios happens in runtime instead of compile time where it is impossible in JSVM.</p></li>
+</ul>
+<p>With the new encoding, the lazy is a much nicer sugar and we encourage you to use it whenever it is convenient!</p>
+<h1><a class="anchor" aria-hidden="true" id="caveats"></a><a href="#caveats" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Caveats:</h1>
+<p>Don't rely on the special name <code>RE_LAZY</code> for JS interop, we may change it to a symbol in the future.</p>
+</span></div></article></div><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2020/05/06/exception-encoding">A story of exception encoding in BuckleScript</a></h1><p class="post-meta">May 6, 2020</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p>We just recently made some significant improvements with our new exception encoding and we find it so exciting that we want to highlight the changes and explain a little bit how exceptions work when compiling to JS.</p>
 <p>The new encoding allows us to provide proper, clear stacktrace information whenever a Reason/OCaml exception is thrown. This is particularly important when you have some code running in production that needs to collect those stacktrace for diagnostics.</p>
 <p>What's the difference?</p>
 <pre><code class="hljs css language-reasonml"><span class="hljs-keyword">exception</span> My_exception { x : <span class="hljs-built_in">int</span>};
@@ -798,51 +882,6 @@ regular definitions are not allowed. Non structural types (variants, records)
 does not have such limitations, with <code>unboxed</code>, we can use non structural
 types as an indirection without changing its runtime representations.</p>
 </blockquote>
-</span></div></article></div><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2019/11/18/whats-new-in-7">What&#x27;s new in release 7</a></h1><p class="post-meta">November 18, 2019</p><div class="authorBlock"></div></header><article class="post-content"><div><span><p>The new major version of BuckleScript is coming -<a href="https://github.com/BuckleScript/bucklescript/pull/3968">7.0.0-dev.1</a> released for testing!</p>
-<p>We are maintaining <code>5.*</code> and <code>6.*</code> for OCaml <code>4.02</code> and <code>4.06</code> for a while, since this release we are moving forward and focusing on release 7.* (for OCaml 4.06).</p>
-<p>This is a major release comes with lots of nice features listed <a href="https://github.com/BuckleScript/bucklescript/blob/master/Changes.md">here</a>.</p>
-<p>We talk about some highlights here</p>
-<ul>
-<li><p>refmt upgraded to latest, it comes with better error message</p></li>
-<li><p>OCaml Records compiled into JS objects</p></li>
-</ul>
-<p>This is one of the most desired features, it is finally landed.</p>
-<p>See the generated code below for excitement!</p>
-<pre><code class="hljs css language-reasonml"><span class="hljs-keyword">type</span> t = {
-  x: <span class="hljs-built_in">int</span>,
-  y: <span class="hljs-built_in">int</span>,
-  z: <span class="hljs-built_in">int</span>,
-};
-
-<span class="hljs-keyword">let</span> obj = {x: <span class="hljs-number">3</span>, y: <span class="hljs-number">2</span>, z: <span class="hljs-number">2</span>};
-
-<span class="hljs-keyword">let</span> obj2 = {...obj, y: <span class="hljs-number">4</span>};
-</code></pre>
-<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">type</span> t = {
-  x : <span class="hljs-built_in">int</span>;
-  y : <span class="hljs-built_in">int</span>;
-  z : <span class="hljs-built_in">int</span> 
-}
-
-<span class="hljs-keyword">let</span> obj = { x = <span class="hljs-number">3</span> ; y = <span class="hljs-number">2</span>; z = <span class="hljs-number">2</span>}
-
-<span class="hljs-keyword">let</span> obj2 = { obj <span class="hljs-keyword">with</span> y = <span class="hljs-number">4</span>}
-</code></pre>
-<pre><code class="hljs css language-js"><span class="hljs-keyword">var</span> obj2 = {
-  <span class="hljs-attr">x</span>: <span class="hljs-number">3</span>,
-  <span class="hljs-attr">y</span>: <span class="hljs-number">4</span>,
-  <span class="hljs-attr">z</span>: <span class="hljs-number">2</span>
-};
-
-<span class="hljs-keyword">var</span> obj = {
-  <span class="hljs-attr">x</span>: <span class="hljs-number">3</span>,
-  <span class="hljs-attr">y</span>: <span class="hljs-number">2</span>,
-  <span class="hljs-attr">z</span>: <span class="hljs-number">2</span>
-};
-</code></pre>
-<p>This new change makes record much more useful and its interaction with <code>private</code> type; unboxed option type will make interop with JS much nicer!</p>
-<p>As always, we continue improving our optimizer in various <a href="https://github.com/BuckleScript/bucklescript/pull/3966/files?file-filters%5B%5D=.js">commits</a>, we belive that not only a better language but also an implementation of high quality is key to push typed functional programming into industry.</p>
-<p>Happy hacking!</p>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-next" href="/blog/page2/">Next →</a></div></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script>window.foo = new Pjax({
           areas: [
             // try to use the first query.
