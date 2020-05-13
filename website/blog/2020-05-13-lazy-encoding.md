@@ -4,11 +4,11 @@ title: Enhanced lazy encoding in BuckleScript
 
 
 
-Recently we made some significant improvements with our new encoding for lazy values and we find it so exciting that we want to highlight the changes. The new encoding generates very idiomatic JS output like hand-written ones.
+Recently we made some significant improvements with our new encoding for lazy values, and we find it so exciting that we want to highlight the changes. The new encoding generates very idiomatic JS output like hand-written code.
 
 # What's the difference?
 
-Take this code snippet for example:
+Take this code snippet, for example:
 
 ```reasonml
 let lazy1 = lazy {
@@ -20,7 +20,7 @@ let lazy2 = lazy 3 ; // artifical lazy values for demo purpose
 
 Js.log2 (lazy1, lazy2); // logging the lazy values
 
-let (lazy la, lazy lb) = (lazy1, lazy2); // pattern match to force it evaluated
+let (lazy la, lazy lb) = (lazy1, lazy2); // pattern match to force evaluation
 
 Js.log2 (la, lb); // logging forced values
 ```
@@ -43,7 +43,7 @@ Hello, lazy
 ```
 As you can see, with the new encoding, no magic tags like 246  appear, and the lazy status is clearly marked via `RE_LAZY: 'todo'` or `RE_LAZY: 'done'`.
 
-More than that, the generated code quality is also improved, in the old mode, the generated JS code is like this:
+More than that, the generated code quality is also improved. In the old mode, the generated JS code was like this:
 
 ```js
 var lazy1 = Caml_obj.caml_lazy_make((function (param) {
@@ -86,24 +86,24 @@ var lb = CamlinternalLazy.force(lazy2);
 console.log(la, lb);
 ```
 
-## What changes do we make?
+## What changes did we make?
 
 In native, the encoding of lazy values is rather complicated: 
 
 - It is an array, which is not friendly for debugging in JS context.
-- It has some special tags which is not meaningful, for example, magic number 246,  in JS context.
-- It tries to unbox lazy values with the help of native GC, however, such complexity does not pay off in JS since JSVM does not expose its GC semantics.
+- It has some special tags which are not meaningful, for example, magic number 246, in JS context.
+- It tries to unbox lazy values with the help of native GC. However, such complexity does not pay off in JS since the JSVM does not expose its GC semantics.
 
 So in the master, our encoding scheme is much simplified to take advantage of JS as much as possible:
 
-- The encoding is uniform, it is always an object of two key value pairs, one is `RE_LAZY` to mark its status, 
+- The encoding is uniform; it is always an object of two key value pairs. One is `RE_LAZY` to mark its status, 
 the other is either a closure or an evaluated value.
 
-- The compiler optimization still kicks in at compile time: if it knows such lazy value is already evaluated or does not need to be evaluated, it will promote its status to be 'done'. However, unboxing is not happening unlike native. This makes sense since the most interesting unboxing scenarios happens in runtime instead of compile time where it is impossible in JSVM.
+- The compiler optimization still kicks in at compile time: if it knows a lazy value is already evaluated or does not need to be evaluated, it will promote its status to be 'done'. However, unlike native, unboxing is not happening. This makes sense since the most interesting unboxing scenario happens in runtime instead of compile time where it is impossible in JSVM.
 
 
-With the new encoding, the lazy is a much nicer sugar and we encourage you to use it whenever it is convenient!
+With the new encoding, `lazy` has a much nicer sugar, and we encourage you to use it whenever it is convenient!
 
 # Caveats:
 
-Don't rely on the special name `RE_LAZY` for JS interop, we may change it to a symbol in the future.
+Don't rely on the special name `RE_LAZY` for JS interop; we may change it to a symbol in the future.
