@@ -73,6 +73,12 @@ const users = [
     image: "img/logos/tradie.png",
     infoLink: "https://tt.edu.au",
     pinned: true
+  },
+   {
+    caption: "Atvero",
+    image: "img/logos/atvero.png",
+    infoLink: "https://atvero.com",
+    pinned: true
   }
 ];
 
