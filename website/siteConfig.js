@@ -76,7 +76,7 @@ const users = [
   },
    {
     caption: "Atvero",
-    image: "img/logos/atvero.png",
+    image: "img/logos/atvero.svg",
     infoLink: "https://atvero.com",
     pinned: true
   }
