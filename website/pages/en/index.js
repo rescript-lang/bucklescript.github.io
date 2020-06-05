@@ -79,6 +79,13 @@ class HomeSplash extends React.Component {
     return (
       <div className="homeContainer">
 
+        <div className="homeContainer homeContainerWrapper homeBanner">
+          Black Lives Matter.{' '}
+          <a target="_blank" href="https://support.eji.org/give/153413/#!/donation/checkout">
+            Support the Equal Justice Initiative
+           </a>.
+        </div>
+
         <div id="redirectBanner">
           <div>
             Hello! This particular page hash has moved to <a id="redirectLink"/>.
