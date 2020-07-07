@@ -120,7 +120,7 @@ const siteConfig = {
   users,
   examples,
   onPageNav: 'separate',
-  scripts: ["/js/toggleSyntaxButton.js", "/js/pjax-api.min.js"],
+  scripts: ["/js/toggleSyntaxButton.js", "/js/redirectToNewDoc.js", "/js/pjax-api.min.js"],
   headerIcon: "img/logos/bucklescript.svg",
   // footerIcon: "img/logo.svg",
   favicon: "img/logos/bucklescript.png",
