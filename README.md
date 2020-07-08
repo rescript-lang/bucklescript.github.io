@@ -1,3 +1,5 @@
+**The new BuckleScript docs live at https://reasonml.org/docs/reason-compiler/latest/introduction. This repo is now deprecated. Please contribute to https://github.com/reason-association/reasonml.org/issues instead. Thanks!
+
 # BuckleScript Website
 
 This code is used to generate https://bucklescript.github.io. It pulls in files from `docs/` and `website/` to generate html files served on the site.
