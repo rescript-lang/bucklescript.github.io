@@ -79,6 +79,12 @@ const users = [
     image: "img/logos/atvero.svg",
     infoLink: "https://atvero.com",
     pinned: true
+  },
+   {
+    caption: "Porter",
+    image: "img/logos/porter.svg",
+    infoLink: "https://porter.in/",
+    pinned: true
   }
 ];
 
