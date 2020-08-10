@@ -7,7 +7,39 @@
     'playground'
   ]
   var specializedDocsRedirect = {
-    'stdlib-overview': 'apis/javascript/latest',
+    'what-why': 'docs/manual/latest/introduction',
+    'new-project': 'docs/manual/latest/installation#new-project',
+    'concept-overview': 'docs/manual/latest/introduction',
+
+    'interop-overview': 'docs/manual/latest/introduction',
+    'common-data-types': 'docs/manual/latest/shared-data-types',
+    'intro-to-external': 'docs/manual/latest/external',
+    'bind-to-global-values': 'docs/manual/latest/bind-to-global-js-values',
+    'object': 'docs/manual/latest/bind-to-js-object',
+    'object-2': 'docs/manual/latest/bind-to-js-object',
+    'class': 'docs/manual/latest/bind-to-js-object#bind-to-a-js-object-thats-a-class',
+    'property-access': 'docs/manual/latest/bind-to-js-object#bind-using-special-bs-getters--setters',
+    'return-value-wrapping': 'docs/manual/latest/bind-to-js-function#function-nullable-return-value-wrapping',
+    'import-export': 'docs/manual/latest/import-from-export-to-js',
+    'regular-expression': 'docs/manual/latest/primitive-types#regular-expression',
+    'exceptions': 'docs/manual/latest/exception',
+    'pipe-first': 'docs/manual/latest/pipe',
+    'generate-converters-accessors': 'docs/manual/latest/introduction',
+    'better-data-structures-printing-debug-mode': 'docs/manual/latest/shared-data-types',
+    'nodejs-special-variables': 'docs/manual/latest/bind-to-global-js-values#special-global-values',
+    'interop-misc': 'docs/manual/latest/introduction',
+
+    'automatic-interface-generation': 'docs/manual/latest/introduction',
+
+    'stdlib-overview': 'apis/latest',
+
+    'conditional-compilation': 'docs/manual/latest/introduction',
+    'extended-compiler-options': 'docs/manual/latest/introduction',
+    'use-existing-ocaml-libraries': 'docs/manual/latest/introduction',
+    'difference-from-native-ocaml': 'docs/manual/latest/introduction',
+    'compiler-architecture-principles': 'docs/manual/latest/introduction',
+    'comparison-to-jsoo': 'docs/manual/latest/introduction',
+
     'community': 'community',
   }
   var specializedBlogRedirect = {
@@ -54,15 +86,15 @@
       // && page !== 'installation' uncomment to test more easily
       && dontRedirect.indexOf(page) === -1) {
     if (specializedDocsRedirect[page] == null) {
-      window.location = 'https://reasonml.org/docs/reason-compiler/latest/' + path[3]
+      window.location = 'https://rescript-lang.org/docs/manual/latest/' + path[3]
     } else {
-      window.location = 'https://reasonml.org/' + specializedDocsRedirect[page]
+      window.location = 'https://rescript-lang.org/' + specializedDocsRedirect[page]
     }
   } else if (path[1] === 'blog' && blogPageFullPath != null) {
     if (specializedBlogRedirect[blogPageFullPath] == null) {
-      window.location = 'https://reasonml.org/blog/' + page
+      window.location = 'https://rescript-lang.org/blog/' + page
     } else {
-      window.location = 'https://reasonml.org/blog/' + specializedBlogRedirect[blogPageFullPath]
+      window.location = 'https://rescript-lang.org/blog/' + specializedBlogRedirect[blogPageFullPath]
     }
   }
 })();
