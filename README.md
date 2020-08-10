@@ -1,4 +1,4 @@
-**The new BuckleScript docs live at https://reasonml.org/docs/reason-compiler/latest/introduction. This repo is now deprecated. Please contribute to https://github.com/reason-association/reasonml.org/issues instead. Thanks!
+**The new BuckleScript docs live at https://rescript-lang.org. This repo is deprecated**.
 
 # BuckleScript Website
 
